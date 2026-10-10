@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node --env-file-if-exists=.env server.js",
-    "simtest": "node tools/sim-test.mjs"
+    "simtest": "node tools/sim-test.mjs",
+    "build:hosted": "node tools/build-hosted.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.133.0"

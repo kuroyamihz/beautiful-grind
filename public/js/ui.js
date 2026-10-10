@@ -109,7 +109,7 @@ export function renderWeek(state, world, story, aiBusy = false) {
       ${story?.isMajorEvent ? '<span class="chip chip-accent">Major</span>' : ''}
       ${story?.source === 'claude' ? '<span class="badge badge-ai">✦ Claude</span>' : ''}
     </div>`;
-  if (aiBusy) return void ($('week-card').innerHTML = html + `<h1 class="headline"><span class="spinner"></span> Claude is writing this week…</h1>`);
+  if (aiBusy) return void ($('week-card').innerHTML = html + `<h1 class="headline"><span class="spinner"></span> Claude is writing this week…</h1><p class="hint">This can take up to a minute.</p>`);
   html += `<h1 class="headline">${e(story?.headline ?? '')}</h1>`;
   const outs = (res?.outcomes ?? []).filter((o) => o.text);
   if (outs.length) html +=outs.map((o) => `<div class="box"><h4>Consequence · you chose "${e(o.label)}"</h4>${e(o.text)}</div>`).join('');

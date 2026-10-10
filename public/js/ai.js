@@ -11,8 +11,35 @@ import { windowOpen, nationalTeamInfo } from './world.js';
 const MOODS = ['Confident', 'Motivated', 'Anxious', 'Frustrated', 'Determined', 'Broken', 'On Fire', 'Lost', 'Focused', 'Numb', 'Homesick', 'Angry', 'Relieved'];
 const AI_DECISION_TYPES = ['in-match', 'tactical', 'personal', 'media', 'financial'];
 
-export async function aiStatus() {
-  try { const r = await fetch('/api/status'); return await r.json(); } catch { return { ai: false, reason: 'The local server is not running (open the game with start-game.bat).' }; }
+// Two ways to reach Claude:
+//  - hosted on claude.ai: the page's built-in `sample` capability (no API key, viewer's own Claude account)
+//  - local (start-game.bat): our server.js, which uses the API key in .env
+let statusPromise = null, sampleFn = null, rulesPromise = null;
+export const isHosted = () => typeof window !== 'undefined' && !!window.claude?.use;
+
+export function aiStatus() {
+  statusPromise ??= (async () => {
+    if (isHosted()) {
+      sampleFn = await window.claude.use('sample').catch(() => null);
+      return sampleFn
+        ? { ai: true, backend: 'claude.ai', model: 'your Claude account' }
+        : { ai: false, reason: 'Claude is not available in this view. Open the game on claude.ai while signed in.' };
+    }
+    try { const r = await fetch('/api/status'); return { backend: 'server', ...(await r.json()) }; }
+    catch { return { ai: false, reason: 'the local server is not running (open the game with start-game.bat).' }; }
+  })();
+  return statusPromise;
+}
+
+const SAMPLE_ERRORS = {
+  not_granted: 'you did not allow this page to use Claude', sampling_disabled: 'Claude is not available for this account',
+  rate_limited: 'Claude usage limit reached for now; try again later', session_expired: 'sign in to claude.ai again',
+  refused: 'Claude declined to write this week', invalid_json: 'Claude replied in the wrong format', prompt_too_large: 'the week was too long to send',
+};
+
+function hostedRules() {
+  rulesPromise ??= Promise.all(['prompts/engine.txt', 'prompts/hybrid-rules.txt'].map((p) => fetch(p).then((r) => r.text()))).then((t) => t.join('\n\n'));
+  return rulesPromise;
 }
 
 function compactPlayer(state) {
@@ -70,6 +97,18 @@ export function buildContext(state, world, res) {
 }
 
 export async function requestNarration(context) {
+  const st = await aiStatus();
+  if (st.backend === 'claude.ai') {
+    if (!sampleFn) throw new Error(st.reason);
+    const prompt = `${await hostedRules()}\n\nSimulate and narrate this game week. Reply with only the JSON object described in OUTPUT FORMAT. Context:\n${JSON.stringify(context)}`;
+    try {
+      const data = await sampleFn.json(prompt, { modelTier: 'default', cache: false });
+      if (!data || typeof data !== 'object' || Array.isArray(data)) throw { code: 'invalid_json' };
+      return { ok: true, data, usage: null, costUSD: 0 };
+    } catch (e) {
+      throw new Error(SAMPLE_ERRORS[e?.code] ?? e?.message ?? 'Claude is unavailable right now');
+    }
+  }
   const r = await fetch('/api/narrate', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ context }) });
   const data = await r.json().catch(() => ({ ok: false, error: `HTTP ${r.status}` }));
   if (!data.ok) throw new Error(data.error ?? 'unknown error');

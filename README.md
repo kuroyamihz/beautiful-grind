@@ -16,7 +16,17 @@ Each week:
 
 Tip: **⚙ Settings → Export save** downloads a backup of your career.
 
-## ✦ Turn on the Claude narrator (optional)
+## 🌐 Play online (no install)
+
+The game is published on claude.ai: **https://claude.ai/artifact/QXoZxnvGS1NfgFBc6sT6r4**
+
+- Works on any device, including phones, when you're signed in to claude.ai.
+- **The Claude narrator works there without an API key.** Turn it on in ⚙ Settings → Narrator. It uses your Claude account's usage, and Claude asks you once to allow it.
+- Saves live in that browser. Use ⚙ Settings → Export save to move a career between devices (Import save on the other one).
+- The link is private. To let friends play, use the page's **Share** menu on claude.ai. Each friend's Claude narrator runs on their own account.
+- To publish an updated version after changing the game: `npm run build:hosted`, then ask Claude to republish `dist/` to the same link.
+
+## ✦ Turn on the Claude narrator locally (optional)
 
 The game plays fully without it. The offline narrator is free. With Claude, every week becomes uniquely written journalism using the rules in `prompts/engine.md`.
 

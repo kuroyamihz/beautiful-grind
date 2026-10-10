@@ -2,7 +2,7 @@
 import { loadWorld, playableLeagues, leagueClubs, clubStrength } from './world.js';
 import { newCareer, advanceWeek, chooseDecision, pendingUnanswered, ageNow } from './engine.js';
 import { narrateOffline } from './narrator-offline.js';
-import { aiStatus, buildContext, requestNarration, mergeAI } from './ai.js';
+import { aiStatus, buildContext, requestNarration, mergeAI, isHosted } from './ai.js';
 import { renderPlayer, renderWeek, renderDecisions, renderPlanner, renderFeed, renderWorld, renderRetirement } from './ui.js';
 import { POSITIONS } from './config.js';
 import { dateLabel } from './time.js';
@@ -130,8 +130,16 @@ function showGame() {
   render();
 }
 
+// Hosted pages can't show confirm() dialogs, so a live career needs a second click instead.
+let newCareerArmed = null;
 function newCareerFlow() {
-  if (state && !state.ended && !confirm('Start a new career? Your current career will be replaced (export it first if you want to keep it).')) return;
+  const btn = $('btn-new');
+  if (state && !state.ended && !newCareerArmed) {
+    btn.textContent = 'Click again to replace this career';
+    newCareerArmed = setTimeout(() => { newCareerArmed = null; btn.textContent = 'New career'; }, 5000);
+    return;
+  }
+  clearTimeout(newCareerArmed); newCareerArmed = null; btn.textContent = 'New career';
   try { localStorage.removeItem(SAVE_KEY); } catch {}
   state = null; story = null;
   $('settings').close?.();
@@ -152,19 +160,30 @@ async function openSettings() {
     b.disabled = b.dataset.mode !== 'offline' && !ai.ai;
     b.onclick = () => { if (b.disabled) return; setMode(b.dataset.mode); };
   });
-  $('ai-status').innerHTML = ai.ai
-    ? `✔ Claude is connected (model <b>${escapeHtml(ai.model)}</b>). Every Claude-written week costs a few cents. "Big moments" uses Claude only for major weeks and the free narrator for the rest. The tracker below shows your real spend.`
-    : `Claude narrator is not available: ${escapeHtml(ai.reason ?? 'unknown reason')}<br>See <b>README.md → "Turn on the Claude narrator"</b>.`;
+  $('settings-msg').textContent = '';
+  $('ai-status').innerHTML = !ai.ai
+    ? `Claude narrator is not available: ${escapeHtml(ai.reason ?? 'unknown reason')}${ai.backend === 'server' ? '<br>See <b>README.md → "Turn on the Claude narrator"</b>.' : ''}`
+    : ai.backend === 'claude.ai'
+      ? '✔ Claude is ready through your Claude account. No API key needed. The first time, Claude asks you to allow this page. Claude-written weeks use your plan\'s usage and take up to a minute each. "Big moments" uses Claude only for major weeks.'
+      : `✔ Claude is connected (model <b>${escapeHtml(ai.model)}</b>). Every Claude-written week costs a few cents. "Big moments" uses Claude only for major weeks and the free narrator for the rest. The tracker below shows your real spend.`;
   const u = state.aiUsage;
-  $('ai-usage').innerHTML = u.calls ? `Claude weeks played: ${u.calls} · tokens in ${u.inputTokens.toLocaleString()} (cached ${u.cacheRead.toLocaleString()}) · out ${u.outputTokens.toLocaleString()} · estimated cost <b>$${u.costUSD.toFixed(2)}</b>` : '';
+  $('ai-usage').innerHTML = u.calls && ai.backend !== 'claude.ai' ?`Claude weeks played: ${u.calls} · tokens in ${u.inputTokens.toLocaleString()} (cached ${u.cacheRead.toLocaleString()}) · out ${u.outputTokens.toLocaleString()} · estimated cost <b>$${u.costUSD.toFixed(2)}</b>` : '';
   dlg.showModal();
 }
 
-function exportSave() {
-  const blob = new Blob([JSON.stringify({ state, story, plan }, null, 1)], { type: 'application/json' });
+async function exportSave() {
+  const data = JSON.stringify({ state, story, plan });
+  const filename = `beautiful-grind-${state.player.jerseyName.toLowerCase()}-week${state.week + 1}.json`;
+  if (isHosted()) { // hosted pages can't download directly; claude.ai asks the player to confirm the save
+    const dl = await window.claude.use('downloads').catch(() => null);
+    if (!dl) { $('settings-msg').textContent = 'Saving files is not available in this view.'; return; }
+    try { await dl.save({ filename, data }); $('settings-msg').textContent = 'Save file downloaded.'; }
+    catch (err) { $('settings-msg').textContent = err?.code === 'declined' ? 'Export cancelled.' : 'The save file could not be downloaded here.'; }
+    return;
+  }
   const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = `beautiful-grind-${state.player.jerseyName.toLowerCase()}-week${state.week}.json`;
+  a.href = URL.createObjectURL(new Blob([data], { type: 'application/json' }));
+  a.download = filename;
   a.click();
   URL.revokeObjectURL(a.href);
 }
@@ -177,7 +196,7 @@ function importSave(file) {
       if (!d.state?.player) throw new Error('not a Beautiful Grind save');
       ({ state, story } = d); plan = d.plan ?? plan;
       save(); $('settings').close(); showGame();
-    } catch (err) { alert(`Could not import: ${err.message}`); }
+    } catch (err) { $('settings-msg').textContent = `Could not import that file: ${err.message}. Choose a .json file exported from Beautiful Grind.`; }
   };
   r.readAsText(file);
 }
