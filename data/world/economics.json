@@ -1,0 +1,86 @@
+{
+  "_meta": { "baseline": "2025-26", "note": "Reference bands for the narrator and the game's financial code. Real figures vary widely; these are realistic typical ranges." },
+
+  "transferFees": {
+    "indonesia": {
+      "Liga 4 / Liga Nusantara → Championship": "Free or €0-5K compensation",
+      "Championship → Super League": "€5K-50K",
+      "Super League → Super League": "€50K-500K",
+      "Super League → Southeast Asia (Thai League, Malaysia, Vietnam)": "€100K-1M",
+      "Super League → Japan/Korea/Australia": "€100K-1M (rare)",
+      "Super League top player → Middle East / Europe": "€1M-5M (exceptional, front-page news)",
+      "naturalised heritage players": "Already at European clubs; no fee involved for national team purposes"
+    },
+    "asia": {
+      "J1/K1 domestic": "€100K-3M",
+      "J1/K1 → Europe (good player)": "€1M-15M (Japanese players often move cheaply to Belgium/Scotland/Netherlands first)",
+      "Saudi Pro League star signing": "€10M-100M+",
+      "Chinese Super League": "Mostly frees and low fees since the salary cap"
+    },
+    "southAmerica": {
+      "Brazil/Argentina teenager breakout → Europe": "€15M-60M (often agreed at 16-17, move at 18)",
+      "Established South American league player → Europe": "€3M-25M",
+      "Smaller CONMEBOL leagues → Brazil/Argentina/MLS": "€0.5M-5M"
+    },
+    "europe": {
+      "League Two / 3rd tiers": "€0-500K",
+      "Championship / 2nd tiers": "€500K-10M (Championship pays far more than other 2nd tiers)",
+      "Smaller top flights (Belgium, Netherlands, Portugal, Austria)": "€1M-40M — selling leagues",
+      "Premier League / LaLiga / Bundesliga / Serie A / Ligue 1": "€5M-150M",
+      "World record": "€222M (Neymar, Barcelona → PSG, 2017)",
+      "Recent largest": "Alexander Isak to Liverpool 2025 (~£125M), Florian Wirtz to Liverpool 2025 (~£100M+)"
+    },
+    "mls": { "Into MLS": "Designated Player signings €5M-20M", "Out of MLS": "€5M-25M for young talents" }
+  },
+
+  "wages": {
+    "indonesia_IDR_per_month": {
+      "Liga 4 (amateur)": "Rp 0-2M (often only match fees and transport)",
+      "Liga Nusantara": "Rp 2M-8M",
+      "Championship": "Rp 5M-25M",
+      "Super League fringe / young player": "Rp 10M-40M",
+      "Super League regular": "Rp 40M-150M",
+      "Super League star (local)": "Rp 150M-500M",
+      "Top foreign player / naturalised national team star in Super League": "Rp 500M-1.5B+"
+    },
+    "weekly_EUR": {
+      "Thai League 1": "€1K-10K",
+      "J1 League": "€2K-30K",
+      "K League 1": "€2K-20K",
+      "Saudi Pro League": "€20K-4M (Ronaldo ~ €4M/week incl. commercial)",
+      "MLS": "€1.5K (minimum) to €1M+ (Messi)",
+      "Championship (England)": "€5K-60K",
+      "Eredivisie / Belgium / Portugal": "€2K-50K (giants higher)",
+      "Premier League": "€30K-500K+",
+      "LaLiga / Bundesliga / Serie A elite": "€50K-500K+"
+    }
+  },
+
+  "currencyApprox": {
+    "note": "Approximate exchange rates for display only (late 2025). The game should store wealth in one base currency and convert.",
+    "EUR_IDR": 19000,
+    "USD_IDR": 16500,
+    "GBP_IDR": 22000,
+    "JPY_IDR": 110,
+    "THB_IDR": 500,
+    "SAR_IDR": 4400
+  },
+
+  "incomeTax": {
+    "Indonesia": "Progressive, top rate 35%",
+    "Saudi Arabia / UAE / Qatar": "0%",
+    "England": "45% top rate",
+    "Spain": "~47% top (Beckham Law special regime abolished for footballers in 2015)",
+    "Italy": "~43% top (Decreto Crescita foreign-player tax break abolished in 2024)",
+    "Germany": "~45% + solidarity",
+    "France": "~45% + social charges",
+    "Netherlands": "49.5% (30% ruling for expats being reduced)",
+    "Japan": "up to ~55% incl. local",
+    "USA": "Federal up to 37% + state (Florida/Texas 0% state tax)"
+  },
+
+  "agents": {
+    "typicalCut": "5-10% of wage (FIFA agent regulations cap fees at 3-5% of remuneration for most deals since 2023, though enforcement is contested)",
+    "storyNote": "Bad or fake agents exploiting young players from Southeast Asia, Africa and South America are a real problem — a strong source of drama for fictional agents."
+  }
+}

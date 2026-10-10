@@ -1,0 +1,45 @@
+{
+  "_meta": {
+    "region": "Oceania (OFC)",
+    "baseline": "2025-26",
+    "note": "Australia is an AFC member and lives in asia.json. New Zealand clubs Wellington Phoenix and Auckland FC play in Australia's A-League.",
+    "continentalNote": "OFC Champions League (Auckland City dominant; played at the 2025 Club World Cup and drew 1-1 with Boca Juniors). The new OFC Professional League launches in 2026 (verify participating clubs). New Zealand qualified directly for the 2026 World Cup (OFC's first guaranteed slot)."
+  },
+  "countries": [
+    {
+      "country": "New Zealand", "code": "NZL", "flag": "🇳🇿", "currency": "NZD",
+      "leagues": [{ "tier": 1, "name": "OFC/NZ National League (Northern, Central, Southern leagues → national championship)", "season": "Mar-Dec", "complete": false, "clubs": ["Auckland City FC", "Wellington Olympic", "Auckland United", "Christchurch United", "Birkenhead United", "Western Springs", "Eastern Suburbs"] }],
+      "cups": ["Chatham Cup"],
+      "notes": "Semi-professional except Auckland City (amateur players who hold day jobs). Best players go to the A-League (Wellington Phoenix, Auckland FC) or abroad. Star: Chris Wood (Nottingham Forest)."
+    },
+    {
+      "country": "Fiji", "code": "FIJ", "flag": "🇫🇯", "currency": "FJD",
+      "leagues": [{ "tier": 1, "name": "Fiji Premier League", "complete": false, "clubs": ["Rewa FC", "Lautoka FC", "Ba FC", "Suva FC", "Labasa FC"] }]
+    },
+    {
+      "country": "Papua New Guinea", "code": "PNG", "flag": "🇵🇬", "currency": "PGK",
+      "leagues": [{ "tier": 1, "name": "PNG National Soccer League", "complete": false, "clubs": ["Hekari United", "Lae City FC"] }]
+    },
+    {
+      "country": "Solomon Islands", "code": "SOL", "flag": "🇸🇧", "currency": "SBD",
+      "leagues": [{ "tier": 1, "name": "Telekom S-League", "complete": false, "clubs": ["Solomon Warriors", "Henderson Eels", "Central Coast FC", "Kossa FC"] }]
+    },
+    {
+      "country": "New Caledonia", "code": "NCL", "flag": "🇳🇨", "currency": "XPF",
+      "leagues": [{ "tier": 1, "name": "Super Ligue", "complete": false, "clubs": ["Hienghène Sport", "AS Magenta", "AS Lössi"] }],
+      "notes": "Reached the 2026 World Cup intercontinental play-off."
+    },
+    {
+      "country": "Tahiti", "code": "TAH", "flag": "🇵🇫", "currency": "XPF",
+      "leagues": [{ "tier": 1, "name": "Ligue 1 Tahiti", "complete": false, "clubs": ["AS Pirae", "AS Vénus", "AS Tefana", "AS Central Sport"] }]
+    },
+    {
+      "country": "Vanuatu", "code": "VAN", "flag": "🇻🇺", "currency": "VUV",
+      "leagues": [{ "tier": 1, "name": "Port Vila Football League / VFF National Super League", "complete": false, "clubs": ["Galaxy FC", "Ifira Black Bird", "Erakor Golden Star"] }]
+    },
+    {
+      "country": "Other OFC nations",
+      "notes": "Samoa, Tonga, American Samoa and Cook Islands have amateur leagues."
+    }
+  ]
+}

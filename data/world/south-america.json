@@ -1,0 +1,116 @@
+{
+  "_meta": {
+    "region": "South America (CONMEBOL) — all 10 nations",
+    "baseline": "2026 season for calendar-year leagues (squads as of early 2026)",
+    "continentalNote": "Copa Libertadores (47 clubs; 32 in group stage; single-match final at a neutral venue) and Copa Sudamericana. Libertadores 2025: Flamengo (1-0 vs Palmeiras, Lima). Sudamericana 2025: Lanús."
+  },
+  "countries": [
+    {
+      "country": "Brazil",
+      "code": "BRA",
+      "flag": "🇧🇷",
+      "currency": "BRL",
+      "transferWindows": { "first": "Jan - early Apr", "second": "Jul - early Sep (verify; calendar shifting from 2026)" },
+      "leagues": [
+        {
+          "tier": 1, "name": "Brasileirão Betano (Campeonato Brasileiro Série A)", "teams": 20, "matchdays": 38, "season": "late Jan - Dec (from 2026; previously Apr-Dec)",
+          "clubs": ["Flamengo", "Palmeiras", "Cruzeiro", "Mirassol", "Fluminense", "Botafogo", "Bahia", "São Paulo", "Grêmio", "Red Bull Bragantino", "Atlético Mineiro", "Santos", "Corinthians", "Vasco da Gama", "Vitória", "Internacional", "Coritiba", "Athletico Paranaense", "Chapecoense", "Remo"],
+          "relegation": "Bottom 4 to Série B",
+          "continental": "Top 4 → Libertadores group stage; 5th-6th → Libertadores qualifying (more if cup winners already qualified); next 6 → Sudamericana; Copa do Brasil winner → Libertadores",
+          "notes": "2025 champions: Flamengo (also won the 2025 Libertadores). Relegated after 2025: Sport, Juventude, Fortaleza, Ceará (verify). Promoted: Coritiba, Athletico Paranaense, Chapecoense, Remo (verify). Mirassol finished in the Libertadores places in their first Série A season."
+        },
+        {
+          "tier": 2, "name": "Série B", "teams": 20, "matchdays": 38, "season": "Mar/Apr - Nov", "complete": false,
+          "clubs": ["Sport Recife", "Juventude", "Fortaleza", "Ceará", "Goiás", "Novorizontino", "Cuiabá", "Criciúma", "América Mineiro", "Vila Nova", "Avaí", "Atlético Goianiense", "Operário-PR", "CRB", "Botafogo-SP", "Athletic Club (MG)", "Ponte Preta"],
+          "promotion": "Top 4 promoted"
+        },
+        {
+          "tier": 3, "name": "Série C", "teams": 20, "season": "Apr - Oct", "format": "Round robin, then two groups of 4 for promotion (top 4 promoted)", "complete": false,
+          "clubs": ["Náutico", "Figueirense", "Ferroviária", "Volta Redonda", "CSA", "Confiança", "Paysandu", "Guarani", "Ituano", "Brusque", "ABC", "Botafogo-PB", "Floresta", "Londrina"]
+        },
+        { "tier": 4, "name": "Série D", "teams": 64, "format": "Regional groups then knockout", "complete": false, "clubs": [] }
+      ],
+      "stateChampionships": "Paulistão (São Paulo), Carioca (Rio), Mineiro, Gaúcho, Baiano, Pernambucano, etc. — Jan-Mar, shortened from 2026. Big local derbies and many smaller clubs that exist mainly for these tournaments.",
+      "cups": ["Copa do Brasil (biggest prize money in the country)"],
+      "supercup": "Supercopa do Brasil (February)",
+      "stars": ["Giorgian de Arrascaeta (Flamengo)", "Jorginho (Flamengo)", "Pedro (Flamengo)", "Samuel Lino (Flamengo)", "Vitor Roque (Palmeiras)", "Neymar (Santos)", "Memphis Depay (Corinthians)", "Hulk (Atlético Mineiro)", "Thiago Silva (Fluminense, verify)", "Philippe Coutinho (Vasco da Gama)", "Lucas Moura (São Paulo)", "Kaio Jorge (Cruzeiro)", "Gabriel Barbosa 'Gabigol' (Cruzeiro, verify)"],
+      "notes": "Brazilian clubs sell young talent to Europe at 18 (FIFA rules forbid international transfers under 18, except within the EU/EEA). A teenager breaking through at Palmeiras/Flamengo can be sold for €30m+ (Endrick, Estêvão). Corporate 'SAF' club ownership (Botafogo, Cruzeiro, Vasco, Bahia) is now common."
+    },
+    {
+      "country": "Argentina",
+      "code": "ARG",
+      "flag": "🇦🇷",
+      "currency": "ARS",
+      "transferWindows": { "first": "Jan - Feb", "second": "Jun - Jul" },
+      "leagues": [
+        {
+          "tier": 1, "name": "Liga Profesional de Fútbol (Torneo Betano)", "teams": 30, "season": "Jan - Dec (calendar year)", "format": "Torneo Apertura (Jan-Jun) and Torneo Clausura (Jul-Dec): two zones of 15, 16 rounds each, then knockout play-offs (top 8 per zone). Relegation by combined annual table and 3-year average ('promedios').",
+          "clubs": ["River Plate", "Boca Juniors", "Racing Club", "Independiente", "San Lorenzo", "Estudiantes de La Plata", "Vélez Sarsfield", "Huracán", "Lanús", "Banfield", "Rosario Central", "Newell's Old Boys", "Talleres de Córdoba", "Belgrano", "Instituto", "Atlético Tucumán", "Sarmiento", "Platense", "Defensa y Justicia", "Tigre", "Unión de Santa Fe", "Central Córdoba (SdE)", "Barracas Central", "Deportivo Riestra", "Gimnasia y Esgrima La Plata", "Argentinos Juniors", "Independiente Rivadavia", "Aldosivi", "Gimnasia y Esgrima de Mendoza", "Estudiantes de Río Cuarto"],
+          "notes": "2025: Platense won the Apertura (first title in their history); Estudiantes won the Clausura. Relegated end of 2025: Godoy Cruz, San Martín de San Juan (verify). The original prompt listed Colón, Arsenal de Sarandí and Quilmes, who are no longer in the top flight."
+        },
+        {
+          "tier": 2, "name": "Primera Nacional", "teams": 36, "format": "Two zones; winners promoted, play-offs for more", "complete": false,
+          "clubs": ["Godoy Cruz", "San Martín de San Juan", "Colón", "Arsenal de Sarandí", "Quilmes", "Chacarita Juniors", "Ferro Carril Oeste", "All Boys", "Atlanta", "Almagro", "Brown de Adrogué", "Agropecuario", "San Martín de Tucumán", "Gimnasia de Jujuy", "Tristán Suárez", "Morón", "Chaco For Ever", "Nueva Chicago", "Patronato"]
+        },
+        { "tier": 3, "name": "Primera B Metropolitana / Torneo Federal A", "format": "Buenos Aires-area clubs play Primera B Metro; interior clubs play Federal A", "complete": false, "clubs": ["Talleres de Remedios de Escalada", "Deportivo Armenio", "Los Andes", "Estudiantes de Buenos Aires"] }
+      ],
+      "cups": ["Copa Argentina", "Trofeo de Campeones"],
+      "supercup": "Supercopa Argentina",
+      "stars": ["Franco Armani (River Plate)", "Gonzalo Montiel (River Plate)", "Marcos Acuña (River Plate)", "Juan Fernando Quintero (River Plate)", "Leandro Paredes (Boca Juniors)", "Edinson Cavani (Boca Juniors)", "Ángel Di María (Rosario Central)", "Adrián 'Maravilla' Martínez (Racing Club)"],
+      "notes": "The Superclásico (Boca vs River) is the biggest derby in the game. Away fans are banned at most league matches. Economic instability means wages are often paid in USD to keep value."
+    },
+    {
+      "country": "Colombia", "code": "COL", "flag": "🇨🇴", "currency": "COP",
+      "leagues": [
+        { "tier": 1, "name": "Liga BetPlay DIMAYOR", "teams": 20, "season": "Jan-Jun (Apertura), Jul-Dec (Finalización)", "format": "19 rounds, top 8 → two groups of 4 → final", "complete": false,
+          "clubs": ["Atlético Nacional", "Millonarios", "Junior", "América de Cali", "Deportivo Cali", "Independiente Santa Fe", "Independiente Medellín", "Once Caldas", "Deportes Tolima", "Atlético Bucaramanga", "Deportivo Pereira", "Alianza FC", "Águilas Doradas", "Fortaleza CEIF", "Llaneros", "Boyacá Chicó", "Unión Magdalena", "Deportivo Pasto", "Internacional de Bogotá (formerly La Equidad)", "Cúcuta Deportivo"],
+          "notes": "Relegation by 3-year average. verify 2026 promoted clubs." },
+        { "tier": 2, "name": "Torneo BetPlay DIMAYOR (Primera B)", "teams": 16, "complete": false, "clubs": ["Envigado", "Jaguares de Córdoba", "Patriotas Boyacá", "Orsomarso", "Real Cartagena"] }
+      ],
+      "cups": ["Copa Colombia"],
+      "stars": ["David Ospina (Atlético Nacional)", "Edwin Cardona (Atlético Nacional, verify)"]
+    },
+    {
+      "country": "Chile", "code": "CHI", "flag": "🇨🇱", "currency": "CLP",
+      "leagues": [
+        { "tier": 1, "name": "Liga de Primera (Mercado Libre)", "teams": 16, "matchdays": 30, "season": "Feb-Dec", "complete": false,
+          "clubs": ["Coquimbo Unido", "Universidad de Chile", "Colo-Colo", "Universidad Católica", "O'Higgins", "Audax Italiano", "Palestino", "Cobresal", "Huachipato", "Everton de Viña del Mar", "Ñublense", "Unión La Calera", "Deportes La Serena", "Deportes Limache", "Universidad de Concepción"],
+          "notes": "2025 champions: Coquimbo Unido (first title). verify 2026 list." },
+        { "tier": 2, "name": "Liga de Ascenso", "teams": 16, "complete": false, "clubs": ["Deportes Iquique", "Unión Española", "Cobreloa", "Santiago Wanderers", "Rangers de Talca"] }
+      ],
+      "cups": ["Copa Chile"],
+      "stars": ["Arturo Vidal (Colo-Colo)", "Charles Aránguiz (Universidad de Chile)"]
+    },
+    {
+      "country": "Uruguay", "code": "URU", "flag": "🇺🇾", "currency": "UYU",
+      "leagues": [
+        { "tier": 1, "name": "Liga AUF Uruguaya (Primera División)", "teams": 16, "season": "Feb-Dec", "format": "Apertura, Intermedio, Clausura, then Championship final", "complete": false,
+          "clubs": ["Nacional", "Peñarol", "Defensor Sporting", "Liverpool (Montevideo)", "Danubio", "Racing (Montevideo)", "Boston River", "Cerro Largo", "Montevideo Wanderers", "Plaza Colonia", "Progreso", "Juventud de Las Piedras", "River Plate (Montevideo)", "Cerro", "Miramar Misiones"],
+          "notes": "Rentistas and Sud América (in the original prompt) are in lower divisions." }
+      ],
+      "cups": ["Copa AUF Uruguay"],
+      "notes": "Uruguay sells young players to Europe very early; a top Nacional/Peñarol youth prospect is a classic story."
+    },
+    {
+      "country": "Ecuador", "code": "ECU", "flag": "🇪🇨", "currency": "USD",
+      "leagues": [{ "tier": 1, "name": "LigaPro Serie A (Ecuabet)", "teams": 16, "season": "Feb-Dec", "complete": false, "clubs": ["LDU Quito", "Independiente del Valle", "Barcelona SC", "Emelec", "Aucas", "Universidad Católica (Quito)", "Orense", "Delfín", "Macará", "Mushuc Runa", "Deportivo Cuenca", "Técnico Universitario", "Libertad FC", "El Nacional"], "notes": "Independiente del Valle's academy is one of the best in the world (Moisés Caicedo, Piero Hincapié, Kendry Páez). Quito's altitude (2,850 m) is an advantage." }],
+      "cups": ["Copa Ecuador"]
+    },
+    {
+      "country": "Peru", "code": "PER", "flag": "🇵🇪", "currency": "PEN",
+      "leagues": [{ "tier": 1, "name": "Liga 1 (Liga 1 Te Apuesto)", "teams": 19, "season": "Feb-Nov", "format": "Apertura + Clausura, then play-off", "complete": false, "clubs": ["Universitario de Deportes", "Alianza Lima", "Sporting Cristal", "FBC Melgar", "Cienciano", "Cusco FC", "Sport Huancayo", "ADT Tarma", "Alianza Atlético", "UTC Cajamarca", "Deportivo Garcilaso", "Atlético Grau", "Sport Boys", "Comerciantes Unidos"], "notes": "Universitario won 2023, 2024 and 2025 (verify 2025). Stars: Paolo Guerrero (Alianza Lima)." }]
+    },
+    {
+      "country": "Paraguay", "code": "PAR", "flag": "🇵🇾", "currency": "PYG",
+      "leagues": [{ "tier": 1, "name": "División de Honor (Copa de Primera)", "teams": 12, "season": "Jan-Dec", "format": "Apertura + Clausura", "clubs": ["Olimpia", "Cerro Porteño", "Libertad", "Guaraní", "Nacional (Asunción)", "Sportivo Luqueño", "Sportivo Trinidense", "2 de Mayo", "Sportivo Ameliano", "General Caballero JLM", "Tacuary", "Recoleta"], "notes": "verify 2026 promotions." }]
+    },
+    {
+      "country": "Bolivia", "code": "BOL", "flag": "🇧🇴", "currency": "BOB",
+      "leagues": [{ "tier": 1, "name": "División Profesional", "teams": 16, "season": "Mar-Dec", "complete": false, "clubs": ["Bolívar", "The Strongest", "Always Ready", "Jorge Wilstermann", "Blooming", "Oriente Petrolero", "Nacional Potosí", "Aurora", "Real Tomayapo", "San Antonio Bulo Bulo", "GV San José", "Universitario de Vinto", "Guabirá", "Real Oruro"], "notes": "Altitude is a core gameplay factor: La Paz (3,640 m), El Alto (4,090 m, Always Ready), Potosí (~3,900 m). Visiting players suffer; acclimatised players gain an edge." }]
+    },
+    {
+      "country": "Venezuela", "code": "VEN", "flag": "🇻🇪", "currency": "VES (wages often in USD)",
+      "leagues": [{ "tier": 1, "name": "Liga FUTVE", "teams": 14, "season": "Feb-Dec", "complete": false, "clubs": ["Deportivo Táchira", "Caracas FC", "Monagas SC", "Carabobo FC", "Universidad Central", "Metropolitanos", "Academia Puerto Cabello", "Deportivo La Guaira", "Portuguesa FC", "Zamora FC"] }]
+    }
+  ]
+}

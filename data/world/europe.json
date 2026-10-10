@@ -1,0 +1,639 @@
+{
+  "_meta": {
+    "region": "Europe (UEFA)",
+    "baseline": "2025-26 season (calendar-year leagues: 2025 season unless noted)",
+    "europeanPlacesNote": "UEFA allocation varies by country coefficient. The two countries with the best club coefficient each season earn an extra Champions League place (European Performance Spot). Domestic cup winners usually take a Europa League place."
+  },
+  "countries": [
+    {
+      "country": "England",
+      "code": "ENG",
+      "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+      "currency": "GBP",
+      "transferWindows": { "summer": "16 Jun - 1 Sep", "winter": "1 Jan - 2 Feb" },
+      "leagues": [
+        {
+          "tier": 1, "name": "Premier League", "teams": 20, "matchdays": 38, "season": "Aug-May",
+          "clubs": ["Arsenal", "Aston Villa", "AFC Bournemouth", "Brentford", "Brighton & Hove Albion", "Burnley", "Chelsea", "Crystal Palace", "Everton", "Fulham", "Leeds United", "Liverpool", "Manchester City", "Manchester United", "Newcastle United", "Nottingham Forest", "Sunderland", "Tottenham Hotspur", "West Ham United", "Wolverhampton Wanderers"],
+          "relegation": "Bottom 3 to Championship",
+          "europe": "Top 4 → UCL (5th too if England earns a European Performance Spot); 5th → UEL; 6th → UECL play-off; FA Cup winner → UEL; EFL Cup winner → UECL play-off",
+          "notes": "2024-25 champions: Liverpool. Promoted for 2025-26: Leeds, Burnley, Sunderland. Relegated 2024-25: Leicester, Ipswich, Southampton. Everton moved to Hill Dickinson Stadium (Bramley-Moore Dock) in 2025."
+        },
+        {
+          "tier": 2, "name": "EFL Championship", "teams": 24, "matchdays": 46, "season": "Aug-May",
+          "clubs": ["Birmingham City", "Blackburn Rovers", "Bristol City", "Charlton Athletic", "Coventry City", "Derby County", "Hull City", "Ipswich Town", "Leicester City", "Middlesbrough", "Millwall", "Norwich City", "Oxford United", "Portsmouth", "Preston North End", "Queens Park Rangers", "Sheffield United", "Sheffield Wednesday", "Southampton", "Stoke City", "Swansea City", "Watford", "West Bromwich Albion", "Wrexham"],
+          "promotion": "Top 2 automatic; 3rd-6th play-offs (final at Wembley)",
+          "relegation": "Bottom 3 to League One",
+          "notes": "Oxford United: home of Indonesia internationals Ole Romeny and (2024-25) Marselino Ferdinan."
+        },
+        {
+          "tier": 3, "name": "EFL League One", "teams": 24, "matchdays": 46, "season": "Aug-May",
+          "clubs": ["AFC Wimbledon", "Barnsley", "Blackpool", "Bolton Wanderers", "Bradford City", "Burton Albion", "Cardiff City", "Doncaster Rovers", "Exeter City", "Huddersfield Town", "Leyton Orient", "Lincoln City", "Luton Town", "Mansfield Town", "Northampton Town", "Peterborough United", "Plymouth Argyle", "Port Vale", "Reading", "Rotherham United", "Stevenage", "Stockport County", "Wigan Athletic", "Wycombe Wanderers"],
+          "promotion": "Top 2 automatic; 3rd-6th play-offs",
+          "relegation": "Bottom 4 to League Two"
+        },
+        {
+          "tier": 4, "name": "EFL League Two", "teams": 24, "matchdays": 46, "season": "Aug-May", "complete": false,
+          "clubs": ["Bristol Rovers", "Cambridge United", "Crawley Town", "Shrewsbury Town", "Milton Keynes Dons", "Notts County", "Chesterfield", "Gillingham", "Salford City", "Swindon Town", "Grimsby Town", "Colchester United", "Bromley", "Oldham Athletic", "Barnet", "Walsall", "Crewe Alexandra", "Fleetwood Town", "Harrogate Town", "Tranmere Rovers", "Accrington Stanley", "Cheltenham Town", "Newport County", "Barrow"]
+        }
+      ],
+      "cups": ["FA Cup (Emirates FA Cup)", "EFL Cup (Carabao Cup)", "EFL Trophy (tiers 3-4 + academy sides)"],
+      "supercup": "FA Community Shield (August, Wembley)",
+      "stars": [
+        "Mohamed Salah (Liverpool)", "Virgil van Dijk (Liverpool)", "Florian Wirtz (Liverpool)", "Alexander Isak (Liverpool)", "Hugo Ekitiké (Liverpool)", "Alexis Mac Allister (Liverpool)", "Dominik Szoboszlai (Liverpool)", "Ryan Gravenberch (Liverpool)", "Alisson (Liverpool)",
+        "Bukayo Saka (Arsenal)", "Martin Ødegaard (Arsenal)", "Declan Rice (Arsenal)", "William Saliba (Arsenal)", "Gabriel Magalhães (Arsenal)", "Viktor Gyökeres (Arsenal)", "Martín Zubimendi (Arsenal)", "Eberechi Eze (Arsenal)", "David Raya (Arsenal)",
+        "Erling Haaland (Manchester City)", "Rodri (Manchester City)", "Phil Foden (Manchester City)", "Tijjani Reijnders (Manchester City)", "Rayan Cherki (Manchester City)", "Omar Marmoush (Manchester City)", "Rúben Dias (Manchester City)", "Joško Gvardiol (Manchester City)", "Gianluigi Donnarumma (Manchester City)",
+        "Cole Palmer (Chelsea)", "Enzo Fernández (Chelsea)", "Moisés Caicedo (Chelsea)", "João Pedro (Chelsea)", "Estêvão (Chelsea)", "Reece James (Chelsea)",
+        "Bruno Fernandes (Manchester United)", "Matheus Cunha (Manchester United)", "Bryan Mbeumo (Manchester United)", "Benjamin Šeško (Manchester United)",
+        "Bruno Guimarães (Newcastle United)", "Sandro Tonali (Newcastle United)", "Anthony Gordon (Newcastle United)", "Nick Woltemade (Newcastle United)",
+        "Cristian Romero (Tottenham Hotspur)", "Mohammed Kudus (Tottenham Hotspur)", "Xavi Simons (Tottenham Hotspur)", "James Maddison (Tottenham Hotspur)",
+        "Ollie Watkins (Aston Villa)", "Emiliano Martínez (Aston Villa)", "Youri Tielemans (Aston Villa)",
+        "Morgan Gibbs-White (Nottingham Forest)", "Chris Wood (Nottingham Forest)", "Adam Wharton (Crystal Palace)", "Jean-Philippe Mateta (Crystal Palace)", "Granit Xhaka (Sunderland)", "Jordan Henderson (Brentford)"
+      ]
+    },
+    {
+      "country": "Spain",
+      "code": "ESP",
+      "flag": "🇪🇸",
+      "currency": "EUR",
+      "transferWindows": { "summer": "1 Jul - 1 Sep", "winter": "2 Jan - 2 Feb" },
+      "leagues": [
+        {
+          "tier": 1, "name": "LALIGA EA SPORTS", "teams": 20, "matchdays": 38, "season": "Aug-May",
+          "clubs": ["Athletic Club", "Atlético de Madrid", "CA Osasuna", "Deportivo Alavés", "Elche CF", "FC Barcelona", "Getafe CF", "Girona FC", "Levante UD", "RCD Espanyol", "RCD Mallorca", "Rayo Vallecano", "RC Celta", "Real Betis", "Real Madrid CF", "Real Oviedo", "Real Sociedad", "Sevilla FC", "Valencia CF", "Villarreal CF"],
+          "relegation": "Bottom 3 to LALIGA HYPERMOTION",
+          "europe": "Top 4 → UCL (+5th via European Performance Spot); 5th → UEL; 6th → UECL play-off; Copa del Rey winner → UEL",
+          "notes": "2024-25 champions: Barcelona. Promoted: Levante, Elche, Real Oviedo. Barcelona returned to the rebuilt Spotify Camp Nou during 2025-26 (partial capacity at first)."
+        },
+        {
+          "tier": 2, "name": "LALIGA HYPERMOTION", "teams": 22, "matchdays": 42, "season": "Aug-Jun",
+          "clubs": ["Albacete", "Almería", "Burgos CF", "Cádiz CF", "CD Castellón", "CD Leganés", "CD Mirandés", "Córdoba CF", "Cultural Leonesa", "Deportivo de La Coruña", "FC Andorra", "Granada CF", "Málaga CF", "Racing de Santander", "Real Sociedad B", "Real Sporting de Gijón", "Real Valladolid", "Real Zaragoza", "SD Eibar", "SD Huesca", "AD Ceuta", "UD Las Palmas"],
+          "promotion": "Top 2 automatic; 3rd-6th play-offs",
+          "relegation": "Bottom 4 to Primera Federación"
+        },
+        {
+          "tier": 3, "name": "Primera Federación", "teams": 40, "matchdays": 38, "season": "Aug-Jun", "format": "2 groups of 20; group winners promoted, 2nd-5th play-offs", "complete": false,
+          "clubs": ["Real Madrid Castilla", "Barça Atlètic", "Real Murcia", "Hércules CF", "Gimnàstic de Tarragona", "Celta Fortuna", "SD Ponferradina", "Racing Club Ferrol", "CD Tenerife", "CD Eldense", "FC Cartagena", "UD Ibiza", "AD Alcorcón", "Unionistas de Salamanca", "CD Lugo", "Algeciras CF", "Antequera CF", "Real Unión", "Arenas Club", "Atlético Madrileño"]
+        }
+      ],
+      "cups": ["Copa del Rey"],
+      "supercup": "Supercopa de España (4 teams, January, Saudi Arabia)",
+      "stars": [
+        "Kylian Mbappé (Real Madrid)", "Vinícius Júnior (Real Madrid)", "Jude Bellingham (Real Madrid)", "Federico Valverde (Real Madrid)", "Trent Alexander-Arnold (Real Madrid)", "Thibaut Courtois (Real Madrid)", "Aurélien Tchouaméni (Real Madrid)", "Arda Güler (Real Madrid)", "Dean Huijsen (Real Madrid)", "Franco Mastantuono (Real Madrid)",
+        "Lamine Yamal (Barcelona)", "Pedri (Barcelona)", "Raphinha (Barcelona)", "Robert Lewandowski (Barcelona)", "Frenkie de Jong (Barcelona)", "Jules Koundé (Barcelona)", "Pau Cubarsí (Barcelona)", "Gavi (Barcelona)", "Joan García (Barcelona)", "Marcus Rashford (Barcelona, loan from Man Utd)",
+        "Julián Álvarez (Atlético de Madrid)", "Antoine Griezmann (Atlético de Madrid)", "Jan Oblak (Atlético de Madrid)", "Koke (Atlético de Madrid)", "Álex Baena (Atlético de Madrid)",
+        "Nico Williams (Athletic Club)", "Iñaki Williams (Athletic Club)", "Mikel Oyarzabal (Real Sociedad)", "Isco (Real Betis)", "Antony (Real Betis)"
+      ],
+      "coaches": { "Real Madrid": "Xabi Alonso (from June 2025, verify)", "Barcelona": "Hansi Flick", "Atlético de Madrid": "Diego Simeone" }
+    },
+    {
+      "country": "Germany",
+      "code": "GER",
+      "flag": "🇩🇪",
+      "currency": "EUR",
+      "transferWindows": { "summer": "1 Jul - 1 Sep", "winter": "1 Jan - 2 Feb" },
+      "leagues": [
+        {
+          "tier": 1, "name": "Bundesliga", "teams": 18, "matchdays": 34, "season": "Aug-May",
+          "clubs": ["FC Bayern München", "Bayer 04 Leverkusen", "Eintracht Frankfurt", "Borussia Dortmund", "SC Freiburg", "1. FSV Mainz 05", "RB Leipzig", "SV Werder Bremen", "VfB Stuttgart", "Borussia Mönchengladbach", "VfL Wolfsburg", "FC Augsburg", "1. FC Union Berlin", "FC St. Pauli", "TSG Hoffenheim", "1. FC Heidenheim", "1. FC Köln", "Hamburger SV"],
+          "relegation": "17th-18th relegated; 16th plays two-leg relegation play-off vs 2. Bundesliga 3rd",
+          "europe": "Top 4 → UCL; 5th → UEL; 6th → UECL play-off; DFB-Pokal winner → UEL",
+          "notes": "2024-25 champions: Bayern. Promoted: 1. FC Köln, Hamburger SV. Relegated: Holstein Kiel, VfL Bochum. 50+1 ownership rule: fans/members control clubs (except Leverkusen, Wolfsburg, Hoffenheim exemptions; Leipzig's structure is controversial)."
+        },
+        {
+          "tier": 2, "name": "2. Bundesliga", "teams": 18, "matchdays": 34, "season": "Aug-May",
+          "clubs": ["VfL Bochum", "Holstein Kiel", "SV Elversberg", "SC Paderborn 07", "1. FC Magdeburg", "Hannover 96", "1. FC Kaiserslautern", "Karlsruher SC", "Hertha BSC", "FC Schalke 04", "Fortuna Düsseldorf", "SV Darmstadt 98", "SpVgg Greuther Fürth", "1. FC Nürnberg", "Preußen Münster", "Eintracht Braunschweig", "Arminia Bielefeld", "Dynamo Dresden"],
+          "promotion": "Top 2 automatic; 3rd → play-off vs Bundesliga 16th",
+          "relegation": "17th-18th relegated; 16th → play-off vs 3. Liga 3rd"
+        },
+        {
+          "tier": 3, "name": "3. Liga", "teams": 20, "matchdays": 38, "season": "Jul-May", "complete": false,
+          "clubs": ["TSV 1860 München", "FC Hansa Rostock", "SSV Ulm 1846", "SSV Jahn Regensburg", "FC Energie Cottbus", "FC Ingolstadt 04", "SV Waldhof Mannheim", "Alemannia Aachen", "Rot-Weiss Essen", "Viktoria Köln", "1. FC Saarbrücken", "SV Wehen Wiesbaden", "SC Verl", "VfL Osnabrück", "FC Erzgebirge Aue", "VfB Stuttgart II", "TSG Hoffenheim II", "MSV Duisburg", "1. FC Schweinfurt 05", "TSV Havelse"]
+        }
+      ],
+      "cups": ["DFB-Pokal"],
+      "supercup": "DFL-Supercup (August)",
+      "stars": [
+        "Harry Kane (Bayern)", "Jamal Musiala (Bayern)", "Michael Olise (Bayern)", "Joshua Kimmich (Bayern)", "Manuel Neuer (Bayern)", "Luis Díaz (Bayern)", "Jonathan Tah (Bayern)", "Dayot Upamecano (Bayern)",
+        "Serhou Guirassy (Dortmund)", "Gregor Kobel (Dortmund)", "Julian Brandt (Dortmund)", "Karim Adeyemi (Dortmund)",
+        "Alejandro Grimaldo (Leverkusen)", "Patrik Schick (Leverkusen)", "Deniz Undav (Stuttgart)", "Kevin Diks (Mönchengladbach, Indonesia international)"
+      ]
+    },
+    {
+      "country": "Italy",
+      "code": "ITA",
+      "flag": "🇮🇹",
+      "currency": "EUR",
+      "transferWindows": { "summer": "1 Jul - 1 Sep", "winter": "2 Jan - 2 Feb" },
+      "leagues": [
+        {
+          "tier": 1, "name": "Serie A Enilive", "teams": 20, "matchdays": 38, "season": "Aug-May",
+          "clubs": ["SSC Napoli", "Inter", "Atalanta", "Juventus", "AS Roma", "ACF Fiorentina", "SS Lazio", "AC Milan", "Bologna FC", "Como 1907", "Torino FC", "Udinese Calcio", "Genoa CFC", "Hellas Verona", "Cagliari Calcio", "Parma Calcio 1913", "US Lecce", "US Sassuolo", "Pisa SC", "US Cremonese"],
+          "relegation": "Bottom 3 to Serie B",
+          "europe": "Top 4 → UCL; 5th → UEL; 6th → UECL play-off; Coppa Italia winner → UEL",
+          "notes": "2024-25 champions: Napoli (Antonio Conte). Promoted: Sassuolo, Pisa, Cremonese. Relegated: Empoli, Venezia, Monza."
+        },
+        {
+          "tier": 2, "name": "Serie B BKT", "teams": 20, "matchdays": 38, "season": "Aug-May",
+          "clubs": ["Empoli", "Venezia", "Monza", "Palermo", "Spezia", "Bari", "Sampdoria", "Südtirol", "Carrarese", "Catanzaro", "Cesena", "Juve Stabia", "Modena", "Mantova", "Reggiana", "Frosinone", "Pescara", "Padova", "Virtus Entella", "Avellino"],
+          "promotion": "Top 2 automatic; 3rd-8th play-offs",
+          "relegation": "Bottom 3 automatic; 16th v 17th play-out",
+          "notes": "Brescia was excluded in 2025 for financial reasons; Sampdoria survived as a result."
+        },
+        {
+          "tier": 3, "name": "Serie C Sky Wifi", "teams": 60, "matchdays": 38, "season": "Aug-May", "format": "3 groups of 20 (North, Centre, South); 3 winners + 1 play-off winner promoted", "complete": false,
+          "clubs": ["Catania", "Benevento", "Salernitana", "Vicenza", "Triestina", "Ternana", "Perugia", "Crotone", "Foggia", "Trapani", "Casertana", "Arezzo", "Ascoli", "Brescia (refounded as Union Brescia)", "Cosenza", "Potenza", "Audace Cerignola", "Monopoli", "Juventus Next Gen", "Inter U23"]
+        }
+      ],
+      "cups": ["Coppa Italia Frecciarossa"],
+      "supercup": "Supercoppa Italiana (4 teams, December/January, Saudi Arabia)",
+      "stars": [
+        "Kevin De Bruyne (Napoli)", "Scott McTominay (Napoli)", "Romelu Lukaku (Napoli)", "Rasmus Højlund (Napoli, loan)",
+        "Lautaro Martínez (Inter)", "Marcus Thuram (Inter)", "Nicolò Barella (Inter)", "Alessandro Bastoni (Inter)", "Hakan Çalhanoğlu (Inter)", "Yann Sommer (Inter)",
+        "Dušan Vlahović (Juventus)", "Kenan Yıldız (Juventus)", "Jonathan David (Juventus)", "Bremer (Juventus)",
+        "Luka Modrić (AC Milan)", "Rafael Leão (AC Milan)", "Christian Pulisic (AC Milan)", "Mike Maignan (AC Milan)", "Adrien Rabiot (AC Milan)",
+        "Ademola Lookman (Atalanta)", "Paulo Dybala (Roma)", "Nico Paz (Como)", "Jay Idzes (Sassuolo, Indonesia captain)", "Emil Audero (Cremonese, Indonesia GK)", "Jamie Vardy (Cremonese)"
+      ]
+    },
+    {
+      "country": "France",
+      "code": "FRA",
+      "flag": "🇫🇷",
+      "currency": "EUR",
+      "transferWindows": { "summer": "1 Jul - 1 Sep", "winter": "1 Jan - 2 Feb" },
+      "leagues": [
+        {
+          "tier": 1, "name": "Ligue 1 McDonald's", "teams": 18, "matchdays": 34, "season": "Aug-May",
+          "clubs": ["Paris Saint-Germain", "Olympique de Marseille", "AS Monaco", "OGC Nice", "LOSC Lille", "Olympique Lyonnais", "RC Strasbourg Alsace", "RC Lens", "Stade Brestois 29", "Toulouse FC", "AJ Auxerre", "Stade Rennais FC", "FC Nantes", "Angers SCO", "Le Havre AC", "FC Lorient", "Paris FC", "FC Metz"],
+          "relegation": "Bottom 2 relegated; 16th plays play-off vs Ligue 2 3rd-5th play-off winner",
+          "europe": "Top 3 → UCL; 4th → UCL qualifying; 5th → UEL; 6th → UECL play-off; Coupe de France winner → UEL",
+          "notes": "2024-25: PSG won the treble including their first Champions League (5-0 vs Inter). Promoted: Lorient, Paris FC, Metz. Relegated: Montpellier, Saint-Étienne, Reims (play-off). Lyon was provisionally relegated by the DNCG in 2025 then reinstated on appeal."
+        },
+        {
+          "tier": 2, "name": "Ligue 2 BKT", "teams": 18, "matchdays": 34, "season": "Aug-May",
+          "clubs": ["Montpellier HSC", "AS Saint-Étienne", "Stade de Reims", "EA Guingamp", "Pau FC", "FC Annecy", "Stade Lavallois", "Grenoble Foot 38", "SC Bastia", "Rodez AF", "Amiens SC", "Red Star FC", "Clermont Foot 63", "ESTAC Troyes", "USL Dunkerque", "US Boulogne", "Le Mans FC", "AS Nancy Lorraine"],
+          "promotion": "Top 2 automatic; 3rd-5th play-offs, winner faces Ligue 1 16th",
+          "relegation": "Bottom 2 relegated; 16th plays play-off vs National 3rd"
+        },
+        {
+          "tier": 3, "name": "National", "teams": 17, "matchdays": 32, "season": "Aug-May", "complete": false,
+          "clubs": ["Stade Malherbe Caen", "FC Martigues", "FC Sochaux-Montbéliard", "FC Rouen 1899", "Valenciennes FC", "US Orléans", "FC Versailles 78", "Dijon FCO", "US Concarneau", "US Quevilly-Rouen", "Aubagne FC", "FC Fleury 91", "Bourg-en-Bresse", "FC Villefranche Beaujolais", "Le Puy Foot 43", "Paris 13 Atletico", "Stade Briochin"],
+          "notes": "verify: exact count changed after 2025 administrative relegations."
+        }
+      ],
+      "cups": ["Coupe de France"],
+      "supercup": "Trophée des Champions (date and venue vary, often abroad)",
+      "stars": [
+        "Ousmane Dembélé (PSG, 2025 Ballon d'Or)", "Vitinha (PSG)", "João Neves (PSG)", "Achraf Hakimi (PSG)", "Marquinhos (PSG)", "Khvicha Kvaratskhelia (PSG)", "Désiré Doué (PSG)", "Bradley Barcola (PSG)", "Warren Zaïre-Emery (PSG)", "Willian Pacho (PSG)", "Lucas Chevalier (PSG)",
+        "Mason Greenwood (Marseille)", "Pierre-Emerick Aubameyang (Marseille)", "Paul Pogba (Monaco)", "Olivier Giroud (Lille)", "Calvin Verdonk (Lille, Indonesia international)"
+      ],
+      "coaches": { "PSG": "Luis Enrique" }
+    },
+    {
+      "country": "Portugal",
+      "code": "POR",
+      "flag": "🇵🇹",
+      "currency": "EUR",
+      "transferWindows": { "summer": "1 Jul - 1 Sep", "winter": "1 Jan - 2 Feb" },
+      "leagues": [
+        {
+          "tier": 1, "name": "Liga Portugal Betclic", "teams": 18, "matchdays": 34, "season": "Aug-May",
+          "clubs": ["Sporting CP", "SL Benfica", "FC Porto", "SC Braga", "Vitória SC", "CD Santa Clara", "FC Famalicão", "GD Estoril Praia", "Casa Pia AC", "Moreirense FC", "Rio Ave FC", "FC Arouca", "Gil Vicente FC", "CD Nacional", "CF Estrela da Amadora", "AVS Futebol SAD", "FC Alverca", "CD Tondela"],
+          "relegation": "Bottom 2 relegated; 16th plays play-off vs Liga 2 3rd",
+          "europe": "Top 2 → UCL (2nd via qualifying); 3rd → UEL qualifying; 4th-5th → UECL qualifying; Taça winner → UEL",
+          "notes": "2024-25 champions: Sporting CP (double). José Mourinho became Benfica coach in September 2025."
+        },
+        {
+          "tier": 2, "name": "Liga Portugal 2 Meu Super", "teams": 18, "matchdays": 34, "season": "Aug-May", "complete": false,
+          "clubs": ["SC Farense", "GD Chaves", "FC Vizela", "Académico de Viseu", "SCU Torreense", "FC Penafiel", "CD Feirense", "Leixões SC", "UD Oliveirense", "SL Benfica B", "FC Porto B", "CS Marítimo", "União de Leiria", "FC Paços de Ferreira", "Portimonense SC", "FC Felgueiras 1932", "Lusitânia Lourosa", "Sporting CP B"],
+          "notes": "verify: Boavista was demoted to the amateur leagues in 2025 for financial reasons."
+        },
+        {
+          "tier": 3, "name": "Liga 3", "teams": 20, "season": "Sep-May", "format": "2 series, then promotion and relegation phases", "complete": false,
+          "clubs": ["Académica de Coimbra", "Varzim SC", "SC Covilhã", "CD Mafra", "Amora FC", "Belenenses"]
+        }
+      ],
+      "cups": ["Taça de Portugal", "Taça da Liga"],
+      "supercup": "Supertaça Cândido de Oliveira (August/December)",
+      "stars": ["Vangelis Pavlidis (Benfica)", "Nicolás Otamendi (Benfica)", "Francisco Trincão (Sporting)", "Pedro Gonçalves (Sporting)", "Luis Suárez (Sporting, Colombian striker)", "Samu Aghehowa (Porto)", "Diogo Costa (Porto)", "Ricardo Horta (Braga)"]
+    },
+    {
+      "country": "Netherlands",
+      "code": "NED",
+      "flag": "🇳🇱",
+      "currency": "EUR",
+      "transferWindows": { "summer": "1 Jul - 1 Sep", "winter": "1 Jan - 2 Feb" },
+      "leagues": [
+        {
+          "tier": 1, "name": "VriendenLoterij Eredivisie", "teams": 18, "matchdays": 34, "season": "Aug-May",
+          "clubs": ["PSV", "AFC Ajax", "Feyenoord", "FC Utrecht", "AZ", "FC Twente", "Go Ahead Eagles", "NEC Nijmegen", "SC Heerenveen", "PEC Zwolle", "Fortuna Sittard", "Sparta Rotterdam", "FC Groningen", "Heracles Almelo", "NAC Breda", "SC Telstar", "Excelsior", "FC Volendam"],
+          "relegation": "17th-18th relegated; 16th to promotion/relegation play-offs",
+          "europe": "1st → UCL; 2nd → UCL qualifying; 3rd → UEL qualifying; play-offs for UECL; KNVB Cup winner → UEL",
+          "notes": "2024-25 champions: PSV. Relegated: Willem II, RKC Waalwijk, Almere City. Many Indonesian national team players were developed in Dutch academies."
+        },
+        {
+          "tier": 2, "name": "Keuken Kampioen Divisie (Eerste Divisie)", "teams": 20, "matchdays": 38, "season": "Aug-May",
+          "clubs": ["Willem II", "RKC Waalwijk", "Almere City FC", "SC Cambuur", "ADO Den Haag", "De Graafschap", "FC Dordrecht", "Roda JC", "MVV Maastricht", "VVV-Venlo", "Helmond Sport", "TOP Oss", "FC Den Bosch", "FC Emmen", "FC Eindhoven", "Jong Ajax", "Jong PSV", "Jong AZ", "Jong FC Utrecht"],
+          "notes": "Vitesse lost its professional licence in 2025. Reserve (Jong) teams cannot be promoted. verify: count may be 19 after Vitesse's removal.",
+          "complete": false
+        },
+        {
+          "tier": 3, "name": "Tweede Divisie", "teams": 18, "season": "Aug-May", "complete": false,
+          "clubs": ["Katwijk", "Rijnsburgse Boys", "Spakenburg", "Quick Boys", "Kozakken Boys", "AFC Amsterdam", "Jong Sparta"],
+          "notes": "Semi-professional. (The Hoofdklasse in the original prompt is a lower amateur tier, not tier 3.)"
+        }
+      ],
+      "cups": ["KNVB Beker"],
+      "supercup": "Johan Cruijff Schaal (August)",
+      "stars": ["Ivan Perišić (PSV)", "Ayase Ueda (Feyenoord)", "Mees Hilgers (FC Twente, Indonesia)", "Dean James (Go Ahead Eagles, Indonesia)", "Justin Hubner (Fortuna Sittard, Indonesia)"]
+    },
+    {
+      "country": "Belgium",
+      "code": "BEL",
+      "flag": "🇧🇪",
+      "currency": "EUR",
+      "transferWindows": { "summer": "1 Jul - 1 Sep", "winter": "1 Jan - 2 Feb" },
+      "leagues": [
+        {
+          "tier": 1, "name": "Jupiler Pro League", "teams": 16, "matchdays": 30, "season": "Jul-May", "format": "30 rounds, then Champions' play-off (top 6, points halved), Europe play-off (7-12) and relegation play-off (13-16)",
+          "clubs": ["Royale Union Saint-Gilloise", "Club Brugge KV", "KRC Genk", "RSC Anderlecht", "KAA Gent", "Royal Antwerp FC", "Standard de Liège", "R. Charleroi SC", "KVC Westerlo", "KV Mechelen", "OH Leuven", "Cercle Brugge", "Sint-Truidense VV", "FCV Dender EH", "SV Zulte Waregem", "RAAL La Louvière"],
+          "notes": "2024-25 champions: Union SG (first title in 90 years). Relegated: Kortrijk, Beerschot. Ragnar Oratmangoen (Indonesia) plays for Dender."
+        },
+        {
+          "tier": 2, "name": "Challenger Pro League", "teams": 16, "matchdays": 30, "season": "Aug-May", "complete": false,
+          "clubs": ["KV Kortrijk", "Beerschot VA", "RWD Molenbeek", "Lommel SK", "Patro Eisden Maasmechelen", "SK Beveren", "KSC Lokeren-Temse", "RFC Seraing", "Francs Borains", "Club NXT", "Jong Genk", "RSCA Futures", "KAS Eupen", "RFC Liège", "Olympic Charleroi"],
+          "notes": "The original prompt said 8 clubs; it is 16 including U23 sides. Joey Pelupessy (Indonesia) plays for Lommel."
+        },
+        { "tier": 3, "name": "Nationale 1", "teams": 16, "season": "Aug-May", "complete": false, "clubs": [] }
+      ],
+      "cups": ["Croky Cup (Belgian Cup)"],
+      "supercup": "Belgian Super Cup (irregular)",
+      "stars": ["Hans Vanaken (Club Brugge)", "Promise David (Union SG)"]
+    },
+    {
+      "country": "Scotland",
+      "code": "SCO",
+      "flag": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+      "currency": "GBP",
+      "transferWindows": { "summer": "~10 Jun - 1 Sep", "winter": "1 Jan - 2 Feb" },
+      "leagues": [
+        {
+          "tier": 1, "name": "William Hill Scottish Premiership", "teams": 12, "matchdays": 38, "season": "Aug-May", "format": "33 rounds then split into top 6 / bottom 6",
+          "clubs": ["Celtic", "Rangers", "Heart of Midlothian", "Hibernian", "Aberdeen", "Motherwell", "Dundee United", "St Mirren", "Kilmarnock", "Dundee", "Falkirk", "Livingston"],
+          "relegation": "12th relegated; 11th play-off vs Championship 2nd-4th",
+          "notes": "2024-25 champions: Celtic (4 in a row). Aberdeen won the 2025 Scottish Cup. Promoted: Falkirk, Livingston. Relegated: St Johnstone, Ross County."
+        },
+        {
+          "tier": 2, "name": "Scottish Championship", "teams": 10, "matchdays": 36, "season": "Aug-May",
+          "clubs": ["Ross County", "St Johnstone", "Partick Thistle", "Ayr United", "Raith Rovers", "Dunfermline Athletic", "Greenock Morton", "Airdrieonians", "Queen's Park", "Arbroath"]
+        },
+        {
+          "tier": 3, "name": "Scottish League One", "teams": 10, "matchdays": 36, "season": "Aug-May", "complete": false,
+          "clubs": ["Hamilton Academical", "Inverness Caledonian Thistle", "Alloa Athletic", "Cove Rangers", "Queen of the South", "Kelty Hearts", "Montrose", "Stenhousemuir", "Peterhead", "East Fife"]
+        }
+      ],
+      "cups": ["Scottish Cup", "Scottish League Cup (Premier Sports Cup)"],
+      "stars": ["Callum McGregor (Celtic)", "Kasper Schmeichel (Celtic)", "James Tavernier (Rangers)", "Lawrence Shankland (Hearts)"]
+    },
+    {
+      "country": "Turkey",
+      "code": "TUR",
+      "flag": "🇹🇷",
+      "currency": "TRY",
+      "transferWindows": { "summer": "Jun - early Sep", "winter": "Jan - early Feb" },
+      "leagues": [
+        {
+          "tier": 1, "name": "Trendyol Süper Lig", "teams": 18, "matchdays": 34, "season": "Aug-May",
+          "clubs": ["Galatasaray", "Fenerbahçe", "Samsunspor", "Beşiktaş", "Başakşehir", "Eyüpspor", "Trabzonspor", "Göztepe", "Çaykur Rizespor", "Konyaspor", "Kasımpaşa", "Alanyaspor", "Antalyaspor", "Gaziantep FK", "Kayserispor", "Kocaelispor", "Gençlerbirliği", "Fatih Karagümrük"],
+          "relegation": "Bottom 3",
+          "notes": "League reduced from 19 to 18 clubs. 2024-25 champions: Galatasaray (3 in a row). Relegated: Adana Demirspor, Hatayspor, Sivasspor, Bodrum. Foreign-player quota changes frequently. Turkish football is volatile: managers are sacked quickly, fan pressure is extreme."
+        },
+        {
+          "tier": 2, "name": "Trendyol 1. Lig", "teams": 20, "matchdays": 38, "season": "Aug-May", "complete": false,
+          "clubs": ["Adana Demirspor", "Hatayspor", "Sivasspor", "Bodrum FK", "Erzurumspor FK", "Bandırmaspor", "Pendikspor", "Iğdır FK", "Ankara Keçiörengücü", "Manisa FK", "Ümraniyespor", "Boluspor", "Amedspor", "Sakaryaspor", "Esenler Erokspor", "Serik Belediyespor"]
+        },
+        { "tier": 3, "name": "TFF 2. Lig", "season": "Sep-May", "format": "Regional groups", "complete": false, "clubs": [] }
+      ],
+      "cups": ["Ziraat Türkiye Kupası"],
+      "supercup": "Turkcell Süper Kupa",
+      "stars": ["Victor Osimhen (Galatasaray)", "Leroy Sané (Galatasaray)", "Mauro Icardi (Galatasaray)", "İlkay Gündoğan (Galatasaray)", "Barış Alper Yılmaz (Galatasaray)", "Uğurcan Çakır (Galatasaray)", "Ederson (Fenerbahçe)", "Marco Asensio (Fenerbahçe)", "Edson Álvarez (Fenerbahçe)", "Milan Škriniar (Fenerbahçe)", "Kerem Aktürkoğlu (Fenerbahçe)", "Orkun Kökçü (Beşiktaş)", "Paul Onuachu (Trabzonspor)"]
+    },
+    {
+      "country": "Austria", "code": "AUT", "flag": "🇦🇹", "currency": "EUR",
+      "transferWindows": { "summer": "Jun - 1 Sep", "winter": "Jan - early Feb" },
+      "leagues": [
+        {
+          "tier": 1, "name": "ADMIRAL Bundesliga", "teams": 12, "matchdays": 32, "season": "Jul-May", "format": "22 rounds, then championship group (6) and qualification group (6), points halved",
+          "clubs": ["SK Sturm Graz", "FC Red Bull Salzburg", "SK Rapid Wien", "FK Austria Wien", "LASK", "Wolfsberger AC", "TSV Hartberg", "FC Blau-Weiß Linz", "SCR Altach", "Grazer AK", "WSG Tirol", "SV Ried"],
+          "notes": "2024-25 champions: Sturm Graz."
+        },
+        { "tier": 2, "name": "ADMIRAL 2. Liga", "teams": 16, "season": "Jul-May", "complete": false, "clubs": ["FC Admira Wacker", "SKN St. Pölten", "SV Austria Salzburg", "FC Liefering", "First Vienna FC", "SV Horn"] }
+      ],
+      "cups": ["ÖFB-Cup"],
+      "stars": []
+    },
+    {
+      "country": "Switzerland", "code": "SUI", "flag": "🇨🇭", "currency": "CHF",
+      "transferWindows": { "summer": "Jun - early Sep", "winter": "Jan - mid Feb" },
+      "leagues": [
+        {
+          "tier": 1, "name": "Credit Suisse Super League (Brack.ch Super League from 2025, verify)", "teams": 12, "matchdays": 38, "season": "Jul-May", "format": "33 rounds then split into top 6 / bottom 6",
+          "clubs": ["FC Basel 1893", "BSC Young Boys", "Servette FC", "FC Lugano", "FC Luzern", "FC St. Gallen 1879", "FC Zürich", "FC Lausanne-Sport", "FC Sion", "FC Thun", "Grasshopper Club Zürich", "FC Winterthur"],
+          "notes": "League expanded to 12 clubs in 2023 (the original prompt said 10). 2024-25 champions: Basel (Xherdan Shaqiri). verify sponsor name."
+        },
+        { "tier": 2, "name": "Challenge League", "teams": 10, "season": "Jul-May", "complete": false, "clubs": ["Yverdon-Sport FC", "FC Aarau", "FC Vaduz (Liechtenstein)", "Neuchâtel Xamax", "FC Wil 1900", "FC Schaffhausen"] }
+      ],
+      "cups": ["Swiss Cup"],
+      "stars": ["Xherdan Shaqiri (Basel)"]
+    },
+    {
+      "country": "Czech Republic", "code": "CZE", "flag": "🇨🇿", "currency": "CZK",
+      "transferWindows": { "summer": "Jun - early Sep", "winter": "Jan - Feb" },
+      "leagues": [
+        {
+          "tier": 1, "name": "Chance Liga", "teams": 16, "matchdays": 35, "season": "Jul-May", "format": "30 rounds then championship/relegation groups",
+          "clubs": ["SK Slavia Praha", "AC Sparta Praha", "FC Viktoria Plzeň", "FC Baník Ostrava", "FK Jablonec", "FC Hradec Králové", "SK Sigma Olomouc", "FC Slovan Liberec", "FK Mladá Boleslav", "Bohemians Praha 1905", "FK Teplice", "MFK Karviná", "FK Pardubice", "FK Dukla Praha", "FC Zlín", "1. FC Slovácko"],
+          "notes": "Renamed from Fortuna Liga (2024). 2024-25 champions: Slavia Praha."
+        }
+      ],
+      "cups": ["MOL Cup"],
+      "stars": []
+    },
+    {
+      "country": "Denmark", "code": "DEN", "flag": "🇩🇰", "currency": "DKK",
+      "transferWindows": { "summer": "Jun - 1 Sep", "winter": "Jan - Feb" },
+      "leagues": [
+        {
+          "tier": 1, "name": "3F Superliga", "teams": 12, "matchdays": 32, "season": "Jul-May", "format": "22 rounds then championship round (6) and relegation round (6)",
+          "clubs": ["FC København", "FC Midtjylland", "Brøndby IF", "AGF", "FC Nordsjælland", "Randers FC", "Silkeborg IF", "Viborg FF", "SønderjyskE", "Vejle BK", "OB", "FC Fredericia"],
+          "notes": "12 clubs (the original prompt said 14). 2024-25 champions: FC København."
+        },
+        { "tier": 2, "name": "NordicBet Liga (1st Division)", "teams": 12, "complete": false, "clubs": ["Lyngby BK", "AaB", "Hvidovre IF", "HB Køge", "Kolding IF", "B.93"] }
+      ],
+      "cups": ["Oddset Pokalen (Danish Cup)"],
+      "stars": []
+    },
+    {
+      "country": "Norway", "code": "NOR", "flag": "🇳🇴", "currency": "NOK",
+      "transferWindows": { "winter": "Jan - Mar", "summer": "Jul - Aug" },
+      "leagues": [
+        {
+          "tier": 1, "name": "Eliteserien", "teams": 16, "matchdays": 30, "season": "Mar-Nov (calendar year)",
+          "clubs": ["Viking FK", "FK Bodø/Glimt", "SK Brann", "Molde FK", "Rosenborg BK", "Vålerenga", "Fredrikstad FK", "Sarpsborg 08", "Sandefjord", "Tromsø IL", "HamKam", "KFUM Oslo", "Kristiansund BK", "Bryne FK", "FK Haugesund", "Strømsgodset IF"],
+          "notes": "2025 season list. 2025 champions: Viking. Bodø/Glimt reached the 2024-25 Europa League semi-finals and the 2025-26 Champions League league phase. verify 2026 promoted/relegated clubs."
+        },
+        { "tier": 2, "name": "OBOS-ligaen (1. divisjon)", "teams": 16, "complete": false, "clubs": ["Lillestrøm SK", "IK Start", "Aalesunds FK", "Odd", "Stabæk", "Lyn"] }
+      ],
+      "cups": ["Norwegian Cup (NM Cupen)"],
+      "stars": []
+    },
+    {
+      "country": "Sweden", "code": "SWE", "flag": "🇸🇪", "currency": "SEK",
+      "transferWindows": { "winter": "Jan - Mar", "summer": "Jul - Aug" },
+      "leagues": [
+        {
+          "tier": 1, "name": "Allsvenskan", "teams": 16, "matchdays": 30, "season": "Mar-Nov (calendar year)",
+          "clubs": ["Mjällby AIF", "Malmö FF", "AIK", "Hammarby IF", "Djurgårdens IF", "IFK Göteborg", "BK Häcken", "IF Elfsborg", "IK Sirius", "GAIS", "Halmstads BK", "IF Brommapojkarna", "Degerfors IF", "Östers IF", "IFK Norrköping", "IFK Värnamo"],
+          "notes": "2025 season list. 2025 champions: Mjällby (historic first title). verify 2026 changes."
+        },
+        { "tier": 2, "name": "Superettan", "teams": 16, "complete": false, "clubs": ["Kalmar FF", "Västerås SK", "Örebro SK", "Helsingborgs IF", "GIF Sundsvall"] }
+      ],
+      "cups": ["Svenska Cupen"],
+      "stars": []
+    },
+    {
+      "country": "Poland", "code": "POL", "flag": "🇵🇱", "currency": "PLN",
+      "transferWindows": { "summer": "Jun - early Sep", "winter": "Jan - Feb" },
+      "leagues": [
+        {
+          "tier": 1, "name": "PKO BP Ekstraklasa", "teams": 18, "matchdays": 34, "season": "Jul-May",
+          "clubs": ["Lech Poznań", "Raków Częstochowa", "Jagiellonia Białystok", "Legia Warszawa", "Pogoń Szczecin", "Górnik Zabrze", "Cracovia", "Motor Lublin", "GKS Katowice", "Widzew Łódź", "Korona Kielce", "Piast Gliwice", "Radomiak Radom", "Zagłębie Lubin", "Lechia Gdańsk", "Arka Gdynia", "Bruk-Bet Termalica Nieciecza", "Wisła Płock"],
+          "notes": "2024-25 champions: Lech Poznań. Wisła Kraków is in the 2nd tier (I liga) in 2025-26."
+        },
+        { "tier": 2, "name": "Betclic 1 Liga", "teams": 18, "complete": false, "clubs": ["Wisła Kraków", "Śląsk Wrocław", "Ruch Chorzów", "Stal Mielec", "Puszcza Niepołomice", "Polonia Warszawa"] }
+      ],
+      "cups": ["Puchar Polski"],
+      "stars": []
+    },
+    {
+      "country": "Greece", "code": "GRE", "flag": "🇬🇷", "currency": "EUR",
+      "transferWindows": { "summer": "Jul - early Sep", "winter": "Jan - Feb" },
+      "leagues": [
+        {
+          "tier": 1, "name": "Stoiximan Super League", "teams": 14, "matchdays": 26, "season": "Aug-May", "format": "26 rounds then championship/Europe/relegation play-offs",
+          "clubs": ["Olympiacos", "PAOK", "AEK Athens", "Panathinaikos", "Aris Thessaloniki", "OFI Crete", "Asteras Tripolis", "Atromitos", "Panetolikos", "Volos NFC", "Levadiakos", "Kifisia", "AEL Larissa", "Panserraikos"],
+          "notes": "2024-25 champions: Olympiacos (double). Olympiacos won the 2023-24 Conference League."
+        }
+      ],
+      "cups": ["Greek Cup"],
+      "stars": ["Ayoub El Kaabi (Olympiacos)"]
+    },
+    {
+      "country": "Croatia", "code": "CRO", "flag": "🇭🇷", "currency": "EUR",
+      "transferWindows": { "summer": "Jun - early Sep", "winter": "Jan - Feb" },
+      "leagues": [
+        {
+          "tier": 1, "name": "SuperSport HNL", "teams": 10, "matchdays": 36, "season": "Jul-May",
+          "clubs": ["HNK Rijeka", "GNK Dinamo Zagreb", "HNK Hajduk Split", "NK Osijek", "NK Varaždin", "HNK Gorica", "NK Istra 1961", "NK Lokomotiva Zagreb", "NK Slaven Belupo", "HNK Vukovar 1991"],
+          "notes": "2024-25 champions: Rijeka."
+        }
+      ],
+      "cups": ["Croatian Cup"],
+      "stars": []
+    },
+    {
+      "country": "Serbia", "code": "SRB", "flag": "🇷🇸", "currency": "RSD",
+      "transferWindows": { "summer": "Jun - early Sep", "winter": "Jan - Feb" },
+      "leagues": [
+        {
+          "tier": 1, "name": "Mozzart Bet SuperLiga", "teams": 16, "matchdays": 37, "season": "Jul-May", "format": "30 rounds then championship/relegation groups", "complete": false,
+          "clubs": ["FK Crvena zvezda (Red Star Belgrade)", "FK Partizan", "FK Vojvodina", "FK Čukarički", "FK TSC Bačka Topola", "FK Novi Pazar", "FK Radnički 1923", "FK Mladost Lučani", "FK Spartak Subotica", "FK IMT", "FK Železničar Pančevo", "OFK Beograd", "FK Napredak Kruševac", "FK Radnik Surdulica"],
+          "notes": "Red Star are dominant champions."
+        }
+      ],
+      "cups": ["Serbian Cup"],
+      "stars": []
+    },
+    {
+      "country": "Ukraine", "code": "UKR", "flag": "🇺🇦", "currency": "UAH",
+      "transferWindows": { "summer": "Jun - early Sep", "winter": "Jan - Mar" },
+      "leagues": [
+        {
+          "tier": 1, "name": "Ukrainian Premier League (VBET League)", "teams": 16, "matchdays": 30, "season": "Aug-May", "complete": false,
+          "clubs": ["FC Dynamo Kyiv", "FC Shakhtar Donetsk", "FC Polissya Zhytomyr", "FC Oleksandriya", "FC Kryvbas Kryvyi Rih", "FC Karpaty Lviv", "FC Zorya Luhansk", "LNZ Cherkasy", "FC Rukh Lviv", "FC Obolon Kyiv", "NK Veres Rivne", "FC Kolos Kovalivka", "FC Metalist 1925 Kharkiv", "FC Epitsentr Kamianets-Podilskyi", "FC Kudrivka"],
+          "notes": "2024-25 champions: Dynamo Kyiv. Played during the war, often behind closed doors, with air-raid interruptions. Ukrainian clubs play European home matches abroad. Dnipro-1 dissolved in 2024 and Vorskla were relegated in 2025 (the original prompt listed both)."
+        }
+      ],
+      "cups": ["Ukrainian Cup"],
+      "stars": []
+    },
+    {
+      "country": "Russia", "code": "RUS", "flag": "🇷🇺", "currency": "RUB",
+      "transferWindows": { "summer": "Jun - early Sep", "winter": "Jan - Feb" },
+      "leagues": [
+        {
+          "tier": 1, "name": "Russian Premier League (Mir RPL)", "teams": 16, "matchdays": 30, "season": "Jul-May",
+          "clubs": ["FC Krasnodar", "FC Zenit Saint Petersburg", "FC Spartak Moscow", "PFC CSKA Moscow", "FC Lokomotiv Moscow", "FC Dynamo Moscow", "FC Rubin Kazan", "FC Rostov", "FC Akhmat Grozny", "PFC Krylia Sovetov Samara", "FC Akron Tolyatti", "FC Dynamo Makhachkala", "FC Pari Nizhny Novgorod", "FC Orenburg", "FC Baltika Kaliningrad", "PFC Sochi"],
+          "notes": "2024-25 champions: Krasnodar (ending Zenit's run). Russian clubs and the national team remain banned from UEFA and FIFA competitions."
+        }
+      ],
+      "cups": ["Russian Cup"],
+      "stars": []
+    },
+    {
+      "country": "Romania", "code": "ROU", "flag": "🇷🇴", "currency": "RON",
+      "transferWindows": { "summer": "Jun - early Sep", "winter": "Jan - Feb" },
+      "leagues": [
+        {
+          "tier": 1, "name": "Superliga", "teams": 16, "matchdays": 30, "season": "Jul-May", "format": "30 rounds then play-off (6) and play-out (10)",
+          "clubs": ["FCSB", "CFR Cluj", "Universitatea Craiova", "Universitatea Cluj", "Rapid București", "Dinamo București", "Farul Constanța", "Petrolul Ploiești", "Oțelul Galați", "UTA Arad", "FC Hermannstadt", "FC Botoșani", "Unirea Slobozia", "FK Csíkszereda", "Metaloglobus București", "FC Argeș Pitești"],
+          "notes": "2024-25 champions: FCSB."
+        }
+      ],
+      "cups": ["Cupa României"],
+      "stars": []
+    },
+    {
+      "country": "Hungary", "code": "HUN", "flag": "🇭🇺", "currency": "HUF",
+      "leagues": [{ "tier": 1, "name": "NB I (Fizz Liga)", "teams": 12, "matchdays": 33, "season": "Jul-May", "complete": false, "clubs": ["Ferencváros", "Puskás Akadémia", "Paksi FC", "MTK Budapest", "Debreceni VSC", "Győri ETO", "Újpest FC", "Zalaegerszegi TE", "Nyíregyháza Spartacus", "Kisvárda", "Diósgyőri VTK", "Kazincbarcika"], "notes": "Ferencváros dominant (2024-25 champions)." }],
+      "cups": ["Magyar Kupa"]
+    },
+    {
+      "country": "Slovakia", "code": "SVK", "flag": "🇸🇰", "currency": "EUR",
+      "leagues": [{ "tier": 1, "name": "Niké liga", "teams": 12, "matchdays": 32, "season": "Jul-May", "clubs": ["ŠK Slovan Bratislava", "MŠK Žilina", "FC Spartak Trnava", "FC DAC 1904 Dunajská Streda", "FK Železiarne Podbrezová", "MFK Ružomberok", "AS Trenčín", "MFK Zemplín Michalovce", "FC Košice", "MFK Skalica", "KFC Komárno", "Tatran Prešov"], "notes": "AS Trenčín has a history of hosting Indonesian players (Marselino Ferdinan joined on loan in 2025, verify)." }],
+      "cups": ["Slovnaft Cup"]
+    },
+    {
+      "country": "Slovenia", "code": "SVN", "flag": "🇸🇮", "currency": "EUR",
+      "leagues": [{ "tier": 1, "name": "Prva Liga (PrvaLiga Telemach)", "teams": 10, "matchdays": 36, "season": "Jul-May", "complete": false, "clubs": ["NK Olimpija Ljubljana", "NK Maribor", "NK Celje", "FC Koper", "NŠ Mura", "NK Bravo", "NK Radomlje", "NK Primorje", "NK Aluminij"] }],
+      "cups": ["Slovenian Cup"]
+    },
+    {
+      "country": "Bulgaria", "code": "BUL", "flag": "🇧🇬", "currency": "BGN",
+      "leagues": [{ "tier": 1, "name": "efbet Liga (First League)", "teams": 16, "season": "Jul-May", "complete": false, "clubs": ["PFC Ludogorets Razgrad", "CSKA Sofia", "PFC Levski Sofia", "Lokomotiv Plovdiv", "Botev Plovdiv", "Cherno More Varna", "Arda Kardzhali", "CSKA 1948", "Slavia Sofia", "Lokomotiv Sofia"], "notes": "Ludogorets have won every title since 2011-12." }],
+      "cups": ["Bulgarian Cup"]
+    },
+    {
+      "country": "Cyprus", "code": "CYP", "flag": "🇨🇾", "currency": "EUR",
+      "leagues": [{ "tier": 1, "name": "Cyprus League (Cyta Championship)", "teams": 14, "season": "Aug-May", "complete": false, "clubs": ["Pafos FC", "APOEL", "Omonia", "AEK Larnaca", "Aris Limassol", "Apollon Limassol", "Anorthosis Famagusta", "AEL Limassol", "Ethnikos Achna"], "notes": "2024-25 champions: Pafos, who reached the 2025-26 Champions League league phase." }]
+    },
+    {
+      "country": "Israel", "code": "ISR", "flag": "🇮🇱", "currency": "ILS",
+      "leagues": [{ "tier": 1, "name": "Ligat Ha'Al", "teams": 14, "season": "Aug-May", "complete": false, "clubs": ["Maccabi Tel Aviv", "Hapoel Be'er Sheva", "Maccabi Haifa", "Beitar Jerusalem", "Hapoel Tel Aviv", "Hapoel Haifa", "Maccabi Netanya", "Bnei Sakhnin", "Hapoel Jerusalem", "Ironi Kiryat Shmona"], "notes": "Israeli clubs play UEFA home matches at neutral venues (Hungary/Serbia) because of the security situation." }]
+    },
+    {
+      "country": "Bosnia and Herzegovina", "code": "BIH", "flag": "🇧🇦", "currency": "BAM",
+      "leagues": [{ "tier": 1, "name": "Premijer liga BiH", "teams": 10, "season": "Jul-May", "complete": false, "clubs": ["HŠK Zrinjski Mostar", "FK Borac Banja Luka", "FK Sarajevo", "FK Željezničar", "FK Velež Mostar", "NK Široki Brijeg", "FK Sloga Doboj"] }]
+    },
+    {
+      "country": "Kazakhstan", "code": "KAZ", "flag": "🇰🇿", "currency": "KZT",
+      "leagues": [{ "tier": 1, "name": "Kazakhstan Premier League", "teams": 14, "season": "Mar-Nov (calendar year)", "complete": false, "clubs": ["FC Kairat", "FC Astana", "FC Tobol", "FC Ordabasy", "FC Aktobe", "FC Elimai", "FC Zhenis", "FC Atyrau"], "notes": "Kairat reached the 2025-26 Champions League league phase, travelling up to ~7,000 km for away games." }]
+    },
+    {
+      "country": "Azerbaijan", "code": "AZE", "flag": "🇦🇿", "currency": "AZN",
+      "leagues": [{ "tier": 1, "name": "Azerbaijan Premier League", "teams": 12, "season": "Aug-May", "complete": false, "clubs": ["Qarabağ FK", "Neftçi PFK", "Sabah FC", "Zira FK", "Turan Tovuz", "Sumgayit FK", "Araz-Naxçıvan"], "notes": "Qarabağ dominant; 2025-26 Champions League league phase." }]
+    },
+    {
+      "country": "Georgia", "code": "GEO", "flag": "🇬🇪", "currency": "GEL",
+      "leagues": [{ "tier": 1, "name": "Erovnuli Liga", "teams": 10, "season": "Mar-Dec (calendar year)", "complete": false, "clubs": ["Dinamo Tbilisi", "Dinamo Batumi", "Torpedo Kutaisi", "Iberia 1999", "Dila Gori", "Saburtalo"] }]
+    },
+    {
+      "country": "Armenia", "code": "ARM", "flag": "🇦🇲", "currency": "AMD",
+      "leagues": [{ "tier": 1, "name": "Armenian Premier League", "teams": 10, "season": "Jul-May", "complete": false, "clubs": ["FC Pyunik", "FC Ararat-Armenia", "FC Noah", "FC Urartu", "FC Ararat Yerevan", "FC Alashkert", "FC Van"] }]
+    },
+    {
+      "country": "Albania", "code": "ALB", "flag": "🇦🇱", "currency": "ALL",
+      "leagues": [{ "tier": 1, "name": "Kategoria Superiore", "teams": 10, "season": "Aug-May", "complete": false, "clubs": ["FK Partizani", "KF Egnatia", "KF Tirana", "KF Vllaznia", "FK Dinamo City", "KF Teuta", "FK Kukësi"] }]
+    },
+    {
+      "country": "North Macedonia", "code": "MKD", "flag": "🇲🇰", "currency": "MKD",
+      "leagues": [{ "tier": 1, "name": "Macedonian First League", "teams": 12, "season": "Aug-May", "complete": false, "clubs": ["KF Shkëndija", "FK Struga", "FK Vardar", "FK Rabotnički", "FK Shkupi", "KF Tikvesh"] }]
+    },
+    {
+      "country": "Montenegro", "code": "MNE", "flag": "🇲🇪", "currency": "EUR",
+      "leagues": [{ "tier": 1, "name": "Meridianbet 1. CFL", "teams": 10, "season": "Aug-May", "complete": false, "clubs": ["FK Budućnost Podgorica", "FK Dečić", "FK Sutjeska Nikšić", "FK Mornar", "OFK Petrovac"] }]
+    },
+    {
+      "country": "Kosovo", "code": "KOS", "flag": "🇽🇰", "currency": "EUR",
+      "leagues": [{ "tier": 1, "name": "Kosovo Superleague (Albi Mall Superliga)", "teams": 10, "season": "Aug-May", "complete": false, "clubs": ["KF Ballkani", "FC Drita", "FC Prishtina", "KF Llapi", "KF Malisheva"] }]
+    },
+    {
+      "country": "Moldova", "code": "MDA", "flag": "🇲🇩", "currency": "MDL",
+      "leagues": [{ "tier": 1, "name": "Super Liga", "teams": 8, "season": "Jul-May", "complete": false, "clubs": ["FC Sheriff Tiraspol", "FC Petrocub Hîncești", "FC Milsami Orhei", "FC Zimbru Chișinău", "FC Dacia Buiucani"] }]
+    },
+    {
+      "country": "Belarus", "code": "BLR", "flag": "🇧🇾", "currency": "BYN",
+      "leagues": [{ "tier": 1, "name": "Belarusian Premier League (Vysheyshaya Liga)", "teams": 16, "season": "Mar-Nov (calendar year)", "complete": false, "clubs": ["FC BATE Borisov", "FC Dinamo Minsk", "FC Shakhtyor Soligorsk", "FC Neman Grodno", "FC Torpedo-BelAZ Zhodino", "FC Isloch Minsk Raion"], "notes": "Belarusian clubs play UEFA home matches at neutral venues." }]
+    },
+    {
+      "country": "Lithuania", "code": "LTU", "flag": "🇱🇹", "currency": "EUR",
+      "leagues": [{ "tier": 1, "name": "TOPsport A Lyga", "teams": 10, "season": "Mar-Nov (calendar year)", "complete": false, "clubs": ["FK Žalgiris", "FK Kauno Žalgiris", "FC Hegelmann", "FK Sūduva", "FK Panevėžys", "FK Banga"] }]
+    },
+    {
+      "country": "Latvia", "code": "LVA", "flag": "🇱🇻", "currency": "EUR",
+      "leagues": [{ "tier": 1, "name": "Virslīga", "teams": 10, "season": "Mar-Nov (calendar year)", "complete": false, "clubs": ["FK RFS", "Riga FC", "FK Auda", "Valmiera FC", "FK Liepāja"] }]
+    },
+    {
+      "country": "Estonia", "code": "EST", "flag": "🇪🇪", "currency": "EUR",
+      "leagues": [{ "tier": 1, "name": "Meistriliiga", "teams": 10, "season": "Mar-Nov (calendar year)", "complete": false, "clubs": ["FCI Levadia", "FC Flora", "Paide Linnameeskond", "Nõmme Kalju", "Narva Trans"] }]
+    },
+    {
+      "country": "Finland", "code": "FIN", "flag": "🇫🇮", "currency": "EUR",
+      "leagues": [{ "tier": 1, "name": "Veikkausliiga", "teams": 12, "season": "Apr-Nov (calendar year)", "complete": false, "clubs": ["KuPS", "HJK Helsinki", "SJK", "Ilves", "FC Inter Turku", "IF Gnistan", "FC Lahti", "VPS", "IFK Mariehamn"] }]
+    },
+    {
+      "country": "Iceland", "code": "ISL", "flag": "🇮🇸", "currency": "ISK",
+      "leagues": [{ "tier": 1, "name": "Besta deild karla", "teams": 12, "season": "Apr-Oct (calendar year)", "complete": false, "clubs": ["Víkingur Reykjavík", "Breiðablik", "Valur", "KR", "Stjarnan", "FH", "ÍA"] }]
+    },
+    {
+      "country": "Republic of Ireland", "code": "IRL", "flag": "🇮🇪", "currency": "EUR",
+      "leagues": [
+        { "tier": 1, "name": "League of Ireland Premier Division (SSE Airtricity)", "teams": 10, "matchdays": 36, "season": "Feb-Oct (calendar year)", "complete": false, "clubs": ["Shamrock Rovers", "Shelbourne", "Bohemians", "St Patrick's Athletic", "Derry City", "Galway United", "Sligo Rovers", "Drogheda United", "Waterford FC", "Cork City"], "notes": "2025 season list. Shamrock Rovers won 2025. verify 2026 promotion/relegation (Dundalk)." },
+        { "tier": 2, "name": "League of Ireland First Division", "teams": 10, "complete": false, "clubs": ["Dundalk", "UCD", "Finn Harps", "Treaty United", "Bray Wanderers"] }
+      ],
+      "cups": ["FAI Cup"]
+    },
+    {
+      "country": "Northern Ireland", "code": "NIR", "flag": "🇬🇧", "currency": "GBP",
+      "leagues": [{ "tier": 1, "name": "NIFL Premiership (Sports Direct Premiership)", "teams": 12, "matchdays": 38, "season": "Aug-Apr", "complete": false, "clubs": ["Linfield", "Larne", "Glentoran", "Cliftonville", "Coleraine", "Crusaders", "Dungannon Swifts", "Ballymena United", "Portadown", "Glenavon", "Carrick Rangers", "Bangor"] }],
+      "cups": ["Irish Cup"]
+    },
+    {
+      "country": "Wales", "code": "WAL", "flag": "🏴󠁧󠁢󠁷󠁬󠁳󠁿", "currency": "GBP",
+      "leagues": [{ "tier": 1, "name": "JD Cymru Premier", "teams": 12, "matchdays": 32, "season": "Aug-Apr", "complete": false, "clubs": ["The New Saints", "Connah's Quay Nomads", "Penybont", "Bala Town", "Caernarfon Town", "Barry Town United", "Cardiff Metropolitan University", "Haverfordwest County", "Colwyn Bay", "Briton Ferry Llansawel", "Flint Town United"] }],
+      "notes": "Cardiff City, Swansea City, Wrexham and Newport County play in the English pyramid. TNS reached the 2024-25 Conference League league phase.",
+      "cups": ["Welsh Cup"]
+    },
+    {
+      "country": "Luxembourg", "code": "LUX", "flag": "🇱🇺", "currency": "EUR",
+      "leagues": [{ "tier": 1, "name": "BGL Ligue", "teams": 16, "season": "Aug-May", "complete": false, "clubs": ["FC Differdange 03", "Swift Hesperange", "F91 Dudelange", "Progrès Niederkorn", "UNA Strassen"] }]
+    },
+    {
+      "country": "Malta", "code": "MLT", "flag": "🇲🇹", "currency": "EUR",
+      "leagues": [{ "tier": 1, "name": "Maltese Premier League", "teams": 12, "season": "Aug-May", "complete": false, "clubs": ["Hamrun Spartans", "Floriana FC", "Birkirkara FC", "Valletta FC", "Hibernians FC", "Sliema Wanderers"] }]
+    },
+    {
+      "country": "Faroe Islands", "code": "FRO", "flag": "🇫🇴", "currency": "DKK",
+      "leagues": [{ "tier": 1, "name": "Betri deildin", "teams": 10, "season": "Mar-Oct (calendar year)", "complete": false, "clubs": ["KÍ Klaksvík", "HB Tórshavn", "Víkingur Gøta", "B36 Tórshavn", "NSÍ Runavík"] }]
+    },
+    {
+      "country": "Andorra", "code": "AND", "flag": "🇦🇩", "currency": "EUR",
+      "leagues": [{ "tier": 1, "name": "Primera Divisió", "teams": 10, "season": "Sep-May", "complete": false, "clubs": ["Inter Club d'Escaldes", "UE Santa Coloma", "Atlètic Club d'Escaldes", "FC Santa Coloma"] }],
+      "notes": "FC Andorra (owned by Gerard Piqué) plays in Spain's LALIGA HYPERMOTION."
+    },
+    {
+      "country": "San Marino", "code": "SMR", "flag": "🇸🇲", "currency": "EUR",
+      "leagues": [{ "tier": 1, "name": "Campionato Sammarinese", "teams": 16, "season": "Sep-May", "complete": false, "clubs": ["SP Tre Penne", "SS La Fiorita", "SS Virtus", "SP Tre Fiori", "SS Folgore"] }],
+      "notes": "Semi-professional; most players have day jobs."
+    },
+    {
+      "country": "Gibraltar", "code": "GIB", "flag": "🇬🇮", "currency": "GIP",
+      "leagues": [{ "tier": 1, "name": "Gibraltar Football League", "teams": 11, "season": "Sep-May", "complete": false, "clubs": ["Lincoln Red Imps", "St Joseph's FC", "Europa FC", "Manchester 62"] }]
+    },
+    {
+      "country": "Liechtenstein", "code": "LIE", "flag": "🇱🇮", "currency": "CHF",
+      "leagues": [],
+      "notes": "No domestic league. Clubs (FC Vaduz, USV Eschen/Mauren, FC Balzers) play in the Swiss pyramid. Liechtenstein Cup winner enters the Conference League."
+    }
+  ]
+}
