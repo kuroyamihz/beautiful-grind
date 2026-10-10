@@ -16,6 +16,9 @@ OVR = the average of pace/shooting/passing/dribbling/defending/physical. That me
 - A world-class centre-back with shooting 40 looks mediocre.
 - Goalkeepers have no goalkeeping stats at all. (A `goalkeeping` stat has been added to the state; the formula still needs deciding.)
 
+**Current state:** the game uses a position-weighted OVR by default (`OVR_MODE = 'positional'` in
+`public/js/config.js`). Change it to `'original'` to get the original formula back.
+
 **Proposal:** a position-weighted OVR. For example, a striker weights shooting/pace/dribbling heavily,
 a centre-back weights defending/physical/mental, and a goalkeeper mostly weights goalkeeping + mental.
 
@@ -29,6 +32,7 @@ The original prompt asks the AI to track everything. AIs are good storytellers b
 numbers over hundreds of weeks: stats creep, money doesn't add up, tables don't sum.
 **Recommendation:** code owns the numbers; the AI writes the story and suggests changes, and the code checks them.
 (See CLAUDE.md, "Architecture".)
+**Current state:** built this way in v0.1. You can still change it.
 
 ## 5. Real journalists and real players in the social feed
 Having real people (Fabrizio Romano, real players) post fake things can mislead if screenshots

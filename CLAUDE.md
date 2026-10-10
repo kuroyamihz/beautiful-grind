@@ -10,21 +10,28 @@ nationality and any country's football pyramid must work.
 The project owner is a beginner programmer and the game designer. Explain technical choices in
 plain language, keep changes small and playable, and ask before big design changes.
 
-## Architecture (planned)
-- Browser game (runs locally; HTML/JS via Node tooling). Node.js v24 and git are installed. Python is not.
-- **Hybrid engine (recommended, not yet confirmed by owner):** game code owns the numbers
-  (calendar, fixtures, standings, stats, money, injury rolls, trust, transfer windows). The AI
-  (Claude API) owns the story: narrative, dialogue, social feed, decision options, consequences.
-  The AI proposes deltas; code validates and clamps them against the rules in `prompts/engine.md`.
-  Reason: LLMs drift with arithmetic and long-term state; code doesn't.
-- Each week the frontend sends: player state, last decision, recent log, open story threads,
-  and ONLY the relevant slice of `data/world/` (keeps cost low).
+## Architecture (built, v0.1 playable)
+- Browser game, plain ES modules, no build step. `server.js` (Node, no framework) serves `public/`
+  and `data/`, and proxies Claude at `/api/narrate`. Run: `start-game.bat` or `npm start` → http://localhost:3000.
+  Node.js v24 and git are installed. Python is not.
+- **Hybrid engine:** `public/js/engine.js` owns every number (calendar, fixtures, tables, stats,
+  money, injuries, trust, transfers, contracts, national team). Narrators only tell the story:
+  `narrator-offline.js` (templates, free) or Claude via `ai.js` + `server.js`
+  (model `claude-opus-5-5`, effort from `CLAUDE_EFFORT`, server-side fallbacks on, system prompt cached).
+  `ai.js mergeAI()` clamps every Claude-suggested delta and drops Claude transfer/contract decisions.
+- Decisions are serializable (`state.pending`); `kind` = template | offer | renewal | rehab | retire | ai.
+  Template events live in `events.js` (build + resolve per choice); delayed consequences via `state.threads`.
+- Narrator modes: `offline`, `ai-major` (Claude only on big weeks), `ai` (every week).
+- Saves: browser localStorage key `beautifulGrind.save.v1`, plus export/import JSON.
 
 ## Key files
+- `public/js/engine.js` — rules; `config.js` — balancing numbers; `events.js` — story events
+- `public/js/world.js` / `season.js` — league data access, fixtures, simulation, tables
 - `prompts/engine.md` — narrator/game-engine system prompt (owner's design, corrected; see its CHANGELOG)
 - `data/world/*.json` — world database (leagues, clubs, cups, windows, players), baseline 2025-26
 - `data/world/_README.md` — how the world data works, `verify` / `complete` flags
 - `docs/OPEN-QUESTIONS.md` — design questions waiting for the owner's decision
+- `tools/sim-test.mjs` — `npm run simtest [n]` plays n full careers headlessly; run after engine changes
 
 ## Rules
 - Never invent damaging personal storylines for real people (REAL PEOPLE RULE in engine.md).

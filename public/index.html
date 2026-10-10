@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Beautiful Grind</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="loading" class="loading-screen">
+    <div class="brand-big">BEAUTIFUL GRIND</div>
+    <p class="muted">Loading the football world…</p>
+  </div>
+
+  <!-- ═════════ NEW CAREER ═════════ -->
+  <main id="setup" class="setup hidden">
+    <div class="setup-hero">
+      <div class="brand-big">BEAUTIFUL GRIND</div>
+      <p class="tagline">Age 16. One week at a time. No shortcuts.</p>
+    </div>
+    <div id="continue-box" class="card continue hidden">
+      <div>
+        <div class="label">Saved career</div>
+        <div id="continue-text" class="continue-text"></div>
+      </div>
+      <button id="btn-continue" class="btn btn-primary">Continue career ▶</button>
+    </div>
+    <form id="setup-form" class="card setup-form" autocomplete="off">
+      <h2>New career</h2>
+      <div class="grid2">
+        <label>Full name<input name="name" required maxlength="40" placeholder="e.g. Raditya Pratama"></label>
+        <label>Name on shirt<input name="jerseyName" maxlength="14" placeholder="e.g. RADIT"></label>
+        <label>Nickname (optional)<input name="nickname" maxlength="20" placeholder="e.g. Si Kilat"></label>
+        <label>Shirt number<input name="number" type="number" min="1" max="99" value="24"></label>
+        <label>Position<select name="position" id="sel-position"></select></label>
+        <label>Nationality<select name="nationality" id="sel-nationality"></select></label>
+      </div>
+      <h3>Where does it begin?</h3>
+      <div class="grid3">
+        <label>Country<select id="sel-country"></select></label>
+        <label>League<select id="sel-league"></select></label>
+        <label>Club<select id="sel-club" name="club"></select></label>
+      </div>
+      <p class="hint" id="club-hint"></p>
+      <div class="setup-actions">
+        <button type="button" id="btn-random-club" class="btn">🎲 Random club</button>
+        <button type="submit" class="btn btn-primary">Start career ▶</button>
+      </div>
+    </form>
+    <p class="footnote">Your career saves automatically in this browser. Use ⚙ Settings in-game to export a backup.</p>
+  </main>
+
+  <!-- ═════════ GAME ═════════ -->
+  <div id="game" class="hidden">
+    <header class="topbar">
+      <div class="brand">BEAUTIFUL GRIND</div>
+      <div id="top-date" class="top-date"></div>
+      <div class="top-actions">
+        <span id="narrator-badge" class="badge"></span>
+        <button id="btn-settings" class="btn btn-small">⚙ Settings</button>
+      </div>
+    </header>
+    <div class="layout">
+      <aside id="col-player" class="col col-left"></aside>
+      <main class="col col-center">
+        <article id="week-card" class="card week-card"></article>
+        <section id="decisions"></section>
+        <section id="planner" class="card planner"></section>
+        <section id="feed" class="card feed"></section>
+      </main>
+      <aside id="col-world" class="col col-right"></aside>
+    </div>
+  </div>
+
+  <!-- ═════════ SETTINGS ═════════ -->
+  <dialog id="settings" class="modal">
+    <form method="dialog" class="modal-inner">
+      <h2>Settings</h2>
+      <h3>Narrator</h3>
+      <div class="seg" id="seg-narrator">
+        <button type="button" data-mode="offline">Offline (free)</button>
+        <button type="button" data-mode="ai-major">Claude: big moments</button>
+        <button type="button" data-mode="ai">Claude: every week</button>
+      </div>
+      <p id="ai-status" class="hint"></p>
+      <div id="ai-usage" class="hint"></div>
+      <h3>Save</h3>
+      <div class="row-btns">
+        <button type="button" id="btn-export" class="btn">⬇ Export save</button>
+        <label class="btn">⬆ Import save<input type="file" id="file-import" accept=".json" hidden></label>
+        <button type="button" id="btn-new" class="btn btn-danger">New career</button>
+      </div>
+      <div class="modal-foot"><button class="btn btn-primary">Close</button></div>
+    </form>
+  </dialog>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

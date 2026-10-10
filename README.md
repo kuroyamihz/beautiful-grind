@@ -2,15 +2,57 @@
 
 A text-based football career RPG: from a 16-year-old nobody to retirement, one week at a time.
 
-## What's here so far
+## ▶ How to play
 
-| Folder | What it is |
+1. Double-click **`start-game.bat`** in this folder.
+2. A black window opens (that's the game server; keep it open) and your browser opens the game at **http://localhost:3000**.
+3. Create your player, pick a starting club, and press **Play week ▶**.
+4. To stop: close the black window. Your career is saved automatically in your browser.
+
+Each week:
+- **Answer the decisions** (cards with a green border). Their consequences show up next week, sometimes weeks later.
+- **Plan your training**: *Train hard* (more growth, more fatigue and injury risk), *Balanced*, *Light* or *Rest*. Watch your **PFM** fitness bar.
+- Read what happened: matches, ratings, the dressing room, the feed.
+
+Tip: **⚙ Settings → Export save** downloads a backup of your career.
+
+## ✦ Turn on the Claude narrator (optional)
+
+The game plays fully without it. The offline narrator is free. With Claude, every week becomes uniquely written journalism using the rules in `prompts/engine.md`.
+
+1. Go to **https://console.anthropic.com**, create an account, add some credit, and create an **API key** (Settings → API Keys).
+2. In this folder, copy **`.env.example`**, rename the copy to **`.env`**, open it in Notepad and paste your key after `ANTHROPIC_API_KEY=`.
+3. Restart the game with `start-game.bat`. The first time, it installs the Claude connector automatically.
+4. In the game: **⚙ Settings → Narrator** → choose:
+   - **Claude: big moments**: Claude writes only the important weeks (goals, transfers, injuries, season finales). Cheapest way to get the magic.
+   - **Claude: every week**: every week is Claude-written.
+
+**Cost:** each Claude-written week costs a few cents, so a whole career on "every week" can add up to tens of dollars. Settings shows your real spend so far. To make it cheaper, add `CLAUDE_EFFORT=low` to `.env`.
+
+**Never share your `.env` file.** It contains your key. It is excluded from git automatically.
+
+## How the game works (short version)
+
+- **The game code is the referee.** Fixtures, results, league tables, stats, money, injuries, transfers and contracts are all calculated by code, so they stay consistent across a whole career.
+- **The narrator is the storyteller.** Claude (or the offline narrator) turns those facts into the story. Claude can add small consequences and its own decisions, but the code limits how much any single week can change.
+
+## What's in this folder
+
+| Path | What it is |
 |---|---|
-| `prompts/engine.md` | The game's "brain": your narrator rules, with mistakes fixed |
-| `data/world/` | The football world: about 2,000 real clubs in 160+ countries and regions, plus cups, transfer windows, star players, national teams and money |
-| `docs/OPEN-QUESTIONS.md` | Design decisions waiting for you |
-| `CLAUDE.md` | Notes Claude reads at the start of every session so it remembers the project |
+| `start-game.bat` | Double-click to play |
+| `public/` | The game (the page and its code) |
+| `public/js/engine.js` | The rules: weeks, matches, growth, money, transfers, injuries |
+| `public/js/events.js` | Story events and decisions (easy to add more!) |
+| `public/js/config.js` | Balancing numbers: growth caps, injury rates, league strengths |
+| `prompts/engine.md` | The Claude narrator's rules (your original design, corrected) |
+| `data/world/` | The football world: ~2,000 real clubs in 160+ countries and regions |
+| `docs/OPEN-QUESTIONS.md` | Design decisions still waiting for you |
+| `tools/sim-test.mjs` | Plays whole careers automatically to catch bugs (`npm run simtest`) |
 
-## Status
-Step 1 of the plan: **design and data**. The game itself doesn't run yet; the next step is the
-first playable prototype.
+## Current limits (next steps)
+
+- Continental club competitions (Champions League, AFC, Libertadores…) aren't simulated yet. Domestic leagues, domestic cups and national teams are.
+- Lower leagues with incomplete club lists can't be chosen as a starting club yet (for example Indonesia's Championship and Liga 4).
+- Teammates and managers are fictional in offline mode. Claude mode can bring in real players.
+- Balancing follows the original design (+8 stat growth per season max at ages 16-23). See `docs/OPEN-QUESTIONS.md`.
