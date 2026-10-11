@@ -1,0 +1,343 @@
+{
+  "scenarios": [
+    {
+      "id": "mg_frozen_out", "cat": "manager", "w": 9, "when": { "trust": [0, 35] },
+      "title": "{J} Left Out Again: Talks With {M}?",
+      "text": "The squad list goes up and {J}'s name isn't on it again. In the corridor, {M} walks past without stopping. The door to his office is open. It feels like an invitation, or a dare.",
+      "prompt": "You're being frozen out.",
+      "choices": [
+        { "label": "Knock on his door", "desc": "Ask directly what you need to change.", "risk": "medium", "hint": "Could clear the air — or confirm the worst.", "out": [
+          { "w": 1, "text": "Forty minutes in {M}'s office. Honest, uncomfortable, useful. He gives {J} three things to fix and a sliver of hope.", "fx": { "trust": 6, "mood": "Determined" } },
+          { "w": 1, "text": "“I pick the team I think wins.” That's it. {J} leaves knowing less than when he went in.", "fx": { "trust": -3, "mood": "Frustrated" } }
+        ] },
+        { "label": "Work in silence", "desc": "Let training do the talking.", "risk": "low", "hint": "Slow. Sometimes it works.", "text": "{J} is first in, last out for a week. Nobody says anything. Somebody notices.", "fx": { "trust": 3, "pfm": -2 } },
+        { "label": "Ask your agent to call", "desc": "Make it clear you'll leave if needed.", "risk": "high", "hint": "Agitating for a transfer damages trust.", "text": "The agent makes the call. Within a day the dressing room knows. {M} now has a reason.", "fx": { "trust": -10, "listed": true, "mood": "Angry" } }
+      ]
+    },
+    {
+      "id": "mg_praise", "cat": "manager", "w": 5, "when": { "trust": [72, 100] },
+      "title": "{M}: “{J} Is the Model Professional”",
+      "text": "Asked about his squad in the pre-match press conference, {M} goes out of his way to mention {J}: “He trains like he's never played a game. I wish I had ten like him.” The quote is everywhere by the evening.",
+      "fx": { "rep": 1, "followers": 3000, "trust": 1, "mood": "Confident" }
+    },
+    {
+      "id": "mg_halftime_blast", "cat": "manager", "w": 5, "when": { "played": true, "lastResult": ["L", "D"] },
+      "title": "Half-Time Hairdryer: {M} Singles Out {J}",
+      "text": "At half-time {M} kicks a water bottle across the dressing room and points at {J}: “You. Where were you for their goal? Asleep?” Twenty-five players stare at the floor.",
+      "prompt": "Everyone is waiting to see what you do.",
+      "choices": [
+        { "label": "Take it", "desc": "Nod. Say nothing. Respond on the pitch.", "risk": "low", "hint": "The professional answer.", "text": "{J} nods once. The second half is his best forty-five minutes of the season.", "fx": { "trust": 3, "form": 0.2, "mood": "Determined" } },
+        { "label": "Answer back", "desc": "“I was covering for someone else's mistake.”", "risk": "high", "hint": "True or not, this is a power struggle.", "out": [
+          { "w": 1, "text": "Silence. Then {M} sits down. “Then cover better.” Strangely, he respects it.", "fx": { "trust": 1, "rep": 0.2 } },
+          { "w": 2, "text": "{M} subs {J} off at half-time, in front of everyone. The message is clear.", "fx": { "trust": -10, "mood": "Angry" } }
+        ] }
+      ]
+    },
+    {
+      "id": "mg_position_switch", "cat": "manager", "w": 4, "when": { "pos": ["W", "AM", "ST", "CM"] },
+      "title": "{M} Wants {J} at Wing-Back",
+      "text": "Injuries at the back. {M} calls {J} into his office: “I need someone with legs on the right. Wing-back. Just for a few weeks.” Everyone knows “a few weeks” in football can mean forever.",
+      "prompt": "Play out of position?",
+      "choices": [
+        { "label": "Accept for the team", "desc": "Whatever the team needs.", "risk": "medium", "hint": "Trust up; your attacking numbers suffer.", "text": "{J} plays wing-back for a month. He learns to defend. {M} learns he's a team player.", "fx": { "trust": 6, "growth": ["defending"], "tacticalFit": 6 } },
+        { "label": "Politely decline", "desc": "Explain you'll help more in your position.", "risk": "high", "hint": "Refusing a tactical role badly damages trust.", "text": "{M} listens, says “fine”, and doesn't pick {J} at all that weekend.", "fx": { "trust": -12 } }
+      ]
+    },
+    {
+      "id": "mg_new_manager", "cat": "manager", "w": 3, "when": { "apps": [10, 9999] }, "cd": 80,
+      "title": "{M} Sacked: A New Manager Arrives",
+      "text": "The board loses patience on a Tuesday morning. By the afternoon, {M}'s office is empty and a new manager is introduced at a press conference: different ideas, different favourites. Every player starts from zero.",
+      "fx": { "newManager": true },
+      "prompt": "How do you approach the new manager?",
+      "choices": [
+        { "label": "Introduce yourself first", "desc": "Be the first to knock on his door.", "risk": "low", "hint": "First impressions.", "text": "{J} is first through the door. The new manager writes his name at the top of a fresh notebook.", "fx": { "trust": 8 } },
+        { "label": "Impress in training", "desc": "Let him see you work.", "risk": "low", "hint": "Solid.", "text": "{J} trains like it's a trial. In a sense, it is.", "fx": { "trust": 6, "pfm": -2 } },
+        { "label": "Defend the old manager publicly", "desc": "Loyalty to the man who gave you a chance.", "risk": "medium", "hint": "Admirable. The new man may not like it.", "text": "{J} praises the sacked manager in an interview. Fans love the loyalty. The new manager reads it too.", "fx": { "trust": -2, "rep": 0.5, "followers": 4000 } }
+      ]
+    },
+    {
+      "id": "mg_dropped_big_game", "cat": "manager", "w": 4, "when": { "role": ["starter"] },
+      "title": "Dropped for the Big Game",
+      "text": "The biggest match of the month, and {J} sees his name on the bench list. {M} explains in two sentences: a tactical decision, the opponent's left-back, nothing personal. It feels personal.",
+      "prompt": "How do you react?",
+      "choices": [
+        { "label": "Accept it professionally", "desc": "Support the team from the bench.", "risk": "low", "hint": "Managers remember.", "text": "{J} warms up longer than anyone and cheers every tackle. {M} notices.", "fx": { "trust": 4 } },
+        { "label": "Sulk", "desc": "Make your feelings known.", "risk": "medium", "hint": "Teammates see everything.", "text": "{J} sits at the end of the bench with his hood up. The photographers capture it beautifully.", "fx": { "trust": -6, "mood": "Frustrated" } }
+      ]
+    },
+    {
+      "id": "mg_tactical_instruction", "cat": "manager", "w": 4, "when": { "role": ["starter", "rotation"] },
+      "title": "Man-Marking Assignment: Stop Their Star",
+      "text": "{M} has a special job for {J} this week: follow the opposition's best player everywhere. Toilet breaks included, he jokes. It means sacrificing your own game completely.",
+      "prompt": "Accept the job?",
+      "choices": [
+        { "label": "Do the job perfectly", "desc": "Sacrifice your own game.", "risk": "low", "hint": "Trust up; no glory.", "check": { "stat": "defending", "dc": 50 },
+          "ok": { "text": "The star touches the ball eleven times. {M} hugs {J} at the final whistle. The newspapers don't mention him.", "fx": { "trust": 7, "tacticalFit": 6 } },
+          "bad": { "text": "The star ghosts away from {J} twice and scores once. {M} sighs. “At least you tried.”", "fx": { "trust": 1 } } },
+        { "label": "Ask to play your own game", "desc": "You can hurt them in attack.", "risk": "medium", "hint": "Not what he asked.", "text": "{M} doesn't argue; he just picks someone else for the job, and for the team.", "fx": { "trust": -5 } }
+      ]
+    },
+    {
+      "id": "mg_contract_push", "cat": "manager", "w": 3, "when": { "role": ["starter"], "trust": [60, 100], "contractYears": [0, 2] },
+      "title": "{M} Wants to Tie {J} Down",
+      "text": "{M} catches {J} after training: “I've told the board I want you here long-term. Don't let your agent make it complicated.”",
+      "fx": { "trust": 3, "mood": "Confident" }
+    },
+    {
+      "id": "mg_late_for_meeting", "cat": "manager", "w": 3,
+      "title": "Late for the Tactical Meeting",
+      "text": "{J}'s alarm didn't go off. He arrives at the tactical meeting nine minutes late, hair still wet. {M} stops talking mid-sentence and waits for him to sit down. The silence is deafening.",
+      "prompt": "Explain?",
+      "choices": [
+        { "label": "Apologise and accept the fine", "desc": "No excuses.", "risk": "low", "hint": "Honest.", "text": "“Sorry, boss. No excuse.” {M} nods. The fine is posted that afternoon.", "fx": { "trust": -3, "wealth": -60 } },
+        { "label": "Blame traffic", "desc": "Everyone believes traffic.", "risk": "medium", "hint": "If anyone checks…", "out": [
+          { "w": 1, "text": "The excuse works. {J} feels sick about it all afternoon.", "fx": { "trust": -2 } },
+          { "w": 1, "text": "A teammate saw him leaving his apartment at 9:40. The excuse becomes a lie, publicly.", "fx": { "trust": -10, "mood": "Anxious" } }
+        ] }
+      ]
+    },
+    {
+      "id": "mg_favourite_accusation", "cat": "manager", "w": 3, "when": { "trust": [75, 100], "role": ["starter"] },
+      "title": "Teammates Whisper: “Manager's Favourite”",
+      "text": "{J} plays every week, even after bad games. The whispers have started: teacher's pet, coach's son, untouchable. {T} says it out loud in the gym.",
+      "prompt": "Respond?",
+      "choices": [
+        { "label": "Prove it's merit", "desc": "Work twice as hard in training.", "risk": "low", "hint": "Actions answer whispers.", "text": "{J} wins every drill for two weeks. The whispers die.", "fx": { "pfm": -4, "growth": ["rel"] } },
+        { "label": "Confront {Tl}", "desc": "Say it to my face.", "risk": "medium", "hint": "Could get heated.", "out": [
+          { "w": 1, "text": "{T} backs down. “Just joking, bro.” He wasn't.", "fx": { "teammate": { "who": "T", "rel": "rival" } } },
+          { "w": 1, "text": "Shouting, shoving, staff stepping in. {M} has to decide whose side he's on in public.", "fx": { "teammate": { "who": "T", "rel": "enemy" }, "trust": -3 } }
+        ] }
+      ]
+    },
+    {
+      "id": "mg_personal_problem_help", "cat": "manager", "w": 3, "when": { "parental": [0, 40] },
+      "title": "{M} Notices Something Is Wrong",
+      "text": "{M} calls {J} into his office, but not to talk about football. “Your head isn't here. What's going on at home?”",
+      "prompt": "Open up to your manager?",
+      "choices": [
+        { "label": "Tell him everything", "desc": "Family trouble, all of it.", "risk": "low", "hint": "Managers are people too. Most of them.", "text": "{M} listens, then gives {J} three days off to go home. “Football will be here when you come back.”", "fx": { "trust": 5, "parental": 10, "pfm": 6, "mood": "Relieved" } },
+        { "label": "“Everything's fine”", "desc": "Keep it private.", "risk": "low", "hint": "Private, and alone with it.", "text": "{M} doesn't believe him, but lets it go. “My door is open.”", "fx": {} }
+      ]
+    },
+    {
+      "id": "mg_youth_vs_experience", "cat": "manager", "w": 3, "when": { "age": [16, 20], "role": ["bench", "outcast"] },
+      "title": "{M}: “Young Players Must Wait Their Turn”",
+      "text": "In a press conference, {M} is asked why the club's young players don't play. His answer: “Young players must earn it. Nobody is given anything here.” He doesn't mention {J} by name. He doesn't need to.",
+      "prompt": "Supporters are campaigning online for you to play.",
+      "choices": [
+        { "label": "Share the campaign", "desc": "Let the fans speak for you.", "risk": "high", "hint": "Public pressure on a manager rarely ends well.", "text": "{J} shares a fan post demanding he plays. {M} sees it within the hour. The temperature drops.", "fx": { "trust": -10, "followers": 8000 } },
+        { "label": "Ask fans to support the team", "desc": "Not just you.", "risk": "low", "hint": "Mature, and noticed.", "text": "{J} posts: “Support the team. My chance will come.” {M} reads it. His next press conference is warmer.", "fx": { "trust": 5, "rep": 0.4, "followers": 3000 } }
+      ]
+    },
+    {
+      "id": "mg_assistant_ally", "cat": "manager", "w": 3,
+      "title": "The Assistant Coach Becomes {J}'s Advocate",
+      "text": "The assistant coach has been watching {J} closely. In staff meetings he's started saying his name. He tells {J} privately: “Keep doing what you're doing. I'm talking you up.”",
+      "fx": { "trust": 4, "mood": "Motivated" }
+    },
+    {
+      "id": "mg_formation_change", "cat": "manager", "w": 3,
+      "title": "{M} Switches to a Back Three",
+      "text": "{M} changes the formation to a back three with wing-backs. Some players benefit. Some lose their place entirely. In the new system, {J}'s role is unclear.",
+      "prompt": "How do you fit in?",
+      "choices": [
+        { "label": "Study the new system", "desc": "Hours with the analysts.", "risk": "low", "hint": "Adaptability.", "text": "{J} learns the new system faster than anyone. {M} uses him to explain it to others.", "fx": { "tacticalFit": 12, "trust": 3 } },
+        { "label": "Wait and see", "desc": "Systems change again.", "risk": "medium", "hint": "Could be left behind.", "text": "{J} waits. The system stays. He's a step behind for a month.", "fx": { "tacticalFit": -5 } }
+      ]
+    },
+    {
+      "id": "mg_manager_under_pressure", "cat": "manager", "w": 3, "when": { "lastResult": ["L"], "trust": [55, 100] },
+      "title": "{M} on the Brink: “Play for Me This Weekend”",
+      "text": "The press says {M} has one match to save his job. In the final team meeting, he doesn't talk about tactics. He looks at the squad and says, quietly: “Whatever happens Saturday, thank you.” Several players look at the floor.",
+      "prompt": "The captain says the team should play for the manager.",
+      "choices": [
+        { "label": "Rally the team", "desc": "Fight for him.", "risk": "low", "hint": "Loyalty.", "text": "{J} speaks up: “We owe him.” The team plays like a team possessed.", "fx": { "trust": 6, "form": 0.2 } },
+        { "label": "Stay neutral", "desc": "Managers come and go.", "risk": "low", "hint": "Pragmatic.", "text": "{J} keeps his head down. If the manager goes, the next one needs to see a professional.", "fx": {} }
+      ]
+    },
+    {
+      "id": "mg_feedback_session", "cat": "manager", "w": 4,
+      "title": "One-to-One Review With {M}",
+      "text": "Every month {M} reviews each player one-to-one: clips, data, a short conversation. Today he puts {J}'s heatmap on the screen. “Tell me what you see.”",
+      "prompt": "What do you say?",
+      "choices": [
+        { "label": "Honest self-criticism", "desc": "Point out your own mistakes first.", "risk": "low", "hint": "Managers love self-awareness.", "text": "{J} identifies three mistakes before {M} can. The manager closes the laptop. “Good. That's what I wanted.”", "fx": { "trust": 4, "growth": ["mental"] } },
+        { "label": "Defend your performance", "desc": "You had good games.", "risk": "medium", "hint": "Some managers want confidence.", "out": [
+          { "w": 1, "text": "{M} likes the confidence. “Good. Believe it.”", "fx": { "trust": 2, "mood": "Confident" } },
+          { "w": 1, "text": "{M} clicks to the next clip: a mistake. Then another. “Still good?”", "fx": { "trust": -2 } }
+        ] }
+      ]
+    },
+    {
+      "id": "mg_rest_request", "cat": "manager", "w": 4, "when": { "pfm": [0, 50], "role": ["starter"] },
+      "title": "{J} Is Running on Empty",
+      "text": "The legs are gone. {J} has played every minute of the last eight matches. The data says he's at risk. {M} needs him on Saturday.",
+      "prompt": "Ask to be rested?",
+      "choices": [
+        { "label": "Ask for rest", "desc": "Better to miss one game than six.", "risk": "medium", "hint": "Some managers see it as weakness.", "out": [
+          { "w": 2, "text": "{M} looks at the data and agrees. {J} watches from the stands and returns refreshed.", "fx": { "pfm": 15 } },
+          { "w": 1, "text": "{M} agrees, but his replacement plays well. Now {J} has to win his place back.", "fx": { "pfm": 15, "trust": -4 } }
+        ] },
+        { "label": "Play through it", "desc": "The team needs you.", "risk": "high", "hint": "Heroic or injured.", "out": [
+          { "w": 2, "text": "{J} plays. He's tired, but he gets through it. {M} notices the sacrifice.", "fx": { "trust": 3, "pfm": -5 } },
+          { "w": 1, "text": "Seventieth minute: the hamstring goes. Exactly what the data predicted.", "fx": { "injury": "moderate", "trust": 1 } }
+        ] }
+      ]
+    },
+    {
+      "id": "mg_disciplinary", "cat": "manager", "w": 3, "when": { "trust": [0, 50] },
+      "title": "Disciplinary Hearing: {J} Accused of Breaking Curfew",
+      "text": "A hotel staff member reported a player leaving the team hotel after curfew on the last away trip. The CCTV is blurry. {M} thinks it was {J}.",
+      "prompt": "Was it you?",
+      "choices": [
+        { "label": "It wasn't me — prove it", "desc": "Ask to see the footage.", "risk": "medium", "hint": "If you're innocent, fight.", "out": [
+          { "w": 1, "text": "The footage shows {T}, not {J}. {M} apologises, almost.", "fx": { "trust": 4 } },
+          { "w": 1, "text": "The footage is inconclusive. {M} keeps his suspicion. {J} keeps his anger.", "fx": { "trust": -3, "mood": "Angry" } }
+        ] },
+        { "label": "Take the blame for a teammate", "desc": "You know who it was.", "risk": "high", "hint": "Loyalty with a price.", "text": "{J} takes the fine to protect {T}. {T} finds out and becomes his most loyal friend in the squad.", "fx": { "trust": -5, "wealth": -150, "teammate": { "who": "T", "rel": "ally" } } }
+      ]
+    },
+    {
+      "id": "mg_manager_family_story", "cat": "manager", "w": 2, "when": { "trust": [60, 100] },
+      "title": "{M} Tells {J} About His Own Career",
+      "text": "On a long away trip, {M} sits next to {J} on the bus. He talks about his own playing career: the injury at twenty-four, the clubs that didn't want him, the year he worked in his father's shop. “Talent is common,” he says. “Patience isn't.”",
+      "fx": { "trust": 3, "growth": ["mental"] }
+    },
+    {
+      "id": "mg_penalty_order", "cat": "manager", "w": 3, "when": { "pos": ["ST", "AM", "W", "CM"], "role": ["starter"] },
+      "title": "{M} Names the New Penalty Taker",
+      "text": "The regular penalty taker missed two in a row. {M} holds a penalty competition in training: five each, the goalkeepers trying everything to put people off.",
+      "prompt": "Five penalties.",
+      "choices": [
+        { "label": "Same corner every time", "desc": "Hit it hard and low, bottom left.", "risk": "medium", "hint": "Keepers learn.", "check": { "stat": "shooting", "dc": 55 },
+          "ok": { "text": "Five out of five. {M} points at {J}. “Yours.”", "fx": { "trust": 3, "flag": "penalty_taker" } },
+          "bad": { "text": "The keeper reads the third one and gloats. Someone else wins.", "fx": {} } },
+        { "label": "Wait for the keeper to move", "desc": "The cool way.", "risk": "medium", "hint": "Needs nerves of steel.", "check": { "stat": "mental", "dc": 58 },
+          "ok": { "text": "Five out of five, each one rolled in as the keeper dived. Cold-blooded. The job is his.", "fx": { "trust": 3, "flag": "penalty_taker", "growth": ["mental"] } },
+          "bad": { "text": "The keeper stands still on the second one and catches it. Laughter.", "fx": {} } }
+      ]
+    },
+    {
+      "id": "mg_manager_leaves_for_bigger", "cat": "manager", "w": 2, "when": { "trust": [70, 100] }, "cd": 100,
+      "title": "{M} Leaves for a Bigger Club — and Wants {J} to Follow",
+      "text": "{M} has been offered a job at a bigger club. On his last day, he takes {J} aside: “I'll be calling your agent in the summer. Be ready.” Then he's gone, and a new manager is introduced.",
+      "fx": { "newManager": true, "flag": "old_manager_wants_me", "mood": "Motivated" }
+    },
+    {
+      "id": "mg_language_in_meetings", "cat": "manager", "w": 3, "when": { "abroad": true },
+      "title": "Tactical Meetings in a Language {J} Barely Speaks",
+      "text": "{M}'s team talks are fast, full of slang and in a language {J} is still learning. He understands about sixty percent. Today he missed an instruction about corners and the team conceded from one.",
+      "prompt": "Fix the communication problem?",
+      "choices": [
+        { "label": "Ask for a translator in meetings", "desc": "Formally.", "risk": "low", "hint": "Practical.", "text": "The club arranges a translator for meetings. {J} catches up, but feels like a guest.", "fx": { "tacticalFit": 6 } },
+        { "label": "Private language lessons", "desc": "Three hours a week.", "risk": "low", "hint": "Slow, but it changes everything.", "vars": { "cost": ["wageWeeks", 0.5, 40] }, "text": "{J} pays {cost} for intensive lessons. Two months later, he makes a joke in a team meeting and the whole room laughs. He belongs.", "fx": { "wealth": "-cost", "tacticalFit": 8, "growth": ["mental"], "flag": "learning_language" } }
+      ]
+    },
+    {
+      "id": "mg_post_match_rant", "cat": "manager", "w": 3, "when": { "lastResult": ["L"] },
+      "title": "{M} Blames the Players Publicly",
+      "text": "After the defeat, {M} tells the press: “Some players don't care enough about this badge.” He doesn't name names. Journalists start guessing. {J}'s name comes up on talk radio.",
+      "prompt": "How do you respond?",
+      "choices": [
+        { "label": "Ask {M} if he meant you", "desc": "Directly.", "risk": "medium", "hint": "You'll get an answer.", "out": [
+          { "w": 1, "text": "“Not you. You care.” {J} leaves relieved.", "fx": { "trust": 2 } },
+          { "w": 1, "text": "{M} pauses a long time. “If you have to ask…”", "fx": { "trust": -3, "mood": "Anxious" } }
+        ] },
+        { "label": "Respond on the pitch", "desc": "Show the badge matters.", "risk": "low", "hint": "Effort is visible.", "text": "In the next match, {J} covers more ground than anyone on the pitch. The talk radio moves on.", "fx": { "trust": 3, "pfm": -4 } }
+      ]
+    },
+    {
+      "id": "mg_loan_suggestion", "cat": "manager", "w": 4, "when": { "age": [17, 22], "role": ["bench", "outcast"] },
+      "title": "{M} Suggests a Loan",
+      "text": "{M} is honest: “You're not going to play here this season. A loan would be good for you. Think about it.” He says it kindly. It still feels like being shown the door.",
+      "prompt": "Consider a loan?",
+      "choices": [
+        { "label": "Ask the agent to find one", "desc": "Minutes matter at your age.", "risk": "low", "hint": "Offers usually follow.", "text": "{J} agrees. The club makes it known he's available for loan.", "fx": { "listed": true, "trust": 2 } },
+        { "label": "Fight for your place", "desc": "Prove him wrong.", "risk": "medium", "hint": "He might be right.", "text": "“I'll fight for it.” {M} shrugs. “Good. Show me.”", "fx": { "mood": "Determined" } }
+      ]
+    },
+    {
+      "id": "mg_board_member_meddling", "cat": "manager", "w": 2, "when": { "country": ["Indonesia", "Thailand", "Vietnam", "Malaysia", "India", "Turkey", "Greece", "Saudi Arabia"] },
+      "title": "A Board Member Wants {J} in the Team",
+      "text": "A powerful board member, also a businessman and local politician, has taken a liking to {J}. He calls {M} to suggest {J} should play more. {M} hates interference. Everyone at the club knows about the call.",
+      "prompt": "The board member invites you to dinner.",
+      "choices": [
+        { "label": "Accept the dinner", "desc": "Powerful friends are useful.", "risk": "high", "hint": "The manager will see it as betrayal.", "text": "A long dinner at an expensive restaurant. The board member promises to “take care of things”. {M} finds out the next day.", "fx": { "trust": -12, "rep": 0.3, "flag": "board_friend" } },
+        { "label": "Decline politely", "desc": "Stay out of politics.", "risk": "low", "hint": "{M} will appreciate it.", "text": "{J} declines politely. {M} hears about it, and something in his manner toward {J} warms.", "fx": { "trust": 5 } }
+      ]
+    },
+    {
+      "id": "mg_injury_honesty", "cat": "manager", "w": 3, "when": { "role": ["starter", "rotation"], "pfm": [0, 65] },
+      "title": "A Niggle Before the Big Match",
+      "text": "{J}'s groin has been tight all week. Nothing serious, probably. If he tells the medical team, they'll rest him for the biggest match of the month. If he doesn't, he plays.",
+      "prompt": "Tell the medical staff?",
+      "choices": [
+        { "label": "Tell them", "desc": "Honesty with the medics.", "risk": "low", "hint": "Safe body. Might lose your place.", "text": "The physio rests him for the match. The replacement plays okay. {M} appreciates the honesty.", "fx": { "trust": 2, "pfm": 8 } },
+        { "label": "Hide it", "desc": "Play the big match.", "risk": "high", "hint": "Might be fine. Might be a long injury.", "out": [
+          { "w": 2, "text": "The groin holds. Nobody ever knows.", "fx": { "pfm": -3 } },
+          { "w": 1, "text": "Twenty minutes in, the groin goes. A moderate tear. The medical team is furious.", "fx": { "injury": "moderate", "trust": -5 } }
+        ] }
+      ]
+    },
+    {
+      "id": "mg_captain_offer", "cat": "manager", "w": 2, "once": true, "when": { "age": [24, 40], "role": ["starter"], "trust": [80, 100], "apps": [120, 9999] },
+      "title": "{M} Offers {J} the Captaincy",
+      "text": "The captain is leaving. {M} calls {J} into his office and puts the armband on the desk between them. “The players respect you. I trust you. It's yours if you want it.”",
+      "prompt": "Accept the captaincy?",
+      "choices": [
+        { "label": "Accept", "desc": "Lead the club.", "risk": "medium", "hint": "Honour and responsibility.", "text": "{J} accepts. The first time he leads the team out, his mother is in the stand holding a phone above her head with shaking hands.", "fx": { "rep": 2, "trust": 5, "followers": 15000, "flag": "captain", "parental": 8 } },
+        { "label": "Decline", "desc": "Focus on your own game.", "risk": "low", "hint": "No extra pressure.", "text": "{J} thanks him and declines. {M} respects the honesty and gives it to someone else.", "fx": {} }
+      ]
+    },
+    {
+      "id": "mg_board_promise", "cat": "manager", "w": 2, "when": { "flags": ["board_friend"] },
+      "title": "The Board Member's Favour Comes Due",
+      "text": "The board member who “took care of things” calls. His nephew is a footballer looking for a trial. Would {J} speak to {M}?",
+      "fx": { "unflag": "board_friend" },
+      "prompt": "Return the favour?",
+      "choices": [
+        { "label": "Speak to {M}", "desc": "A favour for a favour.", "risk": "high", "hint": "The manager will not like this.", "text": "{M} listens with a face like stone. The nephew gets a trial. {J} loses something with {M} that won't come back easily.", "fx": { "trust": -10 } },
+        { "label": "Refuse", "desc": "You never asked for help.", "risk": "medium", "hint": "Powerful people remember.", "text": "{J} says no. The board member hangs up without saying goodbye. Contract talks next year may be colder.", "fx": { "rep": -0.3 } }
+      ]
+    },
+    {
+      "id": "mg_new_manager_wants_me", "cat": "manager", "w": 15, "when": { "flags": ["old_manager_wants_me"], "months": [6, 7, 8, 1] },
+      "title": "Old Manager Calls: “Come and Play for Me”",
+      "text": "{J}'s former manager calls from his new club. He wants {J} to join him: same system, bigger stage. His agent says the clubs are talking.",
+      "fx": { "unflag": "old_manager_wants_me", "listed": true, "rep": 0.5 }
+    },
+    {
+      "id": "mg_tactical_masterclass", "cat": "manager", "w": 3, "when": { "tacticalFit": [0, 40] },
+      "title": "{M} Gives {J} Extra Tactical Lessons",
+      "text": "{M} has noticed {J} is often out of position. Instead of dropping him, he invites {J} to his office every Thursday with coffee and a tablet full of clips.",
+      "fx": { "tacticalFit": 12, "trust": 2, "growth": ["mental"] }
+    },
+    {
+      "id": "mg_squad_rotation_policy", "cat": "manager", "w": 3, "when": { "role": ["rotation"] },
+      "title": "Rotation: {M} Explains the Plan",
+      "text": "{M} gathers the rotation players. “You will all play. Not every week. Be ready when it's your turn.” Half the room nods. Half hears “not every week”.",
+      "prompt": "How do you take it?",
+      "choices": [
+        { "label": "Stay ready", "desc": "Every chance counts.", "risk": "low", "hint": "Good attitude, good chances.", "text": "{J} treats every training session like an audition. When his chance comes, he's sharp.", "fx": { "form": 0.2, "trust": 2 } },
+        { "label": "Push for more", "desc": "Rotation isn't enough.", "risk": "medium", "hint": "Ambition or impatience?", "text": "{J} tells {M} he wants to start every week. {M} says, “Then be undroppable.”", "fx": { "mood": "Determined" } }
+      ]
+    },
+    {
+      "id": "mg_gift_from_manager", "cat": "manager", "w": 2, "when": { "trust": [80, 100] },
+      "title": "{M} Gives {J} a Book",
+      "text": "{M} leaves a book on {J}'s peg: a biography of a legendary player from another era, with one passage underlined in pencil. No note. Just the line.",
+      "fx": { "growth": ["mental"], "trust": 1 }
+    },
+    {
+      "id": "mg_shouting_match", "cat": "manager", "w": 3, "when": { "trust": [0, 40] },
+      "title": "Shouting Match in the Corridor",
+      "text": "It starts with a question about minutes and ends with {J} and {M} shouting in the corridor outside the dressing room. Players poke their heads out of doors. The kit man pretends to count socks.",
+      "prompt": "What now?",
+      "choices": [
+        { "label": "Walk away", "desc": "Before it gets worse.", "risk": "medium", "hint": "Cooler heads.", "text": "{J} walks away mid-sentence. It isn't over, but it isn't worse.", "fx": { "trust": -4 } },
+        { "label": "Apologise the next day", "desc": "Repair what you can.", "risk": "low", "hint": "Some bridges can be repaired.", "text": "{J} knocks on the door the next morning. {M} accepts the apology without looking up.", "fx": { "trust": -1 } },
+        { "label": "Say you want to leave", "desc": "Finish it.", "risk": "extreme", "hint": "You may get your wish.", "text": "“Sell me then.” {M}: “Gladly.” By the afternoon, {J} is transfer listed.", "fx": { "trust": -15, "listed": true, "mood": "Angry" } }
+      ]
+    }
+  ]
+}

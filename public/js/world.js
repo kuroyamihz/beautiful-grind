@@ -12,7 +12,17 @@ export async function loadWorld(fetchJson) {
     for (const c of data.countries) if (c.code) countries.push({ ...c, region });
   }
   const nationalTeams = (await fetchJson('data/world/national-teams.json')).teams;
-  return { countries, nationalTeams, byName: Object.fromEntries(countries.map((c) => [c.country, c])) };
+  // Hand-written story scenarios (data/scenarios) and narration phrase banks (data/text)
+  const scenarios = [];
+  for (const file of (await fetchJson('data/scenarios/index.json')).files) {
+    for (const s of (await fetchJson(`data/scenarios/${file}`)).scenarios) scenarios.push({ ...s, file });
+  }
+  const text = await fetchJson('data/text/narration.json');
+  return {
+    countries, nationalTeams, scenarios, text,
+    byName: Object.fromEntries(countries.map((c) => [c.country, c])),
+    scenarioById: Object.fromEntries(scenarios.map((s) => [s.id, s])),
+  };
 }
 
 export const leagueKey = (country, tier) => `${country}|${tier}`;

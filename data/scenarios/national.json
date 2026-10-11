@@ -1,0 +1,1059 @@
+{
+ "scenarios": [
+  {
+   "id": "nt_first_callup",
+   "cat": "national",
+   "trigger": "callup",
+   "w": 8,
+   "title": "Called Up! {J} Selected for {nation}",
+   "text": [
+    "The squad list is published at 4pm. {J} reads it four times on his phone before he believes it. Then the phone explodes: family, teammates, old coaches, people he hasn't spoken to in ten years.",
+    "The national team's team manager calls personally. {J} answers on the third ring, doesn't speak for three seconds, and then says “yes” about eleven times."
+   ],
+   "prompt": "Who do you call first?",
+   "choices": [
+    {
+     "label": "Your parents",
+     "desc": "Of course.",
+     "risk": "low",
+     "hint": "Tears guaranteed.",
+     "text": "His mother screams. His father goes very quiet and then says, “Your grandfather would have been so proud.”",
+     "fx": {
+      "parental": 12,
+      "mood": "On Fire"
+     }
+    },
+    {
+     "label": "Your first coach",
+     "desc": "He believed first.",
+     "risk": "low",
+     "hint": "Gratitude.",
+     "text": "The old coach answers from a village pitch. In the background, children shout {J}'s name.",
+     "fx": {
+      "rep": 0.4,
+      "mood": "Motivated"
+     }
+    },
+    {
+     "label": "Post it to the fans",
+     "desc": "Share the moment.",
+     "risk": "low",
+     "hint": "Followers flood in.",
+     "text": "A photo of the squad list with a heart. The post becomes his most-liked ever within an hour.",
+     "fx": {
+      "followers": 30000,
+      "rep": 0.3
+     }
+    }
+   ]
+  },
+  {
+   "id": "nt_camp_first_day",
+   "cat": "national",
+   "trigger": "callup",
+   "w": 6,
+   "title": "First Day at National Team Camp",
+   "text": "The national team hotel: the best players in the country, the stars he watched on TV as a kid, all in tracksuits eating breakfast. Nobody tells you where to sit. {J} stands with his tray, frozen, again.",
+   "prompt": "How do you approach camp?",
+   "choices": [
+    {
+     "label": "Work like your life depends on it",
+     "desc": "Every drill, every sprint.",
+     "risk": "low",
+     "hint": "Coaches notice effort.",
+     "text": "{J} is first on the bus, first on the pitch, last off it. The national coach writes a note in his book.",
+     "fx": {
+      "rep": 0.6,
+      "pfm": -4
+     }
+    },
+    {
+     "label": "Make friends with the stars",
+     "desc": "Learn from the best.",
+     "risk": "medium",
+     "hint": "Connections help.",
+     "out": [
+      {
+       "w": 2,
+       "text": "The captain invites {J} to sit with the senior players. He listens more than he talks.",
+       "fx": {
+        "teammate": {
+         "who": "T",
+         "rel": "ally"
+        },
+        "growth": [
+         "mental"
+        ]
+       }
+      },
+      {
+       "w": 1,
+       "text": "One star is cold and dismissive. {J} learns that not every hero is kind.",
+       "fx": {
+        "mood": "Frustrated"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "nt_watch",
+   "cat": "national",
+   "trigger": "ntWatch",
+   "w": 6,
+   "title": "National Team Scouts Are Watching {J}",
+   "text": "A national team scout sits in the main stand with a notebook for the third match in a row. A journalist confirms it: {J} is on the long list.",
+   "prompt": "How do you deal with the attention?",
+   "choices": [
+    {
+     "label": "Ignore it",
+     "desc": "Play your game.",
+     "risk": "low",
+     "hint": "Pressure management.",
+     "text": "{J} refuses to read anything about it. His game stays steady.",
+     "fx": {
+      "growth": [
+       "mental"
+      ]
+     }
+    },
+    {
+     "label": "Use it as motivation",
+     "desc": "Push harder.",
+     "risk": "medium",
+     "hint": "Fuel or pressure.",
+     "check": {
+      "stat": "mental",
+      "dc": 52
+     },
+     "ok": {
+      "text": "The knowledge lifts {J}: three strong matches in a row.",
+      "fx": {
+       "form": 0.3,
+       "rep": 0.5
+      }
+     },
+     "bad": {
+      "text": "{J} tries too hard and plays his worst match of the season in front of the scout.",
+      "fx": {
+       "form": -0.3,
+       "mood": "Anxious"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "nt_dropped",
+   "cat": "national",
+   "trigger": "ntDropped",
+   "w": 6,
+   "title": "{J} Left Out of the National Squad",
+   "text": "The new squad list comes out and {J}'s name isn't on it. No phone call, no explanation. He finds out from a fan's comment under his last post.",
+   "prompt": "Response?",
+   "choices": [
+    {
+     "label": "Accept it publicly",
+     "desc": "“I'll work to earn my place back.”",
+     "risk": "low",
+     "hint": "Classy.",
+     "text": "The post is gracious and short. The national coach reads it.",
+     "fx": {
+      "rep": 0.4,
+      "mood": "Determined"
+     }
+    },
+    {
+     "label": "Criticise the decision",
+     "desc": "You deserved to be there.",
+     "risk": "high",
+     "hint": "The federation remembers.",
+     "text": "{J}'s post questioning the selection goes viral. The federation calls his club to complain.",
+     "fx": {
+      "rep": -1,
+      "followers": 15000,
+      "mood": "Angry"
+     }
+    },
+    {
+     "label": "Say nothing",
+     "desc": "Let your football speak.",
+     "risk": "low",
+     "hint": "Dignified.",
+     "text": "{J} says nothing and scores twice the next weekend.",
+     "fx": {
+      "mood": "Determined"
+     }
+    }
+   ]
+  },
+  {
+   "id": "nt_debut",
+   "cat": "national",
+   "trigger": "ntDebut",
+   "w": 8,
+   "title": "The Anthem: {J} Makes His Senior Debut",
+   "text": "The anthem plays. {J} stands in the line with his hand on his heart, singing every word, and does not trust himself to look at the stands where his family is sitting. When the whistle blows, he is no longer a promising player. He is an international.",
+   "fx": {
+    "mood": "On Fire",
+    "parental": 15
+   },
+   "prompt": "Afterwards, his first senior shirt.",
+   "choices": [
+    {
+     "label": "Give it to your father",
+     "desc": "He drove you to every training session.",
+     "risk": "low",
+     "hint": "The moment of a lifetime.",
+     "text": "His father holds the shirt like a newborn baby. He sleeps with it next to him that night.",
+     "fx": {
+      "parental": 10
+     }
+    },
+    {
+     "label": "Frame it for your foundation or old club",
+     "desc": "Inspire the next kid.",
+     "risk": "low",
+     "hint": "Legacy.",
+     "text": "The shirt hangs at his first club's clubhouse. Children touch it before every match.",
+     "fx": {
+      "rep": 0.8
+     }
+    }
+   ]
+  },
+  {
+   "id": "nt_club_vs_country",
+   "cat": "national",
+   "w": 5,
+   "when": {
+    "nt": [
+     "called",
+     "regular"
+    ],
+    "role": [
+     "starter"
+    ]
+   },
+   "title": "Club vs Country: {M} Wants {J} to Skip a Camp",
+   "text": "There's an international tournament outside the official FIFA dates. {J}'s club isn't obliged to release him. {M} asks him to stay: the club has three important league matches. The national team wants him badly.",
+   "prompt": "Who do you choose?",
+   "choices": [
+    {
+     "label": "Country",
+     "desc": "Representing the nation comes first.",
+     "risk": "high",
+     "hint": "Your manager won't forget.",
+     "text": "{J} goes to camp. The nation loves him for it. {M} picks someone else for the next month.",
+     "fx": {
+      "rep": 1.2,
+      "trust": -10,
+      "followers": 20000
+     }
+    },
+    {
+     "label": "Club",
+     "desc": "Your club pays your salary.",
+     "risk": "high",
+     "hint": "Some fans will call you unpatriotic.",
+     "text": "{J} stays. {M} is grateful. Online, some fans question his loyalty to the flag.",
+     "fx": {
+      "trust": 8,
+      "rep": -0.6
+     }
+    },
+    {
+     "label": "Ask the two coaches to talk",
+     "desc": "Find a compromise.",
+     "risk": "medium",
+     "hint": "Diplomacy.",
+     "out": [
+      {
+       "w": 1,
+       "text": "The coaches agree: {J} plays the first club match, then joins camp. Everyone is half happy.",
+       "fx": {
+        "trust": 2,
+        "rep": 0.4
+       }
+      },
+      {
+       "w": 1,
+       "text": "The coaches can't agree. {J} has to choose anyway, and both are now annoyed with him.",
+       "fx": {
+        "trust": -3,
+        "rep": -0.2
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "nt_rival_vietnam",
+   "cat": "national",
+   "w": 4,
+   "when": {
+    "nationality": [
+     "Indonesia"
+    ],
+    "nt": [
+     "called",
+     "regular"
+    ],
+    "months": [
+     3,
+     6,
+     9,
+     10,
+     11
+    ]
+   },
+   "title": "Indonesia vs Vietnam: The Rivalry",
+   "text": "Indonesia against Vietnam. In Southeast Asia, there's no bigger rivalry for Garuda supporters except maybe Malaysia. The training camp is tense. The media wants a quote.",
+   "prompt": "A journalist asks for a prediction.",
+   "choices": [
+    {
+     "label": "“We'll win”",
+     "desc": "Confidence.",
+     "risk": "medium",
+     "hint": "Headlines both ways.",
+     "text": "The quote becomes headlines in two countries. Vietnamese fans make it into memes. The pressure is on.",
+     "fx": {
+      "followers": 15000,
+      "mood": "Determined"
+     }
+    },
+    {
+     "label": "“Respect, but we're ready”",
+     "desc": "Diplomatic.",
+     "risk": "low",
+     "hint": "Safe.",
+     "text": "A respectful answer. Nobody notices.",
+     "fx": {}
+    }
+   ]
+  },
+  {
+   "id": "nt_rival_malaysia",
+   "cat": "national",
+   "w": 4,
+   "when": {
+    "nationality": [
+     "Indonesia"
+    ],
+    "nt": [
+     "called",
+     "regular"
+    ],
+    "months": [
+     3,
+     6,
+     9,
+     10,
+     11
+    ]
+   },
+   "title": "Garuda vs Harimau Malaya",
+   "text": "Indonesia against Malaysia at Gelora Bung Karno. Eighty thousand people. Lasers, drums, flares, a wall of red and white. In 2010 this fixture decided a final. Everyone remembers.",
+   "prompt": "Walking out of the tunnel, the noise is overwhelming.",
+   "choices": [
+    {
+     "label": "Soak it in",
+     "desc": "This is why you play.",
+     "risk": "medium",
+     "hint": "Inspiring or overwhelming.",
+     "check": {
+      "stat": "mental",
+      "dc": 55
+     },
+     "ok": {
+      "text": "{J} plays the match of his life. When he wins a crucial tackle, the noise lifts the roof.",
+      "fx": {
+       "rep": 1.5,
+       "followers": 40000,
+       "form": 0.3
+      }
+     },
+     "bad": {
+      "text": "The noise swallows him. He's anonymous for an hour before he settles.",
+      "fx": {
+       "mood": "Anxious"
+      }
+     }
+    },
+    {
+     "label": "Block it out",
+     "desc": "Just another match.",
+     "risk": "low",
+     "hint": "Calm.",
+     "text": "{J} treats it like any other match. He's solid, unspectacular, reliable.",
+     "fx": {
+      "rep": 0.5
+     }
+    }
+   ]
+  },
+  {
+   "id": "nt_aff_release",
+   "cat": "national",
+   "w": 5,
+   "when": {
+    "nationality": [
+     "Indonesia",
+     "Thailand",
+     "Vietnam",
+     "Malaysia",
+     "Philippines",
+     "Singapore"
+    ],
+    "abroad": true,
+    "nt": [
+     "called",
+     "regular"
+    ],
+    "months": [
+     11,
+     12
+    ]
+   },
+   "title": "ASEAN Championship: Club Won't Release {J}",
+   "text": "The ASEAN Championship is outside the FIFA calendar, so clubs abroad don't have to release players. {J}'s club says no. At home, fans are furious that their star won't play. The federation asks him to push his club.",
+   "prompt": "Push your club?",
+   "choices": [
+    {
+     "label": "Push hard",
+     "desc": "Your country needs you.",
+     "risk": "high",
+     "hint": "Your club may resent it.",
+     "out": [
+      {
+       "w": 1,
+       "text": "The club relents. {J} flies home to a hero's welcome at the airport.",
+       "fx": {
+        "rep": 1.5,
+        "followers": 50000,
+        "trust": -6
+       }
+      },
+      {
+       "w": 1,
+       "text": "The club refuses anyway. Now both the club and the fans are angry with him.",
+       "fx": {
+        "trust": -6,
+        "rep": -0.5
+       }
+      }
+     ]
+    },
+    {
+     "label": "Accept the club's decision",
+     "desc": "Explain to fans.",
+     "risk": "medium",
+     "hint": "Some fans won't forgive.",
+     "text": "{J} explains publicly. Some fans understand. Many don't. The comments are brutal for a month.",
+     "fx": {
+      "rep": -0.8,
+      "trust": 3,
+      "mood": "Anxious"
+     }
+    }
+   ]
+  },
+  {
+   "id": "nt_youth_tournament",
+   "cat": "national",
+   "w": 5,
+   "when": {
+    "age": [
+     16,
+     22
+    ],
+    "nt": [
+     "called",
+     "regular"
+    ]
+   },
+   "title": "Youth Tournament Abroad",
+   "text": "{J} is selected for the age-group national team at a regional tournament. Ten days, four matches, scouts from every club in Asia in the stands.",
+   "prompt": "How do you approach the tournament?",
+   "choices": [
+    {
+     "label": "Play for the team",
+     "desc": "Win the tournament.",
+     "risk": "low",
+     "hint": "Trophies matter.",
+     "out": [
+      {
+       "w": 1,
+       "text": "The team reaches the final. {J} is named in the team of the tournament.",
+       "fx": {
+        "rep": 1.5,
+        "followers": 20000,
+        "growth": [
+         "rel"
+        ]
+       }
+      },
+      {
+       "w": 2,
+       "text": "Out in the semi-final. {J} plays well but cries on the pitch anyway.",
+       "fx": {
+        "rep": 0.6,
+        "growth": [
+         "mental"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "label": "Play for the scouts",
+     "desc": "This is your shop window.",
+     "risk": "medium",
+     "hint": "Selfish football.",
+     "text": "{J} shoots from everywhere. Two spectacular goals, and a coach who drops him for the knockout game.",
+     "fx": {
+      "rep": 0.8,
+      "trust": -1,
+      "followers": 10000
+     }
+    }
+   ]
+  },
+  {
+   "id": "nt_dual_nationality",
+   "cat": "national",
+   "w": 3,
+   "when": {
+    "age": [
+     17,
+     22
+    ],
+    "nt": [
+     "monitoring",
+     "called"
+    ]
+   },
+   "once": true,
+   "title": "A Second Country Wants {J}",
+   "text": "Through a grandparent, {J} is also eligible for another country, one with a stronger national team and a better chance of World Cup qualification. Their federation calls his agent.",
+   "prompt": "Consider switching?",
+   "choices": [
+    {
+     "label": "Stay with {nation}",
+     "desc": "Your country, your heart.",
+     "risk": "low",
+     "hint": "Loved at home.",
+     "text": "{J} posts a photo in his national shirt: “Only one flag.” The country adores him for it.",
+     "fx": {
+      "rep": 1.5,
+      "followers": 40000,
+      "flag": "loyal_nation"
+     }
+    },
+    {
+     "label": "Explore the other option",
+     "desc": "Your career matters.",
+     "risk": "extreme",
+     "hint": "Irreversible if you play for them.",
+     "text": "The news leaks before he decides. Back home, he's called a traitor on every platform. His family receives abuse.",
+     "fx": {
+      "rep": -2,
+      "parental": -10,
+      "mood": "Anxious"
+     }
+    }
+   ]
+  },
+  {
+   "id": "nt_coach_criticism",
+   "cat": "national",
+   "w": 4,
+   "when": {
+    "nt": [
+     "called",
+     "regular"
+    ],
+    "months": [
+     3,
+     6,
+     9,
+     10,
+     11
+    ]
+   },
+   "title": "National Coach Criticises {J} in Public",
+   "text": "After a poor international match, the national coach tells the press: “Some players play differently for their clubs. I need the same player in red and white.” He doesn't name {J}. Everyone knows.",
+   "prompt": "Respond?",
+   "choices": [
+    {
+     "label": "Call the coach privately",
+     "desc": "Ask what he needs.",
+     "risk": "low",
+     "hint": "Mature.",
+     "text": "The coach appreciates the call and explains his tactical frustration. Next camp, {J} is a different player.",
+     "fx": {
+      "rep": 0.5,
+      "growth": [
+       "mental"
+      ]
+     }
+    },
+    {
+     "label": "Answer publicly",
+     "desc": "Defend yourself.",
+     "risk": "high",
+     "hint": "Could cost your place.",
+     "text": "A public back-and-forth. Fans pick sides. {J} isn't called for the next camp.",
+     "fx": {
+      "rep": -0.8,
+      "followers": 15000
+     }
+    }
+   ]
+  },
+  {
+   "id": "nt_tournament_hero",
+   "cat": "national",
+   "w": 3,
+   "when": {
+    "nt": [
+     "regular"
+    ],
+    "form": [
+     7,
+     10
+    ],
+    "months": [
+     3,
+     6,
+     9,
+     10,
+     11
+    ]
+   },
+   "title": "Hero for {nation}",
+   "text": "In a crucial qualifier, {J} scores the decisive goal in front of eighty thousand people. The city doesn't sleep. His image is on the front of every newspaper the next morning.",
+   "fx": {
+    "rep": 3,
+    "followers": 100000,
+    "mood": "On Fire",
+    "parental": 10
+   }
+  },
+  {
+   "id": "nt_villain_miss",
+   "cat": "national",
+   "w": 2,
+   "when": {
+    "nt": [
+     "called",
+     "regular"
+    ],
+    "months": [
+     3,
+     6,
+     9,
+     10,
+     11
+    ]
+   },
+   "title": "{J}'s Penalty Miss Knocks {nation} Out",
+   "text": "A penalty shoot-out. {J} steps up fifth. Saved. {nation} are out. He sits on the grass with his shirt over his face while the other team celebrates around him.",
+   "prompt": "How do you face the nation?",
+   "choices": [
+    {
+     "label": "Apologise to the fans",
+     "desc": "Own it publicly.",
+     "risk": "low",
+     "hint": "Most will forgive.",
+     "text": "A tearful apology at the airport. Most fans forgive him. A few never will.",
+     "fx": {
+      "rep": -0.5,
+      "mood": "Broken",
+      "growth": [
+       "mental"
+      ]
+     }
+    },
+    {
+     "label": "Hide from the world",
+     "desc": "Delete social media for a month.",
+     "risk": "low",
+     "hint": "Protects you. Silence speaks too.",
+     "text": "{J} disappears for a month. When he comes back, he's quieter and harder.",
+     "fx": {
+      "mood": "Numb",
+      "followers": -5000,
+      "growth": [
+       "mental"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "nt_roommate",
+   "cat": "national",
+   "w": 3,
+   "when": {
+    "nt": [
+     "called",
+     "regular"
+    ],
+    "months": [
+     3,
+     6,
+     9,
+     10,
+     11
+    ]
+   },
+   "title": "National Team Roommate",
+   "text": "At camp, {J} rooms with {T}, a player from the club's biggest rival. Their fans hate each other. In the room, they argue about which is the better club, then about food, then talk about their families until 2am.",
+   "fx": {
+    "teammate": {
+     "who": "T",
+     "rel": "ally"
+    },
+    "rep": 0.3
+   }
+  },
+  {
+   "id": "nt_olympics",
+   "cat": "national",
+   "w": 3,
+   "when": {
+    "age": [
+     20,
+     23
+    ],
+    "nt": [
+     "called",
+     "regular"
+    ]
+   },
+   "once": true,
+   "title": "Olympic Qualification Campaign",
+   "text": "The U-23 team is chasing an Olympic place. Only a handful of Asian countries qualify. {J} is in the squad. The tournament is in a month.",
+   "prompt": "Prepare how?",
+   "choices": [
+    {
+     "label": "Extra training with the U-23 staff",
+     "desc": "Commit fully.",
+     "risk": "medium",
+     "hint": "Your club may grumble.",
+     "out": [
+      {
+       "w": 1,
+       "text": "The team qualifies for the Olympics for the first time in decades. {J} is part of history.",
+       "fx": {
+        "rep": 3,
+        "followers": 80000,
+        "mood": "On Fire"
+       }
+      },
+      {
+       "w": 2,
+       "text": "Out on goal difference. So close. The dressing room is silent for an hour.",
+       "fx": {
+        "rep": 0.8,
+        "mood": "Broken",
+        "growth": [
+         "mental"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "label": "Focus on your club",
+     "desc": "Join camp only at the last minute.",
+     "risk": "medium",
+     "hint": "Less cohesion.",
+     "text": "The team goes out in the group stage. Some blame the players who arrived late.",
+     "fx": {
+      "rep": -0.4,
+      "trust": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "nt_return_injured",
+   "cat": "national",
+   "w": 3,
+   "when": {
+    "nt": [
+     "called",
+     "regular"
+    ],
+    "pfm": [
+     0,
+     55
+    ],
+    "months": [
+     3,
+     6,
+     9,
+     10,
+     11
+    ]
+   },
+   "title": "Back From International Duty Exhausted",
+   "text": "Two matches, two long flights, three time zones. {J} returns to his club exhausted. {M} looks at the GPS data and then at him.",
+   "prompt": "Ask for rest?",
+   "choices": [
+    {
+     "label": "Ask for a rest day",
+     "desc": "Honesty.",
+     "risk": "low",
+     "hint": "Sensible.",
+     "text": "{M} grudgingly gives him a day off. It helps.",
+     "fx": {
+      "pfm": 8,
+      "trust": -1
+     }
+    },
+    {
+     "label": "Train anyway",
+     "desc": "Show commitment.",
+     "risk": "medium",
+     "hint": "Tired players get injured.",
+     "out": [
+      {
+       "w": 2,
+       "text": "{J} grinds through it. {M} notices the effort.",
+       "fx": {
+        "trust": 2,
+        "pfm": -3
+       }
+      },
+      {
+       "w": 1,
+       "text": "A muscle strain in the first sprint. {M} is not happy with the national team.",
+       "fx": {
+        "injury": "minor",
+        "trust": -3
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "nt_fans_at_airport",
+   "cat": "national",
+   "w": 3,
+   "when": {
+    "nationality": [
+     "Indonesia"
+    ],
+    "nt": [
+     "called",
+     "regular"
+    ],
+    "months": [
+     3,
+     6,
+     9,
+     10,
+     11
+    ]
+   },
+   "title": "Airport Welcome for the National Team",
+   "text": "After a big win abroad, the national team lands at Soekarno-Hatta at 2am. Thousands of fans are waiting at arrivals with banners, drums and phones. Security can't hold them.",
+   "fx": {
+    "followers": 30000,
+    "rep": 0.8,
+    "mood": "On Fire",
+    "pfm": -3
+   }
+  },
+  {
+   "id": "nt_naturalised_competition",
+   "cat": "national",
+   "w": 3,
+   "when": {
+    "nationality": [
+     "Indonesia"
+    ],
+    "nt": [
+     "called",
+     "regular"
+    ]
+   },
+   "title": "A New Naturalised Player in {J}'s Position",
+   "text": "The federation announces a new naturalised player born in the Netherlands, playing in {J}'s position at a European club. The comments are already comparing them.",
+   "prompt": "Respond?",
+   "choices": [
+    {
+     "label": "Welcome him publicly",
+     "desc": "We're one team.",
+     "risk": "low",
+     "hint": "Gracious.",
+     "text": "{J} welcomes him with a post in Bahasa and Dutch. The new player replies in very careful Bahasa. The fans love both of them.",
+     "fx": {
+      "rep": 0.8,
+      "teammate": {
+       "who": "T",
+       "rel": "ally"
+      }
+     }
+    },
+    {
+     "label": "Let your football answer",
+     "desc": "Win the shirt.",
+     "risk": "low",
+     "hint": "Competition.",
+     "text": "{J} trains like a man possessed. The national coach has a selection headache, which is exactly what he wanted.",
+     "fx": {
+      "growth": [
+       "rel"
+      ],
+      "mood": "Determined"
+     }
+    }
+   ]
+  },
+  {
+   "id": "nt_captain_armband_country",
+   "cat": "national",
+   "w": 2,
+   "when": {
+    "nt": [
+     "regular"
+    ],
+    "caps": [
+     25,
+     999
+    ],
+    "age": [
+     25,
+     40
+    ]
+   },
+   "once": true,
+   "title": "{J} Captains {nation}",
+   "text": "The regular captain is injured. The national coach hands {J} the armband for the next match. When he leads the team out, he can barely see through his tears.",
+   "fx": {
+    "rep": 3,
+    "followers": 60000,
+    "parental": 15,
+    "mood": "On Fire",
+    "flag": "nt_captain"
+   }
+  },
+  {
+   "id": "nt_50_caps",
+   "cat": "national",
+   "w": 3,
+   "when": {
+    "caps": [
+     50,
+     999
+    ]
+   },
+   "once": true,
+   "title": "Fifty Caps for {J}",
+   "text": "Fifty international appearances. The federation presents him with a golden cap before kick-off. His whole family is on the pitch for the photo, and his mother refuses to let go of his arm.",
+   "fx": {
+    "rep": 2,
+    "followers": 30000,
+    "parental": 10
+   }
+  },
+  {
+   "id": "nt_media_storm",
+   "cat": "national",
+   "w": 3,
+   "when": {
+    "nt": [
+     "called",
+     "regular"
+    ],
+    "followers": [
+     30000,
+     999999999
+    ],
+    "months": [
+     3,
+     6,
+     9,
+     10,
+     11
+    ]
+   },
+   "title": "Fans Demand {J} Start for the National Team",
+   "text": "A hashtag demanding that {J} starts for the national team is trending nationwide. The national coach has been asked about it at three press conferences. He's starting to look annoyed.",
+   "prompt": "Respond?",
+   "choices": [
+    {
+     "label": "Ask fans to trust the coach",
+     "desc": "Calm it down.",
+     "risk": "low",
+     "hint": "The coach will appreciate it.",
+     "text": "{J} asks fans to support the coach's decisions. The national coach calls to thank him.",
+     "fx": {
+      "rep": 0.8
+     }
+    },
+    {
+     "label": "Say nothing",
+     "desc": "Let it run.",
+     "risk": "medium",
+     "hint": "The coach may resent it.",
+     "text": "The hashtag runs for a week. The coach starts {J} — and watches him like a hawk.",
+     "fx": {
+      "followers": 10000
+     }
+    }
+   ]
+  },
+  {
+   "id": "nt_youth_captain",
+   "cat": "national",
+   "w": 3,
+   "when": {
+    "age": [
+     16,
+     21
+    ],
+    "nt": [
+     "called",
+     "regular"
+    ]
+   },
+   "title": "{J} Named Captain of the Youth Team",
+   "text": "The youth national coach names {J} captain for the next tournament. He has to give a speech in the dressing room to twenty teenagers, some of whom are older than him.",
+   "fx": {
+    "rep": 0.8,
+    "growth": [
+     "mental"
+    ],
+    "flag": "leader"
+   }
+  },
+  {
+   "id": "nt_world_cup_dream",
+   "cat": "national",
+   "w": 2,
+   "when": {
+    "nt": [
+     "regular"
+    ],
+    "age": [
+     20,
+     34
+    ]
+   },
+   "title": "{J} Dreams of the World Cup",
+   "text": "Qualifiers are coming. {nation} has a real chance this time. At night, {J} lies awake imagining walking out at a World Cup, the anthem playing, his family in the stands.",
+   "fx": {
+    "mood": "Motivated",
+    "form": 0.1
+   }
+  }
+ ]
+}

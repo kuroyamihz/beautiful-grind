@@ -12,7 +12,9 @@ import { buildSeason, catchUp, roundsInWeek, simScore, recordResult, simulateMat
 import {
   overall, generateStats, weeklyWage, marketValue, trustRole, abilityRole, minRole, personName, managerName, moodFrom, relevantStats,
 } from './player.js';
-import { TEMPLATES, TEMPLATE_BY_ID } from './events.js';
+import {
+  scenarioContext, pickScenario, markUsed, instantiate, resolveFx, resolveChoice, decisionFor, textOf, fill, conditionsMet,
+} from './scenarios.js';
 
 const DAY = 86400000;
 const CUP_ROUND_NAMES = ['First round', 'Second round', 'Round of 16', 'Quarter-final', 'Semi-final', 'Final'];
@@ -53,11 +55,11 @@ export function newCareer(world, o) {
   p.career.peakOverall = overall(p);
   updateMarketValue(state);
   // Day one: an opening scene and first decision.
-  const tpl = TEMPLATE_BY_ID.first_day;
-  const ctx = eventContext(state, 0);
-  const built = tpl.build(state, ctx);
-  pushDecision(state, { kind: 'template', templateId: tpl.id, data: { J: ctx.J, M: ctx.M }, ...built.decision });
-  state.intro = { headline: built.headline, text: built.text };
+  const res = { matches: [], statChanges: {}, milestones: [], trophies: [], awards: [], notes: [], outcomes: [], intl: [], triggers: ['start'] };
+  const s = pickScenario(state, world, scenarioContext(state, world, res), { triggers: ['start'] });
+  if (s) { fireScenario(state, world, s, res); state.intro = { headline: res.event.headline, text: res.event.text }; }
+  else state.intro = { headline: `${p.jerseyName}, 16, Joins ${p.club.name}'s First Team`, text: `Pre-season starts today at ${p.club.name}.` };
+  state.lastEventType = null;
   return state;
 }
 
@@ -175,6 +177,7 @@ function addMilestone(res, text) { res.milestones.push(text); }
 export function applyEffects(state, world, eff, res) {
   if (!eff) return;
   const p = state.player;
+  if (eff.newManager && p.club) { p.manager = { name: managerName(p.club.country), trust: 50, tacticalFit: 50 }; res.newManager = p.manager.name; }
   if (eff.trust) addTrust(state, eff.trust, res);
   if (eff.rep) addRep(state, eff.rep, res);
   if (eff.followers) addFollowers(state, eff.followers);
@@ -193,10 +196,21 @@ export function applyEffects(state, world, eff, res) {
   if (eff.partner) p.partner = { ...p.partner, ...eff.partner };
   if (eff.agent) p.agent = eff.agent;
   if (eff.endorsement) p.endorsements.push({ brand: eff.endorsement.brand, type: eff.endorsement.type, annualValue: eff.endorsement.annualValue, expiryWeek: state.week + 52 * eff.endorsement.years });
-  if (eff.transferListed) p.transferListed = true;
+  if (eff.transferListed || eff.listed === true) p.transferListed = true;
+  if (eff.listed === false) p.transferListed = false;
+  if (eff.form) p.form = clamp(round1(p.form + eff.form), 4, 9.5);
+  if (eff.suspension) p.suspension = Math.max(0, p.suspension + eff.suspension);
+  if (eff.lifestyle) p.lifestyle = clamp(round1(p.lifestyle + eff.lifestyle), 0.6, 3);
+  if (eff.flag || eff.unflag) {
+    const story = { ...(state.flags.story ?? {}) };
+    for (const f of [].concat(eff.flag ?? [])) story[f] = state.week;
+    for (const f of [].concat(eff.unflag ?? [])) delete story[f];
+    state.flags.story = story;
+  }
+  if (eff.matchMod) state.matchMod = { ...eff.matchMod };
   if (eff.mood) res.mood = eff.mood;
   if (eff.injury) createInjury(state, world, res, eff.injury);
-  if (eff.thread) state.threads.push({ id: eff.thread.id, dueWeek: state.week + eff.thread.inWeeks, data: { ...eff.thread.data } });
+  if (eff.thread) state.threads.push({ id: eff.thread.id, dueWeek: state.week + eff.thread.inWeeks, data: JSON.parse(JSON.stringify(eff.thread.data)) });
 }
 
 // ═══════════════════════════ DECISIONS ═══════════════════════════
@@ -219,10 +233,9 @@ function resolveDecisions(state, world, res) {
     state.history.push(`Wk ${state.week}: "${d.prompt}" → ${choice.label}`);
     if (state.history.length > 15) state.history.shift();
     const out = { prompt: d.prompt, label: choice.label, kind: d.kind, text: '' };
-    if (d.kind === 'template') {
-      const t = TEMPLATE_BY_ID[d.templateId];
-      const r = t?.resolve?.[choice.id]?.(state, d.data);
-      if (r) { out.text = r.text; applyEffects(state, world, r.effects, res); }
+    if (d.kind === 'scenario') {
+      const s = world.scenarioById[d.sid];
+      if (s) { const r = resolveChoice(state, s, d.data, choice.id); out.text = r.text; out.moment = !!s.moment; applyEffects(state, world, r.fx, res); }
     } else if (d.kind === 'offer') {
       out.text = resolveOffer(state, world, d.data, choice.id, res);
     } else if (d.kind === 'renewal') {
@@ -232,10 +245,6 @@ function resolveDecisions(state, world, res) {
     } else if (d.kind === 'retire') {
       if (choice.id === 'a') { state.ended = { reason: 'retirement', week: state.week }; out.text = `${state.player.jerseyName} calls time on his career.`; }
       else out.text = 'One more season. The body protests; the heart insists.';
-    } else if (d.kind === 'ai') {
-      out.text = '';
-      res.aiPreviousDecisions = res.aiPreviousDecisions ?? [];
-      res.aiPreviousDecisions.push({ prompt: d.prompt, choiceId: choice.id, choiceLabel: choice.label, consequenceHint: choice.consequence });
     }
     res.outcomes.push(out);
   }
@@ -246,6 +255,7 @@ function participation(state, isCup) {
   const p = state.player;
   if (p.injury) return { minutes: 0, reason: 'injured' };
   if (p.suspension > 0) return { minutes: 0, reason: 'suspended' };
+  if (state.matchMod && !state.matchMod.used) return { minutes: chance(0.75) ? 90 : randint(65, 85), started: true }; // a key moment was played
   const role = p.squadRole;
   let startP = (isCup ? { starter: 0.6, rotation: 0.75, bench: 0.5, outcast: 0.15 } : { starter: 0.93, rotation: 0.5, bench: 0.1, outcast: 0 })[role];
   if (p.pfm < 35) startP *= 0.5;
@@ -265,32 +275,55 @@ function playerMatchCore(state, { myStr, oppStr, home, part, competition, opp, c
       + (p.pfm < 50 ? -0.4 : p.pfm < 70 ? -0.15 : 0) + (MOOD_MOD[p.mood] ?? 0);
     adj = (rating - 6.4) * 2.2 * (part.minutes / 90);
   }
-  const [hs, as] = home ? simScore(myStr + adj, oppStr) : simScore(oppStr, myStr + adj);
+  const mod = part.minutes > 0 && state.matchMod && !state.matchMod.used ? state.matchMod : null;
+  if (mod) { mod.used = true; adj += (mod.rating ?? 0) * 2; }
+  let [hs, as] = home ? simScore(myStr + adj, oppStr) : simScore(oppStr, myStr + adj);
+  // A key-moment goal/assist really happens: make sure the scoreline has room for it.
+  const forced = mod ? (mod.goals ?? 0) + (mod.assists ?? 0) : 0;
+  if (forced) { if (home && hs < forced) hs = forced; if (!home && as < forced) as = forced; }
+  if (mod?.concede) { if (home) as += mod.concede; else hs += mod.concede; }
   const gf = home ? hs : as, ga = home ? as : hs;
   if (part.minutes > 0) {
     const share = part.minutes / 90, perf = (1 + (rating - 6.4) * 0.35) * clamp(1 + (overall(p) - myStr) * 0.03, 0.5, 1.5);
     const pg = clamp(GOAL_SHARE[p.position] * (0.55 + p.stats.shooting / 110) * share * perf, 0, 0.85);
     const pa = clamp(ASSIST_SHARE[p.position] * (0.55 + p.stats.passing / 110) * share * perf, 0, 0.6);
-    for (let i = 0; i < gf; i++) { const r = Math.random(); if (r < pg) goals++; else if (r < pg + pa) assists++; }
+    goals = mod?.goals ?? 0; assists = mod?.assists ?? 0;
+    for (let i = goals + assists; i < gf; i++) { const r = Math.random(); if (r < pg) goals++; else if (r < pg + pa) assists++; }
+    rating += (mod?.rating ?? 0);
     rating += goals * 0.7 + assists * 0.4 + (gf > ga ? 0.2 : gf < ga ? -0.2 : 0);
     if (ga === 0 && part.minutes >= 60 && ['GK', 'CB', 'FB', 'DM'].includes(p.position)) rating += 0.4;
     if (ga >= 3 && ['GK', 'CB'].includes(p.position)) rating -= 0.4;
     rating = round1(clamp(rating, 3.8, 10));
-    yellow = chance((['CB', 'DM'].includes(p.position) ? 0.18 : 0.1) * share);
-    red = chance(0.012 * share);
+    yellow = mod?.card === 'yellow' || chance((['CB', 'DM'].includes(p.position) ? 0.18 : 0.1) * share);
+    red = mod?.card === 'red' || chance(0.012 * share);
+    if (mod?.card === 'red') rating = round1(clamp(rating - 1, 3.8, 10));
     motm = part.minutes >= 45 && (rating >= 8.8 || (rating >= 8.0 && chance(0.55)));
   }
   const minuteList = Array.from({ length: goals }, () => randint(3, 90)).sort((a, b) => a - b);
   return {
     competition, round, isCup, home, club, opp, hs, as, gf, ga, score: `${hs}-${as}`,
     result: gf > ga ? 'W' : gf < ga ? 'L' : 'D', minutes: part.minutes, started: !!part.started, reason: part.reason ?? null,
-    rating, goals, assists, motm, yellow, red, goalMinutes: minuteList,
+    rating, goals, assists, motm, yellow, red, goalMinutes: minuteList, modInjury: mod?.injury ?? null, keyMoment: !!mod,
   };
 }
 
 function afterClubMatch(state, world, m, res) {
   const p = state.player;
-  if (m.minutes <= 0) return;
+  // Streaks used by story triggers
+  p.teamLossStreak = m.result === 'L' ? (p.teamLossStreak ?? 0) + 1 : 0;
+  if (p.teamLossStreak === 3) res.triggers.push('badRun');
+  if (m.minutes <= 0) {
+    if (m.reason === 'unused' || m.reason === null) { p.benchStreak = (p.benchStreak ?? 0) + 1; if (p.benchStreak === 4) res.triggers.push('benchStreak'); }
+    return;
+  }
+  p.benchStreak = 0;
+  p.scoreStreak = m.goals > 0 ? (p.scoreStreak ?? 0) + 1 : 0;
+  if (p.scoreStreak === 3) res.triggers.push('goalStreak');
+  if (m.goals >= 3) res.triggers.push('hatTrick');
+  if (m.red) res.triggers.push('redCard');
+  if (m.rating < 5.5) res.triggers.push('nightmare');
+  if (m.modInjury) createInjury(state, world, res, m.modInjury);
+  p.lastMatch = { result: m.result, rating: m.rating, opp: m.opp, goals: m.goals, competition: m.competition };
   const q = leagueQuality(p.club.key);
   p.career.apps++; p.season.apps++;
   p.career.goals += m.goals; p.season.goals += m.goals;
@@ -321,8 +354,8 @@ function afterClubMatch(state, world, m, res) {
   if (m.red) { p.suspension = randint(1, 3); res.suspended = p.suspension; }
   else if (m.yellow) { p.yellowCards++; if (p.yellowCards >= 5) { p.yellowCards = 0; p.suspension = 1; res.suspended = 1; } }
   // Milestones
-  if (p.career.apps === 1) addMilestone(res, 'First professional appearance');
-  if (m.goals > 0 && p.career.goals === m.goals) addMilestone(res, 'First professional goal');
+  if (p.career.apps === 1) { addMilestone(res, 'First professional appearance'); res.triggers.push('debut'); }
+  if (m.goals > 0 && p.career.goals === m.goals) { addMilestone(res, 'First professional goal'); res.triggers.push('firstGoal'); }
   if (m.motm && p.career.motms === 1) addMilestone(res, 'First Man of the Match award');
   for (const n of [50, 100, 200, 300, 400, 500]) if (p.career.apps === n) addMilestone(res, `${n}th career appearance`);
   for (const n of [25, 50, 100, 150, 200]) if (p.career.goals >= n && p.career.goals - m.goals < n) addMilestone(res, `${n} career goals`);
@@ -802,32 +835,50 @@ function seasonEnd(state, world, season, res) {
 }
 
 // ═══════════════════════════ EVENTS ═══════════════════════════
-function eventContext(state, played) {
-  const p = state.player;
-  return { J: p.jerseyName, M: p.manager.name, age: ageNow(state), played, week: state.week, year: yearOf(state.week), ramadan: RAMADAN.some(([a, b]) => inRange(state.week, a, b)) };
+function fireScenario(state, world, s, res, carried = null) {
+  markUsed(state, s);
+  const inst = instantiate(s, state, world, carried);
+  const ev = { sid: s.id, type: s.cat, headline: fill(s.title, inst, state), text: textOf(s, inst, state), moment: !!s.moment };
+  if (s.moment) res.moment = ev; else { res.event = ev; state.lastEventType = s.cat; }
+  if (s.fx) applyEffects(state, world, resolveFx(s.fx, inst, state), res);
+  if (s.choices?.length) pushDecision(state, { ...decisionFor(s, inst, state), scene: s.moment ? ev.text : null });
 }
 
-function eventWeek(state, world, res, hadMatch) {
+function eventWeek(state, world, res) {
   const p = state.player;
-  if (!p.club || state.ended) return;
-  const ctx = eventContext(state, hadMatch ? 1 : 0);
+  if (state.ended) return;
+  const ctx = scenarioContext(state, world, res);
+  // Storylines that come back weeks later go first.
   const due = state.threads.find((t) => t.dueWeek <= state.week);
-  let tpl = null, data = {};
-  if (due) { state.threads = state.threads.filter((t) => t !== due); tpl = TEMPLATE_BY_ID[due.id]; data = due.data; }
-  else {
-    const busy = state.pending.length >= 2;
-    if (busy || !chance(hadMatch ? 0.45 : 0.9)) return;
-    const seen = state.flags.tplWeek ?? {};
-    tpl = weightedPick(TEMPLATES.filter((t) => t.type !== state.lastEventType && !(p.injury && t.type === 'training') && !(state.week - (seen[t.id] ?? -99) < 20)), (t) => Math.max(0, t.weight(state, ctx)));
+  if (due) {
+    state.threads = state.threads.filter((t) => t !== due);
+    const s = world.scenarioById[due.id];
+    if (s && (p.club || s.when?.freeAgent) && conditionsMet(s.when, ctx)) return fireScenario(state, world, s, res, due.data);
+    if (s && (due.tries ?? 0) < 4) state.threads.push({ ...due, dueWeek: state.week + 2, tries: (due.tries ?? 0) + 1 });
   }
-  if (!tpl) return;
-  state.flags.tplWeek = { ...(state.flags.tplWeek ?? {}), [tpl.id]: state.week };
-  const built = tpl.build(state, ctx, data);
-  const ev = { templateId: tpl.id, type: tpl.type, headline: built.headline, text: built.text };
-  res.event = ev;
-  state.lastEventType = tpl.type;
-  if (built.effects) applyEffects(state, world, built.effects, res);
-  if (built.decision) pushDecision(state, { kind: 'template', templateId: tpl.id, data: { ...(built.data ?? {}), ...data, J: ctx.J, M: ctx.M }, ...built.decision });
+  if (state.pending.length >= 2) return;
+  const triggers = [...new Set(res.triggers)];
+  if (triggers.length && chance(0.85)) {
+    const s = pickScenario(state, world, ctx, { triggers });
+    if (s) return fireScenario(state, world, s, res);
+  }
+  if (!chance(res.matches.length ? 0.5 : 0.9)) return;
+  const s = pickScenario(state, world, ctx);
+  if (s) fireScenario(state, world, s, res);
+}
+
+// Key moments: a split-second decision before next week's match, which changes that match.
+function momentWeek(state, world, res) {
+  const p = state.player;
+  if (!p.club || p.injury || p.suspension > 0 || state.pending.length >= 2 || state.ended) return;
+  if (!['starter', 'rotation'].includes(p.squadRole) && !chance(0.3)) return;
+  const season = currentSeason(state);
+  const next = state.week + 1;
+  const hasMatch = (season && roundsInWeek(season, next).some((r) => r.matches.some((m) => m.h === p.club.name || m.a === p.club.name)))
+    || (state.cup?.alive && state.cup.rounds.some((r) => r.week === next));
+  if (!hasMatch || !chance(0.3)) return;
+  const s = pickScenario(state, world, scenarioContext(state, world, res), { moment: true });
+  if (s) fireScenario(state, world, s, res);
 }
 
 // ═══════════════════════════ ADVANCE WEEK ═══════════════════════════
@@ -835,8 +886,10 @@ export function advanceWeek(state, world, plan = { intensity: 'balanced', focus:
   const p = state.player;
   const res = {
     week: state.week, dateLabel: dateLabel(state.week), age: ageNow(state), clubBefore: p.club?.name ?? null,
-    matches: [], intl: [], outcomes: [], milestones: [], trophies: [], awards: [], notes: [], statChanges: {}, event: null, plan,
+    matches: [], intl: [], outcomes: [], milestones: [], trophies: [], awards: [], notes: [], statChanges: {}, event: null, plan, triggers: [],
   };
+  const roleBefore = p.squadRole, ntBefore = p.national.status, preseason = (() => { const s = currentSeason(state); return s && state.week === s.preStartWeek; })();
+  if (preseason) res.triggers.push('seasonStart');
   // 1. Consequences of last week's decisions
   resolveDecisions(state, world, res);
   if (state.ended) return finish(state, world, res);
@@ -866,9 +919,27 @@ export function advanceWeek(state, world, plan = { intensity: 'balanced', focus:
   // 6. Season end
   const season = currentSeason(state);
   if (season && !season.finished && isComplete(season)) seasonEnd(state, world, season, res);
-  // 7. Story event
-  eventWeek(state, world, res, res.matches.length > 0);
+  // 7. Story triggers, event and next week's key moment
+  collectTriggers(state, res, roleBefore, ntBefore);
+  eventWeek(state, world, res);
+  momentWeek(state, world, res);
+  state.matchMod = null; // a key moment only ever applies to the week it was chosen for
   return finish(state, world, res);
+}
+
+function collectTriggers(state, res, roleBefore, ntBefore) {
+  const p = state.player, t = res.triggers;
+  const nextAge = ageAt(p.dob, state.week + 1);
+  if (nextAge !== res.age) res.birthday = nextAge;
+  if (res.moved) t.push({ loan: 'loanStart', 'loan return': 'loanReturn', 'contract expired': 'freeAgent' }[res.moved.type] ?? 'moved');
+  if (res.injury) t.push(res.injury.weeksLeft >= 6 ? 'longInjury' : 'injured');
+  if (res.recovered) t.push(res.recovered.total >= 6 ? 'returnLong' : 'recovered');
+  if (res.seasonEnd) t.push(res.seasonEnd.movement ?? (res.seasonEnd.pos === 1 ? 'champion' : 'seasonEnd'));
+  if (res.trophies.some((x) => !x.startsWith('Promotion')) && !t.includes('champion')) t.push('trophy');
+  if (res.birthday && [18, 21, 25, 30, 33].includes(res.birthday)) t.push(`birthday${res.birthday}`);
+  if (p.national.status !== ntBefore) t.push(p.national.status === 'none' ? 'ntDropped' : p.national.status === 'monitoring' ? 'ntWatch' : 'callup');
+  if (res.milestones.some((x) => x.startsWith('Senior international debut'))) t.push('ntDebut');
+  if (roleBefore !== p.squadRole) t.push(p.squadRole === 'starter' ? 'roleStarter' : p.squadRole === 'outcast' ? 'roleOutcast' : 'roleChange');
 }
 
 function finish(state, world, res) {

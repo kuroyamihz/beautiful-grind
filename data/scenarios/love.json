@@ -1,0 +1,251 @@
+{
+  "scenarios": [
+    {
+      "id": "lo_meet_cafe", "cat": "love", "w": 4, "when": { "age": [18, 34], "partner": ["none"] },
+      "title": "{J} Meets Someone Who Doesn't Care About Football",
+      "text": "A friend's birthday, a crowded café, and {F}, who asks what he does for a living and then genuinely forgets. She's studying, she's funny, and she leaves first.",
+      "prompt": "Ask {Ff} out?",
+      "choices": [
+        { "label": "Ask her out", "desc": "Life isn't only football.", "risk": "medium", "hint": "A relationship brings stability — and distractions.", "out": [
+          { "w": 7, "text": "She says yes, then says “but I'm not coming to matches,” which somehow makes it better.", "fx": { "partner": { "who": "F", "status": "dating" }, "mood": "Confident" } },
+          { "w": 3, "text": "She says she's flattered. She also says no.", "fx": { "mood": "Numb" } }
+        ] },
+        { "label": "Focus on football", "desc": "Not now. Maybe never.", "risk": "low", "hint": "Nothing gained, nothing lost.", "text": "{J} goes home early and does his stretching. Some nights the discipline feels lonely.", "fx": {} }
+      ]
+    },
+    {
+      "id": "lo_meet_dm", "cat": "love", "w": 3, "when": { "age": [18, 34], "partner": ["none"], "followers": [5000, 999999999] },
+      "title": "A Message in {J}'s Inbox",
+      "text": "Among the thousands of messages, one stands out: {F}, a nurse who watched him play once, sent a funny, kind message about his terrible haircut. No emojis, no requests. Just funny.",
+      "prompt": "Reply?",
+      "choices": [
+        { "label": "Reply", "desc": "Something funny back.", "risk": "medium", "hint": "Could be something. Could be a scam.", "out": [
+          { "w": 2, "text": "They message every night for three weeks, then meet for coffee. It's easy. Too easy to be real, except it is.", "fx": { "partner": { "who": "F", "status": "dating" }, "mood": "Confident" } },
+          { "w": 1, "text": "After two weeks of messages, {F} asks for money for a “family emergency”. It's a scam. {J} feels stupid for a week.", "fx": { "mood": "Frustrated" } }
+        ] },
+        { "label": "Ignore", "desc": "Too risky.", "risk": "low", "hint": "Safe.", "text": "{J} leaves it on read. He wonders about it sometimes.", "fx": {} }
+      ]
+    },
+    {
+      "id": "lo_meet_celebrity", "cat": "love", "w": 2, "when": { "age": [20, 34], "partner": ["none"], "rep": [25, 100] },
+      "title": "A Famous Singer Wants to Meet {J}",
+      "text": "At a sponsor's gala, {J} is seated next to {F}, a pop singer with ten times his followers. They talk all night. Photographers notice.",
+      "prompt": "See her again?",
+      "choices": [
+        { "label": "Yes", "desc": "Why not?", "risk": "high", "hint": "Paparazzi, gossip, glamour.", "text": "Dinner, then another. The gossip sites go wild. The couple name trends nationally.", "fx": { "partner": { "who": "F", "status": "dating" }, "followers": 150000, "rep": 0.5, "flag": "celebrity_partner" } },
+        { "label": "No", "desc": "Too much attention.", "risk": "low", "hint": "Quiet life.", "text": "{J} politely declines a second meeting. The gossip sites move on.", "fx": {} }
+      ]
+    },
+    {
+      "id": "lo_milestone", "cat": "love", "w": 4, "when": { "partner": ["dating"], "age": [19, 40] },
+      "title": "{J} and {P}: Next Step?",
+      "text": "{P} has been patient through the travel, the bad moods after losses, the phone that never stops buzzing. Tonight she asks, gently, whether they're going to take the next step.",
+      "prompt": "Take the next step together?",
+      "choices": [
+        { "label": "Yes", "desc": "Commit.", "risk": "medium", "hint": "Stability at home. Life gets bigger.", "out": [
+          { "w": 1, "text": "Boxes, a too-small sofa, an argument about where the trophies will go. {J} has never been happier.", "fx": { "partner": { "status": "serious" }, "growth": ["mental"], "mood": "Relieved", "followers": 5000 } }
+        ] },
+        { "label": "Not yet", "desc": "Career first, for now.", "risk": "high", "hint": "She may not wait.", "out": [
+          { "w": 1, "text": "A week later her things are gone. The apartment has never been this quiet.", "fx": { "partner": { "status": "none" }, "mood": "Broken" } },
+          { "w": 1, "text": "She says she understands. She does, mostly.", "fx": {} }
+        ] }
+      ]
+    },
+    {
+      "id": "lo_proposal", "cat": "love", "w": 4, "when": { "partner": ["serious"], "age": [21, 40] },
+      "title": "{J} Is Thinking About Proposing",
+      "text": "{J} has been carrying a ring in his kit bag for three weeks. Every time he finds the right moment, something happens: a phone call, a missed train, an argument about nothing.",
+      "prompt": "How do you propose?",
+      "choices": [
+        { "label": "On the pitch after a match", "desc": "In front of the fans.", "risk": "high", "hint": "Romantic or embarrassing.", "out": [
+          { "w": 2, "text": "On one knee in the centre circle, the stadium chanting. {P} says yes through tears. The clip goes around the world.", "fx": { "partner": { "status": "married" }, "followers": 80000, "mood": "On Fire" } },
+          { "w": 1, "text": "{P} says yes, then quietly tells him later she hated the public spectacle. Married, but noted.", "fx": { "partner": { "status": "married" }, "followers": 40000 } }
+        ] },
+        { "label": "Quietly, just the two of you", "desc": "Somewhere meaningful.", "risk": "low", "hint": "Intimate.", "text": "At the spot where they had their first coffee. She says yes before he finishes the sentence. They tell the families together.", "fx": { "partner": { "status": "married" }, "parental": 10, "mood": "Relieved" } }
+      ]
+    },
+    {
+      "id": "lo_wedding_day", "cat": "love", "w": 3, "when": { "partner": ["married"] }, "once": true,
+      "title": "{J}'s Wedding",
+      "text": "The wedding: a thousand guests, three days of ceremonies, his mother directing everything like a general. The whole squad attends. {M} gives a short, surprisingly emotional speech.",
+      "fx": { "parental": 12, "followers": 30000, "trust": 2, "mood": "Relieved", "pfm": -4 }
+    },
+    {
+      "id": "lo_jealousy", "cat": "love", "w": 3, "when": { "partner": ["dating", "serious", "married"], "followers": [20000, 999999999] },
+      "title": "{P} Sees Messages From Fans",
+      "text": "{P} sees a message on {J}'s phone from a female fan: flirtatious, with heart emojis. He never replied. She's still upset.",
+      "prompt": "How do you handle it?",
+      "choices": [
+        { "label": "Show her everything", "desc": "Full transparency.", "risk": "low", "hint": "Trust rebuilt.", "text": "{J} hands her the phone. She scrolls for a minute, then gives it back, embarrassed. They laugh about it later.", "fx": { "mood": "Relieved" } },
+        { "label": "Get defensive", "desc": "You did nothing wrong.", "risk": "medium", "hint": "True, but tone matters.", "text": "The argument goes on for two days. They make up, but it leaves a mark.", "fx": { "mood": "Frustrated", "pfm": -2 } }
+      ]
+    },
+    {
+      "id": "lo_long_distance", "cat": "love", "w": 4, "when": { "partner": ["dating", "serious"], "abroad": true },
+      "title": "Long Distance Is Hard",
+      "text": "{P} is back home; {J} is in another country. Time zones, missed calls, a birthday celebrated over video. Last night she said “I'm tired” and he didn't know if she meant today or something bigger.",
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Ask her to move here", "desc": "Be together.", "risk": "high", "hint": "A big ask.", "out": [
+          { "w": 1, "text": "She says yes. Three months later she arrives with two suitcases and a plan to learn the language.", "fx": { "partner": { "status": "serious" }, "mood": "Relieved", "flag": "learning_language" } },
+          { "w": 1, "text": "She says she can't leave her job and her family. They agree to keep trying. It's fragile.", "fx": { "mood": "Homesick" } }
+        ] },
+        { "label": "Fly home on every free weekend", "desc": "Exhausting, but together.", "risk": "medium", "hint": "Tired legs.", "text": "{J} flies home every free weekend. The relationship holds. His fitness coach notices the jet lag.", "fx": { "pfm": -6, "mood": "Determined" } },
+        { "label": "End it kindly", "desc": "It isn't fair on either of you.", "risk": "medium", "hint": "Painful, maybe right.", "text": "A long, sad call. They end it kindly. It still hurts like a muscle tear.", "fx": { "partner": { "status": "none" }, "mood": "Broken" } }
+      ]
+    },
+    {
+      "id": "lo_breakup_public", "cat": "love", "w": 2, "when": { "partner": ["dating", "serious"], "flags": ["celebrity_partner"] },
+      "title": "Celebrity Breakup Goes Public",
+      "text": "{P} posts a cryptic message about “people who choose football over everything”. Gossip sites decide the relationship is over before {J} even knows.",
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Call her", "desc": "Talk before the internet does.", "risk": "low", "hint": "Maybe it can be saved.", "out": [
+          { "w": 1, "text": "It's over. She says it kindly. The internet is less kind.", "fx": { "partner": { "status": "none" }, "unflag": "celebrity_partner", "mood": "Broken" } },
+          { "w": 1, "text": "It was a bad day, not an ending. They post a photo together a week later. The internet is confused.", "fx": { "mood": "Relieved" } }
+        ] },
+        { "label": "Stay silent", "desc": "Let it play out.", "risk": "medium", "hint": "The story is written without you.", "text": "Silence. The story becomes whatever the gossip sites say it is. It's over.", "fx": { "partner": { "status": "none" }, "unflag": "celebrity_partner", "mood": "Numb" } }
+      ]
+    },
+    {
+      "id": "lo_partner_career", "cat": "love", "w": 3, "when": { "partner": ["serious", "married"] },
+      "title": "{P} Gets a Big Job Offer",
+      "text": "{P} has been offered a promotion: a big step in her career, in another city. She asks {J} what he thinks, which really means: does my career matter as much as yours?",
+      "prompt": "What do you say?",
+      "choices": [
+        { "label": "“Take it. We'll make it work.”", "desc": "Her career matters.", "risk": "medium", "hint": "Supportive, harder logistics.", "text": "She takes it. They see each other less, but she's happier than he's seen her in years. So is he.", "fx": { "mood": "Relieved", "pfm": -2 } },
+        { "label": "Ask her to stay", "desc": "You need her here.", "risk": "high", "hint": "She'll remember this.", "out": [
+          { "w": 1, "text": "She stays. She says it's fine. It isn't, entirely.", "fx": { "mood": "Anxious" } },
+          { "w": 1, "text": "She takes the job anyway, and something cools between them.", "fx": { "mood": "Frustrated" } }
+        ] }
+      ]
+    },
+    {
+      "id": "lo_baby_news", "cat": "love", "w": 3, "when": { "partner": ["married"], "age": [22, 40] }, "once": true,
+      "title": "{J} Is Going to Be a Father",
+      "text": "{P} hands him a small box after training. Inside: a tiny football shirt and an ultrasound photo. {J} sits down on the kitchen floor and doesn't get up for a while.",
+      "fx": { "mood": "On Fire", "parental": 15, "followers": 40000, "chain": { "id": "lo_baby_born", "in": [30, 38] } }
+    },
+    {
+      "id": "lo_baby_born", "cat": "love", "chainOnly": true,
+      "title": "{J} Becomes a Father",
+      "text": "The baby arrives at 3:47am, four days early, on the night before an away match. {M} tells {J} to stay with his family. The squad sends a video of the whole dressing room singing a lullaby, badly.",
+      "prompt": "The away match is tomorrow.",
+      "choices": [
+        { "label": "Stay with your family", "desc": "Some things are bigger than football.", "risk": "low", "hint": "Nobody will blame you.", "text": "{J} stays. He holds his child for six hours straight. The team wins without him and dedicates it to the baby.", "fx": { "mood": "Relieved", "trust": 2, "flag": "father" } },
+        { "label": "Fly to the match and come back", "desc": "Both, somehow.", "risk": "medium", "hint": "Exhausted, proud.", "text": "{J} flies in on the morning of the match, plays sixty minutes on no sleep, and flies back. He celebrates his tackle by rocking an imaginary baby.", "fx": { "pfm": -10, "followers": 30000, "flag": "father" } }
+      ]
+    },
+    {
+      "id": "lo_parenting_sleep", "cat": "love", "w": 4, "when": { "flags": ["father"] },
+      "title": "Sleepless Nights",
+      "text": "The baby doesn't sleep. Which means {J} doesn't sleep. He nods off in the team meeting and the assistant coach throws a pen at him, gently.",
+      "prompt": "How do you manage?",
+      "choices": [
+        { "label": "Share every night shift", "desc": "Be there.", "risk": "medium", "hint": "Good father. Tired player.", "text": "{J} does every other night feed. {P} notices. So does his PFM.", "fx": { "pfm": -8, "mood": "Determined" } },
+        { "label": "Hire a night nurse", "desc": "Money for sleep.", "risk": "low", "hint": "Practical.", "vars": { "cost": ["wageWeeks", 2, 150] }, "text": "A night nurse for {cost}. Everyone sleeps. Nobody feels guilty for long.", "fx": { "wealth": "-cost", "pfm": 3 } }
+      ]
+    },
+    {
+      "id": "lo_child_first_match", "cat": "love", "w": 3, "when": { "flags": ["father"], "age": [24, 40] },
+      "title": "{J}'s Child Watches From the Stands",
+      "text": "His child, tiny ear defenders on, is in the family section for the first time. When {J} wins a corner, the child waves both arms like they scored the winner.",
+      "fx": { "form": 0.2, "mood": "Motivated", "followers": 10000 }
+    },
+    {
+      "id": "lo_anniversary_matchday", "cat": "love", "w": 3, "when": { "partner": ["serious", "married"] },
+      "title": "Anniversary on Match Day",
+      "text": "{J} forgot. It's their anniversary, and there's a match tonight. {P} hasn't said anything, which is how he knows.",
+      "prompt": "Make it up to her?",
+      "choices": [
+        { "label": "Dedicate a goal", "desc": "If you score, she'll know.", "risk": "medium", "hint": "Only works if you score.", "out": [
+          { "w": 1, "text": "He scores and makes a heart with his hands to the family section. The cameras catch her smile. Forgiven.", "fx": { "mood": "Relieved", "followers": 8000 } },
+          { "w": 2, "text": "He doesn't score. He buys flowers at a petrol station on the way home. Mostly forgiven.", "fx": {} }
+        ] },
+        { "label": "Plan a surprise trip", "desc": "A weekend away after the match.", "risk": "low", "hint": "Expensive, effective.", "vars": { "cost": ["wageWeeks", 1, 100] }, "text": "A weekend at a beach hotel, booked in a panic for {cost}. Forgiven completely.", "fx": { "wealth": "-cost", "mood": "Relieved", "pfm": 4 } }
+      ]
+    },
+    {
+      "id": "lo_partner_supportive", "cat": "love", "w": 4, "when": { "partner": ["serious", "married"], "form": [4, 6.3] },
+      "title": "{P} Gets {J} Through a Bad Month",
+      "text": "A bad month: poor form, abuse online, trouble with {M}. Every night, {P} sits with him on the balcony and talks about anything except football. It helps more than any coach.",
+      "fx": { "mood": "Relieved", "growth": ["mental"] }
+    },
+    {
+      "id": "lo_rumours_tabloid", "cat": "love", "w": 2, "when": { "partner": ["serious", "married"], "rep": [20, 100] },
+      "title": "Tabloid Invents an Affair",
+      "text": "A tabloid publishes a blurry photo of {J} talking to a woman outside a restaurant and invents a story. She was his cousin. {P} saw the headline before he did.",
+      "prompt": "How do you respond?",
+      "choices": [
+        { "label": "Sue the tabloid", "desc": "Lies have consequences.", "risk": "medium", "hint": "Costly, satisfying.", "vars": { "cost": ["wageWeeks", 3, 300] }, "text": "{J} spends {cost} on lawyers. The tabloid retracts the story on page 23.", "fx": { "wealth": "-cost", "rep": 0.3 } },
+        { "label": "Post a photo with your cousin", "desc": "Mock the story.", "risk": "low", "hint": "Funny, effective.", "text": "A photo of {J} with his cousin and the caption: “My secret lover, apparently.” The internet laughs at the tabloid.", "fx": { "followers": 15000, "rep": 0.3 } }
+      ]
+    },
+    {
+      "id": "lo_partner_family_conflict", "cat": "love", "w": 3, "when": { "partner": ["serious", "married"] },
+      "title": "{J}'s Mother and {P} Disagree",
+      "text": "His mother and {P} disagree about everything: where they should live, how often they should visit, what kind of wedding there should have been. Both have called {J} today to complain about the other.",
+      "prompt": "Whose side are you on?",
+      "choices": [
+        { "label": "Defend {P}", "desc": "Your partner first.", "risk": "medium", "hint": "Your mother will be hurt.", "text": "{J} gently tells his mother to give {P} space. His mother is hurt but respects it, eventually.", "fx": { "parental": -6, "mood": "Relieved" } },
+        { "label": "Side with your mother", "desc": "Family is family.", "risk": "medium", "hint": "{P} will remember.", "text": "{J} asks {P} to compromise. She does. She also stops visiting his parents.", "fx": { "parental": 4, "mood": "Anxious" } },
+        { "label": "Bring them together", "desc": "Dinner, the three of you.", "risk": "medium", "hint": "Diplomacy.", "check": { "stat": "mental", "dc": 55 },
+          "ok": { "text": "A long dinner, careful words, his mother's cooking. By dessert they're laughing at {J}. Peace.", "fx": { "parental": 8, "mood": "Relieved" } },
+          "bad": { "text": "The dinner ends early and in silence.", "fx": { "parental": -4, "mood": "Frustrated" } } }
+      ]
+    },
+    {
+      "id": "lo_single_lonely", "cat": "love", "w": 3, "when": { "partner": ["none"], "age": [22, 38] },
+      "title": "The Empty Apartment",
+      "text": "A home win, a good performance, a phone full of congratulations. And then the apartment: quiet, dark, takeaway on the counter. Teammates go home to families. {J} goes home to a television.",
+      "prompt": "What do you do about it?",
+      "choices": [
+        { "label": "Adopt a dog", "desc": "A loyal friend.", "risk": "low", "hint": "Walks, love, hair on everything.", "text": "{J} adopts a scruffy rescue dog. It chews one boot and becomes famous online.", "fx": { "mood": "Relieved", "followers": 20000, "flag": "dog_owner" } },
+        { "label": "Spend more time with teammates", "desc": "Say yes to every invitation.", "risk": "low", "hint": "Friendship.", "text": "{J} says yes to every barbecue and birthday. The apartment matters less.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "mood": "Relieved" } },
+        { "label": "Let your family set you up", "desc": "Your mother has a list.", "risk": "medium", "hint": "Could be lovely.", "out": [
+          { "w": 1, "text": "The third introduction is {F}. Something clicks.", "fx": { "partner": { "who": "F", "status": "dating" }, "parental": 6 } },
+          { "w": 1, "text": "None of the introductions work. His mother keeps trying.", "fx": { "parental": 3 } }
+        ] }
+      ]
+    },
+    {
+      "id": "lo_partner_matchday_tradition", "cat": "love", "w": 3, "when": { "partner": ["serious", "married"], "role": ["starter", "rotation"] },
+      "title": "{P}'s Matchday Ritual",
+      "text": "{P} has a ritual: a handwritten note in {J}'s kit bag before every home match. Today's says: “Run like you're late for dinner.” He laughs in the dressing room and won't tell anyone why.",
+      "fx": { "mood": "Confident", "form": 0.1 }
+    },
+    {
+      "id": "lo_ex_returns", "cat": "love", "w": 2, "when": { "partner": ["none"], "rep": [10, 100] },
+      "title": "An Old Flame Gets in Touch",
+      "text": "A message from his first girlfriend, from school, before the money and the fame. She saw him on TV. She's back in town. Coffee?",
+      "prompt": "Meet her?",
+      "choices": [
+        { "label": "Meet for coffee", "desc": "For old times' sake.", "risk": "medium", "hint": "Nostalgia is powerful.", "out": [
+          { "w": 1, "text": "It's like no time passed. They laugh about teachers and old friends for three hours. Something starts again.", "fx": { "partner": { "who": "F", "status": "dating" }, "mood": "Relieved" } },
+          { "w": 1, "text": "It's nice, but they're different people now. They part as friends.", "fx": { "growth": ["mental"] } }
+        ] },
+        { "label": "Politely decline", "desc": "The past is the past.", "risk": "low", "hint": "No complications.", "text": "{J} replies kindly and doesn't meet her.", "fx": {} }
+      ]
+    },
+    {
+      "id": "lo_dog_famous", "cat": "love", "w": 3, "when": { "flags": ["dog_owner"] },
+      "title": "{J}'s Dog Has More Fans Than Some Players",
+      "text": "The scruffy rescue dog now has its own account, run by {J}'s cousin. A pet food brand wants to sponsor it.",
+      "fx": { "followers": 10000, "wealth": 300, "mood": "Confident" }
+    },
+    {
+      "id": "lo_divorce_risk", "cat": "love", "w": 2, "when": { "partner": ["married"], "pfm": [0, 55] },
+      "title": "Cracks at Home",
+      "text": "Away games, training camps, international duty, sponsor events. {P} says she married a man, not a fixture list. It's the third argument this week.",
+      "prompt": "Save the marriage?",
+      "choices": [
+        { "label": "Couples counselling", "desc": "Do the work.", "risk": "low", "hint": "Hard, healing.", "text": "Weekly sessions, difficult conversations, small changes. It gets better. Slowly.", "fx": { "mood": "Relieved", "growth": ["mental"] } },
+        { "label": "Take a break from social and sponsor events", "desc": "Give her your free time.", "risk": "low", "hint": "Less money and fame, more home.", "text": "{J} cancels every non-football commitment for two months. The apartment feels like a home again.", "fx": { "followers": -2000, "mood": "Relieved", "pfm": 5 } },
+        { "label": "Ignore it", "desc": "It's a phase.", "risk": "extreme", "hint": "It might not be.", "out": [
+          { "w": 1, "text": "It was a phase. Mostly.", "fx": { "mood": "Anxious" } },
+          { "w": 1, "text": "She leaves. The divorce is quiet, sad and expensive.", "fx": { "partner": { "status": "none" }, "wealth": -3000, "mood": "Broken" } }
+        ] }
+      ]
+    }
+  ]
+}

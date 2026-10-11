@@ -17,6 +17,7 @@ const positions = ['GK', 'CB', 'FB', 'DM', 'CM', 'AM', 'W', 'ST'];
 
 const starts = [{ key: 'Indonesia|1' }, { key: 'Indonesia|1' }, { key: 'England|2' }, { key: 'Brazil|1' }, { key: 'Japan|1' }];
 let errors = 0;
+const fired = new Map(); let decisions = 0, weeksTotal = 0;
 for (let i = 0; i < runs; i++) {
   const start = starts[i % starts.length];
   const state = newCareer(world, {
@@ -31,6 +32,8 @@ for (let i = 0; i < runs; i++) {
       for (const d of state.pending) if (!d.chosen) chooseDecision(state, d.id, pick(d.choices).id);
       const res = advanceWeek(state, world, { intensity: pick(['hard', 'balanced', 'balanced', 'light', 'rest']), focus: 'auto' });
       const story = narrateOffline(state, world, res);
+      weeksTotal++; for (const ev of [res.event, res.moment]) if (ev?.sid) fired.set(ev.sid, (fired.get(ev.sid) ?? 0) + 1);
+      decisions += state.pending.length;
       if (!story.headline || !story.paragraphs.length) throw new Error(`Empty story in week ${res.week}`);
       if (res.seasonEnd) {
         const s = res.seasonEnd;
@@ -46,5 +49,11 @@ for (let i = 0; i < runs; i++) {
     console.error(`  ERROR at week ${state.week}:`, e);
   }
 }
+const byCat = {}; for (const [id, n] of fired) { const c = world.scenarioById[id].cat; byCat[c] = (byCat[c] ?? 0) + n; }
+console.log(`
+Scenarios: ${fired.size}/${world.scenarios.length} different ones fired, ${[...fired.values()].reduce((a, b) => a + b, 0)} total over ${weeksTotal} weeks (${(decisions / weeksTotal).toFixed(2)} decisions/week)`);
+console.log("By category: " + Object.entries(byCat).map(([k, v]) => `${k} ${v}`).join(" · "));
+const never = world.scenarios.filter((x) => !fired.has(x.id) && !x.chainOnly).map((x) => x.id);
+if (process.argv.includes("--never")) console.log(`Never fired (${never.length}): ${never.join(", ")}`);
 console.log(errors ? `\n${errors} career(s) crashed` : '\nAll careers completed without errors');
 process.exit(errors ? 1 : 0);

@@ -1,0 +1,215 @@
+// Scenario engine: reads hand-written scenarios from data/scenarios/*.json,
+// decides which ones fit the player's life right now, and resolves choices.
+// Scenario format: see data/scenarios/README.md
+import { chance, clamp, gauss, pick, randint, weightedPick } from './util.js';
+import { STAT_KEYS, EUR_IDR, RAMADAN, POSITIONS } from './config.js';
+import { personName, overall } from './player.js';
+import { leagueQuality, leagueClubs } from './world.js';
+import { monthOf, ageAt, inRange } from './time.js';
+
+const POS_GROUP = { GK: 'GK', CB: 'DEF', FB: 'DEF', DM: 'MID', CM: 'MID', AM: 'MID', W: 'ATT', ST: 'ATT' };
+export const DEFAULT_COOLDOWN = 40;
+
+export async function loadScenarios(fetchJson) {
+  const index = await fetchJson('data/scenarios/index.json');
+  const all = [];
+  for (const file of index.files) {
+    const data = await fetchJson(`data/scenarios/${file}`);
+    for (const s of data.scenarios) all.push({ ...s, file });
+  }
+  return all;
+}
+
+// ── Snapshot of everything conditions can test ──
+export function scenarioContext(state, world, res = null) {
+  const p = state.player;
+  const w = state.week;
+  const club = p.club;
+  const season = club ? state.seasons[club.key] : null;
+  const phase = !season ? 'off' : season.finished || w > season.endWeek ? 'off' : w < season.startWeek ? 'pre' : 'in';
+  const allies = p.keyTeammates.filter((t) => t.relationship === 'ally');
+  const rivals = p.keyTeammates.filter((t) => ['rival', 'enemy'].includes(t.relationship));
+  const played = res ? res.matches.find((m) => m.minutes > 0) : null;
+  return {
+    age: ageAt(p.dob, w), role: p.squadRole, injured: !!p.injury, trust: p.manager.trust, form: p.form, rep: p.reputation,
+    wealth: p.wealthEUR, followers: p.followers, country: club?.country ?? null, nationality: p.nationality,
+    abroad: !!club && club.country !== p.nationality, pos: p.position, posGroup: POS_GROUP[p.position],
+    partner: p.partner.status, leagueQ: club ? leagueQuality(club.key) : 0, tier: club?.tier ?? 0, phase,
+    month: monthOf(w) + 1, flags: new Set(Object.keys(state.flags.story ?? {})), ramadan: RAMADAN.some(([a, b]) => inRange(w, a, b)),
+    agent: !!p.agent, nt: p.national.status, caps: p.national.caps, apps: p.career.apps, seasonApps: p.season.apps,
+    contractYears: club ? Math.max(0, (club.contractEndWeek - w) / 52) : 0, listed: p.transferListed, parental: p.family.parentalSupport,
+    lastResult: (played ?? p.lastMatch)?.result ?? null, lastRating: (played ?? p.lastMatch)?.rating ?? null,
+    played: !!played, matchWeek: !!res?.matches.length, freeAgent: !club, hasAlly: allies.length > 0, hasRival: rivals.length > 0,
+    trophies: p.career.trophies.length, ovr: overall(p), tacticalFit: p.manager.tacticalFit, pfm: p.pfm, loan: !!club?.loan, goalsSeason: p.season.goals,
+  };
+}
+
+const inRangeOf = (v, r) => v !== null && v !== undefined && v >= (r[0] ?? -Infinity) && v <= (r[1] ?? Infinity);
+
+export function conditionsMet(when = {}, c) {
+  for (const [k, v] of Object.entries(when)) {
+    switch (k) {
+      case 'age': case 'trust': case 'form': case 'rep': case 'wealth': case 'followers': case 'leagueQ': case 'tier':
+      case 'caps': case 'apps': case 'seasonApps': case 'contractYears': case 'parental': case 'lastRating': case 'trophies':
+      case 'ovr': case 'pfm': case 'goalsSeason': case 'tacticalFit':
+        if (!inRangeOf(c[k], v)) return false; break;
+      case 'role': case 'partner': case 'phase': case 'nt': case 'lastResult':
+        if (!v.includes(c[k])) return false; break;
+      case 'country': if (!v.includes(c.country)) return false; break;
+      case 'notCountry': if (v.includes(c.country)) return false; break;
+      case 'nationality': if (!v.includes(c.nationality)) return false; break;
+      case 'notNationality': if (v.includes(c.nationality)) return false; break;
+      case 'pos': if (!v.includes(c.pos) && !v.includes(c.posGroup)) return false; break;
+      case 'months': if (!v.includes(c.month)) return false; break;
+      case 'flags': if (!v.every((f) => c.flags.has(f))) return false; break;
+      case 'notFlags': if (v.some((f) => c.flags.has(f))) return false; break;
+      case 'injured': case 'abroad': case 'ramadan': case 'agent': case 'listed': case 'played': case 'matchWeek':
+      case 'freeAgent': case 'hasAlly': case 'hasRival': case 'loan':
+        if (!!c[k] !== v) return false; break;
+      default: break; // unknown keys are caught by tools/validate-scenarios.mjs
+    }
+  }
+  return true;
+}
+
+// ── Picking a scenario for this week ──
+export function pickScenario(state, world, ctx, { triggers = [], moment = false } = {}) {
+  const seen = state.flags.scenWeek ?? {};
+  const once = state.flags.scenOnce ?? {};
+  const pool = world.scenarios.filter((s) => {
+    if (s.chainOnly) return false;
+    if (!!s.moment !== moment) return false;
+    if (s.once && once[s.id]) return false;
+    if (state.week - (seen[s.id] ?? -999) < (s.cd ?? DEFAULT_COOLDOWN)) return false;
+    if (s.trigger ? !triggers.includes(s.trigger) : triggers.length > 0) return false;
+    if (!moment && !s.trigger && s.cat === state.lastEventType) return false;
+    if (!s.when?.freeAgent && ctx.freeAgent) return false;
+    if (!s.when || !('injured' in s.when)) { if (ctx.injured && ['training', 'moment'].includes(s.cat)) return false; }
+    return conditionsMet(s.when, ctx);
+  });
+  return weightedPick(pool, (s) => s.w ?? 5);
+}
+
+export function markUsed(state, s) {
+  state.flags.scenWeek = { ...(state.flags.scenWeek ?? {}), [s.id]: state.week };
+  if (s.once) state.flags.scenOnce = { ...(state.flags.scenOnce ?? {}), [s.id]: true };
+}
+
+// ── Instances: names and amounts fixed when the scenario fires ──
+function nameFor(kind, mode, state) {
+  const p = state.player;
+  const country = p.club?.country ?? p.nationality;
+  if (kind === 'T' && mode === 'ally') return pick(p.keyTeammates.filter((t) => t.relationship === 'ally'))?.name;
+  if (kind === 'T' && mode === 'rival') return pick(p.keyTeammates.filter((t) => ['rival', 'enemy'].includes(t.relationship)))?.name;
+  if (kind === 'T' && mode === 'any' && p.keyTeammates.length) return pick(p.keyTeammates).name;
+  if (kind === 'F') return mode === 'partner' && p.partner.name ? p.partner.name : personName(country, true);
+  if (kind === 'A') return mode === 'agent' && p.agent ? p.agent.name : personName(pick([p.nationality, 'England', 'Netherlands']));
+  return personName(country);
+}
+
+function computeVar([kind, a = 0, b = 0], state) {
+  const p = state.player;
+  const wage = p.club?.wageWeekly ?? 100;
+  let v = 0;
+  if (kind === 'wealthPct') v = Math.max(b || 100, Math.abs(p.wealthEUR) * a / 100);
+  else if (kind === 'wageWeeks') v = Math.max(b || 50, wage * a);
+  else if (kind === 'fixed') v = a;
+  else if (kind === 'endorse') v = (a || 800) + p.reputation * p.reputation * 60;
+  else if (kind === 'range') v = randint(a, b);
+  return Math.round(v / 10) * 10;
+}
+
+export function instantiate(s, state, world, carried = null) {
+  const p = state.player;
+  const inst = carried ? { ...carried, sid: s.id } : { sid: s.id, names: {}, vars: {} };
+  for (const k of ['T', 'T2', 'F', 'A', 'K']) {
+    if (inst.names[k]) continue;
+    const mode = s.uses?.[k] ?? 'new';
+    inst.names[k] = nameFor(k, mode, state) ?? personName(p.club?.country ?? p.nationality);
+  }
+  if (!inst.names.R && p.club) inst.names.R = pick(leagueClubs(state, world, p.club.key).filter((c) => c !== p.club.name)) ?? 'their rivals';
+  const defs = Object.assign({}, ...(s.choices ?? []).map((c) => c.vars ?? {}), s.vars ?? {});
+  for (const [k, def] of Object.entries(defs)) if (inst.vars[k] === undefined) inst.vars[k] = computeVar(def, state);
+  return inst;
+}
+
+export function fmtMoney(state, eur) {
+  if (state.player.nationality === 'Indonesia') {
+    const idr = Math.abs(eur) * EUR_IDR;
+    const s = idr >= 1e9 ? `${(idr / 1e9).toFixed(1)} miliar` : idr >= 1e6 ? `${Math.round(idr / 1e6)} juta` : `${Math.round(idr / 1e3)} ribu`;
+    return `Rp ${s}`;
+  }
+  return `€${Math.abs(Math.round(eur)).toLocaleString('en')}`;
+}
+
+export function fill(str, inst, state) {
+  const p = state.player;
+  const first = p.name.split(' ')[0];
+  const map = {
+    J: p.jerseyName, first, name: p.name, M: p.manager.name, club: p.club?.name ?? 'his old club', nation: p.nationality,
+    league: state.seasons[p.club?.key]?.name ?? 'the league', pos: POSITIONS[p.position].name.toLowerCase(), age: String(ageAt(p.dob, state.week)),
+    T: inst.names.T, T2: inst.names.T2, F: inst.names.F, P: p.partner.name || inst.names.F, A: inst.names.A, K: inst.names.K, R: inst.names.R,
+    Tl: inst.names.T?.split(' ').slice(-1)[0], T2l: inst.names.T2?.split(' ').slice(-1)[0], Ff: inst.names.F?.split(' ')[0], Al: inst.names.A?.split(' ').slice(-1)[0],
+    Kl: inst.names.K?.split(' ').slice(-1)[0], Mf: p.manager.name.split(' ').slice(-1)[0], opp: p.lastMatch?.opp ?? inst.names.R, num: String(p.number),
+  };
+  return String(str).replace(/\{(\w+)\}/g, (m, k) => (k in map ? map[k] : k in inst.vars ? fmtMoney(state, inst.vars[k]) : m));
+}
+
+// Effects may refer to vars: "-cost", "cost", "cost*1.5"
+function num(v, inst) {
+  if (typeof v === 'number') return v;
+  const m = String(v).match(/^(-)?(\w+)(?:\*([\d.]+))?$/);
+  if (!m) return 0;
+  const base = inst.vars[m[2]] ?? 0;
+  return (m[1] ? -1 : 1) * base * (m[3] ? Number(m[3]) : 1);
+}
+
+// Turn scenario fx into engine effects (names resolved, numbers computed).
+export function resolveFx(fx, inst, state) {
+  if (!fx) return null;
+  const out = {};
+  for (const [k, v] of Object.entries(fx)) {
+    if (['trust', 'rep', 'followers', 'wealth', 'pfm', 'form', 'tacticalFit', 'parental', 'monthlySupport', 'suspension', 'lifestyle'].includes(k)) out[k] = num(v, inst);
+    else if (k === 'newManager') out.newManager = !!v;
+    else if (k === 'teammate') out.teammate = { name: inst.names[v.who ?? 'T'], rel: v.rel };
+    else if (k === 'partner') out.partner = v.status === 'none' ? { name: '', status: 'none' } : { name: v.who ? inst.names[v.who] : state.player.partner.name, status: v.status };
+    else if (k === 'agent') out.agent = { name: inst.names[v.who ?? 'A'], quality: randint(v.quality?.[0] ?? 40, v.quality?.[1] ?? 70), cut: v.cut ?? 10 };
+    else if (k === 'endorsement') out.endorsement = { brand: fill(v.brand, inst, state), type: v.type ?? 'regional', annualValue: num(v.value, inst), years: v.years ?? 2 };
+    else if (k === 'chain') out.thread = { id: v.id, inWeeks: randint(v.in[0], v.in[1]), data: inst };
+    else out[k] = v; // growth, stat, mood, injury, listed, flag, unflag, matchMod
+  }
+  return out;
+}
+
+function rollCheck(check, state) {
+  const p = state.player;
+  const value = STAT_KEYS.includes(check.stat) ? p.stats[check.stat]
+    : check.stat === 'trust' ? p.manager.trust : check.stat === 'rep' ? p.reputation : check.stat === 'parental' ? p.family.parentalSupport
+      : check.stat === 'pfm' ? p.pfm : check.stat === 'agent' ? (p.agent?.quality ?? 20) : check.stat === 'tacticalFit' ? p.manager.tacticalFit : overall(p);
+  return value + gauss() * 10 >= check.dc;
+}
+
+export function resolveChoice(state, s, inst, choiceId) {
+  const idx = Math.max(0, Number(choiceId));
+  const c = s.choices[idx] ?? s.choices[0];
+  let out;
+  if (c.check) out = rollCheck(c.check, state) ? c.ok : c.bad;
+  else if (c.out) out = weightedPick(c.out, (o) => o.w ?? 1);
+  else out = c;
+  return { text: fill(out.text ?? '', inst, state), fx: resolveFx(out.fx, inst, state), label: fill(c.label, inst, state) };
+}
+
+export function decisionFor(s, inst, state) {
+  return {
+    kind: 'scenario', sid: s.id, data: inst, type: s.dtype ?? (s.moment ? 'in-match' : s.cat),
+    prompt: fill(s.prompt ?? s.title, inst, state),
+    choices: s.choices.map((c, i) => ({ id: String(i), label: fill(c.label, inst, state), description: fill(c.desc ?? '', inst, state), risk: c.risk ?? 'medium', consequence: fill(c.hint ?? '', inst, state) })),
+  };
+}
+
+export function textOf(s, inst, state) {
+  const t = Array.isArray(s.text) ? pick(s.text) : s.text;
+  return fill(t, inst, state);
+}
+
+export const clampFx = clamp;

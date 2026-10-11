@@ -1,0 +1,632 @@
+{
+  "scenarios": [
+    {
+      "id": "mo_shoot_or_pass", "cat": "moment", "moment": true, "w": 8, "when": { "pos": ["ST", "W", "AM"] },
+      "title": "Key Moment: Shoot or Pass?",
+      "text": "Saturday, 71st minute, score level. {J} breaks through on the left side of the box. The keeper comes off his line. {T} is unmarked at the far post, screaming for it.",
+      "prompt": "Split second. What do you do?",
+      "choices": [
+        { "label": "Shoot", "desc": "Near post, low and hard.", "risk": "high", "hint": "Glory or a missed chance everyone remembers.", "check": { "stat": "shooting", "dc": 58 },
+          "ok": { "text": "{J} shoots before the keeper sets his feet. Near post. The net bulges. The stadium shakes.", "fx": { "matchMod": { "goals": 1, "rating": 0.5 } } },
+          "bad": { "text": "{J} shoots. The keeper spreads himself and saves. {T} throws his arms in the air at the far post.", "fx": { "matchMod": { "rating": -0.4 }, "teammate": { "who": "T", "rel": "rival" } } } },
+        { "label": "Square it", "desc": "Unselfish pass to {Tl}.", "risk": "low", "hint": "The safer goal — if the pass is right.", "check": { "stat": "passing", "dc": 50 },
+          "ok": { "text": "{J} draws the keeper and rolls it across. {T} taps into an empty net and runs straight to {J}.", "fx": { "matchMod": { "assists": 1, "rating": 0.4 }, "teammate": { "who": "T", "rel": "ally" } } },
+          "bad": { "text": "The pass is a fraction behind {T}. The defender recovers. Chance gone.", "fx": { "matchMod": { "rating": -0.2 } } } }
+      ]
+    },
+    {
+      "id": "mo_penalty_taker", "cat": "moment", "moment": true, "w": 6, "when": { "pos": ["ST", "W", "AM", "CM"] },
+      "title": "Key Moment: Penalty!",
+      "text": "Saturday, 84th minute, 1-1. Penalty. The regular taker is off the pitch. Somebody has to take it. The ball is lying on the grass and nobody is picking it up. {J} looks at it.",
+      "prompt": "Take the penalty?",
+      "choices": [
+        { "label": "Take it: power", "desc": "Blast it down the middle.", "risk": "high", "hint": "Brave. If it's saved, everyone remembers.", "check": { "stat": "shooting", "dc": 55 },
+          "ok": { "text": "{J} smashes it straight down the middle as the keeper dives left. Goal. He doesn't celebrate, just walks back with his fist clenched.", "fx": { "matchMod": { "goals": 1, "rating": 0.6 }, "rep": 0.5 } },
+          "bad": { "text": "The keeper stays big and blocks it with his legs. Fifteen thousand people groan at once.", "fx": { "matchMod": { "rating": -0.8 }, "mood": "Broken" } } },
+        { "label": "Take it: placement", "desc": "Bottom corner, side-foot.", "risk": "high", "hint": "Needs ice in your veins.", "check": { "stat": "mental", "dc": 55 },
+          "ok": { "text": "Side-foot, bottom corner, keeper the wrong way. {J} kisses the badge.", "fx": { "matchMod": { "goals": 1, "rating": 0.6 }, "rep": 0.5 } },
+          "bad": { "text": "Too close to the keeper. He guesses right and pushes it round the post.", "fx": { "matchMod": { "rating": -0.8 } } } },
+        { "label": "Hand it to a teammate", "desc": "Let {Tl} take it.", "risk": "low", "hint": "No hero moment. No villain moment.", "out": [
+          { "w": 2, "text": "{T} scores. {J} is first to hug him.", "fx": { "matchMod": { "rating": 0.1 }, "teammate": { "who": "T", "rel": "ally" } } },
+          { "w": 1, "text": "{T} misses. Some fans wonder why {J} didn't take it.", "fx": { "matchMod": { "rating": -0.1 } } }
+        ] }
+      ]
+    },
+    {
+      "id": "mo_play_through_pain", "cat": "moment", "moment": true, "w": 5,
+      "title": "Key Moment: Play Through the Pain?",
+      "text": "Saturday, 30th minute. A heavy challenge catches {J} on the thigh. The physio sprays it, rubs it, asks the question with his eyebrows: can you continue?",
+      "prompt": "Stay on?",
+      "choices": [
+        { "label": "Stay on", "desc": "The team needs you.", "risk": "high", "hint": "Could worsen it.", "out": [
+          { "w": 3, "text": "{J} stays on and grinds through it. A brave performance; a sore week.", "fx": { "matchMod": { "rating": 0.2 }, "pfm": -6, "trust": 2 } },
+          { "w": 1, "text": "Ten minutes later the thigh seizes completely. He goes off anyway, and now it's worse.", "fx": { "matchMod": { "rating": -0.3, "injury": "minor" } } }
+        ] },
+        { "label": "Signal to come off", "desc": "Don't risk weeks for minutes.", "risk": "low", "hint": "Sensible.", "text": "{J} signals to the bench. The sub comes on. The thigh is fine by Tuesday.", "fx": { "matchMod": { "rating": -0.2 }, "pfm": 2 } }
+      ]
+    },
+    {
+      "id": "mo_dive_or_stay", "cat": "moment", "moment": true, "w": 5, "when": { "pos": ["ST", "W", "AM"] },
+      "title": "Key Moment: Go Down or Stay Up?",
+      "text": "Saturday, 88th minute, 0-0. {J} dribbles into the box and a defender clips his heel. Barely. He could go down. He could also stay up and try to shoot from a tight angle.",
+      "prompt": "Decide.",
+      "choices": [
+        { "label": "Stay on your feet", "desc": "Honest football.", "risk": "medium", "hint": "Respect, maybe a goal.", "check": { "stat": "dribbling", "dc": 58 },
+          "ok": { "text": "{J} rides the challenge and slots it under the keeper from a tight angle. The pundits talk about his honesty and his finish.", "fx": { "matchMod": { "goals": 1, "rating": 0.6 }, "rep": 0.4 } },
+          "bad": { "text": "{J} stays up, loses his balance, and the chance is gone.", "fx": { "matchMod": { "rating": -0.1 } } } },
+        { "label": "Go down", "desc": "There was contact.", "risk": "high", "hint": "Penalty — or a yellow for diving.", "out": [
+          { "w": 1, "text": "Penalty given. The teammate scores. The opposition fans call {J} every name under the sun.", "fx": { "matchMod": { "rating": 0.2 }, "rep": -0.2, "followers": 2000 } },
+          { "w": 1, "text": "The referee waves a yellow card. Simulation. The replay is mocked on every highlights show.", "fx": { "matchMod": { "card": "yellow", "rating": -0.5 }, "rep": -0.5 } }
+        ] }
+      ]
+    },
+    {
+      "id": "mo_press_or_hold", "cat": "moment", "moment": true, "w": 6, "when": { "pos": ["CM", "DM", "AM", "ST", "W"] },
+      "title": "Key Moment: Press or Hold Your Position?",
+      "text": "Saturday, 60th minute. The opposition centre-back takes a heavy touch. {J} could sprint to press him and maybe win it high — or hold the shape {M} drilled all week.",
+      "prompt": "Half a second to choose.",
+      "choices": [
+        { "label": "Press", "desc": "Hunt the ball.", "risk": "high", "hint": "Win it high — or leave a hole behind you.", "check": { "stat": "pace", "dc": 55 },
+          "ok": { "text": "{J} steals it off his toes and slips a pass into the box. Goal. The kind of moment coaches build a whole week around.", "fx": { "matchMod": { "assists": 1, "rating": 0.5 }, "trust": 2 } },
+          "bad": { "text": "The defender plays round him. Two passes later the ball is in {J}'s team's net. {M} throws his notes on the ground.", "fx": { "matchMod": { "rating": -0.5, "concede": 1 }, "trust": -3 } } },
+        { "label": "Hold the shape", "desc": "Discipline.", "risk": "low", "hint": "Nothing spectacular, nothing stupid.", "text": "{J} holds position. Nothing happens. {M} nods at the touchline.", "fx": { "matchMod": { "rating": 0.1 }, "tacticalFit": 2 } }
+      ]
+    },
+    {
+      "id": "mo_last_man_tackle", "cat": "moment", "moment": true, "w": 7, "when": { "pos": ["CB", "FB", "DM"] },
+      "title": "Key Moment: Last Man",
+      "text": "Saturday, 77th minute, 1-0 up. The striker is through, {J} is the last man, the keeper is too far out. Slide tackle or jockey him wide?",
+      "prompt": "Decide.",
+      "choices": [
+        { "label": "Slide tackle", "desc": "All or nothing.", "risk": "extreme", "hint": "Hero or red card.", "check": { "stat": "defending", "dc": 60 },
+          "ok": { "text": "{J} slides and takes ball, only ball. The stadium roars as if it were a goal. His teammates slap his head.", "fx": { "matchMod": { "rating": 0.7 } } },
+          "bad": { "text": "He gets the man, not the ball. Straight red. Penalty. The longest walk of his career.", "fx": { "matchMod": { "card": "red", "concede": 1 } } } },
+        { "label": "Jockey him wide", "desc": "Show him away from goal, buy time.", "risk": "medium", "hint": "Smart defending, if your feet are quick.", "check": { "stat": "pace", "dc": 50 },
+          "ok": { "text": "{J} shows him wide, wide, wider, until the covering defender arrives. Danger gone. Textbook.", "fx": { "matchMod": { "rating": 0.4 }, "trust": 2 } },
+          "bad": { "text": "The striker cuts back inside and scores. {J} was too slow to turn.", "fx": { "matchMod": { "rating": -0.6, "concede": 1 } } } }
+      ]
+    },
+    {
+      "id": "mo_header_clearance", "cat": "moment", "moment": true, "w": 5, "when": { "pos": ["CB", "DM", "FB"] },
+      "title": "Key Moment: The Corner",
+      "text": "Saturday, 90th minute, leading by one. The opposition's last corner. Their giant centre-back is coming forward, and {J} has the job of marking him.",
+      "prompt": "How do you defend it?",
+      "choices": [
+        { "label": "Attack the ball", "desc": "Win the header first.", "risk": "medium", "hint": "Needs strength and timing.", "check": { "stat": "physical", "dc": 55 },
+          "ok": { "text": "{J} rises above the giant and heads it clear to halfway. Final whistle. He's mobbed.", "fx": { "matchMod": { "rating": 0.5 } } },
+          "bad": { "text": "The giant climbs over him and heads it in. {J} lies on the grass staring at the sky.", "fx": { "matchMod": { "rating": -0.6, "concede": 1 } } } },
+        { "label": "Grab his shirt", "desc": "Old-school defending.", "risk": "high", "hint": "VAR exists.", "out": [
+          { "w": 1, "text": "The referee sees nothing. The ball is cleared. Dark arts.", "fx": { "matchMod": { "rating": 0.2 } } },
+          { "w": 1, "text": "VAR sees everything. Penalty. Yellow card.", "fx": { "matchMod": { "rating": -0.7, "card": "yellow", "concede": 1 } } }
+        ] }
+      ]
+    },
+    {
+      "id": "mo_gk_penalty", "cat": "moment", "moment": true, "w": 8, "when": { "pos": ["GK"] },
+      "title": "Key Moment: Penalty Against You",
+      "text": "Saturday, 65th minute. Penalty to the opposition. Their striker places the ball and stares at {J}. The keeper coach's notes said he goes to the keeper's right three times out of four.",
+      "prompt": "Which way?",
+      "choices": [
+        { "label": "Trust the notes: dive right", "desc": "Data over instinct.", "risk": "medium", "hint": "Usually right.", "out": [
+          { "w": 3, "text": "{J} dives right and the ball is there. Saved! The goalkeeping coach punches the air on the bench.", "fx": { "matchMod": { "rating": 0.9 }, "rep": 0.6 } },
+          { "w": 2, "text": "The striker goes left. Of course he does.", "fx": { "matchMod": { "concede": 1, "rating": -0.1 } } }
+        ] },
+        { "label": "Stand tall, wait", "desc": "Make him choose.", "risk": "high", "hint": "Mind games.", "check": { "stat": "goalkeeping", "dc": 62 },
+          "ok": { "text": "{J} waits until the last moment and pushes a nervous shot round the post. The striker can't believe it.", "fx": { "matchMod": { "rating": 1 }, "rep": 0.7 } },
+          "bad": { "text": "The striker rolls it into the corner while {J} stands there. It looks worse than diving the wrong way.", "fx": { "matchMod": { "concede": 1, "rating": -0.3 } } } }
+      ]
+    },
+    {
+      "id": "mo_gk_one_on_one", "cat": "moment", "moment": true, "w": 7, "when": { "pos": ["GK"] },
+      "title": "Key Moment: One-on-One",
+      "text": "Saturday, 52nd minute. A through ball splits the defence. Their winger is clean through. {J} is on his line.",
+      "prompt": "Rush out or stay?",
+      "choices": [
+        { "label": "Rush out", "desc": "Close the angle fast.", "risk": "high", "hint": "Save, or a foul.", "check": { "stat": "pace", "dc": 48 },
+          "ok": { "text": "{J} charges out and smothers the ball at the winger's feet. Brave and perfectly timed.", "fx": { "matchMod": { "rating": 0.7 } } },
+          "bad": { "text": "{J} arrives late and clips the winger. Penalty and a yellow card.", "fx": { "matchMod": { "rating": -0.6, "card": "yellow", "concede": 1 } } } },
+        { "label": "Stay big", "desc": "Make yourself huge, react.", "risk": "medium", "hint": "Reflexes decide.", "check": { "stat": "goalkeeping", "dc": 58 },
+          "ok": { "text": "The winger shoots low; {J} gets a strong hand down. Save of the week on the highlights show.", "fx": { "matchMod": { "rating": 0.7 }, "followers": 3000 } },
+          "bad": { "text": "The winger dinks it over him. Nothing to be done.", "fx": { "matchMod": { "concede": 1, "rating": -0.2 } } } }
+      ]
+    },
+    {
+      "id": "mo_gk_cross", "cat": "moment", "moment": true, "w": 6, "when": { "pos": ["GK"] },
+      "title": "Key Moment: The High Ball",
+      "text": "Saturday, 89th minute, 1-0 up. A hopeful cross swings in towards the penalty spot. Bodies everywhere. {J} could come and claim it — or stay on his line.",
+      "prompt": "Come for it?",
+      "choices": [
+        { "label": "Come and claim it", "desc": "Command your area.", "risk": "high", "hint": "Catch it and you end the game. Miss it and you lose it.", "check": { "stat": "physical", "dc": 55 },
+          "ok": { "text": "{J} rises above everyone and catches it cleanly. He holds it until the referee blows for full time.", "fx": { "matchMod": { "rating": 0.5 }, "trust": 2 } },
+          "bad": { "text": "He gets a fingertip, no more. The ball drops and the opposition bundle it in.", "fx": { "matchMod": { "rating": -0.9, "concede": 1 } } } },
+        { "label": "Stay on your line", "desc": "Let the defenders deal with it.", "risk": "medium", "hint": "Safer, maybe.", "out": [
+          { "w": 2, "text": "The centre-back heads it clear. Danger over.", "fx": { "matchMod": { "rating": 0.1 } } },
+          { "w": 1, "text": "Unmarked header from six yards. {M} asks later why {J} didn't come.", "fx": { "matchMod": { "concede": 1, "rating": -0.3 } } }
+        ] }
+      ]
+    },
+    {
+      "id": "mo_free_kick", "cat": "moment", "moment": true, "w": 6, "when": { "pos": ["AM", "CM", "W", "ST", "FB"] },
+      "title": "Key Moment: Free Kick, 22 Metres",
+      "text": "Saturday, 80th minute, 0-0. Free kick, twenty-two metres out, slightly right of centre. {J} and {T} stand over the ball.",
+      "prompt": "Who takes it, and how?",
+      "choices": [
+        { "label": "You: curl it over the wall", "desc": "Top corner or bust.", "risk": "high", "hint": "Spectacular or embarrassing.", "check": { "stat": "shooting", "dc": 62 },
+          "ok": { "text": "Over the wall, dipping, top corner. The keeper doesn't move. That clip will be shown for years.", "fx": { "matchMod": { "goals": 1, "rating": 0.8 }, "followers": 15000, "rep": 0.6 } },
+          "bad": { "text": "The ball hits the wall and bounces harmlessly away. {T} shakes his head.", "fx": { "matchMod": { "rating": -0.2 } } } },
+        { "label": "Disguised pass", "desc": "A training-ground routine.", "risk": "medium", "hint": "Clever, if everyone remembers it.", "check": { "stat": "passing", "dc": 55 },
+          "ok": { "text": "The wall jumps, {J} rolls it short, {T} smashes it in. {M} is out of his seat.", "fx": { "matchMod": { "assists": 1, "rating": 0.5 }, "trust": 3 } },
+          "bad": { "text": "Half the team forgot the routine. The ball rolls to nobody.", "fx": { "matchMod": { "rating": -0.3 } } } },
+        { "label": "Let {Tl} take it", "desc": "He's been practising.", "risk": "low", "hint": "Team player.", "out": [
+          { "w": 1, "text": "{T} scores. {J} jumps on his back.", "fx": { "matchMod": { "rating": 0.1 }, "teammate": { "who": "T", "rel": "ally" } } },
+          { "w": 2, "text": "{T} skies it into the stands.", "fx": {} }
+        ] }
+      ]
+    },
+    {
+      "id": "mo_counter_attack", "cat": "moment", "moment": true, "w": 6, "when": { "pos": ["W", "ST", "AM", "FB"] },
+      "title": "Key Moment: Counter-Attack, Three on Two",
+      "text": "Saturday, 75th minute. A clearance falls to {J} on halfway with open grass ahead. Three attackers against two defenders. The crowd rises.",
+      "prompt": "Decide the counter.",
+      "choices": [
+        { "label": "Run at them yourself", "desc": "Use your pace.", "risk": "medium", "hint": "Pace kills.", "check": { "stat": "pace", "dc": 56 },
+          "ok": { "text": "{J} burns past both defenders and finishes coolly. Sixty metres, one man, one goal.", "fx": { "matchMod": { "goals": 1, "rating": 0.7 }, "followers": 5000 } },
+          "bad": { "text": "{J} runs into the second defender. The counter dies. Two teammates were free.", "fx": { "matchMod": { "rating": -0.4 } } } },
+        { "label": "Play the early ball", "desc": "Slide it into the runner.", "risk": "low", "hint": "Simple football.", "check": { "stat": "passing", "dc": 50 },
+          "ok": { "text": "One pass, perfectly weighted. {T} scores. Football can be simple.", "fx": { "matchMod": { "assists": 1, "rating": 0.4 } } },
+          "bad": { "text": "Overhit. The keeper collects. Groans.", "fx": { "matchMod": { "rating": -0.2 } } } }
+      ]
+    },
+    {
+      "id": "mo_time_wasting", "cat": "moment", "moment": true, "w": 4,
+      "title": "Key Moment: Run the Clock Down?",
+      "text": "Saturday, 89th minute, 1-0 up. The ball goes out for a throw near the corner flag. The bench is screaming at {J} to take his time.",
+      "prompt": "How do you see it out?",
+      "choices": [
+        { "label": "Take your time", "desc": "Slow, slow, slower.", "risk": "medium", "hint": "Booking risk.", "out": [
+          { "w": 2, "text": "{J} takes forty seconds over a throw-in and the clock runs down. Ugly, effective.", "fx": { "matchMod": { "rating": 0.1 } } },
+          { "w": 1, "text": "Yellow card for time-wasting. That's a suspension closer.", "fx": { "matchMod": { "card": "yellow" } } }
+        ] },
+        { "label": "Keep playing", "desc": "Keep the ball, don't hide.", "risk": "medium", "hint": "Brave possession.", "check": { "stat": "dribbling", "dc": 52 },
+          "ok": { "text": "{J} keeps the ball in the corner for a minute, shielding it, winning a free kick. The fans love it.", "fx": { "matchMod": { "rating": 0.3 } } },
+          "bad": { "text": "He loses it. A late counter, a late equaliser. Agony.", "fx": { "matchMod": { "rating": -0.6, "concede": 1 } } } }
+      ]
+    },
+    {
+      "id": "mo_retaliate", "cat": "moment", "moment": true, "w": 5,
+      "title": "Key Moment: Provoked",
+      "text": "Saturday, 55th minute. The opposition's hard man has been kicking {J} all game. Now he stands on his ankle after the whistle and whispers something about his mother.",
+      "prompt": "React?",
+      "choices": [
+        { "label": "Walk away", "desc": "Don't give him what he wants.", "risk": "low", "hint": "Self-control.", "text": "{J} walks away. Ten minutes later, the hard man gets booked for something else. Patience wins.", "fx": { "matchMod": { "rating": 0.2 }, "growth": ["mental"] } },
+        { "label": "Shove him", "desc": "Enough is enough.", "risk": "extreme", "hint": "That's exactly what he wanted.", "out": [
+          { "w": 1, "text": "Both booked. Handbags. The referee warns them both.", "fx": { "matchMod": { "card": "yellow", "rating": -0.2 } } },
+          { "w": 1, "text": "The hard man falls like he's been shot. Red card for {J}. Ten men.", "fx": { "matchMod": { "card": "red" }, "trust": -6 } }
+        ] },
+        { "label": "Tell the referee", "desc": "Let the officials deal with it.", "risk": "low", "hint": "Sometimes they listen.", "out": [
+          { "w": 1, "text": "The referee speaks to the hard man. The kicking stops.", "fx": { "matchMod": { "rating": 0.1 } } },
+          { "w": 1, "text": "The referee waves him away. The kicking continues.", "fx": {} }
+        ] }
+      ]
+    },
+    {
+      "id": "mo_dribble_or_recycle", "cat": "moment", "moment": true, "w": 5, "when": { "pos": ["W", "AM", "FB"] },
+      "title": "Key Moment: One-on-One With the Full-Back",
+      "text": "Saturday, 40th minute. {J} receives on the touchline, one-on-one with the full-back. The crowd wants him to take him on. {M} wants the ball recycled.",
+      "prompt": "Take him on?",
+      "choices": [
+        { "label": "Take him on", "desc": "Step over, burst outside.", "risk": "medium", "hint": "Crowd loves it.", "check": { "stat": "dribbling", "dc": 58 },
+          "ok": { "text": "Step-over, drop of the shoulder, gone. {J}'s cross is headed in. The stadium chants his name.", "fx": { "matchMod": { "assists": 1, "rating": 0.6 }, "followers": 3000 } },
+          "bad": { "text": "The full-back reads it and takes ball and man. Counter-attack. {M} is not happy.", "fx": { "matchMod": { "rating": -0.4 }, "trust": -2 } } },
+        { "label": "Recycle possession", "desc": "Pass back, keep the ball.", "risk": "low", "hint": "Some fans whistle.", "text": "{J} plays it back. Some fans whistle. {M} applauds.", "fx": { "matchMod": { "rating": 0 }, "trust": 1 } }
+      ]
+    },
+    {
+      "id": "mo_long_range", "cat": "moment", "moment": true, "w": 5, "when": { "pos": ["CM", "AM", "DM"] },
+      "title": "Key Moment: Space at Thirty Metres",
+      "text": "Saturday, 67th minute. The ball sits up nicely thirty metres from goal. Nobody closes {J} down. A shot? A switch of play?",
+      "prompt": "Decide.",
+      "choices": [
+        { "label": "Hit it", "desc": "Why not?", "risk": "high", "hint": "Goal of the season, or row Z.", "check": { "stat": "shooting", "dc": 66 },
+          "ok": { "text": "{J} catches it perfectly. It swerves, dips, kisses the underside of the bar and goes in. Pandemonium.", "fx": { "matchMod": { "goals": 1, "rating": 0.9 }, "followers": 20000, "rep": 0.8 } },
+          "bad": { "text": "Row Z. The fans behind the goal duck. {M} turns away.", "fx": { "matchMod": { "rating": -0.3 } } } },
+        { "label": "Switch play", "desc": "Diagonal to the far winger.", "risk": "low", "hint": "Clever football.", "check": { "stat": "passing", "dc": 52 },
+          "ok": { "text": "A forty-metre diagonal lands on the winger's chest. Two touches later it's a goal.", "fx": { "matchMod": { "assists": 1, "rating": 0.4 } } },
+          "bad": { "text": "Slightly overhit, out for a throw.", "fx": {} } }
+      ]
+    },
+    {
+      "id": "mo_injury_time_header", "cat": "moment", "moment": true, "w": 4, "when": { "pos": ["CB", "ST"] },
+      "title": "Key Moment: Injury-Time Set Piece",
+      "text": "Saturday, 94th minute, 0-1 down. Last free kick. {M} sends everyone forward, keeper included. The ball is about to be swung into the box.",
+      "prompt": "Where do you go?",
+      "choices": [
+        { "label": "Near post flick", "desc": "Glance it on.", "risk": "medium", "hint": "Timing is everything.", "check": { "stat": "physical", "dc": 58 },
+          "ok": { "text": "{J} gets there first and glances it into the far corner. 1-1 in the 94th minute. Chaos.", "fx": { "matchMod": { "goals": 1, "rating": 0.8 }, "followers": 8000 } },
+          "bad": { "text": "{J} gets there first and flicks it wide by inches.", "fx": { "matchMod": { "rating": -0.1 } } } },
+        { "label": "Lurk for the second ball", "desc": "Hang back for rebounds.", "risk": "medium", "hint": "Poacher's instinct.", "out": [
+          { "w": 1, "text": "The ball drops from a scramble. {J} volleys it through a forest of legs. Equaliser!", "fx": { "matchMod": { "goals": 1, "rating": 0.7 } } },
+          { "w": 2, "text": "Nothing drops. Final whistle.", "fx": {} }
+        ] }
+      ]
+    },
+    {
+      "id": "mo_captain_speech", "cat": "moment", "moment": true, "w": 3, "when": { "flags": ["leader"] },
+      "title": "Key Moment: The Team Is Collapsing",
+      "text": "Saturday, half-time, 0-2 down. Heads are down in the dressing room. {M} hasn't arrived yet. The players look at each other. Then they look at {J}.",
+      "prompt": "Speak?",
+      "choices": [
+        { "label": "Fire them up", "desc": "Loud, emotional, honest.", "risk": "medium", "hint": "Could turn the game.", "check": { "stat": "mental", "dc": 55 },
+          "ok": { "text": "{J} speaks for one minute. The second half is the best football the team has played all season.", "fx": { "matchMod": { "rating": 0.5 }, "trust": 3, "rep": 0.4 } },
+          "bad": { "text": "The words don't land. The second half is the same as the first.", "fx": { "matchMod": { "rating": -0.1 } } } },
+        { "label": "Stay calm and tactical", "desc": "Fix one thing.", "risk": "low", "hint": "Practical leadership.", "text": "{J} goes round the room fixing one detail with each player. It helps.", "fx": { "matchMod": { "rating": 0.2 }, "tacticalFit": 3 } }
+      ]
+    },
+    {
+      "id": "mo_rain_pitch", "cat": "moment", "moment": true, "w": 4, "when": { "country": ["Indonesia", "Thailand", "Vietnam", "Malaysia", "England", "Scotland", "Netherlands", "Belgium", "Brazil"] },
+      "title": "Key Moment: Monsoon Football",
+      "text": "Saturday. The rain arrives just before kick-off, heavy as stones. Puddles form in the centre circle. The ball stops dead in the water. The referee decides to play on.",
+      "prompt": "Adapt your game?",
+      "choices": [
+        { "label": "Go long and direct", "desc": "Forget passing. Hit the channels.", "risk": "low", "hint": "Ugly but effective.", "text": "{J} keeps it simple and direct. The opposition, still trying to pass, drown.", "fx": { "matchMod": { "rating": 0.3 } } },
+        { "label": "Keep playing your game", "desc": "Quality finds a way.", "risk": "medium", "hint": "Brilliant or ridiculous.", "check": { "stat": "dribbling", "dc": 60 },
+          "ok": { "text": "{J} dribbles through puddles like they aren't there. A masterclass in mud.", "fx": { "matchMod": { "rating": 0.6 }, "followers": 4000 } },
+          "bad": { "text": "The ball stops in a puddle mid-dribble and he falls flat on his face. The clip goes viral, unkindly.", "fx": { "matchMod": { "rating": -0.5 }, "followers": 6000 } } }
+      ]
+    },
+    {
+      "id": "mo_derby_atmosphere", "cat": "moment", "moment": true, "w": 5,
+      "title": "Key Moment: Derby Day Nerves",
+      "text": "Saturday is derby day. The city has talked about nothing else all week. In the tunnel, {J} can hear the noise through the concrete walls. His hands are shaking slightly.",
+      "prompt": "How do you handle the occasion?",
+      "choices": [
+        { "label": "Feed off it", "desc": "Let the noise lift you.", "risk": "medium", "hint": "Adrenaline cuts both ways.", "check": { "stat": "mental", "dc": 55 },
+          "ok": { "text": "{J} plays like the noise is fuel. Every tackle is cheered like a goal.", "fx": { "matchMod": { "rating": 0.6 }, "followers": 5000 } },
+          "bad": { "text": "The first ten minutes are a blur of nerves and misplaced passes. He recovers, but too late.", "fx": { "matchMod": { "rating": -0.4 } } } },
+        { "label": "Block it out", "desc": "Breathing, routine, focus.", "risk": "low", "hint": "Calm and steady.", "text": "{J} breathes slowly, focuses on his first three actions, and plays a calm, steady game.", "fx": { "matchMod": { "rating": 0.2 } } }
+      ]
+    },
+    {
+      "id": "mo_ref_mistake", "cat": "moment", "moment": true, "w": 4,
+      "title": "Key Moment: A Terrible Refereeing Decision",
+      "text": "Saturday, 70th minute. A clear foul on {J} in the box, waved away. Then a soft penalty given at the other end. The players surround the referee. {J} is closest.",
+      "prompt": "What do you say to the referee?",
+      "choices": [
+        { "label": "Nothing — walk away", "desc": "You can't win this argument.", "risk": "low", "hint": "Discipline.", "text": "{J} walks away. The captain does the arguing. {J} stays on the pitch.", "fx": { "matchMod": { "rating": 0.1 } } },
+        { "label": "Let him have it", "desc": "He deserves it.", "risk": "high", "hint": "Yellow, or worse.", "out": [
+          { "w": 2, "text": "Yellow card for dissent. Worth it, he thinks. The club disagrees.", "fx": { "matchMod": { "card": "yellow", "rating": -0.2 } } },
+          { "w": 1, "text": "Red card for dissent. He said one word too many.", "fx": { "matchMod": { "card": "red" }, "trust": -6 } }
+        ] }
+      ]
+    },
+    {
+      "id": "mo_open_goal", "cat": "moment", "moment": true, "w": 4, "when": { "pos": ["ST", "W", "AM", "CM"] },
+      "title": "Key Moment: The Open Goal",
+      "text": "Saturday, 35th minute. The keeper slips. The ball rolls across the six-yard box to {J}. An open goal, two metres away. The easiest chance of his life, which is exactly why it's terrifying.",
+      "prompt": "How do you finish?",
+      "choices": [
+        { "label": "Side-foot, calm", "desc": "Don't overthink it.", "risk": "low", "hint": "Nearly always goes in.", "check": { "stat": "mental", "dc": 30 },
+          "ok": { "text": "Side-foot, back of the net. He celebrates like it was a thirty-yarder. Why not.", "fx": { "matchMod": { "goals": 1, "rating": 0.4 } } },
+          "bad": { "text": "Somehow, impossibly, it hits the post and rolls out. The clip will haunt him.", "fx": { "matchMod": { "rating": -0.8 }, "followers": 15000, "mood": "Broken" } } },
+        { "label": "Smash it", "desc": "Make sure.", "risk": "medium", "hint": "Power can betray you.", "check": { "stat": "shooting", "dc": 40 },
+          "ok": { "text": "He smashes it into the roof of the net. The net nearly comes off its hooks.", "fx": { "matchMod": { "goals": 1, "rating": 0.4 } } },
+          "bad": { "text": "Over the bar from two metres. The internet will not let him forget it.", "fx": { "matchMod": { "rating": -0.9 }, "followers": 20000, "mood": "Broken" } } }
+      ]
+    },
+    {
+      "id": "mo_sub_impact", "cat": "moment", "moment": true, "w": 6, "when": { "role": ["rotation", "bench"] },
+      "title": "Key Moment: Coming Off the Bench",
+      "text": "Saturday, 70th minute, 0-0. {M} calls {J} over. “Twenty minutes. Change the game.” He points at the pitch. The fourth official raises the board.",
+      "prompt": "What's your plan?",
+      "choices": [
+        { "label": "Run at tired legs", "desc": "Use your freshness.", "risk": "medium", "hint": "Directness pays off late.", "check": { "stat": "pace", "dc": 52 },
+          "ok": { "text": "Fresh legs against tired ones. {J} wins a corner, then a free kick, then scores from the rebound. Super sub.", "fx": { "matchMod": { "goals": 1, "rating": 0.7 }, "trust": 4 } },
+          "bad": { "text": "{J} runs a lot and achieves little. 0-0.", "fx": { "matchMod": { "rating": 0 } } } },
+        { "label": "Follow instructions exactly", "desc": "Do what {M} said.", "risk": "low", "hint": "Trust up.", "text": "{J} does exactly what was asked. {M} gives him a thumbs-up at the final whistle.", "fx": { "matchMod": { "rating": 0.2 }, "trust": 3 } }
+      ]
+    },
+    {
+      "id": "mo_crowd_abuse", "cat": "moment", "moment": true, "w": 3,
+      "title": "Key Moment: Abuse From the Away End",
+      "text": "Saturday. Every time {J} takes a corner, the home fans behind the goal scream abuse — personal, ugly, some of it about where he comes from.",
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Report it to the referee", "desc": "Use the protocol.", "risk": "low", "hint": "The right thing. The game may be stopped.", "text": "The referee stops the match and an announcement is made. The abuse stops. {J} plays on, shaken but proud.", "fx": { "matchMod": { "rating": 0.1 }, "rep": 0.8, "followers": 6000 } },
+        { "label": "Answer with your football", "desc": "Silence them.", "risk": "medium", "hint": "Satisfying if it works.", "check": { "stat": "mental", "dc": 55 },
+          "ok": { "text": "{J}'s next corner is headed in. He cups his ear to the stand. Silence.", "fx": { "matchMod": { "assists": 1, "rating": 0.6 }, "followers": 10000 } },
+          "bad": { "text": "The abuse gets into his head. A poor afternoon.", "fx": { "matchMod": { "rating": -0.5 }, "mood": "Angry" } } }
+      ]
+    },
+    {
+      "id": "mo_keeper_sweeper", "cat": "moment", "moment": true, "w": 4, "when": { "pos": ["GK"] },
+      "title": "Key Moment: The Back-Pass Under Pressure",
+      "text": "Saturday, 20th minute. A short back-pass from the centre-back, a little too soft. Their striker is sprinting in. {J} has a second.",
+      "prompt": "Decide.",
+      "choices": [
+        { "label": "Clear it first time", "desc": "Row Z, no risk.", "risk": "low", "hint": "Safe.", "text": "{J} launches it into the stand. Nobody claps. Nobody concedes.", "fx": { "matchMod": { "rating": 0 } } },
+        { "label": "Take a touch, pass out", "desc": "Play the system.", "risk": "high", "hint": "{M} loves it. If it works.", "check": { "stat": "passing", "dc": 55 },
+          "ok": { "text": "Touch, feint, pass. The striker slides past him into the advertising boards. {M} applauds.", "fx": { "matchMod": { "rating": 0.4 }, "trust": 3 } },
+          "bad": { "text": "The striker blocks the pass and walks the ball into the net. Nightmare.", "fx": { "matchMod": { "rating": -1, "concede": 1 } } } }
+      ]
+    },
+    {
+      "id": "mo_fullback_overlap", "cat": "moment", "moment": true, "w": 5, "when": { "pos": ["FB"] },
+      "title": "Key Moment: Overlap or Stay Home?",
+      "text": "Saturday, 60th minute. The winger in front of {J} has the ball and space opening outside him. {J} could overlap — but their quick winger would be behind him.",
+      "prompt": "Go or stay?",
+      "choices": [
+        { "label": "Overlap", "desc": "Join the attack.", "risk": "medium", "hint": "Assist or exposed.", "check": { "stat": "pace", "dc": 54 },
+          "ok": { "text": "{J} bombs on, receives, and whips a cross onto the striker's head. Goal.", "fx": { "matchMod": { "assists": 1, "rating": 0.5 } } },
+          "bad": { "text": "The move breaks down. Their winger sprints into the space {J} left. Goal for them.", "fx": { "matchMod": { "rating": -0.6, "concede": 1 } } } },
+        { "label": "Stay home", "desc": "Defend first.", "risk": "low", "hint": "Solid.", "text": "{J} stays put. Their winger never gets a sniff all afternoon.", "fx": { "matchMod": { "rating": 0.2 }, "tacticalFit": 2 } }
+      ]
+    },
+    {
+      "id": "mo_dm_screen", "cat": "moment", "moment": true, "w": 5, "when": { "pos": ["DM", "CM"] },
+      "title": "Key Moment: Tactical Foul?",
+      "text": "Saturday, 82nd minute, 1-0 up. Their playmaker turns in midfield with three teammates sprinting forward. {J} is the only one who can stop it. A tactical foul means a yellow card.",
+      "prompt": "Take the yellow?",
+      "choices": [
+        { "label": "Take one for the team", "desc": "Bring him down.", "risk": "medium", "hint": "Yellow card, danger stopped.", "text": "{J} pulls him down and accepts the yellow without arguing. The counter is dead. {M} nods.", "fx": { "matchMod": { "card": "yellow", "rating": 0.2 }, "trust": 2 } },
+        { "label": "Try to win it cleanly", "desc": "Read it, intercept.", "risk": "high", "hint": "Clean win or a goal against.", "check": { "stat": "defending", "dc": 58 },
+          "ok": { "text": "{J} reads the pass and intercepts it cleanly. Crisis averted.", "fx": { "matchMod": { "rating": 0.5 } } },
+          "bad": { "text": "{J} dives in and misses. The playmaker slips the pass through. 1-1.", "fx": { "matchMod": { "rating": -0.6, "concede": 1 } } } }
+      ]
+    },
+    {
+      "id": "mo_celebration", "cat": "moment", "moment": true, "w": 3, "when": { "pos": ["ST", "W", "AM"], "form": [6.8, 10] },
+      "title": "Key Moment: Celebrate in Front of the Rivals?",
+      "text": "Saturday. If {J} scores against {R} — the club whose fans have abused him all week — the away end is right there. One celebration could become legend. Or a fine.",
+      "prompt": "If you score, how do you celebrate?",
+      "choices": [
+        { "label": "In front of their fans", "desc": "Finger to the lips.", "risk": "high", "hint": "Legend, or a booking and a riot.", "out": [
+          { "w": 1, "text": "He scores. The finger to the lips in front of their fans becomes a T-shirt. A yellow card, and worth it.", "fx": { "matchMod": { "goals": 1, "card": "yellow", "rating": 0.5 }, "followers": 25000 } },
+          { "w": 1, "text": "He doesn't score. Their fans sing about him all afternoon.", "fx": { "matchMod": { "rating": -0.2 } } }
+        ] },
+        { "label": "With your teammates", "desc": "Keep it classy.", "risk": "low", "hint": "Nothing to regret.", "text": "No goal this time. But {J} plays a composed game, and the trap he avoided is not the story.", "fx": { "matchMod": { "rating": 0.1 } } }
+      ]
+    },
+    {
+      "id": "mo_injury_teammate_stop", "cat": "moment", "moment": true, "w": 3,
+      "title": "Key Moment: Opponent Down Injured",
+      "text": "Saturday, 70th minute. {J} is through on goal — but an opponent is lying on the ground behind him, clutching his head. Sportsmanship says kick it out.",
+      "prompt": "Kick it out or play on?",
+      "choices": [
+        { "label": "Kick it out", "desc": "Some things matter more.", "risk": "low", "hint": "Respect from everyone.", "text": "{J} kicks it out. The injured player is fine. The opposing fans applaud him.", "fx": { "matchMod": { "rating": 0.1 }, "rep": 0.6, "followers": 4000 } },
+        { "label": "Play on", "desc": "The referee hasn't stopped it.", "risk": "medium", "hint": "Legal. Not everyone will agree.", "check": { "stat": "shooting", "dc": 55 },
+          "ok": { "text": "{J} scores. Technically fine. The pundits argue about it for a week.", "fx": { "matchMod": { "goals": 1, "rating": 0.3 }, "rep": -0.4 } },
+          "bad": { "text": "He misses, and looks bad doing it.", "fx": { "matchMod": { "rating": -0.3 }, "rep": -0.3 } } }
+      ]
+    },
+    {
+      "id": "mo_injury_return_cautious", "cat": "moment", "moment": true, "w": 4, "when": { "form": [4, 6.4] },
+      "title": "Key Moment: The First Big Tackle",
+      "text": "Saturday. It's {J}'s first real 50-50 since he lost his confidence. The ball is loose between him and their midfielder. Everyone is watching to see if he'll go in.",
+      "prompt": "Commit?",
+      "choices": [
+        { "label": "Go in full-blooded", "desc": "Prove you're back.", "risk": "medium", "hint": "Confidence, or contact.", "check": { "stat": "physical", "dc": 50 },
+          "ok": { "text": "{J} wins it cleanly. The crowd roars. Something switches on in his head.", "fx": { "matchMod": { "rating": 0.4 }, "form": 0.3, "mood": "Confident" } },
+          "bad": { "text": "He loses it, and the midfielder runs away with the ball.", "fx": { "matchMod": { "rating": -0.3 } } } },
+        { "label": "Hold back", "desc": "Not yet.", "risk": "low", "hint": "Safe, but people notice.", "text": "{J} pulls out. Nobody says anything. Everyone noticed.", "fx": { "matchMod": { "rating": -0.2 } } }
+      ]
+    },
+    {
+      "id": "mo_tired_legs", "cat": "moment", "moment": true, "w": 4, "when": { "pfm": [0, 55] },
+      "title": "Key Moment: Empty Tank, 80th Minute",
+      "text": "Saturday, 80th minute. {J}'s legs are gone. Cramp is creeping into both calves. The bench is warming up a substitute but hasn't made the change.",
+      "prompt": "Ask to come off?",
+      "choices": [
+        { "label": "Ask for the sub", "desc": "A fresh player helps the team.", "risk": "low", "hint": "Honest.", "text": "{J} signals. The sub comes on with fresh legs. {M} pats him on the back.", "fx": { "matchMod": { "rating": 0 } } },
+        { "label": "Push to the end", "desc": "Finish what you started.", "risk": "medium", "hint": "Grit or a costly mistake.", "out": [
+          { "w": 2, "text": "{J} grinds through the last ten minutes on pure will.", "fx": { "matchMod": { "rating": 0.1 }, "pfm": -4 } },
+          { "w": 1, "text": "Exhausted, {J} loses his man on a late corner. Goal against.", "fx": { "matchMod": { "rating": -0.5, "concede": 1 } } }
+        ] }
+      ]
+    },
+    {
+      "id": "mo_through_ball_choice", "cat": "moment", "moment": true, "w": 5, "when": { "pos": ["CM", "AM", "DM"] },
+      "title": "Key Moment: The Killer Pass",
+      "text": "Saturday, 58th minute. {J} turns in midfield. Two options: the safe pass to the full-back, or a curling through ball between two centre-backs to the striker making his run.",
+      "prompt": "Which pass?",
+      "choices": [
+        { "label": "The killer ball", "desc": "Thread the needle.", "risk": "medium", "hint": "Assist of the season, or lost possession.", "check": { "stat": "passing", "dc": 60 },
+          "ok": { "text": "The pass bends between the two centre-backs into the striker's stride. Goal. The pass is what people talk about afterwards.", "fx": { "matchMod": { "assists": 1, "rating": 0.6 } } },
+          "bad": { "text": "Intercepted. A counter-attack. {M} shouts something that rhymes with 'simple'.", "fx": { "matchMod": { "rating": -0.3 } } } },
+        { "label": "The safe pass", "desc": "Keep the ball.", "risk": "low", "hint": "Nobody remembers it.", "text": "Safe pass. Possession kept. The game goes on.", "fx": { "matchMod": { "rating": 0.1 } } }
+      ]
+    },
+    {
+      "id": "mo_ball_boy", "cat": "moment", "moment": true, "w": 2,
+      "title": "Key Moment: The Slow Ball Boy",
+      "text": "Saturday, 87th minute, 0-1 down. The ball goes out for a throw. The home ball boy is suspiciously slow to return it. Every second counts.",
+      "prompt": "How do you react?",
+      "choices": [
+        { "label": "Grab the ball from him", "desc": "Every second counts.", "risk": "high", "hint": "Could go viral for the wrong reasons.", "out": [
+          { "w": 1, "text": "{J} snatches it, takes a quick throw, and the attack leads to an equaliser.", "fx": { "matchMod": { "assists": 1, "rating": 0.4 } } },
+          { "w": 1, "text": "The ball boy falls over dramatically. Yellow card. The clip is played on loop by the home club.", "fx": { "matchMod": { "card": "yellow", "rating": -0.4 }, "rep": -0.3 } }
+        ] },
+        { "label": "Use a spare ball", "desc": "Calm and quick.", "risk": "low", "hint": "Smart.", "text": "{J} grabs the spare ball from the cone and takes the throw. Quick and clean.", "fx": { "matchMod": { "rating": 0.1 } } }
+      ]
+    },
+    {
+      "id": "mo_second_yellow_danger", "cat": "moment", "moment": true, "w": 3, "when": { "pos": ["CB", "DM", "FB", "CM"] },
+      "title": "Key Moment: On a Yellow, Facing Their Fastest Player",
+      "text": "Saturday, 65th minute. {J} is already on a yellow card. Their fastest winger is running straight at him. One mistimed tackle and he's off.",
+      "prompt": "How do you defend him?",
+      "choices": [
+        { "label": "Stay on your feet", "desc": "Show him wide, no tackles.", "risk": "medium", "hint": "Careful defending.", "check": { "stat": "pace", "dc": 52 },
+          "ok": { "text": "Patience, positioning, no fouls. The winger gives up and passes backwards.", "fx": { "matchMod": { "rating": 0.3, "card": "yellow" } } },
+          "bad": { "text": "Too careful: the winger skips past and crosses. Goal.", "fx": { "matchMod": { "rating": -0.4, "card": "yellow", "concede": 1 } } } },
+        { "label": "Ask to be subbed", "desc": "Before it goes wrong.", "risk": "low", "hint": "Sensible.", "text": "{J} catches {M}'s eye. He's replaced two minutes later. No second yellow.", "fx": { "matchMod": { "rating": 0, "card": "yellow" } } }
+      ]
+    },
+    {
+      "id": "mo_young_debutant_pass", "cat": "moment", "moment": true, "w": 3, "when": { "age": [24, 40] },
+      "title": "Key Moment: A Debutant Is Free",
+      "text": "Saturday, 88th minute, 3-0 up. {J} is through on goal — but {K}, the seventeen-year-old debutant who came on five minutes ago, is unmarked beside him.",
+      "prompt": "Score yourself, or give the kid his first goal?",
+      "choices": [
+        { "label": "Square it to the kid", "desc": "A memory for life.", "risk": "low", "hint": "Pure class.", "check": { "stat": "passing", "dc": 40 },
+          "ok": { "text": "{K} taps it in and bursts into tears. {J} lifts him off the ground. The fans give {J} a standing ovation.", "fx": { "matchMod": { "assists": 1, "rating": 0.4 }, "rep": 0.8, "followers": 10000 } },
+          "bad": { "text": "The kid is so surprised he miskicks it. Everyone laughs, including {K}.", "fx": { "matchMod": { "rating": 0.1 }, "rep": 0.3 } } },
+        { "label": "Score yourself", "desc": "Goals are goals.", "risk": "low", "hint": "Your stats.", "check": { "stat": "shooting", "dc": 45 },
+          "ok": { "text": "{J} scores. 4-0. {K} high-fives him, trying not to look disappointed.", "fx": { "matchMod": { "goals": 1, "rating": 0.3 } } },
+          "bad": { "text": "{J} misses. {K} stares at him.", "fx": { "matchMod": { "rating": -0.2 } } } }
+      ]
+    },
+    {
+      "id": "mo_handball", "cat": "moment", "moment": true, "w": 3, "when": { "pos": ["ST", "W", "AM"] },
+      "title": "Key Moment: The Ball Hits Your Hand",
+      "text": "Saturday, 75th minute. A scramble in the box. The ball bounces off {J}'s arm and drops perfectly at his feet, two metres from goal. The referee didn't see it. Nobody saw it, except {J}.",
+      "prompt": "Score or stop?",
+      "choices": [
+        { "label": "Score", "desc": "Not your job to referee.", "risk": "high", "hint": "VAR exists. So does your conscience.", "out": [
+          { "w": 1, "text": "Goal. VAR checks, and somehow misses it. {J} celebrates quietly and doesn't sleep well.", "fx": { "matchMod": { "goals": 1, "rating": 0.3 } } },
+          { "w": 1, "text": "Goal — disallowed by VAR for handball. He's booked for good measure.", "fx": { "matchMod": { "card": "yellow", "rating": -0.3 } } }
+        ] },
+        { "label": "Stop and admit it", "desc": "Tell the referee.", "risk": "low", "hint": "Rare honesty.", "text": "{J} stops, raises his hand, tells the referee. Free kick out. Fair play award nominations follow.", "fx": { "matchMod": { "rating": 0 }, "rep": 1.2, "followers": 15000 } }
+      ]
+    },
+    {
+      "id": "mo_rabona", "cat": "moment", "moment": true, "w": 2, "when": { "pos": ["W", "AM", "ST"], "form": [7, 10] },
+      "title": "Key Moment: The Rabona Cross",
+      "text": "Saturday, 3-0 up, 80th minute. {J} is on the right touchline, on his wrong foot. A rabona cross is possible. Unnecessary. Beautiful.",
+      "prompt": "Showboat?",
+      "choices": [
+        { "label": "Rabona", "desc": "Why not?", "risk": "high", "hint": "Magic or mockery.", "check": { "stat": "dribbling", "dc": 64 },
+          "ok": { "text": "The rabona cross lands on the striker's forehead. 4-0. The clip reaches fifty million people.", "fx": { "matchMod": { "assists": 1, "rating": 0.6 }, "followers": 40000 } },
+          "bad": { "text": "The rabona sails out for a goal kick. {M} subs him off immediately.", "fx": { "matchMod": { "rating": -0.5 }, "trust": -4, "followers": 10000 } } },
+        { "label": "Simple cross", "desc": "Professional.", "risk": "low", "hint": "Boring.", "text": "Normal cross, cleared. Nobody remembers it.", "fx": {} }
+      ]
+    },
+    {
+      "id": "mo_cb_aerial_duel_striker", "cat": "moment", "moment": true, "w": 4, "when": { "pos": ["CB"] },
+      "title": "Key Moment: The Target Man",
+      "text": "Saturday. The opposition striker is huge, experienced and dirty. All week the analysts showed clips of him elbowing defenders. First long ball: he's coming for {J}.",
+      "prompt": "Set the tone?",
+      "choices": [
+        { "label": "Let him know you're there", "desc": "A firm first challenge.", "risk": "medium", "hint": "Respect early, or a card.", "check": { "stat": "physical", "dc": 55 },
+          "ok": { "text": "A hard, fair first challenge. The striker looks at {J} differently after that. He doesn't win another header.", "fx": { "matchMod": { "rating": 0.5 } } },
+          "bad": { "text": "Too hard, too early. Yellow card in the fifth minute. A long afternoon.", "fx": { "matchMod": { "rating": -0.2, "card": "yellow" } } } },
+        { "label": "Be smart, use your body", "desc": "Position, not power.", "risk": "low", "hint": "Clever defending.", "check": { "stat": "defending", "dc": 52 },
+          "ok": { "text": "{J} never lets him jump cleanly. Frustration, then a booking — for the striker.", "fx": { "matchMod": { "rating": 0.4 } } },
+          "bad": { "text": "The striker wins everything in the air. A tough day.", "fx": { "matchMod": { "rating": -0.3 } } } }
+      ]
+    },
+    {
+      "id": "mo_injury_time_winner", "cat": "moment", "moment": true, "w": 4, "when": { "pos": ["ST", "W", "AM", "CM"] },
+      "title": "Key Moment: 93rd Minute, Ball at Your Feet",
+      "text": "Saturday, 93rd minute, 1-1. A loose ball on the edge of the box falls to {J}. Defenders closing in. One touch to set, or hit it first time?",
+      "prompt": "Decide.",
+      "choices": [
+        { "label": "First time", "desc": "No time to think.", "risk": "high", "hint": "Instinct.", "check": { "stat": "shooting", "dc": 60 },
+          "ok": { "text": "First time, low, through a crowd of legs, into the corner. 93rd minute winner. The bench empties onto the pitch.", "fx": { "matchMod": { "goals": 1, "rating": 0.9 }, "followers": 15000, "rep": 0.6 } },
+          "bad": { "text": "It hits a defender and loops away. Full time. A draw.", "fx": {} } },
+        { "label": "Take a touch", "desc": "Set yourself.", "risk": "medium", "hint": "Better shot, less time.", "check": { "stat": "dribbling", "dc": 58 },
+          "ok": { "text": "A touch away from the defender, then a curler into the top corner. Winner.", "fx": { "matchMod": { "goals": 1, "rating": 0.9 }, "followers": 15000 } },
+          "bad": { "text": "The touch is too heavy. A defender clears. Full time.", "fx": { "matchMod": { "rating": -0.2 } } } }
+      ]
+    },
+    {
+      "id": "mo_set_piece_routine", "cat": "moment", "moment": true, "w": 4, "when": { "flags": ["set_piece_taker"] },
+      "title": "Key Moment: Your Free Kick",
+      "text": "Saturday, 63rd minute. A free kick in {J}'s favourite spot, just left of the D. He's the club's set-piece taker now. The wall shuffles. The keeper shouts.",
+      "prompt": "Where?",
+      "choices": [
+        { "label": "Keeper's side", "desc": "Surprise him.", "risk": "high", "hint": "Bold.", "check": { "stat": "shooting", "dc": 60 },
+          "ok": { "text": "Keeper's side, top corner, the keeper still taking a step the wrong way. Perfect.", "fx": { "matchMod": { "goals": 1, "rating": 0.7 }, "followers": 8000 } },
+          "bad": { "text": "The keeper isn't fooled. Easy save.", "fx": { "matchMod": { "rating": -0.1 } } } },
+        { "label": "Over the wall", "desc": "Your trademark.", "risk": "medium", "hint": "Practised a thousand times.", "check": { "stat": "shooting", "dc": 55 },
+          "ok": { "text": "Over the wall, dipping, in. Trademark. Signature. His.", "fx": { "matchMod": { "goals": 1, "rating": 0.7 } } },
+          "bad": { "text": "Into the wall.", "fx": {} } }
+      ]
+    },
+    {
+      "id": "mo_penalty_taker_flag", "cat": "moment", "moment": true, "w": 5, "when": { "flags": ["penalty_taker"] },
+      "title": "Key Moment: Penalty, and It's Yours",
+      "text": "Saturday, 70th minute. Penalty. {J} is the designated taker now. He picks up the ball and the keeper starts his mind games: pointing, waving, smiling.",
+      "prompt": "Your routine?",
+      "choices": [
+        { "label": "Your usual corner", "desc": "Trust the routine.", "risk": "medium", "hint": "Scouts have probably seen it.", "check": { "stat": "shooting", "dc": 54 },
+          "ok": { "text": "Usual corner. Usual result. {J} doesn't even celebrate.", "fx": { "matchMod": { "goals": 1, "rating": 0.5 } } },
+          "bad": { "text": "The keeper has done his homework. Saved.", "fx": { "matchMod": { "rating": -0.7 } } } },
+        { "label": "Change it up", "desc": "Go the other way this time.", "risk": "medium", "hint": "Unpredictable.", "check": { "stat": "mental", "dc": 54 },
+          "ok": { "text": "The keeper dives to {J}'s usual corner. The ball goes the other way.", "fx": { "matchMod": { "goals": 1, "rating": 0.5 } } },
+          "bad": { "text": "The change of routine throws {J}'s own rhythm. Wide.", "fx": { "matchMod": { "rating": -0.7 } } } }
+      ]
+    },
+    {
+      "id": "mo_team_down_to_ten", "cat": "moment", "moment": true, "w": 3,
+      "title": "Key Moment: Down to Ten Men",
+      "text": "Saturday, 40th minute. A teammate is sent off. Ten men, a whole half to survive. {M} is changing the shape and shouting at {J} to adjust.",
+      "prompt": "What role do you take?",
+      "choices": [
+        { "label": "Run for two", "desc": "Cover every blade of grass.", "risk": "medium", "hint": "Heroic effort.", "text": "{J} runs fourteen kilometres. The ten men hold on. He can't walk properly for two days.", "fx": { "matchMod": { "rating": 0.5 }, "pfm": -8, "trust": 3 } },
+        { "label": "Stay disciplined", "desc": "Hold your new position.", "risk": "low", "hint": "Tactical maturity.", "text": "{J} holds the new shape perfectly. The analysts mention it on Monday.", "fx": { "matchMod": { "rating": 0.3 }, "tacticalFit": 4 } }
+      ]
+    },
+    {
+      "id": "mo_gk_distribution_counter", "cat": "moment", "moment": true, "w": 3, "when": { "pos": ["GK"] },
+      "title": "Key Moment: Catch and Launch",
+      "text": "Saturday, 80th minute. {J} catches a corner. The opposition has committed everyone forward. One quick throw could start a counter.",
+      "prompt": "Quick throw or slow it down?",
+      "choices": [
+        { "label": "Launch the counter", "desc": "Quick throw to the winger.", "risk": "medium", "hint": "Assist chance.", "check": { "stat": "passing", "dc": 52 },
+          "ok": { "text": "A sixty-metre throw to the winger, who scores. An assist for the goalkeeper.", "fx": { "matchMod": { "assists": 1, "rating": 0.6 } } },
+          "bad": { "text": "The throw is intercepted. Danger again.", "fx": { "matchMod": { "rating": -0.2 } } } },
+        { "label": "Hold it, slow the game", "desc": "Control.", "risk": "low", "hint": "Safe.", "text": "{J} holds the ball, lets the team reorganise. Calm.", "fx": { "matchMod": { "rating": 0.1 } } }
+      ]
+    },
+    {
+      "id": "mo_scrappy_goal", "cat": "moment", "moment": true, "w": 3, "when": { "pos": ["ST"] },
+      "title": "Key Moment: Shin, Knee, Anything",
+      "text": "Saturday, 55th minute. A goalmouth scramble. The ball pinballs between legs. It might hit {J}. It might not. He can throw himself at it.",
+      "prompt": "Throw yourself in?",
+      "choices": [
+        { "label": "Dive in head first", "desc": "Brave.", "risk": "high", "hint": "Goal, or a boot in the face.", "out": [
+          { "w": 2, "text": "Diving header from six inches. Ugly, brave, a goal.", "fx": { "matchMod": { "goals": 1, "rating": 0.5 } } },
+          { "w": 1, "text": "A boot to the head. Concussion protocol. Off.", "fx": { "matchMod": { "rating": -0.2, "injury": "minor" } } }
+        ] },
+        { "label": "Wait for it to drop", "desc": "Poacher patience.", "risk": "medium", "hint": "It might not drop.", "out": [
+          { "w": 1, "text": "It drops to him. Tap-in.", "fx": { "matchMod": { "goals": 1, "rating": 0.4 } } },
+          { "w": 1, "text": "The keeper smothers it. Nothing.", "fx": {} }
+        ] }
+      ]
+    },
+    {
+      "id": "mo_fan_on_pitch", "cat": "moment", "moment": true, "w": 2,
+      "title": "Key Moment: A Fan Runs Onto the Pitch",
+      "text": "Saturday, 60th minute. A teenage fan jumps the barrier and sprints toward {J} wanting a selfie. Stewards are chasing him. He's crying with excitement.",
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Take the selfie", "desc": "Make his day.", "risk": "low", "hint": "Viral kindness. Officials may frown.", "text": "{J} takes the selfie and walks him to the stewards with an arm round his shoulder. The clip is everywhere.", "fx": { "matchMod": { "rating": 0 }, "followers": 30000, "rep": 0.5 } },
+        { "label": "Point him back to the stewards", "desc": "Safety first.", "risk": "low", "hint": "Correct, less beautiful.", "text": "{J} gently steers him back to the stewards. Afterwards, he sends the boy a signed shirt.", "fx": { "matchMod": { "rating": 0 }, "followers": 5000 } }
+      ]
+    },
+    {
+      "id": "mo_keeper_rushes_wrongly", "cat": "moment", "moment": true, "w": 3, "when": { "pos": ["ST", "W", "AM"] },
+      "title": "Key Moment: The Keeper Is Off His Line",
+      "text": "Saturday, 65th minute. {J} receives forty metres out and glances up. The keeper is a long way off his line.",
+      "prompt": "Try the lob?",
+      "choices": [
+        { "label": "Chip him", "desc": "Forty metres.", "risk": "high", "hint": "Goal of the year, or a turnover.", "check": { "stat": "shooting", "dc": 64 },
+          "ok": { "text": "The chip floats over the backpedalling keeper and drops under the bar. Goal of the year contender.", "fx": { "matchMod": { "goals": 1, "rating": 0.9 }, "followers": 30000, "rep": 0.8 } },
+          "bad": { "text": "Over the bar by a metre. So close it's somehow worse.", "fx": { "matchMod": { "rating": -0.2 } } } },
+        { "label": "Drive forward", "desc": "Keep possession and attack.", "risk": "low", "hint": "Sensible.", "text": "{J} drives forward and wins a corner. Nothing more.", "fx": { "matchMod": { "rating": 0.1 } } }
+      ]
+    },
+    {
+      "id": "mo_nt_anthem", "cat": "moment", "moment": true, "w": 3, "when": { "nt": ["called", "regular"] },
+      "title": "Key Moment: Scouts in the Stand",
+      "text": "Saturday. The national team coach is in the stand, according to the stadium announcer. Every player on the pitch knows it. Some will try too hard.",
+      "prompt": "Adjust your game?",
+      "choices": [
+        { "label": "Do your job", "desc": "Exactly what made them notice you.", "risk": "low", "hint": "Consistency.", "text": "{J} plays his normal, intelligent game. Afterwards, his phone has a message from the national team staff.", "fx": { "matchMod": { "rating": 0.3 }, "rep": 0.5 } },
+        { "label": "Go for something special", "desc": "Make them remember.", "risk": "high", "hint": "Spectacular or sloppy.", "out": [
+          { "w": 1, "text": "A moment of genius: a goal that would make anyone's highlight reel.", "fx": { "matchMod": { "goals": 1, "rating": 0.6 }, "rep": 1 } },
+          { "w": 1, "text": "Trying too hard, {J} loses the ball repeatedly. The national coach leaves at half-time.", "fx": { "matchMod": { "rating": -0.5 } } }
+        ] }
+      ]
+    }
+  ]
+}

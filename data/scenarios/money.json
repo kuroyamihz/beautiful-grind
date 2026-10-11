@@ -1,0 +1,458 @@
+{
+  "scenarios": [
+    {
+      "id": "mn_agent_approach", "cat": "money", "w": 5, "when": { "agent": false, "rep": [5, 100] },
+      "title": "Super-Agent {Al} Courts {J}",
+      "text": "Expensive watch, cheap cologne, a laminated folder of players he says he has “placed” in Europe and the Gulf. {A} slides a contract across the table: 10% of everything, exclusive, three years. “Sign with me and you won't be here in two years.”",
+      "prompt": "Sign with {A}?",
+      "choices": [
+        { "label": "Sign now", "desc": "Opportunity knocks once.", "risk": "high", "hint": "Could open doors — or be a shark.", "out": [
+          { "w": 9, "text": "Six weeks in, {A}'s phone is always “in a meeting”. The small print says 15%, not 10%.", "fx": { "agent": { "who": "A", "quality": [15, 35], "cut": 15 }, "mood": "Frustrated" } },
+          { "w": 11, "text": "{A} is the real thing: three calls a day, every scout's number, a plan.", "fx": { "agent": { "who": "A", "quality": [60, 85], "cut": 10 } } }
+        ] },
+        { "label": "Check his references", "desc": "Call players he claims to represent.", "risk": "low", "hint": "Takes time. Reveals the truth.", "out": [
+          { "w": 1, "text": "Two of the “clients” have never heard of him. {J} deletes the number and finds a smaller, honest agent through a former coach.", "fx": { "agent": { "who": "T2", "quality": [45, 65], "cut": 8 } } },
+          { "w": 1, "text": "The references check out. {J} signs, with a lawyer reading every line first.", "fx": { "agent": { "who": "A", "quality": [65, 85], "cut": 9 }, "wealth": -150 } }
+        ] },
+        { "label": "Stay as you are", "desc": "No agent for now.", "risk": "low", "hint": "Nothing changes.", "text": "{J} says no thanks. {A} smiles like he's heard that before.", "fx": {} }
+      ]
+    },
+    {
+      "id": "mn_agent_upgrade", "cat": "money", "w": 4, "when": { "agent": true, "rep": [30, 100] },
+      "title": "A Top Agency Wants to Represent {J}",
+      "text": "One of the world's biggest football agencies sends a representative: glossy brochures, offices on three continents, clients you've seen on television. They want {J}. His current agent doesn't know yet.",
+      "prompt": "Switch agents?",
+      "choices": [
+        { "label": "Switch", "desc": "Bigger reach, bigger deals.", "risk": "medium", "hint": "Your current agent will be hurt, maybe litigious.", "out": [
+          { "w": 3, "text": "The new agency moves fast: two sponsor calls in the first week. The old agent sends one bitter message.", "fx": { "agent": { "who": "A", "quality": [80, 95], "cut": 10 }, "rep": 0.5 } },
+          { "w": 1, "text": "The old agent's contract has a release fee nobody mentioned. Lawyers get involved.", "fx": { "agent": { "who": "A", "quality": [80, 95], "cut": 10 }, "wealth": -2000, "mood": "Frustrated" } }
+        ] },
+        { "label": "Stay loyal", "desc": "He was there at the start.", "risk": "low", "hint": "Loyalty.", "text": "{J} stays with his agent. When the agent hears about the offer, he works twice as hard.", "fx": { "mood": "Focused" } }
+      ]
+    },
+    {
+      "id": "mn_agent_shady_deal", "cat": "money", "w": 3, "when": { "agent": true },
+      "title": "{J}'s Agent Has a Side Deal",
+      "text": "{J} finds out his agent has been taking a secret fee from a club for steering him toward a transfer he didn't want. The email was forwarded by mistake.",
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Fire him", "desc": "Trust is gone.", "risk": "medium", "hint": "Clean break, short-term chaos.", "text": "{J} fires him by phone. Then he spends two weeks finding someone honest. The new agent costs less and calls more.", "fx": { "agent": { "who": "A", "quality": [50, 75], "cut": 8 }, "growth": ["mental"] } },
+        { "label": "Confront him, stay", "desc": "Demand transparency.", "risk": "medium", "hint": "He'll be careful now. Or better at hiding.", "text": "The agent apologises at length and cuts his fee. {J} doesn't fully trust him again.", "fx": { "mood": "Anxious" } }
+      ]
+    },
+    {
+      "id": "mn_sponsorship_offer", "cat": "money", "w": 5, "when": { "rep": [8, 100] },
+      "vars": { "deal": ["endorse", 800] },
+      "title": "{J} Offered a Sponsorship Deal",
+      "text": [
+        "A sportswear brand wants {J}'s face on billboards: {deal} a year, two years, four content days and a boot clause. His agent says it's fair. His agent also says it could be more.",
+        "A mobile phone brand wants {J} for a regional campaign: {deal} a year, two years. The advert involves him doing tricks with a phone instead of a ball."
+      ],
+      "prompt": "Sponsorship offer on the table.",
+      "choices": [
+        { "label": "Accept", "desc": "{deal} a year for two years.", "risk": "low", "hint": "Guaranteed money and exposure.", "text": "{J} signs. A week later his face is ten metres tall on a billboard near his parents' house.", "fx": { "endorsement": { "brand": "a regional brand", "value": "deal", "years": 2 }, "followers": 6000, "parental": 3 } },
+        { "label": "Hold out for more", "desc": "Make them sweat.", "risk": "medium", "hint": "A better deal — or no deal.", "check": { "stat": "agent", "dc": 55 },
+          "ok": { "text": "The brand comes back with 40% more. {J}'s agent is insufferable for days.", "fx": { "endorsement": { "brand": "a regional brand", "value": "deal*1.4", "years": 2 }, "followers": 6000 } },
+          "bad": { "text": "The brand signs a teammate instead. His billboard goes up at the training-ground roundabout.", "fx": { "mood": "Frustrated" } } }
+      ]
+    },
+    {
+      "id": "mn_boot_deal", "cat": "money", "w": 4, "when": { "rep": [20, 100], "pos": ["ST", "W", "AM", "CM"] },
+      "vars": { "deal": ["endorse", 3000] },
+      "title": "Major Boot Brand Wants {J}",
+      "text": "One of the world's big boot brands offers {J} a personalised boot deal: his own colourway, his name on the tongue, {deal} a year. The catch: three years exclusive, and his current boots are much more comfortable.",
+      "prompt": "Sign the boot deal?",
+      "choices": [
+        { "label": "Sign", "desc": "Your own boots!", "risk": "medium", "hint": "Money and status. Blister risk.", "out": [
+          { "w": 3, "text": "The first pair with his name on them arrives in a box like a jewel. He wears them to bed the first night.", "fx": { "endorsement": { "brand": "a global boot brand", "value": "deal", "years": 3 }, "followers": 20000, "rep": 0.5 } },
+          { "w": 1, "text": "The new boots give him blisters for a month. He plays through it; the money helps.", "fx": { "endorsement": { "brand": "a global boot brand", "value": "deal", "years": 3 }, "pfm": -5 } }
+        ] },
+        { "label": "Decline", "desc": "Comfort over cash.", "risk": "low", "hint": "Your feet thank you.", "text": "{J} keeps his old boots. His agent sighs dramatically.", "fx": {} }
+      ]
+    },
+    {
+      "id": "mn_investment_friend", "cat": "money", "w": 4, "when": { "wealth": [4000, 999999999] }, "vars": { "amount": ["wealthPct", 30, 500] },
+      "title": "Friend Pitches {J} an Investment",
+      "text": [
+        "A childhood friend with a new car and a pitch deck: a chain of coffee shops. “Guaranteed returns, bro. Everyone's in.” He wants {amount}.",
+        "A teammate's cousin is raising money for a crypto token “backed by footballers”. The website is very shiny. He wants {amount}."
+      ],
+      "prompt": "Invest {amount}?",
+      "choices": [
+        { "label": "Invest", "desc": "Back your friend.", "risk": "high", "hint": "Could pay off. Could vanish.", "text": "{J} transfers the money. His friend sends a long voice note full of fire emojis.", "fx": { "wealth": "-amount", "chain": { "id": "mn_investment_result", "in": [10, 20] } } },
+        { "label": "Decline", "desc": "Money stays in the bank.", "risk": "low", "hint": "Friend may sulk.", "text": "The friend stops replying to messages for a while.", "fx": {} }
+      ]
+    },
+    {
+      "id": "mn_investment_result", "cat": "money", "chainOnly": true, "vars": { "amount": ["wealthPct", 30, 500] },
+      "title": "{J}'s Investment: The Verdict",
+      "text": "The investment {J} made months ago has finally reached a verdict.",
+      "choices": [
+        { "label": "Check the account", "risk": "high", "hint": "Fingers crossed.", "out": [
+          { "w": 35, "text": "Gone. All of it. So is the friend: his number is disconnected.", "fx": { "mood": "Angry" } },
+          { "w": 20, "text": "It limps along. {J} gets his money back and decides that's a win.", "fx": { "wealth": "amount" } },
+          { "w": 45, "text": "It actually works. The return lands: a healthy profit on what he put in.", "fx": { "wealth": "amount*1.7", "mood": "Confident" } }
+        ] }
+      ]
+    },
+    {
+      "id": "mn_car", "cat": "money", "w": 4, "when": { "wealth": [2500, 999999999] }, "vars": { "price": ["wealthPct", 35, 200] },
+      "title": "{J} Eyes a New Car",
+      "text": "Half the squad drives something that roars. {J} still drives the car his father helped him buy. The dealership has a matte black one for {price}, “special price for footballers”.",
+      "prompt": "Buy the car?",
+      "choices": [
+        { "label": "Buy it", "desc": "You earned this.", "risk": "medium", "hint": "Big dent in savings. Instagram loves it.", "text": "The car photo gets more likes than his last goal. His mother asks how much it cost and he lies.", "fx": { "wealth": "-price", "followers": 4000, "rep": -0.2, "lifestyle": 0.1, "mood": "Confident", "flag": "bought_car" } },
+        { "label": "Keep the old one", "desc": "Money is for later.", "risk": "low", "hint": "Some teammates will tease you.", "text": "The old car survives another season. So do his savings.", "fx": {} }
+      ]
+    },
+    {
+      "id": "mn_watch", "cat": "money", "w": 3, "when": { "wealth": [10000, 999999999] }, "vars": { "price": ["wealthPct", 15, 500] },
+      "title": "The Watch Everyone Has",
+      "text": "In the dressing room, watches are a language. The senior players all wear the same Swiss brand. A jeweller who “looks after footballers” has one for {J}: {price}.",
+      "prompt": "Buy it?",
+      "choices": [
+        { "label": "Buy it", "desc": "Join the club.", "risk": "medium", "hint": "Status costs.", "text": "{J} wears it to training. Three teammates notice immediately. His bank balance notices too.", "fx": { "wealth": "-price", "teammate": { "who": "T", "rel": "ally" }, "lifestyle": 0.1 } },
+        { "label": "No", "desc": "Your phone tells the time.", "risk": "low", "hint": "Sensible.", "text": "{J} declines. The jeweller leaves a card “for when you're ready”.", "fx": {} }
+      ]
+    },
+    {
+      "id": "mn_property", "cat": "money", "w": 3, "when": { "wealth": [20000, 999999999] }, "vars": { "price": ["wealthPct", 50, 3000] },
+      "title": "Investment Property Opportunity",
+      "text": "A financial adviser recommended by the club suggests buying an apartment to rent out: steady income, a long-term asset. The price is {price}.",
+      "prompt": "Buy property?",
+      "choices": [
+        { "label": "Buy it", "desc": "Long-term thinking.", "risk": "low", "hint": "Steady income for years.", "text": "{J} buys the apartment. The first rent payment arrives the next month. Boring, beautiful money.", "fx": { "wealth": "-price", "monthlySupport": "-price*0.008", "flag": "landlord" } },
+        { "label": "Keep cash", "desc": "Flexibility.", "risk": "low", "hint": "Safe.", "text": "{J} keeps his savings liquid.", "fx": {} }
+      ]
+    },
+    {
+      "id": "mn_tax_problem", "cat": "money", "w": 3, "when": { "wealth": [5000, 999999999] }, "vars": { "bill": ["wealthPct", 12, 300] },
+      "title": "Tax Authority Sends {J} a Letter",
+      "text": "A letter from the tax office: an error in last year's declaration, an unpaid amount of {bill}, plus a fine if not paid in thirty days. His agent says the accountant made the mistake. The accountant says the agent did.",
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Pay immediately", "desc": "No scandals.", "risk": "low", "hint": "Clean.", "text": "{J} pays. He also hires a new accountant.", "fx": { "wealth": "-bill" } },
+        { "label": "Fight it with lawyers", "desc": "It wasn't your fault.", "risk": "medium", "hint": "Could save money — or become a headline.", "out": [
+          { "w": 1, "text": "The lawyers prove the mistake was the tax office's. Nothing to pay.", "fx": { "wealth": -150 } },
+          { "w": 1, "text": "The case leaks to the press: “{J} in tax dispute.” He pays anyway, plus the lawyers.", "fx": { "wealth": "-bill*1.3", "rep": -0.8 } }
+        ] }
+      ]
+    },
+    {
+      "id": "mn_gambling_temptation", "cat": "money", "w": 2, "when": { "age": [18, 30] },
+      "title": "Teammates Gamble on the Team Bus",
+      "text": "Online casino apps are everywhere in the dressing room. A teammate shows {J} how much he won last night. It's more than {J} earns in a month.",
+      "prompt": "Try it?",
+      "choices": [
+        { "label": "Try a small bet", "desc": "Just once.", "risk": "high", "hint": "It's never just once.", "out": [
+          { "w": 1, "text": "{J} loses a small amount, feels sick, and deletes the app. Lesson learned cheaply.", "fx": { "wealth": -100 } },
+          { "w": 1, "text": "{J} wins. Then bets again. Then loses more than he won. The app stays on his phone.", "fx": { "wealth": -600, "flag": "gambling", "mood": "Anxious" } }
+        ] },
+        { "label": "Never", "desc": "You've seen what it does.", "risk": "low", "hint": "Wise.", "text": "{J} shakes his head. He's seen what it did to his uncle.", "fx": {} }
+      ]
+    },
+    {
+      "id": "mn_gambling_spiral", "cat": "money", "w": 6, "when": { "flags": ["gambling"] }, "vars": { "loss": ["wealthPct", 20, 300] },
+      "title": "{J}'s Gambling Is Getting Worse",
+      "text": "3am, lying in bed, refreshing a betting app. {J} has lost {loss} this month. He's been chasing losses. He's started hiding his phone from his teammates.",
+      "fx": { "wealth": "-loss", "mood": "Anxious", "pfm": -4 },
+      "prompt": "Get help?",
+      "choices": [
+        { "label": "Tell the club, get help", "desc": "The club has a programme.", "risk": "low", "hint": "Hard and right.", "text": "{J} tells the club doctor. A specialist, a self-exclusion order, weekly sessions. It's the hardest thing he's done. The app is gone.", "fx": { "unflag": "gambling", "growth": ["mental"], "mood": "Relieved" } },
+        { "label": "Quit on your own", "desc": "Delete the app.", "risk": "medium", "hint": "Willpower alone is hard.", "out": [
+          { "w": 1, "text": "He deletes it and it works. He doesn't miss it after a month.", "fx": { "unflag": "gambling", "mood": "Relieved" } },
+          { "w": 1, "text": "He reinstalls it on day four.", "fx": { "mood": "Numb" } }
+        ] }
+      ]
+    },
+    {
+      "id": "mn_wage_dispute", "cat": "money", "w": 3, "when": { "role": ["starter"], "contractYears": [1, 5] },
+      "title": "{J} Learns a Worse Player Earns More",
+      "text": "A teammate shows {J} his payslip by accident: a player who barely plays earns almost double what {J} does. {J} is the club's best player this season.",
+      "prompt": "Ask for a raise?",
+      "choices": [
+        { "label": "Ask the board directly", "desc": "Make the case with numbers.", "risk": "medium", "hint": "Boards respect leverage, not feelings.", "check": { "stat": "agent", "dc": 50 },
+          "ok": { "text": "The board reviews {J}'s contract and offers a raise. Not double, but meaningful.", "fx": { "wealth": 1500, "trust": 1, "mood": "Confident" } },
+          "bad": { "text": "The board says contracts are contracts. {J} leaves the meeting with nothing but resentment.", "fx": { "mood": "Frustrated", "trust": -2 } } },
+        { "label": "Let it go", "desc": "Your time will come.", "risk": "low", "hint": "Patience.", "text": "{J} lets it go. His agent writes it down for the next negotiation.", "fx": {} }
+      ]
+    },
+    {
+      "id": "mn_late_wages", "cat": "money", "w": 4, "when": { "country": ["Indonesia", "Thailand", "Vietnam", "Malaysia", "India", "Greece", "Turkey", "Nigeria", "Ghana", "Bolivia", "Venezuela"] },
+      "title": "Wages Are Late Again",
+      "text": "Payday comes and goes. The club says there's a “delay with the sponsor”. It's the second time this season. {J} has rent to pay and family expecting money.",
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Wait patiently", "desc": "It always comes eventually.", "risk": "low", "hint": "It usually does.", "out": [
+          { "w": 3, "text": "The money arrives nine days late, without apology.", "fx": { "mood": "Frustrated" } },
+          { "w": 1, "text": "Only half arrives. The rest is promised “after the next home match”.", "fx": { "wealth": -300, "mood": "Angry" } }
+        ] },
+        { "label": "Complain to the players' union", "desc": "Formal complaint.", "risk": "medium", "hint": "The club won't like it.", "text": "The union steps in and the money arrives within a week, along with a frosty email from the club secretary.", "fx": { "trust": -2, "rep": 0.3 } }
+      ]
+    },
+    {
+      "id": "mn_luxury_lifestyle_spiral", "cat": "money", "w": 4, "when": { "wealth": [0, 2000], "age": [19, 34] },
+      "title": "{J}'s Bank Account Is Nearly Empty",
+      "text": "{J} checks his banking app and feels sick. The car payment, the apartment, the restaurants, family transfers, all of it adds up to more than he earns. Payday is two weeks away.",
+      "prompt": "Fix the finances?",
+      "choices": [
+        { "label": "Cut everything back", "desc": "Cheaper apartment, no restaurants.", "risk": "low", "hint": "Humbling. Effective.", "text": "{J} moves to a smaller apartment and cooks for himself for the first time. He's surprisingly good at it.", "fx": { "lifestyle": -0.3, "growth": ["mental"] } },
+        { "label": "Hire a financial adviser", "desc": "A professional plan.", "risk": "low", "hint": "Costs money to save money.", "text": "The adviser builds a budget and takes {J}'s card for “safekeeping”. It works.", "fx": { "lifestyle": -0.2, "wealth": -100 } },
+        { "label": "Borrow from a teammate", "desc": "Just until payday.", "risk": "medium", "hint": "Awkward.", "text": "A teammate lends him money without asking questions. {J} pays it back on payday and never forgets the favour.", "fx": { "teammate": { "who": "T", "rel": "ally" } } }
+      ]
+    },
+    {
+      "id": "mn_charity_scam", "cat": "money", "w": 2, "when": { "wealth": [3000, 999999999] }, "vars": { "cost": ["wealthPct", 10, 150] },
+      "title": "A Charity Asks for a Donation",
+      "text": "A charity representative visits the training ground: an orphanage needs a new roof. Photos of smiling children, an official-looking document. They need {cost}.",
+      "prompt": "Donate?",
+      "choices": [
+        { "label": "Donate immediately", "desc": "Children need a roof.", "risk": "medium", "hint": "Generous. Is it real?", "out": [
+          { "w": 1, "text": "The orphanage sends photos of the new roof and a drawing by the children. Real, and good.", "fx": { "wealth": "-cost", "rep": 0.8, "mood": "Relieved" } },
+          { "w": 1, "text": "There is no orphanage. The police say the same people visited three other clubs.", "fx": { "wealth": "-cost", "mood": "Angry" } }
+        ] },
+        { "label": "Ask the club to verify it", "desc": "Check first.", "risk": "low", "hint": "Smart.", "out": [
+          { "w": 1, "text": "The club verifies it. {J} donates and visits the orphanage himself.", "fx": { "wealth": "-cost", "rep": 1 } },
+          { "w": 1, "text": "The club finds it's a scam. {J} reports it. Three arrests.", "fx": { "rep": 0.3 } }
+        ] }
+      ]
+    },
+    {
+      "id": "mn_business_launch", "cat": "money", "w": 2, "when": { "wealth": [8000, 999999999], "rep": [15, 100] }, "vars": { "cost": ["wealthPct", 25, 600] },
+      "title": "{J}'s Own Clothing Line?",
+      "text": "A designer friend proposes a streetwear brand with {J}'s initials and shirt number. Startup cost: {cost}. Fans would buy anything with his name on it. Probably.",
+      "prompt": "Launch the brand?",
+      "choices": [
+        { "label": "Launch it", "desc": "Build something of your own.", "risk": "high", "hint": "Entrepreneur or cautionary tale.", "text": "The launch post goes up. The first batch sells out in two days. The second batch is still in a warehouse.", "fx": { "wealth": "-cost", "followers": 15000, "chain": { "id": "mn_business_result", "in": [16, 30] } } },
+        { "label": "Not now", "desc": "Focus on football.", "risk": "low", "hint": "Fine.", "text": "{J} says maybe later.", "fx": {} }
+      ]
+    },
+    {
+      "id": "mn_business_result", "cat": "money", "chainOnly": true, "vars": { "cost": ["wealthPct", 25, 600] },
+      "title": "{J}'s Clothing Brand: One Year Later",
+      "text": "The accountant sends the annual numbers for the clothing brand.",
+      "choices": [
+        { "label": "Read the numbers", "risk": "high", "hint": "Business is business.", "out": [
+          { "w": 2, "text": "Profit. Not huge, but real. A department store wants to stock it.", "fx": { "wealth": "cost*1.5", "rep": 0.5, "mood": "Confident" } },
+          { "w": 1, "text": "The brand loses money. {J} closes it and keeps one hoodie as a souvenir.", "fx": { "mood": "Frustrated" } }
+        ] }
+      ]
+    },
+    {
+      "id": "mn_endorsement_dropped", "cat": "money", "w": 3, "when": { "rep": [5, 40], "form": [4, 6.2] },
+      "title": "A Sponsor Is Reconsidering",
+      "text": "{J}'s sponsor calls his agent: poor form, fewer minutes, less visibility. They're “reviewing the partnership”.",
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Offer extra content days", "desc": "Show them you're worth it.", "risk": "low", "hint": "More work, keep the deal.", "text": "{J} offers four extra content days. The sponsor stays, happily.", "fx": { "pfm": -3, "rep": 0.2 } },
+        { "label": "Let them go", "desc": "Focus on football.", "risk": "low", "hint": "Less money.", "text": "The sponsor leaves. {J} focuses on getting his form back.", "fx": { "mood": "Determined" } }
+      ]
+    },
+    {
+      "id": "mn_restaurant_bill", "cat": "money", "w": 3, "when": { "wealth": [1500, 999999999], "age": [18, 32] }, "vars": { "bill": ["wageWeeks", 1, 80] },
+      "title": "The Restaurant Bill Lands in Front of {J}",
+      "text": "Dinner with friends from home: twelve people, steaks, desserts, drinks. When the bill comes, everyone looks at {J}. It's {bill}.",
+      "prompt": "Pay?",
+      "choices": [
+        { "label": "Pay for everyone", "desc": "It's what's expected.", "risk": "low", "hint": "Generous. Habit-forming.", "text": "{J} pays. Everyone cheers. Next time, they'll order more.", "fx": { "wealth": "-bill", "lifestyle": 0.05 } },
+        { "label": "Split it", "desc": "Friends split bills.", "risk": "medium", "hint": "Some friendships are tested.", "text": "{J} suggests splitting. An awkward pause, then everyone pays. Two friends stop calling.", "fx": { "growth": ["mental"] } }
+      ]
+    },
+    {
+      "id": "mn_bonus_windfall", "cat": "money", "w": 3, "when": { "role": ["starter", "rotation"], "lastResult": ["W"] },
+      "vars": { "bonus": ["wageWeeks", 2, 100] },
+      "title": "Owner Pays a Surprise Win Bonus",
+      "text": "After a big win, the club owner bursts into the dressing room and announces a cash bonus for every player. {J}'s share: {bonus}.",
+      "fx": { "wealth": "bonus", "mood": "Confident" },
+      "prompt": "What do you do with the bonus?",
+      "choices": [
+        { "label": "Send it home", "desc": "Your family needs it more.", "risk": "low", "hint": "Family first.", "text": "The whole bonus goes to his mother. She uses it to fix the kitchen.", "fx": { "wealth": "-bonus", "parental": 8 } },
+        { "label": "Save it", "desc": "Rainy-day fund.", "risk": "low", "hint": "Sensible.", "text": "Straight into savings.", "fx": {} },
+        { "label": "Treat yourself", "desc": "New headphones, new clothes.", "risk": "low", "hint": "You earned it.", "text": "New headphones and a jacket he doesn't need. He loves both.", "fx": { "wealth": "-bonus*0.5", "mood": "Confident" } }
+      ]
+    },
+    {
+      "id": "mn_ponzi", "cat": "money", "w": 2, "when": { "wealth": [6000, 999999999] }, "vars": { "amount": ["wealthPct", 40, 800] },
+      "title": "Other Players Swear by an Investment Fund",
+      "text": "Three senior players have put money into a private fund that pays 8% a month. They show {J} their returns. The fund manager wants {amount} to “reserve his spot”.",
+      "prompt": "Invest?",
+      "choices": [
+        { "label": "Invest", "desc": "Everyone is making money.", "risk": "extreme", "hint": "8% a month is not normal.", "out": [
+          { "w": 1, "text": "Returns arrive for three months. Then the website goes down. The manager disappears. Forty footballers lose their savings.", "fx": { "wealth": "-amount", "mood": "Broken" } },
+          { "w": 1, "text": "{J} gets lucky and withdraws before the collapse. Others don't.", "fx": { "wealth": "amount*0.3", "mood": "Anxious" } }
+        ] },
+        { "label": "Decline", "desc": "Too good to be true.", "risk": "low", "hint": "It usually is.", "text": "{J} declines. Six months later, the fund collapses. His teammates lose everything.", "fx": { "growth": ["mental"] } }
+      ]
+    },
+    {
+      "id": "mn_endorsement_local_food", "cat": "money", "w": 3, "when": { "rep": [6, 100], "nationality": ["Indonesia"] }, "vars": { "deal": ["endorse", 500] },
+      "title": "Instant Noodle Brand Wants {J}",
+      "text": "A famous instant noodle brand wants {J} in a TV advert: eating noodles after training, smiling. {deal} for a year. The nutritionist will not be pleased.",
+      "prompt": "Accept?",
+      "choices": [
+        { "label": "Accept", "desc": "Every Indonesian will see it.", "risk": "low", "hint": "Massive exposure.", "text": "The advert plays during every match broadcast. Kids start copying his noodle-slurping face.", "fx": { "endorsement": { "brand": "an instant noodle brand", "value": "deal", "years": 1 }, "followers": 40000, "rep": 0.5 } },
+        { "label": "Decline", "desc": "Professional athletes don't eat that.", "risk": "low", "hint": "Principled.", "text": "{J} declines. A rival player takes the deal.", "fx": {} }
+      ]
+    },
+    {
+      "id": "mn_crypto_ambassador", "cat": "money", "w": 2, "when": { "followers": [40000, 999999999] }, "vars": { "fee": ["endorse", 4000] },
+      "title": "Crypto Platform Wants {J} as Ambassador",
+      "text": "A crypto trading platform offers {fee} for {J} to become a “brand ambassador”: three posts a month telling fans to download the app.",
+      "prompt": "Take the deal?",
+      "choices": [
+        { "label": "Take it", "desc": "Easy money.", "risk": "high", "hint": "If it collapses, so does your name.", "out": [
+          { "w": 1, "text": "The money is real and the platform survives. For now.", "fx": { "wealth": "fee", "rep": -0.3 } },
+          { "w": 1, "text": "The platform collapses eight months later. Fans who followed {J}'s posts lose money. Some blame him.", "fx": { "wealth": "fee", "rep": -2, "mood": "Anxious" } }
+        ] },
+        { "label": "Decline", "desc": "Not with your fans' money.", "risk": "low", "hint": "Integrity.", "text": "{J} declines. His agent thinks he's mad. His fans will never know what he protected them from.", "fx": { "rep": 0.2 } }
+      ]
+    },
+    {
+      "id": "mn_insurance", "cat": "money", "w": 3, "when": { "rep": [20, 100], "flags": [] }, "once": true, "vars": { "cost": ["wageWeeks", 4, 300] },
+      "title": "Insure {J}'s Career?",
+      "text": "An insurance broker offers a career-ending-injury policy: {cost} a year, paying out a large sum if {J} can never play again. Most players never claim. Some wish they had insured.",
+      "prompt": "Buy the policy?",
+      "choices": [
+        { "label": "Buy it", "desc": "Protect the future.", "risk": "low", "hint": "Peace of mind.", "text": "{J} signs. He hopes it's the worst money he ever spends.", "fx": { "wealth": "-cost", "flag": "insured" } },
+        { "label": "Skip it", "desc": "You'll be fine.", "risk": "medium", "hint": "Probably.", "text": "{J} skips it.", "fx": {} }
+      ]
+    },
+    {
+      "id": "mn_sponsor_event", "cat": "money", "w": 3, "when": { "rep": [10, 100] }, "vars": { "fee": ["wageWeeks", 1, 80] },
+      "title": "Sponsor Event the Day Before a Match",
+      "text": "A club sponsor wants {J} at a shopping-mall event: two hours of signing, photos and a dance with the mascot. Fee: {fee}. It's the day before a match.",
+      "prompt": "Attend?",
+      "choices": [
+        { "label": "Attend", "desc": "Money and fans.", "risk": "low", "hint": "Tired legs.", "text": "Three hundred fans, a dancing mascot, sore wrists from signing. {J} goes home exhausted and paid.", "fx": { "wealth": "fee", "followers": 3000, "pfm": -3 } },
+        { "label": "Decline", "desc": "Rest before the match.", "risk": "low", "hint": "Professional.", "text": "{J} declines. {M} quietly approves.", "fx": { "trust": 1 } }
+      ]
+    },
+    {
+      "id": "mn_landlord_income", "cat": "money", "w": 4, "when": { "flags": ["landlord"] }, "vars": { "rent": ["wealthPct", 3, 100] },
+      "title": "Tenant Problems at {J}'s Apartment",
+      "text": "The tenant in {J}'s investment apartment has stopped paying rent and stopped answering the phone. The property manager wants instructions.",
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Be patient", "desc": "Maybe they're struggling.", "risk": "low", "hint": "Kind.", "out": [
+          { "w": 1, "text": "The tenant lost their job. They pay everything back over six months, with a thank-you letter.", "fx": { "rep": 0.2 } },
+          { "w": 1, "text": "The tenant leaves in the night with the furniture.", "fx": { "wealth": "-rent*3", "mood": "Angry" } }
+        ] },
+        { "label": "Evict", "desc": "Business is business.", "risk": "low", "hint": "Firm.", "text": "The eviction goes through. A new tenant moves in the next month.", "fx": {} }
+      ]
+    },
+    {
+      "id": "mn_free_gifts", "cat": "money", "w": 3, "when": { "followers": [15000, 999999999] },
+      "title": "Free Gifts Keep Arriving",
+      "text": "Boxes arrive every day: shoes, headphones, skincare, energy drinks, gaming chairs. Brands want one post. Some send invoices afterwards, hoping he won't notice.",
+      "prompt": "What do you do with it all?",
+      "choices": [
+        { "label": "Donate it", "desc": "Give it to a youth club.", "risk": "low", "hint": "Good karma.", "text": "A van of free gear goes to an orphanage football team. Their kit is now better than his club's.", "fx": { "rep": 0.5, "followers": 4000 } },
+        { "label": "Keep it and post", "desc": "Free stuff is free stuff.", "risk": "low", "hint": "Brands are happy.", "text": "{J}'s apartment fills up with gear. Brands are happy. So is his little brother.", "fx": { "followers": 3000 } }
+      ]
+    },
+    {
+      "id": "mn_old_debt", "cat": "money", "w": 2, "when": { "wealth": [2000, 999999999] }, "vars": { "cost": ["wealthPct", 10, 100] },
+      "title": "Someone Claims {J}'s Family Owes Them Money",
+      "text": "A man arrives at the training ground claiming {J}'s father borrowed {cost} from him ten years ago. He has a handwritten note. His father says it's complicated.",
+      "prompt": "Pay?",
+      "choices": [
+        { "label": "Pay it to end it", "desc": "Protect your father's name.", "risk": "low", "hint": "Peace, at a price.", "text": "{J} pays. His father won't look him in the eye for a week, then hugs him for a full minute.", "fx": { "wealth": "-cost", "parental": 6 } },
+        { "label": "Ask a lawyer", "desc": "Is it even real?", "risk": "low", "hint": "Truth first.", "out": [
+          { "w": 1, "text": "The note is fake. The man disappears when the lawyer calls.", "fx": {} },
+          { "w": 1, "text": "The debt is real. {J} pays it, with interest.", "fx": { "wealth": "-cost*1.2" } }
+        ] }
+      ]
+    },
+    {
+      "id": "mn_financial_advisor_good", "cat": "money", "w": 2, "when": { "wealth": [15000, 999999999] },
+      "title": "A Good Financial Adviser Changes Everything",
+      "text": "A retired player introduces {J} to his financial adviser: honest, boring, brilliant. She reorganises everything: savings, pensions, a fund for his parents, a plan for retirement.",
+      "fx": { "lifestyle": -0.1, "wealth": 500, "growth": ["mental"] }
+    },
+    {
+      "id": "mn_sponsor_fan_meet", "cat": "money", "w": 3, "when": { "rep": [15, 100], "nationality": ["Indonesia"] }, "vars": { "deal": ["endorse", 1200] },
+      "title": "E-Wallet App Wants {J} for Its Campaign",
+      "text": "A big e-wallet app wants {J} as the face of a nationwide campaign: TV adverts, billboards, cashback with his face on it. {deal} for a year.",
+      "prompt": "Accept?",
+      "choices": [
+        { "label": "Accept", "desc": "National exposure.", "risk": "low", "hint": "Everyone will see your face.", "text": "{J}'s face appears on every bus stop in Jakarta. His mother takes a photo with each one she passes.", "fx": { "endorsement": { "brand": "an e-wallet app", "value": "deal", "years": 1 }, "followers": 50000, "rep": 0.8, "parental": 4 } },
+        { "label": "Negotiate", "desc": "Push for two years.", "risk": "medium", "hint": "Longer deal or none.", "check": { "stat": "agent", "dc": 55 },
+          "ok": { "text": "Two years, more money. {J}'s agent buys himself a new watch.", "fx": { "endorsement": { "brand": "an e-wallet app", "value": "deal*1.2", "years": 2 }, "followers": 50000 } },
+          "bad": { "text": "The app signs a famous actor instead.", "fx": {} } }
+      ]
+    },
+    {
+      "id": "mn_gulf_money_dream", "cat": "money", "w": 2, "when": { "age": [27, 34], "rep": [30, 100], "notCountry": ["Saudi Arabia", "Qatar", "United Arab Emirates"] },
+      "title": "Agent Says the Gulf Is Calling",
+      "text": "{J}'s agent calls, excited: a Gulf club is interested. Tax-free, triple his wage, a villa with a pool. “It would set your family up for generations.” But it would also mean a quieter league, far from the spotlight he's worked for.",
+      "prompt": "Tell your agent to listen?",
+      "choices": [
+        { "label": "Yes, listen", "desc": "Security for life.", "risk": "medium", "hint": "Fans may call it a cash grab.", "text": "{J} tells the agent to listen. The rumour leaks within a day.", "fx": { "listed": true, "followers": 10000, "rep": -0.3 } },
+        { "label": "No, not yet", "desc": "Unfinished business here.", "risk": "low", "hint": "Ambition over money.", "text": "“Not yet.” The agent sighs and says the offer won't last forever.", "fx": { "mood": "Determined" } }
+      ]
+    },
+    {
+      "id": "mn_wage_raise_performance", "cat": "money", "w": 3, "when": { "form": [7.3, 10], "role": ["starter"] },
+      "title": "Club Rewards {J}'s Form With a Raise",
+      "text": "The sporting director calls {J} in. No negotiation, no agent: the club is raising his wage in recognition of his form. “We look after people who look after us.”",
+      "fx": { "wealth": 800, "trust": 2, "mood": "Confident" }
+    },
+    {
+      "id": "mn_hometown_mosque", "cat": "money", "w": 2, "when": { "nationality": ["Indonesia", "Malaysia", "Saudi Arabia", "Egypt", "Morocco", "Turkey"], "wealth": [8000, 999999999] }, "vars": { "cost": ["wealthPct", 15, 400] },
+      "title": "Hometown Mosque Needs Renovation",
+      "text": "The mosque where {J} learned to read the Quran as a boy is crumbling: a leaking roof, broken fans, a cracked floor. The imam calls to ask, very politely, if he might help.",
+      "prompt": "Fund the renovation ({cost})?",
+      "choices": [
+        { "label": "Fund it fully", "desc": "Give back.", "risk": "low", "hint": "Blessings, and gratitude at home.", "text": "The renovation is finished before Ramadan. His father attends Friday prayers there and is congratulated by everyone.", "fx": { "wealth": "-cost", "parental": 12, "rep": 0.6, "mood": "Relieved" } },
+        { "label": "Contribute part", "desc": "Help with the roof.", "risk": "low", "hint": "Something meaningful.", "text": "{J} pays for the new roof. The imam mentions him in his sermon.", "fx": { "wealth": "-cost*0.4", "parental": 5 } }
+      ]
+    },
+    {
+      "id": "mn_scam_fake_club", "cat": "money", "w": 2, "when": { "role": ["bench", "outcast"], "agent": false },
+      "title": "Fake Agent Promises a European Trial",
+      "text": "A man on social media says he can get {J} a trial with a European club. All he needs is a fee for “registration and visa processing”. He has photos with famous players.",
+      "prompt": "Pay the fee?",
+      "vars": { "cost": ["wealthPct", 25, 300] },
+      "choices": [
+        { "label": "Pay", "desc": "It's your dream.", "risk": "extreme", "hint": "This is a well-known scam.", "text": "{J} pays {cost}. The man stops replying the next day. The photos were edited.", "fx": { "wealth": "-cost", "mood": "Broken" } },
+        { "label": "Ask the club to check", "desc": "Verify first.", "risk": "low", "hint": "Smart.", "text": "The club's lawyer recognises the name: a known scammer. {J} reports him to the federation.", "fx": { "rep": 0.2, "growth": ["mental"] } }
+      ]
+    },
+    {
+      "id": "mn_shoe_collection", "cat": "money", "w": 2, "when": { "wealth": [5000, 999999999], "age": [17, 30] }, "vars": { "cost": ["wealthPct", 8, 100] },
+      "title": "Limited-Edition Sneaker Drop",
+      "text": "A limited-edition sneaker drop, only five hundred pairs worldwide. A reseller has a pair in {J}'s size for {cost}.",
+      "prompt": "Buy them?",
+      "choices": [
+        { "label": "Buy them", "desc": "Collector's item.", "risk": "low", "hint": "Joy. Expensive joy.", "text": "{J} keeps them in the box. He's afraid to wear them.", "fx": { "wealth": "-cost", "followers": 2000 } },
+        { "label": "Skip it", "desc": "Shoes are shoes.", "risk": "low", "hint": "Sensible.", "text": "{J} skips it. He checks resale prices for a week anyway.", "fx": {} }
+      ]
+    },
+    {
+      "id": "mn_charity_foundation", "cat": "money", "w": 2, "when": { "wealth": [25000, 999999999], "age": [25, 40] }, "once": true, "vars": { "cost": ["wealthPct", 15, 2000] },
+      "title": "{J} Considers Starting a Foundation",
+      "text": "{J} wants to do something lasting: a foundation that pays for football boots and school fees for poor kids in his home region. Start-up cost: {cost}.",
+      "prompt": "Start the foundation?",
+      "choices": [
+        { "label": "Start it", "desc": "Your legacy off the pitch.", "risk": "low", "hint": "Real change.", "text": "The {J} Foundation launches with fifty scholarships. The first photo of a girl in new boots makes him cry in the car park.", "fx": { "wealth": "-cost", "rep": 3, "followers": 30000, "flag": "foundation", "mood": "Relieved" } },
+        { "label": "Later", "desc": "After retirement.", "risk": "low", "hint": "Fine.", "text": "{J} decides to wait until he retires.", "fx": {} }
+      ]
+    },
+    {
+      "id": "mn_foundation_update", "cat": "money", "w": 4, "when": { "flags": ["foundation"] },
+      "title": "Foundation Scholar Makes an Academy",
+      "text": "A boy who received one of the foundation's first scholarships has been signed by a professional academy. He sends {J} a video of himself in his new training kit, saying thank you in a voice that hasn't broken yet.",
+      "fx": { "rep": 1, "mood": "Motivated", "followers": 8000 }
+    },
+    {
+      "id": "mn_tipping_point", "cat": "money", "w": 3, "when": { "wealth": [50000, 999999999] }, "once": true,
+      "title": "{J} Is Officially Rich",
+      "text": "The bank calls to offer “private client” services. A dedicated manager, a black card, an invitation to a members' club. Ten years ago, his family couldn't afford the bus to his trials.",
+      "prompt": "How do you feel?",
+      "choices": [
+        { "label": "Stay grounded", "desc": "Nothing changes.", "risk": "low", "hint": "Humility.", "text": "{J} declines the black card and keeps using the same bank app. He sends his first coach a new car.", "fx": { "rep": 0.5, "mood": "Relieved" } },
+        { "label": "Enjoy it", "desc": "You earned it.", "risk": "medium", "hint": "Lifestyle creeps.", "text": "{J} upgrades everything: apartment, wardrobe, holidays. He deserves it. His living costs double.", "fx": { "lifestyle": 0.4, "mood": "Confident" } }
+      ]
+    }
+  ]
+}

@@ -130,6 +130,7 @@ export function renderDecisions(state, onChoose) {
   box.innerHTML = state.pending.map((d) => `
     <div class="card decision" data-id="${d.id}">
       <span class="chip chip-accent">${e(d.type ?? 'decision')}</span>
+      ${d.scene ? `<p class="choice-desc">${e(d.scene)}</p>` : ''}
       <div class="decision-prompt">${e(d.prompt)}</div>
       <div class="choices">${d.choices.map((c) => `
         <button class="choice ${d.chosen === c.id ? 'selected' : ''}" data-choice="${e(c.id)}">
