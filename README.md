@@ -5,7 +5,7 @@ No AI, no account, no internet needed to play. Everything is prepared game conte
 
 ## ▶ How to play
 
-**Online:** open the game's GitHub Pages link (see "Publishing" below once it's set up).
+**Online:** https://kuroyamihz.github.io/beautiful-grind/
 
 **On your computer:** double-click **`start-game.bat`**. A black window opens (keep it open) and your
 browser opens the game at http://localhost:3000.
@@ -47,4 +47,4 @@ Match-report and fan-post lines live in [data/text/narration.json](data/text/nar
 
 ## Publishing (GitHub Pages)
 Every time changes are pushed to the `main` branch on GitHub, the game is checked, built and published
-automatically to `https://<your-github-username>.github.io/<repository-name>/`.
+automatically to **https://kuroyamihz.github.io/beautiful-grind/** (via the `gh-pages` branch).
