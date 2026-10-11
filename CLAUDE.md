@@ -20,7 +20,7 @@ plain language, keep changes small and playable, and ask before big design chang
 - Saves: browser localStorage key `beautifulGrind.save.v1`, plus export/import JSON.
 
 ## Key files
-- `public/js/engine.js` — rules; `config.js` — balancing numbers; `events.js` — story events
+- `public/js/engine.js` — rules; `config.js` — balancing numbers; `scenarios.js` — scenario engine
 - `public/js/world.js` / `season.js` — league data access, fixtures, simulation, tables
 - `docs/original-design.md` — the owner's original design document (written as an AI prompt; now a design reference)
 - `data/scenarios/*.json` + README.md — scenario library and format; `npm run validate` after edits
@@ -30,7 +30,7 @@ plain language, keep changes small and playable, and ask before big design chang
 - `tools/sim-test.mjs` — `npm run simtest [n]` plays n full careers headlessly; run after engine changes
 
 ## Rules
-- Never invent damaging personal storylines for real people (REAL PEOPLE RULE in engine.md).
+- Never invent damaging personal storylines for real people (see REAL PEOPLE RULE in docs/original-design.md).
 - World data baseline is the 2025-26 season; after kick-off the simulation diverges from reality.
 - Keep JSON valid. Run a validation pass after editing anything in `data/world/`.
 - Commit after each working step (git = save points).
