@@ -25,6 +25,8 @@ jobs:
           node-version: 22
       - name: Check scenarios
         run: node tools/validate-scenarios.mjs
+      - name: Play test careers (blocks publishing if anything breaks)
+        run: node tools/sim-test.mjs 3
       - name: Build site
         run: node tools/build-site.mjs
       - name: Publish to gh-pages

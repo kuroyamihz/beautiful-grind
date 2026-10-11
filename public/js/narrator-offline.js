@@ -11,7 +11,7 @@ const POS_GROUP = { GK: "DEF", CB: "DEF", FB: "DEF", DM: "MID", CM: "MID", AM: "
 function say(path, vars, fallback = "") {
   const list = path.split(".").reduce((o, k) => o?.[k], TXT);
   const line = Array.isArray(list) && list.length ? pick(list) : fallback;
-  return String(line).replace(/{(w+)}/g, (m, k) => (k in vars ? vars[k] : m));
+  return String(line).replace(/\{(\w+)\}/g, (m, k) => (k in vars ? vars[k] : m));
 }
 
 function ratingLine(J, m) {

@@ -35,6 +35,11 @@ for (let i = 0; i < runs; i++) {
       weeksTotal++; for (const ev of [res.event, res.moment]) if (ev?.sid) fired.set(ev.sid, (fired.get(ev.sid) ?? 0) + 1);
       decisions += state.pending.length;
       if (!story.headline || !story.paragraphs.length) throw new Error(`Empty story in week ${res.week}`);
+      // Every visible text must have its {placeholders} filled in.
+      const visible = [story.headline, ...story.paragraphs, ...story.socialFeed.map((x) => x.text), ...res.outcomes.map((o) => o.text),
+        ...state.pending.flatMap((d) => [d.prompt, d.scene ?? '', ...d.choices.flatMap((c) => [c.label, c.description, c.consequence])])];
+      const leftover = visible.find((t) => /\{\w+\}/.test(t ?? ''));
+      if (leftover) throw new Error(`Unfilled placeholder in week ${res.week}: "${leftover.slice(0, 120)}"`);
       if (res.seasonEnd) {
         const s = res.seasonEnd;
         console.log(`  ${s.label.padEnd(8)} age ${String(ageNow(state)).padEnd(2)} ${String(p.club?.name ?? 'FREE').padEnd(28)} OVR ${overall(p)} pos ${s.pos}/${s.teams} apps ${s.apps} g ${s.goals} a ${s.assists} avg ${s.avgRating} role ${p.squadRole} trust ${p.manager.trust} €${p.wealthEUR} MV €${p.marketValue} rep ${p.reputation} caps ${p.national.caps}${s.movement ? ' ' + s.movement : ''}`);
