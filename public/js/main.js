@@ -2,16 +2,15 @@
 import { loadWorld, playableLeagues, leagueClubs, clubStrength } from './world.js';
 import { newCareer, advanceWeek, chooseDecision, pendingUnanswered, ageNow } from './engine.js';
 import { narrateOffline } from './narrator-offline.js';
-import { aiStatus, buildContext, requestNarration, mergeAI, isHosted } from './ai.js';
 import { renderPlayer, renderWeek, renderDecisions, renderPlanner, renderFeed, renderWorld, renderRetirement } from './ui.js';
 import { POSITIONS } from './config.js';
 import { dateLabel } from './time.js';
-import { pick, escapeHtml } from './util.js';
+import { escapeHtml } from './util.js';
 
 const SAVE_KEY = 'beautifulGrind.save.v1';
 const $ = (id) => document.getElementById(id);
 
-let world, state = null, story = null, plan = { intensity: 'balanced', focus: 'auto' }, busy = false, ai = { ai: false };
+let world, state = null, story = null, plan = { intensity: 'balanced', focus: 'auto' }, busy = false;
 
 // ── Saving (browser storage can be unavailable — never crash on it) ──
 function save() { try { localStorage.setItem(SAVE_KEY, JSON.stringify({ state, story, plan })); } catch (err) { console.warn('Save failed', err); } }
@@ -77,9 +76,6 @@ function render() {
   renderFeed(story);
   renderWorld(state, world);
   $('top-date').textContent = `${dateLabel(state.week)} · ${state.player.jerseyName}, ${ageNow(state)}`;
-  const aiOn = state.narratorMode !== 'offline';
-  $('narrator-badge').textContent = state.narratorMode === 'ai' ? '✦ Claude narrator' : aiOn ? '✦ Claude: big moments' : 'Offline narrator';
-  $('narrator-badge').className = `badge ${aiOn ? 'badge-ai' : ''}`;
   if (state.ended) { renderRetirement(state); $('btn-new-career').addEventListener('click', newCareerFlow); return; }
   renderDecisions(state, onChoose);
   renderPlannerNow();
@@ -96,26 +92,12 @@ function renderPlannerNow() {
   renderPlanner(state, plan, (np) => { plan = np; save(); renderPlannerNow(); }, playWeek);
 }
 
-async function playWeek() {
+function playWeek() {
   if (busy) return;
   if (pendingUnanswered(state).length) { $('decisions').classList.add('shake'); setTimeout(() => $('decisions').classList.remove('shake'), 400); return; }
   busy = true;
   const res = advanceWeek(state, world, plan);
-  let next = narrateOffline(state, world, res);
-  const bigWeek = next.isMajorEvent || res.matches.some((m) => m.goals || m.motm || m.red) || res.intl.length || res.offer || res.aiPreviousDecisions?.length;
-  if (state.narratorMode === 'ai' || (state.narratorMode === 'ai-major' && bigWeek)) {
-    renderWeek(state, world, next, true);
-    $('btn-play').disabled = true;
-    try {
-      const out = await requestNarration(buildContext(state, world, res));
-      next = mergeAI(state, world, res, next, out.data);
-      const u = state.aiUsage;
-      u.calls++; u.inputTokens += out.usage?.input_tokens ?? 0; u.outputTokens += out.usage?.output_tokens ?? 0;
-      u.cacheRead += out.usage?.cache_read_input_tokens ?? 0; u.cacheWrite += out.usage?.cache_creation_input_tokens ?? 0; u.costUSD += out.costUSD ?? 0;
-    } catch (err) {
-      next.aiError = err.message;
-    }
-  }
+  const next = narrateOffline(state, world, res);
   if (!state.log.length || state.log.at(-1).week !== res.week) state.log.push({ week: res.week, headline: next.headline, type: next.eventType });
   story = next;
   busy = false;
@@ -130,7 +112,7 @@ function showGame() {
   render();
 }
 
-// Hosted pages can't show confirm() dialogs, so a live career needs a second click instead.
+// Replacing a live career needs a second click (no pop-up dialogs).
 let newCareerArmed = null;
 function newCareerFlow() {
   const btn = $('btn-new');
@@ -147,40 +129,14 @@ function newCareerFlow() {
 }
 
 // ── Settings ──
-async function openSettings() {
-  const dlg = $('settings');
-  ai = await aiStatus();
-  const setMode = (m) => {
-    state.narratorMode = m;
-    dlg.querySelectorAll('#seg-narrator button').forEach((b) => b.classList.toggle('on', b.dataset.mode === m));
-    save(); render();
-  };
-  dlg.querySelectorAll('#seg-narrator button').forEach((b) => {
-    b.classList.toggle('on', b.dataset.mode === state.narratorMode);
-    b.disabled = b.dataset.mode !== 'offline' && !ai.ai;
-    b.onclick = () => { if (b.disabled) return; setMode(b.dataset.mode); };
-  });
+function openSettings() {
   $('settings-msg').textContent = '';
-  $('ai-status').innerHTML = !ai.ai
-    ? `Claude narrator is not available: ${escapeHtml(ai.reason ?? 'unknown reason')}${ai.backend === 'server' ? '<br>See <b>README.md → "Turn on the Claude narrator"</b>.' : ''}`
-    : ai.backend === 'claude.ai'
-      ? '✔ Claude is ready through your Claude account. No API key needed. The first time, Claude asks you to allow this page. Claude-written weeks use your plan\'s usage and take up to a minute each. "Big moments" uses Claude only for major weeks.'
-      : `✔ Claude is connected (model <b>${escapeHtml(ai.model)}</b>). Every Claude-written week costs a few cents. "Big moments" uses Claude only for major weeks and the free narrator for the rest. The tracker below shows your real spend.`;
-  const u = state.aiUsage;
-  $('ai-usage').innerHTML = u.calls && ai.backend !== 'claude.ai' ?`Claude weeks played: ${u.calls} · tokens in ${u.inputTokens.toLocaleString()} (cached ${u.cacheRead.toLocaleString()}) · out ${u.outputTokens.toLocaleString()} · estimated cost <b>$${u.costUSD.toFixed(2)}</b>` : '';
-  dlg.showModal();
+  $('settings').showModal();
 }
 
-async function exportSave() {
+function exportSave() {
   const data = JSON.stringify({ state, story, plan });
   const filename = `beautiful-grind-${state.player.jerseyName.toLowerCase()}-week${state.week + 1}.json`;
-  if (isHosted()) { // hosted pages can't download directly; claude.ai asks the player to confirm the save
-    const dl = await window.claude.use('downloads').catch(() => null);
-    if (!dl) { $('settings-msg').textContent = 'Saving files is not available in this view.'; return; }
-    try { await dl.save({ filename, data }); $('settings-msg').textContent = 'Save file downloaded.'; }
-    catch (err) { $('settings-msg').textContent = err?.code === 'declined' ? 'Export cancelled.' : 'The save file could not be downloaded here.'; }
-    return;
-  }
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([data], { type: 'application/json' }));
   a.download = filename;
@@ -206,7 +162,7 @@ function importSave(file) {
   try {
     world = await loadWorld((path) => fetch(path).then((r) => { if (!r.ok) throw new Error(`${path}: HTTP ${r.status}`); return r.json(); }));
   } catch (err) {
-    $('loading').innerHTML = `<div class="brand-big">BEAUTIFUL GRIND</div><p>Could not load the world data (${escapeHtml(err.message)}).<br>Start the game with <b>start-game.bat</b> instead of opening the HTML file directly.</p>`;
+    $('loading').innerHTML = `<div class="brand-big">BEAUTIFUL GRIND</div><p>Could not load the game data (${escapeHtml(err.message)}).<br>Refresh the page. If you're playing on your own computer, start the game with <b>start-game.bat</b> instead of opening the HTML file directly.</p>`;
     return;
   }
   $('loading').classList.add('hidden');

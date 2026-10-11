@@ -10,24 +10,20 @@ nationality and any country's football pyramid must work.
 The project owner is a beginner programmer and the game designer. Explain technical choices in
 plain language, keep changes small and playable, and ask before big design changes.
 
-## Architecture (built, v0.1 playable)
-- Browser game, plain ES modules, no build step. `server.js` (Node, no framework) serves `public/`
-  and `data/`, and proxies Claude at `/api/narrate`. Run: `start-game.bat` or `npm start` → http://localhost:3000.
-  Node.js v24 and git are installed. Python is not.
-- **Hybrid engine:** `public/js/engine.js` owns every number (calendar, fixtures, tables, stats,
-  money, injuries, trust, transfers, contracts, national team). Narrators only tell the story:
-  `narrator-offline.js` (templates, free) or Claude via `ai.js` + `server.js`
-  (model `claude-opus-5-5`, effort from `CLAUDE_EFFORT`, server-side fallbacks on, system prompt cached).
-  `ai.js mergeAI()` clamps every Claude-suggested delta and drops Claude transfer/contract decisions.
-- Decisions are serializable (`state.pending`); `kind` = template | offer | renewal | rehab | retire | ai.
-  Template events live in `events.js` (build + resolve per choice); delayed consequences via `state.threads`.
-- Narrator modes: `offline`, `ai-major` (Claude only on big weeks), `ai` (every week).
+## Architecture (v0.2, fully standalone, no AI)
+- The owner decided (2026-10-11): NO AI at play time. All content is prepared data. Do not add Claude/LLM features back.
+- Browser game, plain ES modules, no build step. `server.js` is a tiny static server for local play (start-game.bat).
+  Online: GitHub Pages via .github/workflows/pages.yml (validates scenarios, runs tools/build-site.mjs, deploys dist/).
+- `public/js/engine.js` owns every number. `scenarios.js` picks and resolves data-driven scenarios
+  (conditions, weighted/skill-check outcomes, chains, triggers, in-match key moments via state.matchMod).
+- `narrator-offline.js` writes the weekly story from engine facts + phrase banks in data/text/narration.json.
 - Saves: browser localStorage key `beautifulGrind.save.v1`, plus export/import JSON.
 
 ## Key files
 - `public/js/engine.js` — rules; `config.js` — balancing numbers; `events.js` — story events
 - `public/js/world.js` / `season.js` — league data access, fixtures, simulation, tables
-- `prompts/engine.md` — narrator/game-engine system prompt (owner's design, corrected; see its CHANGELOG)
+- `docs/original-design.md` — the owner's original design document (written as an AI prompt; now a design reference)
+- `data/scenarios/*.json` + README.md — scenario library and format; `npm run validate` after edits
 - `data/world/*.json` — world database (leagues, clubs, cups, windows, players), baseline 2025-26
 - `data/world/_README.md` — how the world data works, `verify` / `complete` flags
 - `docs/OPEN-QUESTIONS.md` — design questions waiting for the owner's decision

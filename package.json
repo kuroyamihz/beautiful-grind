@@ -1,15 +1,13 @@
 {
   "name": "beautiful-grind",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Football career text RPG",
   "type": "module",
   "scripts": {
-    "start": "node --env-file-if-exists=.env server.js",
+    "start": "node server.js",
     "simtest": "node tools/sim-test.mjs",
-    "build:hosted": "node tools/build-hosted.mjs"
-  },
-  "dependencies": {
-    "@anthropic-ai/sdk": "^0.133.0"
+    "validate": "node tools/validate-scenarios.mjs",
+    "build": "node tools/build-site.mjs"
   }
 }

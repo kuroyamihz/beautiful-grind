@@ -45,10 +45,9 @@ export function newCareer(world, o) {
     lifestyle: 1,
   };
   const state = {
-    version: 1, week: 0, narratorMode: 'offline', player: p,
+    version: 2, week: 0, player: p,
     seasons: {}, leagueClubs: {}, cup: null, pending: [], threads: [], log: [], history: [], flags: {},
     lastEventType: null, last: null, ended: null,
-    aiUsage: { calls: 0, inputTokens: 0, outputTokens: 0, cacheRead: 0, cacheWrite: 0, costUSD: 0 },
   };
   joinClub(state, world, { club: o.club, key, wageWeekly: weeklyWage(overall(p), key), years: randint(2, 3), type: 'youth' });
   p.squadRole = minRole(trustRole(p.manager.trust), abilityRole(overall(p), cs));

@@ -1,68 +1,50 @@
 # BEAUTIFUL GRIND
 
 A text-based football career RPG: from a 16-year-old nobody to retirement, one week at a time.
+No AI, no account, no internet needed to play. Everything is prepared game content.
 
 ## ▶ How to play
 
-1. Double-click **`start-game.bat`** in this folder.
-2. A black window opens (that's the game server; keep it open) and your browser opens the game at **http://localhost:3000**.
-3. Create your player, pick a starting club, and press **Play week ▶**.
-4. To stop: close the black window. Your career is saved automatically in your browser.
+**Online:** open the game's GitHub Pages link (see "Publishing" below once it's set up).
+
+**On your computer:** double-click **`start-game.bat`**. A black window opens (keep it open) and your
+browser opens the game at http://localhost:3000.
 
 Each week:
-- **Answer the decisions** (cards with a green border). Their consequences show up next week, sometimes weeks later.
+- **Answer the decisions** (cards with a green border). Their consequences show up next week, sometimes weeks or seasons later.
+- **Key moments** (marked *in-match*) are split-second decisions about next week's match. They change what actually happens in it.
 - **Plan your training**: *Train hard* (more growth, more fatigue and injury risk), *Balanced*, *Light* or *Rest*. Watch your **PFM** fitness bar.
-- Read what happened: matches, ratings, the dressing room, the feed.
 
-Tip: **⚙ Settings → Export save** downloads a backup of your career.
+Your career saves automatically in the browser. **⚙ Settings → Export save** downloads a backup.
 
-## 🌐 Play online (no install)
+## What's in the game
+- ~2,000 real clubs in 160+ countries and regions, with real league formats, cups and transfer windows (2025-26 start)
+- 465 hand-written scenarios: training, dressing room, manager, 47 in-match key moments, media, family, love, money, culture, national team, health, veteran years
+- Transfers, loans, contracts, injuries and rehab choices, national team call-ups, promotion and relegation, retirement and a legacy rating
 
-The game is published on claude.ai: **https://claude.ai/artifact/QXoZxnvGS1NfgFBc6sT6r4**
+## Adding your own scenarios
+Scenarios are plain data files in [data/scenarios/](data/scenarios/). The format is explained in
+[data/scenarios/README.md](data/scenarios/README.md). After editing, run:
 
-- Works on any device, including phones, when you're signed in to claude.ai.
-- **The Claude narrator works there without an API key.** Turn it on in ⚙ Settings → Narrator. It uses your Claude account's usage, and Claude asks you once to allow it.
-- Saves live in that browser. Use ⚙ Settings → Export save to move a career between devices (Import save on the other one).
-- The link is private. To let friends play, use the page's **Share** menu on claude.ai. Each friend's Claude narrator runs on their own account.
-- To publish an updated version after changing the game: `npm run build:hosted`, then ask Claude to republish `dist/` to the same link.
+```bash
+npm run validate
+```
 
-## ✦ Turn on the Claude narrator locally (optional)
+Match-report and fan-post lines live in [data/text/narration.json](data/text/narration.json).
 
-The game plays fully without it. The offline narrator is free. With Claude, every week becomes uniquely written journalism using the rules in `prompts/engine.md`.
-
-1. Go to **https://console.anthropic.com**, create an account, add some credit, and create an **API key** (Settings → API Keys).
-2. In this folder, copy **`.env.example`**, rename the copy to **`.env`**, open it in Notepad and paste your key after `ANTHROPIC_API_KEY=`.
-3. Restart the game with `start-game.bat`. The first time, it installs the Claude connector automatically.
-4. In the game: **⚙ Settings → Narrator** → choose:
-   - **Claude: big moments**: Claude writes only the important weeks (goals, transfers, injuries, season finales). Cheapest way to get the magic.
-   - **Claude: every week**: every week is Claude-written.
-
-**Cost:** each Claude-written week costs a few cents, so a whole career on "every week" can add up to tens of dollars. Settings shows your real spend so far. To make it cheaper, add `CLAUDE_EFFORT=low` to `.env`.
-
-**Never share your `.env` file.** It contains your key. It is excluded from git automatically.
-
-## How the game works (short version)
-
-- **The game code is the referee.** Fixtures, results, league tables, stats, money, injuries, transfers and contracts are all calculated by code, so they stay consistent across a whole career.
-- **The narrator is the storyteller.** Claude (or the offline narrator) turns those facts into the story. Claude can add small consequences and its own decisions, but the code limits how much any single week can change.
-
-## What's in this folder
+## Folder guide
 
 | Path | What it is |
 |---|---|
-| `start-game.bat` | Double-click to play |
-| `public/` | The game (the page and its code) |
-| `public/js/engine.js` | The rules: weeks, matches, growth, money, transfers, injuries |
-| `public/js/events.js` | Story events and decisions (easy to add more!) |
-| `public/js/config.js` | Balancing numbers: growth caps, injury rates, league strengths |
-| `prompts/engine.md` | The Claude narrator's rules (your original design, corrected) |
-| `data/world/` | The football world: ~2,000 real clubs in 160+ countries and regions |
-| `docs/OPEN-QUESTIONS.md` | Design decisions still waiting for you |
-| `tools/sim-test.mjs` | Plays whole careers automatically to catch bugs (`npm run simtest`) |
+| `start-game.bat` | Double-click to play on your computer |
+| `public/` | The game page and code (`js/engine.js` = rules, `js/config.js` = balancing numbers) |
+| `data/world/` | Leagues, clubs, competitions, national teams |
+| `data/scenarios/` | Story scenarios |
+| `data/text/` | Phrase banks for match reports and the social feed |
+| `docs/` | Your original design and open design questions |
+| `tools/` | `npm run simtest` plays whole careers to find bugs · `npm run validate` checks scenarios · `npm run build` builds the website |
+| `.github/workflows/pages.yml` | Publishes the game to GitHub Pages automatically |
 
-## Current limits (next steps)
-
-- Continental club competitions (Champions League, AFC, Libertadores…) aren't simulated yet. Domestic leagues, domestic cups and national teams are.
-- Lower leagues with incomplete club lists can't be chosen as a starting club yet (for example Indonesia's Championship and Liga 4).
-- Teammates and managers are fictional in offline mode. Claude mode can bring in real players.
-- Balancing follows the original design (+8 stat growth per season max at ages 16-23). See `docs/OPEN-QUESTIONS.md`.
+## Publishing (GitHub Pages)
+Every time changes are pushed to the `main` branch on GitHub, the game is checked, built and published
+automatically to `https://<your-github-username>.github.io/<repository-name>/`.

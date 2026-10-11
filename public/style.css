@@ -40,7 +40,6 @@ label { display: flex; flex-direction: column; gap: 4px; font-size: .8rem; color
 input, select { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 9px 10px; color: var(--text); font-size: .95rem; min-width: 0; }
 input:focus, select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
 .badge { font-size: .72rem; padding: 3px 8px; border-radius: 99px; border: 1px solid var(--border); color: var(--muted); white-space: nowrap; }
-.badge-ai { color: var(--accent); border-color: #4a5e1a; }
 .chip { display: inline-block; font-size: .72rem; font-weight: 600; padding: 2px 8px; border-radius: 99px; background: var(--panel-2); border: 1px solid var(--border); text-transform: uppercase; letter-spacing: .04em; }
 .chip-good { color: var(--good); border-color: #1d5a43; }
 .chip-warn { color: var(--warn); border-color: #5a4417; }
@@ -112,7 +111,6 @@ input:focus, select:focus { outline: 2px solid var(--accent); outline-offset: 1p
 .box { border-left: 3px solid var(--accent); background: var(--panel-2); padding: 10px 12px; border-radius: 0 8px 8px 0; margin: 12px 0; font-size: .9rem; }
 .box-bad { border-color: var(--bad); }
 .box h4 { margin: 0 0 4px; font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
-.ai-note { font-size: .78rem; color: var(--warn); margin-top: 8px; }
 
 /* ── Decisions ── */
 #decisions { display: flex; flex-direction: column; gap: 12px; }

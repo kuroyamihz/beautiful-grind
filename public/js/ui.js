@@ -99,7 +99,7 @@ function matchBox(m, J) {
   </div>`;
 }
 
-export function renderWeek(state, world, story, aiBusy = false) {
+export function renderWeek(state, world, story) {
   const p = state.player;
   const res = state.last;
   const wk = res ? res.week : state.week;
@@ -107,9 +107,7 @@ export function renderWeek(state, world, story, aiBusy = false) {
       <span>${dateLabel(wk)}</span>·<span>Age ${res?.age ?? ageNow(state)}</span>
       ${story?.eventType ? `<span class="chip">${e(story.eventType)}</span>` : ''}
       ${story?.isMajorEvent ? '<span class="chip chip-accent">Major</span>' : ''}
-      ${story?.source === 'claude' ? '<span class="badge badge-ai">✦ Claude</span>' : ''}
     </div>`;
-  if (aiBusy) return void ($('week-card').innerHTML = html + `<h1 class="headline"><span class="spinner"></span> Claude is writing this week…</h1><p class="hint">This can take up to a minute.</p>`);
   html += `<h1 class="headline">${e(story?.headline ?? '')}</h1>`;
   const outs = (res?.outcomes ?? []).filter((o) => o.text);
   if (outs.length) html +=outs.map((o) => `<div class="box"><h4>Consequence · you chose "${e(o.label)}"</h4>${e(o.text)}</div>`).join('');
@@ -121,7 +119,6 @@ export function renderWeek(state, world, story, aiBusy = false) {
   }
   if (res?.trophies?.length) html += `<div class="box"><h4>Trophy</h4>🏆 ${res.trophies.map(e).join(' · ')}</div>`;
   if (res?.money) html += `<div class="box ${res.money.net < 0 ? 'box-bad' : ''}"><h4>Monthly finances</h4>Income ${money(state, res.money.gross, { eurOnly: true })} · Tax ${money(state, res.money.tax, { eurOnly: true })}${res.money.agentFee ? ` · Agent ${money(state, res.money.agentFee, { eurOnly: true })}` : ''} · Living ${money(state, res.money.living, { eurOnly: true })}${res.money.family ? ` · Family ${money(state, res.money.family, { eurOnly: true })}` : ''} → <b>${res.money.net >= 0 ? '+' : ''}${money(state, res.money.net)}</b></div>`;
-  if (story?.aiError) html += `<div class="ai-note">Claude narrator unavailable this week (${e(story.aiError)}), so the offline narrator was used.</div>`;
   $('week-card').innerHTML = html;
 }
 
