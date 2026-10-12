@@ -1,0 +1,177 @@
+{
+  "scenarios": [
+    {
+      "id": "lw_family_rift", "cat": "family", "w": 7, "trigger": "familyRift",
+      "title": "A Rift at Home",
+      "text": ["{DAD} has stopped answering {J}'s calls. {MUM} answers, but only to say 'he's sleeping' at 7pm. {SIB} finally tells him the truth: 'They think you've forgotten us.'", "The family group chat has gone silent for three weeks. When {J} posts a photo from training, nobody reacts. Not even {MUM}."],
+      "prompt": "Your family feels abandoned.",
+      "choices": [
+        { "label": "Go home, now", "desc": "Next free day, no excuses.", "risk": "medium", "hint": "Costs fitness and a day. Saves everything else.", "text": "He turns up unannounced. {DAD} opens the door, looks at him for a long time, and steps aside to let him in. They talk until 3am. Some of it is shouting. Most of it isn't.", "fx": { "family": 20, "pfm": -3, "stress": -3, "trust": -1, "morale": 4 } },
+        { "label": "A long, honest phone call", "desc": "Say sorry properly.", "risk": "low", "hint": "Words help. Presence helps more.", "text": "He apologises for every missed call. {MUM} cries. {DAD} listens without speaking, then says: 'Come home soon.'", "fx": { "family": 12, "morale": 2 } },
+        { "label": "Send money to fix it", "desc": "Show you care.", "risk": "high", "hint": "They don't want money.", "text": "He sends a large transfer. {DAD} sends it back with a message: 'We don't want your money. We want our son.'", "fx": { "family": -4, "stress": 4, "morale": -3 } }
+      ]
+    },
+    {
+      "id": "lw_family_rift_sibling", "cat": "family", "w": 5, "trigger": "familyRift",
+      "title": "{SIB} Is Angry",
+      "text": ["{SIB} posts something online: 'Funny how some people only remember their family when they need a photo.' Everyone knows who it's about.", "{SIB} calls, furious: {MUM} has been ill for two weeks and nobody told {J} because 'you're always too busy'."],
+      "prompt": "Your {SIBr} is calling you out.",
+      "choices": [
+        { "label": "Call {SIB} and listen", "desc": "Don't defend yourself.", "risk": "low", "hint": "Hard. Healing.", "text": "He just listens. Forty minutes of anger, then tears, then 'I just miss you, idiot.' They make a plan for the next holiday.", "fx": { "family": 12, "morale": 3 } },
+        { "label": "Defend yourself", "desc": "'You don't know how hard this is.'", "risk": "high", "hint": "True. Unhelpful.", "text": "It turns into a fight. Both of them say things they'll regret. {MUM} has to mediate from a sickbed.", "fx": { "family": -4, "stress": 4 } }
+      ]
+    },
+    {
+      "id": "lw_friends_drift", "cat": "friends", "w": 7, "trigger": "friendsDrift",
+      "title": "The Group Chat Without You",
+      "text": ["{J} finds out by accident: there's a new group chat. Everyone from the old crew is in it. He isn't. It's called 'the real ones'.", "{BFf} posts photos from a weekend away with all their old friends. {J} wasn't invited. He hadn't replied to a message in a month, so maybe that's fair."],
+      "prompt": "Your friends have moved on without you.",
+      "choices": [
+        { "label": "Call {BFf} and be honest", "desc": "'I miss you. I've been a bad friend.'", "risk": "low", "hint": "Vulnerability opens doors.", "text": "{BFf} is quiet, then: 'We thought you'd outgrown us.' 'Never,' says {J}. The next week, he's back in the original chat. The new one is quietly deleted.", "fx": { "friends": 18, "morale": 4 } },
+        { "label": "Organise a reunion, your treat", "desc": "Fly everyone in.", "risk": "medium", "hint": "Grand gesture. Could feel like buying friendship.", "vars": { "cost": ["wageWeeks", 3, 400] }, "out": [
+          { "w": 2, "text": "Everyone comes. It's awkward for an hour, then it's like nothing ever changed.", "fx": { "friends": 16, "wealth": "-cost", "morale": 5 } },
+          { "w": 1, "text": "Half of them come. One says, quietly, 'You can't just pay to fix this.' He's right.", "fx": { "friends": 6, "wealth": "-cost" } }
+        ] },
+        { "label": "Accept it", "desc": "People grow apart.", "risk": "low", "hint": "Lonely.", "text": "He accepts it. His world gets a little smaller and a little quieter.", "fx": { "morale": -5, "stress": 2 } }
+      ]
+    },
+    {
+      "id": "lw_dressing_revolt", "cat": "dressing", "w": 7, "trigger": "dressingRevolt",
+      "title": "The Dressing Room Turns",
+      "text": ["{CAP} closes the dressing-room door after training. 'We need to talk about you.' Eight players are sitting down. Nobody is smiling.", "Someone has moved {J}'s locker to the corner by the showers. It's a message. Everyone saw who moved it. Nobody says anything."],
+      "prompt": "The squad has a problem with you.",
+      "choices": [
+        { "label": "Listen to every complaint", "desc": "Take it on the chin.", "risk": "medium", "hint": "Humbling. Necessary.", "text": "He sits and listens for twenty minutes. Some of it is unfair. Most of it isn't. At the end he says, 'You're right. I'll fix it.' {CAP} nods once.", "fx": { "dressing": 18, "morale": -2, "growth": ["mental"] } },
+        { "label": "Fight back", "desc": "'You've all got a problem with success.'", "risk": "extreme", "hint": "Total war.", "text": "It escalates fast. A shove. Coaches run in. {Mf} has to choose between {J} and his senior players. He doesn't choose {J}.", "fx": { "dressing": -10, "trust": -10, "board": -4, "stress": 8 } },
+        { "label": "Buy everyone dinner, apologise there", "desc": "Food heals.", "risk": "low", "hint": "A good start.", "text": "A long table, a lot of food, one short speech. It doesn't fix everything. It fixes enough.", "fx": { "dressing": 12, "wealth": -300 } }
+      ]
+    },
+    {
+      "id": "lw_dressing_leader", "cat": "dressing", "w": 6, "trigger": "leader",
+      "title": "One of the Leaders",
+      "text": ["Without anyone announcing it, {J} has become one of the voices of the dressing room. Young players ask his advice. Senior players ask his opinion. {Mf} asks him to speak at half-time.", "{CAP} tells {J}: 'When I'm gone, this is your dressing room.' It isn't a joke."],
+      "prompt": "What kind of leader are you?",
+      "choices": [
+        { "label": "Lead by example", "desc": "First in, last out.", "risk": "low", "hint": "Quiet authority.", "text": "He says little and works harder than anyone. The young players copy everything he does, including the way he ties his boots.", "fx": { "dressing": 4, "trust": 4, "growth": ["mental"] } },
+        { "label": "Be the voice", "desc": "Speeches, standards, accountability.", "risk": "medium", "hint": "Respected — and sometimes resented.", "text": "He starts holding teammates to account out loud. The standards rise. A couple of players resent it. Results improve.", "fx": { "dressing": 2, "trust": 6, "board": 3, "stress": 3 } },
+        { "label": "Look after the young ones", "desc": "The mentor.", "risk": "low", "hint": "Your legacy grows.", "text": "He takes the academy kids under his wing: lifts, advice, phone calls home. One day they'll tell interviewers about him.", "fx": { "dressing": 5, "image": 2, "morale": 3 } }
+      ]
+    },
+    {
+      "id": "lw_board_angry", "cat": "politics", "w": 7, "trigger": "boardAngry", "ui": "boardroom",
+      "title": "The Board Has Had Enough",
+      "text": ["A letter from the club's legal department: a formal warning about 'conduct and commitment'. Nobody explains what that means. Everybody knows what it means.", "President {PRESl} walks past {J} in the corridor and doesn't say hello. Then a director tells his agent that 'offers would be considered'."],
+      "prompt": "The club hierarchy is turning against you.",
+      "choices": [
+        { "label": "Request a meeting with {PRESl}", "desc": "Face to face.", "risk": "medium", "hint": "Could clear the air.", "check": { "stat": "rep", "dc": 40 },
+          "ok": { "text": "An hour in the president's office. Firm handshakes, frank words. {PRESl} says, 'I like a player who looks me in the eye.' The warning is withdrawn.", "fx": { "board": 18, "stress": -2 } },
+          "bad": { "text": "{PRESl} keeps him waiting forty minutes and gives him ten. Nothing changes except {J}'s blood pressure.", "fx": { "board": 2, "stress": 4 } } },
+        { "label": "Do everything the club asks", "desc": "Sponsor events, interviews, smiles.", "risk": "low", "hint": "Slow repair. Tiring.", "text": "Every event, every handshake, every photo. It takes weeks. Slowly, the corridor greetings return.", "fx": { "board": 12, "stress": 4, "pfm": -2 } },
+        { "label": "Hand in a transfer request", "desc": "If they don't want you, leave.", "risk": "high", "hint": "The door opens.", "text": "The request is accepted with indecent speed. He's on the transfer list by Friday.", "fx": { "listed": true, "fans": -4, "board": -4, "stress": 3 } }
+      ]
+    },
+    {
+      "id": "lw_low_morale", "cat": "body", "w": 7, "trigger": "lowMorale",
+      "title": "The Grey Weeks",
+      "text": ["Everything has gone grey. Football, food, music, messages. {J} goes to training, comes home, sits in the dark. He hasn't told anyone. The club psychologist has noticed anyway.", "{J} cancels plans with everyone. He doesn't want to talk. He scrolls, sleeps badly, trains on autopilot. Somewhere along the way, he stopped enjoying football."],
+      "prompt": "Something is wrong, and it isn't your body.",
+      "choices": [
+        { "label": "Talk to the club psychologist", "desc": "Ask for help.", "risk": "low", "hint": "The bravest thing you'll do this year.", "text": "The first session he barely speaks. The second, he can't stop. It isn't fixed. But it's started.", "fx": { "morale": 15, "stress": -8, "flag": "sees_psychologist", "growth": ["mental"] } },
+        { "label": "Tell someone you love", "desc": "{MUM}, or {BFf}, or whoever is closest.", "risk": "low", "hint": "You're not alone.", "text": "He calls and just says, 'I'm not okay.' The person on the other end doesn't panic. They just stay on the phone. That's everything.", "fx": { "morale": 10, "family": 4, "friends": 4, "love": 4, "stress": -5 } },
+        { "label": "Push through alone", "desc": "Footballers don't break.", "risk": "high", "hint": "Footballers do break.", "text": "He tells himself it's nothing. It isn't nothing. It shows on the pitch, in the dressing room, at home.", "fx": { "morale": -4, "stress": 5, "form": -0.3 } }
+      ]
+    },
+    {
+      "id": "lw_burnout", "cat": "body", "w": 8, "trigger": "burnout",
+      "title": "Burnout",
+      "text": ["{J}'s hands are shaking before training. His heart races at night. The sports scientist shows him the data — heart-rate variability, sleep, reaction times — and says one word: 'burnout'.", "In the middle of a routine drill, {J} stops, sits down on the grass and can't explain why. The physio sits next to him. Nobody rushes him."],
+      "prompt": "Your body and mind are at breaking point.",
+      "choices": [
+        { "label": "Take a full week off", "desc": "Club, phone, everything.", "risk": "medium", "hint": "You'll miss a match. You'll save your season.", "text": "A week at home with the phone off. {MUM}'s cooking, long walks, sleep. He comes back a different person.", "fx": { "stress": -30, "pfm": 10, "morale": 8, "trust": -3, "family": 5 } },
+        { "label": "Cut everything except football", "desc": "No media, no events, no extras.", "risk": "low", "hint": "Some people won't like being cut.", "text": "He cancels every sponsor event and interview for a month. The board grumbles. His body thanks him.", "fx": { "stress": -18, "board": -3, "press": -2, "pfm": 4 } },
+        { "label": "Push through", "desc": "Rest when you retire.", "risk": "extreme", "hint": "This is how injuries happen.", "text": "He keeps going. Something has to give, and in football, something always does.", "fx": { "stress": 5, "injury": "moderate", "morale": -5 } }
+      ]
+    },
+    {
+      "id": "lw_stress_partner", "cat": "love", "w": 5, "when": { "stress": [70, 100], "partner": ["dating", "serious", "engaged", "married"] },
+      "title": "Bringing It Home",
+      "text": ["{J} snapped at {Pf} over nothing — the wrong brand of rice. She stares at him. 'This isn't about rice, is it?'", "{Pf} finds {J} awake at 4am, sitting in the kitchen. 'Talk to me,' she says. He doesn't know where to start."],
+      "prompt": "The pressure is leaking into your relationship.",
+      "choices": [
+        { "label": "Tell her everything", "desc": "Every fear.", "risk": "low", "hint": "Sharing halves it.", "text": "He talks until sunrise. She doesn't try to fix anything. She just listens. He sleeps for four hours, the best four hours in weeks.", "fx": { "love": 8, "stress": -10 } },
+        { "label": "'I'm fine.'", "desc": "Protect her from it.", "risk": "medium", "hint": "She knows you're not.", "text": "'I'm fine.' She goes back to bed. He stays in the kitchen. Both of them are awake until morning, in different rooms.", "fx": { "love": -5, "stress": 3 } }
+      ]
+    },
+    {
+      "id": "lw_good_life_balance", "cat": "lifestyle", "w": 4, "when": { "family": [70, 100], "friends": [65, 100], "stress": [0, 35] },
+      "title": "A Good Balance",
+      "text": ["For once, everything is in balance: family calls on Sundays, friends on Fridays, training every day, sleep every night. {J} has found a rhythm.", "{J} realises he hasn't felt anxious in weeks. His family is close, his friends are close, and football feels like a game again."],
+      "prompt": "Protect it?",
+      "choices": [
+        { "label": "Write down what's working", "desc": "Remember this for the hard days.", "risk": "low", "hint": "Future-proofing.", "text": "He writes it all down: the routines, the people, the small things. On hard days months from now, he'll read it again.", "fx": { "morale": 5, "growth": ["mental"], "stress": -3 } },
+        { "label": "Push for more on the pitch", "desc": "Use the stability to level up.", "risk": "low", "hint": "Strong foundations, bigger ambitions.", "text": "With his life settled, he trains with a new hunger. The coaches notice the difference.", "fx": { "trust": 3, "growth": ["rel"], "stress": 2 } }
+      ]
+    },
+    {
+      "id": "lw_press_friend_leak", "cat": "media", "w": 5, "when": { "friends": [0, 35], "rep": [20, 100] },
+      "title": "A Friend Talks to the Papers",
+      "text": ["{OUT} has a story about {J}'s 'loneliness' and 'arrogance', based on 'friends from home who feel abandoned'. One quote sounds exactly like {BFf}.", "A podcast plays an anonymous voice note: an old friend saying {J} 'changed when the money came'."],
+      "prompt": "Neglect at home has become a media story.",
+      "choices": [
+        { "label": "Call {BFf} first, the papers never", "desc": "Fix the friendship, ignore the story.", "risk": "low", "hint": "Root cause.", "text": "{BFf} admits he was angry and said too much to the wrong person. They argue, then they don't. The story dies; the friendship doesn't.", "fx": { "friends": 12, "press": -1, "stress": 2 } },
+        { "label": "Issue a statement", "desc": "Set the record straight.", "risk": "medium", "hint": "Public. Cold.", "text": "His statement is fair and firm. It keeps the story alive another day. The friendship gets colder.", "fx": { "press": 2, "image": 1, "friends": -5 } }
+      ]
+    },
+    {
+      "id": "lw_family_media_pride", "cat": "family", "w": 4, "when": { "family": [75, 100], "rep": [20, 100] },
+      "title": "{MUM} on Television",
+      "text": ["A national TV show visits {J}'s family home. {MUM} has prepared food for forty people. {DAD} has prepared one sentence and repeats it every time a camera points at him.", "{MUM} has been invited onto a morning show to talk about raising a footballer. She's terrified. She's also bought a new dress."],
+      "prompt": "Support it?",
+      "choices": [
+        { "label": "Video-call in live, surprise her", "desc": "On air.", "risk": "low", "hint": "TV gold.", "text": "His face appears on the studio screen. {MUM} screams on live television. The clip is the most-watched moment of the show's year.", "fx": { "family": 6, "followers": 12000, "image": 3, "fans": 2 } },
+        { "label": "Let her shine on her own", "desc": "Her moment.", "risk": "low", "hint": "Pride.", "text": "She's wonderful: funny, warm, slightly embarrassing. {J} watches it six times.", "fx": { "family": 4, "image": 2, "morale": 3 } }
+      ]
+    },
+    {
+      "id": "lw_fans_vs_partner", "cat": "love", "w": 3, "when": { "fans": [0, 35], "partner": ["dating", "serious", "engaged", "married"] },
+      "title": "The Fans Blame {Pf}",
+      "text": ["With {J} playing badly, some fans have found a scapegoat: {Pf}. Her comments are full of abuse. Someone has written her name on a banner.", "A fan forum thread titled 'Is {J}'s girlfriend ruining his career?' has two hundred replies. {Pf} has read all of them."],
+      "prompt": "The fans are attacking your partner.",
+      "choices": [
+        { "label": "Defend her loudly", "desc": "Public statement.", "risk": "medium", "hint": "She'll feel protected. Fans may turn further.", "text": "'Criticise me. Never her.' Most fans respect it. A few double down. {Pf} saves the post on her phone.", "fx": { "love": 10, "fans": -2, "image": 3, "press": 1 } },
+        { "label": "Play better", "desc": "Fix the cause.", "risk": "low", "hint": "Silence while you work.", "text": "He says nothing publicly and trains like a man possessed. {Pf} wishes he'd said something.", "fx": { "love": -4, "growth": ["rel"], "stress": 3 } },
+        { "label": "Protect her privately", "desc": "Security, therapy, time.", "risk": "low", "hint": "Practical care.", "text": "He hires someone to filter her messages and books her a weekend away. She feels cared for, if not defended.", "fx": { "love": 5, "wealth": -300 } }
+      ]
+    },
+    {
+      "id": "lw_board_likes_partner", "cat": "politics", "w": 3, "when": { "board": [65, 100], "partnerStyle": ["public"] },
+      "title": "The President's Invitation",
+      "text": ["President {PRESl} invites {J} and {Pf} to his box for a big match. The president's wife has asked specifically to meet {Pf}.", "The board wants {J} and {Pf} at the club's gala dinner. Front table. Next to the sponsors."],
+      "prompt": "Go as a couple?",
+      "choices": [
+        { "label": "Go and charm the room", "desc": "Power couple mode.", "risk": "low", "hint": "Board loves it.", "text": "{Pf} charms everyone, including the president's wife, who now calls her weekly. {J}'s position at the club has never been safer.", "fx": { "board": 7, "love": 3, "image": 2 } },
+        { "label": "Go alone", "desc": "Keep her out of club politics.", "risk": "low", "hint": "Safe.", "text": "He goes alone. {PRESl} asks where she is. {J} makes an excuse.", "fx": { "board": 1, "love": -1 } }
+      ]
+    },
+    {
+      "id": "lw_dressing_family_day", "cat": "dressing", "w": 3, "when": { "dressing": [60, 100], "freeAgent": false },
+      "title": "Squad Family Day",
+      "text": ["The club's family day. Squad, partners, kids, parents. {MUM} and {DAD} have been invited and are standing nervously by the buffet.", "The squad is hosting a family barbecue. {T} has volunteered {J} to run the grill. He has never run a grill."],
+      "prompt": "Bring your worlds together?",
+      "choices": [
+        { "label": "Introduce your parents to everyone", "desc": "Proudly.", "risk": "low", "hint": "Family and squad both warm.", "text": "{DAD} ends up deep in conversation with {CAPl} about fishing. {MUM} feeds the entire squad. Two worlds become one.", "fx": { "family": 8, "dressing": 5, "morale": 4 } },
+        { "label": "Run the grill", "desc": "Chaos chef.", "risk": "low", "hint": "Memorable.", "text": "He burns everything. The squad eats it anyway, chanting his name. {MUM} quietly takes over.", "fx": { "dressing": 6, "family": 3 } }
+      ]
+    },
+    {
+      "id": "lw_image_sponsor_loss", "cat": "money", "w": 5, "when": { "image": [0, 30], "rep": [15, 100] },
+      "title": "A Sponsor Walks Away",
+      "text": ["A letter from {J}'s boot sponsor: they are 'pausing the partnership pending a review of brand values'. In other words: goodbye.", "A brand he's worked with for years removes his face from their website overnight. His agent finds out from a fan."],
+      "prompt": "Your image is costing you money.",
+      "choices": [
+        { "label": "Fix the image first", "desc": "Quiet good work.", "risk": "low", "hint": "Slow, solid.", "text": "No statements, just steady good behaviour and charity work. In six months, brands start calling again.", "fx": { "image": 8, "wealth": -500, "stress": 2 } },
+        { "label": "Hit back at the sponsor", "desc": "They were never loyal.", "risk": "high", "hint": "Satisfying. Bad for business.", "text": "His post calling the brand 'fake' goes viral. Every other brand takes note.", "fx": { "followers": 10000, "image": -4, "wealth": -500 } }
+      ]
+    }
+  ]
+}

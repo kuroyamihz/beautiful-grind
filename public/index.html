@@ -17,7 +17,12 @@
   <main id="setup" class="setup hidden">
     <div class="setup-hero">
       <div class="brand-big">BEAUTIFUL GRIND</div>
-      <p class="tagline">Age 16. One week at a time. No shortcuts.</p>
+      <p class="tagline">Age 16. One week at a time. Every choice ripples.</p>
+      <ul class="pitch-list">
+        <li><b>Football</b> — training, matches, key moments, transfers</li>
+        <li><b>Life</b> — family, love, friends, money, fame</li>
+        <li><b>Politics</b> — the manager, the board, the fans, the press</li>
+      </ul>
     </div>
     <div id="continue-box" class="card continue hidden">
       <div>
@@ -48,7 +53,7 @@
         <button type="submit" class="btn btn-primary">Start career ▶</button>
       </div>
     </form>
-    <p class="footnote">Your career saves automatically in this browser. Use ⚙ Settings in-game to export a backup.</p>
+    <p class="footnote">Your career saves automatically in this browser. Use Settings in-game to export a backup.</p>
   </main>
 
   <!-- ═════════ GAME ═════════ -->
@@ -56,8 +61,9 @@
     <header class="topbar">
       <div class="brand">BEAUTIFUL GRIND</div>
       <div id="top-date" class="top-date"></div>
+      <div id="top-meters" class="top-meters"></div>
       <div class="top-actions">
-        <button id="btn-settings" class="btn btn-small">⚙ Settings</button>
+        <button id="btn-settings" class="btn btn-small" aria-label="Settings">⚙ <span class="hide-sm">Settings</span></button>
       </div>
     </header>
     <div class="layout">
@@ -65,12 +71,18 @@
       <main class="col col-center">
         <article id="week-card" class="card week-card"></article>
         <section id="decisions"></section>
+        <section id="freetime" class="card freetime"></section>
         <section id="planner" class="card planner"></section>
         <section id="feed" class="card feed"></section>
       </main>
       <aside id="col-world" class="col col-right"></aside>
     </div>
   </div>
+
+  <!-- ═════════ INTERLUDE (a mid-week scene; time stands still) ═════════ -->
+  <dialog id="interlude" class="modal modal-interlude">
+    <div id="interlude-body" class="modal-inner"></div>
+  </dialog>
 
   <!-- ═════════ SETTINGS ═════════ -->
   <dialog id="settings" class="modal">

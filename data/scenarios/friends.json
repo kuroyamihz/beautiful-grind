@@ -1,0 +1,240 @@
+{
+  "scenarios": [
+    {
+      "id": "fr_group_chat_roast", "cat": "friends", "w": 5, "ui": "phone",
+      "title": "The Group Chat Roasts {J}",
+      "text": ["The old school group chat has found a clip of {J}'s worst touch of the season and set it to circus music. It has been playing on loop for an hour. {BFf} has made it the group photo.", "The group chat has a new name: '{J} Can't Defend'. It's had the name for three days. Nobody has changed it back."],
+      "prompt": "How do you respond?",
+      "choices": [
+        { "label": "Roast them back, harder", "desc": "Dig out the old photos.", "risk": "low", "hint": "Tradition. Bonding through cruelty.", "text": "He posts a photo of {BFf} at fourteen with a haircut that should be illegal. The chat explodes. Balance is restored.", "fx": { "friends": 6, "morale": 3 } },
+        { "label": "Leave the chat in mock protest", "desc": "Dramatic exit.", "risk": "low", "hint": "They'll add you back in 30 seconds.", "text": "He leaves. Twenty-eight seconds later he's added back with a new nickname, which is worse.", "fx": { "friends": 4, "morale": 2 } },
+        { "label": "Mute it, you're busy", "desc": "Not today.", "risk": "medium", "hint": "They'll notice you went quiet.", "text": "He mutes it. When he checks later, the joke has moved on without him. That stings more than the joke.", "fx": { "friends": -4 } }
+      ]
+    },
+    {
+      "id": "fr_old_friend_jealous", "cat": "friends", "w": 4, "when": { "rep": [15, 100] },
+      "title": "An Old Friend Turns Sour",
+      "text": ["A friend from the youth team, who didn't make it, posts a long message online: '{J} forgot where he came from.' He hasn't spoken to {J} in a year. Neither of them called the other.", "At a home visit, an old friend makes a joke about {J} 'being too good for us now'. The table laughs. The joke had teeth."],
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Call him directly", "desc": "Clear the air.", "risk": "medium", "hint": "Could heal or blow up.", "out": [
+          { "w": 2, "text": "The call is awkward for five minutes and honest for an hour. He admits he's struggling. They meet next time {J} is home.", "fx": { "friends": 6, "morale": 3, "growth": ["mental"] } },
+          { "w": 1, "text": "He doesn't pick up. He posts a screenshot of the missed call with a laughing emoji.", "fx": { "friends": -3, "stress": 3, "image": -1 } }
+        ] },
+        { "label": "Ignore it publicly, hurt privately", "desc": "Rise above.", "risk": "low", "hint": "Dignified. Unresolved.", "text": "He says nothing. The post fades. The feeling doesn't.", "fx": { "stress": 2, "morale": -2 } },
+        { "label": "Reply in public", "desc": "Set the record straight.", "risk": "high", "hint": "Everyone will watch.", "text": "His reply is fair, but it's public. The argument becomes a story in {OUT}. Mutual friends pick sides.", "fx": { "friends": -6, "press": -2, "followers": 4000, "image": -2 } }
+      ]
+    },
+    {
+      "id": "fr_bf_wedding_bestman", "cat": "friends", "w": 4, "once": true, "when": { "age": [21, 38] },
+      "title": "{BFf} Is Getting Married",
+      "text": ["{BFf} calls, voice shaking: he's getting married, and he wants {J} as his best man. The wedding is in three months. It falls on a matchday.", "{BFf} proposed! The wedding date is set. He wants {J} to give the best man's speech. He has also, accidentally, chosen the day of a cup tie."],
+      "prompt": "The date clashes with a match.",
+      "choices": [
+        { "label": "Ask the club for permission", "desc": "Fight for it.", "risk": "medium", "hint": "Your manager decides.", "check": { "stat": "trust", "dc": 55 },
+          "ok": { "text": "{Mf} sighs and says, 'Family is family. Go.' The speech makes the whole room cry, including {BFf}'s father, who has never cried.", "fx": { "friends": 12, "morale": 6, "trust": -1, "family": 2 } },
+          "bad": { "text": "{Mf} says no. {J} records his speech on video. It's played on a projector. {BFf} says he understands. He doesn't, fully.", "fx": { "friends": -5, "stress": 3 } } },
+        { "label": "Skip the match, go anyway", "desc": "Some things are bigger.", "risk": "extreme", "hint": "Your friend will never forget it. Nor will the club.", "text": "He goes. The best day of {BFf}'s life. The club fines him two weeks' wages and {Mf} doesn't look at him for a month.", "fx": { "friends": 15, "morale": 6, "trust": -10, "board": -5, "fans": -2, "wealth": -400 } },
+        { "label": "Ask him to move the date", "desc": "It's only a date, right?", "risk": "high", "hint": "It isn't only a date.", "text": "There's a silence on the phone. 'The venue's booked, bro.' He finds another best man. They're still friends. Different friends.", "fx": { "friends": -10, "morale": -3 } }
+      ]
+    },
+    {
+      "id": "fr_hangers_on", "cat": "friends", "w": 4, "when": { "wealth": [10000, 999999999], "age": [18, 40] },
+      "title": "The Entourage Grows",
+      "text": ["Somehow there are seven people in {J}'s apartment who weren't there last month. Cousins of friends. Friends of cousins. One of them is wearing {J}'s jacket.", "{J}'s new 'friends' are always available, always fun, and always looking at the bill when it arrives."],
+      "prompt": "Who stays?",
+      "choices": [
+        { "label": "Clear the house", "desc": "Only real friends.", "risk": "medium", "hint": "Quieter life. Some will badmouth you.", "text": "He keeps three people and asks the rest to leave. One of them sells a 'story' to a gossip account a week later. It's mostly lies.", "fx": { "friends": 3, "stress": -4, "image": -1, "lifestyle": -0.2 } },
+        { "label": "Keep the party going", "desc": "Life's for living.", "risk": "high", "hint": "Expensive. Fun. Risky.", "text": "The parties are legendary. The bills are too. {BFf} comes once, looks around, and leaves early.", "fx": { "lifestyle": 0.3, "friends": -3, "morale": 3, "pfm": -3, "image": -2 } },
+        { "label": "Ask {BFf} who's real", "desc": "He'll know.", "risk": "low", "hint": "Trust the person who knew you before.", "text": "{BFf} looks at the list and crosses out five names without hesitating. He's right about all five.", "fx": { "friends": 6, "stress": -2, "lifestyle": -0.1 } }
+      ]
+    },
+    {
+      "id": "fr_teammate_friendship", "cat": "friends", "w": 5, "uses": { "T": "any" }, "when": { "freeAgent": false },
+      "title": "{T} Invites {J} Home",
+      "text": ["{T} invites {J} for dinner with his family. His wife cooks, his kids climb on {J} like a tree, and nobody mentions football for three hours.", "{T} has a spare ticket to a concert on Saturday. 'It's not your music,' he says. 'Come anyway.'"],
+      "prompt": "Go?",
+      "choices": [
+        { "label": "Go and stay late", "desc": "Friendship off the pitch.", "risk": "low", "hint": "A real friend in the squad.", "text": "It's the best evening he's had in this city. {T} drives him home at midnight. Something has changed between them.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "friends": 5, "dressing": 3, "morale": 3 } },
+        { "label": "Go, but leave early", "desc": "Early training tomorrow.", "risk": "low", "hint": "Nice. Brief.", "text": "He's a good guest for two hours and leaves before dessert. {T} says 'next time, stay'.", "fx": { "friends": 2, "dressing": 1 } },
+        { "label": "Make an excuse", "desc": "Not in the mood.", "risk": "low", "hint": "He'll stop asking eventually.", "text": "'Next time,' says {J}. {T} nods. Next time doesn't come.", "fx": { "dressing": -2, "friends": -1 } }
+      ]
+    },
+    {
+      "id": "fr_friend_in_trouble", "cat": "friends", "w": 3, "ui": "phone", "when": { "age": [18, 40] },
+      "title": "{BFf} Has Been Arrested",
+      "text": ["A call at 2am from {BFf}'s brother: {BFf} has been arrested after a fight outside {PLACE}. He says he was defending someone. He needs a lawyer and doesn't have money for one.", "{BFf} is in a police cell. A misunderstanding, he swears. The bail is more than he earns in a year."],
+      "prompt": "Help him?",
+      "vars": { "cost": ["wealthPct", 10, 800] },
+      "choices": [
+        { "label": "Pay for a lawyer quietly", "desc": "{cost}, no questions.", "risk": "medium", "hint": "Loyalty. If the press finds out...", "out": [
+          { "w": 3, "text": "The lawyer gets him out by morning. The charges are dropped. {BFf} doesn't know how to thank him, so he just hugs him for a long time.", "fx": { "wealth": "-cost", "friends": 12, "stress": 3 } },
+          { "w": 1, "text": "It works — but a journalist finds out who paid. 'Footballer bails out brawling friend' runs in {OUT}.", "fx": { "wealth": "-cost", "friends": 12, "press": -3, "image": -3, "board": -2 } }
+        ] },
+        { "label": "Go to the station in person", "desc": "Be there.", "risk": "high", "hint": "Someone will take a photo.", "text": "He sits in the station waiting room all night. A photo of him there is everywhere by breakfast. {BFf} will never forget it. Neither will the club.", "fx": { "friends": 15, "image": -4, "board": -3, "trust": -2, "pfm": -3 } },
+        { "label": "Send money, stay away", "desc": "Help without risk.", "risk": "low", "hint": "Practical. He might feel abandoned.", "text": "He sends the money through {BFf}'s brother. It helps. {BFf} notices that {J} didn't call.", "fx": { "wealth": "-cost", "friends": 4 } }
+      ]
+    },
+    {
+      "id": "fr_new_city_friend", "cat": "friends", "w": 4, "when": { "abroad": true },
+      "title": "A Friend in a Foreign City",
+      "text": ["At the gym near his apartment, a local guy his age keeps spotting {J} on the bench press. He doesn't seem to care about football at all. That's what makes him interesting.", "The barista at the café near training always writes {J}'s name wrong on purpose. Today she's written 'the new guy who looks lost'. He laughs. She invites him to a quiz night."],
+      "prompt": "Make a new friend?",
+      "choices": [
+        { "label": "Say yes to everything", "desc": "Build a life here.", "risk": "low", "hint": "The city becomes home.", "text": "Quiz nights, cheap dinners, a birthday party where nobody asks for selfies. Slowly, the city stops feeling foreign.", "fx": { "friends": 8, "morale": 5, "stress": -3, "flag": "abroad_friend" } },
+        { "label": "Keep to yourself", "desc": "You're here to play.", "risk": "low", "hint": "Focused. Lonely.", "text": "He keeps it professional. The apartment stays quiet. Some nights, too quiet.", "fx": { "morale": -2, "growth": ["mental"] } }
+      ]
+    },
+    {
+      "id": "fr_forgot_birthday", "cat": "friends", "w": 4, "ui": "phone",
+      "title": "A Forgotten Birthday",
+      "text": ["{BFf}'s birthday was yesterday. {J} remembers at 11pm today, scrolling past photos of a party he wasn't at and a cake that says '{BFf} 🎉'.", "The group chat is full of birthday messages for {BFf}. They're from yesterday. {J}'s isn't one of them."],
+      "prompt": "How do you fix it?",
+      "choices": [
+        { "label": "Call and grovel", "desc": "Full apology.", "risk": "low", "hint": "He'll forgive you. Eventually.", "text": "{BFf} lets it ring four times on purpose before picking up. Then he laughs. 'You owe me {FOOD}. A lot of it.'", "fx": { "friends": 3 } },
+        { "label": "Send an outrageous gift", "desc": "Make it memorable.", "risk": "low", "hint": "Money talks. Friends notice.", "vars": { "cost": ["wageWeeks", 1, 120] }, "text": "The gift is so ridiculous that {BFf} posts it everywhere. All is forgiven. Mostly because of the gift.", "fx": { "friends": 5, "wealth": "-cost" } },
+        { "label": "Pretend you were busy", "desc": "Work.", "risk": "medium", "hint": "He knows.", "text": "'Busy with work.' {BFf} replies: 'Yeah.' Just that.", "fx": { "friends": -5 } }
+      ]
+    },
+    {
+      "id": "fr_charity_match", "cat": "friends", "w": 3, "when": { "rep": [15, 100], "phase": ["off", "pre"] },
+      "title": "The Charity Match Back Home",
+      "text": ["The old neighbourhood is organising a charity match: {J}'s childhood friends against a team of local celebrities. The proceeds go to the clinic where {J} was born.", "{BFf} has organised a charity game back home and put {J}'s name on the poster before asking. The tickets have sold out."],
+      "prompt": "Play in it?",
+      "choices": [
+        { "label": "Play the full game", "desc": "For the neighbourhood.", "risk": "medium", "hint": "Joy. A real injury risk.", "out": [
+          { "w": 3, "text": "He plays for the old team, scores twice, and lets the local mayor score a penalty. The clinic gets a new wing.", "fx": { "friends": 8, "family": 4, "image": 4, "fans": 2, "morale": 5 } },
+          { "w": 1, "text": "A local celebrity, a singer who has never played, scythes him down in the first minute. Small knock. Huge photos.", "fx": { "friends": 6, "image": 3, "injury": "minor" } }
+        ] },
+        { "label": "Come and coach from the sideline", "desc": "Present, safe.", "risk": "low", "hint": "Club-friendly. Friends slightly disappointed.", "text": "He shouts instructions like a real manager. His friends lose 5-1 and blame his tactics.", "fx": { "friends": 4, "image": 2, "family": 2 } },
+        { "label": "Ask them to take your name off", "desc": "The club won't allow it.", "risk": "medium", "hint": "Sensible. Feels like betrayal back home.", "text": "The poster is reprinted without his name. Ticket refunds are requested. The neighbourhood remembers.", "fx": { "friends": -7, "family": -2, "board": 1 } }
+      ]
+    },
+    {
+      "id": "fr_gaming_rivalry", "cat": "friends", "w": 4, "when": { "age": [16, 32] },
+      "title": "The Online Rivalry",
+      "text": ["{BFf} has beaten {J} at the football video game eleven times in a row and is posting the results. Fans have found the posts. They're taking sides.", "A friend from home challenges {J} to a live-streamed game. Loser has to wear the other's club shirt for a day."],
+      "prompt": "Accept?",
+      "choices": [
+        { "label": "Accept, stream it", "desc": "Make it an event.", "risk": "medium", "hint": "Viral either way.", "out": [
+          { "w": 1, "text": "He wins in the last minute. Thirty thousand people watch live. {BFf} demands a rematch on air.", "fx": { "friends": 5, "followers": 8000, "fans": 2 } },
+          { "w": 1, "text": "He loses 6-0. He wears his friend's local team shirt to training. The squad photograph it from every angle.", "fx": { "friends": 6, "followers": 6000, "dressing": 2 } }
+        ] },
+        { "label": "Play privately", "desc": "No cameras.", "risk": "low", "hint": "Just friends.", "text": "They play until 2am, trash-talking like they're twelve. Nobody else sees. That's the point.", "fx": { "friends": 6, "pfm": -2, "morale": 3 } }
+      ]
+    },
+    {
+      "id": "fr_friend_business", "cat": "friends", "w": 3, "when": { "wealth": [5000, 999999999] },
+      "title": "A Friend's Business Idea",
+      "text": ["{BFf} wants to open a small futsal centre in the old neighbourhood and name it after {J}. He needs an investor. He also needs {J}'s face on the sign.", "An old friend pitches {J} a clothing brand. The designs are actually good. He wants a partner, not a sponsor."],
+      "prompt": "Invest?",
+      "vars": { "cost": ["wealthPct", 15, 1000] },
+      "choices": [
+        { "label": "Invest and be involved", "desc": "{cost}, plus your name.", "risk": "medium", "hint": "Could flourish. Could fail. Either way, you're in it together.", "out": [
+          { "w": 2, "text": "It works. Within a year it's a local institution. Kids who can't afford academies play there for free on Sundays.", "fx": { "wealth": "-cost", "friends": 8, "image": 4, "family": 2, "flag": "friend_business" } },
+          { "w": 1, "text": "It struggles, then closes. The money's gone. The friendship survives, just about.", "fx": { "wealth": "-cost", "friends": 2, "stress": 3 } }
+        ] },
+        { "label": "Lend your name only", "desc": "No money.", "risk": "low", "hint": "Helps him, protects you.", "text": "His name on the sign brings customers. {BFf} is grateful, a little disappointed.", "fx": { "friends": 3, "image": 1 } },
+        { "label": "Decline", "desc": "Business and friendship don't mix.", "risk": "medium", "hint": "Wise, maybe. He'll be hurt.", "text": "{BFf} says he understands. He finds another investor. The sign has someone else's name.", "fx": { "friends": -5 } }
+      ]
+    },
+    {
+      "id": "fr_reunion_awkward", "cat": "friends", "w": 3, "when": { "phase": ["off"], "rep": [20, 100] },
+      "title": "The School Reunion",
+      "text": ["A school reunion. Everyone wants a selfie. Nobody asks how he is. The girl he had a crush on at fourteen is there, married, and lovely, and asks only about his salary.", "The reunion is in the old school hall, which seems smaller than he remembers. A teacher who said he'd 'never amount to anything' is now telling everyone she 'always believed in him'."],
+      "prompt": "How do you play it?",
+      "choices": [
+        { "label": "Be gracious to everyone", "desc": "Selfies, stories, smiles.", "risk": "low", "hint": "Exhausting. Kind.", "text": "He signs, smiles and listens for four hours. Driving home, he feels empty and full at the same time.", "fx": { "image": 2, "friends": 2, "stress": 2 } },
+        { "label": "Find your real friends in a corner", "desc": "The ones who knew you.", "risk": "low", "hint": "Real conversations.", "text": "He finds the four people who always mattered and they talk in the car park until midnight. Nothing has changed. Everything has.", "fx": { "friends": 7, "morale": 4 } },
+        { "label": "Remind the teacher", "desc": "Gently. Or not.", "risk": "medium", "hint": "Satisfying. Petty.", "text": "'You said I'd never amount to anything.' The table goes silent. It feels good for exactly ten seconds.", "fx": { "morale": 2, "image": -1, "growth": ["mental"] } }
+      ]
+    },
+    {
+      "id": "fr_teammate_needs_place", "cat": "friends", "w": 3, "uses": { "T": "any" }, "when": { "freeAgent": false },
+      "title": "{T} Needs a Place to Stay",
+      "text": ["{T} has split up with his girlfriend and has nowhere to live. He asks if he can stay on {J}'s sofa 'for a week'. Weeks are flexible in football.", "{T}'s flat has flooded. He turns up with a suitcase and a hopeful face."],
+      "prompt": "Let him stay?",
+      "choices": [
+        { "label": "Yes, as long as he needs", "desc": "Mi casa es tu casa.", "risk": "low", "hint": "Friendship. Chaos. Dishes.", "text": "The week becomes six. He leaves dishes everywhere and the apartment has never been livelier. They become inseparable.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "friends": 4, "dressing": 3, "stress": 2 } },
+        { "label": "One week, strict", "desc": "With house rules.", "risk": "low", "hint": "Fair.", "text": "One week, a list of rules on the fridge. {T} breaks all of them and leaves on day seven with a thank-you card.", "fx": { "dressing": 2, "friends": 1 } },
+        { "label": "Help him find a hotel", "desc": "Your space is your space.", "risk": "low", "hint": "Reasonable. A bit cold.", "text": "He books {T} a hotel and pays the first night. {T} is grateful. Slightly less close.", "fx": { "dressing": 1, "wealth": -100 } }
+      ]
+    },
+    {
+      "id": "fr_friend_wants_tickets", "cat": "friends", "w": 4, "ui": "phone", "when": { "freeAgent": false },
+      "title": "Tickets, Tickets, Tickets",
+      "text": ["Every friend he's ever had wants tickets for the big game. The club gives him four. He has received thirty-one requests, including from a man he met once at a bus stop.", "The derby is coming and {J}'s phone has become a ticket office."],
+      "prompt": "Who gets them?",
+      "choices": [
+        { "label": "Family and {BFf} only", "desc": "The inner circle.", "risk": "low", "hint": "The people who matter.", "text": "His family and {BFf} sit together in the stand. Twenty-seven other people quietly mute him.", "fx": { "family": 3, "friends": 2 } },
+        { "label": "Buy extra tickets for everyone", "desc": "Expensive generosity.", "risk": "low", "hint": "Everyone happy. Wallet less so.", "vars": { "cost": ["wageWeeks", 1.5, 200] }, "text": "He buys a block of seats for {cost}. Thirty people in his name. They make a banner. It's misspelled.", "fx": { "friends": 6, "family": 2, "wealth": "-cost", "fans": 1 } },
+        { "label": "Raffle them in the group chat", "desc": "Let fate decide.", "risk": "low", "hint": "Fair, chaotic.", "text": "The raffle becomes a three-day saga with accusations of rigging. It's the most fun the group chat has had in years.", "fx": { "friends": 4 } }
+      ]
+    },
+    {
+      "id": "fr_depression_friend", "cat": "friends", "w": 3, "when": { "friends": [30, 100] },
+      "title": "Something's Wrong With {BFf}",
+      "text": ["{BFf}'s messages have become strange: short, flat, sent at 4am. When {J} calls, he says he's 'just tired'. He's been just tired for a month.", "{BFf}'s sister messages {J}: 'Have you spoken to him? He's not himself. He won't talk to us.'"],
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Go home and see him", "desc": "In person.", "risk": "medium", "hint": "Costs time and a training day.", "text": "He flies home on his day off. They sit on the old wall behind the school until 3am. {BFf} finally talks. Then he agrees to see someone. It's a start.", "fx": { "friends": 12, "trust": -2, "pfm": -3, "morale": 2, "stress": 2 } },
+        { "label": "Call every day", "desc": "From a distance, consistently.", "risk": "low", "hint": "Steady support.", "text": "Ten minutes every evening, no matter what. Slowly, the calls get longer. Slowly, {BFf} laughs again.", "fx": { "friends": 8, "stress": 2 } },
+        { "label": "Send him a message and hope", "desc": "He'll reach out if he needs to.", "risk": "high", "hint": "He might not.", "text": "'Here if you need me.' He doesn't reply. {J} tells himself that means he's fine.", "fx": { "friends": -4, "stress": 3 } }
+      ]
+    },
+    {
+      "id": "fr_viral_with_friends", "cat": "friends", "w": 3, "when": { "followers": [5000, 999999999] },
+      "title": "The Friends Video",
+      "text": ["{BFf} posts a video of {J} losing at a street game of keepy-uppy to an eleven-year-old. It's going viral. {J}'s agent has called twice.", "A video of {J} and the old crew singing badly in a car goes viral. In the background you can see the club's training ground. And a very illegal U-turn."],
+      "prompt": "React?",
+      "choices": [
+        { "label": "Repost it, laughing", "desc": "Own it with your friends.", "risk": "low", "hint": "Fans love the human side.", "text": "He reposts it with 'I want a rematch'. The kid gets invited to the club's academy open day. {BFf} becomes briefly famous and unbearable.", "fx": { "friends": 6, "followers": 7000, "image": 2 } },
+        { "label": "Ask {BFf} to delete it", "desc": "Your agent insists.", "risk": "medium", "hint": "Professional. Friend feels policed.", "text": "{BFf} deletes it, slowly, with a voice note that says only: 'Got it, boss.'", "fx": { "friends": -5, "board": 1 } }
+      ]
+    },
+    {
+      "id": "fr_promise_to_return", "cat": "friends", "w": 3, "when": { "abroad": true, "friends": [0, 50] },
+      "title": "The Friends You Left Behind",
+      "text": ["Looking through old photos, {J} realises he hasn't spoken properly to anyone from home in months. The group chat has moved on. His friends' lives have new names in them.", "{BFf}'s new girlfriend, new job, new apartment — {J} learned about all three from social media."],
+      "prompt": "What will you do?",
+      "choices": [
+        { "label": "Schedule a weekly call", "desc": "Every Sunday. Non-negotiable.", "risk": "low", "hint": "Effort rebuilds bridges.", "text": "Sunday calls start awkward and become essential. By the third week, it's like he never left.", "fx": { "friends": 10, "morale": 4 } },
+        { "label": "Fly them all out for a weekend", "desc": "Expensive. Unforgettable.", "risk": "low", "hint": "Grand gesture.", "vars": { "cost": ["wageWeeks", 3, 600] }, "text": "Five friends, one weekend, a city none of them have seen. They watch him play. They cry when he scores, then deny it.", "fx": { "friends": 14, "morale": 6, "wealth": "-cost" } },
+        { "label": "Accept that life moves on", "desc": "People drift.", "risk": "low", "hint": "Mature. Sad.", "text": "He accepts it. Friendships have seasons. This one might be ending.", "fx": { "friends": -3, "growth": ["mental"] } }
+      ]
+    },
+    {
+      "id": "fr_friend_sells_story", "cat": "friends", "w": 2, "cd": 120, "when": { "friends": [0, 40], "rep": [25, 100] },
+      "title": "A 'Friend' Sells a Story",
+      "text": ["{OUT} runs an 'exclusive' from 'a lifelong friend' of {J}: stories about his childhood, his family's money troubles, and a girlfriend from school. Half of it is true. That's the worst part.", "A gossip account posts screenshots from a private group chat. Someone in {J}'s old circle has sold him out."],
+      "prompt": "How do you respond?",
+      "choices": [
+        { "label": "Find out who, cut them off", "desc": "Quietly.", "risk": "low", "hint": "Trust is broken, but contained.", "text": "It takes a day to figure out. He removes one person from his life. The group chat goes silent, then slowly recovers.", "fx": { "friends": -3, "stress": 3, "growth": ["mental"] } },
+        { "label": "Make a public statement", "desc": "Address the lies.", "risk": "medium", "hint": "Keeps the story alive.", "text": "His statement is dignified. It also means the story runs for another three days.", "fx": { "press": -2, "image": 1, "stress": 3 } },
+        { "label": "Call {JR} with your side", "desc": "Fight fire with fire.", "risk": "medium", "hint": "Depends on your press relations.", "check": { "stat": "rep", "dc": 40 },
+          "ok": { "text": "{JR} writes a sympathetic piece about friendship and fame. The public sides with {J}.", "fx": { "press": 3, "image": 3 } },
+          "bad": { "text": "{JR} runs it, but the headline makes it look like a feud. More fuel on the fire.", "fx": { "press": -2, "image": -2, "friends": -3 } } }
+      ]
+    },
+    {
+      "id": "fr_old_coach_promise", "cat": "friends", "w": 5, "when": { "flags": ["first_coach_promise"] }, "once": true,
+      "title": "Keeping a Promise",
+      "text": ["{J} promised his first coach a visit. The old man is in a small house near the pitch where it all started, a blanket on his knees and every newspaper clipping of {J}'s career on the wall.", "The visit he promised. The old coach's daughter opens the door and starts crying before he's said a word."],
+      "prompt": "How long do you stay?",
+      "choices": [
+        { "label": "All afternoon", "desc": "No phone. Just stories.", "risk": "low", "hint": "Some debts are paid in time.", "text": "They watch an old tape of a youth match on a VCR. The coach points out every mistake {J} made at eleven. They laugh until they cry.", "fx": { "unflag": "first_coach_promise", "morale": 8, "image": 2, "friends": 3, "growth": ["mental"] } },
+        { "label": "An hour, with photos", "desc": "Share it with the world.", "risk": "low", "hint": "Fans will love the story.", "text": "The photos of them together go everywhere. The coach's phone rings for a week with old players calling him.", "fx": { "unflag": "first_coach_promise", "morale": 5, "followers": 4000, "fans": 2 } }
+      ]
+    },
+    {
+      "id": "fr_kid_found_followup", "cat": "friends", "w": 5, "when": { "flags": ["found_a_kid"] }, "once": true,
+      "title": "The Kid From the Street",
+      "text": ["The boy {J} spotted playing in sandals is now in an academy. He's sent a video: a goal from a youth match, a celebration copying {J}'s, and a message: 'One day I'll play against you.'"],
+      "prompt": "Reply?",
+      "choices": [
+        { "label": "Become his mentor", "desc": "Regular calls, advice, boots.", "risk": "low", "hint": "A lifelong bond.", "text": "Monthly calls. New boots every season. The boy calls him 'coach', which is ridiculous and perfect.", "fx": { "unflag": "found_a_kid", "morale": 6, "image": 3, "flag": "mentor_kid" } },
+        { "label": "Send a signed shirt and a voice note", "desc": "Encouragement.", "risk": "low", "hint": "He'll treasure it.", "text": "The boy pins the shirt above his bed. The voice note is his phone's alarm sound for a year.", "fx": { "unflag": "found_a_kid", "morale": 4 } }
+      ]
+    }
+  ]
+}

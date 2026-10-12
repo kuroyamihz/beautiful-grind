@@ -120,10 +120,13 @@ export const EUR_IDR = 19000;
 // ── Life web (relationships, stress, interludes) ───────────────
 export const LIFE = {
   maxRipples: 3,                              // side-effect lines shown per decision
-  neglect: { family: 5, love: 3, friends: 4 }, // weeks without contact before that relationship starts sliding
+  neglect: { family: 3, love: 2, friends: 3 }, // weeks without contact before that relationship starts sliding
+  coolAbove: 60,                              // above this, family/friends/partner cool by about 1 a week unless you keep investing
+  softCap: 60,                                // above this (or below 100 minus this), each step further is harder
+  stressRest: 30,                             // the level stress drifts back to on its own
   freeTimePerWeek: 2,                         // free-time actions per week (+1 while injured)
   stressInjury: 0.02,                         // extra weekly injury chance when stress is above 75
-  interludeChance: 0.3,                       // share of "Play week" clicks that open a mid-week scene instead (time stands still)
+  interludeChance: 0.38,                      // share of "Play week" clicks that open a mid-week scene instead (time stands still)
   weeklyDecisions: { 1: 14, 2: 34, 3: 34, 4: 18 }, // how many story decisions a week brings (weights)
   maxPending: 5,                              // never more open decisions than this
   repeatPenalty: 0.5,                         // each time a scenario has fired, its weight is divided by (1 + this × times)

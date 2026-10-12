@@ -1,0 +1,548 @@
+{
+  "scenarios": [
+    {
+      "id": "il_kid_drawing", "cat": "interlude", "w": 5, "cd": 150,
+      "title": "A Drawing at the Gate",
+      "text": ["A girl of about seven is waiting at the training-ground gate with a drawing of {J}. He has six fingers on one hand and the ball is bigger than his head. She is extremely proud of it.", "A small boy pushes a crumpled drawing through the fence: {J} scoring, the net drawn in furious biro, the crowd a sea of tiny circles with smiles."],
+      "prompt": "What do you do with it?",
+      "choices": [
+        { "label": "Sign it and take a photo with them", "desc": "Make their day.", "risk": "low", "hint": "Pure joy. Someone will film it.", "text": "The kid's parent films the whole thing. By night it has half a million views and {MUM} has sent it to everyone she knows.", "fx": { "followers": 3000, "fans": 2, "image": 2, "morale": 3 } },
+        { "label": "Keep it, stick it in your locker", "desc": "This one's for you.", "risk": "low", "hint": "Private. Means more.", "text": "The drawing goes up inside his locker door. {CAPl} sees it and says nothing, then brings in his own kid's drawing the next day.", "fx": { "morale": 4, "dressing": 1 } }
+      ]
+    },
+    {
+      "id": "il_kitman_boots", "cat": "interlude", "w": 4, "cd": 150, "when": { "freeAgent": false },
+      "title": "The Kit Man's Theory",
+      "text": ["The kit man stops {J} in the corridor with a serious face. He has a theory: {J} plays better in the old boots, the scuffed ones. He has data. The data is a notebook.", "The kit man, who has been at the club for twenty-six years, informs {J} that his new boots are 'cursed'. He says it the way a doctor delivers a diagnosis."],
+      "prompt": "Humour him?",
+      "choices": [
+        { "label": "Switch to the old boots", "desc": "Respect the elder.", "risk": "low", "hint": "Superstition is free.", "text": "{J} wears the old boots. Whatever happens next, the kit man will take credit. He's earned it.", "fx": { "dressing": 2, "morale": 2, "mood": "Confident" } },
+        { "label": "Ask to see the notebook", "desc": "Science.", "risk": "low", "hint": "You'll learn something. Possibly nothing useful.", "text": "The notebook goes back to 1998. It records every player's boots, results, and the weather. It is the most detailed document the club owns.", "fx": { "dressing": 3, "growth": ["mental"] } },
+        { "label": "Laugh it off", "desc": "They're just boots.", "risk": "low", "hint": "He'll be quietly offended.", "text": "The kit man nods slowly. Next week {J}'s socks are inexplicably two sizes too small.", "fx": { "dressing": -1 } }
+      ]
+    },
+    {
+      "id": "il_chef_secret", "cat": "interlude", "w": 4, "cd": 150, "when": { "freeAgent": false },
+      "title": "The Canteen Deal",
+      "text": ["The club chef slides {J} a plate of {FOOD} that is definitely not on the nutritionist's plan. 'Our secret,' she whispers. 'You look homesick.'", "In the canteen the chef has made something from {J}'s home region, just for him. She found the recipe online. It's almost right, which makes it perfect."],
+      "prompt": "Eat it?",
+      "choices": [
+        { "label": "Eat every bite", "desc": "Morale is nutrition too.", "risk": "low", "hint": "Happy heart, slightly heavier legs.", "text": "It's the best thing he's eaten in weeks. The nutritionist walks past, looks at the plate, looks at {J}, and keeps walking.", "fx": { "morale": 4, "stress": -2, "pfm": -1 } },
+        { "label": "Thank her, stick to the plan", "desc": "Discipline.", "risk": "low", "hint": "Respected. Slightly sad.", "text": "He thanks her warmly and eats grilled chicken. She makes him a smaller portion 'for after the season'.", "fx": { "pfm": 1, "trust": 1 } }
+      ]
+    },
+    {
+      "id": "il_lost_wallet", "cat": "interlude", "w": 4, "cd": 180,
+      "title": "A Wallet on the Pavement",
+      "text": ["Outside {PLACE}, {J} finds a wallet: cash, cards, a photo of a family. The ID belongs to someone who lives twenty minutes away.", "There's a wallet in the car park, fat with cash. Nobody's around. A camera on the wall is pointing the other way."],
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Drive it to the address", "desc": "Twenty minutes. Easy.", "risk": "low", "hint": "Right thing. Someone may recognise you.", "out": [
+          { "w": 2, "text": "The man who opens the door is a season-ticket holder. He calls his whole family to the doorway. There is crying. There are photos. There is an offer of food that cannot be refused.", "fx": { "fans": 3, "image": 3, "followers": 2000, "morale": 3 } },
+          { "w": 1, "text": "An old woman opens the door, takes the wallet, says 'thank you, young man' and closes the door. She has no idea who he is. It's wonderful.", "fx": { "morale": 4, "stress": -2 } }
+        ] },
+        { "label": "Hand it to the police", "desc": "Proper channels.", "risk": "low", "hint": "Done. Nobody will know.", "text": "The desk officer recognises him and asks for an autograph for her nephew. The wallet goes back to its owner the same day.", "fx": { "image": 1, "morale": 1 } }
+      ]
+    },
+    {
+      "id": "il_teammate_birthday", "cat": "interlude", "w": 5, "cd": 120, "when": { "freeAgent": false },
+      "title": "Whose Birthday Is It?",
+      "text": ["It's {T}'s birthday. The squad has a tradition: the birthday boy gets a cake smashed into his face after training. Someone has to do the smashing.", "The squad WhatsApp is planning {T}'s birthday surprise. Nobody has volunteered to organise it, and all eyes turn to {J}."],
+      "prompt": "Get involved?",
+      "choices": [
+        { "label": "Organise the whole thing", "desc": "Cake, music, a terrible speech.", "risk": "low", "hint": "Dressing-room points. Time and a bit of money.", "text": "It goes perfectly: the cake, the singing, the speech that makes {T} pretend not to cry. {CAPl} claps him on the back.", "fx": { "dressing": 4, "teammate": { "who": "T", "rel": "ally" }, "wealth": -60 } },
+        { "label": "Do the cake smash", "desc": "Glory, and danger.", "risk": "medium", "hint": "Legendary or awkward.", "out": [
+          { "w": 2, "text": "Perfect execution. {T} gets cake in both ears. The video becomes the club's most-watched post of the month.", "fx": { "dressing": 3, "followers": 2000 } },
+          { "w": 1, "text": "{T} dodges and the cake hits {Mf} square in the chest. Silence. Then {Mf} laughs, thank God.", "fx": { "dressing": 2, "trust": -1 } }
+        ] },
+        { "label": "Just sign the card", "desc": "Low effort, no risk.", "risk": "low", "hint": "Fine. Forgettable.", "text": "He writes 'happy birthday bro' and his shirt number. It's fine.", "fx": {} }
+      ]
+    },
+    {
+      "id": "il_mum_videocall_recipe", "cat": "interlude", "w": 4, "cd": 140,
+      "title": "Cooking Class With {MUM}",
+      "text": ["{MUM} video-calls to teach him to cook her signature dish. The camera is pointed mostly at the ceiling. The instructions are 'a bit of this, until it's right'.", "A Sunday video call turns into a cooking lesson. {MUM} watches him chop an onion and visibly suffers."],
+      "prompt": "Give it a go?",
+      "choices": [
+        { "label": "Cook along properly", "desc": "An hour on the call.", "risk": "low", "hint": "Family warmth. The kitchen may not survive.", "out": [
+          { "w": 2, "text": "It's not as good as hers, but it's close. She makes him show her the plate three times. He eats it all, too proud to admit it's slightly burnt.", "fx": { "family": 6, "morale": 3, "stress": -2 } },
+          { "w": 1, "text": "The smoke alarm goes off halfway through. {MUM} laughs so hard she has to put the phone down. Best call in months.", "fx": { "family": 7, "morale": 4 } }
+        ] },
+        { "label": "Promise to try another day", "desc": "Too tired tonight.", "risk": "low", "hint": "She'll understand. She'll also remember.", "text": "'Next week then,' she says. They both know about next week.", "fx": { "family": -1 } }
+      ]
+    },
+    {
+      "id": "il_rain_delay_rondo", "cat": "interlude", "w": 4, "cd": 140, "when": { "freeAgent": false },
+      "title": "Rain Stops Play",
+      "text": ["A thunderstorm stops training after twenty minutes. The squad is trapped in the gym. Someone produces a tennis ball and a game of keep-ball breaks out among the weights.", "Lightning closes the pitches. Forty grown men in a corridor with nothing to do is a dangerous thing."],
+      "prompt": "How do you spend the storm?",
+      "choices": [
+        { "label": "Join the indoor game", "desc": "Chaos with a tennis ball.", "risk": "low", "hint": "Bonding. Possible bruises.", "text": "The game gets absurdly competitive. {J} wins it with a backheel off a dumbbell rack. They'll talk about it for years.", "fx": { "dressing": 3, "morale": 3 } },
+        { "label": "Watch film with the analyst", "desc": "Use the time.", "risk": "low", "hint": "The coaches notice.", "text": "Ninety minutes of opposition clips while thunder rattles the windows. {Mf} pops his head in and nods.", "fx": { "trust": 2, "growth": ["mental"] } },
+        { "label": "Nap in the physio room", "desc": "Rest is training.", "risk": "low", "hint": "Unbothered. Unproductive.", "text": "He sleeps through the whole storm and wakes up to someone having drawn a moustache on him.", "fx": { "pfm": 2, "dressing": 1 } }
+      ]
+    },
+    {
+      "id": "il_airport_fan", "cat": "interlude", "w": 3, "cd": 160, "when": { "rep": [12, 100] },
+      "title": "Recognised at Departures",
+      "text": ["At the airport, a man in a faded shirt with {J}'s number on it is standing at the next gate. He hasn't noticed {J} yet.", "Queueing for coffee at the airport, {J} realises the woman in front of him has his face as her phone background."],
+      "prompt": "Say hello?",
+      "choices": [
+        { "label": "Tap them on the shoulder", "desc": "Surprise!", "risk": "low", "hint": "A story they'll tell forever.", "text": "The reaction is worth a thousand goals: a double-take, a scream, a hug. Half the gate takes photos. {J} misses his boarding call by thirty seconds and doesn't care.", "fx": { "fans": 2, "followers": 2500, "morale": 4 } },
+        { "label": "Hood up, stay invisible", "desc": "You're tired.", "risk": "low", "hint": "Peace and quiet.", "text": "He keeps his hood up and his headphones in. Peace. Slightly guilty peace.", "fx": { "stress": -1 } }
+      ]
+    },
+    {
+      "id": "il_old_coach_call", "cat": "interlude", "w": 4, "cd": 200,
+      "title": "A Call From the First Coach",
+      "text": ["An unknown number. It's the coach who ran {J}'s first youth team, the one who used to drive the kids to matches in his own van. He's retiring.", "A voice from long ago: his very first coach, calling to say he's sick, and that he watches every game."],
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Promise to visit and mean it", "desc": "Next free weekend.", "risk": "low", "hint": "Some debts are worth paying.", "text": "The old man goes quiet on the line. 'You don't have to,' he says. 'I know,' says {J}. Both of them know it matters.", "fx": { "morale": 5, "image": 1, "flag": "first_coach_promise" } },
+        { "label": "Send a signed shirt and a long message", "desc": "Something he can keep.", "risk": "low", "hint": "Kind. Not quite the same.", "text": "The shirt arrives framed. His old coach hangs it in the clubhouse where {J} learnt to play.", "fx": { "morale": 2, "fans": 1 } }
+      ]
+    },
+    {
+      "id": "il_sibling_homework", "cat": "interlude", "w": 4, "cd": 140,
+      "title": "{SIB} Needs Help",
+      "text": ["{SIB} sends a panicked message: an essay about 'someone who inspires me' is due tomorrow. They've chosen {J}. They need quotes.", "Little {SIB} needs a famous person for a school project. Guess who."],
+      "prompt": "Help out?",
+      "choices": [
+        { "label": "Do a proper interview", "desc": "On video, for the class.", "risk": "low", "hint": "Family points. Possibly viral.", "text": "He answers every question seriously. {SIB}'s teacher shows the video to the whole school. {SIB} is a celebrity for a week, and unbearable about it.", "fx": { "family": 5, "morale": 3, "followers": 800 } },
+        { "label": "Send three funny quotes", "desc": "Quick and silly.", "risk": "low", "hint": "Ten minutes. Fun.", "text": "'Always eat your vegetables or you'll end up on the bench.' {SIB} gets a B-minus and blames him.", "fx": { "family": 2 } }
+      ]
+    },
+    {
+      "id": "il_neighbour_noise", "cat": "interlude", "w": 3, "cd": 160,
+      "title": "The Neighbour Upstairs",
+      "text": ["It's 23:40. The neighbour upstairs is either learning the drums or fighting a wardrobe. {J} has training at eight.", "Someone in the building is having a party. The bass comes through the walls, the floor, and somehow his teeth."],
+      "prompt": "How do you handle it?",
+      "choices": [
+        { "label": "Knock politely", "desc": "A friendly word.", "risk": "low", "hint": "Could go either way.", "out": [
+          { "w": 2, "text": "The neighbour opens the door, recognises him, apologises profusely, and asks for a selfie. The music stops. The selfie happens.", "fx": { "stress": -2, "pfm": 1 } },
+          { "w": 1, "text": "The neighbour supports the rival club. The music gets louder.", "fx": { "stress": 3, "pfm": -2 } }
+        ] },
+        { "label": "Earplugs and suffer", "desc": "Avoid drama.", "risk": "low", "hint": "Bad sleep.", "text": "He sleeps in fragments. Training feels like wading through soup.", "fx": { "pfm": -3, "stress": 2 } },
+        { "label": "Go to a hotel", "desc": "Money solves this.", "risk": "low", "hint": "A good night's sleep, for a price.", "vars": { "cost": ["wageWeeks", 0.3, 40] }, "text": "A quiet hotel room and eight hours of sleep. Worth every cent of {cost}.", "fx": { "pfm": 2, "wealth": "-cost" } }
+      ]
+    },
+    {
+      "id": "il_street_game", "cat": "interlude", "w": 4, "cd": 150,
+      "title": "A Street Game",
+      "text": ["Driving home, {J} passes a group of kids playing football on a dusty lot with sandals for goalposts. One of them is very, very good.", "On a back street near {PLACE}, teenagers are playing five-a-side with a half-flat ball. Somebody shouts his name."],
+      "prompt": "Stop the car?",
+      "choices": [
+        { "label": "Join in for ten minutes", "desc": "Sandals for goalposts.", "risk": "low", "hint": "Joy. Probably filmed.", "text": "He plays in his flip-flops and gets nutmegged by a twelve-year-old. The video goes everywhere. Fans love it. The club's insurance department does not.", "fx": { "fans": 3, "followers": 4000, "image": 2, "morale": 4, "board": -1 } },
+        { "label": "Give the good kid a trial contact", "desc": "Your agent's number.", "risk": "low", "hint": "You might change a life.", "text": "He gives the boy his agent's number and the academy director's email. Six weeks later the boy sends a photo in an academy tracksuit.", "fx": { "image": 2, "morale": 3, "flag": "found_a_kid" } },
+        { "label": "Honk and wave", "desc": "Keep driving.", "risk": "low", "hint": "Nice. Brief.", "text": "The kids scream and chase the car for half a street. It's enough.", "fx": { "morale": 1 } }
+      ]
+    },
+    {
+      "id": "il_partner_playlist", "cat": "interlude", "w": 4, "cd": 120, "when": { "partner": ["dating", "serious", "engaged", "married"] },
+      "title": "{Pf}'s Playlist",
+      "text": ["{Pf} has made him a pre-match playlist. It is forty minutes of songs he has never heard, and one very romantic ballad in the middle.", "{Pf} sends a playlist called 'for my striker' even though he isn't a striker. The first song is about heartbreak."],
+      "prompt": "Use it before the next game?",
+      "choices": [
+        { "label": "Play it in the dressing room", "desc": "Out loud. Brave.", "risk": "medium", "hint": "Romance meets banter.", "text": "The ballad comes on at full volume during the warm-up. The whole squad sings along, mockingly, then genuinely. {Pf} hears about it and is delighted.", "fx": { "love": 5, "dressing": 2 } },
+        { "label": "Headphones only", "desc": "Private.", "risk": "low", "hint": "Sweet and safe.", "text": "He listens on the bus, eyes closed. Some of the songs are actually good. He tells her the ballad is his favourite. It isn't. It's becoming it.", "fx": { "love": 4, "stress": -2 } }
+      ]
+    },
+    {
+      "id": "il_bf_needs_advice", "cat": "interlude", "w": 4, "cd": 130,
+      "title": "{BFf} Calls at Midnight",
+      "text": ["{BFf} calls at midnight. He's been offered a job in another city and doesn't know what to do. He wants {J}'s advice, which is funny, because {J} has never known what to do either.", "{BFf} has met someone and is panicking. 'You're the famous one, tell me what to say to her.'"],
+      "prompt": "Stay on the phone?",
+      "choices": [
+        { "label": "Talk until 2am", "desc": "He'd do it for you.", "risk": "low", "hint": "Friendship over sleep.", "text": "They talk for two hours, about the job and then about everything. {J} goes to training on four hours of sleep and doesn't regret it.", "fx": { "friends": 7, "pfm": -3, "morale": 2 } },
+        { "label": "Quick advice, then sleep", "desc": "'Go for it. Night.'", "risk": "low", "hint": "Practical. A bit cold.", "text": "'Go for it,' says {J}. 'Love you, night.' {BFf} laughs. It's fine. It's a bit less than fine.", "fx": { "friends": 1, "pfm": 1 } }
+      ]
+    },
+    {
+      "id": "il_vending_machine", "cat": "interlude", "w": 3, "cd": 200, "when": { "freeAgent": false },
+      "title": "The Vending Machine Incident",
+      "text": ["The vending machine at the training ground has eaten {J}'s coins and is holding a chocolate bar hostage. Two teammates are watching with great interest.", "A crisp packet is stuck in the vending machine, dangling. A small crowd of professional athletes has gathered to offer advice."],
+      "prompt": "How do you solve this?",
+      "choices": [
+        { "label": "Shake the machine", "desc": "Brute force.", "risk": "medium", "hint": "Comedy, potential injury.", "out": [
+          { "w": 2, "text": "Everything falls out. Everything. The squad has a feast. {J} is a hero.", "fx": { "dressing": 3, "morale": 2 } },
+          { "w": 1, "text": "The machine doesn't budge. {J} tweaks his shoulder. The physio's report says 'vending-related'.", "fx": { "pfm": -2, "dressing": 2 } }
+        ] },
+        { "label": "Walk away with dignity", "desc": "Let it go.", "risk": "low", "hint": "They will never let you forget.", "text": "He walks away. The packet falls the second he leaves. A teammate eats it in front of him.", "fx": { "dressing": 1 } }
+      ]
+    },
+    {
+      "id": "il_charity_ask_dm", "cat": "interlude", "w": 4, "cd": 140, "ui": "phone", "when": { "followers": [3000, 999999999] },
+      "title": "A Message Request",
+      "text": ["A DM from a stranger: her father is sick, the hospital bills are impossible, would {J} share her fundraising link? It could be real. It could be a scam.", "A message from a school in a poor district: their pitch has flooded and they're raising money for a new one. They attach photos. The goals are made of bamboo."],
+      "prompt": "Share it?",
+      "choices": [
+        { "label": "Check it first, then share", "desc": "Get someone to verify it.", "risk": "low", "hint": "Careful kindness.", "text": "It checks out. He shares it and quietly adds a donation. The target is hit in a day. The thank-you message makes him put his phone down for a while.", "fx": { "image": 3, "morale": 4, "wealth": -150, "followers": 1500 } },
+        { "label": "Share it straight away", "desc": "If it's real, every hour matters.", "risk": "medium", "hint": "Fast. Risky.", "out": [
+          { "w": 2, "text": "It's real, and his share makes it explode. Strangers donate all night.", "fx": { "image": 3, "followers": 2000, "morale": 3 } },
+          { "w": 1, "text": "It's a scam. Hundreds of his fans lose money. The apology post is the hardest thing he's written.", "fx": { "image": -4, "press": -2, "fans": -2, "stress": 4 } }
+        ] },
+        { "label": "Ignore it", "desc": "Too many of these.", "risk": "low", "hint": "Safe. Nagging feeling.", "text": "He swipes it away. It comes back to him at 2am.", "fx": { "stress": 1 } }
+      ]
+    },
+    {
+      "id": "il_haircut", "cat": "interlude", "w": 4, "cd": 120,
+      "title": "The Barber's Chair",
+      "text": ["The barber has a vision. It involves bleach, a lightning bolt shaved into the side, and 'trust me'.", "{J}'s barber shows him a photo of a very bold haircut. 'You'd suit it,' he says, already plugging in the clippers."],
+      "prompt": "New look?",
+      "choices": [
+        { "label": "Go bold", "desc": "Trust the artist.", "risk": "medium", "hint": "Iconic or a meme.", "out": [
+          { "w": 1, "text": "It's iconic. Kids at the gate copy it within a week. A hair-product brand gets in touch.", "fx": { "followers": 5000, "fans": 2, "morale": 3 } },
+          { "w": 1, "text": "It's a meme. The squad call him 'the light bulb'. {MUM} asks what happened to his head.", "fx": { "followers": 3000, "dressing": 1, "family": -1, "morale": -1 } }
+        ] },
+        { "label": "The usual, please", "desc": "Short back and sides.", "risk": "low", "hint": "Safe.", "text": "The barber sighs the sigh of a misunderstood genius and gives him the usual.", "fx": {} }
+      ]
+    },
+    {
+      "id": "il_game_night_squad", "cat": "interlude", "w": 4, "cd": 120, "when": { "freeAgent": false, "age": [16, 34] },
+      "title": "Online Game Night",
+      "text": ["The squad's online gaming tournament is tonight. {T} has been trash-talking in the group chat for three days.", "It's the monthly squad tournament on the console. Loser buys breakfast for everyone. {T} has been practising."],
+      "prompt": "Play?",
+      "choices": [
+        { "label": "Play to win", "desc": "No mercy.", "risk": "low", "hint": "Glory or humiliation. Late night.", "out": [
+          { "w": 1, "text": "{J} wins the final in a penalty shootout and celebrates like it's a real trophy. {T} demands a rematch.", "fx": { "dressing": 3, "morale": 3, "pfm": -1 } },
+          { "w": 1, "text": "{J} goes out in the first round to the reserve goalkeeper. Breakfast is on him. Forty people. Lots of eggs.", "fx": { "dressing": 3, "wealth": -120, "pfm": -1 } }
+        ] },
+        { "label": "Skip it, sleep", "desc": "Early night.", "risk": "low", "hint": "Rested. Missed out.", "text": "He sleeps. The group chat is full of screenshots in the morning. He's missed a legendary night.", "fx": { "pfm": 2, "dressing": -1 } }
+      ]
+    },
+    {
+      "id": "il_ref_in_supermarket", "cat": "interlude", "w": 3, "cd": 200, "when": { "freeAgent": false },
+      "title": "Aisle Seven",
+      "text": ["In the supermarket {J} turns into aisle seven and comes face to face with the referee from last week's match. He's holding a melon. They both freeze.", "Buying toothpaste, {J} spots the referee who booked him recently, reading the label on a jar of pickles with enormous concentration."],
+      "prompt": "Say something?",
+      "choices": [
+        { "label": "Shake his hand", "desc": "No hard feelings.", "risk": "low", "hint": "Class.", "text": "They shake hands over the melons. The referee says, 'You were lucky not to get a second yellow.' {J} says, 'I know.' They both laugh. Someone films it.", "fx": { "image": 2, "followers": 1500 } },
+        { "label": "Make a joke about the booking", "desc": "Light banter.", "risk": "medium", "hint": "Depends on his sense of humour.", "out": [
+          { "w": 1, "text": "The referee laughs. 'Your dive was worse than my decision.' Fair.", "fx": { "morale": 2 } },
+          { "w": 1, "text": "The referee doesn't laugh. He writes nothing down, but {J} feels like he has.", "fx": { "stress": 1 } }
+        ] },
+        { "label": "Reverse out of the aisle", "desc": "Abort.", "risk": "low", "hint": "Awkward but safe.", "text": "He reverses his trolley out like a car leaving a tight parking space. No toothpaste today.", "fx": {} }
+      ]
+    },
+    {
+      "id": "il_rookie_asks", "cat": "interlude", "w": 4, "cd": 130, "when": { "freeAgent": false, "age": [21, 40] },
+      "title": "The Kid Wants Advice",
+      "text": ["{K}, seventeen and terrified, has just been called up from the academy. He sits next to {J} at lunch and asks, very quietly, how you survive this.", "The academy kid {Kl} stays behind after training and asks {J} to show him how he does that turn."],
+      "prompt": "Take him under your wing?",
+      "choices": [
+        { "label": "Spend the afternoon with him", "desc": "Drills, then a talk.", "risk": "low", "hint": "You remember being him.", "text": "An hour of drills, then an hour of honest talk about homesickness and doubt. The kid leaves looking taller.", "fx": { "dressing": 3, "trust": 2, "morale": 3, "pfm": -1 } },
+        { "label": "One piece of advice", "desc": "'Work harder than everyone.'", "risk": "low", "hint": "True. Brief.", "text": "'Work harder than everyone, and phone your mum.' The kid writes it in his notes app.", "fx": { "dressing": 1 } }
+      ]
+    },
+    {
+      "id": "il_fan_tattoo", "cat": "interlude", "w": 3, "cd": 240, "when": { "fans": [65, 100] },
+      "title": "A Fan's Tattoo",
+      "text": ["A fan at the gate rolls up his sleeve to show a fresh tattoo: {J}'s face, his number, and the date of his first goal. The likeness is… approximate.", "A woman shows {J} her son's new tattoo on her phone: {J}'s signature, enormous, on his calf. She's not sure how she feels about it."],
+      "prompt": "Your reaction?",
+      "choices": [
+        { "label": "Post it with love", "desc": "Share the madness.", "risk": "low", "hint": "Fans adore it.", "text": "He posts it: 'Brother, you're crazy. I love you.' The fan's phone breaks under the weight of notifications.", "fx": { "fans": 3, "followers": 3500 } },
+        { "label": "Sign next to it", "desc": "Make it official.", "risk": "low", "hint": "He'll go straight back to the tattoo shop.", "text": "{J} signs his arm in marker. The fan drives directly to the tattoo shop to make it permanent.", "fx": { "fans": 2, "morale": 2 } }
+      ]
+    },
+    {
+      "id": "il_wrong_bus", "cat": "interlude", "w": 3, "cd": 240, "when": { "freeAgent": false },
+      "title": "Left Behind",
+      "text": ["{J} comes out of the hotel two minutes late. The team bus is pulling away. Through the back window, five teammates are waving at him.", "The squad's hotel lift breaks with {J} inside it. By the time he's out, the bus to training has gone."],
+      "prompt": "Now what?",
+      "choices": [
+        { "label": "Chase it", "desc": "Sprint.", "risk": "low", "hint": "Comedy gold.", "text": "He chases the bus for three hundred metres. The driver stops eventually, because {Mf} told him to wait until {J} 'had suffered enough'.", "fx": { "dressing": 2, "pfm": -1, "trust": -1 } },
+        { "label": "Taxi and a fine", "desc": "Pay the price.", "risk": "low", "hint": "The kangaroo court awaits.", "text": "The taxi costs a fortune and the squad fine costs more. The kangaroo court sentences him to sing in front of everyone.", "fx": { "dressing": 1, "wealth": -80 } }
+      ]
+    },
+    {
+      "id": "il_photo_shoot", "cat": "interlude", "w": 4, "cd": 130, "when": { "freeAgent": false },
+      "title": "Kit Launch Photo Shoot",
+      "text": ["The club's new kit launch. The photographer wants {J} to look 'fierce but approachable'. He has never been less sure what his face is doing.", "Photo shoot for the new shirt. The creative director keeps saying 'more energy' and then 'less energy'."],
+      "prompt": "How do you play it?",
+      "choices": [
+        { "label": "Lean into it", "desc": "Model mode.", "risk": "low", "hint": "Commercial gold.", "text": "He commits completely. One of the shots ends up on a billboard in the city centre. {MUM} goes to look at it twice.", "fx": { "board": 3, "image": 2, "followers": 2000, "family": 2 } },
+        { "label": "Clown around", "desc": "Make the crew laugh.", "risk": "low", "hint": "Fun. The marketing team less so.", "text": "The behind-the-scenes clip of him pulling faces gets more views than the real photos. Marketing are torn.", "fx": { "followers": 3500, "fans": 2, "board": -1 } }
+      ]
+    },
+    {
+      "id": "il_old_school_visit", "cat": "interlude", "w": 3, "cd": 260, "when": { "abroad": false, "age": [18, 40] },
+      "title": "The Old School",
+      "text": ["His old school invites {J} to speak at assembly. The headteacher who once confiscated his ball for a week now introduces him as 'our pride'.", "The school where {J} spent more time playing football than studying wants him to open their new sports hall."],
+      "prompt": "Go?",
+      "choices": [
+        { "label": "Go and give a real speech", "desc": "Tell them the truth.", "risk": "low", "hint": "Inspiring. Possibly emotional.", "text": "He tells them about the bus fares, the rejections, the blisters. Five hundred kids go completely silent. A teacher wipes her eyes.", "fx": { "image": 3, "family": 3, "morale": 4, "fans": 1 } },
+        { "label": "Send a video message", "desc": "Busy schedule.", "risk": "low", "hint": "Polite. Distant.", "text": "The video plays on a projector in the hall. The kids cheer anyway.", "fx": { "image": 1 } }
+      ]
+    },
+    {
+      "id": "il_traffic_stop", "cat": "interlude", "w": 3, "cd": 200, "when": { "age": [18, 40] },
+      "title": "Pulled Over",
+      "text": ["Blue lights in the mirror. {J} was doing eight over the limit. The officer walks up slowly, looks in the window, and her face changes.", "A police officer waves {J}'s car over at a checkpoint. He's going to be late for training."],
+      "prompt": "How do you handle it?",
+      "choices": [
+        { "label": "Apologise and accept the fine", "desc": "No special treatment.", "risk": "low", "hint": "The right way.", "text": "He takes the ticket and thanks her. She tells her colleagues later that he was 'a gentleman'. It somehow reaches {OUT}.", "fx": { "image": 2, "wealth": -100, "press": 1 } },
+        { "label": "Offer a signed shirt", "desc": "Charm.", "risk": "high", "hint": "Could be read as a bribe.", "out": [
+          { "w": 1, "text": "She laughs and lets him off with a warning — and takes the shirt for her son 'as a separate matter'.", "fx": { "morale": 1 } },
+          { "w": 1, "text": "She does not laugh. 'Are you trying to bribe me, sir?' The story is in the papers by Friday.", "fx": { "image": -4, "press": -3, "board": -2, "wealth": -100 } }
+        ] }
+      ]
+    },
+    {
+      "id": "il_mystery_gift", "cat": "interlude", "w": 3, "cd": 200, "when": { "followers": [10000, 999999999] },
+      "title": "A Parcel With No Name",
+      "text": ["A parcel arrives at the training ground addressed to {J}. No sender. Inside: {GIFT} and a note that says 'from someone who believes in you'.", "Security brings a box to the dressing room. It's for {J}. Everyone gathers round. Inside: {GIFT}, and a hand-drawn map of a pitch."],
+      "prompt": "Find out who sent it?",
+      "choices": [
+        { "label": "Post a thank-you to the mystery fan", "desc": "Let the internet hunt.", "risk": "low", "hint": "Fun. Maybe too much attention.", "text": "The internet finds the sender in four hours: a retired groundsman who watched {J} play as a child. They meet for coffee. It's lovely.", "fx": { "followers": 3000, "fans": 2, "morale": 3 } },
+        { "label": "Keep it a secret", "desc": "Some things are private.", "risk": "low", "hint": "A small mystery to keep.", "text": "He keeps the note in his wallet. On bad days he reads it.", "fx": { "morale": 3, "stress": -1 } },
+        { "label": "Hand it to club security", "desc": "Better safe.", "risk": "low", "hint": "Sensible. Slightly sad.", "text": "Security checks it, finds nothing strange, and returns it a week later with a form to sign.", "fx": {} }
+      ]
+    },
+    {
+      "id": "il_language_slip", "cat": "interlude", "w": 4, "cd": 150, "when": { "abroad": true },
+      "title": "Lost in Translation",
+      "text": ["{J} tries to thank the club cook in the local language. From her face, he has said something very different. Something about her husband.", "In a team meeting {J} answers a question in the local language. The room goes silent and then erupts. He has used the word for 'goat' instead of 'goal'."],
+      "prompt": "Recover?",
+      "choices": [
+        { "label": "Ask what you said, laugh with them", "desc": "Own it.", "risk": "low", "hint": "Self-deprecation wins hearts.", "text": "They explain. He laughs harder than anyone. 'Goat' becomes his nickname. It's affectionate. Mostly.", "fx": { "dressing": 4, "morale": 2 } },
+        { "label": "Never speak the language again", "desc": "Too embarrassing.", "risk": "low", "hint": "Isolation creeps in.", "text": "He goes back to English and gestures. The distance stays.", "fx": { "dressing": -1, "morale": -2 } }
+      ]
+    },
+    {
+      "id": "il_pet_offer", "cat": "interlude", "w": 3, "cd": 400, "when": { "age": [19, 40] },
+      "title": "The Puppy",
+      "text": ["A teammate's dog has had puppies. One of them, all ears and paws, has fallen asleep on {J}'s foot.", "Outside {PLACE} a shelter is holding an adoption day. A scruffy dog with one ear up and one ear down will not stop staring at {J}."],
+      "prompt": "Take it home?",
+      "choices": [
+        { "label": "Yes. Obviously.", "desc": "Look at that face.", "risk": "medium", "hint": "Joy. Responsibility. Hair everywhere.", "text": "He names the dog after his first club. It eats a boot in week one. It is the best decision he's made all year.", "fx": { "morale": 6, "stress": -4, "lifestyle": 0.05, "followers": 2000, "flag": "has_dog" } },
+        { "label": "Not with this schedule", "desc": "It wouldn't be fair.", "risk": "low", "hint": "Responsible. A little sad.", "text": "He scratches its ears for ten minutes and leaves. He checks the shelter's page twice that week.", "fx": { "morale": -1 } }
+      ]
+    },
+    {
+      "id": "il_dog_chaos", "cat": "interlude", "w": 4, "cd": 100, "when": { "flags": ["has_dog"] },
+      "title": "The Dog Has Opinions",
+      "text": ["The dog has eaten one of {J}'s match boots. Only the left one. It is now looking at the right one.", "The dog has learned to open the fridge. The evidence is everywhere."],
+      "prompt": "Discipline?",
+      "choices": [
+        { "label": "Film it and post it", "desc": "The fans deserve this.", "risk": "low", "hint": "Content.", "text": "The dog now has more engaged followers than {J}. The boot sponsor sends a new pair 'for the dog'.", "fx": { "followers": 3000, "morale": 3 } },
+        { "label": "Hire a dog trainer", "desc": "Order must be restored.", "risk": "low", "hint": "Expensive. Peaceful.", "text": "The trainer is strict and expensive. The dog now sits on command and looks at {J} with deep disappointment.", "fx": { "wealth": -200, "stress": -2 } }
+      ]
+    },
+    {
+      "id": "il_rain_photo", "cat": "interlude", "w": 3, "cd": 200,
+      "title": "Stuck in the Rain",
+      "text": ["{WEATHER}, and {J}'s car has a flat tyre on the hard shoulder. A man on a motorbike pulls over, and only after ten minutes of helping does he say, 'You're {J}, aren't you?'", "His car breaks down outside {PLACE}. A group of delivery riders stop to push it, arguing about formations the whole time."],
+      "prompt": "How do you thank them?",
+      "choices": [
+        { "label": "Tickets for the next home game", "desc": "Best seats.", "risk": "low", "hint": "Fans for life.", "text": "They come to the next game with a banner: 'WE PUSHED HIS CAR'. It becomes a club legend.", "fx": { "fans": 3, "image": 2 } },
+        { "label": "Buy everyone dinner", "desc": "Right now.", "risk": "low", "hint": "A great evening.", "text": "Dinner at a roadside stall becomes three hours of football talk. He learns more about tactics from a motorbike mechanic than from most coaches.", "fx": { "morale": 4, "wealth": -60, "friends": 2 } }
+      ]
+    },
+    {
+      "id": "il_ice_bath_debate", "cat": "interlude", "w": 4, "cd": 130, "when": { "freeAgent": false },
+      "title": "The Ice Bath Debate",
+      "text": ["In the ice baths, a serious debate breaks out: who is the greatest player of all time? {CAPl} says something unforgivable. Everyone turns to {J}.", "Six men sit shivering in ice baths, arguing about whether a hot dog is a sandwich. It has become heated, which is an achievement at four degrees."],
+      "prompt": "Pick a side?",
+      "choices": [
+        { "label": "Side with the captain", "desc": "Politics.", "risk": "low", "hint": "Smart. Slightly spineless.", "text": "{CAPl} nods approvingly. The others call {J} a coward. It's fine. He's in the captain's good books.", "fx": { "dressing": 1, "morale": 1 } },
+        { "label": "Defend the unpopular opinion", "desc": "Die on this hill.", "risk": "low", "hint": "Respect for the conviction.", "text": "He argues passionately for twenty minutes, long after the cold has stopped being healthy. He loses the argument and wins the room.", "fx": { "dressing": 3, "pfm": -1 } }
+      ]
+    },
+    {
+      "id": "il_birthday_text_forgot", "cat": "interlude", "w": 3, "cd": 200, "ui": "phone",
+      "title": "Did You Forget Something?",
+      "text": ["A message from {MUM}: a single photo of a cake, candles lit. It's {DAD}'s birthday. It's 21:47.", "{SIB} sends a screenshot of the family group chat: thirty birthday messages for {DAD}. None from {J}."],
+      "prompt": "Quick, what do you do?",
+      "choices": [
+        { "label": "Call immediately", "desc": "Better late than never.", "risk": "low", "hint": "Saves the day. Mostly.", "text": "{DAD} picks up on the first ring, pretending he hadn't noticed. They talk for an hour. He had noticed.", "fx": { "family": 3, "morale": 1 } },
+        { "label": "Send a huge gift tomorrow", "desc": "Make up for it.", "risk": "low", "hint": "Money isn't time. But it helps.", "vars": { "cost": ["wageWeeks", 1, 150] }, "text": "The gift arrives: {GIFT}. {DAD} posts a photo of it, which he has never done with anything.", "fx": { "family": 4, "wealth": "-cost" } },
+        { "label": "Send a quick text", "desc": "'HBD Dad ❤️'", "risk": "low", "hint": "Noticed. Not in a good way.", "text": "'Thanks,' {DAD} replies. Just that. {MUM} calls the next day to say he was hurt.", "fx": { "family": -4 } }
+      ]
+    },
+    {
+      "id": "il_wrong_group_chat", "cat": "interlude", "w": 3, "cd": 260, "ui": "phone", "when": { "freeAgent": false },
+      "title": "Wrong Chat",
+      "text": ["{J} sends a voice note complaining about the training drills. He sends it to the squad group. The squad group that includes {Mf}.", "A meme about {CAPl}'s haircut, meant for {BFf}, lands in the team chat instead. Two blue ticks. Then twenty."],
+      "prompt": "Damage control?",
+      "choices": [
+        { "label": "Own it with humour", "desc": "'Well, now you know.'", "risk": "medium", "hint": "Could break the ice. Or not.", "out": [
+          { "w": 2, "text": "The squad finds it hilarious. Even the target sends a laughing emoji. Crisis averted.", "fx": { "dressing": 2 } },
+          { "w": 1, "text": "Not everyone laughs. A frosty silence follows him around for a few days.", "fx": { "dressing": -2, "trust": -1 } }
+        ] },
+        { "label": "Apologise in person", "desc": "Face it.", "risk": "low", "hint": "Mature.", "text": "He apologises face to face. It's awkward for thirty seconds and then it's forgotten.", "fx": { "trust": 1, "dressing": 1 } },
+        { "label": "Pretend you were hacked", "desc": "Classic.", "risk": "high", "hint": "Nobody will believe it.", "text": "'I was hacked.' Nobody believes him. 'Hacked' becomes a squad joke for the rest of the season.", "fx": { "dressing": -1, "morale": -1 } }
+      ]
+    },
+    {
+      "id": "il_free_agent_park", "cat": "interlude", "w": 5, "cd": 60, "when": { "freeAgent": true },
+      "title": "Training Alone",
+      "text": ["Without a club, {J} trains alone in a public park. A dog walker stops to watch his shooting drills. 'You're good,' she says. 'You should try out for a team.'", "Free agent life: cones in a public park at 7am, sprints between joggers, a fitness app instead of a coach."],
+      "prompt": "Keep at it?",
+      "choices": [
+        { "label": "Hire a personal trainer", "desc": "Stay sharp properly.", "risk": "low", "hint": "Costs money, keeps you ready.", "vars": { "cost": ["fixed", 300] }, "text": "The trainer is relentless and expensive. {J} is in the best shape of his life with no one to play for.", "fx": { "wealth": "-cost", "pfm": 4, "stress": -2, "growth": ["physical"] } },
+        { "label": "Join a Sunday league game", "desc": "Just to play.", "risk": "medium", "hint": "Joy, and risk of getting kicked.", "text": "He plays for a pub team on a bumpy pitch and has the most fun he's had in months. The other team's centre-back tries to kick him into next week.", "fx": { "morale": 5, "pfm": -2, "followers": 2000 } }
+      ]
+    },
+    {
+      "id": "il_wedding_invite", "cat": "interlude", "w": 3, "cd": 200, "ui": "letter",
+      "title": "A Wedding Invitation",
+      "text": ["A wedding invitation arrives: a cousin {J} hasn't seen in years. The date is the day before a match, four hours' drive away.", "{BFf}'s older brother is getting married and wants {J} there. The family are already telling guests he's coming."],
+      "prompt": "Go?",
+      "choices": [
+        { "label": "Go, even briefly", "desc": "Show your face.", "risk": "medium", "hint": "Family love. Tired legs.", "text": "He arrives late, dances badly, eats everything, and leaves early. Everyone talks about it for a year.", "fx": { "family": 5, "friends": 4, "pfm": -3, "morale": 3 } },
+        { "label": "Send a gift and a video", "desc": "Football first.", "risk": "low", "hint": "Understandable. Someone will be hurt.", "text": "The video is played at the reception. People clap. An aunt says loudly that he's 'too famous for us now'.", "fx": { "family": -2, "friends": -1, "wealth": -100 } }
+      ]
+    },
+    {
+      "id": "il_insomnia_window", "cat": "interlude", "w": 3, "cd": 120, "time": "Wednesday, 03:12", "when": { "stress": [55, 100] },
+      "title": "Can't Sleep",
+      "text": ["3am. The ceiling again. {J}'s mind is replaying a pass he misplaced in a match four months ago, and then a conversation with {DAD} from when he was twelve.", "The city is silent and {J} is wide awake, scrolling through comments he promised himself he wouldn't read."],
+      "prompt": "What now?",
+      "choices": [
+        { "label": "Put the phone in another room", "desc": "Breathe. Try again.", "risk": "low", "hint": "Hard. Helps.", "text": "It takes an hour of breathing exercises, but he sleeps. Badly, but he sleeps.", "fx": { "stress": -4, "pfm": 1 } },
+        { "label": "Message someone", "desc": "Who's awake?", "risk": "low", "hint": "Connection at a strange hour.", "text": "{BFf} is awake too, of course. They talk nonsense until 5am. It's exactly what he needed.", "fx": { "stress": -3, "friends": 3, "pfm": -2 } },
+        { "label": "Keep scrolling", "desc": "One more comment.", "risk": "medium", "hint": "It won't help.", "text": "He reads three hundred comments. Two hundred and ninety are nice. He remembers the other ten.", "fx": { "stress": 4, "morale": -3, "pfm": -2 } }
+      ]
+    },
+    {
+      "id": "il_fan_wedding_crash", "cat": "interlude", "w": 2, "cd": 300, "when": { "fans": [60, 100] },
+      "title": "The Wedding Photo",
+      "text": ["Leaving {PLACE}, {J} walks straight into a wedding party taking photos. The groom is wearing a club scarf over his suit. He sees {J} and makes a noise like a kettle.", "A bride in full dress runs across a hotel lobby towards {J}. Her new husband, it turns out, has loved {J} since his debut."],
+      "prompt": "Join the photo?",
+      "choices": [
+        { "label": "Join the wedding photos", "desc": "Make a memory.", "risk": "low", "hint": "The best day of their life just got better.", "text": "He ends up in thirty photos and one slow dance with the bride's grandmother. The video reaches the club's official account.", "fx": { "fans": 4, "image": 3, "followers": 5000, "morale": 4 } },
+        { "label": "Congratulate them and leave", "desc": "It's their day.", "risk": "low", "hint": "Gracious.", "text": "A quick handshake and a selfie. The groom will tell the story at every family gathering until he dies.", "fx": { "fans": 2, "morale": 2 } }
+      ]
+    },
+    {
+      "id": "il_tactics_napkin", "cat": "interlude", "w": 3, "cd": 160, "when": { "freeAgent": false },
+      "title": "The Napkin Diagram",
+      "text": ["At lunch, {Mf} sits at {J}'s table — unusual — and starts drawing arrows on a napkin with a borrowed pen. It's about {J}'s positioning. The napkin fills up fast.", "{Mf} catches {J} in the corridor and grabs a whiteboard marker. Five minutes, three arrows, one idea that changes how {J} sees the pitch."],
+      "prompt": "How do you react?",
+      "choices": [
+        { "label": "Ask questions, lots of them", "desc": "Soak it up.", "risk": "low", "hint": "He loves curious players.", "text": "Twenty minutes later the napkin is a full tactical plan. {Mf} leaves it with him. {J} keeps it in his wallet.", "fx": { "trust": 3, "tacticalFit": 5, "growth": ["mental"] } },
+        { "label": "Nod and agree", "desc": "Got it, boss.", "risk": "low", "hint": "Polite. He wonders if you really got it.", "text": "{J} nods. {Mf} looks at him for a second too long, then leaves the napkin behind anyway.", "fx": { "tacticalFit": 2 } }
+      ]
+    },
+    {
+      "id": "il_groundsman", "cat": "interlude", "w": 3, "cd": 200, "when": { "freeAgent": false },
+      "title": "The Groundsman's Secret",
+      "text": ["The groundsman, a silent man who has cut the club's grass for thirty years, beckons {J} over. He knows which patch of the pitch is slower. He's never told anyone.", "Late after training, the old groundsman is walking the pitch with a fork. He says the left wing drains badly. 'Cut inside there,' he mutters. 'Ball dies on the touchline.'"],
+      "prompt": "Listen?",
+      "choices": [
+        { "label": "Walk the pitch with him", "desc": "An hour of grass wisdom.", "risk": "low", "hint": "Secret knowledge.", "text": "They walk every metre of the pitch. The groundsman talks more in an hour than he has in a decade. {J} learns things no coach knows.", "fx": { "growth": ["mental"], "morale": 2, "dressing": 1 } },
+        { "label": "Thank him and go", "desc": "Long day.", "risk": "low", "hint": "Polite.", "text": "The groundsman nods and goes back to his fork. He'll tell someone else one day.", "fx": {} }
+      ]
+    },
+    {
+      "id": "il_comment_from_ex", "cat": "interlude", "w": 3, "cd": 260, "ui": "social", "when": { "followers": [5000, 999999999] },
+      "title": "A Comment From the Past",
+      "text": ["Under his latest post, a comment from someone {J} dated at school: 'Proud of you. Always knew you'd make it.' It already has four thousand likes. People are speculating.", "An old flame from his teenage years likes eleven of his posts in a row at 1am. The fan accounts have noticed."],
+      "prompt": "Respond?",
+      "choices": [
+        { "label": "Reply kindly", "desc": "'Thank you, means a lot.'", "risk": "medium", "hint": "Nice. Might not be read as nice at home.", "text": "A kind reply. Fan accounts call it 'the most wholesome thing on the internet'. Others call it something else.", "fx": { "followers": 2000, "image": 1, "love": -3 } },
+        { "label": "Like it and move on", "desc": "Minimal.", "risk": "low", "hint": "Safe.", "text": "A single like. The speculation dies within a day.", "fx": {} },
+        { "label": "Ignore it", "desc": "The past is the past.", "risk": "low", "hint": "Clean.", "text": "He scrolls past. Some doors are better left closed.", "fx": { "love": 1 } }
+      ]
+    },
+    {
+      "id": "il_hotel_karaoke", "cat": "interlude", "w": 3, "cd": 160, "when": { "freeAgent": false },
+      "title": "Away-Trip Karaoke",
+      "text": ["The away hotel has a karaoke room and {CAPl} has booked it. It's tradition: every new player sings. {J}'s turn has come.", "Away trip, hotel, a night before a game. Someone has found a karaoke machine. The microphone is being passed around like a hot coal."],
+      "prompt": "Sing?",
+      "choices": [
+        { "label": "Belt out a power ballad", "desc": "Commit.", "risk": "medium", "hint": "Glory or shame.", "out": [
+          { "w": 1, "text": "He absolutely nails it. Standing ovation. Someone cries. The video leaks and the comments call him 'the voice'.", "fx": { "dressing": 4, "followers": 3000, "morale": 3 } },
+          { "w": 1, "text": "It's catastrophic. Off-key, wrong lyrics, a cracked high note. The squad will play the recording at his wedding.", "fx": { "dressing": 4, "morale": 1 } }
+        ] },
+        { "label": "Sing something from home", "desc": "Your culture, your song.", "risk": "low", "hint": "Heartfelt.", "text": "He sings a song his mother used to sing. Nobody understands the words. Everybody understands the feeling. The room is very quiet afterwards.", "fx": { "dressing": 3, "morale": 4, "family": 1 } },
+        { "label": "Refuse", "desc": "Not happening.", "risk": "low", "hint": "Fines and teasing.", "text": "The kangaroo court fines him double and makes him sing anyway, next week, with a dance.", "fx": { "dressing": -1, "wealth": -50 } }
+      ]
+    },
+    {
+      "id": "il_sponsor_freebies", "cat": "interlude", "w": 3, "cd": 160, "when": { "rep": [15, 100] },
+      "title": "A Box of Free Stuff",
+      "text": ["A brand {J} has never heard of sends him a box of free products: headphones, energy drinks, and a hoodie with a very large logo. A note asks for 'just one post'.", "Free trainers, three pairs, from a company that wants him seen in them. No contract. Just vibes and hope."],
+      "prompt": "Post about them?",
+      "choices": [
+        { "label": "Give them to the academy kids", "desc": "Spread the love.", "risk": "low", "hint": "The kids go wild.", "text": "The academy kids receive the box like it's treasure. {K} wears the hoodie every day for a month.", "fx": { "image": 2, "dressing": 1, "morale": 2 } },
+        { "label": "Post about them", "desc": "Free is free.", "risk": "medium", "hint": "Your existing sponsor won't love it.", "text": "The post does well. Then his boot sponsor's lawyer sends a polite, terrifying email.", "fx": { "followers": 2000, "board": -1, "stress": 2 } },
+        { "label": "Ignore it", "desc": "No unpaid ads.", "risk": "low", "hint": "Professional.", "text": "The box sits in his hallway for a month. Then his {SIBr} 'borrows' all of it.", "fx": { "family": 1 } }
+      ]
+    },
+    {
+      "id": "il_rival_player_dinner", "cat": "interlude", "w": 3, "cd": 200, "when": { "freeAgent": false },
+      "title": "Dinner With the Enemy",
+      "text": ["An old youth-team friend now plays for {R}, your rivals this weekend. He texts: 'Dinner tonight? For old times' sake.'", "At {PLACE}, {J} bumps into a player from {R}. They came through the same youth tournaments. He suggests grabbing food."],
+      "prompt": "Go?",
+      "choices": [
+        { "label": "Go, but no football talk", "desc": "Friends first.", "risk": "medium", "hint": "A photo of you two would cause a stir.", "out": [
+          { "w": 2, "text": "A great evening of nostalgia. Nobody sees them. Probably.", "fx": { "friends": 4, "morale": 3 } },
+          { "w": 1, "text": "Someone photographs them laughing together. Rival fans and his own fans are equally furious, which is impressive.", "fx": { "friends": 3, "fans": -3, "press": -1 } }
+        ] },
+        { "label": "After the game", "desc": "Rivalry first.", "risk": "low", "hint": "Professional.", "text": "'After the game, brother.' The reply is a laughing emoji and a threat to nutmeg him.", "fx": { "fans": 1 } }
+      ]
+    },
+    {
+      "id": "il_secret_talent", "cat": "interlude", "w": 3, "cd": 260,
+      "title": "The Hidden Talent",
+      "text": ["A teammate discovers {J} can solve a Rubik's cube in under a minute. The squad demands a demonstration. A crowd gathers. Phones come out.", "At a team event, someone finds out {J} can play the piano. There is a piano in the hotel lobby. There is no escape."],
+      "prompt": "Show off?",
+      "choices": [
+        { "label": "Perform", "desc": "Your moment.", "risk": "low", "hint": "Surprising. Viral.", "text": "He does it. Silence, then uproar. The clip is the club's most-shared video of the year and has nothing to do with football.", "fx": { "followers": 6000, "dressing": 3, "morale": 3 } },
+        { "label": "Deny everything", "desc": "Mystery.", "risk": "low", "hint": "They'll keep asking.", "text": "He denies it. They don't believe him. It becomes a running joke that he's a secret genius.", "fx": { "dressing": 1 } }
+      ]
+    },
+    {
+      "id": "il_fasting_training", "cat": "interlude", "w": 4, "cd": 40, "when": { "ramadan": true },
+      "title": "Fasting and Training",
+      "text": ["Ramadan. Training is at 10am in {WEATHER}, and {J} hasn't eaten or drunk since before dawn. The nutritionist hovers with a worried face.", "The sun sets during a late tactics meeting. Someone has brought dates and water. The meeting pauses for a moment of quiet."],
+      "prompt": "How do you manage?",
+      "choices": [
+        { "label": "Talk to the staff about adjusting", "desc": "Plan the load together.", "risk": "low", "hint": "Respected and sensible.", "text": "The staff adjust his sessions and timings. {Mf} says, simply, 'Of course.' It means more than he can say.", "fx": { "trust": 2, "pfm": 1, "morale": 3 } },
+        { "label": "Push through everything", "desc": "No special treatment.", "risk": "medium", "hint": "Admirable. Exhausting.", "text": "He does every drill at full intensity. By evening he can barely stand. His teammates notice the effort.", "fx": { "pfm": -4, "dressing": 2, "growth": ["mental"] } },
+        { "label": "Invite teammates to break the fast", "desc": "Share it.", "risk": "low", "hint": "Culture and connection.", "text": "Twelve teammates turn up for the evening meal. Half of them have never tried the food. All of them ask for seconds.", "fx": { "dressing": 5, "morale": 4, "wealth": -80 } }
+      ]
+    },
+    {
+      "id": "il_jersey_swap_kid", "cat": "interlude", "w": 3, "cd": 200, "when": { "freeAgent": false },
+      "title": "The Mascot",
+      "text": ["The matchday mascot, a nervous eight-year-old, is holding {J}'s hand in the tunnel and shaking. He whispers that he has a question: 'Are you scared?'", "This week's mascot won't let go of {J}'s hand. She's told him, very seriously, that he's going to score."],
+      "prompt": "What do you say?",
+      "choices": [
+        { "label": "'Every time. That's how you know it matters.'", "desc": "The truth.", "risk": "low", "hint": "A moment.", "text": "The kid nods seriously. After the match, his father finds {J} to say his son hasn't stopped talking about it.", "fx": { "morale": 3, "image": 1, "mood": "Motivated" } },
+        { "label": "Promise him your shirt", "desc": "Win or lose.", "risk": "low", "hint": "Keep the promise.", "text": "After the final whistle, {J} walks across the pitch to the family section and hands over a sweaty shirt. The boy holds it like a trophy.", "fx": { "fans": 2, "followers": 1500, "morale": 2 } }
+      ]
+    },
+    {
+      "id": "il_bad_review_restaurant", "cat": "interlude", "w": 2, "cd": 300, "when": { "rep": [20, 100] },
+      "title": "The Restaurant Review",
+      "text": ["A food blogger has posted: 'Saw {J} at {PLACE}. He sent his food back twice. Diva behaviour.' He sent it back once. It was raw chicken.", "A one-star review of a restaurant goes viral because it mentions {J}: 'Footballer at next table was too loud.' He was singing happy birthday to {SIB}."],
+      "prompt": "Respond?",
+      "choices": [
+        { "label": "Post a funny response", "desc": "Set the record straight with jokes.", "risk": "medium", "hint": "Usually works.", "text": "'In my defence, the chicken was clucking.' The internet sides with him. The restaurant sends him a free dinner.", "fx": { "followers": 2500, "image": 2 } },
+        { "label": "Say nothing", "desc": "Let it pass.", "risk": "low", "hint": "Some people will believe it.", "text": "The story fades in a day. A few fan accounts keep the 'diva' joke going.", "fx": { "image": -1 } }
+      ]
+    },
+    {
+      "id": "il_video_call_grandma", "cat": "interlude", "w": 3, "cd": 200,
+      "title": "Grandma Gets a Phone",
+      "text": ["His grandmother has a smartphone now. She has learned to video-call. She calls eleven times on Tuesday, mostly with the camera pointed at her ear.", "A blurry video call from his grandmother. She's ninety. She wants to know why he 'kicks the ball and runs away from it'."],
+      "prompt": "Pick up?",
+      "choices": [
+        { "label": "Every time", "desc": "She's ninety.", "risk": "low", "hint": "Precious.", "text": "Eleven calls, eleven conversations about nothing. On the last one she says she's proud of him, clear as a bell, then hangs up by accident.", "fx": { "family": 6, "morale": 4, "stress": -2 } },
+        { "label": "Call her back on Sunday", "desc": "Properly, with time.", "risk": "low", "hint": "Fine.", "text": "On Sunday he calls and they talk for an hour. She tells the same story three times. He laughs every time.", "fx": { "family": 3 } }
+      ]
+    },
+    {
+      "id": "il_charity_run", "cat": "interlude", "w": 3, "cd": 200,
+      "title": "The Charity Run",
+      "text": ["A local charity is holding a 5k fun run and the organisers have asked whether {J} might 'make an appearance'. In a costume. It's a banana costume.", "The children's hospital charity run is this Sunday. The poster has {J}'s face on it, which nobody asked him about."],
+      "prompt": "Run it?",
+      "choices": [
+        { "label": "Run it in the costume", "desc": "Go all in.", "risk": "low", "hint": "Hilarious. Wholesome.", "text": "A professional footballer in a banana costume finishes 34th. The photos raise more money than the run itself.", "fx": { "image": 4, "fans": 2, "followers": 4000, "pfm": -2 } },
+        { "label": "Start the race and cheer", "desc": "Fire the starting pistol.", "risk": "low", "hint": "Nice, safe.", "text": "He fires the starting pistol and high-fives every runner at the finish. His arm hurts more than his legs ever have.", "fx": { "image": 2, "fans": 1 } }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,286 @@
+{
+  "scenarios": [
+    {
+      "id": "md_presser_partner_question", "cat": "media", "w": 5, "ui": "press", "when": { "partner": ["dating", "serious", "engaged", "married"], "rep": [10, 100] },
+      "title": "A Question About {Pf}",
+      "text": ["At {SET}, {JR} from {OUT} slips in a question that has nothing to do with football: 'Your relationship with {P} is all over social media. Is she a distraction?'", "The last question at {SET} comes from a tabloid reporter at the back: 'Is it true {P} has been seen at training more often? Does the coach mind?'"],
+      "prompt": "How do you answer a question about your partner?",
+      "choices": [
+        { "label": "'She's the reason I'm playing well.'", "desc": "Proud and public.", "risk": "medium", "hint": "{Pf} reacts depending on how private she is.", "text": "The quote becomes a headline. Fans call it romantic. Whether {Pf} loves it or hates it depends entirely on who she is.", "fx": { "love": 5, "followers": 5000, "press": 2, "image": 2 } },
+        { "label": "'My private life is private.'", "desc": "Firm boundary.", "risk": "low", "hint": "Respected. Reporters back off. Mostly.", "text": "Said politely, without a smile. The room moves on. {Pf} hears about it and sends a heart emoji.", "fx": { "love": 3, "press": -1, "image": 1 } },
+        { "label": "Make a joke at her expense", "desc": "'She's a distraction from my PlayStation.'", "risk": "high", "hint": "The room laughs. She might not.", "text": "The reporters laugh. The clip is everywhere by dinner. {Pf} watches it twice and doesn't reply to his messages until morning.", "fx": { "love": -7, "followers": 6000, "press": 3, "stress": 2 } }
+      ]
+    },
+    {
+      "id": "md_presser_teammate_blame", "cat": "media", "w": 5, "ui": "press", "uses": { "T": "any" }, "when": { "freeAgent": false, "rep": [8, 100], "lastResult": ["L", "D"] },
+      "title": "The Blame Question",
+      "text": ["After the result, {JR} asks directly: 'Was {T}'s mistake the reason you didn't win?' Every camera in the room swings to {J}.", "At {SET}, a reporter replays the moment {T} lost the ball for the goal, then asks {J} what he said to him in the dressing room."],
+      "prompt": "A teammate is being blamed in public.",
+      "choices": [
+        { "label": "Defend him completely", "desc": "'We win together, we lose together.'", "risk": "low", "hint": "The dressing room hears everything.", "text": "'We win together, we lose together. Next question.' {T} reads the quote on his phone in the canteen and looks over at {J} for a long moment.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "dressing": 5, "press": -1 } },
+        { "label": "Be honest: 'It cost us.'", "desc": "The truth hurts.", "risk": "high", "hint": "Media loves honesty. Teammates don't.", "text": "'It was a mistake and it cost us.' True. Also the back page. {T} doesn't speak to him for a week.", "fx": { "teammate": { "who": "T", "rel": "rival" }, "dressing": -6, "press": 4, "trust": -2 } },
+        { "label": "Blame yourself instead", "desc": "Take the hit for him.", "risk": "medium", "hint": "Noble. The media will run with it.", "text": "'I should have tracked my runner. That's on me.' It isn't, really. {T} knows it. {CAPl} knows it.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "dressing": 7, "image": 2, "morale": -1 } }
+      ]
+    },
+    {
+      "id": "md_presser_board_question", "cat": "media", "w": 4, "ui": "press", "when": { "freeAgent": false, "rep": [12, 100] },
+      "title": "The Ownership Question",
+      "text": ["At {SET}, {JR} asks about the club's finances: 'Do the players trust President {PRES}'s plan?' The club's press officer stiffens.", "A reporter asks: 'Fans say the board has no ambition. Do you agree?' The press officer reaches for the microphone, then stops."],
+      "prompt": "A question about the board.",
+      "choices": [
+        { "label": "Back the board", "desc": "'We trust the project.'", "risk": "medium", "hint": "Board grateful. Fans roll their eyes.", "text": "'We trust the president and the project.' {PRESl} sends a thank-you message. The fan forums are less grateful.", "fx": { "board": 6, "fans": -3, "press": 1 } },
+        { "label": "Side with the fans", "desc": "'The fans deserve more.'", "risk": "high", "hint": "Fans love it. The board will remember.", "text": "'The fans deserve ambition, and so do we.' The ultras put the quote on a flag. A director calls his agent.", "fx": { "fans": 7, "board": -7, "press": 3 } },
+        { "label": "'That's above my pay grade.'", "desc": "Deflect with a smile.", "risk": "low", "hint": "Clever. Nobody upset.", "text": "The room laughs. The press officer exhales. Nobody's happy, nobody's angry.", "fx": { "press": 1 } }
+      ]
+    },
+    {
+      "id": "md_presser_family_poverty", "cat": "media", "w": 4, "ui": "press", "when": { "rep": [15, 100] },
+      "title": "The Family Story",
+      "text": ["A TV interviewer wants to talk about {J}'s childhood: the poverty, the bus fares, {DAD}'s job. She has clearly spoken to someone from his neighbourhood. She has details.", "{OUT} wants to run a big feature on 'the sacrifices of {J}'s family'. They want quotes from {J}. And photos of the old house."],
+      "prompt": "Tell your family's story?",
+      "choices": [
+        { "label": "Tell it, with pride", "desc": "Honour their sacrifice.", "risk": "medium", "hint": "Moving. {DAD} is a private man.", "out": [
+          { "w": 2, "text": "The story is beautiful. People cry. {MUM} prints it out. {DAD} says only, 'You made us sound better than we were.' He sounds pleased.", "fx": { "family": 5, "image": 5, "followers": 10000, "press": 3 } },
+          { "w": 1, "text": "The story is beautiful, but it shows the old house and names the street. {DAD} is ashamed. He doesn't call for two weeks.", "fx": { "family": -6, "image": 4, "followers": 10000, "press": 2 } }
+        ] },
+        { "label": "Ask your parents first", "desc": "Their story too.", "risk": "low", "hint": "Respectful.", "text": "{DAD} says no photos. {MUM} says yes to everything. They compromise. The piece is gentler and truer for it.", "fx": { "family": 6, "image": 3, "press": 2 } },
+        { "label": "Decline", "desc": "Some stories aren't for sale.", "risk": "low", "hint": "Private. The journalist is disappointed.", "text": "He declines. {JR} writes it anyway, from other sources, and gets half of it wrong.", "fx": { "press": -2, "family": 1 } }
+      ]
+    },
+    {
+      "id": "md_presser_manager_rumour", "cat": "media", "w": 4, "ui": "press", "when": { "freeAgent": false, "rep": [10, 100], "trust": [0, 45] },
+      "title": "'Is There a Problem With the Coach?'",
+      "text": ["{JR}: 'You've been dropped three times this month. Sources say you and {Mf} don't speak. Is there a problem?' Silence. The press officer's pen stops.", "At {SET}, a reporter reads out a fan's question: 'Why does the coach hate {J}?' The room laughs nervously."],
+      "prompt": "Your relationship with the manager, in public.",
+      "choices": [
+        { "label": "'I respect him. I'll earn my place.'", "desc": "Professional.", "risk": "low", "hint": "The manager notices.", "text": "Calm and humble. {Mf} reads it and, the next day, asks him to stay after training for some extra work.", "fx": { "trust": 6, "press": 1, "fans": 1 } },
+        { "label": "'Ask him.'", "desc": "Two words.", "risk": "high", "hint": "Massive headlines. War.", "text": "'Ask him.' It's the only headline in the country the next morning. {Mf} answers in his own press conference. It's not pretty.", "fx": { "trust": -12, "press": 5, "followers": 12000, "fans": 2, "dressing": -2, "stress": 4 } },
+        { "label": "Laugh it off", "desc": "'He loves me, he just hides it.'", "risk": "medium", "hint": "Charming. Avoids the question.", "text": "The room laughs. The clip is cute. Nothing is resolved.", "fx": { "press": 2, "followers": 3000 } }
+      ]
+    },
+    {
+      "id": "md_social_post_family", "cat": "media", "w": 4, "ui": "social", "when": { "followers": [3000, 999999999] },
+      "title": "The Family Photo Post",
+      "text": ["{J} took a photo of {MUM} and {DAD} at their kitchen table, laughing at something he said. It's the most real photo he's ever taken. He wants to post it.", "{SIB} sends him a photo from home: the whole family in matching shirts with his number. It's ridiculous. It's perfect."],
+      "prompt": "Post it?",
+      "choices": [
+        { "label": "Post it with a long caption", "desc": "Tell them what they mean.", "risk": "low", "hint": "The internet melts. Family feels seen.", "text": "Two million likes. {MUM} reads every comment, all of them, over three days. {DAD} pretends he hasn't seen it.", "fx": { "family": 7, "followers": 8000, "image": 3 } },
+        { "label": "Keep it private", "desc": "Some moments are just yours.", "risk": "low", "hint": "Precious.", "text": "He sets it as his phone wallpaper. Nobody else needs to see it.", "fx": { "morale": 2 } },
+        { "label": "Post it, but crop out {DAD}", "desc": "He hates photos.", "risk": "medium", "hint": "Respectful? Or hurtful?", "text": "{DAD} notices immediately. 'Good, I hate photos,' he says. He's quiet for a while.", "fx": { "family": -2, "followers": 4000 } }
+      ]
+    },
+    {
+      "id": "md_social_rival_beef", "cat": "media", "w": 4, "ui": "social", "when": { "followers": [10000, 999999999], "freeAgent": false },
+      "title": "Beef With a Rival Player",
+      "text": ["A player from {R} posts a video mocking {J}'s celebration. It has a million views. The comments are full of {J}'s own fans asking him to respond.", "A rival defender posts: 'Some players are all TikTok and no tackles.' He doesn't tag {J}. He doesn't need to."],
+      "prompt": "Respond?",
+      "choices": [
+        { "label": "Clap back with a joke", "desc": "Sharp, funny.", "risk": "medium", "hint": "Fans love it. Rivalry heats up.", "text": "His reply is so good that even the rival's teammates like it. The next derby is the most-anticipated match of the season.", "fx": { "followers": 15000, "fans": 4, "image": -1, "stress": 2, "flag": "online_beef" } },
+        { "label": "Answer on the pitch", "desc": "Say nothing until Sunday.", "risk": "low", "hint": "Classy. Pressure on.", "text": "He says nothing. Fans make 'answer on the pitch' a hashtag. The pressure is enormous.", "fx": { "image": 2, "stress": 3, "fans": 1 } },
+        { "label": "Message him privately", "desc": "Settle it like adults.", "risk": "low", "hint": "Maturity.", "text": "A private message: 'Good video. See you Sunday.' The rival replies with a laughing emoji. Respect, of a sort.", "fx": { "growth": ["mental"] } }
+      ]
+    },
+    {
+      "id": "md_documentary_crew", "cat": "media", "w": 3, "when": { "freeAgent": false, "rep": [25, 100] },
+      "title": "The Documentary",
+      "text": ["A streaming service is filming a documentary about the club. They want {J} as one of the main characters: cameras at training, at home, in the car.", "The documentary producers want to film {J}'s family back home. They say it will be 'the emotional heart of the series'."],
+      "prompt": "Let the cameras in?",
+      "choices": [
+        { "label": "Full access", "desc": "Home, family, everything.", "risk": "high", "hint": "Global fame. Zero privacy. Family feelings.", "text": "The series is a hit. {J} becomes famous in countries he's never visited. {MUM} becomes famous too, and hates it a little.", "fx": { "followers": 60000, "image": 3, "family": -4, "love": -4, "stress": 5, "board": 3 } },
+        { "label": "Football only", "desc": "Training and matches.", "risk": "low", "hint": "Balanced.", "text": "He keeps the cameras on the pitch. He's in it enough to be noticed, not enough to be consumed by it.", "fx": { "followers": 15000, "board": 2 } },
+        { "label": "No", "desc": "Not your story to sell.", "risk": "medium", "hint": "The club is disappointed.", "text": "He declines. He's in the background of one scene, looking annoyed at a camera. It becomes a meme.", "fx": { "board": -3, "followers": 2000 } }
+      ]
+    },
+    {
+      "id": "md_tabloid_family_secret", "cat": "media", "w": 3, "cd": 150, "when": { "rep": [30, 100] },
+      "title": "The Tabloid Calls {MUM}",
+      "text": ["A tabloid journalist has turned up at {MUM}'s door pretending to be a family friend. She talked for an hour before realising. Now they have quotes.", "A reporter has been calling relatives, asking about an uncle who went to prison twenty years ago. {DAD} has stopped answering the phone."],
+      "prompt": "They went after your family.",
+      "choices": [
+        { "label": "Go public with your anger", "desc": "Name and shame the paper.", "risk": "high", "hint": "Fans back you. Press war.", "text": "His post goes viral. Fans flood the paper's comments. Other outlets take his side. That paper will never write kindly about him again.", "fx": { "family": 6, "press": -6, "fans": 4, "image": 2, "stress": 3 } },
+        { "label": "Lawyers, quietly", "desc": "Legal letter.", "risk": "low", "hint": "Effective. Invisible.", "text": "A lawyer's letter kills the story before it runs. {MUM} never knows how close it came.", "fx": { "family": 3, "wealth": -500, "press": -2 } },
+        { "label": "Call {JR} for help", "desc": "Your friend in the press.", "risk": "medium", "hint": "Depends on your relationship.", "check": { "stat": "rep", "dc": 45 },
+          "ok": { "text": "{JR} makes a few calls. The story is quietly dropped. 'You owe me lunch,' says {JR}.", "fx": { "press": 3, "family": 3 } },
+          "bad": { "text": "{JR} says he can't interfere with another outlet. The story runs. {MUM} cries.", "fx": { "family": -4, "stress": 4 } } }
+      ]
+    },
+    {
+      "id": "md_viral_kindness", "cat": "media", "w": 4, "ui": "social", "when": { "followers": [2000, 999999999] },
+      "title": "Caught Being Kind",
+      "text": ["Someone filmed {J} giving his jacket to a homeless man outside {PLACE} at midnight. He didn't know he was being filmed. Now everyone knows.", "A hidden-camera video shows {J} paying for an old woman's groceries. It's been viewed four million times."],
+      "prompt": "Talk about it?",
+      "choices": [
+        { "label": "Say nothing at all", "desc": "It wasn't for the cameras.", "risk": "low", "hint": "The silence makes it bigger.", "text": "He never mentions it. That makes people love it even more.", "fx": { "image": 6, "fans": 3, "followers": 10000 } },
+        { "label": "Use it to promote a charity", "desc": "Turn attention into help.", "risk": "medium", "hint": "Good intentions. Some cynics.", "text": "He points everyone to a homeless charity. Donations triple. A few cynics call it a PR stunt. Most people don't.", "fx": { "image": 4, "followers": 8000, "press": 2 } }
+      ]
+    },
+    {
+      "id": "md_interview_mistranslated", "cat": "media", "w": 3, "ui": "press", "when": { "abroad": true, "rep": [10, 100] },
+      "title": "Lost in Translation",
+      "text": ["An interview in the local language goes badly: {J} meant to say 'the fans here are passionate', but the translation reads 'the fans here are crazy'. It's the headline.", "A foreign outlet has mistranslated {J} saying he 'dreams of playing in a bigger league'. He said he 'dreams of playing in big games'."],
+      "prompt": "Fix it?",
+      "choices": [
+        { "label": "Video apology in the local language", "desc": "Effort matters.", "risk": "low", "hint": "Clumsy but sincere.", "text": "His grammar is terrible, his intent obvious. The fans forgive him instantly and adopt his mistakes as chants.", "fx": { "fans": 5, "press": 2, "dressing": 1 } },
+        { "label": "Let the club issue a correction", "desc": "Official channels.", "risk": "low", "hint": "Effective, impersonal.", "text": "The correction is accurate and nobody reads it.", "fx": { "fans": -2 } }
+      ]
+    },
+    {
+      "id": "md_sponsor_deal_partner", "cat": "media", "w": 3, "when": { "partner": ["serious", "engaged", "married"], "followers": [30000, 999999999] },
+      "title": "The Couple Campaign",
+      "text": ["A clothing brand wants {J} and {P} together for a campaign. Real money. Photos everywhere. Billboards with both their faces.", "A jewellery brand offers {J} and {Pf} a joint deal. 'Football's favourite couple', the pitch deck says."],
+      "prompt": "Do it together?",
+      "vars": { "deal": ["endorse", 3000] },
+      "choices": [
+        { "label": "Ask {Pf} first", "desc": "Her face, her choice.", "risk": "low", "hint": "Respect.", "text": "He asks. Her answer depends on who she is — but she appreciates being asked, either way.", "fx": { "love": 5 } },
+        { "label": "Sign it for both of you", "desc": "Surprise her!", "risk": "high", "hint": "Big money. Big assumption.", "text": "He signs. She finds out from the brand's email. Whether it's a gift or a betrayal depends entirely on her.", "fx": { "love": -5, "endorsement": { "brand": "Couple campaign", "value": "deal", "years": 1 }, "followers": 20000 } },
+        { "label": "Decline", "desc": "Keep love out of marketing.", "risk": "low", "hint": "Private.", "text": "He declines. The brand signs another couple. Their billboard is enormous. {J} doesn't mind.", "fx": { "love": 2 } }
+      ]
+    },
+    {
+      "id": "md_comment_section_war", "cat": "media", "w": 4, "ui": "social", "when": { "followers": [5000, 999999999] },
+      "title": "Comments About {MUM}",
+      "text": ["After a bad game, someone in {J}'s comments writes something vile about his mother. It has 2,000 likes.", "A troll account has been posting edited photos of {J}'s family for a week. {SIB} has seen them."],
+      "prompt": "Respond?",
+      "choices": [
+        { "label": "Respond furiously", "desc": "Nobody talks about your mum.", "risk": "high", "hint": "Satisfying. Messy.", "text": "His reply is furious and justified and becomes its own story. The club's media team asks him to 'take a breath'. {MUM} asks him to delete it.", "fx": { "family": 2, "image": -3, "press": -2, "followers": 6000, "stress": 4 } },
+        { "label": "Report and block, say nothing", "desc": "Don't feed them.", "risk": "low", "hint": "Dignified. Painful.", "text": "He reports it, blocks them, and calls {MUM} to check she's okay. She hasn't seen it. He makes sure she never does.", "fx": { "family": 3, "stress": 2 } },
+        { "label": "Post about online abuse", "desc": "Make it bigger than you.", "risk": "medium", "hint": "Could change something.", "text": "His post about abuse gets picked up by national news. The platform deletes two hundred accounts. It's a start.", "fx": { "image": 5, "press": 3, "followers": 8000, "stress": 2 } }
+      ]
+    },
+    {
+      "id": "md_transfer_rumour_family", "cat": "media", "w": 4, "when": { "freeAgent": false, "rep": [15, 100] },
+      "title": "The Rumour Reaches Home",
+      "text": ["A transfer rumour links {J} with a club abroad. It's probably nonsense. {MUM} has read it three times and called him twice, crying, asking if he's leaving.", "A rumour says {J} is moving abroad. His family's neighbours are already congratulating them. {DAD} wants to know why he heard it from the neighbours."],
+      "prompt": "The rumour hits home before you.",
+      "choices": [
+        { "label": "Call them, tell them everything", "desc": "Even what you don't know.", "risk": "low", "hint": "Calms home.", "text": "He explains it's just a rumour, and promises they'll hear everything from him first. {DAD} says, 'Good. That's all.'", "fx": { "family": 5, "stress": -1 } },
+        { "label": "Post a denial publicly", "desc": "Kill the rumour.", "risk": "medium", "hint": "Board happy. Agent annoyed.", "text": "'I'm happy here.' The rumour dies. Fans cheer. His agent, who started the rumour, is quietly furious.", "fx": { "fans": 4, "board": 3, "family": 2 } },
+        { "label": "Let it run", "desc": "Rumours raise your value.", "risk": "medium", "hint": "Leverage. Worried family.", "text": "He lets it run. His value goes up. His family's worry does too.", "fx": { "family": -4, "board": -2, "stress": 2 } }
+      ]
+    },
+    {
+      "id": "md_live_tv_gaffe", "cat": "media", "w": 3, "ui": "press", "when": { "rep": [12, 100] },
+      "title": "Live on TV",
+      "text": ["A live post-match TV interview. Adrenaline still pumping. The presenter asks about the referee. {J} feels a word forming that should not be said on live TV.", "Live TV, pitchside, rain dripping off his eyebrows. The interviewer asks what he'll say to {R}'s fans."],
+      "prompt": "Live. No edits.",
+      "choices": [
+        { "label": "Breathe, say something boring", "desc": "Count to three.", "risk": "low", "hint": "Media training pays off.", "text": "'We take the positives and look forward to the next game.' The most boring sentence in football. It saves him a fine.", "fx": { "press": 2, "board": 1 } },
+        { "label": "Say exactly what you think", "desc": "Raw honesty.", "risk": "extreme", "hint": "Viral. Fines. Legend status for some.", "text": "He says it. The clip has ten million views by midnight. The league fines him. Half the country thinks he's a hero; the other half thinks he's a disgrace.", "fx": { "followers": 30000, "fans": 5, "image": -5, "board": -5, "press": -3, "wealth": -500, "suspension": 1 } },
+        { "label": "Make the presenter laugh", "desc": "Charm.", "risk": "low", "hint": "Clip-worthy.", "text": "He makes a joke about the rain. The presenter laughs mid-question. The clip is the most-shared of the weekend for nicer reasons.", "fx": { "followers": 8000, "image": 2, "press": 2 } }
+      ]
+    },
+    {
+      "id": "md_journalist_friendship_test", "cat": "media", "w": 3, "ui": "phone", "when": { "press": [60, 100] },
+      "title": "{JR} Needs a Favour",
+      "text": ["{JR} has been fair to {J} for years. Now he needs a favour: an exclusive about a teammate's transfer, before anyone else has it. His editor is threatening to cut his job.", "{JR} messages late at night. He's heard a rumour about the manager's future. He needs {J} to confirm or deny. Off the record. Please."],
+      "prompt": "Help your friend in the press?",
+      "choices": [
+        { "label": "Give him the exclusive", "desc": "He's been loyal to you.", "risk": "high", "hint": "{JR} saved. If the squad finds out...", "out": [
+          { "w": 2, "text": "{JR} gets his scoop and keeps his job. Nobody traces it back. {JR} will owe {J} forever.", "fx": { "press": 8 } },
+          { "w": 1, "text": "The scoop runs. The dressing room works out the source within a day. {CAPl} looks at {J} like a stranger.", "fx": { "press": 6, "dressing": -8, "trust": -4 } }
+        ] },
+        { "label": "Refuse, but help another way", "desc": "An interview with you instead.", "risk": "low", "hint": "Integrity and friendship.", "text": "'I can't give you that. But I'll give you an exclusive interview about me.' {JR} takes it. His editor is satisfied.", "fx": { "press": 4, "followers": 3000 } },
+        { "label": "Refuse flatly", "desc": "Squad first.", "risk": "low", "hint": "Loyal. The press friendship cools.", "text": "'No.' {JR} says he understands. His next piece about {J} is noticeably colder.", "fx": { "press": -4, "dressing": 1 } }
+      ]
+    },
+    {
+      "id": "md_award_speech", "cat": "media", "w": 4, "when": { "rep": [20, 100], "form": [7, 10] },
+      "title": "The Award Speech",
+      "text": ["{J} has won a monthly award and has thirty seconds to speak on live TV. He can thank anyone. Everyone he's ever known is watching.", "At the league's awards night, {J}'s name is called. He walks up with no speech prepared."],
+      "prompt": "Who do you thank?",
+      "choices": [
+        { "label": "{MUM} and {DAD}, by name", "desc": "Where it all began.", "risk": "low", "hint": "Family moment.", "text": "'{MUM}, {DAD} — this is yours.' Back home, the whole street cheers at the TV. {DAD} goes outside 'for air'.", "fx": { "family": 8, "image": 2 } },
+        { "label": "The team and the manager", "desc": "Club first.", "risk": "low", "hint": "Dressing room grateful.", "text": "He thanks the squad, {Mf}, the kit man, the chef. The squad sing his name on the bus.", "fx": { "dressing": 5, "trust": 3 } },
+        { "label": "{Pf}", "desc": "For standing by you.", "risk": "low", "hint": "Romantic.", "text": "'And {Pf}. For everything.' Cameras find her in the crowd. She's crying. So is half the internet.", "fx": { "love": 8, "followers": 5000 } },
+        { "label": "The fans", "desc": "They pay for all this.", "risk": "low", "hint": "Fans adore it.", "text": "'This is for the people in the stands every week.' The ultras make it their new banner.", "fx": { "fans": 6, "image": 1 } }
+      ]
+    },
+    {
+      "id": "md_paparazzi_hospital", "cat": "media", "w": 2, "cd": 200, "when": { "rep": [30, 100] },
+      "title": "Photographed at the Hospital",
+      "text": ["{J} visits {DAD} in hospital for a minor operation. A photographer catches him in the corridor looking exhausted. The headline: '{J} Family Health Scare'.", "A gossip site posts a photo of {J} at a clinic. They speculate wildly. It was a dentist appointment."],
+      "prompt": "Respond?",
+      "choices": [
+        { "label": "Explain calmly", "desc": "Facts, briefly.", "risk": "low", "hint": "Ends the speculation.", "text": "A short statement ends the story. {DAD} is mortified to be in the news at all.", "fx": { "press": 1, "family": -1 } },
+        { "label": "Condemn the intrusion", "desc": "Hospitals are off-limits.", "risk": "medium", "hint": "Public sympathy. Press resentment.", "text": "His statement about privacy is widely shared. Other players back him. Photographers become more careful, for a while.", "fx": { "image": 3, "press": -3, "family": 3 } }
+      ]
+    },
+    {
+      "id": "md_press_darling", "cat": "media", "w": 5, "trigger": "pressDarling",
+      "title": "The Media Darling",
+      "text": ["The press love {J}. He's quotable, accessible, generous. Every outlet wants him. {OUT} calls him 'the face of the league'.", "Journalists fight over interviews with {J}. Even critical columnists write about him kindly."],
+      "prompt": "Use the goodwill?",
+      "choices": [
+        { "label": "Use it for causes you care about", "desc": "Amplify others.", "risk": "low", "hint": "Your platform, used well.", "text": "He uses every interview to mention his foundation, his old neighbourhood, a teammate who deserves more credit. The goodwill grows.", "fx": { "image": 5, "dressing": 2, "family": 2 } },
+        { "label": "Become the main character", "desc": "Say yes to everything.", "risk": "medium", "hint": "Fame grows. Teammates notice.", "text": "Three interviews a week. His face is everywhere. Some teammates start calling him 'the celebrity'.", "fx": { "followers": 20000, "dressing": -4, "stress": 3 } },
+        { "label": "Step back a little", "desc": "Don't burn out the welcome.", "risk": "low", "hint": "Wise.", "text": "He turns down half the requests. Scarcity makes him more valuable. The press respects it.", "fx": { "press": 2, "stress": -2 } }
+      ]
+    },
+    {
+      "id": "md_press_war", "cat": "media", "w": 6, "trigger": "pressWar",
+      "title": "At War With the Press",
+      "text": ["Every outlet is against {J} now. Every misplaced pass is a column. Every quiet game is 'proof'. {OUT} has published three negative pieces this week.", "The press has turned. Journalists who used to praise him now write about his 'attitude', his 'lifestyle', his 'decline'."],
+      "prompt": "How do you fight a war with the media?",
+      "choices": [
+        { "label": "Charm offensive", "desc": "Coffee with every journalist.", "risk": "medium", "hint": "Slow repairs.", "text": "One by one, he sits down with them. Off the record, honest, humble. It takes weeks. Slowly, the tone shifts.", "fx": { "press": 15, "stress": 3, "growth": ["mental"] } },
+        { "label": "Go around them", "desc": "Talk directly to fans online.", "risk": "medium", "hint": "Fans love it. Press hates it more.", "text": "He starts a weekly video for fans. No journalists needed. The fans love it. The press calls it 'arrogant'.", "fx": { "fans": 6, "followers": 15000, "press": -5 } },
+        { "label": "Let your football answer", "desc": "Ignore all of it.", "risk": "low", "hint": "Only works if you play well.", "text": "He stops reading. He trains harder. Whether it works depends on Sundays.", "fx": { "stress": -2, "growth": ["mental"] } }
+      ]
+    },
+    {
+      "id": "md_scandal_trigger", "cat": "media", "w": 6, "trigger": "scandal",
+      "title": "{J}'s Image in Freefall",
+      "text": ["{J}'s public image has collapsed. Brands are 'reviewing' deals. Parents tell their kids to pick a different favourite player. {OUT} runs a poll: 'Is {J} a bad influence?'", "The headlines have turned toxic. {J} is now the example columnists use when they write about 'what's wrong with modern footballers'."],
+      "prompt": "Rebuild or rebel?",
+      "choices": [
+        { "label": "Public apology and real change", "desc": "Own every mistake.", "risk": "medium", "hint": "Slow climb back.", "text": "A sincere video, no script. Then months of quiet good behaviour. It takes time. Time is the only thing that works.", "fx": { "image": 12, "press": 3, "stress": 2, "board": 3 } },
+        { "label": "Embrace the villain role", "desc": "If they hate you, let them.", "risk": "extreme", "hint": "Some fans love a villain. Sponsors don't.", "text": "He leans into it: the sneer, the celebrations, the attitude. Away fans hate him. Some home fans love him more. The board is horrified.", "fx": { "followers": 20000, "fans": 3, "board": -8, "image": -5, "family": -4 } },
+        { "label": "Disappear for a while", "desc": "No posts, no interviews.", "risk": "low", "hint": "Out of sight, slowly out of mind.", "text": "Total silence for a month. The story dies of starvation.", "fx": { "image": 6, "followers": -5000, "stress": -4 } }
+      ]
+    },
+    {
+      "id": "md_role_model", "cat": "media", "w": 5, "trigger": "roleModel",
+      "title": "A National Role Model",
+      "text": ["{J} has become a genuine role model. Schools invite him to speak. Parents name their children after him. A government minister mentions him in a speech about youth sport.", "A national survey names {J} the most admired athlete among teenagers. His family's phone hasn't stopped ringing."],
+      "prompt": "What do you do with it?",
+      "choices": [
+        { "label": "Become an ambassador for a cause", "desc": "Use the platform.", "risk": "low", "hint": "Legacy.", "text": "He becomes an ambassador for youth sport in poor areas. Pitches get built in his name. That will outlast any goal.", "fx": { "image": 4, "family": 4, "fans": 3, "morale": 5, "stress": 2 } },
+        { "label": "Stay humble, say nothing", "desc": "Let it be.", "risk": "low", "hint": "The humility makes it stronger.", "text": "He shrugs it off in interviews. The humility makes people admire him more.", "fx": { "image": 3, "morale": 3 } }
+      ]
+    },
+    {
+      "id": "md_ai_fake_video", "cat": "media", "w": 2, "cd": 200, "ui": "social", "when": { "followers": [50000, 999999999] },
+      "title": "A Fake Video",
+      "text": ["A video is spreading of {J} saying terrible things about his own fans. It's fake — made with software — but it's convincing. It has three million views.", "A doctored clip appears to show {J} mocking a disabled fan. It's fake. The internet doesn't wait for facts."],
+      "prompt": "Respond fast.",
+      "choices": [
+        { "label": "Go live and talk directly", "desc": "Face to face with your fans.", "risk": "low", "hint": "Authenticity beats fakes.", "text": "He goes live for twenty minutes, calm and clear. The fans believe him. The fake video becomes a story about fake videos.", "fx": { "fans": 4, "image": 2, "press": 2, "stress": 3 } },
+        { "label": "Let the club's lawyers handle it", "desc": "Official channels.", "risk": "medium", "hint": "Slower.", "text": "The takedown requests work eventually. For three days, a lot of people believe it.", "fx": { "image": -3, "fans": -2, "stress": 4 } }
+      ]
+    },
+    {
+      "id": "md_fan_favourite", "cat": "media", "w": 5, "trigger": "fanFavourite",
+      "title": "The Fans' Favourite",
+      "text": ["{J} is the most popular player at {club}. His shirt outsells everyone's. The ultras' new banner is twenty metres long and has his face on it.", "The fans voted: {J} is their favourite player by a landslide. The club shop has run out of his name letters."],
+      "prompt": "How do you repay that love?",
+      "choices": [
+        { "label": "Spend a day with the supporters' clubs", "desc": "Visit every branch.", "risk": "low", "hint": "Bond deepens.", "text": "He visits four supporters' clubs in one day: tea, photos, a karaoke song, a cake. The bond becomes unbreakable.", "fx": { "fans": 5, "pfm": -2, "board": 2 } },
+        { "label": "Promise you'll never leave", "desc": "Romantic. Risky.", "risk": "high", "hint": "They'll hold you to it.", "text": "'I'm never leaving.' The stadium roars. Every transfer window from now on will be complicated.", "fx": { "fans": 8, "flag": "promised_ultras", "board": 3 } },
+        { "label": "Stay grounded", "desc": "'I'm just doing my job.'", "risk": "low", "hint": "Humble.", "text": "Humble words, a wave. The fans love him more for not making it about himself.", "fx": { "fans": 2, "image": 2 } }
+      ]
+    },
+    {
+      "id": "md_fans_turn", "cat": "media", "w": 6, "trigger": "fansTurn",
+      "title": "The Fans Have Turned",
+      "text": ["The boos started quietly. Now they're loud. When {J}'s name is read out before kick-off, a section of the stadium whistles. A banner says '{J} OUT'.", "Social media is a war zone. Club forums have threads titled 'Why we must sell {J}'. A fan throws a scarf at him after the final whistle."],
+      "prompt": "How do you win them back?",
+      "choices": [
+        { "label": "Face them directly", "desc": "Walk to the stand after the match.", "risk": "high", "hint": "Brave. Could go either way.", "check": { "stat": "mental", "dc": 60 },
+          "ok": { "text": "He walks to the angry stand and applauds them, hand on heart. The boos fade. Some applaud back. It's a start.", "fx": { "fans": 12, "image": 2, "growth": ["mental"] } },
+          "bad": { "text": "He walks to the stand. Something is thrown. Stewards pull him away. The photo is everywhere.", "fx": { "fans": -3, "stress": 6, "image": -2 } } },
+        { "label": "Meet the supporters' groups privately", "desc": "Listen to them.", "risk": "medium", "hint": "Slow repair.", "text": "Two hours in a supporters' club, mostly listening. Some of what they say is unfair. Some of it isn't. They leave with grudging respect.", "fx": { "fans": 8, "stress": 2 } },
+        { "label": "Ignore them", "desc": "They'll come round when you score.", "risk": "medium", "hint": "Maybe.", "text": "He blocks it out. The boos continue. Every bad touch is amplified.", "fx": { "stress": 4, "morale": -3 } }
+      ]
+    }
+  ]
+}

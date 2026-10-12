@@ -10,14 +10,20 @@ nationality and any country's football pyramid must work.
 The project owner is a beginner programmer and the game designer. Explain technical choices in
 plain language, keep changes small and playable, and ask before big design changes.
 
-## Architecture (v0.2, fully standalone, no AI)
+## Architecture (v0.3, fully standalone, no AI)
 - The owner decided (2026-10-11): NO AI at play time. All content is prepared data. Do not add Claude/LLM features back.
 - Browser game, plain ES modules, no build step. `server.js` is a tiny static server for local play (start-game.bat).
   Online: GitHub Pages via .github/workflows/pages.yml (validates scenarios, runs tools/build-site.mjs, deploys dist/).
 - `public/js/engine.js` owns every number. `scenarios.js` picks and resolves data-driven scenarios
   (conditions, weighted/skill-check outcomes, chains, triggers, in-match key moments via state.matchMod).
-- `narrator-offline.js` writes the weekly story from engine facts + phrase banks in data/text/narration.json.
-- Saves: browser localStorage key `beautifulGrind.save.v1`, plus export/import JSON.
+- `life.js` is the life web: 11 meters (manager trust, board, dressing room, fans, press, image, family, partner, friends, morale, stress),
+  the cast, ripple rules (one decision's knock-on effects), weekly drift/neglect/stress, red-line triggers, free-time actions.
+- A week = 1-4 decisions from different arenas (engine.js `ARENAS`) + optional key moment. Interludes (cat `interlude`) and free time
+  never advance time. Balance numbers live in config.js `LIFE`.
+- `narrator-offline.js` writes the long sectioned weekly story from engine facts + phrase banks in data/text/story.json and narration.json,
+  avoiding recently used lines. `ui.js` + `icons.js` (hand-drawn SVG icons) render it.
+- Saves: browser localStorage key `beautifulGrind.save.v1`, plus export/import JSON. `state.version` (now 3) + `migrate()` in engine.js
+  upgrade older saves; bump the version and extend migrate() whenever the state shape changes.
 
 ## Key files
 - `public/js/engine.js` — rules; `config.js` — balancing numbers; `scenarios.js` — scenario engine

@@ -1,20 +1,33 @@
-// App controller: setup screen, game loop, saving, settings.
+// App controller: setup screen, game loop, interludes, free time, saving, settings.
 import { loadWorld, playableLeagues, leagueClubs, clubStrength } from './world.js';
-import { newCareer, advanceWeek, chooseDecision, pendingUnanswered, ageNow } from './engine.js';
+import {
+  newCareer, advanceWeek, chooseDecision, pendingUnanswered, migrate, maybeInterlude, answerInterlude, freeTime, freeTimeList, freeTimeSlots,
+} from './engine.js';
 import { narrateOffline } from './narrator-offline.js';
-import { renderPlayer, renderWeek, renderDecisions, renderPlanner, renderFeed, renderWorld, renderRetirement } from './ui.js';
+import {
+  renderPlayer, renderTopbar, renderWeek, renderDecisions, renderFreeTime, renderPlanner, renderFeed, renderWorld, renderRetirement,
+  renderInterlude, renderInterludeResult,
+} from './ui.js';
 import { POSITIONS } from './config.js';
 import { dateLabel } from './time.js';
 import { escapeHtml } from './util.js';
 
+// The key stays the same across versions: old saves are upgraded by migrate() when they load.
 const SAVE_KEY = 'beautifulGrind.save.v1';
 const $ = (id) => document.getElementById(id);
 
 let world, state = null, story = null, plan = { intensity: 'balanced', focus: 'auto' }, busy = false;
+let tab = 'circle';
+try { tab = localStorage.getItem('beautifulGrind.tab') || 'circle'; } catch {}
 
 // ── Saving (browser storage can be unavailable — never crash on it) ──
 function save() { try { localStorage.setItem(SAVE_KEY, JSON.stringify({ state, story, plan })); } catch (err) { console.warn('Save failed', err); } }
 function loadSave() { try { const raw = localStorage.getItem(SAVE_KEY); return raw ? JSON.parse(raw) : null; } catch { return null; } }
+function useSave(d) {
+  state = migrate(d.state, world);
+  story = d.story;
+  plan = d.plan ?? plan;
+}
 
 // ── Setup screen ──
 function fillSetup() {
@@ -51,7 +64,19 @@ function fillSetup() {
       name: f.get('name').trim(), jerseyName: f.get('jerseyName').trim(), nickname: f.get('nickname').trim(), number: f.get('number'),
       position: f.get('position'), nationality: f.get('nationality'), leagueKey: $('sel-league').value, club: $('sel-club').value,
     });
-    story = { headline: state.intro.headline, paragraphs: [state.intro.text], socialFeed: [{ handle: '@' + state.player.club.name.replace(/[^A-Za-z0-9]/g, ''), displayName: state.player.club.name, verified: true, platform: 'instagram', text: `Welcome to the first team, ${state.player.jerseyName}! 🔥 #${state.player.number}`, likes: 1200 }], eventType: 'milestone', isMajorEvent: true, source: 'offline' };
+    const p = state.player, c = p.circle;
+    const intro = [
+      // The opening scene is already on its decision card; don't print it twice.
+      state.pending.some((d) => d.scene) ? `${p.jerseyName} is sixteen, and today ${p.club.name} hand him a first-team training kit.` : state.intro.text,
+      `Your world, for now: ${p.manager.name} is the manager. ${c.captain} wears the armband. ${c.president} is the club president. At home, ${c.mum} and ${c.dad} have told everyone they know, and your little ${c.sibling.kind} ${c.sibling.name} has told everyone else. Your best friend ${c.bestFriend.name}, ${c.bestFriend.job}, has already asked for tickets.`,
+      'Every week brings decisions from different parts of your life. What you choose in one place ripples into the others: what you tell the press reaches your partner, how you treat your friends reaches the papers, how the fans feel reaches the boardroom. Make time for people, or they drift away.',
+    ];
+    story = {
+      headline: state.intro.headline, dek: 'Day one. Everything starts here.',
+      sections: [{ id: 'opening', icon: 'calendar', title: '', paras: intro }], paragraphs: intro,
+      socialFeed: [{ handle: '@' + p.club.name.replace(/[^A-Za-z0-9]/g, ''), displayName: p.club.name, verified: true, platform: 'instagram', text: `Welcome to the first team, ${p.jerseyName}! 🔥 #${p.number}`, likes: 1200 }],
+      eventType: 'milestone', isMajorEvent: true, source: 'offline',
+    };
     plan = { intensity: 'balanced', focus: 'auto' };
     save();
     showGame();
@@ -71,14 +96,20 @@ function showSetup() {
 
 // ── Game screen ──
 function render() {
-  renderPlayer(state, world, story);
+  renderTopbar(state);
+  renderPlayer(state, world);
   renderWeek(state, world, story);
   renderFeed(story);
-  renderWorld(state, world);
-  $('top-date').textContent = `${dateLabel(state.week)} · ${state.player.jerseyName}, ${ageNow(state)}`;
+  renderWorldNow();
   if (state.ended) { renderRetirement(state); $('btn-new-career').addEventListener('click', newCareerFlow); return; }
   renderDecisions(state, onChoose);
+  renderFreeTimeNow();
   renderPlannerNow();
+  if (state.interlude) openInterlude(state.interlude);
+}
+
+function renderWorldNow() {
+  renderWorld(state, world, tab, (t) => { tab = t; try { localStorage.setItem('beautifulGrind.tab', t); } catch {} renderWorldNow(); });
 }
 
 function onChoose(id, choice) {
@@ -89,12 +120,52 @@ function onChoose(id, choice) {
 }
 
 function renderPlannerNow() {
-  renderPlanner(state, plan, (np) => { plan = np; save(); renderPlannerNow(); }, playWeek);
+  renderPlanner(state, plan, (np) => { plan = np; save(); renderPlannerNow(); }, onPlay);
+}
+
+function renderFreeTimeNow() {
+  renderFreeTime(state, freeTimeList(state, world), freeTimeSlots(state), onFreeTime);
+}
+
+// Free time: an immediate result that doesn't move the clock.
+function onFreeTime(id) {
+  if (busy) return;
+  const r = freeTime(state, world, id);
+  if (!r) return;
+  save();
+  renderTopbar(state);
+  renderPlayer(state, world);
+  renderWeek(state, world, story);
+  renderWorldNow();
+  renderFreeTimeNow();
+  $('week-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// "Play week": sometimes life interrupts first (an interlude). Time only moves when no interlude comes.
+function onPlay() {
+  if (busy) return;
+  if (pendingUnanswered(state).length) { $('decisions').classList.add('shake'); setTimeout(() => $('decisions').classList.remove('shake'), 400); return; }
+  const it = maybeInterlude(state, world);
+  if (it) { save(); openInterlude(it); return; }
+  playWeek();
+}
+
+function openInterlude(it) {
+  const dlg = $('interlude');
+  renderInterlude(state, it, (choiceId) => {
+    const r = answerInterlude(state, world, choiceId);
+    save();
+    renderTopbar(state);
+    renderPlayer(state, world);
+    renderWeek(state, world, story);
+    renderWorldNow();
+    renderInterludeResult(state, r, () => { dlg.close(); playWeek(); }, () => dlg.close());
+  });
+  if (!dlg.open) dlg.showModal();
 }
 
 function playWeek() {
   if (busy) return;
-  if (pendingUnanswered(state).length) { $('decisions').classList.add('shake'); setTimeout(() => $('decisions').classList.remove('shake'), 400); return; }
   busy = true;
   try {
     const res = advanceWeek(state, world, plan);
@@ -156,7 +227,7 @@ function importSave(file) {
     try {
       const d = JSON.parse(r.result);
       if (!d.state?.player) throw new Error('not a Beautiful Grind save');
-      ({ state, story } = d); plan = d.plan ?? plan;
+      useSave(d);
       save(); $('settings').close(); showGame();
     } catch (err) { $('settings-msg').textContent = `Could not import that file: ${err.message}. Choose a .json file exported from Beautiful Grind.`; }
   };
@@ -173,12 +244,14 @@ function importSave(file) {
   }
   $('loading').classList.add('hidden');
   fillSetup();
-  $('btn-continue').addEventListener('click', () => { const d = loadSave(); ({ state, story } = d); plan = d.plan ?? plan; showGame(); });
+  $('btn-continue').addEventListener('click', () => { useSave(loadSave()); showGame(); });
   $('btn-settings').addEventListener('click', openSettings);
   $('btn-export').addEventListener('click', exportSave);
   $('file-import').addEventListener('change', (ev) => ev.target.files[0] && importSave(ev.target.files[0]));
   $('btn-new').addEventListener('click', newCareerFlow);
+  // Closing the interlude with Esc keeps it pending; it reopens next time you press Play.
+  $('interlude').addEventListener('cancel', () => {});
   const saved = loadSave();
-  if (saved?.state && !saved.state.ended) { ({ state, story } = saved); plan = saved.plan ?? plan; showGame(); }
+  if (saved?.state && !saved.state.ended) { useSave(saved); showGame(); }
   else showSetup();
 })();

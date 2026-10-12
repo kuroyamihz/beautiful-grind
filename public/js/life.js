@@ -49,10 +49,18 @@ function setMeter(p, k, v) {
 }
 
 // Change a meter and remember the change for this week's report. Returns the real change.
-export function addMeter(state, k, delta, res) {
+// Moving towards an extreme gets harder the closer you are to it (raw = skip that, for weekly drift).
+export function addMeter(state, k, delta, res, raw = false) {
   const p = state.player;
   const before = meter(p, k);
   if (before === null || !delta) return 0;
+  if (!raw && k !== 'trust') {
+    const f = delta > 0 && before > LIFE.softCap ? Math.max(0.15, (100 - before) / (100 - LIFE.softCap))
+      : delta < 0 && before < 100 - LIFE.softCap ? Math.max(0.15, before / (100 - LIFE.softCap)) : 1;
+    const x = delta * f;
+    delta = Math.trunc(x) + (Math.random() < Math.abs(x % 1) ? Math.sign(x) : 0);
+    if (!delta) return 0;
+  }
   setMeter(p, k, before + delta);
   const d = meter(p, k) - before;
   if (d && res) {
@@ -199,29 +207,37 @@ export function lifeWeek(state, world, res, plan) {
   const w = state.week;
   const abroad = p.club && p.club.country !== p.nationality;
   const hasPartner = p.partner.status !== 'none';
-  // Neglect: people you don't make time for drift away.
-  if (w - (p.contact.family ?? 0) > LIFE.neglect.family) addMeter(state, 'family', abroad ? -2 : -1, res);
-  if (hasPartner && w - (p.contact.love ?? 0) > LIFE.neglect.love) addMeter(state, 'love', p.partner.status === 'married' ? -1 : -2, res);
-  if (w - (p.contact.friends ?? 0) > LIFE.neglect.friends) addMeter(state, 'friends', -1, res);
-  // Stress
+  // Neglect: people you don't make time for drift away. Even when you do, closeness cools a little every week.
+  const N = LIFE.neglect;
+  if (w - (p.contact.family ?? 0) > N.family) addMeter(state, 'family', abroad ? -3 : -2, res, true);
+  if (hasPartner && w - (p.contact.love ?? 0) > N.love) addMeter(state, 'love', p.partner.status === 'married' ? -2 : -3, res, true);
+  if (w - (p.contact.friends ?? 0) > N.friends) addMeter(state, 'friends', abroad ? -3 : -2, res, true);
+  for (const k of ['family', 'friends', 'love']) if ((meter(p, k) ?? 0) > LIFE.coolAbove && chance(0.6)) addMeter(state, k, -1, res, true);
+  // Stress: matches, training load, money, headlines, injuries, the size of the stage. Love and friends soak it up.
   const played = res.matches.filter((m) => m.minutes > 0).length + res.intl.filter((m) => m.minutes > 0).length;
-  let ds = played * 2 + ({ hard: 3, balanced: 0, light: -2, rest: -4 }[plan.intensity] ?? 0);
-  if (p.debtMonths > 0) ds += 2;
-  if (meter(p, 'press') < 30) ds += 1;
-  if (p.injury && p.injury.weeksLeft > 6) ds += 2;
+  let ds = played * 3 + ({ hard: 4, balanced: 1, light: -2, rest: -5 }[plan.intensity] ?? 0);
+  if (p.debtMonths > 0) ds += 3;
+  if (meter(p, 'press') < 35) ds += 2;
+  if (meter(p, 'fans') < 30) ds += 2;
+  if (meter(p, 'board') < 30) ds += 1;
+  if (p.injury && p.injury.weeksLeft > 6) ds += 3;
+  if (p.followers > 100000) ds += 1;
+  if (p.club && p.squadRole === 'starter' && p.club.tier === 1) ds += 1;
+  if (res.matches.some((m) => m.minutes > 0 && m.rating < 6)) ds += 3;
   if (hasPartner && meter(p, 'love') >= 70) ds -= 2;
   if (meter(p, 'friends') >= 70) ds -= 1;
   if (meter(p, 'family') >= 70) ds -= 1;
-  ds += (22 - meter(p, 'stress')) * 0.08; // drifts back towards calm
-  addMeter(state, 'stress', Math.round(ds), res);
+  ds += (LIFE.stressRest - meter(p, 'stress')) * 0.12; // drifts back towards normal
+  addMeter(state, 'stress', Math.round(ds), res, true);
   // Morale moves towards what his life currently deserves.
   const roleM = { starter: 12, rotation: 4, bench: -6, outcast: -16 }[p.squadRole] ?? 0;
   const priv = [meter(p, 'family'), meter(p, 'friends'), hasPartner ? meter(p, 'love') : null].filter((x) => x !== null);
   const target = 50 + roleM + (p.form - 6.5) * 10 + (priv.reduce((a, b) => a + b, 0) / priv.length - 50) * 0.3
     - Math.max(0, meter(p, 'stress') - 40) * 0.35 + (meter(p, 'fans') - 50) * 0.1 + (p.injury ? -8 : 0);
-  addMeter(state, 'morale', Math.round((clamp(target, 5, 95) - meter(p, 'morale')) * 0.25), res);
+  addMeter(state, 'morale', Math.round((clamp(target, 5, 95) - meter(p, 'morale')) * 0.25), res, true);
   // Slow drift of public and club meters
-  const drift = (k, to, rate) => addMeter(state, k, Math.round((to - meter(p, k)) * rate), res);
+  const drift = (k, to, rate) => addMeter(state, k, Math.round((to - meter(p, k)) * rate), res, true);
+  drift('fans', 50, 0.03);
   drift('press', 50, 0.04);
   drift('image', 55, 0.03);
   const allies = p.keyTeammates.filter((t) => t.relationship === 'ally').length, rivals = p.keyTeammates.filter((t) => ['rival', 'enemy'].includes(t.relationship)).length;

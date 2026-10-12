@@ -191,7 +191,7 @@
     "DAY": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
     "TIME": ["Tuesday, 22:40", "Wednesday morning", "Thursday, after training", "Monday, 07:15", "Friday night", "Wednesday, 13:05", "Sunday afternoon", "Thursday, 23:55", "Tuesday lunchtime", "Saturday, 06:30"],
     "SET": ["the pre-match press conference", "a mixed-zone interview", "a radio phone-in", "a TV studio segment", "a podcast recording", "a sponsor's media day", "a live Instagram session"],
-    "APP": ["Instagram", "TikTok", "X", "YouTube", "Twitch"],
+    "APP": ["Instagram", "TikTok", "X", "YouTube"],
     "CAR": ["a matte-black SUV", "a white sports coupé", "a second-hand hatchback", "a borrowed scooter", "a hybrid the club gave him", "a vintage pickup"],
     "SHOW": ["a Korean drama", "a true-crime documentary", "an old cartoon from his childhood", "a cooking competition", "a football documentary about a club he hates"],
     "GIFT": ["a watch", "a pair of trainers", "a bouquet the size of a small child", "a signed shirt", "a new phone", "a handwritten letter"],

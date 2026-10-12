@@ -1,0 +1,525 @@
+{
+  "scenarios": [
+    {
+      "id": "il_partner_meets_squad", "cat": "interlude", "w": 4, "cd": 200, "when": { "partner": ["dating", "serious"], "freeAgent": false },
+      "title": "{Pf} Meets the Squad",
+      "text": ["The club's family day. {Pf} is meeting the squad's partners for the first time, and the captain's wife is famously terrifying.", "There's a players-and-partners dinner tonight. {Pf} has changed outfits three times and asked eleven questions about who sits where."],
+      "prompt": "How do you handle it?",
+      "choices": [
+        { "label": "Stay by her side all night", "desc": "Introduce her to everyone.", "risk": "low", "hint": "She'll feel safe. The lads will tease you.", "text": "He doesn't leave her side once. The squad calls him 'the bodyguard' for a week. {Pf} calls it the best night since they met.", "fx": { "love": 6, "dressing": 1 } },
+        { "label": "Let her charm them herself", "desc": "She's got this.", "risk": "medium", "hint": "Sink or swim.", "out": [
+          { "w": 2, "text": "She's a hit. By dessert she's in the partners' group chat and knows more club gossip than he does.", "fx": { "love": 4, "dressing": 3 } },
+          { "w": 1, "text": "She's left alone with the captain's wife for forty minutes. In the car she says, 'Never again.'", "fx": { "love": -4, "stress": 2 } }
+        ] }
+      ]
+    },
+    {
+      "id": "il_partner_jealous_fan", "cat": "interlude", "w": 3, "cd": 200, "when": { "partner": ["dating", "serious", "engaged", "married"], "followers": [8000, 999999999] },
+      "title": "The Fan Who Got Too Close",
+      "text": ["A fan at the gate kisses {J} on the cheek during a selfie. Someone films it. {Pf} has seen it before he has.", "A model comments a heart-eyes emoji under every one of {J}'s posts. {Pf} has noticed. She hasn't said anything. That's the problem."],
+      "prompt": "Talk about it?",
+      "choices": [
+        { "label": "Bring it up first", "desc": "Honesty before she asks.", "risk": "low", "hint": "Trust builds.", "text": "He shows her the video before she can mention it. She laughs, mostly with relief. 'Thank you for telling me.'", "fx": { "love": 4 } },
+        { "label": "Block the account publicly", "desc": "A statement.", "risk": "medium", "hint": "She'll love it. The internet will talk.", "text": "He blocks the account and posts a photo with {Pf}. The internet goes wild. So does {Pf}, in a good way.", "fx": { "love": 6, "followers": 2000, "press": 1 } },
+        { "label": "Say nothing", "desc": "It's nothing.", "risk": "medium", "hint": "Silence is also an answer.", "text": "He says nothing. She says nothing. The silence lasts three days and is very loud.", "fx": { "love": -5, "stress": 2 } }
+      ]
+    },
+    {
+      "id": "il_partner_cooking_disaster", "cat": "interlude", "w": 4, "cd": 150, "when": { "partner": ["dating", "serious", "engaged", "married"] },
+      "title": "Surprise Dinner",
+      "text": ["{J} decides to surprise {Pf} with a home-cooked dinner. He has watched one video. The kitchen has never been in more danger.", "{Pf} comes home to candles, music, and a smoke alarm going off."],
+      "prompt": "Save the evening?",
+      "choices": [
+        { "label": "Order takeaway, keep the candles", "desc": "Adapt.", "risk": "low", "hint": "Romance survives.", "text": "They eat {FOOD} from boxes by candlelight on the floor. She says it's the most romantic thing he's ever done. He thinks she might mean it.", "fx": { "love": 6, "morale": 3 } },
+        { "label": "Serve it anyway", "desc": "Confidence.", "risk": "medium", "hint": "She'll eat it. Bravely.", "text": "She eats every bite with a straight face, then admits she's never been prouder or more frightened.", "fx": { "love": 5 } }
+      ]
+    },
+    {
+      "id": "il_partner_career", "cat": "interlude", "w": 3, "cd": 200, "when": { "partner": ["serious", "engaged", "married"] },
+      "title": "{Pf}'s Big News",
+      "text": ["{Pf} has been offered a promotion at work. It's in another city. She's excited and terrified and watching his face very carefully.", "{Pf} wants to go back to university. Evenings and weekends. Exactly when he's free."],
+      "prompt": "What do you say?",
+      "choices": [
+        { "label": "'Do it. We'll make it work.'", "desc": "Her dreams matter too.", "risk": "medium", "hint": "Less time together. More respect.", "text": "She hugs him so hard he loses his breath. It'll be complicated. They'll make it work.", "fx": { "love": 8, "stress": 2 } },
+        { "label": "'Can we talk about the timing?'", "desc": "Honest about football.", "risk": "medium", "hint": "Fair, but she'll hear 'no'.", "text": "They talk for two hours. She says she understands. She's quieter for a week.", "fx": { "love": -4, "stress": 1 } }
+      ]
+    },
+    {
+      "id": "il_single_dating_app", "cat": "interlude", "w": 4, "cd": 120, "when": { "partner": ["none"], "age": [18, 40] },
+      "title": "The Dating App",
+      "text": ["{T} has secretly made {J} a dating profile. It has a terrible photo and a bio that says 'professional ball kicker, looking for a striker partner'. It has 400 matches.", "{BFf} insists {J} tries a dating app. The first match asks if he can get her tickets."],
+      "prompt": "Swipe or delete?",
+      "choices": [
+        { "label": "Give it a real go", "desc": "Why not.", "risk": "medium", "hint": "Love, chaos or a screenshot in the papers.", "out": [
+          { "w": 1, "text": "One conversation stands out: funny, sharp, no football questions. They meet for coffee. Her name is {P}.", "fx": { "newPartner": true, "morale": 5 } },
+          { "w": 2, "text": "A week of conversations about his salary. He deletes the app.", "fx": { "morale": -1 } },
+          { "w": 1, "text": "Someone screenshots his profile and posts it. 'Professional ball kicker' trends for a day.", "fx": { "followers": 3000, "image": -1 } }
+        ] },
+        { "label": "Delete it, get revenge", "desc": "On {T}.", "risk": "low", "hint": "War has been declared.", "text": "He deletes it and fills {T}'s car with balloons. The dressing room approves of the escalation.", "fx": { "dressing": 3, "friends": 1 } }
+      ]
+    },
+    {
+      "id": "il_single_wedding_plusone", "cat": "interlude", "w": 3, "cd": 200, "when": { "partner": ["none"], "age": [20, 40] },
+      "title": "The Plus-One Problem",
+      "text": ["{CAPl}'s wedding invitation says '{J} + 1'. {J} does not have a +1. The whole squad is bringing partners.", "A cousin's wedding. {MUM} has 'arranged' for him to sit next to a family friend's daughter. She has done this before."],
+      "prompt": "What's the plan?",
+      "choices": [
+        { "label": "Bring {BFf}", "desc": "The most reliable date.", "risk": "low", "hint": "Hilarious. Wholesome.", "text": "{BFf} wears a suit two sizes too big and dances with every grandmother. He's the star of the wedding.", "fx": { "friends": 5, "dressing": 2, "morale": 3 } },
+        { "label": "Go along with the set-up", "desc": "Be open-minded.", "risk": "medium", "hint": "Who knows?", "out": [
+          { "w": 1, "text": "Against all odds, they get on brilliantly. They talk all evening. Her name is {P}. {MUM} is unbearable about it.", "fx": { "newPartner": true, "family": 4 } },
+          { "w": 2, "text": "Polite conversation about the weather for four hours. {MUM} asks for a full report. There's nothing to report.", "fx": { "family": 1 } }
+        ] }
+      ]
+    },
+    {
+      "id": "il_press_coffee_spill", "cat": "interlude", "w": 3, "cd": 200, "ui": "press", "when": { "rep": [10, 100] },
+      "title": "Coffee on the Journalist",
+      "text": ["Walking into the press room, {J} trips on a cable and spills coffee all over {JR} from {OUT}. On his notebook. On his laptop.", "In the mixed zone {J} turns too fast and his water bottle drenches {JR}'s recorder."],
+      "prompt": "Make it right?",
+      "choices": [
+        { "label": "Replace everything, personally", "desc": "Buy him a new one.", "risk": "low", "hint": "Expensive. A friend in the press.", "vars": { "cost": ["fixed", 400] }, "text": "{J} sends a new laptop the next day with a note. {JR} writes about it in his column, kindly. The press room loves the story.", "fx": { "press": 6, "image": 2, "wealth": "-cost" } },
+        { "label": "Apologise and laugh it off", "desc": "Accidents happen.", "risk": "low", "hint": "Fine.", "text": "{JR} is gracious. Mostly. His next piece is noticeably less warm.", "fx": { "press": -1 } }
+      ]
+    },
+    {
+      "id": "il_podcast_invite", "cat": "interlude", "w": 3, "cd": 160, "ui": "phone", "when": { "rep": [12, 100] },
+      "title": "Podcast Invitation",
+      "text": ["A popular football podcast wants {J} on next week. Two former players, a lot of laughing, and a reputation for getting guests to say things they regret.", "A comedy podcast, not even a football one, wants {J} as a guest. Their last athlete guest admitted he hates his club's kit."],
+      "prompt": "Go on?",
+      "choices": [
+        { "label": "Go on and be yourself", "desc": "Relaxed and real.", "risk": "medium", "hint": "Big reach. Loose lips.", "out": [
+          { "w": 2, "text": "He's funny, warm and honest. Clips spread everywhere. Fans who didn't know him now love him.", "fx": { "followers": 8000, "fans": 2, "image": 2, "press": 2 } },
+          { "w": 1, "text": "He's funny — a bit too funny about {Mf}'s training methods. The clip makes the back pages.", "fx": { "followers": 10000, "trust": -4, "press": 1, "dressing": -1 } }
+        ] },
+        { "label": "Go on, keep it media-trained", "desc": "Safe answers.", "risk": "low", "hint": "Boring is safe.", "text": "He gives careful answers. The hosts are a bit disappointed. The club's media team is delighted.", "fx": { "followers": 2000, "board": 1 } },
+        { "label": "Decline", "desc": "Not now.", "risk": "low", "hint": "Nothing ventured.", "text": "He declines politely. They book someone else, who says something stupid. {J} feels lucky.", "fx": {} }
+      ]
+    },
+    {
+      "id": "il_selfie_angle", "cat": "interlude", "w": 3, "cd": 200, "ui": "social", "when": { "followers": [5000, 999999999] },
+      "title": "The Unflattering Photo",
+      "text": ["A fan's selfie with {J} catches him mid-sneeze. It's the least flattering photo of a human ever taken. It's going viral as a meme template.", "A photo of {J} mid-celebration, face twisted into something prehistoric, has become a reaction meme. It's everywhere."],
+      "prompt": "How do you respond?",
+      "choices": [
+        { "label": "Make it your profile picture", "desc": "Embrace the chaos.", "risk": "low", "hint": "The internet loves self-awareness.", "text": "He makes it his profile picture. The internet decides he's 'one of us'. Followers pour in.", "fx": { "followers": 7000, "image": 2, "fans": 2 } },
+        { "label": "Ask for it to be taken down", "desc": "Not funny.", "risk": "medium", "hint": "Streisand effect.", "text": "Asking makes it worse. Now there are memes about the meme.", "fx": { "followers": 3000, "image": -2, "stress": 2 } }
+      ]
+    },
+    {
+      "id": "il_fake_quote", "cat": "interlude", "w": 3, "cd": 200, "ui": "social", "when": { "rep": [15, 100] },
+      "title": "A Quote He Never Said",
+      "text": ["A fake quote is spreading: '{J}: I'd leave {club} tomorrow for a bigger club.' He has never said this. It's on a graphic with his face.", "A parody account with a convincing name has 'quoted' {J} insulting the fans of {R}. It has twenty thousand retweets."],
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Post a clear denial", "desc": "Straight to the fans.", "risk": "low", "hint": "Most will see it.", "text": "His denial travels almost as fast as the lie. Almost.", "fx": { "fans": 1, "press": 1 } },
+        { "label": "Let the club handle it", "desc": "Official channels.", "risk": "low", "hint": "Slower. More authority.", "text": "The club's statement is formal and slow. The fake quote has already done some damage.", "fx": { "fans": -2, "board": 1 } },
+        { "label": "Call {JR} to debunk it", "desc": "Use your press contact.", "risk": "low", "hint": "Depends on your relationship with the press.", "check": { "stat": "rep", "dc": 30 },
+          "ok": { "text": "{JR} runs a debunk piece within the hour. Other outlets follow. The lie dies quickly.", "fx": { "press": 3, "fans": 2 } },
+          "bad": { "text": "{JR} says he'll 'look into it'. By the time he does, everyone has moved on — to believing the lie.", "fx": { "fans": -2, "press": -1 } } }
+      ]
+    },
+    {
+      "id": "il_board_lunch", "cat": "interlude", "w": 3, "cd": 200, "ui": "boardroom", "when": { "freeAgent": false, "rep": [10, 100] },
+      "title": "Lunch With the President",
+      "text": ["President {PRES} invites {J} to lunch in the directors' suite. White tablecloths, three forks, and a very long story about the president's golf handicap.", "{PRESl}'s assistant calls: the president would like {J} to join a sponsors' lunch. Dress code: 'smart'. {J} owns one suit."],
+      "prompt": "How do you play it?",
+      "choices": [
+        { "label": "Charm the room", "desc": "Laugh at the jokes.", "risk": "low", "hint": "Board points. Some teammates will call it sucking up.", "text": "He laughs at every golf story. By dessert, {PRESl} is calling him 'the future of this club'. {CAPl} raises an eyebrow when he hears.", "fx": { "board": 6, "dressing": -1 } },
+        { "label": "Be honest about the squad's concerns", "desc": "Use the access.", "risk": "medium", "hint": "Brave. Could go either way.", "out": [
+          { "w": 1, "text": "{PRESl} listens, takes notes, and actually fixes the broken gym equipment the next week. The squad hears who raised it.", "fx": { "board": 2, "dressing": 5 } },
+          { "w": 1, "text": "{PRESl}'s smile goes stiff. 'Football matters, {J}. Let's keep to football.'", "fx": { "board": -4, "dressing": 2 } }
+        ] }
+      ]
+    },
+    {
+      "id": "il_board_parking", "cat": "interlude", "w": 2, "cd": 300, "ui": "boardroom", "when": { "freeAgent": false },
+      "title": "The Parking Space",
+      "text": ["{J} has parked in the space marked 'Director'. It was the only one free. A director has arrived and is standing next to his car, phone in hand.", "There's a note on {J}'s windscreen. It's from a board member. It is very polite and very, very angry."],
+      "prompt": "Your move.",
+      "choices": [
+        { "label": "Run out and apologise", "desc": "Grovel.", "risk": "low", "hint": "Survivable.", "text": "He apologises three times. The director accepts and then mentions it at the next board meeting anyway.", "fx": { "board": -1 } },
+        { "label": "Leave a signed shirt as an apology", "desc": "Diplomacy.", "risk": "low", "hint": "He'll frame it.", "text": "The director frames the shirt. The parking incident becomes a funny story he tells at sponsor dinners.", "fx": { "board": 2 } }
+      ]
+    },
+    {
+      "id": "il_ultras_visit", "cat": "interlude", "w": 3, "cd": 200, "when": { "freeAgent": false, "fans": [40, 100] },
+      "title": "The Ultras' Clubhouse",
+      "text": ["The leader of the ultras group invites {J} to their clubhouse: a room above a garage, flags on every wall, a drum the size of a car tyre.", "The ultras are painting a giant banner for Sunday and want {J} to add a brushstroke. They say it's tradition. It isn't. They just invented it."],
+      "prompt": "Go?",
+      "choices": [
+        { "label": "Go and stay for hours", "desc": "Become one of them.", "risk": "medium", "hint": "Fans adore you. The board worry about the photos.", "text": "He drinks sweet tea, learns three new chants and bangs the drum. The ultras adopt him. A photo of him in their scarf makes the board uneasy.", "fx": { "fans": 8, "board": -2, "image": -1 } },
+        { "label": "Drop in for ten minutes", "desc": "Respect, briefly.", "risk": "low", "hint": "Good for everyone.", "text": "Ten minutes, a brushstroke, photos, handshakes. Everyone's happy.", "fx": { "fans": 4 } },
+        { "label": "Politely decline", "desc": "Keep distance.", "risk": "low", "hint": "Some will take offence.", "text": "The ultras take it badly. There's a pointed silence when he warms up on Sunday.", "fx": { "fans": -3, "board": 1 } }
+      ]
+    },
+    {
+      "id": "il_teammate_secret", "cat": "interlude", "w": 3, "cd": 200, "uses": { "T": "any" }, "when": { "freeAgent": false },
+      "title": "{T}'s Secret",
+      "text": ["{T} pulls {J} aside, eyes red. He's been gambling. A lot. Nobody knows. He's begging {J} not to tell anyone.", "{T} admits, in the car park, that he's been struggling with his mental health for months. He hasn't told the club."],
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Keep the secret, help him yourself", "desc": "Loyalty.", "risk": "medium", "hint": "A heavy weight to carry.", "text": "{J} spends evenings with him, helps him find a counsellor quietly. It's draining. {T} will never forget it.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "stress": 4, "morale": 1, "dressing": 2 } },
+        { "label": "Persuade him to tell the club", "desc": "He needs real help.", "risk": "low", "hint": "Right. Hard.", "out": [
+          { "w": 2, "text": "After a long night of talking, {T} agrees. The club's support staff are excellent. He thanks {J} weeks later.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "dressing": 3, "trust": 2 } },
+          { "w": 1, "text": "{T} feels betrayed even by the suggestion. He stops talking to {J}.", "fx": { "teammate": { "who": "T", "rel": "rival" }, "stress": 2 } }
+        ] }
+      ]
+    },
+    {
+      "id": "il_bf_visits", "cat": "interlude", "w": 4, "cd": 160, "when": { "friends": [30, 100] },
+      "title": "{BFf} Turns Up",
+      "text": ["{BFf} turns up unannounced with a backpack and a grin. He's taken a 14-hour bus. He's staying 'a few days'.", "There's a knock at the door at 23:00. It's {BFf}, holding a bag of {FOOD} from the stall back home. 'Surprise.'"],
+      "prompt": "Make time for him?",
+      "choices": [
+        { "label": "Show him your whole life", "desc": "Training ground, stadium, city.", "risk": "low", "hint": "Friendship deepens. Rest suffers.", "text": "{BFf} meets the squad, eats in the canteen, does a lap of the empty stadium. He doesn't say much, but he takes a photo of everything.", "fx": { "friends": 9, "morale": 5, "pfm": -2, "dressing": 1 } },
+        { "label": "Evenings only", "desc": "Football comes first.", "risk": "low", "hint": "Balanced. He'll understand.", "text": "They spend evenings on the sofa watching {SHOW} like they're fifteen. It's perfect.", "fx": { "friends": 5, "morale": 3 } }
+      ]
+    },
+    {
+      "id": "il_bf_asks_money", "cat": "interlude", "w": 3, "cd": 200, "ui": "phone", "when": { "wealth": [2000, 999999999] },
+      "title": "{BFf} Asks for a Loan",
+      "text": ["{BFf} messages: his motorbike was stolen and he needs it for work. He's embarrassed to ask. He asks.", "{BFf} wants to open a small {FOOD} stall and needs money to start. He's sent a business plan. It's handwritten."],
+      "prompt": "Lend him the money?",
+      "vars": { "cost": ["wealthPct", 8, 300] },
+      "choices": [
+        { "label": "Give it, not lend it", "desc": "{cost}. No strings.", "risk": "low", "hint": "Friendship over money.", "text": "{J} sends it with a note: 'Not a loan. Shut up.' {BFf} sends a voice note that is mostly silence.", "fx": { "wealth": "-cost", "friends": 9, "morale": 3 } },
+        { "label": "Lend it with a plan", "desc": "Pay back monthly.", "risk": "medium", "hint": "Fair. Money and friends mix badly.", "out": [
+          { "w": 2, "text": "{BFf} pays back every cent, on time, with a thank-you note each month.", "fx": { "friends": 5 } },
+          { "w": 1, "text": "The payments stop after two months. Neither of them mentions it. It sits between them.", "fx": { "wealth": "-cost", "friends": -4 } }
+        ] },
+        { "label": "Say you can't", "desc": "Boundaries.", "risk": "medium", "hint": "He'll say he understands.", "text": "'No worries, bro,' says {BFf}. The group chat is quieter after that.", "fx": { "friends": -6 } }
+      ]
+    },
+    {
+      "id": "il_friends_party_photo", "cat": "interlude", "w": 3, "cd": 160, "when": { "age": [18, 40] },
+      "title": "The Birthday Party",
+      "text": ["It's {BFf}'s birthday party back home. The whole old crew will be there. {J} has a match in four days.", "An old friend is throwing a birthday party and has invited {J}. It's at {PLACE}. It'll go late. There will be phones."],
+      "prompt": "Go?",
+      "choices": [
+        { "label": "Go, leave early", "desc": "Show up, don't stay.", "risk": "low", "hint": "Best of both worlds.", "text": "He arrives with a cake, stays two hours, leaves at ten. {BFf} hugs him at the door: 'You came.'", "fx": { "friends": 6, "pfm": -1 } },
+        { "label": "Go all night", "desc": "Live a little.", "risk": "high", "hint": "Glorious. Possibly photographed.", "out": [
+          { "w": 1, "text": "The best night in years. Nobody posts anything. The old crew protect their own.", "fx": { "friends": 9, "morale": 5, "pfm": -4 } },
+          { "w": 1, "text": "A photo of {J} on a table at 3am makes the gossip accounts. The club is not impressed.", "fx": { "friends": 7, "image": -4, "trust": -3, "board": -2, "pfm": -5 } }
+        ] },
+        { "label": "Send a video message", "desc": "Too close to the match.", "risk": "low", "hint": "Professional. Missing out again.", "text": "The video gets cheers. Then the party moves on without him, the way they increasingly do.", "fx": { "friends": -3 } }
+      ]
+    },
+    {
+      "id": "il_mum_visit", "cat": "interlude", "w": 3, "cd": 200, "when": { "abroad": true },
+      "title": "{MUM} Comes to Visit",
+      "text": ["{MUM} has arrived for a week. She has brought two suitcases. One contains clothes. The other contains food, spices and a rice cooker.", "{MUM}'s first visit abroad. She's never been on a plane before. She's holding the boarding pass like it might escape."],
+      "prompt": "How do you spend the week?",
+      "choices": [
+        { "label": "Take her to the match", "desc": "VIP seats.", "risk": "low", "hint": "She'll cry. You'll play for her.", "text": "She sits in the VIP section in her best clothes and cheers every time he touches the ball, even backwards passes. The club's media team film her. It's the best content they've ever had.", "fx": { "family": 10, "morale": 6, "fans": 2, "followers": 2000, "mood": "Motivated" } },
+        { "label": "Quiet week at home together", "desc": "Just her cooking.", "risk": "low", "hint": "Home comes to you.", "text": "The apartment smells like home for a week. He gains a kilo. The nutritionist sees it and says nothing, because he once had a mother too.", "fx": { "family": 8, "stress": -6, "pfm": 1 } }
+      ]
+    },
+    {
+      "id": "il_homesick_food", "cat": "interlude", "w": 4, "cd": 120, "when": { "abroad": true },
+      "title": "A Taste of Home",
+      "text": ["{J} finds a tiny shop run by people from his country. The owner recognises him and refuses to take his money.", "Homesick, {J} tries to cook {FOOD} from memory. It's wrong. It's almost right. He eats it anyway, standing at the counter."],
+      "prompt": "What now?",
+      "choices": [
+        { "label": "Become a regular", "desc": "Every Sunday.", "risk": "low", "hint": "A little community abroad.", "text": "The shop becomes his Sunday ritual. The owner's family adopt him. He gets a key to the back door.", "fx": { "morale": 5, "stress": -3, "friends": 3, "flag": "abroad_community" } },
+        { "label": "Call home while you eat", "desc": "Share the moment.", "risk": "low", "hint": "Bittersweet.", "text": "He eats while {MUM} watches on video, critiquing his technique. It's the closest he's been to home in months.", "fx": { "family": 4, "morale": 2 } }
+      ]
+    },
+    {
+      "id": "il_retired_legend", "cat": "interlude", "w": 3, "cd": 260, "when": { "freeAgent": false },
+      "title": "The Club Legend",
+      "text": ["A club legend, now sixty and walking with a stick, visits training. He watches {J} for twenty minutes and then waves him over.", "The club's all-time top scorer is in the canteen. He asks, specifically, to meet {J}."],
+      "prompt": "What do you ask him?",
+      "choices": [
+        { "label": "'What do you wish you'd known?'", "desc": "Wisdom.", "risk": "low", "hint": "He'll tell you.", "text": "'That it ends,' he says. 'Enjoy it more. Call your mother more. Save your money.' {J} writes all three down.", "fx": { "morale": 3, "growth": ["mental"], "family": 1 } },
+        { "label": "'Show me how you finished like that'", "desc": "Technique.", "risk": "low", "hint": "Old-school lessons.", "text": "The legend drops his stick and demonstrates a finish from 1987 with a shoe. It's still perfect. {J} copies it for an hour.", "fx": { "growth": ["shooting"], "fans": 1 } }
+      ]
+    },
+    {
+      "id": "il_superstition", "cat": "interlude", "w": 4, "cd": 150,
+      "title": "The Lucky Socks",
+      "text": ["{J} realises he's won every match this month wearing the same pair of underwear. Unwashed. It's becoming a situation.", "Since {J} started eating exactly three bananas before each game, the team hasn't lost. The bananas are now a squad matter."],
+      "prompt": "Keep the ritual?",
+      "choices": [
+        { "label": "Never change it", "desc": "Science is science.", "risk": "low", "hint": "The squad will be invested.", "text": "The ritual becomes squad lore. When it eventually stops working, they hold a small funeral for it.", "fx": { "dressing": 3, "morale": 2, "mood": "Confident" } },
+        { "label": "Break it deliberately", "desc": "You make your own luck.", "risk": "low", "hint": "Brave. Superstitious teammates may panic.", "text": "He breaks it publicly. Half the squad is horrified. The other half respects the courage.", "fx": { "growth": ["mental"], "dressing": -1 } }
+      ]
+    },
+    {
+      "id": "il_fan_letter_old", "cat": "interlude", "w": 3, "cd": 200, "ui": "letter",
+      "title": "A Handwritten Letter",
+      "text": ["A real letter, on paper, arrives at the club. It's from an eighty-year-old fan who has watched the club for seventy years. He writes that {J} reminds him of his late brother.", "A letter in careful handwriting from a woman whose son was in hospital: he watched {J}'s games every week from his bed. He's better now. She wanted him to know."],
+      "prompt": "Reply?",
+      "choices": [
+        { "label": "Write back by hand", "desc": "Slowly. Properly.", "risk": "low", "hint": "Some things matter more than followers.", "text": "It takes him an evening and four drafts. He never tells anyone he wrote it. The reply is framed in a living room he'll never see.", "fx": { "morale": 5, "stress": -2, "image": 1 } },
+        { "label": "Invite them to a match", "desc": "Meet in person.", "risk": "low", "hint": "A day they'll never forget.", "text": "They come to a match. Afterwards he meets them in the tunnel. There's not a dry eye, including the security guard's.", "fx": { "fans": 3, "image": 3, "morale": 4, "followers": 1500 } }
+      ]
+    },
+    {
+      "id": "il_scout_in_stands", "cat": "interlude", "w": 3, "cd": 160, "when": { "freeAgent": false, "rep": [15, 100] },
+      "title": "Somebody's Watching",
+      "text": ["{T} nudges {J} during the warm-up: there's a scout in the stand from a much bigger club, with a notebook and a very obvious club scarf.", "{J}'s agent texts before training: 'Scouts in today. Don't change anything. Just be you.'"],
+      "prompt": "Does it change anything?",
+      "choices": [
+        { "label": "Ignore it completely", "desc": "Just play.", "risk": "low", "hint": "The best players never notice.", "text": "He doesn't look at the stand once. Afterwards, his agent says the scout wrote three pages.", "fx": { "growth": ["mental"], "trust": 1 } },
+        { "label": "Try to impress", "desc": "Show some flair.", "risk": "medium", "hint": "Could backfire.", "out": [
+          { "w": 1, "text": "A rabona, a flick, a bicycle kick that nearly works. The scout smiles. {Mf} doesn't.", "fx": { "rep": 1, "trust": -2 } },
+          { "w": 1, "text": "He tries too hard and has his worst session of the month. The scout leaves at half-time.", "fx": { "stress": 3, "morale": -2 } }
+        ] }
+      ]
+    },
+    {
+      "id": "il_kid_gets_shirt", "cat": "interlude", "w": 3, "cd": 200, "when": { "freeAgent": false },
+      "title": "The Shirt Thief",
+      "text": ["After the match, a kid on the edge of the pitch is crying because a bigger boy grabbed the shirt {J} threw into the crowd.", "Through the fence, {J} sees a small boy in a homemade shirt with his number drawn on in marker."],
+      "prompt": "Do something?",
+      "choices": [
+        { "label": "Go back with another shirt", "desc": "Justice.", "risk": "low", "hint": "Pure wholesome energy.", "text": "He jogs back with a fresh shirt and signs it. The boy's face is something he'll remember for a long time.", "fx": { "fans": 3, "image": 3, "morale": 4, "followers": 2000 } },
+        { "label": "Invite the kid to training", "desc": "Next week, VIP.", "risk": "low", "hint": "The club's media team will love it.", "text": "The boy comes to training, sits in the dugout, and gets nutmegged by the goalkeeper. Best day of his life.", "fx": { "fans": 2, "board": 1, "image": 2 } }
+      ]
+    },
+    {
+      "id": "il_manager_family", "cat": "interlude", "w": 2, "cd": 300, "when": { "freeAgent": false },
+      "title": "The Manager's Kid",
+      "text": ["{Mf}'s nine-year-old son is at training, and he's decided {J} is his favourite player. He follows {J} everywhere. {Mf} watches with an unreadable expression.", "{Mf} brings his daughter to training. She asks {J} why he doesn't play every week. Out loud. In front of her father."],
+      "prompt": "Handle it.",
+      "choices": [
+        { "label": "Be a great role model", "desc": "Patient, kind, fun.", "risk": "low", "hint": "The manager is also a dad.", "text": "He spends the afternoon showing the kid tricks. {Mf} says nothing, but the next day he says 'good morning' with his whole face.", "fx": { "trust": 4, "morale": 2 } },
+        { "label": "Answer the question honestly", "desc": "'Ask your dad!'", "risk": "medium", "hint": "Funny. Possibly dangerous.", "text": "'Ask your dad!' The kid does. {Mf} laughs for the first time in weeks. {J} still doesn't start on Sunday.", "fx": { "trust": 1, "dressing": 2 } }
+      ]
+    },
+    {
+      "id": "il_media_training", "cat": "interlude", "w": 3, "cd": 200, "when": { "freeAgent": false, "age": [16, 23] },
+      "title": "Media Training",
+      "text": ["The club makes the young players attend media training. A former TV presenter fires trick questions at them. {J} is up next.", "A media coach shows the squad clips of players saying terrible things in interviews. Then it's {J}'s turn in the hot seat."],
+      "prompt": "Take it seriously?",
+      "choices": [
+        { "label": "Take notes, practise", "desc": "Learn the game.", "risk": "low", "hint": "Future interviews get easier.", "text": "He learns to pause, to bridge, to never repeat a negative question. The press team notice the difference immediately.", "fx": { "press": 5, "growth": ["mental"] } },
+        { "label": "Make everyone laugh", "desc": "Absurd answers.", "risk": "low", "hint": "Popular. Not educational.", "text": "His mock interview about 'eating the ball' has the squad in tears. The media coach writes 'needs work' on her clipboard.", "fx": { "dressing": 3, "press": -1 } }
+      ]
+    },
+    {
+      "id": "il_jersey_number", "cat": "interlude", "w": 2, "cd": 400, "when": { "freeAgent": false },
+      "title": "The Number Debate",
+      "text": ["The club's iconic number has become available. The kit man asks {J} if he wants it. It comes with history — and expectations.", "A new signing has asked for {J}'s shirt number. Politely. With a smile. With the president standing next to him."],
+      "prompt": "What do you decide?",
+      "choices": [
+        { "label": "Take the iconic number", "desc": "Embrace the pressure.", "risk": "medium", "hint": "Fans will love it. Or judge you for it.", "text": "The announcement post is the club's most-liked of the season. Now he has to live up to it.", "fx": { "fans": 5, "stress": 3, "followers": 3000 } },
+        { "label": "Keep your own number", "desc": "Your number, your story.", "risk": "low", "hint": "Loyal to yourself.", "text": "He keeps his number. A small detail. Fans who notice respect it.", "fx": { "fans": 1, "morale": 1 } }
+      ]
+    },
+    {
+      "id": "il_sunrise_run", "cat": "interlude", "w": 3, "cd": 120, "time": "Saturday, 05:40",
+      "title": "Sunrise",
+      "text": ["{J} wakes up before dawn for no reason. The city is silent, purple and grey. His running shoes are by the door.", "5:40am. Too early to be awake, too late to go back to sleep."],
+      "prompt": "Get up?",
+      "choices": [
+        { "label": "Go for a sunrise run", "desc": "Just you and the city.", "risk": "low", "hint": "Peace.", "text": "He runs by the water as the sun comes up. A street sweeper waves. For forty minutes, nothing is complicated.", "fx": { "stress": -5, "morale": 4, "pfm": -1 } },
+        { "label": "Stay in bed, watch the light", "desc": "Do nothing on purpose.", "risk": "low", "hint": "Rare.", "text": "He watches the light move across the ceiling and thinks about nothing at all. It's the most rested he's felt in weeks.", "fx": { "stress": -3, "pfm": 2 } }
+      ]
+    },
+    {
+      "id": "il_trivia_quiz", "cat": "interlude", "w": 4, "cd": 150, "when": { "freeAgent": false },
+      "title": "The Team Quiz",
+      "text": ["It's quiz night on the team bus. {CAPl} reads questions from his phone. {J}'s team is losing badly, and the last round is 'general knowledge'.", "The squad's monthly quiz. The prize is not having to carry the training equipment for a month."],
+      "prompt": "Final question: go for the big points?",
+      "choices": [
+        { "label": "Answer with total confidence", "desc": "Trust your gut.", "risk": "medium", "hint": "50/50.", "check": { "stat": "mental", "dc": 55 },
+          "ok": { "text": "He's right. His team wins by one point. He's carried off the bus on shoulders. The cones will be carried by others.", "fx": { "dressing": 4, "morale": 3 } },
+          "bad": { "text": "He's confidently, spectacularly wrong. The answer becomes a squad catchphrase.", "fx": { "dressing": 2 } } },
+        { "label": "Let the clever one answer", "desc": "Teamwork.", "risk": "low", "hint": "Humble.", "text": "The reserve keeper, who reads books, answers correctly. {J} celebrates like he scored.", "fx": { "dressing": 2 } }
+      ]
+    },
+    {
+      "id": "il_old_rival_message", "cat": "interlude", "w": 2, "cd": 300, "ui": "phone", "when": { "age": [20, 40] },
+      "title": "A Message From an Old Rival",
+      "text": ["A message from a kid who bullied {J} at youth trials, years ago. He's working in a warehouse now. He writes that he's sorry, and that he watches every game.", "The boy who beat {J} to a place in a youth team years ago sends a message: he never made it. He wants to say congratulations."],
+      "prompt": "Reply?",
+      "choices": [
+        { "label": "Reply with grace", "desc": "Life's long.", "risk": "low", "hint": "Healing.", "text": "They exchange long messages. It turns out they had more in common than either of them knew.", "fx": { "morale": 4, "growth": ["mental"] } },
+        { "label": "Leave it on read", "desc": "Some wounds don't need reopening.", "risk": "low", "hint": "Fair.", "text": "He reads it twice and closes the app. That's allowed too.", "fx": {} }
+      ]
+    },
+    {
+      "id": "il_injured_fan_visit", "cat": "interlude", "w": 3, "cd": 200, "when": { "injured": true },
+      "title": "Another Patient",
+      "text": ["At the rehab clinic, a teenage boy in a wheelchair recognises {J}. He's recovering from a car accident. He asks how {J} stays motivated.", "In the physio waiting room, an old man with a new hip asks {J} if footballers 'really cry this much about injuries'."],
+      "prompt": "Talk with him?",
+      "choices": [
+        { "label": "Make a rehab pact", "desc": "Race each other back.", "risk": "low", "hint": "Motivation, both ways.", "text": "They swap numbers and send each other their rehab progress every day. It becomes the thing that gets {J} out of bed.", "fx": { "morale": 6, "stress": -3, "image": 1 } },
+        { "label": "Quick chat and a photo", "desc": "Kind, brief.", "risk": "low", "hint": "Nice.", "text": "A photo, some encouragement, a fist bump. Both of them feel a bit better.", "fx": { "morale": 2 } }
+      ]
+    },
+    {
+      "id": "il_rumour_group_chat", "cat": "interlude", "w": 3, "cd": 160, "ui": "phone", "when": { "freeAgent": false },
+      "title": "Dressing Room Gossip",
+      "text": ["The squad group chat lights up: rumour has it {Mf} is about to be sacked. Everyone is speculating. Screenshots are flying.", "A teammate forwards {J} a voice note claiming the club hasn't paid some of the staff. 'Don't share this,' it says, which means everyone has."],
+      "prompt": "Join in?",
+      "choices": [
+        { "label": "Stay out of it", "desc": "Mute the chat.", "risk": "low", "hint": "Clean hands.", "text": "He mutes the chat for a day. When the rumour turns out to be half wrong, he's glad he said nothing.", "fx": { "trust": 1, "stress": -1 } },
+        { "label": "Share what you know", "desc": "Join the speculation.", "risk": "medium", "hint": "Bonding. Messages leak.", "out": [
+          { "w": 2, "text": "Twenty minutes of wild theories. Good fun, no harm done.", "fx": { "dressing": 2 } },
+          { "w": 1, "text": "A screenshot of his message reaches {Mf}. Nobody knows how. Everybody knows how.", "fx": { "trust": -5, "dressing": 1 } }
+        ] }
+      ]
+    },
+    {
+      "id": "il_child_asks_why", "cat": "interlude", "w": 2, "cd": 300, "when": { "image": [0, 40] },
+      "title": "A Child's Question",
+      "text": ["At a petrol station, a little girl tugs her father's sleeve and points at {J}. 'Daddy, is that the bad man from the news?' The father turns pale.", "A boy wearing {J}'s shirt asks him, very seriously, whether what the papers said is true."],
+      "prompt": "How do you answer?",
+      "choices": [
+        { "label": "Kneel down and talk to her", "desc": "Honest, gentle.", "risk": "low", "hint": "Hard. Human.", "text": "'Sometimes I make mistakes. I'm trying to be better.' The girl considers this and then asks for a photo. The father nods at him. It means a lot.", "fx": { "image": 3, "morale": 2, "growth": ["mental"] } },
+        { "label": "Smile and walk away", "desc": "Not today.", "risk": "low", "hint": "It'll stay with you.", "text": "He walks away. The question follows him all day.", "fx": { "morale": -3, "stress": 2 } }
+      ]
+    },
+    {
+      "id": "il_new_car_test", "cat": "interlude", "w": 3, "cd": 200, "when": { "wealth": [20000, 999999999] },
+      "title": "The Showroom",
+      "text": ["A luxury car dealer invites {J} for a 'no-obligation test drive'. The car is {CAR}. The salesman is very, very good at his job.", "{T} has a new car. It's absurd. {J} sits in it and feels something dangerous."],
+      "prompt": "Buy one?",
+      "vars": { "cost": ["wealthPct", 25, 2000] },
+      "choices": [
+        { "label": "Buy it", "desc": "{cost}. You only live once.", "risk": "high", "hint": "Joy. Costs. Photos.", "text": "He drives it home grinning. {BFf} screams down the phone. {MUM} asks how much it cost and goes silent at the answer.", "fx": { "wealth": "-cost", "lifestyle": 0.2, "morale": 5, "friends": 2, "family": -2, "followers": 3000, "flag": "bought_car" } },
+        { "label": "Walk away", "desc": "Not yet.", "risk": "low", "hint": "Sensible.", "text": "He hands back the keys. The salesman gives him a card 'for when you're ready'. The card stays on his fridge.", "fx": { "growth": ["mental"] } }
+      ]
+    },
+    {
+      "id": "il_fan_proposal", "cat": "interlude", "w": 2, "cd": 400, "when": { "freeAgent": false, "fans": [50, 100] },
+      "title": "The Proposal",
+      "text": ["A fan emails the club: he wants to propose to his girlfriend at the training ground, and he wants {J} to hand him the ring.", "A couple who met at one of {J}'s matches want him to be part of their proposal video."],
+      "prompt": "Take part?",
+      "choices": [
+        { "label": "Yes, go all out", "desc": "Make it unforgettable.", "risk": "low", "hint": "Wholesome. Viral.", "text": "He hands over the ring disguised as a match ball. She says yes. Then she asks for a selfie. The video gets two million views.", "fx": { "fans": 4, "image": 3, "followers": 8000, "morale": 4 } },
+        { "label": "Politely decline", "desc": "Too personal.", "risk": "low", "hint": "Understandable.", "text": "He sends a signed card instead. The proposal still happens. He hopes they're happy.", "fx": {} }
+      ]
+    },
+    {
+      "id": "il_lookalike", "cat": "interlude", "w": 2, "cd": 400, "when": { "followers": [20000, 999999999] },
+      "title": "The Lookalike",
+      "text": ["There's a man who looks exactly like {J} getting free meals around town by pretending to be him. He's been doing it for a month. A restaurant owner calls the club.", "A lookalike of {J} has 100,000 followers. He's doing ads. He's better at TikTok than {J} is."],
+      "prompt": "Deal with it?",
+      "choices": [
+        { "label": "Meet him and film a video together", "desc": "Turn it into content.", "risk": "low", "hint": "The internet will lose its mind.", "text": "The video of the two of them confusing a waiter goes everywhere. The lookalike becomes a minor celebrity. {J} becomes a bigger one.", "fx": { "followers": 12000, "fans": 2, "image": 2 } },
+        { "label": "Let the club's lawyers handle it", "desc": "Cease and desist.", "risk": "low", "hint": "Effective. Humourless.", "text": "A stern letter is sent. The lookalike posts it. The internet decides {J} is 'no fun'.", "fx": { "image": -1, "board": 1 } }
+      ]
+    },
+    {
+      "id": "il_photo_old_team", "cat": "interlude", "w": 3, "cd": 200,
+      "title": "The Old Team Photo",
+      "text": ["{DAD} sends a photo he found in a box: {J}'s first-ever team, aged nine, in shirts so big they're dresses. Half of the boys are tagged in the family chat.", "Someone posts an old under-12 team photo. Of the sixteen boys in it, {J} is the only professional footballer."],
+      "prompt": "Reach out to the old team?",
+      "choices": [
+        { "label": "Organise a reunion match", "desc": "Next off-season.", "risk": "low", "hint": "Nostalgia and sore legs.", "text": "Fourteen of the sixteen come. They lose 7-2 to a team of dads. It's the best afternoon of the year.", "fx": { "friends": 6, "morale": 5, "fans": 1 } },
+        { "label": "Post it with a caption", "desc": "'Where it all started.'", "risk": "low", "hint": "Fans love origin stories.", "text": "The post does huge numbers. Three of his old teammates comment. One of them is now a dentist.", "fx": { "followers": 3000, "friends": 2 } }
+      ]
+    },
+    {
+      "id": "il_tailor", "cat": "interlude", "w": 2, "cd": 300, "when": { "rep": [20, 100] },
+      "title": "The First Real Suit",
+      "text": ["An awards dinner is coming up and {J} owns one suit, bought for a cousin's wedding when he was fifteen. A tailor offers to make him a proper one.", "The club's sponsor provides suits for the squad. The tailor measures {J} and makes a small disappointed noise about his posture."],
+      "prompt": "Go big?",
+      "choices": [
+        { "label": "Something bold", "desc": "Velvet. Colour. Confidence.", "risk": "medium", "hint": "Best-dressed or worst-dressed list.", "out": [
+          { "w": 1, "text": "He makes the best-dressed list. Fashion accounts post about him. {MUM} is very proud.", "fx": { "followers": 4000, "image": 2, "morale": 2 } },
+          { "w": 1, "text": "He makes the worst-dressed list. The squad screenshots it into the group chat at 7am.", "fx": { "followers": 2000, "dressing": 2, "morale": -1 } }
+        ] },
+        { "label": "Classic black", "desc": "Can't go wrong.", "risk": "low", "hint": "Timeless.", "text": "Classic, sharp, forgettable. Exactly right.", "fx": { "image": 1 } }
+      ]
+    },
+    {
+      "id": "il_charity_auction", "cat": "interlude", "w": 2, "cd": 300, "when": { "rep": [25, 100] },
+      "title": "The Charity Auction",
+      "text": ["At a charity gala, {J}'s match-worn boots are up for auction. The bidding stalls at a humiliating number. Everyone is looking at him.", "A gala dinner. A signed shirt from {J} is lot 14. Lot 13, a holiday villa, went for a fortune. The room is quiet."],
+      "prompt": "Rescue it?",
+      "choices": [
+        { "label": "Bid on your own boots", "desc": "Self-own for charity.", "risk": "low", "hint": "Hilarious. Generous.", "vars": { "cost": ["fixed", 1500] }, "text": "{J} raises his own paddle and bids {cost}. The room erupts. The video of it raises more than the boots.", "fx": { "wealth": "-cost", "image": 4, "followers": 4000 } },
+        { "label": "Add a training session to the lot", "desc": "Sweeten the deal.", "risk": "low", "hint": "Your time is worth more.", "text": "'Plus a training session with me.' The bidding explodes. The winner is a nine-year-old with his father's credit card.", "fx": { "image": 3, "fans": 2, "pfm": -1 } }
+      ]
+    },
+    {
+      "id": "il_umbrella", "cat": "interlude", "w": 3, "cd": 200,
+      "title": "One Umbrella",
+      "text": ["{WEATHER} outside {PLACE}. {J} has an umbrella. An old woman at the bus stop does not.", "Rain hammers down. A delivery rider is sheltering under a tiny awning, soaked, phone dying, order going cold."],
+      "prompt": "Help?",
+      "choices": [
+        { "label": "Give away the umbrella", "desc": "Get soaked yourself.", "risk": "low", "hint": "Small kindness.", "text": "He arrives at training drenched. The physio thinks he's mad. He feels great.", "fx": { "morale": 3, "image": 1 } },
+        { "label": "Offer a lift", "desc": "The car's right there.", "risk": "low", "hint": "Unexpected company.", "text": "Twenty minutes of conversation with a stranger who has no idea who he is. It's the most normal he's felt in months.", "fx": { "morale": 4, "stress": -2 } }
+      ]
+    },
+    {
+      "id": "il_bench_coffee_order", "cat": "interlude", "w": 3, "cd": 200, "when": { "freeAgent": false, "role": ["bench", "outcast"] },
+      "title": "The Coffee Run",
+      "text": ["As the youngest and least-used member of the squad, {J} is told to do the coffee run. Thirty-one orders. Several involve oat milk. One involves 'whatever, surprise me'.", "Squad tradition: the player with the fewest minutes buys the coffee. It's {J}. Again."],
+      "prompt": "How do you take it?",
+      "choices": [
+        { "label": "Do it perfectly", "desc": "Every order exactly right.", "risk": "low", "hint": "Respect from small things.", "text": "Thirty-one coffees, all correct. {CAPl} raises his cup to him. Small things build reputations.", "fx": { "dressing": 4, "wealth": -60 } },
+        { "label": "Get everyone the same thing", "desc": "Rebellion.", "risk": "low", "hint": "Comedy. Possible fines.", "text": "Thirty-one identical espressos. Outrage, then laughter. The court fines him, but he becomes a legend.", "fx": { "dressing": 3, "wealth": -80 } }
+      ]
+    },
+    {
+      "id": "il_twin_fans", "cat": "interlude", "w": 2, "cd": 300, "when": { "freeAgent": false },
+      "title": "Named After You",
+      "text": ["A couple at the gate hold up their newborn twins. One is named after {J}. The other is named after {CAPl}. They want a photo of all four.", "A message to the club: a fan has named his baby boy after {J}. He attaches a photo. The baby looks unimpressed."],
+      "prompt": "Your response?",
+      "choices": [
+        { "label": "Send a tiny signed shirt", "desc": "With his name and number.", "risk": "low", "hint": "Heart-melting.", "text": "The baby wears the tiny shirt in every photo for a year. The family sends updates. {J} keeps every one.", "fx": { "fans": 3, "morale": 5, "image": 2 } },
+        { "label": "Post the photo", "desc": "'Little legend.'", "risk": "low", "hint": "The internet's heart melts.", "text": "The post is his most-loved ever. Three more babies are named after him that month.", "fx": { "followers": 6000, "fans": 2 } }
+      ]
+    },
+    {
+      "id": "il_vacation_plan", "cat": "interlude", "w": 4, "cd": 80, "when": { "phase": ["off"] },
+      "title": "Holiday Plans",
+      "text": ["The season's over. Three weeks off. The squad is scattering to beaches. {MUM} wants him home. {BFf} wants a trip.", "Summer break. The fitness coach has given everyone a programme 'for the holiday'. Nobody has looked at it."],
+      "prompt": "Where are you going?",
+      "choices": [
+        { "label": "Home to family", "desc": "Mum's cooking for three weeks.", "risk": "low", "hint": "Family time. Gain a kilo.", "text": "Three weeks of home: {MUM}'s food, {DAD}'s silence, {SIB}'s chaos. He comes back fat and happy.", "fx": { "family": 10, "stress": -8, "friends": 3, "pfm": -2 } },
+        { "label": "A beach trip with friends", "desc": "Sun, sea, nobody knows you.", "risk": "medium", "hint": "Fun. Photos.", "out": [
+          { "w": 2, "text": "Ten days of sun and laughter. Nobody recognises him. Perfect.", "fx": { "friends": 8, "stress": -6, "morale": 5, "wealth": -500 } },
+          { "w": 1, "text": "A tourist recognises him on a jet ski. The photos make the papers: 'Living the high life while his club struggles'.", "fx": { "friends": 6, "stress": -4, "image": -2, "fans": -2, "wealth": -500 } }
+        ] },
+        { "label": "Stay and train privately", "desc": "Come back a different player.", "risk": "low", "hint": "Gains. Lonely.", "text": "He hires a private coach and trains twice a day. He comes back sharper than anyone, and slightly lonelier.", "fx": { "growth": ["rel"], "pfm": -2, "friends": -3, "family": -2, "trust": 2 } }
+      ]
+    },
+    {
+      "id": "il_league_awards_vote", "cat": "interlude", "w": 3, "cd": 52, "when": { "phase": ["off", "pre"], "freeAgent": false },
+      "title": "The Players' Vote",
+      "text": ["The players' union sends out its award ballot. Players vote for the best player in the league. {J} can't vote for himself. He can vote for {T}, his friend, or for the obvious winner from {R}.", "Ballot time. The players' awards. {J} has to choose between loyalty and honesty."],
+      "prompt": "Who do you vote for?",
+      "choices": [
+        { "label": "The best player, honestly", "desc": "Even if he's from {R}.", "risk": "low", "hint": "Integrity.", "text": "He votes honestly. Nobody will ever know. He knows.", "fx": { "growth": ["mental"] } },
+        { "label": "Your teammate", "desc": "Loyalty.", "risk": "low", "hint": "He'll find out. Somehow.", "text": "{T} somehow finds out and hugs him at training. The vote doesn't change the result, but it changes something.", "fx": { "dressing": 2, "teammate": { "who": "T", "rel": "ally" } } }
+      ]
+    },
+    {
+      "id": "il_mirror_talk", "cat": "interlude", "w": 3, "cd": 120, "when": { "morale": [0, 40] },
+      "title": "The Mirror",
+      "text": ["In the dressing-room mirror, after everyone's gone, {J} looks at himself for a long time.", "{J} catches his reflection in a shop window and doesn't like the tired, tense person looking back."],
+      "prompt": "What do you tell yourself?",
+      "choices": [
+        { "label": "'You've survived worse.'", "desc": "Remember the bus fares.", "risk": "low", "hint": "Resilience.", "text": "He thinks of the 5am buses to trials, the rejection letters, the borrowed boots. He has survived worse. He'll survive this.", "fx": { "morale": 5, "growth": ["mental"] } },
+        { "label": "Book a session with the club psychologist", "desc": "Talk to someone.", "risk": "low", "hint": "Strength, not weakness.", "text": "The psychologist is calm and asks good questions. It's the first of many sessions. It helps more than he expected.", "fx": { "morale": 4, "stress": -6, "flag": "sees_psychologist" } }
+      ]
+    },
+    {
+      "id": "il_weird_injury", "cat": "interlude", "w": 2, "cd": 400,
+      "title": "An Embarrassing Injury",
+      "text": ["{J} has hurt his toe. Not in training. Not in a match. On a coffee table, at home, in the dark. The physio wants to know how. The squad wants to know more.", "{J} pulled a muscle reaching for the TV remote. It's minor. The story is not."],
+      "prompt": "What's the official story?",
+      "choices": [
+        { "label": "Tell the truth", "desc": "Own it.", "risk": "low", "hint": "Comedy, at your expense.", "text": "He tells the truth. The squad buys him a padded coffee table. The club's social team posts about it. He'll never live it down.", "fx": { "dressing": 3, "followers": 2000, "pfm": -2 } },
+        { "label": "'Training knock'", "desc": "Cover story.", "risk": "medium", "hint": "Someone will find out.", "text": "'Training knock.' The physio winks. The kit man knows. By Friday everyone knows.", "fx": { "dressing": 1, "pfm": -2 } }
+      ]
+    },
+    {
+      "id": "il_reporter_doorstep", "cat": "interlude", "w": 3, "cd": 160, "ui": "press", "when": { "rep": [20, 100], "press": [0, 45] },
+      "title": "Doorstepped",
+      "text": ["A reporter and a photographer are waiting outside {J}'s building at 7am. They want a comment on 'the rumours'. He hasn't heard the rumours.", "A tabloid photographer is camped outside {J}'s apartment. A reporter shouts questions as he gets into his car."],
+      "prompt": "How do you react?",
+      "choices": [
+        { "label": "Stop, smile, say 'no comment'", "desc": "Calm and polite.", "risk": "low", "hint": "Boring photos don't sell.", "text": "He smiles, says 'no comment, have a good day', and leaves. The photos are so boring they're never printed.", "fx": { "press": 3, "image": 1 } },
+        { "label": "Tell them to leave", "desc": "Firmly.", "risk": "medium", "hint": "Righteous. Photographable.", "text": "The photo of him pointing angrily is on the front page the next morning: '{J} Snaps'.", "fx": { "press": -5, "image": -3, "stress": 3 } },
+        { "label": "Offer them coffee", "desc": "Kill them with kindness.", "risk": "low", "hint": "Disarming.", "text": "He brings them two coffees. They're so confused they leave. The reporter's piece the next week is noticeably softer.", "fx": { "press": 5, "image": 2 } }
+      ]
+    }
+  ]
+}
