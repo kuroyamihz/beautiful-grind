@@ -76,20 +76,20 @@
       "text": ["Everything has gone grey. Football, food, music, messages. {J} goes to training, comes home, sits in the dark. He hasn't told anyone. The club psychologist has noticed anyway.", "{J} cancels plans with everyone. He doesn't want to talk. He scrolls, sleeps badly, trains on autopilot. Somewhere along the way, he stopped enjoying football."],
       "prompt": "Something is wrong, and it isn't your body.",
       "choices": [
-        { "label": "Talk to the club psychologist", "desc": "Ask for help.", "risk": "low", "hint": "The bravest thing you'll do this year.", "text": "The first session he barely speaks. The second, he can't stop. It isn't fixed. But it's started.", "fx": { "morale": 15, "stress": -8, "flag": "sees_psychologist", "growth": ["mental"] } },
+        { "label": "Talk to the club psychologist", "desc": "Ask for help.", "risk": "low", "hint": "The bravest thing you'll do this year.", "text": "The first session he barely speaks. The second, he can't stop. It isn't fixed. But it's started.", "fx": { "morale": 15, "stress": -8, "flag": "sees_psychologist", "growth": ["mental"], "potential": 1 } },
         { "label": "Tell someone you love", "desc": "{MUM}, or {BFf}, or whoever is closest.", "risk": "low", "hint": "You're not alone.", "text": "He calls and just says, 'I'm not okay.' The person on the other end doesn't panic. They just stay on the phone. That's everything.", "fx": { "morale": 10, "family": 4, "friends": 4, "love": 4, "stress": -5 } },
         { "label": "Push through alone", "desc": "Footballers don't break.", "risk": "high", "hint": "Footballers do break.", "text": "He tells himself it's nothing. It isn't nothing. It shows on the pitch, in the dressing room, at home.", "fx": { "morale": -4, "stress": 5, "form": -0.3 } }
       ]
     },
     {
-      "id": "lw_burnout", "cat": "body", "w": 8, "trigger": "burnout",
+      "id": "lw_burnout", "group": "burnout", "groupCd": 52, "cat": "body", "w": 8, "trigger": "burnout",
       "title": "Burnout",
       "text": ["{J}'s hands are shaking before training. His heart races at night. The sports scientist shows him the data — heart-rate variability, sleep, reaction times — and says one word: 'burnout'.", "In the middle of a routine drill, {J} stops, sits down on the grass and can't explain why. The physio sits next to him. Nobody rushes him."],
       "prompt": "Your body and mind are at breaking point.",
       "choices": [
         { "label": "Take a full week off", "desc": "Club, phone, everything.", "risk": "medium", "hint": "You'll miss a match. You'll save your season.", "text": "A week at home with the phone off. {MUM}'s cooking, long walks, sleep. He comes back a different person.", "fx": { "stress": -30, "pfm": 10, "morale": 8, "trust": -3, "family": 5 } },
         { "label": "Cut everything except football", "desc": "No media, no events, no extras.", "risk": "low", "hint": "Some people won't like being cut.", "text": "He cancels every sponsor event and interview for a month. The board grumbles. His body thanks him.", "fx": { "stress": -18, "board": -3, "press": -2, "pfm": 4 } },
-        { "label": "Push through", "desc": "Rest when you retire.", "risk": "extreme", "hint": "This is how injuries happen.", "text": "He keeps going. Something has to give, and in football, something always does.", "fx": { "stress": 5, "injury": "moderate", "morale": -5 } }
+        { "label": "Push through", "desc": "Rest when you retire.", "risk": "extreme", "hint": "This is how injuries happen.", "text": "He keeps going. Something has to give, and in football, something always does.", "fx": { "stress": 5, "injury": "moderate", "morale": -5, "potential": -2 } }
       ]
     },
     {

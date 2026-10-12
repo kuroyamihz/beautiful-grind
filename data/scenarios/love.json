@@ -27,7 +27,7 @@
       ]
     },
     {
-      "id": "lo_meet_celebrity", "cat": "love", "w": 2, "when": { "age": [20, 34], "partner": ["none"], "rep": [25, 100] },
+      "id": "lo_meet_celebrity", "once": true, "cat": "love", "w": 2, "when": { "age": [20, 34], "partner": ["none"], "rep": [25, 100] },
       "title": "A Famous Singer Wants to Meet {J}",
       "text": "At a sponsor's gala, {J} is seated next to {F}, a pop singer with ten times his followers. They talk all night. Photographers notice.",
       "prompt": "See her again?",
@@ -37,7 +37,7 @@
       ]
     },
     {
-      "id": "lo_milestone", "cat": "love", "w": 4, "when": { "partner": ["dating"], "age": [19, 40] },
+      "id": "lo_milestone", "cd": 80, "cat": "love", "w": 4, "when": { "partner": ["dating"], "age": [19, 40] },
       "title": "{J} and {P}: Next Step?",
       "text": "{P} has been patient through the travel, the bad moods after losses, the phone that never stops buzzing. Tonight she asks, gently, whether they're going to take the next step.",
       "prompt": "Take the next step together?",
@@ -52,7 +52,7 @@
       ]
     },
     {
-      "id": "lo_proposal", "cat": "love", "w": 4, "when": { "partner": ["serious"], "age": [21, 40] },
+      "id": "lo_proposal", "group": "proposal", "groupCd": 9999, "cat": "love", "w": 4, "when": { "partner": ["serious"], "age": [21, 40] },
       "title": "{J} Is Thinking About Proposing",
       "text": "{J} has been carrying a ring in his kit bag for three weeks. Every time he finds the right moment, something happens: a phone call, a missed train, an argument about nothing.",
       "prompt": "How do you propose?",
@@ -71,7 +71,7 @@
       "fx": { "parental": 12, "followers": 30000, "trust": 2, "mood": "Relieved", "pfm": -4 }
     },
     {
-      "id": "lo_jealousy", "cat": "love", "w": 3, "when": { "partner": ["dating", "serious", "married"], "followers": [20000, 999999999] },
+      "id": "lo_jealousy", "cd": 80, "cat": "love", "w": 3, "when": { "partner": ["dating", "serious", "married"], "followers": [20000, 999999999] },
       "title": "{P} Sees Messages From Fans",
       "text": "{P} sees a message on {J}'s phone from a female fan: flirtatious, with heart emojis. He never replied. She's still upset.",
       "prompt": "How do you handle it?",
@@ -81,7 +81,7 @@
       ]
     },
     {
-      "id": "lo_long_distance", "cat": "love", "w": 4, "when": { "partner": ["dating", "serious"], "abroad": true },
+      "id": "lo_long_distance", "group": "long_distance", "groupCd": 40, "cat": "love", "w": 4, "when": { "partner": ["dating", "serious"], "abroad": true },
       "title": "Long Distance Is Hard",
       "text": "{P} is back home; {J} is in another country. Time zones, missed calls, a birthday celebrated over video. Last night she said “I'm tired” and he didn't know if she meant today or something bigger.",
       "prompt": "What do you do?",
@@ -95,7 +95,7 @@
       ]
     },
     {
-      "id": "lo_breakup_public", "cat": "love", "w": 2, "when": { "partner": ["dating", "serious"], "flags": ["celebrity_partner"] },
+      "id": "lo_breakup_public", "cd": 150, "cat": "love", "w": 2, "when": { "partner": ["dating", "serious"], "flags": ["celebrity_partner"] },
       "title": "Celebrity Breakup Goes Public",
       "text": "{P} posts a cryptic message about “people who choose football over everything”. Gossip sites decide the relationship is over before {J} even knows.",
       "prompt": "What do you do?",
@@ -108,7 +108,7 @@
       ]
     },
     {
-      "id": "lo_partner_career", "cat": "love", "w": 3, "when": { "partner": ["serious", "married"] },
+      "id": "lo_partner_career", "group": "partner_career", "groupCd": 200, "cat": "love", "w": 3, "when": { "partner": ["serious", "married"] },
       "title": "{P} Gets a Big Job Offer",
       "text": "{P} has been offered a promotion: a big step in her career, in another city. She asks {J} what he thinks, which really means: does my career matter as much as yours?",
       "prompt": "What do you say?",
@@ -121,7 +121,7 @@
       ]
     },
     {
-      "id": "lo_baby_news", "cat": "love", "w": 3, "when": { "partner": ["married"], "age": [22, 40] }, "once": true,
+      "id": "lo_baby_news", "group": "baby_news", "groupCd": 9999, "cat": "love", "w": 3, "when": { "partner": ["married"], "age": [22, 40] }, "once": true,
       "title": "{J} Is Going to Be a Father",
       "text": "{P} hands him a small box after training. Inside: a tiny football shirt and an ultrasound photo. {J} sits down on the kitchen floor and doesn't get up for a while.",
       "fx": { "mood": "On Fire", "parental": 15, "followers": 40000, "chain": { "id": "lo_baby_born", "in": [30, 38] } }
@@ -147,7 +147,7 @@
       ]
     },
     {
-      "id": "lo_child_first_match", "cat": "love", "w": 3, "when": { "flags": ["father"], "age": [24, 40] },
+      "id": "lo_child_first_match", "once": true, "cat": "love", "w": 3, "when": { "flags": ["father"], "age": [24, 40] },
       "title": "{J}'s Child Watches From the Stands",
       "text": "His child, tiny ear defenders on, is in the family section for the first time. When {J} wins a corner, the child waves both arms like they scored the winner.",
       "fx": { "form": 0.2, "mood": "Motivated", "followers": 10000 }
@@ -182,7 +182,7 @@
       ]
     },
     {
-      "id": "lo_partner_family_conflict", "cat": "love", "w": 3, "when": { "partner": ["serious", "married"] },
+      "id": "lo_partner_family_conflict", "group": "partner_mum", "groupCd": 80, "cat": "love", "w": 3, "when": { "partner": ["serious", "married"] },
       "title": "{J}'s Mother and {P} Disagree",
       "text": "His mother and {P} disagree about everything: where they should live, how often they should visit, what kind of wedding there should have been. Both have called {J} today to complain about the other.",
       "prompt": "Whose side are you on?",
@@ -215,7 +215,7 @@
       "fx": { "mood": "Confident", "form": 0.1 }
     },
     {
-      "id": "lo_ex_returns", "cat": "love", "w": 2, "when": { "partner": ["none"], "rep": [10, 100] },
+      "id": "lo_ex_returns", "group": "ex", "groupCd": 120, "cat": "love", "w": 2, "when": { "partner": ["none"], "rep": [10, 100] },
       "title": "An Old Flame Gets in Touch",
       "text": "A message from his first girlfriend, from school, before the money and the fame. She saw him on TV. She's back in town. Coffee?",
       "prompt": "Meet her?",
@@ -234,7 +234,7 @@
       "fx": { "followers": 10000, "wealth": 300, "mood": "Confident" }
     },
     {
-      "id": "lo_divorce_risk", "cat": "love", "w": 2, "when": { "partner": ["married"], "pfm": [0, 55] },
+      "id": "lo_divorce_risk", "cd": 150, "cat": "love", "w": 2, "when": { "partner": ["married"], "pfm": [0, 55] },
       "title": "Cracks at Home",
       "text": "Away games, training camps, international duty, sponsor events. {P} says she married a man, not a fixture list. It's the third argument this week.",
       "prompt": "Save the marriage?",

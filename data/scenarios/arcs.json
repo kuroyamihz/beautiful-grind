@@ -1,0 +1,325 @@
+{
+  "_about": "Long storylines that span years. Each stage needs the flags set by an earlier stage and some time to have passed (when.since). The flags also decide the end-of-career epilogue.",
+  "scenarios": [
+    {
+      "id": "ar_rival_1", "cat": "dressing", "w": 8, "once": true, "group": "arc_rival", "groupOnce": true, "when": { "age": [16, 18], "freeAgent": false },
+      "title": "{T} Wants Your Place",
+      "text": [
+        "There's another kid your age in the squad: {T}. Same position, same hunger, a better first touch on his good days. Everyone can see what's happening. The coaches have started pairing you in drills on purpose.",
+        "{T} arrived from another academy with a reputation. In his first week he tells a teammate, loud enough for {J} to hear, that he'll have his shirt by Christmas."
+      ],
+      "prompt": "How do you deal with your rival?",
+      "choices": [
+        { "label": "Outwork him. Every single day.", "desc": "First in, last out.", "risk": "low", "hint": "Respect is earned. He'll remember.", "text": "You turn the rivalry into fuel. Extra sessions, extra video. {T} notices. Neither of you says a word about it.", "fx": { "cast": { "rival": "T" }, "flag": "rival_respect", "growth": ["rel"], "trust": 2, "stress": 2 } },
+        { "label": "Make him a friend", "desc": "Share the journey.", "risk": "medium", "hint": "A friend in football is rare.", "text": "You invite him to dinner. Then to the gym. By the end of the month you're inseparable, still competing, now laughing about it.", "fx": { "cast": { "rival": "T" }, "flag": "rival_friend_seed", "teammate": { "who": "T", "rel": "ally" }, "dressing": 3, "friends": 2 } },
+        { "label": "Make sure he fails", "desc": "A word to the right person, a late tackle in training.", "risk": "extreme", "hint": "It might work. It might come back.", "text": "A rumour about his attitude reaches the coaches. A late tackle in training does the rest. He's sent on loan. You get his minutes, and a secret.", "fx": { "cast": { "rival": "T" }, "flag": "rival_sabotage", "trust": 3, "dressing": -3, "growth": ["rel"] } }
+      ]
+    },
+    {
+      "id": "ar_rival_2a", "cat": "dressing", "w": 9, "once": true, "group": "arc_rival2", "groupOnce": true, "when": { "flags": ["rival_respect"], "age": [21, 28], "since": { "rival_respect": [150, 9999] } },
+      "title": "{RIVAL} Is Back — On the Other Side",
+      "text": ["Years later, {RIVAL} is a regular for {R}. Before kick-off he walks over in the tunnel: 'You made me better, you know. All those mornings.'", "{RIVAL}, the kid who wanted your place, is now in the national squad too. At camp he sits next to you at breakfast like it's the most natural thing in the world."],
+      "prompt": "Your old rival offers a hand.",
+      "choices": [
+        { "label": "Take it. Bury the rivalry.", "desc": "Friends now.", "risk": "low", "hint": "Some rivals become your closest friends.", "text": "You end up talking for an hour after the match. He tells you about the loan that almost ended his career. You tell him about the nights you couldn't sleep.", "fx": { "flag": "rival_friend", "unflag": "rival_respect", "friends": 4, "morale": 3 } },
+        { "label": "Keep the edge", "desc": "Respect, from a distance.", "risk": "low", "hint": "The rivalry keeps you sharp.", "text": "A firm handshake, nothing more. The rivalry stays. It suits you both.", "fx": { "unflag": "rival_respect", "growth": ["mental"] } }
+      ]
+    },
+    {
+      "id": "ar_rival_2b", "cat": "friends", "w": 9, "once": true, "group": "arc_rival2", "groupOnce": true, "when": { "flags": ["rival_friend_seed"], "age": [20, 28], "since": { "rival_friend_seed": [120, 9999] } },
+      "title": "{RIVAL} Needs You",
+      "text": ["{RIVAL}, your friend since the youth team, calls late at night. He's been released by his club. No offers. He's thinking about quitting football altogether.", "{RIVAL} has been out injured for a year and his contract is ending. He sounds smaller on the phone than you've ever heard him."],
+      "prompt": "Your old friend is drowning.",
+      "choices": [
+        { "label": "Get him a trial at your club", "desc": "Put your name on the line.", "risk": "medium", "hint": "If he flops, it's on you.", "out": [
+          { "w": 2, "text": "He trains with your squad for two weeks and earns a contract. In the dressing room, he hugs you so hard your ribs hurt.", "fx": { "flag": "rival_friend", "unflag": "rival_friend_seed", "friends": 6, "dressing": 3, "trust": 1 } },
+          { "w": 1, "text": "He's rusty. The club says no. He thanks you anyway — 'you tried, that's more than anyone else did'.", "fx": { "flag": "rival_friend", "unflag": "rival_friend_seed", "friends": 4, "trust": -2 } }
+        ] },
+        { "label": "Pay for his rehab and training", "desc": "Quietly.", "risk": "low", "hint": "Expensive, private, life-changing.", "vars": { "cost": ["wageWeeks", 4, 800] }, "text": "You pay for a specialist and a private coach. Six months later he signs for a club abroad. He sends you a photo of his new shirt with your name written on the back in marker.", "fx": { "flag": "rival_friend", "unflag": "rival_friend_seed", "wealth": "-cost", "friends": 6, "morale": 4 } },
+        { "label": "Tell him to move on", "desc": "Football isn't everything.", "risk": "medium", "hint": "Honest. Painful.", "text": "'There's a life after this.' He goes quiet. You don't hear from him for a long time.", "fx": { "unflag": "rival_friend_seed", "friends": -4 } }
+      ]
+    },
+    {
+      "id": "ar_rival_2c", "cat": "media", "w": 10, "once": true, "group": "arc_rival2", "groupOnce": true, "when": { "flags": ["rival_sabotage"], "age": [21, 30], "since": { "rival_sabotage": [150, 9999] }, "rep": [15, 100] },
+      "title": "{RIVAL} Tells His Story",
+      "text": ["{RIVAL} has given a long interview to {OUT} about the youth team years: 'Someone made sure I was sent away. Everyone in that dressing room knows who.' He doesn't say your name. He doesn't have to.", "A podcast with {RIVAL}, now a decent pro, goes viral. One sentence keeps getting clipped: 'He got me thrown out, and I've never forgiven him.'"],
+      "prompt": "The secret from the youth team is out.",
+      "choices": [
+        { "label": "Call him and apologise", "desc": "Years too late, but sincere.", "risk": "medium", "hint": "He may not accept it.", "check": { "stat": "mental", "dc": 55 },
+          "ok": { "text": "The call is long and awful and necessary. He accepts the apology, slowly. In public, he says only: 'We've talked.'", "fx": { "unflag": "rival_sabotage", "flag": "rival_friend", "image": 2, "press": 1, "growth": ["mental"] } },
+          "bad": { "text": "He listens, then says: 'Too late.' And hangs up. The story runs for a week.", "fx": { "unflag": "rival_sabotage", "flag": "rival_enemy", "image": -5, "press": -3, "fans": -3 } } },
+        { "label": "Deny everything", "desc": "It was competition, nothing more.", "risk": "high", "hint": "Others from the youth team may speak.", "out": [
+          { "w": 1, "text": "Your denial holds. Mostly. The story fades, and {RIVAL} becomes a permanent enemy.", "fx": { "unflag": "rival_sabotage", "flag": "rival_enemy", "image": -2, "stress": 3 } },
+          { "w": 1, "text": "Two former teammates back his version. Your denial becomes the bigger story.", "fx": { "unflag": "rival_sabotage", "flag": ["rival_enemy", "secret_exposed"], "image": -9, "press": -5, "fans": -4, "board": -3 } }
+        ] },
+        { "label": "Say nothing", "desc": "Don't feed it.", "risk": "medium", "hint": "Silence reads like guilt to some.", "text": "You say nothing. Half the internet decides that means yes.", "fx": { "unflag": "rival_sabotage", "flag": "rival_enemy", "image": -4, "press": -2 } }
+      ]
+    },
+    {
+      "id": "ar_rival_3_friend", "cat": "national", "w": 9, "once": true, "group": "arc_rival3", "groupOnce": true, "when": { "flags": ["rival_friend"], "age": [30, 37], "since": { "rival_friend": [150, 9999] } },
+      "title": "{RIVAL} Becomes a Coach",
+      "text": ["{RIVAL} has retired early and gone straight into coaching. Now he's an assistant at the national team, and the first thing he does is call you: 'We need your experience. Not just on the pitch.'", "{RIVAL} has his first job as a head coach, and he wants you as his on-pitch leader: 'You're the only one I trust to tell me when I'm wrong.'"],
+      "prompt": "Your old friend wants you on his team.",
+      "choices": [
+        { "label": "Become his voice in the dressing room", "desc": "Senior leader.", "risk": "low", "hint": "A last chapter with purpose.", "text": "You become his eyes and ears among the players. It's the most meaningful football you play in years.", "fx": { "dressing": 5, "morale": 6, "flag": "coaching_badges", "rep": 1 } },
+        { "label": "Ask him to treat you like anyone else", "desc": "No favours.", "risk": "low", "hint": "Integrity.", "text": "'Pick me only if I deserve it.' He laughs: 'I was always going to.'", "fx": { "image": 2, "growth": ["mental"] } }
+      ]
+    },
+    {
+      "id": "ar_rival_3_enemy", "cat": "manager", "w": 10, "once": true, "group": "arc_rival3", "groupOnce": true, "when": { "flags": ["rival_enemy"], "age": [29, 37], "freeAgent": false, "since": { "rival_enemy": [100, 9999] } },
+      "title": "Your New Manager: {RIVAL}",
+      "text": ["The club announce their new head coach. You read the name three times. {RIVAL}. He walks into his first meeting, looks at the squad, and his eyes stop on you for one second too long.", "Of all the coaches in the world, the board has hired {RIVAL}. In his first press conference he's asked about you. 'Everyone starts from zero,' he says, smiling."],
+      "prompt": "The man you wronged — or who wronged you — now picks the team.",
+      "choices": [
+        { "label": "Ask for a private meeting", "desc": "Clear the air, man to man.", "risk": "medium", "hint": "Could heal it. Could seal it.", "check": { "stat": "mental", "dc": 62 },
+          "ok": { "text": "An hour behind a closed door. Some shouting. Then, unexpectedly, a laugh. 'Just play well,' he says. 'That's all I ever wanted from you.'", "fx": { "newManager": true, "trust": 15, "unflag": "rival_enemy", "flag": "rival_friend", "morale": 5 } },
+          "bad": { "text": "He hears you out, then says: 'We'll see.' You're on the bench on Saturday. And the next Saturday.", "fx": { "newManager": true, "trust": -20, "stress": 6, "morale": -5 } } },
+        { "label": "Ask for a transfer", "desc": "Not under him.", "risk": "high", "hint": "The door opens fast.", "text": "Your agent makes calls the same afternoon. The board, keen to back their new coach, put you on the list.", "fx": { "newManager": true, "trust": -15, "listed": true, "fans": -2 } },
+        { "label": "Let your football speak", "desc": "Make it impossible to drop you.", "risk": "medium", "hint": "Only works if you're good enough.", "text": "You train like you're seventeen again. He can't ignore you forever. He tries.", "fx": { "newManager": true, "trust": -8, "growth": ["rel"], "stress": 4 } }
+      ]
+    },
+    {
+      "id": "ar_secret_1", "cat": "lifestyle", "w": 7, "once": true, "group": "arc_secret", "groupOnce": true, "when": { "age": [17, 20] },
+      "title": "The Night That Got Filmed",
+      "text": ["A birthday party, a stupid argument, a shove that turned into a scuffle in a car park. Nobody was badly hurt. But someone filmed it, and that someone now has {J}'s number.", "{J} was at {PLACE} when a fight broke out. He wasn't the one who started it. He was the one who threw the last punch. A stranger sends him the video with one word: 'Interesting.'"],
+      "prompt": "There's a video. What do you do?",
+      "choices": [
+        { "label": "Tell the club everything", "desc": "Own it before it owns you.", "risk": "medium", "hint": "Painful now, safe later.", "text": "The club's lawyers sigh and handle it. You're fined, you apologise, and you do community service on Saturday mornings. It's humiliating. It's over.", "fx": { "flag": "secret_confessed", "trust": -4, "board": -3, "wealth": -300, "growth": ["mental"] } },
+        { "label": "Pay him to delete it", "desc": "Make it disappear.", "risk": "high", "hint": "People who take money once come back.", "vars": { "cost": ["wageWeeks", 3, 400] }, "text": "{F}'s cousin — the one with the video — takes {cost} in cash and swears it's deleted. You want to believe him.", "fx": { "flag": "secret_paid", "wealth": "-cost", "cast": { "fixer": "F" }, "stress": 3 } },
+        { "label": "Ignore it", "desc": "It's just a video. Nobody cares.", "risk": "high", "hint": "The internet never forgets.", "text": "You block the number. The video doesn't go anywhere. For now.", "fx": { "flag": "secret_hidden", "stress": 2 } }
+      ]
+    },
+    {
+      "id": "ar_secret_2_paid", "cat": "money", "w": 10, "once": true, "group": "arc_secret2", "groupOnce": true, "when": { "flags": ["secret_paid"], "since": { "secret_paid": [60, 400] }, "rep": [12, 100] },
+      "title": "The Video Didn't Get Deleted",
+      "text": ["A message from an old number: the video from years ago, still there, attached. 'You're famous now. The price has gone up.'", "{FIXER}'s cousin is back, and he has kept a copy of everything. He wants ten times what you paid last time."],
+      "prompt": "You're being blackmailed.",
+      "vars": { "cost": ["wageWeeks", 12, 3000] },
+      "choices": [
+        { "label": "Go to the police and the club", "desc": "End it, whatever it costs.", "risk": "high", "hint": "The video comes out, but on your terms.", "text": "The police arrest him for extortion. The video leaks anyway. But the story becomes 'Footballer blackmailed', and the public is mostly on your side.", "fx": { "unflag": "secret_paid", "flag": "secret_confessed", "image": -3, "press": 2, "board": 1, "stress": 6, "growth": ["mental"] } },
+        { "label": "Pay again", "desc": "{cost}. Just make it stop.", "risk": "extreme", "hint": "It won't stop.", "text": "You pay. He promises it's the last time. Both of you know it isn't.", "fx": { "wealth": "-cost", "stress": 8, "morale": -4, "chain": { "id": "ar_secret_3_paid", "in": [40, 80] } } }
+      ]
+    },
+    {
+      "id": "ar_secret_3_paid", "cat": "media", "w": 10, "chainOnly": true,
+      "title": "The Video Leaks",
+      "text": "The payments stopped working. The video is on every gossip account by morning: a younger {J}, a car park, a punch. The caption calls him 'the real {J}'.",
+      "prompt": "Everything you paid to hide is public.",
+      "choices": [
+        { "label": "Tell the whole truth, including the blackmail", "desc": "Full honesty.", "risk": "high", "hint": "Hard, but people respect it.", "text": "Your statement is long and honest. The story turns from 'thug' to 'victim of blackmail who made a mistake at eighteen'. It takes months. It works.", "fx": { "unflag": "secret_paid", "image": -5, "press": 1, "stress": 5 } },
+        { "label": "Say nothing", "desc": "Ride it out.", "risk": "extreme", "hint": "Silence looks like guilt.", "text": "You say nothing. Sponsors call. The board calls. Your mother calls, crying.", "fx": { "unflag": "secret_paid", "flag": "secret_exposed", "image": -12, "board": -6, "family": -4, "stress": 8 } }
+      ]
+    },
+    {
+      "id": "ar_secret_2_hidden", "cat": "media", "w": 10, "once": true, "group": "arc_secret2", "groupOnce": true, "when": { "flags": ["secret_hidden"], "since": { "secret_hidden": [150, 600] }, "rep": [30, 100] },
+      "title": "{JR} Has the Video",
+      "text": [
+        "A journalist has found the old car-park video. It's going to run in {OUT} on Sunday. Nobody warned you.",
+        { "when": { "press": [60, 100] }, "t": "{JR} calls you personally on a Thursday night: 'I have to run it. But I'm telling you first, because you've always been straight with me. You have 48 hours.'" }
+      ],
+      "prompt": "Your old secret is about to become a headline.",
+      "choices": [
+        { "label": "Get ahead of it", "desc": "Publish your own apology first.", "risk": "medium", "hint": "Control the story.", "text": "Your video goes up on Saturday night: no script, just the truth. By Sunday, the story is your apology, not the punch.", "fx": { "unflag": "secret_hidden", "image": -3, "press": 3, "stress": 3 } },
+        { "label": "Lawyers", "desc": "Try to stop it running.", "risk": "high", "hint": "Expensive. Might make it worse.", "out": [
+          { "w": 1, "text": "The lawyers find a technicality. The story is killed. It costs a fortune and {OUT} will never forget it.", "fx": { "unflag": "secret_hidden", "wealth": -2000, "press": -8 } },
+          { "w": 2, "text": "It runs anyway, now with a paragraph about your attempt to suppress it.", "fx": { "unflag": "secret_hidden", "flag": "secret_exposed", "wealth": -2000, "image": -10, "press": -6, "stress": 6 } }
+        ] },
+        { "label": "Deny it's you", "desc": "It was dark. It's blurry.", "risk": "extreme", "hint": "Someone else from that night will talk.", "text": "Someone else who was there that night talks. Then another. The denial is now the scandal.", "fx": { "unflag": "secret_hidden", "flag": "secret_exposed", "image": -14, "press": -6, "board": -5, "fans": -4, "stress": 8 } }
+      ]
+    },
+    {
+      "id": "ar_secret_2_confessed", "cat": "media", "w": 6, "once": true, "group": "arc_secret2", "groupOnce": true, "when": { "flags": ["secret_confessed"], "since": { "secret_confessed": [150, 700] }, "rep": [30, 100] },
+      "title": "An Old Story Resurfaces",
+      "text": "A gossip account digs up the old car-park video and posts it as if it's new. Within an hour, a hundred replies point out the same thing: he told the club years ago, apologised, did the community service. The post is deleted by lunchtime.",
+      "prompt": "Respond?",
+      "choices": [
+        { "label": "Share what you learned from it", "desc": "Turn it into something useful.", "risk": "low", "hint": "Owning your past is powerful.", "text": "A short post about mistakes and second chances. It becomes the most-shared thing you've ever written.", "fx": { "unflag": "secret_confessed", "image": 5, "followers": 20000, "press": 2 } },
+        { "label": "Ignore it", "desc": "Old news.", "risk": "low", "hint": "Nothing to see here.", "text": "You don't even reply. The internet moves on by dinner.", "fx": { "unflag": "secret_confessed" } }
+      ]
+    },
+    {
+      "id": "ar_promise_1", "cat": "culture", "w": 8, "once": true, "group": "arc_promise", "groupOnce": true, "when": { "age": [19, 25], "freeAgent": false },
+      "title": "The Kids at the Old Club",
+      "text": "{J} visits {FIRSTCLUB}, the club where it all started, for the youth tournament. A boy with a missing front tooth asks the question the whole room wants to ask: 'Will you come back and play for us one day?'",
+      "prompt": "What do you say to the kid?",
+      "choices": [
+        { "label": "'I promise. Before I retire.'", "desc": "A promise in front of a hundred children.", "risk": "medium", "hint": "They will remember. Years from now, so will you.", "text": "The room explodes. Someone films it. By evening, the clip is on the club's page with the caption 'HE PROMISED'.", "fx": { "flag": "hometown_promise", "fans": 2, "family": 4, "followers": 5000, "morale": 3 } },
+        { "label": "'Football is complicated. But I'll never forget you.'", "desc": "Honest. Careful.", "risk": "low", "hint": "Nobody can hold you to it.", "text": "The kids look a bit disappointed. The coach nods: 'That's the right answer, son.'", "fx": { "growth": ["mental"] } }
+      ]
+    },
+    {
+      "id": "ar_promise_2", "cat": "milestone", "w": 12, "once": true, "group": "arc_promise2", "groupOnce": true, "when": { "flags": ["hometown_promise"], "age": [30, 36], "since": { "hometown_promise": [300, 9999] } },
+      "title": "{FIRSTCLUB} Call In the Promise",
+      "text": ["A letter arrives from {FIRSTCLUB}. Inside is a photo: a boy with a missing tooth, now a young man in the club's first-team kit. 'You promised,' it says. 'We're ready when you are.'", "The president of {FIRSTCLUB} calls in person. Behind his voice you can hear a stadium full of kids chanting your name. 'There's a shirt waiting for you.'"],
+      "prompt": "Do you go home?",
+      "choices": [
+        { "label": "Ask them to send an offer", "desc": "Keep your word.", "risk": "medium", "hint": "Less money, smaller stage, the biggest welcome of your life.", "text": "Your agent thinks you've lost your mind. Your mother cries for an hour. The offer from {FIRSTCLUB} arrives within the week.", "fx": { "offerHome": true, "family": 4, "morale": 4 } },
+        { "label": "'Not yet. One more big season.'", "desc": "Delay.", "risk": "high", "hint": "Promises have expiry dates.", "text": "'Next year,' you tell them. They say they understand. The banner at {FIRSTCLUB} changes from 'WELCOME HOME' to 'WE'RE WAITING'.", "fx": { "fans": -1, "family": -2, "chain": { "id": "ar_promise_3", "in": [45, 60] } } },
+        { "label": "Tell them the truth: you can't", "desc": "Break it honestly.", "risk": "high", "hint": "It will hurt people who believed in you.", "text": "You call the president yourself. He's gracious on the phone. At {FIRSTCLUB}, the clip of your promise is quietly taken down.", "fx": { "unflag": "hometown_promise", "flag": "promise_broken", "family": -5, "morale": -4, "image": -2 } }
+      ]
+    },
+    {
+      "id": "ar_promise_3", "cat": "milestone", "w": 10, "chainOnly": true,
+      "title": "The Last Chance to Keep It",
+      "text": "{FIRSTCLUB} write again. Shorter this time. 'This is the last time we ask.'",
+      "prompt": "Last chance.",
+      "choices": [
+        { "label": "Go home", "desc": "Finally.", "risk": "low", "hint": "Promise kept.", "text": "You tell your agent before you can change your mind. The offer from {FIRSTCLUB} arrives two days later.", "fx": { "offerHome": true, "family": 5 } },
+        { "label": "Let it go", "desc": "It's over.", "risk": "high", "hint": "A promise broken.", "text": "You don't reply. Neither do they, ever again.", "fx": { "unflag": "hometown_promise", "flag": "promise_broken", "family": -6, "image": -3, "morale": -4 } }
+      ]
+    },
+    {
+      "id": "ar_ultras_betrayal", "cat": "media", "w": 12, "trigger": "moved", "once": true, "when": { "flags": ["promised_ultras"] },
+      "title": "'Judas': The Old Club Turns",
+      "text": ["You told the ultras you'd never leave. Now you have. At your old club, a banner goes up outside the stadium: '{J} — JUDAS'. Your old shirt is burned on video.", "The ultras of your old club still have the clip of you promising to stay. Tonight they play it on a loop outside the stadium, next to a pile of your shirts."],
+      "prompt": "The fans you promised feel betrayed.",
+      "choices": [
+        { "label": "Write them an honest letter", "desc": "Explain. Don't excuse.", "risk": "medium", "hint": "Some will forgive. Some never will.", "text": "Your letter is honest about the money, the ambition, and the guilt. Half of them read it. A few of them forgive you. The banner stays.", "fx": { "unflag": "promised_ultras", "flag": "ultras_betrayed", "image": 1, "stress": 3 } },
+        { "label": "Say nothing", "desc": "Football is business.", "risk": "high", "hint": "They'll remember this at every reunion.", "text": "You say nothing. When your new club plays your old one, the noise every time you touch the ball is like nothing you've ever heard.", "fx": { "unflag": "promised_ultras", "flag": "ultras_betrayed", "image": -3, "stress": 5 } }
+      ]
+    },
+    {
+      "id": "ar_mentee_2", "cat": "friends", "w": 9, "once": true, "group": "arc_mentee", "groupOnce": true, "when": { "flags": ["mentor_kid"], "since": { "mentor_kid": [120, 9999] } },
+      "title": "The Kid Gets His Chance",
+      "text": "The boy you found playing in sandals is seventeen now, and a big club wants to sign him. His parents don't trust agents. They call you instead: 'What should we do?'",
+      "uses": { "K": "new" },
+      "prompt": "Your mentee's future is in your hands.",
+      "choices": [
+        { "label": "Guide them through it, for free", "desc": "Lawyers, contracts, the lot.", "risk": "low", "hint": "Your time, his future.", "text": "You read every page of the contract with them. The club respects it. {K} signs a fair deal and calls you 'coach' in his first interview.", "fx": { "cast": { "mentee": "K" }, "flag": "mentee_star", "unflag": "mentor_kid", "image": 3, "morale": 6 } },
+        { "label": "Send them to your agent", "desc": "Professionals.", "risk": "medium", "hint": "Agents take cuts.", "text": "Your agent handles it — efficiently, expensively. The boy signs. His parents send you a polite thank-you card. Something cooled.", "fx": { "cast": { "mentee": "K" }, "unflag": "mentor_kid", "morale": 1 } }
+      ]
+    },
+    {
+      "id": "ar_mentee_3", "cat": "milestone", "w": 9, "once": true, "when": { "flags": ["mentee_star"], "since": { "mentee_star": [100, 9999] }, "freeAgent": false },
+      "title": "Face to Face With {MENTEE}",
+      "text": "{MENTEE}, the kid from the street, the boy who called you coach, lines up against you today. In the tunnel he shakes your hand and then, very quickly, hugs you. The cameras catch it.",
+      "prompt": "Ninety minutes against the boy you helped.",
+      "choices": [
+        { "label": "Swap shirts after the match", "desc": "Full circle.", "risk": "low", "hint": "A photo for the ages.", "text": "Whatever the score, the photo of you two swapping shirts is the image of the weekend.", "fx": { "followers": 20000, "image": 4, "morale": 6, "fans": 2 } },
+        { "label": "Show him who's still the boss", "desc": "Competitive to the end.", "risk": "low", "hint": "He'll love you for it.", "text": "You kick him, once, fairly. He grins. After the match he says: 'You taught me that.'", "fx": { "growth": ["mental"], "morale": 4, "followers": 8000 } }
+      ]
+    },
+    {
+      "id": "ar_dad_1", "cat": "family", "w": 9, "once": true, "group": "arc_dad", "groupOnce": true, "when": { "dadAge": [60, 85], "age": [26, 40] },
+      "title": "{DAD} Is Ill",
+      "text": ["{MUM} calls at 6am. {DAD} collapsed in the garden. He's in hospital and he's awake, but the doctors want to run tests, and their faces are serious.", "{SIB} sends a message that starts with 'Don't panic.' {DAD} has had a heart scare and he's in hospital. He keeps telling the nurses not to tell you."],
+      "prompt": "Your father is in hospital.",
+      "choices": [
+        { "label": "Fly home today", "desc": "Miss whatever it costs.", "risk": "medium", "hint": "You'll miss a match. You won't regret it.", "text": "You land at midnight and go straight to the hospital. {DAD} pretends to be annoyed you came. He holds your hand the whole night.", "fx": { "flag": "dad_present", "family": 10, "trust": -3, "pfm": -4, "stress": 5 } },
+        { "label": "Pay for the best specialists", "desc": "From a distance.", "risk": "medium", "hint": "Money helps. Presence helps more.", "vars": { "cost": ["wageWeeks", 6, 1500] }, "text": "You arrange the best cardiologist in the country and pay every bill. {MUM} says thank you. {SIB} says, 'He keeps asking when you're coming.'", "fx": { "flag": "dad_paid", "wealth": "-cost", "family": 3, "stress": 6 } },
+        { "label": "Play on, call every day", "desc": "He'd want you to play.", "risk": "high", "hint": "He would say that. Is it true?", "text": "'Play,' he says on the phone, voice weak. 'I'll watch from here.' You play. You don't remember a single thing about the match.", "fx": { "flag": "dad_away", "family": -4, "stress": 8, "morale": -4 } }
+      ]
+    },
+    {
+      "id": "ar_dad_2", "cat": "family", "w": 12, "once": true, "group": "arc_dad2", "groupOnce": true, "when": { "flags": ["dad_present"], "since": { "dad_present": [20, 300] } },
+      "title": "{DAD}'s Recovery",
+      "text": "Months later, {DAD} is walking again: slowly, with a stick he refuses to call a stick. He's decided he wants to see you play in person, one more time, from the stands.",
+      "prompt": "Bring him to a match?",
+      "choices": [
+        { "label": "VIP seats, the whole family", "desc": "A day for him.", "risk": "low", "hint": "Unforgettable.", "text": "He sits in the directors' box in his best shirt and stands up for every one of your touches, stick and all. After the match the whole squad signs a ball for him.", "fx": { "unflag": "dad_present", "family": 10, "morale": 8, "dressing": 2, "mood": "On Fire" } },
+        { "label": "Watch a match together on TV instead", "desc": "He shouldn't travel.", "risk": "low", "hint": "Quiet, precious.", "text": "On your day off you watch an old match of yours with him on the sofa. He criticises every decision you made. It's perfect.", "fx": { "unflag": "dad_present", "family": 8, "stress": -4 } }
+      ]
+    },
+    {
+      "id": "ar_dad_2b", "cat": "family", "w": 12, "once": true, "group": "arc_dad2", "groupOnce": true, "when": { "flags": ["dad_away"], "since": { "dad_away": [8, 300] } },
+      "title": "A Second Call From Home",
+      "text": "{SIB} calls again. {DAD} is back in hospital, weaker this time. 'He keeps saying it's fine,' {SIB} says. 'It's not fine. Come home.'",
+      "prompt": "Will you go this time?",
+      "choices": [
+        { "label": "Go home now", "desc": "Whatever the club says.", "risk": "medium", "hint": "This time, be there.", "out": [
+          { "w": 3, "text": "You make it. He's frail, but he squeezes your hand and makes a joke about your haircut. He pulls through, slowly. You never take a phone call from home for granted again.", "fx": { "unflag": "dad_away", "family": 12, "trust": -3, "morale": 4 } },
+          { "w": 1, "text": "You make it in time to say goodbye. He tells you he's proud of you, clearly, twice. He passes away peacefully two days later, with the family around him. Your next goal, whenever it comes, is for him.", "fx": { "unflag": "dad_away", "flag": "dad_passed", "family": 10, "morale": -10, "stress": 6, "mood": "Numb" } }
+        ] },
+        { "label": "Ask {SIB} to handle it", "desc": "You can't leave now.", "risk": "extreme", "hint": "Some moments don't come back.", "text": "{SIB} handles it. {DAD} recovers, mostly. But something between you and your family has changed, and everyone at home knows it.", "fx": { "unflag": "dad_away", "family": -12, "stress": 4 } }
+      ]
+    },
+    {
+      "id": "ar_sib_academy", "cat": "family", "w": 9, "once": true, "group": "sib_money", "groupOnce": true, "when": { "sibAge": [13, 17] },
+      "title": "{SIB}'s Football Academy",
+      "text": ["{SIB} is {SIBage} now and good — properly good. A private football academy has offered a place. The fees are more than your parents earn in a year. {SIB} asks, very quietly, if you could help.", "{MUM} sends a long voice note: {SIB} has been invited to an academy in the city. {SIBhe} wants it more than anything. Your parents can't afford it, and won't ask."],
+      "prompt": "Pay for your {SIBr}'s academy?",
+      "vars": { "cost": ["wealthPct", 12, 600] },
+      "choices": [
+        { "label": "Pay the full fees", "desc": "{cost}. Give them the chance you almost didn't get.", "risk": "low", "hint": "Family first.", "text": "{SIB} screams down the phone. {DAD} pretends he has something in his eye. The first training kit photo arrives the next morning.", "fx": { "flag": "sib_academy", "wealth": "-cost", "family": 10, "morale": 4 } },
+        { "label": "Pay half, they find the rest", "desc": "Help, but make it earned.", "risk": "low", "hint": "Teaches value. Some will call it stingy.", "text": "{SIB} takes a weekend job to cover the rest. {SIBhe} complains constantly and never misses a session.", "fx": { "flag": "sib_academy", "wealth": "-cost*0.5", "family": 4 } },
+        { "label": "Say no", "desc": "One footballer in the family is enough pressure.", "risk": "medium", "hint": "{SIB} won't forget.", "text": "'Focus on school,' you say. {SIB} hangs up without saying goodbye.", "fx": { "family": -8 } }
+      ]
+    },
+    {
+      "id": "ar_sib_trial", "cat": "politics", "w": 10, "once": true, "group": "arc_sib2", "groupOnce": true, "when": { "flags": ["sib_academy"], "sibAge": [18, 21], "freeAgent": false },
+      "title": "Your {SIBr} on Trial at Your Club",
+      "text": "{SIB}'s academy has arranged a trial at {club}. Your club. Everyone knows whose sibling {SIBhe} is. Some teammates are already joking about 'the family business'.",
+      "prompt": "How involved do you get?",
+      "choices": [
+        { "label": "Push the coaches to sign {SIB}", "desc": "Use your influence.", "risk": "high", "hint": "Nepotism looks bad. Even if it works.", "out": [
+          { "w": 1, "text": "{SIB} gets a contract. {SIBhe} also gets a nickname in the dressing room that nobody will tell you. The board writes your name in a notebook.", "fx": { "unflag": "sib_academy", "flag": "sib_pro", "family": 8, "dressing": -5, "board": -4 } },
+          { "w": 1, "text": "The coaches resent the pressure and say no. {SIB} is embarrassed. So are you.", "fx": { "unflag": "sib_academy", "family": -4, "trust": -4, "dressing": -2 } }
+        ] },
+        { "label": "Stay completely out of it", "desc": "Let {SIBhim} be judged fairly.", "risk": "medium", "hint": "Fair. Possibly painful.", "check": { "stat": "rep", "dc": 35 },
+          "ok": { "text": "{SIB} earns a contract on merit. On {SIBhis} first day, {SIBhe} walks past you in the corridor and winks.", "fx": { "unflag": "sib_academy", "flag": "sib_pro", "family": 10, "dressing": 2, "morale": 6 } },
+          "bad": { "text": "{SIB} isn't quite good enough. A smaller club offers a deal. Your family says you could have helped more.", "fx": { "unflag": "sib_academy", "flag": "sib_pro", "family": -3 } } },
+        { "label": "Tell {SIB} to choose another club", "desc": "Avoid the circus.", "risk": "low", "hint": "Sensible. {SIB} may feel rejected.", "text": "'Make your own name, somewhere else.' {SIB} signs for a club two hours away and doesn't call for a month.", "fx": { "unflag": "sib_academy", "flag": "sib_pro", "family": -2, "growth": ["mental"] } }
+      ]
+    },
+    {
+      "id": "ar_sib_derby", "cat": "milestone", "w": 9, "once": true, "when": { "flags": ["sib_pro"], "sibAge": [21, 35], "since": { "sib_pro": [80, 9999] }, "freeAgent": false },
+      "title": "{J} vs {SIB}",
+      "text": "It finally happens: your club against {SIB}'s. Your parents have bought two shirts and cut them in half and sewn them together. {MUM} has not slept in two days.",
+      "prompt": "Brother against sibling, on national TV.",
+      "choices": [
+        { "label": "Go easy on {SIBhim}", "desc": "Family first.", "risk": "medium", "hint": "Your manager won't love it.", "text": "You pull out of a tackle on {SIB} in the 60th minute. Nobody notices except {DAD}, who notices everything.", "fx": { "family": 6, "trust": -2 } },
+        { "label": "No mercy", "desc": "Professional.", "risk": "low", "hint": "{SIB} wouldn't want charity.", "text": "You play like it's any other game. At the final whistle you swap shirts, and your mother cries in the stands for reasons she can't explain.", "fx": { "family": 4, "followers": 15000, "morale": 5, "image": 2 } }
+      ]
+    },
+    {
+      "id": "ar_agent_audit", "cat": "money", "w": 7, "once": true, "group": "arc_agent", "groupOnce": true, "when": { "agent": true, "age": [22, 32], "wealth": [5000, 999999999] },
+      "title": "Something Doesn't Add Up",
+      "uses": { "A": "agent" },
+      "text": "Your accountant has questions. The sponsorship money that arrives is about 20% less than the contracts say. {A} says it's 'fees and taxes'. He says it quickly.",
+      "prompt": "Investigate your agent?",
+      "choices": [
+        { "label": "Hire an independent auditor", "desc": "Find the truth.", "risk": "medium", "hint": "If he's clean, he'll be insulted.", "out": [
+          { "w": 2, "text": "The audit finds it: years of skimming through a company in his cousin's name. You fire him, sue him, and get some of it back. Some.", "fx": { "agent": null, "flag": "agent_lawsuit", "wealth": 2500, "stress": 6, "press": 2 } },
+          { "w": 1, "text": "He's clean. The fees were real, just badly explained. He's hurt you doubted him, and your relationship never quite recovers.", "fx": { "stress": 2, "wealth": -500 } }
+        ] },
+        { "label": "Trust him", "desc": "He's been with you for years.", "risk": "high", "hint": "Trust is lovely. Receipts are better.", "text": "You let it go. {A} sends a fruit basket for no reason.", "fx": { "flag": "agent_skims", "cast": { "fixer": "A" } } }
+      ]
+    },
+    {
+      "id": "ar_agent_reveal", "cat": "money", "w": 10, "once": true, "when": { "flags": ["agent_skims"], "since": { "agent_skims": [100, 9999] } },
+      "title": "The Agent Scandal",
+      "text": "{OUT} breaks the story: {FIXER}, an agent with several big clients, has been skimming his players' money for years. Your name is on the list. So is a number with a lot of zeros.",
+      "prompt": "Your agent has been stealing from you.",
+      "vars": { "cost": ["wealthPct", 25, 3000] },
+      "choices": [
+        { "label": "Join the lawsuit", "desc": "With the other players.", "risk": "medium", "hint": "Long, public, maybe worth it.", "text": "The case takes two years. You get back a fraction. Testifying in public is humiliating. Doing nothing would have been worse.", "fx": { "unflag": "agent_skims", "flag": "agent_lawsuit", "wealth": "-cost*0.6", "stress": 6, "press": 2 } },
+        { "label": "Settle quietly", "desc": "Take what he offers, sign the NDA.", "risk": "medium", "hint": "Fast, private, less money.", "text": "You take a third of what he stole and sign a document promising never to talk about it.", "fx": { "unflag": "agent_skims", "wealth": "-cost*0.7", "stress": 2 } }
+      ]
+    },
+    {
+      "id": "ar_oldboss_returns", "cat": "manager", "w": 7, "once": true, "when": { "age": [26, 34] },
+      "title": "{OLDBOSS} Calls",
+      "text": ["{OLDBOSS}, the manager who gave you your debut at sixteen, calls out of nowhere. He's coaching abroad now. 'I need a leader. I need someone I trust. I need you.'", "Your phone lights up with a name you haven't seen in years: {OLDBOSS}, your first manager. He's in charge of a club abroad and wants to bring you there."],
+      "prompt": "Your first manager wants you.",
+      "choices": [
+        { "label": "Ask him for a formal offer", "desc": "Reunite.", "risk": "medium", "hint": "A move abroad with someone who believes in you.", "text": "He laughs. 'Already done.' The offer arrives the same week.", "fx": { "offerAbroad": true, "morale": 4 } },
+        { "label": "Thank him, but stay", "desc": "Not now.", "risk": "low", "hint": "He'll understand.", "text": "'I understand,' he says. 'You were always loyal. That's why I wanted you.'", "fx": { "morale": 2, "growth": ["mental"] } }
+      ]
+    },
+    {
+      "id": "ar_exflame_return", "cat": "love", "w": 7, "once": true, "group": "arc_exflame", "groupOnce": true, "when": { "age": [27, 36], "partner": ["serious", "engaged", "married"] },
+      "uses": { "F": "new" },
+      "title": "The One Who Got Away",
+      "text": "{F}, your first love from school, is now a journalist. She's been assigned to write a profile of you. Two hours, just the two of you, the questions she always wanted to ask.",
+      "prompt": "Do the interview?",
+      "choices": [
+        { "label": "Do it, with your partner's blessing", "desc": "Tell {Pf} everything first.", "risk": "low", "hint": "Honesty protects you.", "text": "{Pf} says, 'Go. I trust you.' The profile is beautiful and a little sad. You come home and hold {Pf} for a long time.", "fx": { "cast": { "exflame": "F" }, "love": 5, "press": 3, "image": 2 } },
+        { "label": "Do it, don't mention who she is", "desc": "It's just work.", "risk": "high", "hint": "Secrets have a way of coming out.", "out": [
+          { "w": 1, "text": "Nobody notices. Nothing happens. You feel strange about it for months.", "fx": { "cast": { "exflame": "F" }, "press": 3, "stress": 3 } },
+          { "w": 1, "text": "A gossip account connects the dots. 'Footballer's secret meeting with first love'. {Pf} finds out from her phone.", "fx": { "cast": { "exflame": "F" }, "love": -12, "image": -3, "press": 2, "stress": 5 } }
+        ] },
+        { "label": "Ask for another journalist", "desc": "Some doors stay closed.", "risk": "low", "hint": "Clean.", "text": "Her editor sends someone else. The profile is fine. You'll never know what she would have written.", "fx": { "love": 2 } }
+      ]
+    }
+  ]
+}

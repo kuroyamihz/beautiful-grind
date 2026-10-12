@@ -83,7 +83,9 @@ export function createCircle(state, world) {
   const sibKind = chance(0.5) ? 'brother' : 'sister';
   p.circle = {
     mum: MUM[home] ?? 'Mum', dad: DAD[home] ?? 'Dad',
-    sibling: { name: personName(home, sibKind === 'sister').split(' ')[0], kind: sibKind },
+    // Everyone ages with the player: born N weeks before week 0.
+    sibling: { name: personName(home, sibKind === 'sister').split(' ')[0], kind: sibKind, born: state.week - randint(6, 12) * 52 - randint(0, 51) },
+    mumBorn: state.week - randint(38, 48) * 52, dadBorn: state.week - randint(41, 54) * 52,
     bestFriend: { name: personName(home), job: pick(FRIEND_JOBS) },
     journalist: null, captain: null, president: null,
   };
@@ -111,6 +113,13 @@ function outletFor(world, country) {
   return pick(list);
 }
 
+// Ages of the people around him (they grow up and grow old during the career).
+export const yearsSince = (state, born) => (born === undefined ? null : Math.floor((state.week - born) / 52));
+export function castAges(state) {
+  const c = state.player.circle ?? {};
+  return { sibAge: yearsSince(state, c.sibling?.born), mumAge: yearsSince(state, c.mumBorn), dadAge: yearsSince(state, c.dadBorn), kidAge: state.player.kids?.length ? yearsSince(state, state.player.kids[0].born) : null };
+}
+
 // Fill life tokens in a piece of text. Used by scenarios, ripples, actions and the narrator.
 export function lifeTokens(state) {
   const p = state.player, c = p.circle ?? {};
@@ -122,6 +131,19 @@ export function lifeTokens(state) {
     JR: c.journalist?.name ?? 'a journalist', JRl: pl(c.journalist?.name) || 'the journalist', OUT: c.journalist?.outlet ?? 'the local paper',
     CAP: c.captain ?? 'the captain', CAPl: pl(c.captain) || 'the captain', PRES: c.president ?? 'the president', PRESl: pl(c.president) || 'the president',
     Pf: pf(p.partner.name) || 'his partner',
+    ...ageTokens(state),
+  };
+}
+
+function ageTokens(state) {
+  const a = castAges(state), c = state.player.circle ?? {};
+  const sa = a.sibAge ?? 12;
+  return {
+    SIBage: String(sa), SIBlil: sa < 18 ? 'little ' : '', SIBplace: sa < 18 ? 'school' : sa < 23 ? 'campus' : 'work',
+    SIBhe: c.sibling?.kind === 'brother' ? 'he' : 'she', SIBhis: c.sibling?.kind === 'brother' ? 'his' : 'her', SIBhim: c.sibling?.kind === 'brother' ? 'him' : 'her',
+    FIRSTCLUB: state.player.career?.clubHistory?.[0]?.club ?? 'his first club',
+    MUMage: String(a.mumAge ?? 50), DADage: String(a.dadAge ?? 52),
+    KID: state.player.kids?.[0]?.name ?? 'the baby', KIDage: String(a.kidAge ?? 0),
   };
 }
 
@@ -246,6 +268,12 @@ export function lifeWeek(state, world, res, plan) {
   // Consequences that keep biting while a meter is in the red
   if (p.club && meter(p, 'dressing') < 20 && chance(0.3)) addMeter(state, 'trust', -1, res);
   if (p.club && meter(p, 'board') < 15 && !p.transferListed && chance(0.08)) { p.transferListed = true; res.notes.push(fillLife('The board has quietly told {A} that offers for {J} will now be considered.', state, { A: p.agent?.name ?? 'his representatives' })); }
+  // Habits move the hidden ceiling: sustained discipline raises it, chronic chaos wears it down.
+  if (p.potential !== undefined && p.club) {
+    const age = res.age ?? 20;
+    if (age <= 26 && plan.intensity === 'hard' && meter(p, 'stress') < 55 && meter(p, 'morale') > 65 && chance(LIFE.potentialUp)) { p.potential += 1; res.potentialUp = true; }
+    if (meter(p, 'stress') > 85 && chance(LIFE.potentialDown)) { p.potential -= 1; res.potentialDown = true; }
+  }
   thresholds(state, res);
 }
 
@@ -348,6 +376,10 @@ export function migrateLife(state, world) {
   p.partner.style = p.partner.style ?? pick(['private', 'public']);
   p.contact = p.contact ?? { family: state.week, love: state.week, friends: state.week };
   p.zones = p.zones ?? {};
+  // v4: everyone gets an age
+  const c = p.circle;
+  if (c.sibling && c.sibling.born === undefined) c.sibling.born = -randint(6, 12) * 52;
+  if (c.mumBorn === undefined) { c.mumBorn = -randint(38, 48) * 52; c.dadBorn = -randint(41, 54) * 52; }
 }
 
 // Short human word for a meter value (used in the UI).

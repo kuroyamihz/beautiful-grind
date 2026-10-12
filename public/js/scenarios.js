@@ -6,8 +6,9 @@ import { STAT_KEYS, EUR_IDR, RAMADAN, POSITIONS } from './config.js';
 import { personName, overall } from './player.js';
 import { leagueQuality, leagueClubs } from './world.js';
 import { monthOf, ageAt, inRange } from './time.js';
-import { meter, lifeTokens, LIFE_FX } from './life.js';
+import { meter, lifeTokens, LIFE_FX, castAges } from './life.js';
 import { LIFE } from './config.js';
+import { flavourBrand, eligibleBrands } from './sponsors.js';
 
 const POS_GROUP = { GK: 'GK', CB: 'DEF', FB: 'DEF', DM: 'MID', CM: 'MID', AM: 'MID', W: 'ATT', ST: 'ATT' };
 export const DEFAULT_COOLDOWN = 60;
@@ -48,6 +49,9 @@ export function scenarioContext(state, world, res = null) {
     played: !!played, matchWeek: !!res?.matches.length, freeAgent: !club, hasAlly: allies.length > 0, hasRival: rivals.length > 0,
     trophies: p.career.trophies.length, ovr: overall(p), tacticalFit: p.manager.tacticalFit, pfm: p.pfm, loan: !!club?.loan, goalsSeason: seasonStats.goals,
     partnerStyle: p.partner.status === 'none' ? null : p.partner.style, debt: p.wealthEUR < 0,
+    ...(p.circle ? castAges(state) : {}), sibKind: p.circle?.sibling?.kind ?? null, week: w, flagWeeks: state.flags.story ?? {},
+    partnerYears: p.partner.status === 'none' ? null : (w - (p.partner.since ?? w)) / 52, potential: p.potential ?? null, wantsAbroad: !!p.wantsAbroad,
+    sponsors: (p.endorsements ?? []).length, followersM: p.followers / 1e6,
     ...Object.fromEntries(LIFE_RANGES.map((k) => [k, p.life ? meter(p, k) : 50])),
   };
 }
@@ -61,8 +65,9 @@ export function conditionsMet(when = {}, c) {
       case 'caps': case 'apps': case 'seasonApps': case 'contractYears': case 'parental': case 'lastRating': case 'trophies':
       case 'ovr': case 'pfm': case 'goalsSeason': case 'tacticalFit':
       case 'board': case 'dressing': case 'fans': case 'press': case 'image': case 'love': case 'friends': case 'morale': case 'stress': case 'family':
+      case 'sibAge': case 'mumAge': case 'dadAge': case 'kidAge': case 'partnerYears': case 'potential': case 'sponsors':
         if (!inRangeOf(c[k], v)) return false; break;
-      case 'role': case 'partner': case 'phase': case 'nt': case 'lastResult': case 'partnerStyle':
+      case 'role': case 'partner': case 'phase': case 'nt': case 'lastResult': case 'partnerStyle': case 'sibKind':
         if (!v.includes(c[k])) return false; break;
       case 'country': if (!v.includes(c.country)) return false; break;
       case 'notCountry': if (v.includes(c.country)) return false; break;
@@ -73,8 +78,12 @@ export function conditionsMet(when = {}, c) {
       case 'flags': if (!v.every((f) => c.flags.has(f))) return false; break;
       case 'notFlags': if (v.some((f) => c.flags.has(f))) return false; break;
       case 'injured': case 'abroad': case 'ramadan': case 'agent': case 'listed': case 'played': case 'matchWeek':
-      case 'freeAgent': case 'hasAlly': case 'hasRival': case 'loan': case 'debt':
+      case 'freeAgent': case 'hasAlly': case 'hasRival': case 'loan': case 'debt': case 'wantsAbroad':
         if (!!c[k] !== v) return false; break;
+      // Weeks since a story flag was set: { "since": { "promised_ultras": [100, 9999] } }
+      case 'since':
+        for (const [f, r] of Object.entries(v)) { const at = c.flagWeeks?.[f]; if (at === undefined || !inRangeOf(c.week - at, r)) return false; }
+        break;
       default: break; // unknown keys are caught by tools/validate-scenarios.mjs
     }
   }
@@ -86,6 +95,7 @@ export function pickScenario(state, world, ctx, { triggers = [], moment = false,
   const seen = state.flags.scenWeek ?? {};
   const once = state.flags.scenOnce ?? {};
   const count = state.flags.scenCount ?? {};
+  const groupSeen = state.flags.groupWeek ?? {};
   const lastCats = state.lastCats ?? [];
   const pool = world.scenarios.filter((s) => {
     if (s.chainOnly) return false;
@@ -94,7 +104,10 @@ export function pickScenario(state, world, ctx, { triggers = [], moment = false,
     if (cats && !cats.includes(s.cat)) return false;
     if (excludeCats?.has(s.cat)) return false;
     if (s.once && once[s.id]) return false;
-    if (state.week - (seen[s.id] ?? -999) < (s.cd ?? DEFAULT_COOLDOWN)) return false;
+    if (seen[s.id] !== undefined && state.week - seen[s.id] < (s.cd ?? DEFAULT_COOLDOWN)) return false;
+    // Stories about the same thing (a group) share one cooldown, so the same situation never comes back too soon.
+    if (s.group && groupSeen[s.group] !== undefined && state.week - groupSeen[s.group] < (s.groupCd ?? s.cd ?? DEFAULT_COOLDOWN)) return false;
+    if (s.group && s.groupOnce && groupSeen[s.group] !== undefined) return false;
     if (s.trigger ? !triggers.includes(s.trigger) : triggers.length > 0) return false;
     if (!s.when?.freeAgent && ctx.freeAgent) return false;
     if (!s.when || !('injured' in s.when)) { if (ctx.injured && ['training', 'moment'].includes(s.cat)) return false; }
@@ -106,8 +119,22 @@ export function pickScenario(state, world, ctx, { triggers = [], moment = false,
 
 export function markUsed(state, s) {
   state.flags.scenWeek = { ...(state.flags.scenWeek ?? {}), [s.id]: state.week };
+  if (s.group) state.flags.groupWeek = { ...(state.flags.groupWeek ?? {}), [s.group]: state.week };
   state.flags.scenCount = { ...(state.flags.scenCount ?? {}), [s.id]: (state.flags.scenCount?.[s.id] ?? 0) + 1 };
   if (s.once) state.flags.scenOnce = { ...(state.flags.scenOnce ?? {}), [s.id]: true };
+}
+
+// Real brand names for {BRAND} and {BRAND_industry} (e.g. {BRAND_boots}), picked from brands that would want him.
+function brandWords(state, world) {
+  if (!world.brands) return {};
+  const out = flavourBrand(state, world);
+  const elig = eligibleBrands(state, world, { ignoreCat: true });
+  for (const ind of Object.keys(world.brands.industries)) {
+    const list = elig.filter((b) => b.ind === ind);
+    const any = world.brands.brands.filter((b) => b.ind === ind);
+    out['BRAND_' + ind] = pick(list.length ? list : any)?.name ?? out.BRAND;
+  }
+  return out;
 }
 
 // ── Instances: names and amounts fixed when the scenario fires ──
@@ -138,7 +165,7 @@ export function instantiate(s, state, world, carried = null) {
   const p = state.player;
   const inst = carried ? { ...carried, sid: s.id } : { sid: s.id, names: {}, vars: {} };
   // Random words ({PLACE}, {FOOD}, {DAY}…) are picked once, so the scene and its outcome agree.
-  inst.words = { ...Object.fromEntries(Object.entries(world.life?.words ?? {}).map(([k, list]) => [k, pick(list)])), ...(carried?.words ?? {}) };
+  inst.words = { ...Object.fromEntries(Object.entries(world.life?.words ?? {}).map(([k, list]) => [k, pick(list)])), ...brandWords(state, world), ...(carried?.words ?? {}) };
   for (const k of ['T', 'T2', 'F', 'A', 'K']) {
     if (inst.names[k]) continue;
     const mode = s.uses?.[k] ?? 'new';
@@ -169,6 +196,8 @@ export function fill(str, inst, state) {
     Tl: inst.names.T?.split(' ').slice(-1)[0], T2l: inst.names.T2?.split(' ').slice(-1)[0], Ff: inst.names.F?.split(' ')[0], Al: inst.names.A?.split(' ').slice(-1)[0],
     Kl: inst.names.K?.split(' ').slice(-1)[0], Mf: p.manager.name.split(' ').slice(-1)[0], opp: p.lastMatch?.opp ?? inst.names.R, num: String(p.number),
     ...(p.circle ? lifeTokens(state) : {}), ...(inst.words ?? {}),
+    // People the story remembers across years (set with fx cast): {RIVAL} {MENTEE} {EXFLAME} {FIXER} {OLDBOSS}
+    RIVAL: p.cast?.rival ?? inst.names.T, MENTEE: p.cast?.mentee ?? inst.names.K, EXFLAME: p.cast?.exflame ?? inst.names.F, FIXER: p.cast?.fixer ?? inst.names.A, OLDBOSS: p.cast?.oldboss ?? p.manager.name,
   };
   return String(str).replace(/\{(\w+)\}/g, (m, k) => (k in map ? map[k] : k in inst.vars ? fmtMoney(state, inst.vars[k]) : m));
 }
@@ -187,12 +216,14 @@ export function resolveFx(fx, inst, state) {
   if (!fx) return null;
   const out = {};
   for (const [k, v] of Object.entries(fx)) {
-    if (['trust', 'rep', 'followers', 'wealth', 'pfm', 'form', 'tacticalFit', 'parental', 'monthlySupport', 'suspension', 'lifestyle', ...LIFE_FX].includes(k)) out[k] = num(v, inst);
+    if (['trust', 'rep', 'followers', 'wealth', 'pfm', 'form', 'tacticalFit', 'parental', 'monthlySupport', 'suspension', 'lifestyle', 'potential', ...LIFE_FX].includes(k)) out[k] = num(v, inst);
     else if (k === 'newManager') out.newManager = !!v;
     else if (k === 'teammate') out.teammate = { name: inst.names[v.who ?? 'T'], rel: v.rel };
     else if (k === 'partner') out.partner = v.status === 'none' ? { name: '', status: 'none' } : { name: v.who ? inst.names[v.who] : state.player.partner.name, status: v.status };
+    else if (k === 'agent' && v === null) out.agent = null; // fire the agent
     else if (k === 'agent') out.agent = { name: inst.names[v.who ?? 'A'], quality: randint(v.quality?.[0] ?? 40, v.quality?.[1] ?? 70), cut: v.cut ?? 10 };
     else if (k === 'endorsement') out.endorsement = { brand: fill(v.brand, inst, state), type: v.type ?? 'regional', annualValue: num(v.value, inst), years: v.years ?? 2 };
+    else if (k === 'cast') out.cast = Object.fromEntries(Object.entries(v).map(([key, who]) => [key, inst.names[who] ?? who]));
     else if (k === 'chain') out.thread = { id: v.id, inWeeks: randint(v.in[0], v.in[1]), data: inst };
     else out[k] = v; // growth, stat, mood, injury, listed, flag, unflag, matchMod
   }
@@ -214,7 +245,7 @@ export function resolveChoice(state, s, inst, choiceId) {
   if (c.check) out = rollCheck(c.check, state) ? c.ok : c.bad;
   else if (c.out) out = weightedPick(c.out, (o) => o.w ?? 1);
   else out = c;
-  return { text: fill(out.text ?? '', inst, state), fx: resolveFx(out.fx, inst, state), label: fill(c.label, inst, state) };
+  return { text: fill(pickText(out.text ?? '', state), inst, state), fx: resolveFx(out.fx, inst, state), label: fill(c.label, inst, state) };
 }
 
 // Which parts of life a choice can touch (shown as icons on the choice button).
@@ -239,9 +270,19 @@ export function decisionFor(s, inst, state) {
   };
 }
 
+// Text variants can be plain strings or { when, t } objects that only appear when their conditions hold
+// (so a scene can read differently after a win, abroad, when married…). Matching conditional variants are favoured.
+export function pickText(t, state, world = null) {
+  if (!Array.isArray(t)) return typeof t === 'object' && t ? t.t : t;
+  if (!t.some((x) => typeof x === 'object')) return pick(t);
+  const ctx = scenarioContext(state, world ?? { scenarios: [] });
+  const ok = t.filter((x) => typeof x === 'string' || conditionsMet(x.when, ctx));
+  const chosen = weightedPick(ok, (x) => (typeof x === 'string' ? 1 : 2.5)) ?? t.find((x) => typeof x === 'string') ?? t[0];
+  return typeof chosen === 'string' ? chosen : chosen.t;
+}
+
 export function textOf(s, inst, state) {
-  const t = Array.isArray(s.text) ? pick(s.text) : s.text;
-  return fill(t, inst, state);
+  return fill(pickText(s.text, state), inst, state);
 }
 
 export const clampFx = clamp;

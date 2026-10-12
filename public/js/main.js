@@ -2,11 +2,12 @@
 import { loadWorld, playableLeagues, leagueClubs, clubStrength } from './world.js';
 import {
   newCareer, advanceWeek, chooseDecision, pendingUnanswered, migrate, maybeInterlude, answerInterlude, freeTime, freeTimeList, freeTimeSlots,
+  socialOptions, socialCanPost, socialPost,
 } from './engine.js';
 import { narrateOffline } from './narrator-offline.js';
 import {
   renderPlayer, renderTopbar, renderWeek, renderDecisions, renderFreeTime, renderPlanner, renderFeed, renderWorld, renderRetirement,
-  renderInterlude, renderInterludeResult,
+  renderInterlude, renderInterludeResult, renderSocial,
 } from './ui.js';
 import { POSITIONS } from './config.js';
 import { dateLabel } from './time.js';
@@ -101,9 +102,10 @@ function render() {
   renderWeek(state, world, story);
   renderFeed(story);
   renderWorldNow();
-  if (state.ended) { renderRetirement(state); $('btn-new-career').addEventListener('click', newCareerFlow); return; }
+  if (state.ended) { renderRetirement(state, world); $('btn-new-career').addEventListener('click', newCareerFlow); return; }
   renderDecisions(state, onChoose);
   renderFreeTimeNow();
+  renderSocialNow();
   renderPlannerNow();
   if (state.interlude) openInterlude(state.interlude);
 }
@@ -121,6 +123,24 @@ function onChoose(id, choice) {
 
 function renderPlannerNow() {
   renderPlanner(state, plan, (np) => { plan = np; save(); renderPlannerNow(); }, onPlay);
+}
+
+function renderSocialNow() {
+  renderSocial(state, socialOptions(state, world), socialCanPost(state), onPost);
+}
+
+// A social post: instant result, no time passes.
+function onPost(key) {
+  if (busy) return;
+  if (!socialPost(state, world, key)) return;
+  save();
+  renderTopbar(state);
+  renderPlayer(state, world);
+  renderWeek(state, world, story);
+  renderWorldNow();
+  renderSocialNow();
+  renderFreeTimeNow();
+  $('week-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function renderFreeTimeNow() {

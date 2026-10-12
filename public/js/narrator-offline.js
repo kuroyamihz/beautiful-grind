@@ -4,7 +4,8 @@
 import { pick, chance, randint, ordinal, compact, hash } from './util.js';
 import { shortDate, MONTHS, weekDate } from './time.js';
 import { statLabel } from './player.js';
-import { lifeTokens, meter } from './life.js';
+import { lifeTokens, meter, castAges } from './life.js';
+import { epilogue } from './epilogue.js';
 
 const ROLE_TEXT = { starter: 'a regular starter', rotation: 'in the rotation', bench: 'on the bench', outcast: 'out of the picture' };
 const POS_GROUP = { GK: 'GK', CB: 'DEF', FB: 'DEF', DM: 'MID', CM: 'MID', AM: 'MID', W: 'ATT', ST: 'ATT' };
@@ -189,7 +190,7 @@ function messages(state, res) {
   const senders = [
     { key: 'mum', name: t.MUM, icon: 'home', p: 0.6 },
     { key: 'dad', name: t.DAD, icon: 'home', p: 0.25 },
-    { key: 'sib', name: t.SIB, icon: 'home', p: 0.3 },
+    { key: (() => { const a = castAges(state).sibAge ?? 12; return a < 13 ? 'sibKid' : a < 18 ? 'sib' : 'sibAdult'; })(), name: t.SIB, icon: 'home', p: 0.3 },
     { key: 'bf', name: t.BFf, icon: 'friends', p: meter(p, 'friends') >= 35 ? 0.4 : 0.1 },
     { key: 'partner', name: t.Pf, icon: 'heart', p: p.partner.status !== 'none' ? 0.6 : 0 },
     { key: 'agent', name: p.agent?.name?.split(' ')[0] ?? '', icon: 'briefcase', p: p.agent ? 0.25 : 0 },
@@ -272,6 +273,8 @@ export function narrateOffline(state, world, res) {
   if (gains.length) tr.push(say('training.gain', { STATS: gains.map(([k, v]) => `${statLabel(k).toLowerCase()} +${v}`).join(', ') }, `Development: ${gains.map(([k, v]) => `${statLabel(k)} +${v}`).join(', ')}.`));
   if (res.growthCapped && !gains.length && plan.intensity === 'hard') tr.push(`The coaches say ${J} has hit a plateau for this season — more work will not show until next year.`);
   if (!p.injury && chance(0.5)) tr.push(say('coachNote'));
+  if (res.potentialUp) tr.push(say('potential.up', {}, 'The coaches notice something: he is learning faster than before.'));
+  if (res.potentialDown) tr.push(say('potential.down', {}, 'The pressure is eating into him. The staff worry he is going backwards.'));
   if (res.injury) tr.push(`The scan confirms it: a ${res.injury.type.toLowerCase()}${res.injury.repeat ? ' — the same injury again, which the doctors say will take longer' : ''}. Around ${res.injury.weeksLeft} weeks out. ` + say('injuryLine', {}, `${J} sits in the physio room staring at the ceiling tiles.`));
   if (res.recovered) tr.push(say('recovered', { INJ: res.recovered.type.toLowerCase() }, `${J} is back in full training after the ${res.recovered.type.toLowerCase()}.`));
   if (res.roleChange) tr.push(say(`roleChange.${res.roleChange.to}`, {}, `Squad status: ${J} is now ${ROLE_TEXT[res.roleChange.to]}.`));
@@ -303,12 +306,13 @@ export function narrateOffline(state, world, res) {
   }
   if (res.milestones.length) extra.push(`Milestone: ${res.milestones.join(' · ')}. ` + say('milestoneLine', {}, ''));
   if (res.money && res.money.net < 0) extra.push(`Money: this month's bills outrun the wage — the savings shrink by €${Math.abs(res.money.net).toLocaleString()}${res.money.interest ? `, including €${res.money.interest.toLocaleString()} of interest on the debt` : ''}.`);
-  for (const n of res.notes ?? []) extra.push(n);
+  for (const x of res.notes ?? []) extra.push(x);
+  for (const x of res.sponsorNotes ?? []) extra.push(x);
   if (extra.length) sections.push({ id: 'ledger', icon: 'trophy', title: res.seasonEnd ? 'Season review' : 'The ledger', paras: extra.filter(Boolean) });
 
   // 8. Late at night
   if (!res.careerEnd) sections.push(mindSection(state, res));
-  else sections.push({ id: 'end', icon: 'trophy', title: 'The end', paras: [`And then it is over. ${p.career.apps} appearances, ${p.career.goals} goals, ${p.career.trophies.length} trophies. The boots go into a box in his mother's house, next to the first pair she ever bought him.`] });
+  else sections.push({ id: 'end', icon: 'trophy', title: 'The end', paras: [...epilogue(state, world).map((x) => x.text), `And then it is over. ${p.career.apps} appearances, ${p.career.goals} goals, ${p.career.trophies.length} trophies. The boots go into a box in his mother's house, next to the first pair she ever bought him.`] });
 
   for (const s of sections) s.paras = s.paras.filter((x) => x && x.trim());
   const live = sections.filter((s) => s.paras.length);

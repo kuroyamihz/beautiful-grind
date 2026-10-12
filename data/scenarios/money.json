@@ -1,7 +1,7 @@
 {
   "scenarios": [
     {
-      "id": "mn_agent_approach", "cat": "money", "w": 5, "when": { "agent": false, "rep": [5, 100] },
+      "id": "mn_agent_approach", "cd": 104, "cat": "money", "w": 5, "when": { "agent": false, "rep": [5, 100] },
       "title": "Super-Agent {Al} Courts {J}",
       "text": "Expensive watch, cheap cologne, a laminated folder of players he says he has “placed” in Europe and the Gulf. {A} slides a contract across the table: 10% of everything, exclusive, three years. “Sign with me and you won't be here in two years.”",
       "prompt": "Sign with {A}?",
@@ -18,7 +18,7 @@
       ]
     },
     {
-      "id": "mn_agent_upgrade", "cat": "money", "w": 4, "when": { "agent": true, "rep": [30, 100] },
+      "id": "mn_agent_upgrade", "cd": 104, "cat": "money", "w": 4, "when": { "agent": true, "rep": [30, 100] },
       "title": "A Top Agency Wants to Represent {J}",
       "text": "One of the world's biggest football agencies sends a representative: glossy brochures, offices on three continents, clients you've seen on television. They want {J}. His current agent doesn't know yet.",
       "prompt": "Switch agents?",
@@ -50,28 +50,28 @@
       ],
       "prompt": "Sponsorship offer on the table.",
       "choices": [
-        { "label": "Accept", "desc": "{deal} a year for two years.", "risk": "low", "hint": "Guaranteed money and exposure.", "text": "{J} signs. A week later his face is ten metres tall on a billboard near his parents' house.", "fx": { "endorsement": { "brand": "a regional brand", "value": "deal", "years": 2 }, "followers": 6000, "parental": 3 } },
+        { "label": "Accept", "desc": "{deal} a year for two years.", "risk": "low", "hint": "Guaranteed money and exposure.", "text": "{J} signs. A week later his face is ten metres tall on a billboard near his parents' house.", "fx": { "endorsement": { "brand": "{BRAND}", "value": "deal", "years": 2 }, "followers": 6000, "parental": 3 } },
         { "label": "Hold out for more", "desc": "Make them sweat.", "risk": "medium", "hint": "A better deal — or no deal.", "check": { "stat": "agent", "dc": 55 },
-          "ok": { "text": "The brand comes back with 40% more. {J}'s agent is insufferable for days.", "fx": { "endorsement": { "brand": "a regional brand", "value": "deal*1.4", "years": 2 }, "followers": 6000 } },
+          "ok": { "text": "The brand comes back with 40% more. {J}'s agent is insufferable for days.", "fx": { "endorsement": { "brand": "{BRAND}", "value": "deal*1.4", "years": 2 }, "followers": 6000 } },
           "bad": { "text": "The brand signs a teammate instead. His billboard goes up at the training-ground roundabout.", "fx": { "mood": "Frustrated" } } }
       ]
     },
     {
-      "id": "mn_boot_deal", "cat": "money", "w": 4, "when": { "rep": [20, 100], "pos": ["ST", "W", "AM", "CM"] },
+      "id": "mn_boot_deal", "cd": 104, "cat": "money", "w": 4, "when": { "rep": [20, 100], "pos": ["ST", "W", "AM", "CM"] },
       "vars": { "deal": ["endorse", 3000] },
-      "title": "Major Boot Brand Wants {J}",
-      "text": "One of the world's big boot brands offers {J} a personalised boot deal: his own colourway, his name on the tongue, {deal} a year. The catch: three years exclusive, and his current boots are much more comfortable.",
+      "title": "{BRAND_boots} Want {J}",
+      "text": "{BRAND_boots} offer {J} a personalised boot deal: his own colourway, his name on the tongue, {deal} a year. The catch: three years exclusive, and his current boots are much more comfortable.",
       "prompt": "Sign the boot deal?",
       "choices": [
         { "label": "Sign", "desc": "Your own boots!", "risk": "medium", "hint": "Money and status. Blister risk.", "out": [
-          { "w": 3, "text": "The first pair with his name on them arrives in a box like a jewel. He wears them to bed the first night.", "fx": { "endorsement": { "brand": "a global boot brand", "value": "deal", "years": 3 }, "followers": 20000, "rep": 0.5 } },
-          { "w": 1, "text": "The new boots give him blisters for a month. He plays through it; the money helps.", "fx": { "endorsement": { "brand": "a global boot brand", "value": "deal", "years": 3 }, "pfm": -5 } }
+          { "w": 3, "text": "The first pair with his name on them arrives in a box like a jewel. He wears them to bed the first night.", "fx": { "endorsement": { "brand": "{BRAND_boots}", "value": "deal", "years": 3 }, "followers": 20000, "rep": 0.5 } },
+          { "w": 1, "text": "The new boots give him blisters for a month. He plays through it; the money helps.", "fx": { "endorsement": { "brand": "{BRAND_boots}", "value": "deal", "years": 3 }, "pfm": -5 } }
         ] },
         { "label": "Decline", "desc": "Comfort over cash.", "risk": "low", "hint": "Your feet thank you.", "text": "{J} keeps his old boots. His agent sighs dramatically.", "fx": {} }
       ]
     },
     {
-      "id": "mn_investment_friend", "cat": "money", "w": 4, "when": { "wealth": [4000, 999999999] }, "vars": { "amount": ["wealthPct", 30, 500] },
+      "id": "mn_investment_friend", "group": "invest_pitch", "groupCd": 104, "cat": "money", "w": 4, "when": { "wealth": [4000, 999999999] }, "vars": { "amount": ["wealthPct", 30, 500] },
       "title": "Friend Pitches {J} an Investment",
       "text": [
         "A childhood friend with a new car and a pitch deck: a chain of coffee shops. “Guaranteed returns, bro. Everyone's in.” He wants {amount}.",
@@ -96,7 +96,7 @@
       ]
     },
     {
-      "id": "mn_car", "cat": "money", "w": 4, "when": { "wealth": [2500, 999999999] }, "vars": { "price": ["wealthPct", 35, 200] },
+      "id": "mn_car", "group": "car", "groupCd": 150, "cat": "money", "w": 4, "when": { "wealth": [2500, 999999999] }, "vars": { "price": ["wealthPct", 35, 200] },
       "title": "{J} Eyes a New Car",
       "text": "Half the squad drives something that roars. {J} still drives the car his father helped him buy. The dealership has a matte black one for {price}, “special price for footballers”.",
       "prompt": "Buy the car?",
@@ -106,7 +106,7 @@
       ]
     },
     {
-      "id": "mn_watch", "cat": "money", "w": 3, "when": { "wealth": [10000, 999999999] }, "vars": { "price": ["wealthPct", 15, 500] },
+      "id": "mn_watch", "group": "watch", "groupCd": 200, "cat": "money", "w": 3, "when": { "wealth": [10000, 999999999] }, "vars": { "price": ["wealthPct", 15, 500] },
       "title": "The Watch Everyone Has",
       "text": "In the dressing room, watches are a language. The senior players all wear the same Swiss brand. A jeweller who “looks after footballers” has one for {J}: {price}.",
       "prompt": "Buy it?",
@@ -116,7 +116,7 @@
       ]
     },
     {
-      "id": "mn_property", "cat": "money", "w": 3, "when": { "wealth": [20000, 999999999] }, "vars": { "price": ["wealthPct", 50, 3000] },
+      "id": "mn_property", "cd": 104, "cat": "money", "w": 3, "when": { "wealth": [20000, 999999999] }, "vars": { "price": ["wealthPct", 50, 3000] },
       "title": "Investment Property Opportunity",
       "text": "A financial adviser recommended by the club suggests buying an apartment to rent out: steady income, a long-term asset. The price is {price}.",
       "prompt": "Buy property?",
@@ -126,7 +126,7 @@
       ]
     },
     {
-      "id": "mn_tax_problem", "cat": "money", "w": 3, "when": { "wealth": [5000, 999999999] }, "vars": { "bill": ["wealthPct", 12, 300] },
+      "id": "mn_tax_problem", "cd": 150, "cat": "money", "w": 3, "when": { "wealth": [5000, 999999999] }, "vars": { "bill": ["wealthPct", 12, 300] },
       "title": "Tax Authority Sends {J} a Letter",
       "text": "A letter from the tax office: an error in last year's declaration, an unpaid amount of {bill}, plus a fine if not paid in thirty days. His agent says the accountant made the mistake. The accountant says the agent did.",
       "prompt": "What do you do?",
@@ -139,7 +139,7 @@
       ]
     },
     {
-      "id": "mn_gambling_temptation", "cat": "money", "w": 2, "when": { "age": [18, 30] },
+      "id": "mn_gambling_temptation", "group": "gambling", "groupCd": 150, "cat": "money", "w": 2, "when": { "age": [18, 30] },
       "title": "Teammates Gamble on the Team Bus",
       "text": "Online casino apps are everywhere in the dressing room. A teammate shows {J} how much he won last night. It's more than {J} earns in a month.",
       "prompt": "Try it?",
@@ -152,7 +152,7 @@
       ]
     },
     {
-      "id": "mn_gambling_spiral", "cat": "money", "w": 6, "when": { "flags": ["gambling"] }, "vars": { "loss": ["wealthPct", 20, 300] },
+      "id": "mn_gambling_spiral", "group": "gambling_spiral", "groupCd": 30, "cat": "money", "w": 6, "when": { "flags": ["gambling"] }, "vars": { "loss": ["wealthPct", 20, 300] },
       "title": "{J}'s Gambling Is Getting Worse",
       "text": "3am, lying in bed, refreshing a betting app. {J} has lost {loss} this month. He's been chasing losses. He's started hiding his phone from his teammates.",
       "fx": { "wealth": "-loss", "mood": "Anxious", "pfm": -4 },
@@ -218,7 +218,7 @@
       ]
     },
     {
-      "id": "mn_business_launch", "cat": "money", "w": 2, "when": { "wealth": [8000, 999999999], "rep": [15, 100] }, "vars": { "cost": ["wealthPct", 25, 600] },
+      "id": "mn_business_launch", "once": true, "group": "foundation", "groupCd": 9999, "cat": "money", "w": 2, "when": { "wealth": [8000, 999999999], "rep": [15, 100] }, "vars": { "cost": ["wealthPct", 25, 600] },
       "title": "{J}'s Own Clothing Line?",
       "text": "A designer friend proposes a streetwear brand with {J}'s initials and shirt number. Startup cost: {cost}. Fans would buy anything with his name on it. Probably.",
       "prompt": "Launch the brand?",
@@ -272,7 +272,7 @@
       ]
     },
     {
-      "id": "mn_ponzi", "cat": "money", "w": 2, "when": { "wealth": [6000, 999999999] }, "vars": { "amount": ["wealthPct", 40, 800] },
+      "id": "mn_ponzi", "group": "invest_pitch", "groupCd": 104, "cat": "money", "w": 2, "when": { "wealth": [6000, 999999999] }, "vars": { "amount": ["wealthPct", 40, 800] },
       "title": "Other Players Swear by an Investment Fund",
       "text": "Three senior players have put money into a private fund that pays 8% a month. They show {J} their returns. The fund manager wants {amount} to “reserve his spot”.",
       "prompt": "Invest?",
@@ -285,17 +285,17 @@
       ]
     },
     {
-      "id": "mn_endorsement_local_food", "cat": "money", "w": 3, "when": { "rep": [6, 100], "nationality": ["Indonesia"] }, "vars": { "deal": ["endorse", 500] },
-      "title": "Instant Noodle Brand Wants {J}",
-      "text": "A famous instant noodle brand wants {J} in a TV advert: eating noodles after training, smiling. {deal} for a year. The nutritionist will not be pleased.",
+      "id": "mn_endorsement_local_food", "once": true, "cat": "money", "w": 3, "when": { "rep": [6, 100], "nationality": ["Indonesia"] }, "vars": { "deal": ["endorse", 500] },
+      "title": "Indomie Want {J}",
+      "text": "Indomie want {J} in a TV advert: eating noodles after training, smiling. {deal} for a year. The nutritionist will not be pleased.",
       "prompt": "Accept?",
       "choices": [
-        { "label": "Accept", "desc": "Every Indonesian will see it.", "risk": "low", "hint": "Massive exposure.", "text": "The advert plays during every match broadcast. Kids start copying his noodle-slurping face.", "fx": { "endorsement": { "brand": "an instant noodle brand", "value": "deal", "years": 1 }, "followers": 40000, "rep": 0.5 } },
+        { "label": "Accept", "desc": "Every Indonesian will see it.", "risk": "low", "hint": "Massive exposure.", "text": "The advert plays during every match broadcast. Kids start copying his noodle-slurping face.", "fx": { "endorsement": { "brand": "Indomie", "value": "deal", "years": 1 }, "followers": 40000, "rep": 0.5 } },
         { "label": "Decline", "desc": "Professional athletes don't eat that.", "risk": "low", "hint": "Principled.", "text": "{J} declines. A rival player takes the deal.", "fx": {} }
       ]
     },
     {
-      "id": "mn_crypto_ambassador", "cat": "money", "w": 2, "when": { "followers": [40000, 999999999] }, "vars": { "fee": ["endorse", 4000] },
+      "id": "mn_crypto_ambassador", "once": true, "cat": "money", "w": 2, "when": { "followers": [40000, 999999999] }, "vars": { "fee": ["endorse", 4000] },
       "title": "Crypto Platform Wants {J} as Ambassador",
       "text": "A crypto trading platform offers {fee} for {J} to become a “brand ambassador”: three posts a month telling fans to download the app.",
       "prompt": "Take the deal?",
@@ -318,7 +318,7 @@
       ]
     },
     {
-      "id": "mn_sponsor_event", "cat": "money", "w": 3, "when": { "rep": [10, 100] }, "vars": { "fee": ["wageWeeks", 1, 80] },
+      "id": "mn_sponsor_event", "group": "sponsor_event", "groupCd": 40, "cat": "money", "w": 3, "when": { "rep": [10, 100] }, "vars": { "fee": ["wageWeeks", 1, 80] },
       "title": "Sponsor Event the Day Before a Match",
       "text": "A club sponsor wants {J} at a shopping-mall event: two hours of signing, photos and a dance with the mascot. Fee: {fee}. It's the day before a match.",
       "prompt": "Attend?",
@@ -351,7 +351,7 @@
       ]
     },
     {
-      "id": "mn_old_debt", "cat": "money", "w": 2, "when": { "wealth": [2000, 999999999] }, "vars": { "cost": ["wealthPct", 10, 100] },
+      "id": "mn_old_debt", "once": true, "cat": "money", "w": 2, "when": { "wealth": [2000, 999999999] }, "vars": { "cost": ["wealthPct", 10, 100] },
       "title": "Someone Claims {J}'s Family Owes Them Money",
       "text": "A man arrives at the training ground claiming {J}'s father borrowed {cost} from him ten years ago. He has a handwritten note. His father says it's complicated.",
       "prompt": "Pay?",
@@ -370,19 +370,19 @@
       "fx": { "lifestyle": -0.1, "wealth": 500, "growth": ["mental"] }
     },
     {
-      "id": "mn_sponsor_fan_meet", "cat": "money", "w": 3, "when": { "rep": [15, 100], "nationality": ["Indonesia"] }, "vars": { "deal": ["endorse", 1200] },
-      "title": "E-Wallet App Wants {J} for Its Campaign",
-      "text": "A big e-wallet app wants {J} as the face of a nationwide campaign: TV adverts, billboards, cashback with his face on it. {deal} for a year.",
+      "id": "mn_sponsor_fan_meet", "group": "sponsor_event", "groupCd": 40, "cat": "money", "w": 3, "when": { "rep": [15, 100], "nationality": ["Indonesia"] }, "vars": { "deal": ["endorse", 1200] },
+      "title": "{BRAND_fintech} Want {J} for Their Campaign",
+      "text": "{BRAND_fintech} want {J} as the face of a nationwide campaign: TV adverts, billboards, cashback with his face on it. {deal} for a year.",
       "prompt": "Accept?",
       "choices": [
-        { "label": "Accept", "desc": "National exposure.", "risk": "low", "hint": "Everyone will see your face.", "text": "{J}'s face appears on every bus stop in Jakarta. His mother takes a photo with each one she passes.", "fx": { "endorsement": { "brand": "an e-wallet app", "value": "deal", "years": 1 }, "followers": 50000, "rep": 0.8, "parental": 4 } },
+        { "label": "Accept", "desc": "National exposure.", "risk": "low", "hint": "Everyone will see your face.", "text": "{J}'s face appears on every bus stop in Jakarta. His mother takes a photo with each one she passes.", "fx": { "endorsement": { "brand": "{BRAND_fintech}", "value": "deal", "years": 1 }, "followers": 50000, "rep": 0.8, "parental": 4 } },
         { "label": "Negotiate", "desc": "Push for two years.", "risk": "medium", "hint": "Longer deal or none.", "check": { "stat": "agent", "dc": 55 },
-          "ok": { "text": "Two years, more money. {J}'s agent buys himself a new watch.", "fx": { "endorsement": { "brand": "an e-wallet app", "value": "deal*1.2", "years": 2 }, "followers": 50000 } },
+          "ok": { "text": "Two years, more money. {J}'s agent buys himself a new watch.", "fx": { "endorsement": { "brand": "{BRAND_fintech}", "value": "deal*1.2", "years": 2 }, "followers": 50000 } },
           "bad": { "text": "The app signs a famous actor instead.", "fx": {} } }
       ]
     },
     {
-      "id": "mn_gulf_money_dream", "cat": "money", "w": 2, "when": { "age": [27, 34], "rep": [30, 100], "notCountry": ["Saudi Arabia", "Qatar", "United Arab Emirates"] },
+      "id": "mn_gulf_money_dream", "cd": 150, "cat": "money", "w": 2, "when": { "age": [27, 34], "rep": [30, 100], "notCountry": ["Saudi Arabia", "Qatar", "United Arab Emirates"] },
       "title": "Agent Says the Gulf Is Calling",
       "text": "{J}'s agent calls, excited: a Gulf club is interested. Tax-free, triple his wage, a villa with a pool. “It would set your family up for generations.” But it would also mean a quieter league, far from the spotlight he's worked for.",
       "prompt": "Tell your agent to listen?",
@@ -398,7 +398,7 @@
       "fx": { "wealth": 800, "trust": 2, "mood": "Confident" }
     },
     {
-      "id": "mn_hometown_mosque", "cat": "money", "w": 2, "when": { "nationality": ["Indonesia", "Malaysia", "Saudi Arabia", "Egypt", "Morocco", "Turkey"], "wealth": [8000, 999999999] }, "vars": { "cost": ["wealthPct", 15, 400] },
+      "id": "mn_hometown_mosque", "once": true, "cat": "money", "w": 2, "when": { "nationality": ["Indonesia", "Malaysia", "Saudi Arabia", "Egypt", "Morocco", "Turkey"], "wealth": [8000, 999999999] }, "vars": { "cost": ["wealthPct", 15, 400] },
       "title": "Hometown Mosque Needs Renovation",
       "text": "The mosque where {J} learned to read the Quran as a boy is crumbling: a leaking roof, broken fans, a cracked floor. The imam calls to ask, very politely, if he might help.",
       "prompt": "Fund the renovation ({cost})?",
@@ -408,7 +408,7 @@
       ]
     },
     {
-      "id": "mn_scam_fake_club", "cat": "money", "w": 2, "when": { "role": ["bench", "outcast"], "agent": false },
+      "id": "mn_scam_fake_club", "once": true, "cat": "money", "w": 2, "when": { "role": ["bench", "outcast"], "agent": false },
       "title": "Fake Agent Promises a European Trial",
       "text": "A man on social media says he can get {J} a trial with a European club. All he needs is a fee for “registration and visa processing”. He has photos with famous players.",
       "prompt": "Pay the fee?",

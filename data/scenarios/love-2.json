@@ -23,7 +23,7 @@
       ]
     },
     {
-      "id": "lv_long_distance", "cat": "love", "w": 5, "when": { "abroad": true, "partner": ["dating", "serious", "engaged"] },
+      "id": "lv_long_distance", "group": "long_distance", "groupCd": 40, "cat": "love", "w": 5, "when": { "abroad": true, "partner": ["dating", "serious", "engaged"] },
       "title": "Long Distance",
       "text": ["Time zones are winning. {J}'s evenings are {Pf}'s early mornings. Their calls get shorter. Tonight, she fell asleep mid-sentence.", "{Pf} sends a voice note: 'I miss you in a way that's starting to feel permanent.' He listens to it on the team bus four times."],
       "prompt": "The distance is hurting.",
@@ -37,7 +37,7 @@
       ]
     },
     {
-      "id": "lv_proposal", "cat": "love", "w": 4, "once": true, "when": { "partner": ["serious"], "love": [70, 100], "age": [21, 40] },
+      "id": "lv_proposal", "group": "proposal", "groupCd": 9999, "cat": "love", "w": 4, "once": true, "when": { "partner": ["serious"], "love": [70, 100], "age": [21, 40] },
       "title": "The Ring",
       "text": ["{J} has been carrying a ring in his kitbag for three weeks. He keeps planning the perfect moment and chickening out.", "{MUM} has asked, again, when he's going to 'make it official' with {Pf}. {J} has already bought the ring. Nobody knows."],
       "prompt": "How do you propose?",
@@ -62,7 +62,7 @@
       ]
     },
     {
-      "id": "lv_baby_news", "cat": "love", "w": 4, "once": true, "when": { "partner": ["married"], "age": [22, 40] },
+      "id": "lv_baby_news", "group": "baby_news", "groupCd": 9999, "cat": "love", "w": 4, "once": true, "when": { "partner": ["married"], "age": [22, 40] },
       "title": "Big News",
       "text": ["{Pf} is waiting at the door when he gets home from training. She's holding something behind her back. She's been crying, the good kind.", "The test is positive. {Pf} shows him the little plastic stick and they both stare at it like it might change its mind."],
       "prompt": "You're going to be a father.",
@@ -77,15 +77,15 @@
       "text": ["The call comes at 4am the night before an away match: it's time. The hospital is three hours away. The team bus leaves at nine.", "{Pf} goes into labour on a Thursday. The match is on Saturday. {Mf} has already said 'go'."],
       "prompt": "Your child is being born.",
       "choices": [
-        { "label": "Be there, miss the match", "desc": "Obviously.", "risk": "low", "hint": "Some things are bigger than football.", "text": "He holds his child for the first time at 7:12am. He doesn't see the match. He doesn't care. {Mf} sends a photo of the whole squad holding up a sign: 'WELCOME LITTLE ONE'.", "fx": { "unflag": "baby_coming", "flag": "parent", "love": 15, "family": 12, "morale": 15, "dressing": 4, "pfm": -4, "stress": 3 } },
+        { "label": "Be there, miss the match", "desc": "Obviously.", "risk": "low", "hint": "Some things are bigger than football.", "text": "He holds his child for the first time at 7:12am. He doesn't see the match. He doesn't care. {Mf} sends a photo of the whole squad holding up a sign: 'WELCOME LITTLE ONE'.", "fx": { "unflag": "baby_coming", "flag": "father", "love": 15, "family": 12, "morale": 15, "dressing": 4, "pfm": -4, "stress": 3 } },
         { "label": "Play, then rush to the hospital", "desc": "Do both.", "risk": "extreme", "hint": "You might miss it.", "out": [
-          { "w": 1, "text": "He plays, scores, and makes it to the hospital in time — just. He'll tell this story forever.", "fx": { "unflag": "baby_coming", "flag": "parent", "love": 4, "morale": 12, "fans": 4 } },
-          { "w": 1, "text": "He misses it by forty minutes. {Pf} forgives him. She also mentions it at every family gathering for the rest of their lives.", "fx": { "unflag": "baby_coming", "flag": "parent", "love": -10, "family": -4, "morale": 4 } }
+          { "w": 1, "text": "He plays, scores, and makes it to the hospital in time — just. He'll tell this story forever.", "fx": { "unflag": "baby_coming", "flag": "father", "love": 4, "morale": 12, "fans": 4 } },
+          { "w": 1, "text": "He misses it by forty minutes. {Pf} forgives him. She also mentions it at every family gathering for the rest of their lives.", "fx": { "unflag": "baby_coming", "flag": "father", "love": -10, "family": -4, "morale": 4 } }
         ] }
       ]
     },
     {
-      "id": "lv_parent_life", "cat": "love", "w": 4, "when": { "flags": ["parent"] },
+      "id": "lv_parent_life", "cat": "love", "w": 4, "when": { "flags": ["father"] },
       "title": "Fatherhood",
       "text": ["The baby hasn't slept more than two hours in a row for a week. Neither has {J}. In training, he falls asleep on the physio's table.", "His child grabbed his finger and smiled at him today. He played the best game of his month that weekend and doesn't think it's a coincidence."],
       "prompt": "Balancing football and fatherhood.",
@@ -110,7 +110,7 @@
       ]
     },
     {
-      "id": "lv_ex_returns", "cat": "love", "w": 3, "uses": { "F": "new" }, "when": { "age": [19, 38] },
+      "id": "lv_ex_returns", "group": "ex", "groupCd": 120, "cat": "love", "w": 3, "uses": { "F": "new" }, "when": { "age": [19, 38] },
       "title": "An Ex Reappears",
       "text": ["{F}, an ex from before he was famous, messages: she's in town, she'd love to catch up. Just coffee. Her timing is suspicious, her message very warm.", "At a friend's party, {J} runs into {F}, the girl he dated at seventeen. She's even more charming than he remembers."],
       "prompt": "Meet up?",
@@ -124,7 +124,7 @@
       ]
     },
     {
-      "id": "lv_partner_family_clash", "cat": "love", "w": 4, "when": { "partner": ["serious", "engaged", "married"] },
+      "id": "lv_partner_family_clash", "group": "partner_mum", "groupCd": 80, "cat": "love", "w": 4, "when": { "partner": ["serious", "engaged", "married"] },
       "title": "{Pf} and {MUM}",
       "text": ["{Pf} and {MUM} don't get along. {MUM} criticises the cooking. {Pf} criticises {MUM}'s criticism. {J} is in the middle, as always.", "{MUM} has made a comment about {Pf}'s family at dinner. {Pf} is very, very quiet in the car home."],
       "prompt": "Choose a side?",

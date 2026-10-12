@@ -1,10 +1,12 @@
 // Rendering: turns state + story into HTML.
 import { escapeHtml as e, compact, ordinal } from './util.js';
 import { EUR_IDR, POSITIONS, STAT_KEYS } from './config.js';
-import { overall, statLabel, wealthLevel } from './player.js';
+import { overall, statLabel, wealthLevel, scoutEstimate } from './player.js';
 import { dateLabel, shortDate, yearOf } from './time.js';
 import { standings, nextFixtures } from './season.js';
-import { ageNow, currentSeason, legacy } from './engine.js';
+import { ageNow, currentSeason, legacy, transferOutlook } from './engine.js';
+import { activeDeals } from './sponsors.js';
+import { lifeLegacy, epilogue } from './epilogue.js';
 import { METERS, meter, meterWord, lifeTokens } from './life.js';
 import { icon, ASPECT_ICON, ASPECT_LABEL, ARENA_STYLE } from './icons.js';
 
@@ -50,6 +52,23 @@ function ripplesHtml(state, ripples = []) {
   return `<ul class="ripples">${ripples.map((r) => `<li>${icon('ripple')}<div><span>${e(r.text)}</span>${changeChips(state, r.changes)}</div></li>`).join('')}</ul>`;
 }
 
+// Scouts' view of his ceiling (a range that narrows with age).
+function scoutHtml(state) {
+  const s = scoutEstimate(state.player, ageNow(state));
+  const stars = '★'.repeat(Math.floor(s.stars)) + (s.stars % 1 ? '½' : '');
+  return `<div class="scout" title="Scouts' estimate of your ceiling. It narrows as you get older. Disciplined hard work with a clear head can raise it; chaos, burnout and partying lower it.">
+    <span>${icon('target')} Potential</span><b>${s.lo}–${s.hi}</b><span class="stars">${stars}</span><em>${e(s.label)}</em></div>`;
+}
+
+function sponsorsHtml(state) {
+  const deals = activeDeals(state);
+  if (!deals.length) return `<p class="hint">${icon('briefcase')} No sponsors yet. Fame, followers and a clean image bring brands; an agent helps.</p>`;
+  return `<h3>${icon('briefcase')} Sponsors</h3><ul class="deals">${deals.map((d) => `<li>
+    <div class="deal-top"><b>${e(d.brand)}</b><span>${money(state, d.annualValue, { eurOnly: true })}/yr · to ${shortDate(d.expiryWeek)}</span></div>
+    ${d.duty ? `<div class="deal-duty">Posts ${d.done?.posts ?? 0}/${d.duty.posts} this month · Appearances ${d.done?.events ?? 0}/${d.duty.events} this year · happiness ${d.sat ?? 65}</div>${bar(d.sat ?? 65, 100, (d.sat ?? 65) >= 55 ? 'var(--good)' : (d.sat ?? 65) >= 30 ? 'var(--warn)' : 'var(--bad)')}` : ''}
+  </li>`).join('')}</ul>`;
+}
+
 // ═══════════════════════════ LEFT: THE PLAYER ═══════════════════════════
 export function renderPlayer(state, world) {
   const p = state.player;
@@ -76,6 +95,7 @@ export function renderPlayer(state, world) {
         ${p.suspension ? `<span class="chip chip-bad">Suspended</span>` : ''}
         ${p.transferListed ? `<span class="chip chip-warn">Transfer listed</span>` : ''}
       </div>
+      ${scoutHtml(state)}
       <h3>${icon('spark')} Attributes</h3>
       ${statsShown.map((k) => `<div class="stat"><span>${icon(STAT_ICON[k])}${statLabel(k)}</span>${bar(p.stats[k], 99, statColor(p.stats[k]))}<span class="v ${changes[k] > 0 ? 'up' : ''}">${p.stats[k]}${changes[k] > 0 ? '▲' : changes[k] < 0 ? '▼' : ''}</span></div>`).join('')}
       <h3>${icon('pulse')} Condition</h3>
@@ -94,8 +114,8 @@ export function renderPlayer(state, world) {
         <dt>Market value</dt><dd>€${compact(p.marketValue)}</dd>
         <dt>Followers</dt><dd>${compact(p.followers)}</dd>
         <dt>Lifestyle</dt><dd>${p.lifestyle <= 0.8 ? 'Frugal' : p.lifestyle <= 1.2 ? 'Normal' : p.lifestyle <= 1.8 ? 'Comfortable' : 'Lavish'}</dd>
-        ${p.endorsements.length ? `<dt>Sponsors</dt><dd>${p.endorsements.map((x) => e(x.brand)).join(', ')}</dd>` : ''}
       </dl>
+      ${sponsorsHtml(state)}
       <h3>${icon('flag')} National team</h3>
       <dl class="kv">
         <dt>Status</dt><dd>${nt.status === 'none' ? 'Not selected' : nt.status}${nt.team !== 'none' ? ` · ${nt.team}` : ''}</dd>
@@ -141,8 +161,26 @@ function outcomeCard(state, o) {
 }
 const CAT_TO_ARENA = { training: 'football', manager: 'football', dressing: 'football', body: 'football', national: 'football', milestone: 'football', veteran: 'football', media: 'media', love: 'love', friends: 'friends', family: 'family', culture: 'family', money: 'lifestyle', lifestyle: 'lifestyle', politics: 'politics', transfer: 'transfer', 'in-match': 'match', tactical: 'football', personal: 'football' };
 
+// Your social post, as it would look on the app, with likes and comments.
+function postCard(state, a) {
+  const x = a.post, p = state.player;
+  return `<div class="aside aside-post card-in">
+    <div class="aside-head">${icon('camera')}<span>You posted on ${e(x.platform)}</span><span class="aside-tag">${icon('clock')} time didn't move</span></div>
+    <div class="igpost">
+      <div class="ig-top"><span class="pav" style="background:#c6f432">${e(p.jerseyName[0])}</span><b>${e(p.jerseyName.toLowerCase())}</b>${p.social?.verified ? `<span class="verified">${icon('check')}</span>` : ''}<span class="muted">· ${e(x.label)}</span></div>
+      <p class="ig-cap">${e(x.caption)}</p>
+      <div class="ig-meta">${icon('heart')} ${compact(x.likes)} likes · +${compact(Math.max(0, x.gained))} followers${x.viral ? ' · <b class="viral">VIRAL</b>' : ''} · <span class="${x.positive ? 'up' : 'down'}">${x.positive ? 'mostly loved' : 'mostly negative'}</span></div>
+      <ul class="ig-comments">${x.comments.map((c) => `<li><b>${e(c.handle)}</b> ${e(c.text)}</li>`).join('')}</ul>
+    </div>
+    ${changeChips(state, a.changes, a.stats)}
+    ${ripplesHtml(state, a.ripples)}
+    ${a.milestones?.length ? `<p class="hint">${icon('star')} Milestone: ${a.milestones.map(e).join(', ')}</p>` : ''}
+  </div>`;
+}
+
 export function asideCard(state, a) {
   if (!a) return '';
+  if (a.kind === 'post') return postCard(state, a);
   return `<div class="aside card-in">
     <div class="aside-head">${icon(a.kind === 'free' ? (a.icon ?? 'clock') : 'pause')}<span>${a.kind === 'free' ? 'Free time' : `Meanwhile · ${e(a.time ?? '')}`}</span><span class="aside-tag">${icon('clock')} time didn't move</span></div>
     <h4>${e(a.headline)}</h4>
@@ -220,6 +258,17 @@ export function renderFreeTime(state, options, left, onAction) {
   el.innerHTML = `<div class="ft-head"><h2>${icon('clock')} Free time</h2><span class="ft-left">${Array.from({ length: Math.max(left, 0) }, () => '<i></i>').join('')}<span class="hint">${left} left this week · doesn't move time</span></span></div>
     <div class="ft-grid">${options.map((a) => `<button class="ft" data-id="${e(a.id)}" ${a.done || left <= 0 ? 'disabled' : ''}>${icon(a.icon)}<span class="ft-label">${e(a.label)}</span><span class="ft-desc">${e(a.desc)}</span>${a.done ? `<span class="ft-done">${icon('check')}</span>` : ''}</button>`).join('')}</div>`;
   el.querySelectorAll('.ft').forEach((b) => b.addEventListener('click', () => onAction(b.dataset.id)));
+}
+
+// ═══════════════════════════ SOCIAL MEDIA ═══════════════════════════
+export function renderSocial(state, options, canPost, onPost) {
+  const el = $('social');
+  const p = state.player;
+  if (state.ended) { el.innerHTML = ''; return; }
+  el.innerHTML = `<div class="ft-head"><h2>${icon('camera')} Social media</h2><span class="hint">${compact(p.followers)} followers${p.social?.verified ? ' · verified' : ''} · ${canPost ? "1 post this week · doesn't move time" : 'Posted this week'}</span></div>
+    ${canPost ? `<div class="ft-grid post-grid">${options.map((o) => `<button class="ft post-btn" data-key="${e(o.key)}">${icon(o.icon)}<span class="ft-label">${e(o.label)}</span><span class="ft-desc">${e(o.desc)}</span></button>`).join('')}</div>`
+    : '<p class="hint">Your next post is available next week. Posting every single week slowly wears out your audience; timing matters more than volume.</p>'}`;
+  el.querySelectorAll('.post-btn').forEach((b) => b.addEventListener('click', () => onPost(b.dataset.key)));
 }
 
 // ═══════════════════════════ PLANNER ═══════════════════════════
@@ -322,7 +371,7 @@ function circleTab(state) {
     p.circle?.journalist ? [p.circle.journalist.name, `Journalist · ${p.circle.journalist.outlet}`, 'newspaper', AVATAR_COLORS[5]] : null,
     p.partner.status !== 'none' ? [p.partner.name, `Partner · ${p.partner.status}`, 'heart', AVATAR_COLORS[4]] : null,
     [`${t.MUM} & ${t.DAD}`, 'Parents', 'home', AVATAR_COLORS[3]],
-    [t.SIB, `Little ${t.SIBr}`, 'home', AVATAR_COLORS[3]],
+    [t.SIB, `${t.SIBr[0].toUpperCase()}${t.SIBr.slice(1)} · ${t.SIBage}`, "home", AVATAR_COLORS[3]],
     p.circle?.bestFriend ? [p.circle.bestFriend.name, `Best friend · ${p.circle.bestFriend.job}`, 'friends', AVATAR_COLORS[0]] : null,
     p.agent ? [p.agent.name, `Agent · ${p.agent.cut}%`, 'briefcase', AVATAR_COLORS[1]] : null,
     ...p.keyTeammates.map((tm) => [tm.name, `Teammate · ${tm.relationship}`, 'users', tm.relationship === 'ally' ? 'var(--good)' : ['rival', 'enemy'].includes(tm.relationship) ? 'var(--bad)' : AVATAR_COLORS[1]]),
@@ -347,9 +396,15 @@ function tableTab(state) {
   return html;
 }
 
-function careerTab(state) {
+function careerTab(state, world) {
   const p = state.player, c = p.career;
-  return `<dl class="kv">
+  const t = transferOutlook(state, world);
+  const cls = { '+': 'up', '-': 'down', tip: 'tip', i: 'info' };
+  return `<h3 class="first">${icon('map')} Transfer outlook</h3>
+    <div class="outlook"><div><span>Offers</span><b>${t.weekly >= 0.2 ? 'Likely' : t.weekly >= 0.07 ? 'Possible' : 'Unlikely'}</b></div><div><span>From abroad</span><b>${Math.round(t.abroad * 100)}%</b></div><div><span>Window</span><b>${t.windowNow ? 'Open' : 'Closed'}</b></div></div>
+    <ul class="notes">${t.notes.map(([k, n]) => `<li class="n-${cls[k]}">${e(n)}</li>`).join('')}</ul>
+    <h3>${icon('trophy')} Record</h3>
+    <dl class="kv">
       <dt>Appearances</dt><dd>${c.apps}</dd><dt>Goals</dt><dd>${c.goals}</dd><dt>Assists</dt><dd>${c.assists}</dd><dt>Man of the Match</dt><dd>${c.motms}</dd>
       <dt>This season</dt><dd>${p.season.apps} apps · ${p.season.goals} G · ${p.season.assists} A</dd>
       <dt>Peak overall</dt><dd>${c.peakOverall}</dd><dt>Peak value</dt><dd>€${compact(c.peakMarketValue)}</dd>
@@ -365,7 +420,7 @@ function logTab(state) {
 }
 
 export function renderWorld(state, world, tab, onTab) {
-  const body = { circle: circleTab, table: tableTab, career: careerTab, log: logTab }[tab] ?? circleTab;
+  const body = { circle: circleTab, table: tableTab, career: (s) => careerTab(s, world), log: logTab }[tab] ?? circleTab;
   $('col-world').innerHTML = `<section class="card tabs-card">
     <nav class="tabs">${TABS.map(([k, l, ic]) => `<button data-tab="${k}" class="${tab === k ? 'on' : ''}">${icon(ic)}<span>${l}</span></button>`).join('')}</nav>
     <div class="tab-body">${body(state)}</div></section>`;
@@ -373,16 +428,18 @@ export function renderWorld(state, world, tab, onTab) {
 }
 
 // ═══════════════════════════ RETIREMENT ═══════════════════════════
-export function renderRetirement(state) {
-  const p = state.player, c = p.career, L = legacy(state);
+export function renderRetirement(state, world) {
+  const p = state.player, c = p.career, L = legacy(state), LL = lifeLegacy(state), ep = world ? epilogue(state, world) : [];
   const reason = { retirement: 'Retired', injury: 'Career-ending injury', pfm: 'The body gave out (fitness 0)', age: 'Age 40' }[state.ended.reason] ?? 'Career over';
   $('decisions').innerHTML = '';
   $('freetime').innerHTML = '';
+  $('social').innerHTML = '';
   $('planner').innerHTML = `<div class="legacy">
     ${icon('trophy', 'big')}
     <div class="label">${reason} · age ${ageNow(state)}</div>
-    <div class="legacy-label">${e(L.label)}</div>
-    <p class="hint">Legacy score ${L.score}</p>
+    <div class="legacy-label">${e(L.label)} · ${e(LL.label)}</div>
+    <p class="hint">Football legacy ${L.score} · Life legacy ${LL.score}</p>
+    ${ep.length ? `<div class="epilogue"><h3>${icon('clock')} What happened next</h3>${ep.map((x) => `<div class="ep">${icon(x.icon)}<div><b>${e(x.title)}</b><p>${e(x.text)}</p></div></div>`).join('')}</div>` : ''}
     <dl class="kv" style="max-width:360px;margin:16px auto;text-align:left">
       <dt>Appearances</dt><dd>${c.apps}</dd><dt>Goals / assists</dt><dd>${c.goals} / ${c.assists}</dd><dt>MOTM awards</dt><dd>${c.motms}</dd>
       <dt>International caps</dt><dd>${p.national.caps} (${p.national.goals} goals)</dd><dt>Trophies</dt><dd>${c.trophies.length}</dd><dt>Awards</dt><dd>${c.awards.length}</dd>

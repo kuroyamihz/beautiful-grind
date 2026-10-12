@@ -17,7 +17,7 @@
       "fx": { "teammate": { "who": "T", "rel": "ally" }, "mood": "Relieved" }
     },
     {
-      "id": "cu_bobotoh", "cat": "culture", "w": 6, "when": { "country": ["Indonesia"], "apps": [5, 9999] },
+      "id": "cu_bobotoh", "group": "ultras", "groupCd": 52, "cat": "culture", "w": 6, "when": { "country": ["Indonesia"], "apps": [5, 9999] },
       "title": "The Supporter Groups Invite {J}",
       "text": "The club's biggest supporter group invites {J} to their headquarters: a small building covered in murals, drums stacked in the corner, three generations of fans. They want him to sing the chants with them.",
       "prompt": "Go?",
@@ -37,7 +37,7 @@
       ]
     },
     {
-      "id": "cu_kanjuruhan_memorial", "cat": "culture", "w": 3, "when": { "country": ["Indonesia"], "months": [10] },
+      "id": "cu_kanjuruhan_memorial", "cd": 52, "cat": "culture", "w": 3, "when": { "country": ["Indonesia"], "months": [10] },
       "title": "Kanjuruhan Remembered",
       "text": "October. Before kick-off, the stadium falls silent for the 135 people who died at Kanjuruhan in 2022. Players link arms in the centre circle. Some supporters cry. Indonesian football still carries that night.",
       "fx": { "mood": "Numb", "growth": ["mental"] }
@@ -61,7 +61,7 @@
       "fx": { "followers": 5000, "parental": 6, "pfm": -4 }
     },
     {
-      "id": "cu_independence_day", "cat": "culture", "w": 3, "when": { "nationality": ["Indonesia"], "months": [8] },
+      "id": "cu_independence_day", "cd": 52, "cat": "culture", "w": 3, "when": { "nationality": ["Indonesia"], "months": [8] },
       "title": "17 Agustus: {J} at the Village Games",
       "text": "Independence Day. Every kampung holds games: sack races, climbing the greased pinang pole, krupuk-eating contests. {J}'s old neighbourhood invites him to judge. They want him to climb the pole.",
       "prompt": "Climb the pole?",
@@ -101,7 +101,7 @@
       "fx": { "followers": 15000, "rep": 0.8, "tacticalFit": 5, "unflag": "learning_language" }
     },
     {
-      "id": "cu_hometown_hero_return", "cat": "culture", "w": 3, "when": { "rep": [25, 100], "phase": ["off"] },
+      "id": "cu_hometown_hero_return", "once": true, "group": "hometown", "groupCd": 52, "cat": "culture", "w": 3, "when": { "rep": [25, 100], "phase": ["off"] },
       "title": "Hometown Holds a Parade for {J}",
       "text": "{J}'s hometown wants to honour him: a parade, a ceremony at the town hall, a mural on the market wall. The mayor is very enthusiastic. Elections are next year.",
       "prompt": "Attend?",
@@ -127,7 +127,7 @@
       ]
     },
     {
-      "id": "cu_pilgrimage", "cat": "culture", "w": 2, "when": { "nationality": ["Indonesia", "Malaysia", "Egypt", "Morocco", "Turkey", "Senegal"], "phase": ["off"], "wealth": [5000, 999999999] }, "vars": { "cost": ["wealthPct", 15, 400] },
+      "id": "cu_pilgrimage", "once": true, "cat": "culture", "w": 2, "when": { "nationality": ["Indonesia", "Malaysia", "Egypt", "Morocco", "Turkey", "Senegal"], "phase": ["off"], "wealth": [5000, 999999999] }, "vars": { "cost": ["wealthPct", 15, 400] },
       "title": "Umrah With His Parents",
       "text": "{J}'s parents have dreamed their whole lives of going to Mecca for umrah. The off-season is long enough. The trip would cost {cost}.",
       "prompt": "Take them?",
@@ -178,7 +178,7 @@
       ]
     },
     {
-      "id": "cu_volunteer_disaster", "cat": "culture", "w": 2, "when": { "country": ["Indonesia", "Philippines", "Japan", "Turkey", "Morocco", "Mexico"] },
+      "id": "cu_volunteer_disaster", "cd": 150, "cat": "culture", "w": 2, "when": { "country": ["Indonesia", "Philippines", "Japan", "Turkey", "Morocco", "Mexico"] },
       "title": "Earthquake Hits the Region",
       "text": "An earthquake hits a region near the club's home. Hundreds of families have lost their houses. The club suspends training for two days. Several players drive to help.",
       "prompt": "Go and help?",
@@ -188,7 +188,7 @@
       ]
     },
     {
-      "id": "cu_naturalised_debate", "cat": "culture", "w": 3, "when": { "nationality": ["Indonesia"], "age": [18, 30] },
+      "id": "cu_naturalised_debate", "cd": 104, "cat": "culture", "w": 3, "when": { "nationality": ["Indonesia"], "age": [18, 30] },
       "title": "The Naturalisation Debate Gets Personal",
       "text": "On a talk show, a pundit argues that local players like {J} are being overlooked for the national team because of naturalised players from Europe. He uses {J} as his example. Nobody asked {J}.",
       "prompt": "Respond?",
@@ -199,7 +199,7 @@
       ]
     },
     {
-      "id": "cu_dutch_heritage_teammate", "cat": "culture", "w": 3, "when": { "nationality": ["Indonesia"], "nt": ["called", "regular"] },
+      "id": "cu_dutch_heritage_teammate", "once": true, "cat": "culture", "w": 3, "when": { "nationality": ["Indonesia"], "nt": ["called", "regular"] },
       "title": "Teaching a Dutch-Born Teammate Bahasa",
       "text": "At national team camp, a newly naturalised player born in the Netherlands, {T}, asks {J} to teach him some Bahasa Indonesia for the anthem and the fans. He's nervous about pronouncing things wrong.",
       "fx": { "teammate": { "who": "T", "rel": "ally" }, "rep": 0.4, "mood": "Motivated" }
@@ -237,7 +237,7 @@
       "fx": { "mood": "Motivated", "rep": 0.2 }
     },
     {
-      "id": "cu_childhood_pitch", "cat": "culture", "w": 2, "when": { "phase": ["off"], "age": [20, 40] },
+      "id": "cu_childhood_pitch", "once": true, "cat": "culture", "w": 2, "when": { "phase": ["off"], "age": [20, 40] },
       "title": "The Pitch Where It All Started",
       "text": "{J} visits the dusty field where he learned to play: a rice-paddy edge, two bamboo goalposts, a ball made of plastic bags. It's going to be sold to a developer.",
       "prompt": "Save it?",
@@ -300,7 +300,7 @@
       ]
     },
     {
-      "id": "cu_heritage_trip", "cat": "culture", "w": 2, "when": { "nationality": ["Indonesia"], "phase": ["off"] },
+      "id": "cu_heritage_trip", "once": true, "cat": "culture", "w": 2, "when": { "nationality": ["Indonesia"], "phase": ["off"] },
       "title": "A Trip to Papua With a Teammate",
       "text": "{T}, a teammate from Papua, invites {J} home for a week in the off-season: mountains, rivers, a village where every boy plays football barefoot on red earth, and many of them are better than {J} was at their age.",
       "fx": { "teammate": { "who": "T", "rel": "ally" }, "growth": ["mental"], "mood": "Relieved" }
@@ -345,7 +345,7 @@
       "fx": { "pfm": -3, "mood": "Homesick" }
     },
     {
-      "id": "cu_school_visit", "cat": "culture", "w": 3, "when": { "rep": [8, 100] },
+      "id": "cu_school_visit", "cd": 104, "cat": "culture", "w": 3, "when": { "rep": [8, 100] },
       "title": "Visit to an Inner-City School",
       "text": "The club's community programme sends {J} to a school in the poorest part of the city. The pitch is concrete. The goals have no nets. Three hundred children are waiting.",
       "fx": { "rep": 0.5, "followers": 4000, "growth": ["mental"], "mood": "Motivated" }

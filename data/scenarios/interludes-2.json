@@ -1,7 +1,7 @@
 {
   "scenarios": [
     {
-      "id": "il_partner_meets_squad", "cat": "interlude", "w": 4, "cd": 200, "when": { "partner": ["dating", "serious"], "freeAgent": false },
+      "id": "il_partner_meets_squad", "once": true, "cat": "interlude", "w": 4, "cd": 200, "when": { "partner": ["dating", "serious"], "freeAgent": false },
       "title": "{Pf} Meets the Squad",
       "text": ["The club's family day. {Pf} is meeting the squad's partners for the first time, and the captain's wife is famously terrifying.", "There's a players-and-partners dinner tonight. {Pf} has changed outfits three times and asked eleven questions about who sits where."],
       "prompt": "How do you handle it?",
@@ -35,7 +35,7 @@
       ]
     },
     {
-      "id": "il_partner_career", "cat": "interlude", "w": 3, "cd": 200, "when": { "partner": ["serious", "engaged", "married"] },
+      "id": "il_partner_career", "once": true, "group": "partner_career", "groupCd": 200, "cat": "interlude", "w": 3, "cd": 200, "when": { "partner": ["serious", "engaged", "married"] },
       "title": "{Pf}'s Big News",
       "text": ["{Pf} has been offered a promotion at work. It's in another city. She's excited and terrified and watching his face very carefully.", "{Pf} wants to go back to university. Evenings and weekends. Exactly when he's free."],
       "prompt": "What do you say?",
@@ -142,7 +142,7 @@
       ]
     },
     {
-      "id": "il_ultras_visit", "cat": "interlude", "w": 3, "cd": 200, "when": { "freeAgent": false, "fans": [40, 100] },
+      "id": "il_ultras_visit", "group": "ultras", "groupCd": 52, "cat": "interlude", "w": 3, "cd": 200, "when": { "freeAgent": false, "fans": [40, 100] },
       "title": "The Ultras' Clubhouse",
       "text": ["The leader of the ultras group invites {J} to their clubhouse: a room above a garage, flags on every wall, a drum the size of a car tyre.", "The ultras are painting a giant banner for Sunday and want {J} to add a brushstroke. They say it's tradition. It isn't. They just invented it."],
       "prompt": "Go?",
@@ -176,7 +176,7 @@
       ]
     },
     {
-      "id": "il_bf_asks_money", "cat": "interlude", "w": 3, "cd": 200, "ui": "phone", "when": { "wealth": [2000, 999999999] },
+      "id": "il_bf_asks_money", "group": "money_ask", "groupCd": 40, "cat": "interlude", "w": 3, "cd": 200, "ui": "phone", "when": { "wealth": [2000, 999999999] },
       "title": "{BFf} Asks for a Loan",
       "text": ["{BFf} messages: his motorbike was stolen and he needs it for work. He's embarrassed to ask. He asks.", "{BFf} wants to open a small {FOOD} stall and needs money to start. He's sent a business plan. It's handwritten."],
       "prompt": "Lend him the money?",
@@ -205,7 +205,7 @@
       ]
     },
     {
-      "id": "il_mum_visit", "cat": "interlude", "w": 3, "cd": 200, "when": { "abroad": true },
+      "id": "il_mum_visit", "group": "parents_abroad", "groupCd": 80, "cat": "interlude", "w": 3, "cd": 200, "when": { "abroad": true },
       "title": "{MUM} Comes to Visit",
       "text": ["{MUM} has arrived for a week. She has brought two suitcases. One contains clothes. The other contains food, spices and a rice cooker.", "{MUM}'s first visit abroad. She's never been on a plane before. She's holding the boarding pass like it might escape."],
       "prompt": "How do you spend the week?",
@@ -225,7 +225,7 @@
       ]
     },
     {
-      "id": "il_retired_legend", "cat": "interlude", "w": 3, "cd": 260, "when": { "freeAgent": false },
+      "id": "il_retired_legend", "once": true, "cat": "interlude", "w": 3, "cd": 260, "when": { "freeAgent": false },
       "title": "The Club Legend",
       "text": ["A club legend, now sixty and walking with a stick, visits training. He watches {J} for twenty minutes and then waves him over.", "The club's all-time top scorer is in the canteen. He asks, specifically, to meet {J}."],
       "prompt": "What do you ask him?",
@@ -288,7 +288,7 @@
       ]
     },
     {
-      "id": "il_media_training", "cat": "interlude", "w": 3, "cd": 200, "when": { "freeAgent": false, "age": [16, 23] },
+      "id": "il_media_training", "group": "media_training", "groupCd": 9999, "cat": "interlude", "w": 3, "cd": 200, "when": { "freeAgent": false, "age": [16, 23] },
       "title": "Media Training",
       "text": ["The club makes the young players attend media training. A former TV presenter fires trick questions at them. {J} is up next.", "A media coach shows the squad clips of players saying terrible things in interviews. Then it's {J}'s turn in the hot seat."],
       "prompt": "Take it seriously?",
@@ -298,7 +298,7 @@
       ]
     },
     {
-      "id": "il_jersey_number", "cat": "interlude", "w": 2, "cd": 400, "when": { "freeAgent": false },
+      "id": "il_jersey_number", "once": true, "cat": "interlude", "w": 2, "cd": 400, "when": { "freeAgent": false },
       "title": "The Number Debate",
       "text": ["The club's iconic number has become available. The kit man asks {J} if he wants it. It comes with history — and expectations.", "A new signing has asked for {J}'s shirt number. Politely. With a smile. With the president standing next to him."],
       "prompt": "What do you decide?",
@@ -330,7 +330,7 @@
       ]
     },
     {
-      "id": "il_old_rival_message", "cat": "interlude", "w": 2, "cd": 300, "ui": "phone", "when": { "age": [20, 40] },
+      "id": "il_old_rival_message", "once": true, "cat": "interlude", "w": 2, "cd": 300, "ui": "phone", "when": { "age": [20, 40] },
       "title": "A Message From an Old Rival",
       "text": ["A message from a kid who bullied {J} at youth trials, years ago. He's working in a warehouse now. He writes that he's sorry, and that he watches every game.", "The boy who beat {J} to a place in a youth team years ago sends a message: he never made it. He wants to say congratulations."],
       "prompt": "Reply?",
@@ -373,7 +373,7 @@
       ]
     },
     {
-      "id": "il_new_car_test", "cat": "interlude", "w": 3, "cd": 200, "when": { "wealth": [20000, 999999999] },
+      "id": "il_new_car_test", "group": "car", "groupCd": 150, "cat": "interlude", "w": 3, "cd": 200, "when": { "wealth": [20000, 999999999] },
       "title": "The Showroom",
       "text": ["A luxury car dealer invites {J} for a 'no-obligation test drive'. The car is {CAR}. The salesman is very, very good at his job.", "{T} has a new car. It's absurd. {J} sits in it and feels something dangerous."],
       "prompt": "Buy one?",
@@ -384,7 +384,7 @@
       ]
     },
     {
-      "id": "il_fan_proposal", "cat": "interlude", "w": 2, "cd": 400, "when": { "freeAgent": false, "fans": [50, 100] },
+      "id": "il_fan_proposal", "once": true, "cat": "interlude", "w": 2, "cd": 400, "when": { "freeAgent": false, "fans": [50, 100] },
       "title": "The Proposal",
       "text": ["A fan emails the club: he wants to propose to his girlfriend at the training ground, and he wants {J} to hand him the ring.", "A couple who met at one of {J}'s matches want him to be part of their proposal video."],
       "prompt": "Take part?",
@@ -394,7 +394,7 @@
       ]
     },
     {
-      "id": "il_lookalike", "cat": "interlude", "w": 2, "cd": 400, "when": { "followers": [20000, 999999999] },
+      "id": "il_lookalike", "once": true, "cat": "interlude", "w": 2, "cd": 400, "when": { "followers": [20000, 999999999] },
       "title": "The Lookalike",
       "text": ["There's a man who looks exactly like {J} getting free meals around town by pretending to be him. He's been doing it for a month. A restaurant owner calls the club.", "A lookalike of {J} has 100,000 followers. He's doing ads. He's better at TikTok than {J} is."],
       "prompt": "Deal with it?",
@@ -404,7 +404,7 @@
       ]
     },
     {
-      "id": "il_photo_old_team", "cat": "interlude", "w": 3, "cd": 200,
+      "id": "il_photo_old_team", "once": true, "cat": "interlude", "w": 3, "cd": 200,
       "title": "The Old Team Photo",
       "text": ["{DAD} sends a photo he found in a box: {J}'s first-ever team, aged nine, in shirts so big they're dresses. Half of the boys are tagged in the family chat.", "Someone posts an old under-12 team photo. Of the sixteen boys in it, {J} is the only professional footballer."],
       "prompt": "Reach out to the old team?",
@@ -414,7 +414,7 @@
       ]
     },
     {
-      "id": "il_tailor", "cat": "interlude", "w": 2, "cd": 300, "when": { "rep": [20, 100] },
+      "id": "il_tailor", "once": true, "cat": "interlude", "w": 2, "cd": 300, "when": { "rep": [20, 100] },
       "title": "The First Real Suit",
       "text": ["An awards dinner is coming up and {J} owns one suit, bought for a cousin's wedding when he was fifteen. A tailor offers to make him a proper one.", "The club's sponsor provides suits for the squad. The tailor measures {J} and makes a small disappointed noise about his posture."],
       "prompt": "Go big?",
@@ -457,7 +457,7 @@
       ]
     },
     {
-      "id": "il_twin_fans", "cat": "interlude", "w": 2, "cd": 300, "when": { "freeAgent": false },
+      "id": "il_twin_fans", "once": true, "cat": "interlude", "w": 2, "cd": 300, "when": { "freeAgent": false },
       "title": "Named After You",
       "text": ["A couple at the gate hold up their newborn twins. One is named after {J}. The other is named after {CAPl}. They want a photo of all four.", "A message to the club: a fan has named his baby boy after {J}. He attaches a photo. The baby looks unimpressed."],
       "prompt": "Your response?",

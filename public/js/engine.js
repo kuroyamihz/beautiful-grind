@@ -19,9 +19,12 @@ import {
   METER_KEYS, meter, addMeter, createCircle, clubCast, ripple, lifeWeek, lifeRatingMod, lifeInjuryMod, lifeAfterMatch, lifeMove,
   freeTimeLeft, freeTimeOptions, doFreeTime, migrateLife,
 } from './life.js';
-import { LIFE } from './config.js';
+import { LIFE, POSITIONS } from './config.js';
+import { sponsorMonth, resolveSponsor, sponsorEventOptions, doSponsorEvent } from './sponsors.js';
+import { ensureSocial, postOptions, canPost, makePost, socialMilestones, followerCeiling } from './social.js';
 
 const DAY = 86400000;
+const TRANSFER_SETTLE = 40; // weeks a new signing usually stays before clubs bid again
 const CUP_ROUND_NAMES = ['First round', 'Second round', 'Round of 16', 'Quarter-final', 'Semi-final', 'Final'];
 
 // ═══════════════════════════ NEW CAREER ═══════════════════════════
@@ -48,6 +51,8 @@ export function newCareer(world, o) {
     season: { apps: 0, goals: 0, assists: 0, motms: 0, ratings: [], growthUsed: 0 },
     injury: null, injuryHistory: [], fragileWeeks: 0, suspension: 0, yellowCards: 0, endorsements: [], mood: 'Motivated',
     lifestyle: 1,
+    // Hidden potential: talent sets the start, habits and choices move it during the career.
+    potential: Math.round(clamp(GROWTH.potential.mean + gauss() * GROWTH.potential.sd + (cs - 62) * 0.15, GROWTH.potential.min, GROWTH.potential.max)),
   };
   const state = {
     version: SAVE_VERSION, week: 0, player: p,
@@ -56,6 +61,9 @@ export function newCareer(world, o) {
   };
   joinClub(state, world, { club: o.club, key, wageWeekly: weeklyWage(overall(p), key), years: randint(2, 3), type: 'youth' });
   createCircle(state, world);
+  ensureSocial(p);
+  p.kids = [];
+  p.cast = { oldboss: p.manager.name }; // people the story remembers for years
   p.squadRole = minRole(trustRole(p.manager.trust), abilityRole(overall(p), cs));
   p.career.peakOverall = overall(p);
   updateMarketValue(state);
@@ -70,7 +78,7 @@ export function newCareer(world, o) {
 
 // ═══════════════════════════ SAVES ═══════════════════════════
 // Bump SAVE_VERSION whenever the state shape changes, and teach migrate() how to upgrade older saves.
-export const SAVE_VERSION = 3;
+export const SAVE_VERSION = 4;
 export function migrate(state, world) {
   if (!state?.player) return state;
   if ((state.version ?? 1) < 3) {
@@ -78,6 +86,13 @@ export function migrate(state, world) {
     delete state.player.stats.rel; // left behind by an old bug in growth: ['rel']
     state.lastCats = state.lastCats ?? [];
     state.interlude = null;
+  }
+  if ((state.version ?? 1) < 4) {
+    migrateLife(state, world); // adds ages to the cast
+    const p = state.player;
+    if (p.potential === undefined) p.potential = Math.min(GROWTH.potential.max, overall(p) + randint(4, 16) + Math.max(0, 24 - ageNow(state)));
+    p.kids = p.kids ?? [];
+    ensureSocial(p);
   }
   state.version = SAVE_VERSION;
   return state;
@@ -171,21 +186,40 @@ function updateMarketValue(state) {
 
 function socialBoost(state) { return SOCIAL_BOOST[state.player.nationality] ?? 1.5; }
 
-function addFollowers(state, n) { state.player.followers = Math.max(0, Math.round(state.player.followers + n)); }
+function addFollowers(state, n) {
+  const p = state.player;
+  if (n > 0) n *= Math.max(0.05, 1 - p.followers / followerCeiling(p)); // growth slows near your fame's ceiling
+  p.followers = Math.max(0, Math.round(p.followers + n));
+}
+
+// Fame drifts towards what your football has earned: a big name fades if the level isn't there.
+function fameTarget(state) {
+  const p = state.player;
+  const q = p.club ? leagueQuality(p.club.key) : 50;
+  return clamp((overall(p) - 50) * 2.2 + (q - 55) * 1.0 + Math.min(p.national.caps, 100) * 0.15 + p.career.trophies.length * 1.5, 0, 100);
+}
 
 function grow(state, stat, res) {
   const p = state.player;
   const age = ageNow(state);
-  if (stat === 'rel') stat = pick(relevantStats(p.position).slice(0, 3)); // 'rel' = one of his position's key stats
+  if (stat === 'rel') stat = growthStat(p); // 'rel' = one of his position's key stats
   if (!stat || p.stats[stat] >= 99) return false;
   if (age >= 29 && stat !== 'mental') return false;
-  if (p.season.growthUsed >= GROWTH.seasonCapByAge(age)) { res.growthCapped = true; return false; }
+  if (p.season.growthUsed >= GROWTH.seasonCap(age, potentialGap(p))) { res.growthCapped = true; return false; }
   if ((res.growthThisWeek ?? 0) >= GROWTH.maxPerWeek) return false;
   p.stats[stat] += 1;
   p.season.growthUsed += 1;
   res.growthThisWeek = (res.growthThisWeek ?? 0) + 1;
   res.statChanges[stat] = (res.statChanges[stat] ?? 0) + 1;
   return true;
+}
+
+// Potential: hidden ceiling. potentialGap = how much room is left to grow.
+export const potentialGap = (p) => Math.max(0, (p.potential ?? 70) - overall(p));
+// Which stat a general gain goes to: weighted by what matters for his position.
+function growthStat(p) {
+  const w = POSITIONS[p.position].weights;
+  return weightedPick(Object.keys(w).filter((k) => p.stats[k] < 99), (k) => w[k]) ?? 'mental';
 }
 
 function changeStat(state, stat, delta, res) {
@@ -259,19 +293,30 @@ function directEffects(state, world, eff, res) {
     p.partner = { ...p.partner, ...eff.partner };
     if (p.partner.status === 'none') p.partner.aff = 0;
     else if (old.status === 'none' || (eff.partner.name && eff.partner.name !== old.name)) {
-      p.partner.aff = 62; p.partner.style = pick(['private', 'public']); p.contact.love = state.week;
+      p.partner.aff = 62; p.partner.style = pick(['private', 'public']); p.contact.love = state.week; p.partner.since = state.week;
     } else if ((PARTNER_RANK[p.partner.status] ?? 0) > (PARTNER_RANK[old.status] ?? 0)) addMeter(state, 'love', 8, res);
   }
-  if (eff.agent) p.agent = eff.agent;
-  if (eff.endorsement) p.endorsements.push({ brand: eff.endorsement.brand, type: eff.endorsement.type, annualValue: eff.endorsement.annualValue, expiryWeek: state.week + 52 * eff.endorsement.years });
+  if ('agent' in eff) p.agent = eff.agent;
+  if (eff.endorsement) {
+    const b = (world.brands?.brands ?? []).find((x) => x.name === eff.endorsement.brand);
+    if (b) for (const old of p.endorsements) if (old.cat === b.cat && old.expiryWeek > state.week) old.expiryWeek = state.week; // one deal per category
+    p.endorsements.push({ brand: eff.endorsement.brand, type: eff.endorsement.type, annualValue: eff.endorsement.annualValue, expiryWeek: state.week + 52 * eff.endorsement.years, since: state.week, yearStart: state.week,
+      ...(b ? { ind: b.ind, cat: b.cat, tier: b.tier, duty: b.duty, done: { posts: 0, events: 0 }, sat: 65, minRep: b.rep } : {}) });
+  }
   if (eff.transferListed || eff.listed === true) p.transferListed = true;
   if (eff.listed === false) p.transferListed = false;
   if (eff.form) p.form = clamp(round1(p.form + eff.form), 4, 9.5);
   if (eff.suspension) p.suspension = Math.max(0, p.suspension + eff.suspension);
+  if (eff.cast) p.cast = { ...(p.cast ?? {}), ...eff.cast };
+  if (eff.abroadWish !== undefined) p.wantsAbroad = !!eff.abroadWish;
+  if (eff.offerAbroad) offerFromAbroad(state, world, res);
+  if (eff.offerHome) offerHomecoming(state, world, res);
+  if (eff.potential) p.potential = clamp((p.potential ?? 70) + eff.potential, 45, GROWTH.potential.max + 3);
   if (eff.lifestyle) p.lifestyle = clamp(round1(p.lifestyle + eff.lifestyle), 0.6, 3);
   if (eff.flag || eff.unflag) {
     const story = { ...(state.flags.story ?? {}) };
     for (const f of [].concat(eff.flag ?? [])) story[f] = state.week;
+    if ([].concat(eff.flag ?? []).includes('father') && !(p.kids ?? []).length) p.kids = [{ name: personName(p.nationality, chance(0.5)).split(' ')[0], born: state.week }];
     for (const f of [].concat(eff.unflag ?? [])) delete story[f];
     state.flags.story = story;
   }
@@ -309,6 +354,8 @@ function resolveDecisions(state, world, res) {
       out.text = resolveOffer(state, world, d.data, choice.id, res);
     } else if (d.kind === 'renewal') {
       out.text = resolveRenewal(state, world, d.data, choice.id, res);
+    } else if (d.kind === 'sponsor') {
+      out.text = resolveSponsor(state, world, d.data, choice.id, res, (x) => applyEffects(state, world, x, res, { source: 'sponsor' }));
     } else if (d.kind === 'rehab') {
       out.text = resolveRehab(state, world, d.data, choice.id, res);
     } else if (d.kind === 'retire') {
@@ -417,11 +464,11 @@ function afterClubMatch(state, world, m, res) {
   addRep(state, Math.max(-0.3, (m.rating - 6.5) * 0.12 * (q / 70)) + m.goals * 0.2 * (q / 70) + (m.motm ? 0.3 : 0), res);
   addFollowers(state, (m.goals * 400 + (m.motm ? 600 : 0) + Math.max(0, m.rating - 7) * 300) * socialBoost(state));
   if (m.rating >= 9 || m.goals >= 3) { const viral = Math.round(randint(50000, 200000) * socialBoost(state) / 4); addFollowers(state, viral); res.viral = viral; }
-  // Growth from matches (rare)
-  const rel = relevantStats(p.position).slice(0, 3);
-  if (m.rating >= 8.0 && chance(0.4)) grow(state, pick(rel), res);
-  if (m.rating >= 8.8 && chance(0.3)) grow(state, pick(rel), res);
-  else if (m.rating >= 7.3 && m.rating < 8.0 && chance(0.12)) grow(state, pick(rel), res);
+  // Growth from playing: minutes are the best teacher, and good games teach more.
+  if (m.minutes >= 45 && chance(GROWTH.matchGrowth + Math.max(0, m.rating - 6.5) * 0.1)) grow(state, growthStat(p), res);
+  if (m.rating >= 8.5 && chance(0.3)) grow(state, growthStat(p), res);
+  // Over-achievers raise their own ceiling (a little).
+  if (m.rating >= 8.3 && ageNow(state) <= 24 && chance(0.06)) p.potential = Math.min(GROWTH.potential.max + 3, (p.potential ?? 70) + 1);
   // Discipline
   if (m.red) { p.suspension = randint(1, 3); res.suspended = p.suspension; }
   else if (m.yellow) { p.yellowCards++; if (p.yellowCards >= 5) { p.yellowCards = 0; p.suspension = 1; res.suspended = 1; } }
@@ -656,6 +703,39 @@ function injuryWeek(state, world, res, matchesPlayed, plan) {
 }
 
 // ═══════════════════════════ TRANSFERS & CONTRACTS ═══════════════════════════
+// How likely offers are, and how likely they come from abroad, with the reasons (shown in the UI as notes).
+export function transferOutlook(state, world) {
+  const p = state.player;
+  const age = ageNow(state);
+  const free = !p.club;
+  const ovr = overall(p);
+  const myStr = free ? ovr : clubStrength(p.club.name, p.club.key);
+  const homeQ = leagueQuality(p.club?.key ?? leagueKey(p.nationality, 1));
+  const notes = [];
+  let weekly = free ? 0.45 : 0.03 + Math.max(0, ovr - myStr + 3) * 0.015 + p.reputation * 0.0015;
+  if (!free && ovr - myStr >= 3) notes.push(['+', 'You are better than your club. Bigger clubs notice.']);
+  if (p.transferListed) { weekly += 0.15; notes.push(['+', 'You are on the transfer list.']); }
+  if (['bench', 'outcast'].includes(p.squadRole) && age <= 21) { weekly += 0.1; notes.push(['+', 'Young and not playing: clubs offer loans.']); }
+  if (p.wantsAbroad) weekly += 0.08;
+  if (p.agent) weekly += p.agent.quality / 1000;
+  weekly = clamp(weekly, 0, 0.65);
+  let abroad = 0.12 + p.reputation / 120;
+  if (p.wantsAbroad) { abroad += 0.35; notes.push(['+', 'You told your agent you want to play abroad.']); }
+  else notes.push(['tip', 'Tell your agent you want to play abroad (free time) to make offers from abroad far likelier.']);
+  if (p.agent) { abroad += p.agent.quality / 400; notes.push(['+', `Your agent (${p.agent.name}) has contacts abroad.`]); }
+  else notes.push(['tip', 'An agent opens doors abroad. Without one, foreign clubs rarely call.']);
+  if (p.national.caps > 0) { abroad += 0.06; notes.push(['+', 'Senior caps put you on the lists of foreign scouts.']); }
+  if (ovr - homeQ > 4) { abroad += 0.15; notes.push(['+', 'You have outgrown your league.']); }
+  if (p.followers > 500000) { abroad += 0.05; notes.push(['+', 'Your social following makes you commercially attractive abroad.']); }
+  if (p.reputation < 12) notes.push(['-', 'Few people outside your country know your name yet (fame below 12).']);
+  if (age >= 30) { abroad -= 0.08; notes.push(['-', 'Clubs abroad prefer younger signings.']); }
+  abroad = clamp(abroad, 0.06, 0.88);
+  const windowNow = free || windowOpen(world, p.club.key, monthOf(state.week));
+  if (!free && !windowNow) notes.unshift(['i', 'The transfer window is closed. Offers come when it reopens.']);
+  if (!free && state.week - p.club.joinedWeek < TRANSFER_SETTLE) notes.unshift(['i', `You only just arrived: clubs usually wait about ${TRANSFER_SETTLE} weeks before bidding (sooner if you are transfer-listed or frozen out).`]);
+  return { weekly, abroad, windowNow, notes };
+}
+
 function transferWeek(state, world, res) {
   const p = state.player;
   const month = monthOf(state.week);
@@ -663,14 +743,37 @@ function transferWeek(state, world, res) {
   if (state.pending.some((d) => d.kind === 'offer') || age >= 37) return;
   const free = !p.club;
   if (!free && !windowOpen(world, p.club.key, month)) return;
-  if (!free && state.week - p.club.joinedWeek < 20) return; // settle in first
+  if (!free && state.week - p.club.joinedWeek < (p.transferListed || p.squadRole === 'outcast' ? 20 : TRANSFER_SETTLE)) return; // settle in first
   const ovr = overall(p);
   const myStr = free ? ovr : clubStrength(p.club.name, p.club.key);
-  let prob = free ? 0.45 : 0.05 + Math.max(0, ovr - myStr + 3) * 0.02 + p.reputation * 0.002 + (p.transferListed ? 0.15 : 0)
-    + (['bench', 'outcast'].includes(p.squadRole) && age <= 21 ? 0.1 : 0);
-  if (!chance(clamp(prob, 0, 0.6))) return;
+  if (!chance(transferOutlook(state, world).weekly)) return;
   const offer = makeOffer(state, world, { free, ovr, myStr, age, month });
   if (!offer) return;
+  pushOffer(state, offer, res);
+}
+
+// A trial or an agent's contacts can produce an offer from abroad right away (any window that's open there).
+function offerFromAbroad(state, world, res) {
+  const p = state.player;
+  if (state.pending.some((d) => d.kind === 'offer')) return;
+  const ovr = overall(p);
+  const offer = makeOffer(state, world, { free: !p.club, ovr, myStr: p.club ? clubStrength(p.club.name, p.club.key) : ovr, age: ageNow(state), month: monthOf(state.week), forceAbroad: true });
+  if (offer) pushOffer(state, offer, res);
+}
+
+// The first club asks him home (a promise arc). Always a free transfer, modest wage, 1-2 years.
+function offerHomecoming(state, world, res) {
+  const p = state.player;
+  const first = p.career.clubHistory[0];
+  if (!first || p.club?.name === first.club || state.pending.some((d) => d.kind === 'offer')) return;
+  const key = findClubKey(state, world, { name: first.club, key: first.key }) ?? first.key;
+  const offer = { club: first.club, key, country: splitKey(key).country, leagueName: leagueDef(world, key)?.name ?? 'home', str: clubStrength(first.club, key),
+    type: p.club ? 'permanent' : 'free', fee: 0, wageWeekly: Math.round(weeklyWage(overall(p), key) * 0.9 / 10) * 10, years: randint(1, 2), sellingClubResponse: 'accepting', untilWeek: null,
+    qualityDelta: round1(clubStrength(first.club, key) - (p.club ? clubStrength(p.club.name, p.club.key) : overall(p))), homecoming: true };
+  pushOffer(state, offer, res);
+}
+
+function pushOffer(state, offer, res) {
   res.offer = offer;
   const typeLabel = offer.type === 'loan' ? 'loan' : offer.fee > 0 ? `€${offer.fee.toLocaleString()} transfer` : 'free transfer';
   const blocking = offer.sellingClubResponse === 'blocking';
@@ -687,22 +790,28 @@ function transferWeek(state, world, res) {
   });
 }
 
-function makeOffer(state, world, { free, ovr, myStr, age, month }) {
+function makeOffer(state, world, { free, ovr, myStr, age, month, forceAbroad = false }) {
   const p = state.player;
   const loan = !free && age <= 21 && ['bench', 'outcast'].includes(p.squadRole) && chance(0.6);
   const target = loan ? Math.min(myStr - 3, ovr + 4) : ovr + randint(-3, 4);
-  const abroadP = clamp((p.reputation - 12) / 60, 0.03, 0.6);
   const homeCountry = p.club?.country ?? p.nationality;
-  const goAbroad = chance(abroadP);
-  const leagues = playableLeagues(world).filter((l) => windowOpen(world, l.key, month) && (goAbroad ? l.country !== homeCountry : l.country === homeCountry) && Math.abs(leagueQuality(l.key) - target) <= 12);
+  const goAbroad = forceAbroad || chance(transferOutlook(state, world).abroad);
+  // Abroad: a wider net (clubs abroad take more of a gamble), and leagues near home or in Europe are likelier.
+  const qWin = goAbroad ? 16 : 12, cWin = goAbroad ? 7 : 5;
+  const myRegion = world.byName[p.nationality]?.region;
+  const leagues = playableLeagues(world).filter((l) => windowOpen(world, l.key, month) && (goAbroad ? l.country !== homeCountry : l.country === homeCountry) && Math.abs(leagueQuality(l.key) - target) <= qWin);
   const cands = [];
-  for (const l of leagues) for (const c of leagueClubs(state, world, l.key)) {
-    if (c === p.club?.name) continue;
-    const s = clubStrength(c, l.key);
-    if (Math.abs(s - target) <= 5) cands.push({ club: c, key: l.key, country: l.country, leagueName: l.name, str: s });
+  for (const l of leagues) {
+    const region = world.byName[l.country]?.region;
+    const lw = !goAbroad ? 1 : (l.country === p.nationality ? 1.5 : region === myRegion ? 2.5 : region === 'europe' ? 1.4 : 0.7);
+    for (const c of leagueClubs(state, world, l.key)) {
+      if (c === p.club?.name) continue;
+      const s = clubStrength(c, l.key);
+      if (Math.abs(s - target) <= cWin) cands.push({ club: c, key: l.key, country: l.country, leagueName: l.name, str: s, lw });
+    }
   }
   if (!cands.length) return null;
-  const c = pick(cands);
+  const { lw, ...c } = weightedPick(cands, (x) => x.lw);
   const years = age >= 31 ? randint(1, 2) : randint(2, 4);
   const yearsLeft = contractYearsLeft(state);
   const fee = loan || free || yearsLeft <= 0.5 ? 0 : Math.round(p.marketValue * (0.7 + Math.random() * 0.6) / 1000) * 1000;
@@ -732,6 +841,7 @@ function resolveOffer(state, world, offer, choiceId, res) {
   const p = state.player;
   const J = p.jerseyName;
   const fx = (e) => applyEffects(state, world, e, res, { source: 'transfer' });
+  if (offer.homecoming) applyEffects(state, world, choiceId === 'accept' ? { flag: 'promise_kept', unflag: 'hometown_promise', family: 6, morale: 6 } : state.flags.story?.hometown_promise ? { flag: 'promise_broken', unflag: 'hometown_promise', family: -3 } : {}, res, { source: 'transfer' });
   if (choiceId === 'reject') { if (p.club) { addTrust(state, 2, res); fx({ board: 2, fans: 2 }); } return `${J} turns down ${offer.club}.`; }
   if (choiceId === 'stay') { addTrust(state, 3, res); fx({ fans: 4, board: 3, dressing: 1 }); return `${J} tells his agent to close the door on ${offer.club}. The club notices the loyalty.`; }
   if (choiceId === 'push') {
@@ -818,9 +928,10 @@ function signRenewal(state, world, wage, years) {
 }
 
 // ═══════════════════════════ MONEY ═══════════════════════════
-function moneyMonth(state, res) {
+function moneyMonth(state, res, world) {
   const p = state.player;
   if (state.week > 0 && monthOf(state.week) === monthOf(state.week - 1)) return;
+  sponsorMonth(state, world, res, (d) => pushDecision(state, d));
   const wage = (p.club?.wageWeekly ?? 0) * 4.33;
   const endorse = p.endorsements.filter((e) => e.expiryWeek > state.week).reduce((a, e) => a + e.annualValue / 12, 0);
   p.endorsements = p.endorsements.filter((e) => e.expiryWeek > state.week);
@@ -909,6 +1020,7 @@ function seasonEnd(state, world, season, res) {
   if (age >= 29 && age <= 32) { changeStat(state, 'pace', -1, res); changeStat(state, 'physical', -1, res); if (chance(0.5)) changeStat(state, 'mental', 1, res); }
   if (age >= 33) { changeStat(state, 'pace', -randint(2, 3), res); changeStat(state, 'physical', -randint(2, 3), res); changeStat(state, 'dribbling', -1, res); if (p.position === 'GK') changeStat(state, 'goalkeeping', -randint(1, 2), res); }
   p.season = { apps: 0, goals: 0, assists: 0, motms: 0, ratings: [], growthUsed: 0 };
+  p.scoutBias = randint(-3, 3);
   p.yellowCards = 0;
   if (age >= 33 && !state.ended) {
     pushDecision(state, {
@@ -1022,11 +1134,40 @@ export function answerInterlude(state, world, choiceId) {
   return state.lastAside;
 }
 
+// ═══════════════════════════ SOCIAL MEDIA ═══════════════════════════
+// One post a week; it doesn't move the clock. The reaction depends on timing, image and what you post.
+export const socialOptions = (state, world) => (canPost(state) ? postOptions(state, world) : []);
+export const socialCanPost = (state) => canPost(state);
+export function socialPost(state, world, key) {
+  const before = snap(state);
+  const r = makePost(state, world, key);
+  if (!r) return null;
+  const res = emptyRes(state);
+  applyEffects(state, world, r.fx, res, { source: 'social' });
+  socialMilestones(state, res);
+  state.lastAside = { kind: 'post', post: r.post, headline: r.post.label, text: '', changes: diff(before, snap(state)), ripples: res.ripples ?? [], stats: res.statChanges, milestones: res.milestones };
+  return state.lastAside;
+}
+
 // ═══════════════════════════ FREE TIME ═══════════════════════════
 export const freeTimeSlots = (state) => freeTimeLeft(state);
-export const freeTimeList = (state, world) => freeTimeOptions(state, world, scenarioContext(state, world, null), conditionsMet);
+export const freeTimeList = (state, world) => {
+  const done = state.player.freeTime?.week === state.week ? state.player.freeTime.done : [];
+  return [...sponsorEventOptions(state).map((a) => ({ ...a, done: done.includes(a.id) })), ...freeTimeOptions(state, world, scenarioContext(state, world, null), conditionsMet)];
+};
 export function freeTime(state, world, id) {
   const before = snap(state);
+  if (id.startsWith('sponsor:')) {
+    if (freeTimeLeft(state) <= 0) return null;
+    const p = state.player;
+    const r = doSponsorEvent(state, id.slice(8));
+    if (!r) return null;
+    p.freeTime.used++; p.freeTime.done.push(id);
+    const res = emptyRes(state);
+    applyEffects(state, world, { wealth: r.fee, pfm: -2, stress: 1, followers: Math.round(p.followers * 0.004) + 200 }, res, { source: 'sponsor' });
+    state.lastAside = { kind: 'free', icon: 'briefcase', headline: id.slice(8) + ' appearance', text: r.text + ` Appearance fee: €${r.fee.toLocaleString()}.`, changes: diff(before, snap(state)), ripples: res.ripples ?? [], stats: res.statChanges };
+    return state.lastAside;
+  }
   const r = doFreeTime(state, world, id, applyEffects);
   if (!r) return null;
   if (r.res.mood) state.player.mood = r.res.mood;
@@ -1064,8 +1205,12 @@ export function advanceWeek(state, world, plan = { intensity: 'balanced', focus:
   if (p.injury) p.pfm = clamp(p.pfm + 4, 0, p.pfmCeiling);
   else {
     p.pfm = clamp(p.pfm + PFM.plan[plan.intensity], 0, p.pfmCeiling);
-    const gp = { hard: 0.22, balanced: 0.1, light: 0.04, rest: 0 }[plan.intensity];
-    if (chance(gp)) grow(state, plan.focus && plan.focus !== 'auto' ? plan.focus : pick(relevantStats(p.position).slice(0, 3)), res);
+    // Training gains: bigger when far below potential, at a club with better coaching, and with a clear head.
+    const coaching = p.club ? 1 + (leagueQuality(p.club.key) - 60) / 120 : 0.8;
+    const headspace = p.life ? 1 - Math.max(0, meter(p, 'stress') - 70) / 150 : 1;
+    const gp = GROWTH.training[plan.intensity] * clamp(0.5 + potentialGap(p) / 22, 0.35, 1.6) * coaching * headspace;
+    if (chance(gp)) grow(state, plan.focus && plan.focus !== 'auto' ? plan.focus : growthStat(p), res);
+    if (plan.intensity === 'hard' && chance(gp * 0.4)) grow(state, growthStat(p), res);
     // Hard work on the training ground slowly wins a manager back.
     if (p.club && p.manager.trust < 45 && plan.intensity !== 'rest' && chance(plan.intensity === 'hard' ? 0.6 : 0.35)) addTrust(state, 1, res);
   }
@@ -1077,18 +1222,24 @@ export function advanceWeek(state, world, plan = { intensity: 'balanced', focus:
   injuryWeek(state, world, res, res.matches.filter((m) => m.minutes > 0).length, plan);
   p.pfm = clamp(p.pfm + PFM.naturalRecovery, 0, p.pfmCeiling);
   p.pfmCeiling = round1(Math.max(0, p.pfmCeiling - PFM.ageDecay(ageNow(state))));
+  const ft = fameTarget(state);
+  if (p.reputation > ft) p.reputation = round1(p.reputation - (p.reputation - ft) * 0.02);
+  // Audiences drift away when you're more followed than famous.
+  const ceil = followerCeiling(p);
+  if (p.followers > ceil) p.followers = Math.round(p.followers - (p.followers - ceil) * 0.01);
   // 4b. Life: relationships drift, stress and morale move, red lines trigger stories
   lifeWeek(state, world, res, plan);
   // 5. Club life
   updateRole(state, res);
   if (state.week % 4 === 0) updateMarketValue(state);
-  moneyMonth(state, res);
+  moneyMonth(state, res, world);
   contractWeek(state, world, res);
   if (!state.ended) transferWeek(state, world, res);
   // 6. Season end
   const season = currentSeason(state);
   if (season && !season.finished && isComplete(season)) seasonEnd(state, world, season, res);
   // 7. Story triggers, event and next week's key moment
+  socialMilestones(state, res);
   collectTriggers(state, res, roleBefore, ntBefore);
   eventWeek(state, world, res);
   momentWeek(state, world, res);

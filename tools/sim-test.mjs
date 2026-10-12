@@ -5,7 +5,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadWorld, playableLeagues, leagueClubs } from '../public/js/world.js';
-import { newCareer, advanceWeek, chooseDecision, legacy, ageNow, maybeInterlude, answerInterlude, freeTimeList, freeTime, freeTimeSlots } from '../public/js/engine.js';
+import { newCareer, advanceWeek, chooseDecision, legacy, ageNow, maybeInterlude, answerInterlude, freeTimeList, freeTime, freeTimeSlots, socialOptions, socialPost } from '../public/js/engine.js';
+import { lifeLegacy, epilogue } from '../public/js/epilogue.js';
+import { activeDeals } from '../public/js/sponsors.js';
 import { meter } from '../public/js/life.js';
 import { overall } from '../public/js/player.js';
 import { narrateOffline } from '../public/js/narrator-offline.js';
@@ -18,7 +20,7 @@ const positions = ['GK', 'CB', 'FB', 'DM', 'CM', 'AM', 'W', 'ST'];
 
 const starts = [{ key: 'Indonesia|1' }, { key: 'Indonesia|1' }, { key: 'England|2' }, { key: 'Brazil|1' }, { key: 'Japan|1' }];
 let errors = 0;
-const fired = new Map(); let decisions = 0, weeksTotal = 0, asides = 0, clicks = 0, words = 0;
+const fired = new Map(); let decisions = 0, weeksTotal = 0, asides = 0, clicks = 0, words = 0, posts = 0, deals = 0;
 const checkText = (where, texts) => { const bad = texts.find((t) => /\{\w+\}/.test(t ?? '')); if (bad) throw new Error(`Unfilled placeholder in ${where}: "${bad.slice(0, 140)}"`); };
 for (let i = 0; i < runs; i++) {
   const start = starts[i % starts.length];
@@ -34,6 +36,9 @@ for (let i = 0; i < runs; i++) {
       for (const d of state.pending) if (!d.chosen) chooseDecision(state, d.id, pick(d.choices).id);
       // Free time and mid-week interludes: they never move the clock.
       if (Math.random() < 0.5) for (const a of freeTimeList(state, world).filter((x) => !x.done).slice(0, freeTimeSlots(state))) { if (Math.random() < 0.5) { const r = freeTime(state, world, a.id); asides++; checkText('free time ' + a.id, [a.label, a.desc, r.text, ...r.ripples.map((x) => x.text)]); } }
+      // A social post most weeks
+      const opts = socialOptions(state, world);
+      if (opts.length && Math.random() < 0.6) { const r = socialPost(state, world, pick(opts).key); posts++; checkText('post', [r.post.caption, ...r.post.comments.map((c) => c.text), ...r.ripples.map((x) => x.text)]); }
       clicks++;
       let it; while ((it = maybeInterlude(state, world))) { clicks++; asides++; checkText('interlude ' + it.sid, [it.headline, it.text, it.time, ...it.choices.flatMap((c) => [c.label, c.description, c.consequence])]); const r = answerInterlude(state, world, pick(it.choices).id); checkText('interlude result ' + it.sid, [r.text, ...r.ripples.map((x) => x.text)]); fired.set(it.sid, (fired.get(it.sid) ?? 0) + 1); }
       const res = advanceWeek(state, world, { intensity: pick(['hard', 'balanced', 'balanced', 'light', 'rest']), focus: 'auto' });
@@ -56,7 +61,11 @@ for (let i = 0; i < runs; i++) {
       if (res.moved) console.log(`  -> wk ${res.week}: ${res.moved.from} → ${res.moved.to} (${res.moved.type})`);
       weeks++;
     }
-    const L = legacy(state);
+    const L = legacy(state), LL = lifeLegacy(state);
+    const ep = epilogue(state, world);
+    checkText('epilogue', ep.map((x) => x.text));
+    deals += p.endorsements.length;
+    console.log(`  LIFE: ${LL.label} (${LL.score}) · sponsors over career ${p.endorsements.length} (${[...new Set(p.endorsements.map((x) => x.brand))].slice(0, 6).join(', ')}) · followers ${p.followers} · potential ${p.potential}`);
     console.log(`  END: ${state.ended?.reason ?? 'timeout'} at age ${ageNow(state)} after ${weeks} weeks. Apps ${p.career.apps}, goals ${p.career.goals}, trophies ${p.career.trophies.length}, caps ${p.national.caps}, peak OVR ${p.career.peakOverall}, legacy ${L.label} (${L.score})`);
   } catch (e) {
     errors++;
@@ -66,7 +75,7 @@ for (let i = 0; i < runs; i++) {
 const byCat = {}; for (const [id, n] of fired) { const c = world.scenarioById[id].cat; byCat[c] = (byCat[c] ?? 0) + n; }
 console.log(`
 Scenarios: ${fired.size}/${world.scenarios.length} different ones fired, ${[...fired.values()].reduce((a, b) => a + b, 0)} total over ${weeksTotal} weeks (${(decisions / weeksTotal).toFixed(2)} decisions/week)
-Story: ${Math.round(words / weeksTotal)} words/week · ${asides} free-time/interlude moments · ${Math.round(100 * (1 - weeksTotal / clicks))}% of Play clicks did not advance time`);
+Social: ${posts} posts · sponsor deals ${deals} · Story: ${Math.round(words / weeksTotal)} words/week · ${asides} free-time/interlude moments · ${Math.round(100 * (1 - weeksTotal / clicks))}% of Play clicks did not advance time`);
 console.log("By category: " + Object.entries(byCat).map(([k, v]) => `${k} ${v}`).join(" · "));
 const never = world.scenarios.filter((x) => !fired.has(x.id) && !x.chainOnly && x.trigger !== "start").map((x) => x.id);
 if (process.argv.includes("--never")) console.log(`Never fired (${never.length}): ${never.join(", ")}`);

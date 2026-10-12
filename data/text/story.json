@@ -1,6 +1,5 @@
 {
   "_about": "Phrase banks for the long weekly story (see public/js/narrator-offline.js). One line is picked at random and lines used recently are skipped. Tokens: {J} player, {M}/{Mf} manager, {club}, {opp}, {score}, {comp}, {venue}, {MUM} {DAD} {SIB} {SIBr} {BF} {BFf} {BFjob} {Pf} partner, {JR} {OUT} journalist/outlet, {CAP} {CAPl} captain, {PRES} {PRESl} president, {T} ally teammate, {R} rival teammate, random words {PLACE} {FOOD} {DAY} {WEATHER} {SHOW} {HOBBY} {CAR} {GIFT}, {month}, {age}. Add lines freely.",
-
   "opening": {
     "match": [
       "Matchweek. The training ground is quieter than usual, the jokes a little shorter. {WEATHER} over the stadium on the morning of the game.",
@@ -22,30 +21,91 @@
       "International breaks, cup gaps, fixture holes: whatever it's called, it's a week of work in the shadows."
     ]
   },
-
   "moodLine": {
-    "Focused": ["{J} feels focused: one session at a time, one meal at a time.", "His head is clear this week, the noise turned down to a hum.", "He's in that rare state where nothing distracts him."],
-    "Determined": ["There is something hard in {J}'s jaw this week. He wants something and he knows it.", "{J} arrives first and leaves last. Nobody has to ask why.", "Determination looks boring from the outside: extra reps, early nights. {J} is very boring this week."],
-    "Motivated": ["{J} is hungry. Every drill feels like an audition.", "Motivation is cheap, they say. {J} has plenty this week anyway.", "He can't sit still. Every session feels like a chance."],
-    "OnFire": ["{J} is flying. Everything he touches seems to work, and he's stopped questioning why.", "Confidence is a drug and {J} is high on it this week.", "Teammates have started passing to him in training just to see what he'll do."],
-    "Confident": ["{J} walks a little taller this week.", "He's playing without fear — the best way to play.", "The doubts are quiet. {J} enjoys the silence."],
-    "Anxious": ["{J} sleeps badly. His mind runs the same three thoughts on a loop at 3am.", "There's a knot in his stomach that won't untie, no matter how many sessions he does.", "He checks his phone too often and hates what he reads."],
-    "Frustrated": ["{J} is frustrated, and it leaks out in small ways: a kicked ball, a short answer, a slammed locker.", "Nothing seems to go his way and he's started taking it personally.", "{J} trains angry. Coaches love it until he catches someone late."],
-    "Broken": ["{J} feels broken. Getting out of bed is a decision, not a habit.", "Some weeks you just survive. This is one.", "The light has gone out of him, and everyone around him can see it."],
-    "Lost": ["{J} feels lost — in the squad, in the city, in his own head.", "He doesn't know what he's working towards anymore, only that he has to keep working.", "There's a fog around everything this week."],
-    "Homesick": ["{J} misses home with a physical ache: the food, the noise, his mother's voice in the next room.", "Every video call home ends with a silence neither side wants to fill."],
-    "Angry": ["{J} is angry and doesn't fully know at whom.", "The fury is useful in tackles and dangerous everywhere else."],
-    "Numb": ["{J} goes through the motions. He feels nothing much, which scares him more than feeling bad.", "Numb is a strange place: no highs, no lows, just the next session."],
-    "Relieved": ["A weight has lifted and {J} can breathe properly again.", "Relief makes him generous: he buys the whole kit room coffee."]
+    "Focused": [
+      "{J} feels focused: one session at a time, one meal at a time.",
+      "His head is clear this week, the noise turned down to a hum.",
+      "He's in that rare state where nothing distracts him."
+    ],
+    "Determined": [
+      "There is something hard in {J}'s jaw this week. He wants something and he knows it.",
+      "{J} arrives first and leaves last. Nobody has to ask why.",
+      "Determination looks boring from the outside: extra reps, early nights. {J} is very boring this week."
+    ],
+    "Motivated": [
+      "{J} is hungry. Every drill feels like an audition.",
+      "Motivation is cheap, they say. {J} has plenty this week anyway.",
+      "He can't sit still. Every session feels like a chance."
+    ],
+    "OnFire": [
+      "{J} is flying. Everything he touches seems to work, and he's stopped questioning why.",
+      "Confidence is a drug and {J} is high on it this week.",
+      "Teammates have started passing to him in training just to see what he'll do."
+    ],
+    "Confident": [
+      "{J} walks a little taller this week.",
+      "He's playing without fear — the best way to play.",
+      "The doubts are quiet. {J} enjoys the silence."
+    ],
+    "Anxious": [
+      "{J} sleeps badly. His mind runs the same three thoughts on a loop at 3am.",
+      "There's a knot in his stomach that won't untie, no matter how many sessions he does.",
+      "He checks his phone too often and hates what he reads."
+    ],
+    "Frustrated": [
+      "{J} is frustrated, and it leaks out in small ways: a kicked ball, a short answer, a slammed locker.",
+      "Nothing seems to go his way and he's started taking it personally.",
+      "{J} trains angry. Coaches love it until he catches someone late."
+    ],
+    "Broken": [
+      "{J} feels broken. Getting out of bed is a decision, not a habit.",
+      "Some weeks you just survive. This is one.",
+      "The light has gone out of him, and everyone around him can see it."
+    ],
+    "Lost": [
+      "{J} feels lost — in the squad, in the city, in his own head.",
+      "He doesn't know what he's working towards anymore, only that he has to keep working.",
+      "There's a fog around everything this week."
+    ],
+    "Homesick": [
+      "{J} misses home with a physical ache: the food, the noise, his mother's voice in the next room.",
+      "Every video call home ends with a silence neither side wants to fill."
+    ],
+    "Angry": [
+      "{J} is angry and doesn't fully know at whom.",
+      "The fury is useful in tackles and dangerous everywhere else."
+    ],
+    "Numb": [
+      "{J} goes through the motions. He feels nothing much, which scares him more than feeling bad.",
+      "Numb is a strange place: no highs, no lows, just the next session."
+    ],
+    "Relieved": [
+      "A weight has lifted and {J} can breathe properly again.",
+      "Relief makes him generous: he buys the whole kit room coffee."
+    ]
   },
-
   "role": {
-    "starter": ["{J} is a first-choice name now. The pressure has changed shape: it's no longer 'will I play?' but 'how well?'.", "His place in the eleven feels secure — for now. In football, 'for now' is the only kind of secure.", "Starting every week brings a new kind of tiredness, and {J} wouldn't trade it for anything."],
-    "rotation": ["{J} is in and out of the side. Every chance has to count double.", "Rotation means living on the edge of the eleven: some weeks in, some weeks watching.", "He's close. Close enough to taste it, far enough to hurt."],
-    "bench": ["The bench is where {J} lives at the moment. He warms up properly every time anyway.", "{J} has memorised the pattern of the dugout roof. He'd rather not have.", "Minutes are scarce. {J} treats every training session like a cup final, because it's the only stage he gets."],
-    "outcast": ["{J} trains with the reserves now. Nobody says the word 'outcast'. Nobody has to.", "His name isn't on the team sheets pinned to the dressing-room wall. He checks anyway.", "The first team trains on pitch one. {J} is on pitch four, with the kids and the forgotten."]
+    "starter": [
+      "{J} is a first-choice name now. The pressure has changed shape: it's no longer 'will I play?' but 'how well?'.",
+      "His place in the eleven feels secure — for now. In football, 'for now' is the only kind of secure.",
+      "Starting every week brings a new kind of tiredness, and {J} wouldn't trade it for anything."
+    ],
+    "rotation": [
+      "{J} is in and out of the side. Every chance has to count double.",
+      "Rotation means living on the edge of the eleven: some weeks in, some weeks watching.",
+      "He's close. Close enough to taste it, far enough to hurt."
+    ],
+    "bench": [
+      "The bench is where {J} lives at the moment. He warms up properly every time anyway.",
+      "{J} has memorised the pattern of the dugout roof. He'd rather not have.",
+      "Minutes are scarce. {J} treats every training session like a cup final, because it's the only stage he gets."
+    ],
+    "outcast": [
+      "{J} trains with the reserves now. Nobody says the word 'outcast'. Nobody has to.",
+      "His name isn't on the team sheets pinned to the dressing-room wall. He checks anyway.",
+      "The first team trains on pitch one. {J} is on pitch four, with the kids and the forgotten."
+    ]
   },
-
   "training": {
     "hard": [
       "{J} asked for a hard week and gets one: double sessions, sprint ladders, finishing until his legs scream. The fitness coach writes 'good' on his sheet, which is the highest praise he gives.",
@@ -87,7 +147,6 @@
       "Something clicks this week — {STATS}."
     ]
   },
-
   "coachNote": [
     "On Thursday one of the assistant coaches pulls {J} aside to work on his first touch under pressure. Twenty minutes, one drill, a hundred repetitions.",
     "{Mf} stops a session to move {J} two metres to the left. It changes everything. It's the kind of thing you only learn by being moved two metres to the left.",
@@ -98,7 +157,6 @@
     "{CAP} stays behind to practise set-pieces with {J}. They barely speak. It's the best hour of the week.",
     "The fitness coach introduces a new test. {J} finishes second and is annoyed about it for two days."
   ],
-
   "injuryLine": [
     "{J} sits in the physio room staring at the ceiling tiles, counting fixtures he will miss.",
     "The walk from the treatment room to the car takes a long time on crutches.",
@@ -113,12 +171,23 @@
     "Back with the group. The lads give him a round of applause and then immediately nutmeg him."
   ],
   "roleChange": {
-    "starter": ["The team sheet goes up on Friday and {J}'s name is in the eleven — and it's starting to look permanent.", "{Mf} has seen enough: {J} is now a starter."],
-    "rotation": ["{J} is in the rotation now — in some weeks, out in others.", "Squad status changes: {J} drifts into the rotation group."],
-    "bench": ["{J}'s name slides down the pecking order. The bench is his for now.", "Squad status: back to the bench."],
-    "outcast": ["{J} is told to train with the reserves. It's the shortest meeting of his life.", "Squad status: out of the picture. Nobody explains why. Nobody needs to."]
+    "starter": [
+      "The team sheet goes up on Friday and {J}'s name is in the eleven — and it's starting to look permanent.",
+      "{Mf} has seen enough: {J} is now a starter."
+    ],
+    "rotation": [
+      "{J} is in the rotation now — in some weeks, out in others.",
+      "Squad status changes: {J} drifts into the rotation group."
+    ],
+    "bench": [
+      "{J}'s name slides down the pecking order. The bench is his for now.",
+      "Squad status: back to the bench."
+    ],
+    "outcast": [
+      "{J} is told to train with the reserves. It's the shortest meeting of his life.",
+      "Squad status: out of the picture. Nobody explains why. Nobody needs to."
+    ]
   },
-
   "prematch": {
     "home": [
       "The stadium is filling an hour before kick-off, and the noise carries all the way to the dressing room.",
@@ -135,7 +204,6 @@
       "An away day in {WEATHER}. The pitch is heavier than the one at home, and so are the legs."
     ]
   },
-
   "flow": {
     "Wbig": [
       "It's over by half-time. The second half is a procession, the away fans leaving in quiet clumps.",
@@ -169,63 +237,168 @@
       "By the hour mark it's about damage limitation. They don't limit much."
     ]
   },
-
   "sideline": {
-    "injured": ["{J} watches from the stands, his leg strapped.", "{J} spends the match in the stands with a hood up, wincing at every tackle.", "Injured, {J} watches on a TV in the physio room, kicking every ball with his good leg."],
-    "suspended": ["{J} serves his suspension in a club tracksuit in the stands.", "Suspended, {J} watches from the directors' box and hates every minute of it.", "{J} sits out the match, banned. The longest ninety minutes of his week."]
+    "injured": [
+      "{J} watches from the stands, his leg strapped.",
+      "{J} spends the match in the stands with a hood up, wincing at every tackle.",
+      "Injured, {J} watches on a TV in the physio room, kicking every ball with his good leg."
+    ],
+    "suspended": [
+      "{J} serves his suspension in a club tracksuit in the stands.",
+      "Suspended, {J} watches from the directors' box and hates every minute of it.",
+      "{J} sits out the match, banned. The longest ninety minutes of his week."
+    ]
   },
   "card": {
-    "red": ["Then the red card: a lunge he regrets mid-air.", "A second yellow for a tug he didn't need to make. Off he goes.", "Straight red — a moment of madness that he will replay all night."],
-    "yellow": ["He picks up a yellow card along the way.", "A booking for a cynical foul, the kind managers secretly like.", "He's booked for dissent, which annoys him more than the foul would have."]
+    "red": [
+      "Then the red card: a lunge he regrets mid-air.",
+      "A second yellow for a tug he didn't need to make. Off he goes.",
+      "Straight red — a moment of madness that he will replay all night."
+    ],
+    "yellow": [
+      "He picks up a yellow card along the way.",
+      "A booking for a cynical foul, the kind managers secretly like.",
+      "He's booked for dissent, which annoys him more than the foul would have."
+    ]
   },
-  "motm": ["He is named man of the match.", "The sponsors hand him the man-of-the-match trophy, which is enormous and slightly ugly.", "Man of the match. He gives the trophy to the kit man's son.", "The stadium announcer reads his name as man of the match and the crowd roars."],
-
+  "motm": [
+    "He is named man of the match.",
+    "The sponsors hand him the man-of-the-match trophy, which is enormous and slightly ugly.",
+    "Man of the match. He gives the trophy to the kit man's son.",
+    "The stadium announcer reads his name as man of the match and the crowd roars."
+  ],
   "action": {
     "ATT": {
-      "good": ["He makes the centre-backs miserable all game: running in behind, dropping short, never still.", "Every time he gets the ball facing goal, the stadium leans forward.", "His movement is a nightmare for the defence; they never settle on who should mark him.", "He wins three free kicks in dangerous areas just by being too quick for clumsy legs."],
-      "bad": ["He's starved of service and frustrated when he does get it.", "Two big chances come and go. He looks at the sky after the second one.", "He's caught offside four times and the home fans start counting.", "The centre-back has the better of him in the air all afternoon."]
+      "good": [
+        "He makes the centre-backs miserable all game: running in behind, dropping short, never still.",
+        "Every time he gets the ball facing goal, the stadium leans forward.",
+        "His movement is a nightmare for the defence; they never settle on who should mark him.",
+        "He wins three free kicks in dangerous areas just by being too quick for clumsy legs."
+      ],
+      "bad": [
+        "He's starved of service and frustrated when he does get it.",
+        "Two big chances come and go. He looks at the sky after the second one.",
+        "He's caught offside four times and the home fans start counting.",
+        "The centre-back has the better of him in the air all afternoon."
+      ]
     },
     "MID": {
-      "good": ["He finds pockets nobody else sees and keeps the ball moving at the right speed.", "He wins the midfield battle through sheer stubbornness.", "His passing sets the tempo; when he plays quickly, the whole team plays quickly.", "He covers every blade of grass. The GPS data will be ridiculous."],
-      "bad": ["He's bypassed too often, the game happening over his head.", "His passes are a fraction slow and the press eats him alive.", "He gives the ball away cheaply twice in his own half. The second one nearly costs a goal.", "He never finds his rhythm, always half a second behind."]
+      "good": [
+        "He finds pockets nobody else sees and keeps the ball moving at the right speed.",
+        "He wins the midfield battle through sheer stubbornness.",
+        "His passing sets the tempo; when he plays quickly, the whole team plays quickly.",
+        "He covers every blade of grass. The GPS data will be ridiculous."
+      ],
+      "bad": [
+        "He's bypassed too often, the game happening over his head.",
+        "His passes are a fraction slow and the press eats him alive.",
+        "He gives the ball away cheaply twice in his own half. The second one nearly costs a goal.",
+        "He never finds his rhythm, always half a second behind."
+      ]
     },
     "DEF": {
-      "good": ["He wins every header that matters and reads the danger before it arrives.", "One goal-saving block in the second half is worth as much as any goal.", "He's calm on the ball and ruthless off it.", "The striker he's marking is substituted with twenty minutes left, a quiet admission."],
-      "bad": ["He's turned too easily and the winger enjoys himself.", "One misjudged header leads to a big chance; the keeper saves him.", "He looks nervous with the ball at his feet and the crowd senses it.", "Caught on the wrong side of his man more than once."]
+      "good": [
+        "He wins every header that matters and reads the danger before it arrives.",
+        "One goal-saving block in the second half is worth as much as any goal.",
+        "He's calm on the ball and ruthless off it.",
+        "The striker he's marking is substituted with twenty minutes left, a quiet admission."
+      ],
+      "bad": [
+        "He's turned too easily and the winger enjoys himself.",
+        "One misjudged header leads to a big chance; the keeper saves him.",
+        "He looks nervous with the ball at his feet and the crowd senses it.",
+        "Caught on the wrong side of his man more than once."
+      ]
     },
     "GK": {
-      "good": ["He makes two saves that he has no business making.", "He commands his box like he owns it, plucking crosses out of the air.", "His distribution starts attack after attack.", "One reflex stop in the last minute is the moment of the match."],
-      "bad": ["He flaps at a cross and the defence has to scramble.", "A shot he should hold squirms under him.", "He's beaten at his near post, the goalkeeper's cardinal sin.", "His kicking is erratic and the defence stops trusting him."]
+      "good": [
+        "He makes two saves that he has no business making.",
+        "He commands his box like he owns it, plucking crosses out of the air.",
+        "His distribution starts attack after attack.",
+        "One reflex stop in the last minute is the moment of the match."
+      ],
+      "bad": [
+        "He flaps at a cross and the defence has to scramble.",
+        "A shot he should hold squirms under him.",
+        "He's beaten at his near post, the goalkeeper's cardinal sin.",
+        "His kicking is erratic and the defence stops trusting him."
+      ]
     }
   },
-
   "mgrQuote": {
     "W": {
-      "good": ["{Mf} in the press conference: \"{J} was excellent. He's earning everything he's getting.\"", "\"I'm pleased with {J}. He did exactly what we asked and more,\" says {Mf}.", "{Mf} singles him out: \"That's the level. Now he does it again next week.\""],
-      "mid": ["{Mf}: \"A good result. Some players can give more, but we take the win.\"", "\"Three points. The rest we fix on Monday,\" {Mf} tells reporters."],
-      "bad": ["{Mf} won't be drawn on {J}: \"We won. That's what matters today.\"", "\"Not everyone was at their level,\" says {Mf}. Everyone knows who he means."],
-      "none": ["{Mf} praises the squad: \"Everybody contributed, on and off the pitch.\"", "\"A team performance,\" says {Mf}, which is what managers say when they're happy."]
+      "good": [
+        "{Mf} in the press conference: \"{J} was excellent. He's earning everything he's getting.\"",
+        "\"I'm pleased with {J}. He did exactly what we asked and more,\" says {Mf}.",
+        "{Mf} singles him out: \"That's the level. Now he does it again next week.\""
+      ],
+      "mid": [
+        "{Mf}: \"A good result. Some players can give more, but we take the win.\"",
+        "\"Three points. The rest we fix on Monday,\" {Mf} tells reporters."
+      ],
+      "bad": [
+        "{Mf} won't be drawn on {J}: \"We won. That's what matters today.\"",
+        "\"Not everyone was at their level,\" says {Mf}. Everyone knows who he means."
+      ],
+      "none": [
+        "{Mf} praises the squad: \"Everybody contributed, on and off the pitch.\"",
+        "\"A team performance,\" says {Mf}, which is what managers say when they're happy."
+      ]
     },
     "D": {
-      "good": ["{Mf}: \"{J} was one of the positives. We should have won.\"", "\"I can't fault {J}'s attitude,\" says {Mf}. \"The result, I can fault.\""],
-      "mid": ["\"A point. We wanted three,\" says {Mf}, through slightly clenched teeth.", "{Mf}: \"We move on. There are things to improve.\""],
-      "bad": ["{Mf} is asked about {J}'s display and takes a long breath before answering: \"He knows he can do more.\"", "\"Some decisions today were not good enough,\" says {Mf}. {J} reads the quote on the bus."],
-      "none": ["{Mf}: \"A fair result. We go again.\"", "\"Disappointed, not devastated,\" says {Mf}."]
+      "good": [
+        "{Mf}: \"{J} was one of the positives. We should have won.\"",
+        "\"I can't fault {J}'s attitude,\" says {Mf}. \"The result, I can fault.\""
+      ],
+      "mid": [
+        "\"A point. We wanted three,\" says {Mf}, through slightly clenched teeth.",
+        "{Mf}: \"We move on. There are things to improve.\""
+      ],
+      "bad": [
+        "{Mf} is asked about {J}'s display and takes a long breath before answering: \"He knows he can do more.\"",
+        "\"Some decisions today were not good enough,\" says {Mf}. {J} reads the quote on the bus."
+      ],
+      "none": [
+        "{Mf}: \"A fair result. We go again.\"",
+        "\"Disappointed, not devastated,\" says {Mf}."
+      ]
     },
     "L": {
-      "good": ["{Mf}: \"Even in defeat, {J} showed character.\"", "\"If everyone had {J}'s attitude today, we don't lose,\" says {Mf}. It doesn't go down well in the dressing room."],
-      "mid": ["\"We lost the details,\" says {Mf}. \"Football is details.\"", "{Mf} keeps it short: \"Not good enough. Collectively.\""],
-      "bad": ["{Mf} is blunt: \"Some players were not ready for this game.\" He doesn't need to name {J}.", "\"We need more from certain players,\" says {Mf}. The cameras find {J} on the bench."],
-      "none": ["{Mf}: \"A painful day. We look at ourselves first.\"", "\"No excuses,\" says {Mf}, and then gives three."]
+      "good": [
+        "{Mf}: \"Even in defeat, {J} showed character.\"",
+        "\"If everyone had {J}'s attitude today, we don't lose,\" says {Mf}. It doesn't go down well in the dressing room."
+      ],
+      "mid": [
+        "\"We lost the details,\" says {Mf}. \"Football is details.\"",
+        "{Mf} keeps it short: \"Not good enough. Collectively.\""
+      ],
+      "bad": [
+        "{Mf} is blunt: \"Some players were not ready for this game.\" He doesn't need to name {J}.",
+        "\"We need more from certain players,\" says {Mf}. The cameras find {J} on the bench."
+      ],
+      "none": [
+        "{Mf}: \"A painful day. We look at ourselves first.\"",
+        "\"No excuses,\" says {Mf}, and then gives three."
+      ]
     }
   },
-
   "after": {
-    "W": ["In the dressing room the music goes up and {CAPl} does a dance nobody asked for.", "The bus home is loud. Somebody orders {FOOD} for forty people.", "Ice baths have never felt so pleasant."],
-    "D": ["The dressing room is flat. Nobody can decide whether to be happy or annoyed, so everyone is both.", "Quiet showers, quick exits. A point is a point.", "{CAPl} gives a short speech. It's about next week."],
-    "L": ["The dressing room is silent except for the sound of tape being peeled off ankles.", "{Mf} doesn't shout. That's worse.", "On the bus, every phone is face-down. Nobody wants to read anything."]
+    "W": [
+      "In the dressing room the music goes up and {CAPl} does a dance nobody asked for.",
+      "The bus home is loud. Somebody orders {FOOD} for forty people.",
+      "Ice baths have never felt so pleasant."
+    ],
+    "D": [
+      "The dressing room is flat. Nobody can decide whether to be happy or annoyed, so everyone is both.",
+      "Quiet showers, quick exits. A point is a point.",
+      "{CAPl} gives a short speech. It's about next week."
+    ],
+    "L": [
+      "The dressing room is silent except for the sound of tape being peeled off ankles.",
+      "{Mf} doesn't shout. That's worse.",
+      "On the bus, every phone is face-down. Nobody wants to read anything."
+    ]
   },
-
   "dressing": {
     "high": [
       "The dressing room is {J}'s place now. He sits next to {T}, the jokes go through him, and younger players ask his opinion.",
@@ -245,221 +418,771 @@
       "Nobody passes him the aux cable. Nobody asks how his weekend was. Small things. Heavy things.",
       "{CAP} tells him, kindly but clearly, that some of the boys think he's 'not one of us'."
     ],
-    "ally": ["{T} has become a real friend: rides to training, shared playlists, an unspoken agreement to have each other's back.", "{T} invites {J} round for dinner with his family. The kids climb all over him.", "{T} defends {J} in a heated team meeting. It's noticed."],
-    "rival": ["Things with {R} are frosty. A shoulder in training here, a pointed silence there.", "{R} makes a joke about {J}'s last game in front of the whole squad. A few laugh.", "{J} and {R} go for the same ball in a training game and neither pulls out. The coaches separate them."]
+    "ally": [
+      "{T} has become a real friend: rides to training, shared playlists, an unspoken agreement to have each other's back.",
+      "{T} invites {J} round for dinner with his family. The kids climb all over him.",
+      "{T} defends {J} in a heated team meeting. It's noticed."
+    ],
+    "rival": [
+      "Things with {R} are frosty. A shoulder in training here, a pointed silence there.",
+      "{R} makes a joke about {J}'s last game in front of the whole squad. A few laugh.",
+      "{J} and {R} go for the same ball in a training game and neither pulls out. The coaches separate them."
+    ]
   },
-
   "home": {
     "family": {
-      "high": ["Home feels warm this week. {MUM}'s voice notes arrive every morning, half prayer and half instructions to eat properly.", "{DAD} watches every match now, even the boring ones, and texts tactical advice that is always wrong and always welcome.", "Little {SIB} has the wallpaper of {J} on their phone and pretends it's ironic.", "A box arrives from home: snacks, a hand-knitted thing, a note from {MUM}. The squad steal the snacks."],
-      "mid": ["The calls with home are short this week — everyone is busy, nobody is upset.", "{MUM} asks the same three questions she always asks. He gives the same three answers. It's comforting.", "{DAD} sends a link to an article about {J} with no message. That's {DAD}.", "{SIB} needs help with homework over video call. He is no help at all."],
-      "low": ["The family group chat has gone quiet, and the silence feels pointed.", "{DAD} hasn't called in weeks. {MUM} says he's 'busy'. {J} knows better.", "Every call home turns into an argument about something else that is really about the same thing.", "He opens the family chat, types a message, deletes it. Types again. Deletes it."]
+      "high": [
+        "Home feels warm this week. {MUM}'s voice notes arrive every morning, half prayer and half instructions to eat properly.",
+        "{DAD} watches every match now, even the boring ones, and texts tactical advice that is always wrong and always welcome.",
+        "{SIB} has a photo of {J} as {SIBhis} phone wallpaper and pretends it's ironic.",
+        "A box arrives from home: snacks, a hand-knitted thing, a note from {MUM}. The squad steal the snacks."
+      ],
+      "mid": [
+        "The calls with home are short this week — everyone is busy, nobody is upset.",
+        "{MUM} asks the same three questions she always asks. He gives the same three answers. It's comforting.",
+        "{DAD} sends a link to an article about {J} with no message. That's {DAD}.",
+        "{SIB} wants advice over video call about something at {SIBplace}. {J} is no help at all."
+      ],
+      "low": [
+        "The family group chat has gone quiet, and the silence feels pointed.",
+        "{DAD} hasn't called in weeks. {MUM} says he's 'busy'. {J} knows better.",
+        "Every call home turns into an argument about something else that is really about the same thing.",
+        "He opens the family chat, types a message, deletes it. Types again. Deletes it."
+      ]
     },
     "love": {
-      "high": ["With {Pf}, home is the quiet place. She knows when to ask about the match and when to just put the kettle on.", "{Pf} has started a tradition: whatever happens on the pitch, they eat {FOOD} together on Sunday night.", "{Pf} sends him a voice note before every game. He listens to it in the tunnel.", "{J} catches himself planning a future with {Pf} in it. It doesn't scare him."],
-      "mid": ["Things with {Pf} are fine. Busy, but fine. They keep promising each other a proper weekend.", "{Pf} is patient with his schedule. Patience isn't infinite, and they both know it.", "A small argument about where to eat becomes a long argument about how little time they spend together, then a quiet truce.", "{Pf} watches the match from the family section and gives him a thumbs up he can just about see."],
-      "low": ["{Pf} is distant. When he talks about football, her eyes drift to her phone.", "The flat is full of unfinished conversations.", "{Pf} says 'I'm fine' in the tone that means the opposite, and he's too tired to ask.", "Another evening of two people in the same room on two different planets."]
+      "high": [
+        "With {Pf}, home is the quiet place. She knows when to ask about the match and when to just put the kettle on.",
+        "{Pf} has started a tradition: whatever happens on the pitch, they eat {FOOD} together on Sunday night.",
+        "{Pf} sends him a voice note before every game. He listens to it in the tunnel.",
+        "{J} catches himself planning a future with {Pf} in it. It doesn't scare him."
+      ],
+      "mid": [
+        "Things with {Pf} are fine. Busy, but fine. They keep promising each other a proper weekend.",
+        "{Pf} is patient with his schedule. Patience isn't infinite, and they both know it.",
+        "A small argument about where to eat becomes a long argument about how little time they spend together, then a quiet truce.",
+        "{Pf} watches the match from the family section and gives him a thumbs up he can just about see."
+      ],
+      "low": [
+        "{Pf} is distant. When he talks about football, her eyes drift to her phone.",
+        "The flat is full of unfinished conversations.",
+        "{Pf} says 'I'm fine' in the tone that means the opposite, and he's too tired to ask.",
+        "Another evening of two people in the same room on two different planets."
+      ]
     },
-    "single": ["He's single, and at the moment the only relationship he has time for is with the ice bath.", "His teammates keep trying to set him up with someone's cousin. He keeps saying he's focused. Mostly true.", "Dating as a young footballer is complicated: nobody knows if people like you or the shirt.", "{SIB} keeps asking when he's going to bring someone home. {MUM} pretends not to be listening."],
+    "single": [
+      "He's single, and at the moment the only relationship he has time for is with the ice bath.",
+      "His teammates keep trying to set him up with someone's cousin. He keeps saying he's focused. Mostly true.",
+      "Dating as a young footballer is complicated: nobody knows if people like you or the shirt.",
+      "{SIB} keeps asking when he's going to bring someone home. {MUM} pretends not to be listening."
+    ],
     "friends": {
-      "high": ["The old crew are still the old crew: {BFf}, still {BFjob}, still the funniest person {J} has ever met.", "{BFf} sends him memes about his own bad passes. It keeps him humble.", "His friends from home don't care about his stats. That's exactly why he needs them.", "The group chat named after a joke from years ago is still the most important place in {J}'s phone."],
-      "mid": ["He sees less of his friends than he'd like. {BFf} understands. Mostly.", "Life has got busy on both sides. The group chat is quieter, not dead.", "{BFf} posts a photo from a party {J} couldn't go to. It stings, a little."],
-      "low": ["{BFf} doesn't reply to messages anymore. The group chat has a new name, and {J} isn't sure he's still in it.", "His friends have moved on to new jokes and new places. Fame has made him a guest in his old life.", "He realises he hasn't laughed with anyone who isn't paid to be around him in weeks."]
+      "high": [
+        "The old crew are still the old crew: {BFf}, still {BFjob}, still the funniest person {J} has ever met.",
+        "{BFf} sends him memes about his own bad passes. It keeps him humble.",
+        "His friends from home don't care about his stats. That's exactly why he needs them.",
+        "The group chat named after a joke from years ago is still the most important place in {J}'s phone."
+      ],
+      "mid": [
+        "He sees less of his friends than he'd like. {BFf} understands. Mostly.",
+        "Life has got busy on both sides. The group chat is quieter, not dead.",
+        "{BFf} posts a photo from a party {J} couldn't go to. It stings, a little."
+      ],
+      "low": [
+        "{BFf} doesn't reply to messages anymore. The group chat has a new name, and {J} isn't sure he's still in it.",
+        "His friends have moved on to new jokes and new places. Fame has made him a guest in his old life.",
+        "He realises he hasn't laughed with anyone who isn't paid to be around him in weeks."
+      ]
     },
-    "abroad": ["Being abroad means a lot of evenings in a quiet apartment and a lot of time-zone maths before calling home.", "He's learning the city slowly: the supermarket, a place to pray, the one restaurant that does rice properly.", "The language still trips him up. He orders the same meal every time because he knows how to pronounce it.", "Homesickness arrives at strange times: a smell in the street, a song in a shop."]
+    "abroad": [
+      "Being abroad means a lot of evenings in a quiet apartment and a lot of time-zone maths before calling home.",
+      "He's learning the city slowly: the supermarket, a place to pray, the one restaurant that does rice properly.",
+      "The language still trips him up. He orders the same meal every time because he knows how to pronounce it.",
+      "Homesickness arrives at strange times: a smell in the street, a song in a shop."
+    ]
   },
-
   "mind": {
-    "stressHigh": ["At 2am {J} is awake, scrolling, heart racing for no reason he can name. The pressure has moved into his body.", "He grinds his teeth in his sleep now. The club dentist has noticed. So has he.", "Everything feels urgent and nothing feels finished. He writes a list of worries just to see them outside his head; the list is long.", "His chest is tight before training, and it isn't the fitness test."],
-    "moraleLow": ["Late at night, {J} wonders if he's good enough. It isn't the first time this month.", "He looks at old photos of himself at fifteen, grinning in borrowed boots, and doesn't recognise the feeling.", "Some nights he thinks about quitting. Then the alarm goes off at seven and he goes to training anyway.", "The doubt is quiet but constant, like traffic noise."],
-    "moraleHigh": ["{J} lies in bed grinning at the ceiling like an idiot. Life is good, and he knows it won't always be.", "He's happy, properly happy, and it makes him play braver.", "Some nights you fall asleep the moment your head hits the pillow because there's nothing to worry about. Tonight is one."],
-    "neutral": ["The week ends. {J} sets his alarm, plugs in his phone, and lets the noise fade.", "He writes three lines in the notebook he keeps by the bed: what went well, what didn't, what's next.", "Sleep comes slowly, but it comes.", "Another week closer to wherever this is going."]
+    "stressHigh": [
+      "At 2am {J} is awake, scrolling, heart racing for no reason he can name. The pressure has moved into his body.",
+      "He grinds his teeth in his sleep now. The club dentist has noticed. So has he.",
+      "Everything feels urgent and nothing feels finished. He writes a list of worries just to see them outside his head; the list is long.",
+      "His chest is tight before training, and it isn't the fitness test."
+    ],
+    "moraleLow": [
+      "Late at night, {J} wonders if he's good enough. It isn't the first time this month.",
+      "He looks at old photos of himself at fifteen, grinning in borrowed boots, and doesn't recognise the feeling.",
+      "Some nights he thinks about quitting. Then the alarm goes off at seven and he goes to training anyway.",
+      "The doubt is quiet but constant, like traffic noise."
+    ],
+    "moraleHigh": [
+      "{J} lies in bed grinning at the ceiling like an idiot. Life is good, and he knows it won't always be.",
+      "He's happy, properly happy, and it makes him play braver.",
+      "Some nights you fall asleep the moment your head hits the pillow because there's nothing to worry about. Tonight is one."
+    ],
+    "neutral": [
+      "The week ends. {J} sets his alarm, plugs in his phone, and lets the noise fade.",
+      "He writes three lines in the notebook he keeps by the bed: what went well, what didn't, what's next.",
+      "Sleep comes slowly, but it comes.",
+      "Another week closer to wherever this is going."
+    ]
   },
-
   "moved": {
-    "arrive": ["{J} walks into {NEWCLUB}'s training ground for the first time. New badge, new language in the dressing room, new manager: {M}. Everyone is polite. Nobody owes him anything.", "First day at {NEWCLUB}. A tour of the facilities, a photo with the shirt, a locker with a stranger's name still half-peeled off it.", "{NEWCLUB} welcome him with a press conference, a medical and a dressing room full of people deciding what they think of him."],
-    "free": ["The contract runs out. No farewell ceremony, no banner — just a cleared locker and a phone that has to start ringing.", "Free agency. It sounds like freedom. It feels like waiting.", "He's a free agent. His agent says 'calls are coming'. His phone says otherwise."]
+    "arrive": [
+      "{J} walks into {NEWCLUB}'s training ground for the first time. New badge, new language in the dressing room, new manager: {M}. Everyone is polite. Nobody owes him anything.",
+      "First day at {NEWCLUB}. A tour of the facilities, a photo with the shirt, a locker with a stranger's name still half-peeled off it.",
+      "{NEWCLUB} welcome him with a press conference, a medical and a dressing room full of people deciding what they think of him."
+    ],
+    "free": [
+      "The contract runs out. No farewell ceremony, no banner — just a cleared locker and a phone that has to start ringing.",
+      "Free agency. It sounds like freedom. It feels like waiting.",
+      "He's a free agent. His agent says 'calls are coming'. His phone says otherwise."
+    ]
   },
-
-  "ntDebut": ["When the anthem plays, {J} sings every word and does not trust himself to look at the stands.", "The national shirt feels heavier than any club shirt. {MUM} is crying somewhere in the crowd, he's sure of it.", "He thinks of {DAD} teaching him to kick a ball against the wall of their house. Then the whistle goes."],
+  "ntDebut": [
+    "When the anthem plays, {J} sings every word and does not trust himself to look at the stands.",
+    "The national shirt feels heavier than any club shirt. {MUM} is crying somewhere in the crowd, he's sure of it.",
+    "He thinks of {DAD} teaching him to kick a ball against the wall of their house. Then the whistle goes."
+  ],
   "ntNews": {
-    "monitoring": ["The national team's scouts are in the stand this week. {J} is told, and pretends not to care.", "His name has appeared on a provisional list. Everyone at home already knows."],
-    "called": ["The call-up arrives by email and then by forty messages from relatives.", "National team duty. {MUM} has already bought a new shirt with his name on it."]
+    "monitoring": [
+      "The national team's scouts are in the stand this week. {J} is told, and pretends not to care.",
+      "His name has appeared on a provisional list. Everyone at home already knows."
+    ],
+    "called": [
+      "The call-up arrives by email and then by forty messages from relatives.",
+      "National team duty. {MUM} has already bought a new shirt with his name on it."
+    ]
   },
-  "seasonReflect": ["He sits on the empty pitch after the last game of the season, the sprinklers going, thinking about all of it.", "Another season in the books. He writes down what he learned. The list is longer than last year's.", "The season ends and the body sighs. Rest, then start again."],
-  "milestoneLine": ["Numbers like that used to be dreams. Now they're stats.", "{MUM} will frame that one.", "Somewhere, a fifteen-year-old version of {J} would lose his mind."],
-
+  "seasonReflect": [
+    "He sits on the empty pitch after the last game of the season, the sprinklers going, thinking about all of it.",
+    "Another season in the books. He writes down what he learned. The list is longer than last year's.",
+    "The season ends and the body sighs. Rest, then start again."
+  ],
+  "milestoneLine": [
+    "Numbers like that used to be dreams. Now they're stats.",
+    "{MUM} will frame that one.",
+    "Somewhere, a fifteen-year-old version of {J} would lose his mind."
+  ],
   "headline": {
-    "hattrick": ["Hat-Trick Hero {J} Destroys {opp}", "Three and Easy: {J} Takes the Match Ball Home", "{J}'s Perfect Hat-Trick Sinks {opp}"],
-    "goalWin": ["{J} Strikes as {club} Beat {opp}", "{J} on Target in {score} Win", "{J} Fires {club} Past {opp}", "Match-Winner {J} Settles It Against {opp}"],
-    "motm": ["Man of the Match {J} Inspires {club}", "{J} Runs the Show Against {opp}", "Masterclass From {J}"],
-    "nightmare": ["Nightmare for {J} Against {opp}", "{J} Endures Day to Forget", "{J}'s Bad Afternoon Against {opp}"],
-    "sidelines": ["Another Week on the Sidelines for {J}", "{J} Waits for His Chance", "Watching, Waiting: {J}'s Bench Week"],
-    "quiet": ["A Quiet Week of Work for {J}", "{J} Grinds On Behind the Scenes", "Training Ground Week for {J}", "Away From the Cameras, {J} Gets to Work"]
+    "hattrick": [
+      "Hat-Trick Hero {J} Destroys {opp}",
+      "Three and Easy: {J} Takes the Match Ball Home",
+      "{J}'s Perfect Hat-Trick Sinks {opp}"
+    ],
+    "goalWin": [
+      "{J} Strikes as {club} Beat {opp}",
+      "{J} on Target in {score} Win",
+      "{J} Fires {club} Past {opp}",
+      "Match-Winner {J} Settles It Against {opp}"
+    ],
+    "motm": [
+      "Man of the Match {J} Inspires {club}",
+      "{J} Runs the Show Against {opp}",
+      "Masterclass From {J}"
+    ],
+    "nightmare": [
+      "Nightmare for {J} Against {opp}",
+      "{J} Endures Day to Forget",
+      "{J}'s Bad Afternoon Against {opp}"
+    ],
+    "sidelines": [
+      "Another Week on the Sidelines for {J}",
+      "{J} Waits for His Chance",
+      "Watching, Waiting: {J}'s Bench Week"
+    ],
+    "quiet": [
+      "A Quiet Week of Work for {J}",
+      "{J} Grinds On Behind the Scenes",
+      "Training Ground Week for {J}",
+      "Away From the Cameras, {J} Gets to Work"
+    ]
   },
   "dek": {
-    "match": ["Match report, the dressing room, and what happened when the cameras left.", "Ninety minutes, and everything around them.", "The game, the fallout, the week."],
-    "transfer": ["Bags packed, contracts signed, lives rearranged.", "The move that changes everything."],
-    "injury": ["The body says stop. The mind refuses.", "A setback, and how he takes it."],
-    "recovery": ["Back on the grass, finally."],
-    "international": ["Wearing the national shirt.", "Country before club."],
-    "training": ["The work nobody films.", "A week in the life.", "Behind the training-ground gates."],
-    "milestone": ["A week to remember.", "History, his and the club's."],
-    "media": ["Everyone has an opinion about {J} this week.", "Headlines, hashtags and consequences."],
-    "love": ["Football is only half of his life.", "Matters of the heart."],
-    "family": ["Home is never far away.", "Blood is thicker than football."],
-    "friends": ["The people who knew him before."],
-    "politics": ["Power, money and the boardroom.", "Club politics come knocking."],
-    "money": ["Money talks. This week it shouts."],
-    "lifestyle": ["How he lives when nobody's keeping score."],
-    "dressing": ["What's said in the dressing room stays there. Mostly."],
-    "manager": ["Him and the manager: an ongoing negotiation."],
-    "culture": ["Where he comes from, and who he's becoming."],
-    "body": ["Listening to the body."],
-    "national": ["The national team picture."],
-    "veteran": ["The long goodbye."]
+    "match": [
+      "Match report, the dressing room, and what happened when the cameras left.",
+      "Ninety minutes, and everything around them.",
+      "The game, the fallout, the week."
+    ],
+    "transfer": [
+      "Bags packed, contracts signed, lives rearranged.",
+      "The move that changes everything."
+    ],
+    "injury": [
+      "The body says stop. The mind refuses.",
+      "A setback, and how he takes it."
+    ],
+    "recovery": [
+      "Back on the grass, finally."
+    ],
+    "international": [
+      "Wearing the national shirt.",
+      "Country before club."
+    ],
+    "training": [
+      "The work nobody films.",
+      "A week in the life.",
+      "Behind the training-ground gates."
+    ],
+    "milestone": [
+      "A week to remember.",
+      "History, his and the club's."
+    ],
+    "media": [
+      "Everyone has an opinion about {J} this week.",
+      "Headlines, hashtags and consequences."
+    ],
+    "love": [
+      "Football is only half of his life.",
+      "Matters of the heart."
+    ],
+    "family": [
+      "Home is never far away.",
+      "Blood is thicker than football."
+    ],
+    "friends": [
+      "The people who knew him before."
+    ],
+    "politics": [
+      "Power, money and the boardroom.",
+      "Club politics come knocking."
+    ],
+    "money": [
+      "Money talks. This week it shouts."
+    ],
+    "lifestyle": [
+      "How he lives when nobody's keeping score."
+    ],
+    "dressing": [
+      "What's said in the dressing room stays there. Mostly."
+    ],
+    "manager": [
+      "Him and the manager: an ongoing negotiation."
+    ],
+    "culture": [
+      "Where he comes from, and who he's becoming."
+    ],
+    "body": [
+      "Listening to the body."
+    ],
+    "national": [
+      "The national team picture."
+    ],
+    "veteran": [
+      "The long goodbye."
+    ]
   },
-
   "posts": {
     "partner": {
-      "high": ["proud of you. always. 🤍", "my favourite player 😌⚽", "sunday dinner with this one >>> everything", "you did that. 🥹"],
-      "mid": ["busy week but we made it 💫", "📍 stadium", "football widow era 😂"],
-      "low": ["🌧️", "some people never change", "focusing on me for a while.", "ok."]
+      "high": [
+        "proud of you. always. 🤍",
+        "my favourite player 😌⚽",
+        "sunday dinner with this one >>> everything",
+        "you did that. 🥹"
+      ],
+      "mid": [
+        "busy week but we made it 💫",
+        "📍 stadium",
+        "football widow era 😂"
+      ],
+      "low": [
+        "🌧️",
+        "some people never change",
+        "focusing on me for a while.",
+        "ok."
+      ]
     },
     "gossip": {
-      "id": ["Ada yang lagi panas nih soal {J}... 👀 cek story kita", "Sumber terpercaya bilang {J} lagi ada masalah. Spill di kolom komentar 🍵", "Netizen heboh, {J} kepergok di tempat yang 'kurang pas' 👀"],
-      "en": ["👀 Hearing interesting things about {J}'s week. Tea coming soon.", "Who was {J} with at {PLACE}? 👀 Sources say...", "The {J} situation is getting messy. Thread 🧵"]
+      "id": [
+        "Ada yang lagi panas nih soal {J}... 👀 cek story kita",
+        "Sumber terpercaya bilang {J} lagi ada masalah. Spill di kolom komentar 🍵",
+        "Netizen heboh, {J} kepergok di tempat yang 'kurang pas' 👀"
+      ],
+      "en": [
+        "👀 Hearing interesting things about {J}'s week. Tea coming soon.",
+        "Who was {J} with at {PLACE}? 👀 Sources say...",
+        "The {J} situation is getting messy. Thread 🧵"
+      ]
     },
     "ultrasLove": {
-      "id": ["{J} itu darah kita, jiwa kita. Jangan pernah dijual!! 💙", "Spanduk raksasa buat {J} udah siap minggu ini 🔥", "Kalau {J} pergi, kita demo di depan kantor klub. Serius."],
-      "en": ["{J} is one of our own. Not for sale. Ever.", "New banner for {J} this weekend. Get there early.", "Hands off {J}. That's it, that's the tweet."]
+      "id": [
+        "{J} itu darah kita, jiwa kita. Jangan pernah dijual!! 💙",
+        "Spanduk raksasa buat {J} udah siap minggu ini 🔥",
+        "Kalau {J} pergi, kita demo di depan kantor klub. Serius."
+      ],
+      "en": [
+        "{J} is one of our own. Not for sale. Ever.",
+        "New banner for {J} this weekend. Get there early.",
+        "Hands off {J}. That's it, that's the tweet."
+      ]
     },
     "fansAngry": {
-      "id": ["Sudahlah {J}, jual aja. Udah gak niat main.", "Gaji gede, main kayak amatir. {J} out!!", "Manajemen, tolong lihat performa {J}. Kami muak."],
-      "en": ["{J} out. Simple as.", "Paid like a star, plays like a stranger. Sell {J}.", "Done defending {J}. Enough."]
+      "id": [
+        "Sudahlah {J}, jual aja. Udah gak niat main.",
+        "Gaji gede, main kayak amatir. {J} out!!",
+        "Manajemen, tolong lihat performa {J}. Kami muak."
+      ],
+      "en": [
+        "{J} out. Simple as.",
+        "Paid like a star, plays like a stranger. Sell {J}.",
+        "Done defending {J}. Enough."
+      ]
     },
-    "pundit": ["Everybody's talking about {J} this week. Some of what they're saying is even true.", "The {J} story isn't going away. My take on the pod tonight.", "Unpopular opinion: the {J} drama is overblown. Popular opinion: it's very entertaining."]
+    "pundit": [
+      "Everybody's talking about {J} this week. Some of what they're saying is even true.",
+      "The {J} story isn't going away. My take on the pod tonight.",
+      "Unpopular opinion: the {J} drama is overblown. Popular opinion: it's very entertaining."
+    ]
   },
-
   "clip": {
     "matchGood": {
-      "high": ["{J} the Difference as Fans Find a New Hero", "Star Turn: {J} Shines Again", "Brilliant {J} Leaves {opp} Chasing Shadows"],
-      "mid": ["{J} Impresses Against {opp}", "Positive Signs From {J}", "{J} Delivers When It Counts"],
-      "low": ["{J} Finally Shows Something", "Better From {J} — But For How Long?", "One Good Game Doesn't Change Everything, {J}"]
+      "high": [
+        "{J} the Difference as Fans Find a New Hero",
+        "Star Turn: {J} Shines Again",
+        "Brilliant {J} Leaves {opp} Chasing Shadows"
+      ],
+      "mid": [
+        "{J} Impresses Against {opp}",
+        "Positive Signs From {J}",
+        "{J} Delivers When It Counts"
+      ],
+      "low": [
+        "{J} Finally Shows Something",
+        "Better From {J} — But For How Long?",
+        "One Good Game Doesn't Change Everything, {J}"
+      ]
     },
     "matchMid": {
-      "high": ["{J} Solid as Ever in Hard-Fought Game", "Quietly Effective {J} Does His Job"],
-      "mid": ["Mixed Afternoon for {J}", "{J} Neither Hero Nor Villain"],
-      "low": ["Anonymous {J} Fails to Answer Critics", "Where Was {J}?"]
+      "high": [
+        "{J} Solid as Ever in Hard-Fought Game",
+        "Quietly Effective {J} Does His Job"
+      ],
+      "mid": [
+        "Mixed Afternoon for {J}",
+        "{J} Neither Hero Nor Villain"
+      ],
+      "low": [
+        "Anonymous {J} Fails to Answer Critics",
+        "Where Was {J}?"
+      ]
     },
     "matchBad": {
-      "high": ["Off Day for {J}, But No Panic", "Even the Best Have Bad Days, {J}"],
-      "mid": ["{J} Struggles Against {opp}", "Tough Outing for {J}"],
-      "low": ["{J} Flops Again", "Is {J} Overrated? The Evidence Mounts", "{J} Must Be Dropped, Say Fans"]
+      "high": [
+        "Off Day for {J}, But No Panic",
+        "Even the Best Have Bad Days, {J}"
+      ],
+      "mid": [
+        "{J} Struggles Against {opp}",
+        "Tough Outing for {J}"
+      ],
+      "low": [
+        "{J} Flops Again",
+        "Is {J} Overrated? The Evidence Mounts",
+        "{J} Must Be Dropped, Say Fans"
+      ]
     },
     "transfer": {
-      "high": ["{NEWCLUB} Land Their Man: {J} Seals Dream Move", "Coup for {NEWCLUB} as {J} Signs"],
-      "mid": ["{J} Completes Move to {NEWCLUB}", "Done: {J} Joins {NEWCLUB}"],
-      "low": ["{NEWCLUB} Take a Gamble on {J}", "Fans Divided as {J} Joins {NEWCLUB}"]
+      "high": [
+        "{NEWCLUB} Land Their Man: {J} Seals Dream Move",
+        "Coup for {NEWCLUB} as {J} Signs"
+      ],
+      "mid": [
+        "{J} Completes Move to {NEWCLUB}",
+        "Done: {J} Joins {NEWCLUB}"
+      ],
+      "low": [
+        "{NEWCLUB} Take a Gamble on {J}",
+        "Fans Divided as {J} Joins {NEWCLUB}"
+      ]
     },
     "rumour": {
-      "high": ["{NEWCLUB} Lead Race for In-Demand {J}", "Clubs Queue Up for {J}"],
-      "mid": ["{NEWCLUB} Make Contact Over {J}", "Transfer Talk: {J} Linked With {NEWCLUB}"],
-      "low": ["Is {J}'s Head Turned? {NEWCLUB} Circling", "{J} Agent Touting Client to {NEWCLUB}"]
+      "high": [
+        "{NEWCLUB} Lead Race for In-Demand {J}",
+        "Clubs Queue Up for {J}"
+      ],
+      "mid": [
+        "{NEWCLUB} Make Contact Over {J}",
+        "Transfer Talk: {J} Linked With {NEWCLUB}"
+      ],
+      "low": [
+        "Is {J}'s Head Turned? {NEWCLUB} Circling",
+        "{J} Agent Touting Client to {NEWCLUB}"
+      ]
     },
     "injury": {
-      "high": ["Blow for Club as {J} Is Sidelined", "Get Well Soon: {J} Injury Hits Hard"],
-      "mid": ["{J} Faces Spell on Sidelines", "Injury Setback for {J}"],
-      "low": ["Injury-Prone {J} Breaks Down Again", "{J} Injury Raises Questions About Fitness"]
+      "high": [
+        "Blow for Club as {J} Is Sidelined",
+        "Get Well Soon: {J} Injury Hits Hard"
+      ],
+      "mid": [
+        "{J} Faces Spell on Sidelines",
+        "Injury Setback for {J}"
+      ],
+      "low": [
+        "Injury-Prone {J} Breaks Down Again",
+        "{J} Injury Raises Questions About Fitness"
+      ]
     },
     "love": {
-      "high": ["{J} and His Partner: Football's Sweetest Couple?", "Love Off the Pitch Powers {J}"],
-      "mid": ["{J} Spotted Out With Partner at {PLACE}", "Date Night for {J}"],
-      "low": ["Trouble in Paradise for {J}?", "{J}'s Partner Unfollows Club Account — What Does It Mean?"]
+      "high": [
+        "{J} and His Partner: Football's Sweetest Couple?",
+        "Love Off the Pitch Powers {J}"
+      ],
+      "mid": [
+        "{J} Spotted Out With Partner at {PLACE}",
+        "Date Night for {J}"
+      ],
+      "low": [
+        "Trouble in Paradise for {J}?",
+        "{J}'s Partner Unfollows Club Account — What Does It Mean?"
+      ]
     },
     "scandal": {
-      "high": ["Out of Character: What's Going On With {J}?", "{J} Deserves Benefit of the Doubt"],
-      "mid": ["{J} in the Spotlight for the Wrong Reasons", "Questions Over {J}'s Conduct"],
-      "low": ["{J}: The Inside Story of a Player Out of Control", "Shame of {J}", "{J} Must Answer for Latest Embarrassment"]
+      "high": [
+        "Out of Character: What's Going On With {J}?",
+        "{J} Deserves Benefit of the Doubt"
+      ],
+      "mid": [
+        "{J} in the Spotlight for the Wrong Reasons",
+        "Questions Over {J}'s Conduct"
+      ],
+      "low": [
+        "{J}: The Inside Story of a Player Out of Control",
+        "Shame of {J}",
+        "{J} Must Answer for Latest Embarrassment"
+      ]
     },
     "idol": {
-      "high": ["{J}: The People's Player", "Why {J} Is the Most Loved Man in the City"],
-      "mid": ["Fans Can't Get Enough of {J}", "The Cult of {J} Grows"],
-      "low": ["Fans Love Him, But Is {J} Really That Good?"]
+      "high": [
+        "{J}: The People's Player",
+        "Why {J} Is the Most Loved Man in the City"
+      ],
+      "mid": [
+        "Fans Can't Get Enough of {J}",
+        "The Cult of {J} Grows"
+      ],
+      "low": [
+        "Fans Love Him, But Is {J} Really That Good?"
+      ]
     },
     "bench": {
-      "high": ["Patience Will Pay Off for {J}, Says Coach", "{J} Biding His Time"],
-      "mid": ["{J} Still Waiting for His Chance", "Bench Again for {J}"],
-      "low": ["Forgotten Man {J} Faces Uncertain Future", "Is the {J} Experiment Over?"]
+      "high": [
+        "Patience Will Pay Off for {J}, Says Coach",
+        "{J} Biding His Time"
+      ],
+      "mid": [
+        "{J} Still Waiting for His Chance",
+        "Bench Again for {J}"
+      ],
+      "low": [
+        "Forgotten Man {J} Faces Uncertain Future",
+        "Is the {J} Experiment Over?"
+      ]
     },
     "quiet": {
-      "high": ["{J} Working Hard Behind the Scenes, Say Insiders", "Inside {J}'s Training Routine"],
-      "mid": ["Quiet Week for {J}", "{J} Keeps Head Down"],
-      "low": ["What Happened to {J}?", "{J}: Still Here, Still Searching"]
+      "high": [
+        "{J} Working Hard Behind the Scenes, Say Insiders",
+        "Inside {J}'s Training Routine"
+      ],
+      "mid": [
+        "Quiet Week for {J}",
+        "{J} Keeps Head Down"
+      ],
+      "low": [
+        "What Happened to {J}?",
+        "{J}: Still Here, Still Searching"
+      ]
     }
   },
-
   "msg": {
     "mum": {
-      "great": ["I watched with the whole street!! 😭😭 The neighbour cried. Now eat something.", "Your goal!!! I screamed so loud the neighbour came to check. Don't forget to pray. ❤️", "Proud of you. Now sleep. And call your father, he won't say it but he's proud too."],
-      "bad": ["It's just one game, love. You are still my champion. Eat properly.", "I didn't watch the second half, my heart can't take it. Call me when you're ready.", "Don't read the comments. Promise me."],
-      "normal": ["Have you eaten? Send me a photo of your food so I can check.", "Wear a jacket, the TV says it's cold where you are.", "Your aunt asks if you can get tickets. I said no. Was that right?"],
-      "quiet": ["Quiet week? Good. Rest. And call your grandmother.", "Sending you a voice note because typing is too slow 🎤 (4:37)", "I made your favourite today. I'm eating it for you."],
-      "injury": ["I'm praying every night. Do what the doctors say, not what your stubbornness says.", "Should I come? I can come. I'll bring food."],
-      "moved": ["New city, new home. Lock your door. Find a good place to pray. Call me every day.", "I looked at the map. It's so far 😢 But I'm proud."],
-      "cold": ["We saw the news. We're not angry. We're worried.", "Call when you have time. If you have time."]
+      "great": [
+        "I watched with the whole street!! 😭😭 The neighbour cried. Now eat something.",
+        "Your goal!!! I screamed so loud the neighbour came to check. Don't forget to pray. ❤️",
+        "Proud of you. Now sleep. And call your father, he won't say it but he's proud too."
+      ],
+      "bad": [
+        "It's just one game, love. You are still my champion. Eat properly.",
+        "I didn't watch the second half, my heart can't take it. Call me when you're ready.",
+        "Don't read the comments. Promise me."
+      ],
+      "normal": [
+        "Have you eaten? Send me a photo of your food so I can check.",
+        "Wear a jacket, the TV says it's cold where you are.",
+        "Your aunt asks if you can get tickets. I said no. Was that right?"
+      ],
+      "quiet": [
+        "Quiet week? Good. Rest. And call your grandmother.",
+        "Sending you a voice note because typing is too slow 🎤 (4:37)",
+        "I made your favourite today. I'm eating it for you."
+      ],
+      "injury": [
+        "I'm praying every night. Do what the doctors say, not what your stubbornness says.",
+        "Should I come? I can come. I'll bring food."
+      ],
+      "moved": [
+        "New city, new home. Lock your door. Find a good place to pray. Call me every day.",
+        "I looked at the map. It's so far 😢 But I'm proud."
+      ],
+      "cold": [
+        "We saw the news. We're not angry. We're worried.",
+        "Call when you have time. If you have time."
+      ]
     },
     "dad": {
-      "great": ["Good.", "Your first touch was better today. Keep that.", "I watched it twice. Good."],
-      "bad": ["Head up. Work harder. That's all.", "The left foot. Practise the left foot."],
-      "normal": ["Remember why you started.", "Don't let them change you.", "Saw the table. Keep going."],
-      "quiet": ["Rest is part of work.", "Your mother misses you. So do I."],
-      "injury": ["I broke my ankle playing in the village once. It healed. So will you.", "Patience. You were never good at patience."],
-      "moved": ["Make us proud. You already do.", "New club, same boy. Don't forget that."],
-      "cold": ["We need to talk. When you're ready.", "I'm not angry. Just call."]
+      "great": [
+        "Good.",
+        "Your first touch was better today. Keep that.",
+        "I watched it twice. Good."
+      ],
+      "bad": [
+        "Head up. Work harder. That's all.",
+        "The left foot. Practise the left foot."
+      ],
+      "normal": [
+        "Remember why you started.",
+        "Don't let them change you.",
+        "Saw the table. Keep going."
+      ],
+      "quiet": [
+        "Rest is part of work.",
+        "Your mother misses you. So do I."
+      ],
+      "injury": [
+        "I broke my ankle playing in the village once. It healed. So will you.",
+        "Patience. You were never good at patience."
+      ],
+      "moved": [
+        "Make us proud. You already do.",
+        "New club, same boy. Don't forget that."
+      ],
+      "cold": [
+        "We need to talk. When you're ready.",
+        "I'm not angry. Just call."
+      ]
     },
     "sib": {
-      "great": ["BRO EVERYONE AT SCHOOL SAW IT 😭🔥", "can u sign 30 shirts for my class lol", "ok you're kind of good i guess"],
-      "bad": ["the memes about u are actually funny tho 💀", "it's ok you're still my favourite player (you're my only player)"],
-      "normal": ["can i borrow money", "mum says call her. also can i borrow money", "my friend thinks ur overrated. i fought him"],
-      "quiet": ["are u even playing this week", "send me boots pls"],
-      "injury": ["get better or i'm taking your room", "i drew you a card it's bad but it's from the heart"],
-      "moved": ["bring me something from there!!", "i get your room now right"],
-      "cold": ["mum's been sad lately", "why don't u call anymore"]
+      "great": [
+        "BRO EVERYONE AT SCHOOL SAW IT 😭🔥",
+        "can u sign 30 shirts for my class lol",
+        "ok you're kind of good i guess"
+      ],
+      "bad": [
+        "the memes about u are actually funny tho 💀",
+        "it's ok you're still my favourite player (you're my only player)"
+      ],
+      "normal": [
+        "can i borrow money",
+        "mum says call her. also can i borrow money",
+        "my friend thinks ur overrated. i fought him"
+      ],
+      "quiet": [
+        "are u even playing this week",
+        "send me boots pls"
+      ],
+      "injury": [
+        "get better or i'm taking your room",
+        "i drew you a card it's bad but it's from the heart"
+      ],
+      "moved": [
+        "bring me something from there!!",
+        "i get your room now right"
+      ],
+      "cold": [
+        "mum's been sad lately",
+        "why don't u call anymore"
+      ]
     },
     "bf": {
-      "great": ["BROTHERRRR 😂🔥 still remember when you couldn't kick with your left", "everyone at the shop watched it. ur famous famous now", "drinks on you next time. well, juice. athlete."],
-      "bad": ["rough one. you'll be back. remember the under-14 final?", "ignore the internet. i'll fight all of them"],
-      "normal": ["still {BFjob}, still broke, still funnier than you", "remember {PLACE}? we should go back", "group chat misses you. well. i miss you."],
-      "quiet": ["come home soon, the old pitch got new nets", "watching {SHOW} and thinking about how you cried at the ending"],
-      "injury": ["you're gonna come back stronger. that's literally your whole thing", "want me to visit? i'll bring {FOOD}"],
-      "moved": ["don't forget us when you're famous famous", "the group chat renamed itself after you. it's not flattering"],
-      "distant": ["hey. long time.", "saw you on tv. nice."]
+      "great": [
+        "BROTHERRRR 😂🔥 still remember when you couldn't kick with your left",
+        "everyone at the shop watched it. ur famous famous now",
+        "drinks on you next time. well, juice. athlete."
+      ],
+      "bad": [
+        "rough one. you'll be back. remember the under-14 final?",
+        "ignore the internet. i'll fight all of them"
+      ],
+      "normal": [
+        "still {BFjob}, still broke, still funnier than you",
+        "remember {PLACE}? we should go back",
+        "group chat misses you. well. i miss you."
+      ],
+      "quiet": [
+        "come home soon, the old pitch got new nets",
+        "watching {SHOW} and thinking about how you cried at the ending"
+      ],
+      "injury": [
+        "you're gonna come back stronger. that's literally your whole thing",
+        "want me to visit? i'll bring {FOOD}"
+      ],
+      "moved": [
+        "don't forget us when you're famous famous",
+        "the group chat renamed itself after you. it's not flattering"
+      ],
+      "distant": [
+        "hey. long time.",
+        "saw you on tv. nice."
+      ]
     },
     "partner": {
-      "great": ["I screamed. The whole family section looked at me. Worth it. ❤️", "my man 😍 come home, I made {FOOD}", "you were incredible. I'm so proud I could burst"],
-      "bad": ["Come home. No football talk tonight. Just us.", "I don't care about the score. I care about you. 🤍"],
-      "normal": ["what time are you home?", "can we do something this weekend that isn't football? 🙏", "missing you"],
-      "quiet": ["movie night? I'll choose. you'll complain. tradition.", "I bought you {GIFT}. don't ask why. just because."],
-      "injury": ["I'm here. Whatever you need. Even if you're grumpy.", "I'll be your nurse. A strict one."],
-      "moved": ["We'll figure it out. We always do.", "Long distance is going to be hard. But you're worth it."],
-      "cold": ["We need to talk.", "Fine.", "I'm staying at my sister's tonight."]
+      "great": [
+        "I screamed. The whole family section looked at me. Worth it. ❤️",
+        "my man 😍 come home, I made {FOOD}",
+        "you were incredible. I'm so proud I could burst"
+      ],
+      "bad": [
+        "Come home. No football talk tonight. Just us.",
+        "I don't care about the score. I care about you. 🤍"
+      ],
+      "normal": [
+        "what time are you home?",
+        "can we do something this weekend that isn't football? 🙏",
+        "missing you"
+      ],
+      "quiet": [
+        "movie night? I'll choose. you'll complain. tradition.",
+        "I bought you {GIFT}. don't ask why. just because."
+      ],
+      "injury": [
+        "I'm here. Whatever you need. Even if you're grumpy.",
+        "I'll be your nurse. A strict one."
+      ],
+      "moved": [
+        "We'll figure it out. We always do.",
+        "Long distance is going to be hard. But you're worth it."
+      ],
+      "cold": [
+        "We need to talk.",
+        "Fine.",
+        "I'm staying at my sister's tonight."
+      ]
     },
     "agent": {
-      "great": ["Phone's been ringing all morning 📈 Keep doing that.", "Your value just went up. Keep your head down and your feet moving."],
-      "bad": ["Bad day. Don't post anything. Let me handle the noise.", "Delete the apps for 48 hours. Trust me."],
-      "normal": ["Lunch next week? A few things to discuss.", "A brand wants to talk. Small, but good. Call me."],
-      "quiet": ["Stay sharp. Scouts watch training too.", "Nothing to report, which is fine. Rest."],
-      "injury": ["Focus on recovery. Clubs remember players who come back properly.", "I've spoken to the club. They're behind you."],
-      "moved": ["Welcome to the next chapter. Now we earn it.", "Paperwork's done. Go be great."]
+      "great": [
+        "Phone's been ringing all morning 📈 Keep doing that.",
+        "Your value just went up. Keep your head down and your feet moving."
+      ],
+      "bad": [
+        "Bad day. Don't post anything. Let me handle the noise.",
+        "Delete the apps for 48 hours. Trust me."
+      ],
+      "normal": [
+        "Lunch next week? A few things to discuss.",
+        "A brand wants to talk. Small, but good. Call me."
+      ],
+      "quiet": [
+        "Stay sharp. Scouts watch training too.",
+        "Nothing to report, which is fine. Rest."
+      ],
+      "injury": [
+        "Focus on recovery. Clubs remember players who come back properly.",
+        "I've spoken to the club. They're behind you."
+      ],
+      "moved": [
+        "Welcome to the next chapter. Now we earn it.",
+        "Paperwork's done. Go be great."
+      ]
     },
     "captain": {
-      "great": ["Proper performance today. Proud of you, kid.", "That's the level. Do it again."],
-      "bad": ["We lose together. Shake it off.", "Come early tomorrow. We'll work on it."],
-      "normal": ["Team dinner Thursday. Don't be late, fines are doubled.", "Bring your boots tomorrow, extra finishing."],
-      "quiet": ["Use the quiet week. Get better.", "Gym at 8. You and me."],
-      "injury": ["The lads miss you. Get back soon.", "Do the boring rehab properly. Trust me."],
-      "moved": ["Welcome, brother. Ask me anything."]
+      "great": [
+        "Proper performance today. Proud of you, kid.",
+        "That's the level. Do it again."
+      ],
+      "bad": [
+        "We lose together. Shake it off.",
+        "Come early tomorrow. We'll work on it."
+      ],
+      "normal": [
+        "Team dinner Thursday. Don't be late, fines are doubled.",
+        "Bring your boots tomorrow, extra finishing."
+      ],
+      "quiet": [
+        "Use the quiet week. Get better.",
+        "Gym at 8. You and me."
+      ],
+      "injury": [
+        "The lads miss you. Get back soon.",
+        "Do the boring rehab properly. Trust me."
+      ],
+      "moved": [
+        "Welcome, brother. Ask me anything."
+      ]
+    },
+    "sibKid": {
+      "great": [
+        "I SAW YOU ON TV!!!! 📺⚽⚽⚽",
+        "mum let me stay up to watch!! you were so good",
+        "i told my teacher you are my {SIBr}. she didnt believe me"
+      ],
+      "bad": [
+        "its ok. i still have your poster",
+        "i cried a bit but mum said its fine"
+      ],
+      "normal": [
+        "when are you coming home",
+        "i scored in PE today 😎",
+        "can you send a video saying hi to my class"
+      ],
+      "quiet": [
+        "are you playing this week",
+        "i drew you. its on the fridge"
+      ],
+      "injury": [
+        "get better!!! i made you a card",
+        "does it hurt? i fell off my bike once"
+      ],
+      "moved": [
+        "is it far",
+        "will you still come for my birthday"
+      ],
+      "cold": [
+        "mum is sad",
+        "why dont you call me anymore"
+      ]
+    },
+    "sibAdult": {
+      "great": [
+        "ok that was actually class. proud of you",
+        "the whole office watched it on someone's laptop 😂",
+        "{MUM} has called me four times to talk about it"
+      ],
+      "bad": [
+        "tough one. call me if you want to vent",
+        "don't read the comments. seriously"
+      ],
+      "normal": [
+        "call {DAD}, he won't admit he misses you",
+        "dinner when you're back? my treat this time",
+        "work is mad. how are you actually doing?"
+      ],
+      "quiet": [
+        "saw a photo of you in the paper. you look tired",
+        "free this weekend? video call?"
+      ],
+      "injury": [
+        "I'll come up and visit. no arguments",
+        "do the boring rehab. you always skip the boring bits"
+      ],
+      "moved": [
+        "proud of you. look after yourself out there",
+        "I'll look after {MUM} and {DAD}, don't worry"
+      ],
+      "cold": [
+        "you've gone quiet on all of us",
+        "{MUM} asks about you every day. call her"
+      ]
     }
+  },
+  "potential": {
+    "up": [
+      "The coaches have noticed something: {J} is learning faster than anyone his age they have seen. A scout revises his report upwards.",
+      "The sports scientists run his numbers twice. He is improving faster than the model predicted.",
+      "Discipline is paying off. The staff quietly upgrade their idea of how far {J} can go."
+    ],
+    "down": [
+      "The pressure is eating into him. The staff worry he is stalling, maybe even going backwards.",
+      "Something is off. His sharpness in training has dulled, and the coaches lower their expectations a notch.",
+      "Exhaustion and noise are costing him. A scout writes \"ceiling may be lower than we thought\"."
+    ]
   }
 }

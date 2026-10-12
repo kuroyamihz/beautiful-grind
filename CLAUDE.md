@@ -10,7 +10,7 @@ nationality and any country's football pyramid must work.
 The project owner is a beginner programmer and the game designer. Explain technical choices in
 plain language, keep changes small and playable, and ask before big design changes.
 
-## Architecture (v0.3, fully standalone, no AI)
+## Architecture (v0.4, fully standalone, no AI)
 - The owner decided (2026-10-11): NO AI at play time. All content is prepared data. Do not add Claude/LLM features back.
 - Browser game, plain ES modules, no build step. `server.js` is a tiny static server for local play (start-game.bat).
   Online: GitHub Pages via .github/workflows/pages.yml (validates scenarios, runs tools/build-site.mjs, deploys dist/).
@@ -20,6 +20,11 @@ plain language, keep changes small and playable, and ask before big design chang
   the cast, ripple rules (one decision's knock-on effects), weekly drift/neglect/stress, red-line triggers, free-time actions.
 - A week = 1-4 decisions from different arenas (engine.js `ARENAS`) + optional key moment. Interludes (cat `interlude`) and free time
   never advance time. Balance numbers live in config.js `LIFE`.
+- Growth: hidden `potential` (config.js GROWTH) with a scouts' estimate in the UI; habits move it. Transfers: `transferOutlook()`
+  explains offer/abroad chances (notes shown in the Career tab). `sponsors.js` = real-brand deals (data/text/brands.json) with duties,
+  satisfaction, morality clauses, renewals. `social.js` = one post a week, likes/comments, follower ceiling by fame.
+  `epilogue.js` = life legacy + end-of-career epilogue (data/text/epilogue.json). Long storylines live in data/scenarios/arcs.json.
+- Immersion: the cast ages (sibling, parents, children); life events use `once`/`group`; text variants can have `when`.
 - `narrator-offline.js` writes the long sectioned weekly story from engine facts + phrase banks in data/text/story.json and narration.json,
   avoiding recently used lines. `ui.js` + `icons.js` (hand-drawn SVG icons) render it.
 - Saves: browser localStorage key `beautifulGrind.save.v1`, plus export/import JSON. `state.version` (now 3) + `migrate()` in engine.js
@@ -36,7 +41,8 @@ plain language, keep changes small and playable, and ask before big design chang
 - `tools/sim-test.mjs` — `npm run simtest [n]` plays n full careers headlessly; run after engine changes
 
 ## Rules
-- Never invent damaging personal storylines for real people (see REAL PEOPLE RULE in docs/original-design.md).
+- Never invent damaging personal storylines for real people (see REAL PEOPLE RULE in docs/original-design.md). Agents, journalists and
+  outlets stay fictional for that reason. Real brands are fine as sponsors, but only in neutral/positive roles (no scams, betting, scandals).
 - World data baseline is the 2025-26 season; after kick-off the simulation diverges from reality.
 - Keep JSON valid. Run a validation pass after editing anything in `data/world/`.
 - Commit after each working step (git = save points).

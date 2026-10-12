@@ -61,7 +61,7 @@
       ]
     },
     {
-      "id": "fr_friend_in_trouble", "cat": "friends", "w": 3, "ui": "phone", "when": { "age": [18, 40] },
+      "id": "fr_friend_in_trouble", "once": true, "cat": "friends", "w": 3, "ui": "phone", "when": { "age": [18, 40] },
       "title": "{BFf} Has Been Arrested",
       "text": ["A call at 2am from {BFf}'s brother: {BFf} has been arrested after a fight outside {PLACE}. He says he was defending someone. He needs a lawyer and doesn't have money for one.", "{BFf} is in a police cell. A misunderstanding, he swears. The bail is more than he earns in a year."],
       "prompt": "Help him?",
@@ -172,7 +172,7 @@
       ]
     },
     {
-      "id": "fr_depression_friend", "cat": "friends", "w": 3, "when": { "friends": [30, 100] },
+      "id": "fr_depression_friend", "cd": 150, "cat": "friends", "w": 3, "when": { "friends": [30, 100] },
       "title": "Something's Wrong With {BFf}",
       "text": ["{BFf}'s messages have become strange: short, flat, sent at 4am. When {J} calls, he says he's 'just tired'. He's been just tired for a month.", "{BFf}'s sister messages {J}: 'Have you spoken to him? He's not himself. He won't talk to us.'"],
       "prompt": "What do you do?",

@@ -30,7 +30,12 @@ export const ASSIST_SHARE = { GK: 0.01, CB: 0.03, FB: 0.1, DM: 0.07, CM: 0.15, A
 // ── Growth (original design rules) ─────────────────────────────
 export const GROWTH = {
   maxPerWeek: 2,
-  seasonCapByAge: (age) => (age <= 23 ? 8 : age <= 28 ? 4 : 1), // 29+: mental only
+  // Growth per season depends on age and on the gap between ability (OVR) and hidden potential.
+  // A 17-year-old 30 points below his potential can add ~17 stat points a season; a 27-year-old near it, 1-2.
+  seasonCap: (age, gap) => Math.max(1, Math.round(age <= 19 ? 6 + 0.7 * gap : age <= 22 ? 4 + 0.6 * gap : age <= 25 ? 2 + 0.45 * gap : age <= 28 ? 1 + 0.25 * gap : 1)),
+  training: { hard: 0.5, balanced: 0.32, light: 0.12, rest: 0 },  // weekly chance of a training gain (before modifiers)
+  matchGrowth: 0.28,                                              // chance per match of 45+ minutes (more with a good rating)
+  potential: { mean: 72, sd: 9, min: 54, max: 97 },              // hidden potential at 16
 };
 
 // ── PFM (Performance Fitness Meter) ────────────────────────────
@@ -129,7 +134,29 @@ export const LIFE = {
   interludeChance: 0.38,                      // share of "Play week" clicks that open a mid-week scene instead (time stands still)
   weeklyDecisions: { 1: 14, 2: 34, 3: 34, 4: 18 }, // how many story decisions a week brings (weights)
   maxPending: 5,                              // never more open decisions than this
+  potentialUp: 0.03,                          // weekly chance that disciplined, happy hard work raises potential by 1 (age 26 and under)
+  potentialDown: 0.04,                        // weekly chance that stress above 85 lowers it by 1
   repeatPenalty: 0.5,                         // each time a scenario has fired, its weight is divided by (1 + this × times)
+};
+
+// ── Sponsors (real brands in data/text/brands.json) ────────────
+export const SPONSOR = {
+  tier: { local: 4000, regional: 15000, global: 50000, luxury: 110000 }, // yearly € base at fame 40 (grows fast with fame and followers)
+  approachBase: 0.06,   // monthly chance a brand approaches you (plus fame, followers, agent, image)
+  missPost: 8, keepPost: 4, missEvent: 12, eventBoost: 12, // brand satisfaction changes
+  moralityAt: 30,       // public image below this can trigger a morality clause
+  terminateAt: 20,      // satisfaction below this: the brand walks
+  renewAt: 55,          // satisfaction needed for a renewal offer
+};
+
+// ── Social media ───────────────────────────────────────────────
+export const SOCIAL = {
+  engagement: 0.05,     // share of followers who like an average post
+  conversion: 0.06,     // new followers per like
+  viralBase: 0.03,      // chance any post goes viral (more for goals, trends, replies)
+  ceilingBase: 1500,    // follower ceiling = this × e^(fame/9) × country boost (fame 60 ≈ 1-5M, fame 90 ≈ 30-130M)
+  adFatigueAfter: 2,    // sponsored posts per month before fans start calling you a billboard
+  mult: { goal: 1.6, matchday: 1.1, training: 0.8, fans: 1, teammate: 0.8, family: 1.1, partner: 1.3, flex: 1.2, charity: 1, trend: 1.2, cryptic: 1.1, reply: 1, throwback: 1.1, greeting: 0.9, nation: 1.3, sponsor: 1 },
 };
 
 // ── Debt ───────────────────────────────────────────────────────

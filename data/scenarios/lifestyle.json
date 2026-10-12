@@ -12,7 +12,7 @@
       ]
     },
     {
-      "id": "ls_watch_temptation", "cat": "lifestyle", "w": 4, "when": { "wealth": [20000, 999999999], "age": [18, 40] },
+      "id": "ls_watch_temptation", "group": "watch", "groupCd": 200, "cat": "lifestyle", "w": 4, "when": { "wealth": [20000, 999999999], "age": [18, 40] },
       "title": "The Watch",
       "text": ["Every senior player in the dressing room wears a watch that costs more than {J}'s parents' house. {T} shows him a catalogue. 'You've made it. Act like it.'", "A luxury watch brand invites {J} to a private showroom. The glass of water they offer him is in crystal."],
       "prompt": "Buy one?",
@@ -24,12 +24,12 @@
       ]
     },
     {
-      "id": "ls_diet_change", "cat": "lifestyle", "w": 4,
+      "id": "ls_diet_change", "group": "diet", "groupCd": 104, "cat": "lifestyle", "w": 4,
       "title": "A New Way of Eating",
       "text": ["A famous veteran swears his career was extended five years by a strict new diet: no sugar, no fried food, everything weighed. He offers to share his chef.", "The club nutritionist has a new plan for {J}. It involves a lot of fish. {J} has never knowingly enjoyed a fish."],
       "prompt": "Commit to it?",
       "choices": [
-        { "label": "Go all in", "desc": "Weigh every meal.", "risk": "medium", "hint": "Fitter. Grumpier.", "text": "Three weeks in, he's sharper in sprints and quieter at dinner parties. His family visits and finds nothing in his fridge but broccoli.", "fx": { "pfm": 5, "growth": ["physical"], "morale": -2, "family": -1 } },
+        { "label": "Go all in", "desc": "Weigh every meal.", "risk": "medium", "hint": "Fitter. Grumpier.", "text": "Three weeks in, he's sharper in sprints and quieter at dinner parties. His family visits and finds nothing in his fridge but broccoli.", "fx": { "pfm": 5, "growth": ["physical"], "morale": -2, "family": -1, "potential": 1 } },
         { "label": "80% of the time", "desc": "Balance.", "risk": "low", "hint": "Sustainable.", "text": "Fish on weekdays, {FOOD} on Sundays. The nutritionist sighs but accepts it.", "fx": { "pfm": 3, "morale": 1 } },
         { "label": "Politely ignore it", "desc": "Your body, your rules.", "risk": "low", "hint": "Happy now. Maybe not at thirty.", "text": "He keeps eating what he likes. The nutritionist writes something in a file.", "fx": { "morale": 2, "trust": -1 } }
       ]
@@ -44,7 +44,7 @@
           { "w": 2, "text": "Loud, glamorous, slightly boring. He leaves at midnight and is in bed by one. Nothing happens. Nothing is good.", "fx": { "friends": 2, "morale": 1 } },
           { "w": 1, "text": "He leaves at midnight — but a photo from 11:58 looks like 3am. It's on a gossip account by morning.", "fx": { "image": -3, "trust": -2, "followers": 3000 } }
         ] },
-        { "label": "Become a regular", "desc": "VIP every Saturday.", "risk": "extreme", "hint": "Fun now. Expensive later.", "text": "The weekends blur. His touch in training gets heavier. {Mf} stops making eye contact. The people closest to him start asking questions.", "fx": { "lifestyle": 0.4, "pfm": -6, "trust": -5, "image": -5, "friends": 3, "love": -5, "family": -3, "flag": "party_regular" } },
+        { "label": "Become a regular", "desc": "VIP every Saturday.", "risk": "extreme", "hint": "Fun now. Expensive later.", "text": "The weekends blur. His touch in training gets heavier. {Mf} stops making eye contact. The people closest to him start asking questions.", "fx": { "lifestyle": 0.4, "pfm": -6, "trust": -5, "image": -5, "friends": 3, "love": -5, "family": -3, "flag": "party_regular", "potential": -2 } },
         { "label": "Say no", "desc": "Not your scene.", "risk": "low", "hint": "Boring is professional.", "text": "He says no. He watches {SHOW} instead. On Monday, two teammates who went look exhausted.", "fx": { "pfm": 2, "trust": 1 } }
       ]
     },
@@ -56,11 +56,11 @@
       "choices": [
         { "label": "Quit the scene completely", "desc": "Reset.", "risk": "low", "hint": "Everything recovers. Slowly.", "text": "He deletes the promoter's number. The first quiet Saturday feels like withdrawal. By the third, he sleeps through the night.", "fx": { "unflag": "party_regular", "lifestyle": -0.3, "trust": 3, "pfm": 4, "image": 2, "morale": -1 } },
         { "label": "Cut back, don't quit", "desc": "Just Saturdays after wins.", "risk": "medium", "hint": "Compromise. Temptation stays.", "text": "He tells himself he's in control. Some weeks, he is.", "fx": { "pfm": 1, "image": -1 } },
-        { "label": "Carry on", "desc": "You're young once.", "risk": "extreme", "hint": "This ends badly.", "text": "He carries on. The papers carry on too. {Mf} drops him for the next match without explanation.", "fx": { "trust": -8, "image": -5, "pfm": -5, "board": -4, "stress": 4 } }
+        { "label": "Carry on", "desc": "You're young once.", "risk": "extreme", "hint": "This ends badly.", "text": "He carries on. The papers carry on too. {Mf} drops him for the next match without explanation.", "fx": { "trust": -8, "image": -5, "pfm": -5, "board": -4, "stress": 4, "potential": -2 } }
       ]
     },
     {
-      "id": "ls_tattoo", "cat": "lifestyle", "w": 3, "once": true, "when": { "age": [18, 35] },
+      "id": "ls_tattoo", "group": "tattoo", "groupCd": 9999, "cat": "lifestyle", "w": 3, "once": true, "when": { "age": [18, 35] },
       "title": "The First Tattoo",
       "text": ["Half the squad has tattoos. {J} has been thinking about one for months: something for his family, maybe. {MUM} has said, many times, 'over my dead body'.", "{T} is getting a new tattoo on Thursday and has booked a second slot 'in case {J} grows a spine'."],
       "prompt": "Get one?",
@@ -71,7 +71,7 @@
       ]
     },
     {
-      "id": "ls_investment_pitch", "cat": "lifestyle", "w": 4, "when": { "wealth": [15000, 999999999] },
+      "id": "ls_investment_pitch", "group": "invest_pitch", "groupCd": 104, "cat": "lifestyle", "w": 4, "when": { "wealth": [15000, 999999999] },
       "title": "An Investment Opportunity",
       "text": ["A smooth man in a smooth suit has an investment opportunity: crypto, real estate, 'guaranteed' returns. Three other players have already invested, he says.", "{T} swears he doubled his money in six months with 'a guy'. The guy wants to meet {J}."],
       "prompt": "Invest?",
@@ -91,13 +91,13 @@
       "text": ["It's 2:40am. {J} has been playing online since dinner. Training is at nine. He tells himself 'one more game' for the eleventh time.", "{J}'s screen-time report says nine hours a day. The physio says his sleep data is 'concerning'."],
       "prompt": "What do you do?",
       "choices": [
-        { "label": "Put the console in a cupboard", "desc": "Weekends only.", "risk": "low", "hint": "Better sleep.", "text": "The first few nights are boring. Then he reads a book. Then he sleeps eight hours. His training numbers jump.", "fx": { "pfm": 4, "stress": -2, "trust": 1, "friends": -1 } },
+        { "label": "Put the console in a cupboard", "desc": "Weekends only.", "risk": "low", "hint": "Better sleep.", "text": "The first few nights are boring. Then he reads a book. Then he sleeps eight hours. His training numbers jump.", "fx": { "pfm": 4, "stress": -2, "trust": 1, "friends": -1, "potential": 1 } },
         { "label": "Turn it into streaming", "desc": "If you're playing anyway...", "risk": "medium", "hint": "Followers up, sleep down.", "text": "The streams are popular. The sleep is not. His followers grow. His sprint times don't.", "fx": { "followers": 6000, "pfm": -4, "trust": -2 } },
         { "label": "It's fine, it's relaxing", "desc": "Everyone needs a hobby.", "risk": "medium", "hint": "It isn't fine.", "text": "He keeps playing. His legs feel heavy in every Monday session.", "fx": { "pfm": -4, "stress": 2 } }
       ]
     },
     {
-      "id": "ls_charity_foundation", "cat": "lifestyle", "w": 3, "once": true, "when": { "wealth": [30000, 999999999], "rep": [25, 100] },
+      "id": "ls_charity_foundation", "group": "foundation", "groupCd": 9999, "cat": "lifestyle", "w": 3, "once": true, "when": { "wealth": [30000, 999999999], "rep": [25, 100] },
       "title": "Starting a Foundation",
       "text": ["{J}'s agent suggests starting a foundation: good for the image, good for the tax bill, good for the soul. In that order, says the agent.", "{MUM} suggests {J} give something back to the neighbourhood. She already has a list. It's long."],
       "prompt": "Start a foundation?",
@@ -148,7 +148,7 @@
       "text": ["A teammate is doing an online business degree in his spare time. He says every footballer should plan for 'life after'. {J} has never thought about life after.", "The players' union offers free online courses: coaching, finance, languages, media."],
       "prompt": "Sign up?",
       "choices": [
-        { "label": "Coaching badges", "desc": "Learn the game from the other side.", "risk": "low", "hint": "Understanding improves. Time goes.", "text": "The theory sessions change how he sees training. {Mf} starts asking his opinion.", "fx": { "growth": ["mental"], "tacticalFit": 6, "trust": 2, "pfm": -1, "flag": "coaching_badges" } },
+        { "label": "Coaching badges", "desc": "Learn the game from the other side.", "risk": "low", "hint": "Understanding improves. Time goes.", "text": "The theory sessions change how he sees training. {Mf} starts asking his opinion.", "fx": { "growth": ["mental"], "tacticalFit": 6, "trust": 2, "pfm": -1, "flag": "coaching_badges", "potential": 1 } },
         { "label": "A language", "desc": "Open doors.", "risk": "low", "hint": "Useful for a move abroad.", "text": "Twenty minutes a day. Six months later, he can order food and flirt, badly, in a new language.", "fx": { "growth": ["mental"], "morale": 2 } },
         { "label": "Too busy", "desc": "Football is the job.", "risk": "low", "hint": "Fair. Short-sighted?", "text": "'Later,' he says. It's what everyone says.", "fx": {} }
       ]
@@ -168,7 +168,7 @@
       ]
     },
     {
-      "id": "ls_sleep_coach", "cat": "lifestyle", "w": 3, "when": { "stress": [45, 100] },
+      "id": "ls_sleep_coach", "group": "sleep", "groupCd": 60, "cat": "lifestyle", "w": 3, "when": { "stress": [45, 100] },
       "title": "The Sleep Problem",
       "text": ["{J} hasn't slept more than five hours a night in three weeks. The club's sports scientist shows him the data on a tablet. It's red.", "Bags under his eyes, coffee at 4pm, staring at the ceiling at 2am. The body is talking. {J} isn't listening."],
       "prompt": "Do something about it?",
@@ -212,7 +212,7 @@
       ]
     },
     {
-      "id": "ls_gambling_temptation", "cat": "lifestyle", "w": 2, "cd": 200, "when": { "age": [18, 40] },
+      "id": "ls_gambling_temptation", "group": "gambling", "groupCd": 150, "cat": "lifestyle", "w": 2, "cd": 200, "when": { "age": [18, 40] },
       "title": "The Card Game",
       "text": ["On the team bus, a card game for money has been going for months. The stakes have crept up. Tonight a teammate lost a month's wages in an hour.", "A teammate invites {J} to a 'private poker night'. The address is a penthouse. The buy-in is a number with a lot of zeros."],
       "prompt": "Play?",
@@ -225,7 +225,7 @@
       ]
     },
     {
-      "id": "ls_gambling_spiral", "cat": "lifestyle", "w": 6, "cd": 40, "when": { "flags": ["gambling"] },
+      "id": "ls_gambling_spiral", "group": "gambling_spiral", "groupCd": 30, "cat": "lifestyle", "w": 6, "cd": 40, "when": { "flags": ["gambling"] },
       "title": "Chasing Losses",
       "text": ["{J} has been betting online. Small at first. Then less small. Last night he lost more than a month's wages and tried to win it back. Then he lost more.", "The betting app sends {J} a notification: 'We miss you! Here's a free bet.' He opens it at 3am."],
       "prompt": "This is becoming a problem.",
@@ -271,7 +271,7 @@
       ]
     },
     {
-      "id": "ls_old_neighbourhood", "cat": "lifestyle", "w": 3, "when": { "rep": [30, 100], "abroad": false },
+      "id": "ls_old_neighbourhood", "group": "hometown", "groupCd": 52, "cat": "lifestyle", "w": 3, "when": { "rep": [30, 100], "abroad": false },
       "title": "Back in the Old Neighbourhood",
       "text": ["{J} drives through the neighbourhood where he grew up. The street vendors, the broken goalpost, the wall where he used to kick a ball for hours. Everyone stops what they're doing.", "A visit home. The kids who used to call him names now ask for selfies."],
       "prompt": "Stay a while?",

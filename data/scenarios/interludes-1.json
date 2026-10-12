@@ -11,7 +11,7 @@
       ]
     },
     {
-      "id": "il_kitman_boots", "cat": "interlude", "w": 4, "cd": 150, "when": { "freeAgent": false },
+      "id": "il_kitman_boots", "once": true, "cat": "interlude", "w": 4, "cd": 150, "when": { "freeAgent": false },
       "title": "The Kit Man's Theory",
       "text": ["The kit man stops {J} in the corridor with a serious face. He has a theory: {J} plays better in the old boots, the scuffed ones. He has data. The data is a notebook.", "The kit man, who has been at the club for twenty-six years, informs {J} that his new boots are 'cursed'. He says it the way a doctor delivers a diagnosis."],
       "prompt": "Humour him?",
@@ -93,7 +93,7 @@
       ]
     },
     {
-      "id": "il_old_coach_call", "cat": "interlude", "w": 4, "cd": 200,
+      "id": "il_old_coach_call", "once": true, "group": "old_coach", "groupCd": 9999, "cat": "interlude", "w": 4, "cd": 200,
       "title": "A Call From the First Coach",
       "text": ["An unknown number. It's the coach who ran {J}'s first youth team, the one who used to drive the kids to matches in his own van. He's retiring.", "A voice from long ago: his very first coach, calling to say he's sick, and that he watches every game."],
       "prompt": "What do you do?",
@@ -103,7 +103,7 @@
       ]
     },
     {
-      "id": "il_sibling_homework", "cat": "interlude", "w": 4, "cd": 140,
+      "id": "il_sibling_homework", "when": { "sibAge": [7, 17] }, "group": "sib_sport", "groupCd": 104, "cat": "interlude", "w": 4, "cd": 140,
       "title": "{SIB} Needs Help",
       "text": ["{SIB} sends a panicked message: an essay about 'someone who inspires me' is due tomorrow. They've chosen {J}. They need quotes.", "Little {SIB} needs a famous person for a school project. Guess who."],
       "prompt": "Help out?",
@@ -235,7 +235,7 @@
       ]
     },
     {
-      "id": "il_fan_tattoo", "cat": "interlude", "w": 3, "cd": 240, "when": { "fans": [65, 100] },
+      "id": "il_fan_tattoo", "once": true, "cat": "interlude", "w": 3, "cd": 240, "when": { "fans": [65, 100] },
       "title": "A Fan's Tattoo",
       "text": ["A fan at the gate rolls up his sleeve to show a fresh tattoo: {J}'s face, his number, and the date of his first goal. The likeness is… approximate.", "A woman shows {J} her son's new tattoo on her phone: {J}'s signature, enormous, on his calf. She's not sure how she feels about it."],
       "prompt": "Your reaction?",
@@ -265,7 +265,7 @@
       ]
     },
     {
-      "id": "il_old_school_visit", "cat": "interlude", "w": 3, "cd": 260, "when": { "abroad": false, "age": [18, 40] },
+      "id": "il_old_school_visit", "once": true, "cat": "interlude", "w": 3, "cd": 260, "when": { "abroad": false, "age": [18, 40] },
       "title": "The Old School",
       "text": ["His old school invites {J} to speak at assembly. The headteacher who once confiscated his ball for a week now introduces him as 'our pride'.", "The school where {J} spent more time playing football than studying wants him to open their new sports hall."],
       "prompt": "Go?",
@@ -309,17 +309,17 @@
       ]
     },
     {
-      "id": "il_pet_offer", "cat": "interlude", "w": 3, "cd": 400, "when": { "age": [19, 40] },
+      "id": "il_pet_offer", "once": true, "group": "pet", "groupCd": 9999, "cat": "interlude", "w": 3, "cd": 400, "when": { "age": [19, 40] },
       "title": "The Puppy",
       "text": ["A teammate's dog has had puppies. One of them, all ears and paws, has fallen asleep on {J}'s foot.", "Outside {PLACE} a shelter is holding an adoption day. A scruffy dog with one ear up and one ear down will not stop staring at {J}."],
       "prompt": "Take it home?",
       "choices": [
-        { "label": "Yes. Obviously.", "desc": "Look at that face.", "risk": "medium", "hint": "Joy. Responsibility. Hair everywhere.", "text": "He names the dog after his first club. It eats a boot in week one. It is the best decision he's made all year.", "fx": { "morale": 6, "stress": -4, "lifestyle": 0.05, "followers": 2000, "flag": "has_dog" } },
+        { "label": "Yes. Obviously.", "desc": "Look at that face.", "risk": "medium", "hint": "Joy. Responsibility. Hair everywhere.", "text": "He names the dog after his first club. It eats a boot in week one. It is the best decision he's made all year.", "fx": { "morale": 6, "stress": -4, "lifestyle": 0.05, "followers": 2000, "flag": "dog_owner" } },
         { "label": "Not with this schedule", "desc": "It wouldn't be fair.", "risk": "low", "hint": "Responsible. A little sad.", "text": "He scratches its ears for ten minutes and leaves. He checks the shelter's page twice that week.", "fx": { "morale": -1 } }
       ]
     },
     {
-      "id": "il_dog_chaos", "cat": "interlude", "w": 4, "cd": 100, "when": { "flags": ["has_dog"] },
+      "id": "il_dog_chaos", "cat": "interlude", "w": 4, "cd": 100, "when": { "flags": ["dog_owner"] },
       "title": "The Dog Has Opinions",
       "text": ["The dog has eaten one of {J}'s match boots. Only the left one. It is now looking at the right one.", "The dog has learned to open the fridge. The evidence is everywhere."],
       "prompt": "Discipline?",
@@ -394,7 +394,7 @@
       ]
     },
     {
-      "id": "il_insomnia_window", "cat": "interlude", "w": 3, "cd": 120, "time": "Wednesday, 03:12", "when": { "stress": [55, 100] },
+      "id": "il_insomnia_window", "group": "sleep", "groupCd": 60, "cat": "interlude", "w": 3, "cd": 120, "time": "Wednesday, 03:12", "when": { "stress": [55, 100] },
       "title": "Can't Sleep",
       "text": ["3am. The ceiling again. {J}'s mind is replaying a pass he misplaced in a match four months ago, and then a conversation with {DAD} from when he was twelve.", "The city is silent and {J} is wide awake, scrolling through comments he promised himself he wouldn't read."],
       "prompt": "What now?",
@@ -425,7 +425,7 @@
       ]
     },
     {
-      "id": "il_groundsman", "cat": "interlude", "w": 3, "cd": 200, "when": { "freeAgent": false },
+      "id": "il_groundsman", "once": true, "cat": "interlude", "w": 3, "cd": 200, "when": { "freeAgent": false },
       "title": "The Groundsman's Secret",
       "text": ["The groundsman, a silent man who has cut the club's grass for thirty years, beckons {J} over. He knows which patch of the pitch is slower. He's never told anyone.", "Late after training, the old groundsman is walking the pitch with a fork. He says the left wing drains badly. 'Cut inside there,' he mutters. 'Ball dies on the touchline.'"],
       "prompt": "Listen?",
@@ -435,7 +435,7 @@
       ]
     },
     {
-      "id": "il_comment_from_ex", "cat": "interlude", "w": 3, "cd": 260, "ui": "social", "when": { "followers": [5000, 999999999] },
+      "id": "il_comment_from_ex", "group": "ex", "groupCd": 120, "cat": "interlude", "w": 3, "cd": 260, "ui": "social", "when": { "followers": [5000, 999999999] },
       "title": "A Comment From the Past",
       "text": ["Under his latest post, a comment from someone {J} dated at school: 'Proud of you. Always knew you'd make it.' It already has four thousand likes. People are speculating.", "An old flame from his teenage years likes eleven of his posts in a row at 1am. The fan accounts have noticed."],
       "prompt": "Respond?",
@@ -484,7 +484,7 @@
       ]
     },
     {
-      "id": "il_secret_talent", "cat": "interlude", "w": 3, "cd": 260,
+      "id": "il_secret_talent", "once": true, "cat": "interlude", "w": 3, "cd": 260,
       "title": "The Hidden Talent",
       "text": ["A teammate discovers {J} can solve a Rubik's cube in under a minute. The squad demands a demonstration. A crowd gathers. Phones come out.", "At a team event, someone finds out {J} can play the piano. There is a piano in the hotel lobby. There is no escape."],
       "prompt": "Show off?",
@@ -525,7 +525,7 @@
       ]
     },
     {
-      "id": "il_video_call_grandma", "cat": "interlude", "w": 3, "cd": 200,
+      "id": "il_video_call_grandma", "when": { "age": [16, 26] }, "once": true, "cat": "interlude", "w": 3, "cd": 200,
       "title": "Grandma Gets a Phone",
       "text": ["His grandmother has a smartphone now. She has learned to video-call. She calls eleven times on Tuesday, mostly with the camera pointed at her ear.", "A blurry video call from his grandmother. She's ninety. She wants to know why he 'kicks the ball and runs away from it'."],
       "prompt": "Pick up?",

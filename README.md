@@ -17,13 +17,17 @@ Each week:
 - **Press Play.** About a third of the time, life interrupts first with a small mid-week scene (an *interlude*). Answer it and see what happens straight away; time only moves when you play on.
 - **Key moments** (marked *in-match*) are split-second decisions about next week's match. They change what actually happens in it.
 - **Plan your training**: *Train hard* (more growth, more fatigue, stress and injury risk), *Balanced*, *Light* or *Rest*.
+- **Post on social media** once a week: what you post and when decides how it lands (a car selfie after a defeat goes badly).
+- **Sponsors** (170+ real brands) approach you as you get famous. Do your sponsored posts and appearances, keep your image clean, and they renew.
+- **Potential:** scouts estimate how good you can become. Disciplined hard work with a clear head raises it; chaos lowers it.
+- **Want to play abroad?** The Career tab explains your chances and what helps (an agent, fame, telling your agent you want to go).
 - **Look after your circle.** The *Circle* tab shows how the manager, board, dressing room, fans, press, family, partner and friends feel about you, plus your morale and stress. People you ignore drift away. High stress hurts your football.
 
 Your career saves automatically in the browser. **⚙ Settings → Export save** downloads a backup.
 
 ## What's in the game
 - ~2,000 real clubs in 160+ countries and regions, with real league formats, cups and transfer windows (2025-26 start)
-- 600+ hand-written scenarios: training, dressing room, manager, 47 in-match key moments, media and press conferences, family, love, friends, club politics, lifestyle, money, culture, national team, health, veteran years
+- 740+ hand-written scenarios (plus long storylines that span years and change how your career ends): training, dressing room, manager, 47 in-match key moments, media and press conferences, family, love, friends, club politics, lifestyle, money, culture, national team, health, veteran years
 - ~100 interludes (mid-week scenes that don't advance time) and 20 free-time activities
 - A life web: 11 relationships and moods that react to each other, a cast of people (parents, sibling, best friend, captain, president, journalist, partner, agent), and long weekly stories with press clippings and phone messages
 - Transfers, loans, contracts, injuries and rehab choices, national team call-ups, promotion and relegation, retirement and a legacy rating

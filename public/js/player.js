@@ -108,6 +108,17 @@ export function moodFrom(p, extra = null) {
   return pick(['Focused', 'Determined', 'Motivated']);
 }
 
+// What scouts think his potential is: a range that narrows as he gets older (and is slightly off, like real scouting).
+export function scoutEstimate(p, ageYears) {
+  const pot = p.potential ?? 70;
+  const bias = p.scoutBias ?? 0;
+  const width = Math.max(2, Math.round(14 - (ageYears - 16) * 1.6));
+  const lo = Math.max(overall(p), Math.round(pot + bias - width / 2));
+  const hi = Math.max(lo, Math.round(pot + bias + width / 2));
+  const stars = Math.max(0.5, Math.min(5, Math.round(((lo + hi) / 2 - 45) / 9 * 2) / 2));
+  return { lo, hi, stars, label: hi >= 88 ? 'World-class prospect' : hi >= 80 ? 'Top-level potential' : hi >= 72 ? 'Solid professional' : hi >= 64 ? 'Squad player' : 'Limited ceiling' };
+}
+
 export const statLabel = (k) => ({ pace: 'Pace', shooting: 'Shooting', passing: 'Passing', dribbling: 'Dribbling', defending: 'Defending', physical: 'Physical', mental: 'Mental', goalkeeping: 'Goalkeeping' }[k]);
 
 export function relevantStats(position) {

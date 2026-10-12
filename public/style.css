@@ -332,3 +332,53 @@ td.n, th.n { text-align: right; }
 .legacy-label { font-family: var(--serif); font-size: 2.4rem; color: var(--accent); margin: 8px 0; }
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* ── Potential (scouts' estimate) ── */
+.scout { display: grid; grid-template-columns: auto auto 1fr; grid-template-rows: auto auto; gap: 0 10px; align-items: baseline; margin-top: 12px; padding: 8px 10px; background: var(--bg-2); border: 1px solid var(--border); border-radius: 10px; font-size: .82rem; }
+.scout > span:first-child { color: var(--muted); display: inline-flex; align-items: center; gap: 5px; }
+.scout b { font-family: var(--serif); font-size: 1.1rem; }
+.scout .stars { color: var(--gold); letter-spacing: 1px; justify-self: end; }
+.scout em { grid-column: 1 / -1; font-style: normal; font-size: .72rem; color: var(--muted); }
+
+/* ── Sponsors ── */
+.deals { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.deals li { background: var(--bg-2); border: 1px solid var(--border); border-radius: 9px; padding: 8px 10px; }
+.deal-top { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; font-size: .84rem; flex-wrap: wrap; }
+.deal-top span { color: var(--muted); font-size: .74rem; }
+.deal-duty { font-size: .72rem; color: var(--muted); margin: 3px 0 5px; }
+
+/* ── Social composer and post card ── */
+.social .ft > .ic { color: #ff7aa2; }
+.social .ft:hover:not(:disabled) { border-color: #a8456a; background: #1c0f17; }
+.aside-post { border-color: #5a2b42; background: linear-gradient(180deg, rgba(255, 122, 162, .08), rgba(255, 122, 162, .02)); }
+.aside-post .aside-head { color: #ffa3c0; }
+.igpost { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin: 10px 0; }
+.ig-top { display: flex; align-items: center; gap: 8px; font-size: .86rem; }
+.ig-top .pav { width: 28px; height: 28px; font-size: .72rem; }
+.ig-cap { margin: 8px 0; font-size: .95rem; }
+.ig-meta { font-size: .78rem; color: var(--muted); display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
+.ig-meta .up { color: var(--good); } .ig-meta .down { color: var(--bad); }
+.viral { color: var(--accent); letter-spacing: .08em; }
+.ig-comments { list-style: none; margin: 8px 0 0; padding: 8px 0 0; border-top: 1px solid var(--border); display: grid; gap: 4px; font-size: .84rem; color: var(--text-2); }
+.ig-comments b { color: var(--text); font-weight: 700; margin-right: 4px; }
+
+/* ── Transfer outlook ── */
+.outlook { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 8px; }
+.outlook div { background: var(--bg-2); border: 1px solid var(--border); border-radius: 9px; padding: 6px 8px; display: grid; }
+.outlook span { font-size: .68rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.outlook b { font-size: .95rem; }
+.notes { list-style: none; margin: 0 0 6px; padding: 0; display: grid; gap: 5px; font-size: .8rem; }
+.notes li { padding: 5px 8px 5px 24px; border-radius: 7px; background: var(--bg-2); position: relative; color: var(--text-2); }
+.notes li::before { position: absolute; left: 8px; top: 4px; font-weight: 800; }
+.notes .n-up::before { content: '+'; color: var(--good); }
+.notes .n-down::before { content: '−'; color: var(--bad); }
+.notes .n-tip::before { content: '›'; color: var(--accent); }
+.notes .n-tip { border: 1px dashed #4a5e1a; }
+.notes .n-info::before { content: 'i'; color: var(--info); }
+
+/* ── Epilogue ── */
+.epilogue { text-align: left; max-width: 620px; margin: 18px auto 0; }
+.ep { display: grid; grid-template-columns: 22px 1fr; gap: 10px; padding: 10px 0; border-top: 1px solid var(--border); }
+.ep > .ic { width: 20px; height: 20px; color: var(--accent); margin-top: 2px; }
+.ep b { font-size: .8rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
+.ep p { margin: 3px 0 0; font-family: var(--serif); font-size: 1rem; line-height: 1.6; }

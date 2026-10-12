@@ -1,0 +1,162 @@
+{
+  "_about": "End-of-career epilogue lines. Tokens: {J} {club} last club, {FIRSTCLUB} first club, {MUM} {DAD} {SIB} {SIBr} {BF} {BFf} {Pf} {RIVAL} {MENTEE} {OLDBOSS} {WEALTH} {KIDS}.",
+  "next": {
+    "coach": [
+      "{J} takes his coaching badges further and starts with an under-15 team. The kids complain he makes them run too much. Within five years he's an assistant at {club}.",
+      "He goes straight into coaching. His first team talk is a disaster. His second one is better. By forty he has his own dugout and the same intensity he had as a player."
+    ],
+    "pundit": [
+      "Television snaps him up. He's honest, a bit too honest, and the clips of him criticising former teammates get millions of views.",
+      "{J} becomes a pundit: sharp suit, sharper opinions. The journalists he once dodged now share a studio with him."
+    ],
+    "foundation": [
+      "The foundation becomes his life's work: pitches in villages, scholarships, a programme for kids who can't afford boots. He says it's the best thing he ever did, and he means it.",
+      "He runs his foundation full-time. Every year, a few more kids get the chance he almost didn't."
+    ],
+    "business": [
+      "He invests in businesses back home: a futsal chain, a coffee brand, a property or two. Not all of it works. Enough of it does.",
+      "{J} becomes a businessman. He's better at it than anyone expected, possibly including himself."
+    ],
+    "broke": [
+      "The money is gone. The debts are not. He takes a job coaching kids on weekends and selling insurance on weekdays, and he's quieter than anyone remembers.",
+      "Retirement starts with a bank meeting he'd rather forget. He sells the medals he can bear to part with. Some friends help. Not many."
+    ],
+    "shadow": [
+      "The headlines follow him into retirement. Offers dry up. He moves somewhere quieter and tries to become someone else.",
+      "Nobody calls with jobs. His name still sells newspapers, just not in the way he'd like."
+    ],
+    "quiet": [
+      "He chooses a quiet life: a house near the sea, a small pitch in the garden, an alarm clock he never sets again.",
+      "{J} disappears from public life almost completely. Sometimes he plays five-a-side with people who have no idea who he was."
+    ]
+  },
+  "family": {
+    "high": [
+      "{MUM} keeps every newspaper clipping in a cabinet in the living room. Visitors are made to look at all of them.",
+      "Sunday lunch at his parents' house becomes sacred. {DAD} finally admits, out loud, that he was proud of him all along."
+    ],
+    "mid": [
+      "Family life settles into something comfortable: calls on Sundays, visits at holidays, old arguments that never quite get resolved.",
+      "He's closer to his family than he was in the hard years, if not as close as he'd like."
+    ],
+    "low": [
+      "The distance from the playing years never fully closes. He calls home more than he used to. It isn't always answered.",
+      "His family are proud of the footballer. They're still getting to know the man."
+    ],
+    "oldParents": [
+      "His father is old now, and {J} takes him to every match at {FIRSTCLUB}, where it all began."
+    ],
+    "lostDad": [
+      "On the anniversary of {DAD}'s death every year, {J} goes back to {FIRSTCLUB} and kicks a ball against the wall where his father taught him to play.",
+      "A photo of {DAD} in the stands sits on his desk. He looks at it every morning."
+    ]
+  },
+  "love": {
+    "marriedHappy": [
+      "He and {Pf} grow old the way they promised: arguing about restaurants, holding hands on the sofa.",
+      "{Pf} and {J} are still together, still laughing at the same terrible films."
+    ],
+    "marriedStrained": [
+      "The marriage survives, but the hard years left marks. They work at it. Some years are better than others.",
+      "He and {Pf} stay together, quieter than they used to be. Retirement gives them time to learn each other again."
+    ],
+    "together": [
+      "He and {Pf} finally have the time they never had during his career. They spend it travelling, mostly to places without stadiums."
+    ],
+    "single": [
+      "He never quite found the right person during the playing years. Retirement, he says, is his chance.",
+      "Single, and surprisingly at peace with it."
+    ],
+    "singleParent": [
+      "He raises his children mostly on his own, at every school play, every grazed knee."
+    ],
+    "kids": [
+      "{KIDS} grow up hearing stories about his career and pretending to be unimpressed.",
+      "{KIDS} have his old shirts framed in their rooms. One of them is already better at keepy-uppy than he ever was."
+    ]
+  },
+  "friends": {
+    "high": [
+      "{BFf} is still his best friend: still {BFjob}, still roasting him in the group chat. Some things never change, and he's grateful.",
+      "The old crew still meet every month at the same cheap restaurant. Nobody lets him pay."
+    ],
+    "low": [
+      "He realises, too late, how many friendships he let fade. He starts calling people again. Some of them pick up."
+    ]
+  },
+  "rival": {
+    "friend": [
+      "{RIVAL}, the boy he once fought for a place, becomes his closest friend in football. They open a coaching school together.",
+      "{RIVAL} speaks at his testimonial dinner and makes the whole room cry with a story about the youth team."
+    ],
+    "enemy": [
+      "He and {RIVAL} never speak again. When asked about each other, both say 'no comment' in exactly the same tone.",
+      "{RIVAL} still won't shake his hand at legends matches."
+    ],
+    "neutral": [
+      "He sees {RIVAL} at a legends match years later. They nod, and that's enough."
+    ]
+  },
+  "mentee": {
+    "star": [
+      "The kid he helped, {MENTEE}, becomes a star. In his first big interview he thanks {J} by name.",
+      "{MENTEE}, the boy he once mentored, plays in front of eighty thousand people and dedicates his first goal to {J}."
+    ],
+    "normal": [
+      "The kids he mentored send him messages on his birthday every year. One of them is now a coach himself."
+    ]
+  },
+  "promise": {
+    "kept": [
+      "He kept his promise. The people of his hometown never forget it: there's a mural of {J} on the wall of the old stadium.",
+      "He went back, like he said he would. The final chapter at home is the one people talk about most."
+    ],
+    "broken": [
+      "He never went back, despite the promise. In his hometown, his name gets a complicated silence.",
+      "The promise was broken. There's a banner at {FIRSTCLUB} that still says so."
+    ]
+  },
+  "fans": {
+    "high": [
+      "The fans of {club} chant his name at the first home match after he retires. He's in the stand, and he can't stop crying.",
+      "There's talk of a statue. He laughs it off. They build it anyway."
+    ],
+    "mid": [
+      "Fans remember him fondly, the way you remember a good season.",
+      "He gets a warm round of applause whenever he goes back to {club}."
+    ],
+    "low": [
+      "The fans aren't sentimental about him. He'd hoped for more. Maybe he should have given them more."
+    ]
+  },
+  "money": {
+    "rich": [
+      "He retires with {WEALTH} and the strange problem of having more money than time. He gives a lot of it away.",
+      "Financially, he never has to work again. His mother still checks he's eating properly."
+    ],
+    "comfortable": [
+      "He leaves the game comfortable: a paid-off house, savings, and a plan.",
+      "Money isn't a worry. That was never guaranteed, and he knows it."
+    ],
+    "modest": [
+      "He retires with less than people assume. Footballers' money isn't what fans think. He gets a job, and he's fine.",
+      "The savings are modest. He's proud of every cent of them."
+    ],
+    "debt": [
+      "He retires in debt. It takes years to pay back. He tells young players about it every chance he gets."
+    ]
+  },
+  "image": {
+    "high": [
+      "Parents still point him out to their children: 'That's how you do it.'",
+      "He's remembered as one of the good ones."
+    ],
+    "mid": [
+      "He's remembered the way most players are: a few great moments, a few mistakes, a lot of hard work in between.",
+      "History is kind to him, mostly."
+    ],
+    "low": [
+      "The controversies follow his name like a shadow. Some people remember the football. More remember the headlines."
+    ]
+  }
+}

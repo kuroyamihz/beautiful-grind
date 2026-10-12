@@ -11,7 +11,10 @@ scenarios to a file (or create a file and list it in `index.json`), then run
   "w": 5,                                // weight: higher = more likely when eligible (default 5)
   "when": { "age": [16, 21], "role": ["bench", "rotation"] },   // conditions (all must match)
   "cd": 60,                              // cooldown in weeks before it can fire again (default 60)
-  "once": true,                          // fire at most once per career
+  "once": true,                          // fire at most once per career (use it for life events: a wedding, a sibling's academy...)
+  "group": "sib_money",                  // stories about the same situation share one cooldown...
+  "groupCd": 104,                        // ...of this many weeks (default: the scenario's cd)
+  "groupOnce": true,                     // ...or the whole group can only ever happen once
   "trigger": "debut",                    // only fires right after this happens (see triggers)
   "moment": true,                        // an in-match key moment, asked the week before a match
   "chainOnly": true,                     // only fires as a follow-up from another scenario's "chain"
@@ -46,6 +49,33 @@ Plus: in-match key moments (`moment`), transfer offers and contracts (made by th
 advance time. They're answered on the spot and the result is shown immediately.
 
 Scenarios that have fired before are picked less often, and so is the same category as last week.
+
+## Text that adapts to his life
+
+Any `text` (the scene or an outcome) can mix plain strings with variants that only appear when their
+conditions hold. Matching variants are preferred:
+
+```json
+"text": [
+  "Plain version, always possible.",
+  { "when": { "lastResult": ["L"] }, "t": "Version after a defeat." },
+  { "when": { "partnerStyle": ["private"] }, "t": "Version when his partner hates the spotlight." }
+]
+```
+
+## Long storylines
+
+Use flags plus `since` to make a story come back years later, and `cast` to remember who it was about:
+
+```json
+"fx": { "flag": "rival_respect", "cast": { "rival": "T" } }
+"when": { "flags": ["rival_respect"], "since": { "rival_respect": [150, 9999] } }
+```
+
+Stage 1 remembers `{T}` as `{RIVAL}`; stage 2 needs that flag and 150+ weeks to have passed.
+Remembered people: `{RIVAL} {MENTEE} {EXFLAME} {FIXER} {OLDBOSS}` (his first manager is remembered automatically).
+Flags the epilogue reads: `rival_friend rival_enemy mentee_star promise_kept promise_broken foundation captain secret_exposed dad_passed`
+and more (see `public/js/epilogue.js`). The storylines themselves are in `arcs.json`.
 
 ## Choices (three forms)
 
@@ -88,7 +118,9 @@ So `{ "followers": 8000 }` on its own already reaches the partner and the family
 
 The player's circle: `{MUM}` `{DAD}` (what he calls his parents, e.g. Ibu/Bapak) · `{SIB}` sibling's name, `{SIBr}` "brother"/"sister" ·
 `{BF}` best friend (`{BFf}` first name, `{BFjob}` his job) · `{JR}` the local journalist (`{JRl}` surname), `{OUT}` his outlet ·
-`{CAP}` captain (`{CAPl}`) · `{PRES}` club president (`{PRESl}`).
+`{CAP}` captain (`{CAPl}`) · `{PRES}` club president (`{PRESl}`) · `{SIBage}` `{SIBhe}` `{SIBhis}` `{SIBhim}` `{SIBlil}` ("little " while under 18) `{SIBplace}` (school/campus/work) · `{MUMage}` `{DADage}` · `{KID}` `{KIDage}` · `{FIRSTCLUB}`.
+
+Real brands: `{BRAND}` (a brand that would want him) or `{BRAND_boots}`, `{BRAND_tech}`, `{BRAND_fintech}`... (any industry in `data/text/brands.json`). Only use real brands in neutral or positive roles; scams, betting and anything shady must use fictional names.
 
 Random words (picked once per scenario, so scene and outcome agree; lists in `data/text/life.json`):
 `{PLACE} {FOOD} {DAY} {TIME} {SET} {APP} {CAR} {SHOW} {GIFT} {WEATHER} {HOBBY}`.
@@ -121,6 +153,12 @@ Random words (picked once per scenario, so scene and outcome agree; lists in `da
 | suspension | `1` | matches banned |
 | listed | `true` / `false` | transfer listed |
 | lifestyle | `0.2` | living-cost multiplier change |
+| potential | `1` / `-2` | hidden potential (the ceiling of his growth) |
+| abroadWish | `true` / `false` | he wants to play abroad (offers from abroad become much likelier) |
+| offerAbroad | `true` | a club abroad makes an offer now |
+| offerHome | `true` | his first club makes a homecoming offer (keeps or breaks a promise) |
+| cast | `{ "rival": "T" }` | remember this person by name for later stages |
+| agent | `null` | fires the agent |
 | flag / unflag | `"bought_car"` | story flags for later conditions |
 | chain | `{ "id": "x_followup", "in": [6, 12] }` | follow-up scenario after N weeks (keeps names and vars) |
 | matchMod | `{ "rating": 0.5, "goals": 1, "assists": 1, "card": "yellow", "concede": 1, "injury": "minor" }` | key moments only: changes next match |
@@ -131,7 +169,8 @@ Getting a meter higher gets harder near the top (and lower near the bottom), so 
 
 Ranges `[min, max]`: `age trust form rep wealth followers leagueQ tier caps apps seasonApps contractYears parental lastRating trophies ovr pfm goalsSeason tacticalFit board dressing fans press image family love friends morale stress`
 Lists: `role` (starter, rotation, bench, outcast) · `partner` · `partnerStyle` (private, public) · `phase` (pre, in, off) · `nt` (none, monitoring, called, regular) · `lastResult` (W, D, L) · `country` / `notCountry` (club's country) · `nationality` / `notNationality` · `pos` (GK CB FB DM CM AM W ST or DEF MID ATT) · `months` (1-12) · `flags` / `notFlags`
-True/false: `injured abroad ramadan agent listed played matchWeek freeAgent hasAlly hasRival loan debt`
+True/false: `injured abroad ramadan agent listed played matchWeek freeAgent hasAlly hasRival loan debt wantsAbroad`
+Ages and time: `sibAge mumAge dadAge kidAge partnerYears potential sponsors` (ranges) · `sibKind` (brother, sister) · `since` ({ flag: [minWeeks, maxWeeks] })
 
 `leagueQ` is league strength: ~56 Indonesia, ~63 Thailand/Australia, ~69 Championship/MLS, ~82 Premier League.
 
@@ -139,7 +178,7 @@ True/false: `injured abroad ramadan agent listed played matchWeek freeAgent hasA
 
 `start seasonStart seasonEnd champion trophy promoted relegated debut firstGoal goalStreak hatTrick nightmare redCard badRun benchStreak moved loanStart loanReturn freeAgent injured longInjury recovered returnLong callup ntWatch ntDropped ntDebut roleStarter roleOutcast roleChange birthday18 birthday21 birthday25 birthday30 birthday33 debt`
 
-Life web (fire once when a meter crosses a line, again only after it recovers):
+Social: `followers100K followers1M` · Life web (fire once when a meter crosses a line, again only after it recovers):
 `partnerCrisis familyRift friendsDrift dressingRevolt boardAngry fansTurn pressWar scandal lowMorale burnout` (red lines) ·
 `fanFavourite pressDarling deepLove leader roleModel` (peaks)
 

@@ -1,7 +1,7 @@
 {
   "scenarios": [
     {
-      "id": "ve_young_replacement", "cat": "veteran", "w": 6, "when": { "age": [30, 40] },
+      "id": "ve_young_replacement", "once": true, "cat": "veteran", "w": 6, "when": { "age": [30, 40] },
       "title": "The Club Signs {J}'s Replacement",
       "text": "The club announces a new signing: twenty-one, quick, plays {J}'s position, five-year contract. At the press conference the sporting director uses the phrase “succession planning”.",
       "prompt": "How do you handle it?",
@@ -22,7 +22,7 @@
       ]
     },
     {
-      "id": "ve_last_contract", "cat": "veteran", "w": 6, "when": { "age": [32, 40], "contractYears": [0, 1] },
+      "id": "ve_last_contract", "once": true, "cat": "veteran", "w": 6, "when": { "age": [32, 40], "contractYears": [0, 1] },
       "title": "Maybe the Last Contract",
       "text": "Contract talks at thirty-two-plus are different. The club offers one year, less money, an option for a second year “based on appearances”. A club in a smaller league offers two years and more money. Retirement is also an option nobody says out loud.",
       "prompt": "What do you prioritise?",
@@ -32,7 +32,7 @@
       ]
     },
     {
-      "id": "ve_coaching_offer", "cat": "veteran", "w": 4, "when": { "age": [31, 40], "flags": ["coaching_badges"] },
+      "id": "ve_coaching_offer", "once": true, "cat": "veteran", "w": 4, "when": { "age": [31, 40], "flags": ["coaching_badges"] },
       "title": "The Academy Wants {J} to Coach Part-Time",
       "text": "The club's academy director asks if {J} would coach the U-16s twice a week, alongside playing. His coaching badges make it possible. The kids already know who he is.",
       "prompt": "Coach the kids?",
@@ -68,7 +68,7 @@
       "fx": { "rep": 1, "mood": "Relieved", "followers": 15000 }
     },
     {
-      "id": "ve_mentor_teenager", "cat": "veteran", "w": 5, "when": { "age": [29, 40] },
+      "id": "ve_mentor_teenager", "once": true, "cat": "veteran", "w": 5, "when": { "age": [29, 40] },
       "title": "{J} Takes a Teenager Under His Wing",
       "text": "{K}, seventeen, reminds {J} of himself: talented, nervous, too much hair gel. The kid follows him around like a shadow and asks a hundred questions a day.",
       "prompt": "What do you teach him first?",
@@ -79,7 +79,7 @@
       ]
     },
     {
-      "id": "ve_punditry_offer", "cat": "veteran", "w": 3, "when": { "age": [31, 40], "rep": [25, 100] },
+      "id": "ve_punditry_offer", "once": true, "cat": "veteran", "w": 3, "when": { "age": [31, 40], "rep": [25, 100] },
       "title": "TV Wants {J} as a Pundit",
       "text": "A television network invites {J} to guest on their weekend highlights show. If it goes well, a permanent job after retirement.",
       "prompt": "Try it?",
@@ -91,7 +91,7 @@
       ]
     },
     {
-      "id": "ve_old_rival_retires", "cat": "veteran", "w": 3, "when": { "age": [30, 40] },
+      "id": "ve_old_rival_retires", "once": true, "cat": "veteran", "w": 3, "when": { "age": [30, 40] },
       "title": "An Old Rival Retires",
       "text": "{T}, the defender who kicked {J} in a hundred matches over fifteen years, announces his retirement. In the farewell interview, he says {J} was the toughest opponent he ever faced.",
       "prompt": "Respond?",
@@ -107,7 +107,7 @@
       "fx": { "trust": 3, "rep": 0.5, "mood": "Focused" }
     },
     {
-      "id": "ve_family_wants_retire", "cat": "veteran", "w": 4, "when": { "age": [33, 40], "partner": ["serious", "married"] },
+      "id": "ve_family_wants_retire", "cd": 52, "cat": "veteran", "w": 4, "when": { "partnerYears": [3, 99], "age": [33, 40], "partner": ["serious", "married"] },
       "title": "{P} Asks When It Will End",
       "text": "{P} says it at the kitchen table one evening, gently: “The children want their father at home. When will you stop?”",
       "prompt": "What do you say?",
@@ -129,7 +129,7 @@
       "fx": { "rep": 2, "followers": 25000, "mood": "Confident" }
     },
     {
-      "id": "ve_last_derby", "cat": "veteran", "w": 4, "when": { "age": [34, 40] },
+      "id": "ve_last_derby", "once": true, "cat": "veteran", "w": 4, "when": { "age": [34, 40] },
       "title": "Probably {J}'s Last Derby",
       "text": "Everyone knows this is probably {J}'s last derby. The rival fans, who have abused him for fifteen years, have made a banner. Nobody knows yet what it says.",
       "prompt": "Walk to the rival end before kick-off?",
@@ -142,7 +142,7 @@
       ]
     },
     {
-      "id": "ve_retirement_letter", "cat": "veteran", "w": 4, "when": { "flags": ["promised_retire"], "age": [33, 40] },
+      "id": "ve_retirement_letter", "once": true, "cat": "veteran", "w": 4, "when": { "flags": ["promised_retire"], "age": [33, 40] },
       "title": "{J} Writes His Retirement Letter",
       "text": "He promised {P}. One night, at the kitchen table, {J} writes the letter he's been composing in his head for a year. He doesn't send it yet. He reads it to himself four times.",
       "fx": { "mood": "Numb", "growth": ["mental"] }
@@ -154,7 +154,7 @@
       "fx": { "trust": 6, "rep": 0.8, "form": 0.4, "mood": "On Fire" }
     },
     {
-      "id": "ve_wage_cut", "cat": "veteran", "w": 3, "when": { "age": [32, 40], "contractYears": [0, 1.5] },
+      "id": "ve_wage_cut", "cd": 104, "cat": "veteran", "w": 3, "when": { "age": [32, 40], "contractYears": [0, 1.5] },
       "title": "The Club Asks {J} to Take a Pay Cut",
       "text": "Finances are tight. The sporting director asks the senior players to accept reduced wages for the rest of the season. {J} earns the most of anyone over thirty.",
       "prompt": "Accept the cut?",
@@ -164,7 +164,7 @@
       ]
     },
     {
-      "id": "ve_old_club_return", "cat": "veteran", "w": 3, "when": { "age": [31, 37], "rep": [20, 100] },
+      "id": "ve_old_club_return", "once": true, "cat": "veteran", "w": 3, "when": { "age": [31, 37], "rep": [20, 100] },
       "title": "First Club Wants {J} Back for a Final Chapter",
       "text": "The club where it all started calls: would {J} come home for one last season? Less money, smaller league. The fans who saw him at sixteen are waiting.",
       "prompt": "Go home?",
@@ -195,7 +195,7 @@
       ]
     },
     {
-      "id": "ve_teaching_young_keeper", "cat": "veteran", "w": 4, "when": { "age": [31, 40], "pos": ["GK"] },
+      "id": "ve_teaching_young_keeper", "once": true, "cat": "veteran", "w": 4, "when": { "age": [31, 40], "pos": ["GK"] },
       "title": "Passing the Gloves",
       "text": "The young goalkeeper who will replace {J} is talented and terrified. Every mistake in training, he looks at {J}. {J} recognises the look.",
       "fx": { "rep": 0.6, "trust": 3, "growth": ["mental"] }
@@ -211,7 +211,7 @@
       ]
     },
     {
-      "id": "ve_brand_ambassador_club", "cat": "veteran", "w": 3, "when": { "age": [32, 40], "rep": [30, 100], "trophies": [1, 99] },
+      "id": "ve_brand_ambassador_club", "once": true, "cat": "veteran", "w": 3, "when": { "age": [32, 40], "rep": [30, 100], "trophies": [1, 99] },
       "title": "Club Offers {J} an Ambassador Role After Retirement",
       "text": "The club president offers {J} a job for life: club ambassador after retirement, representing the club around the world. A desk, a salary, a seat in the directors' box.",
       "fx": { "flag": "club_ambassador", "mood": "Relieved", "trust": 3 }
@@ -223,7 +223,7 @@
       "fx": { "mood": "Relieved", "followers": 8000 }
     },
     {
-      "id": "ve_physio_honesty", "cat": "veteran", "w": 3, "when": { "age": [34, 40], "pfm": [0, 60] },
+      "id": "ve_physio_honesty", "once": true, "cat": "veteran", "w": 3, "when": { "age": [34, 40], "pfm": [0, 60] },
       "title": "The Physio's Honest Conversation",
       "text": "The head physio, who has treated {J} for eight years, closes the treatment room door. “You can keep going. But every season now costs you something later. Your knees at sixty. Your back. I want you to know.”",
       "prompt": "What do you do with that?",

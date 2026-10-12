@@ -51,7 +51,7 @@
       "fx": { "mood": "Motivated" }
     },
     {
-      "id": "bo_sleep_problems", "cat": "body", "w": 4,
+      "id": "bo_sleep_problems", "group": "sleep", "groupCd": 60, "cat": "body", "w": 4,
       "title": "{J} Can't Sleep",
       "text": "Night matches mean adrenaline at midnight, cold showers at 1am, staring at the ceiling at 3am. {J} has been running on four hours of sleep for two weeks. His reaction times are down.",
       "prompt": "Fix it?",
@@ -64,7 +64,7 @@
       ]
     },
     {
-      "id": "bo_diet_change", "cat": "body", "w": 4,
+      "id": "bo_diet_change", "group": "diet", "groupCd": 104, "cat": "body", "w": 4,
       "title": "The Nutritionist's New Plan",
       "text": "The club's new nutritionist hands {J} a meal plan: no sugar, no fried food, timed carbohydrates, a lot of fish. It's very different from what his mother cooks.",
       "prompt": "Follow it?",
@@ -74,7 +74,7 @@
       ]
     },
     {
-      "id": "bo_mental_burnout", "cat": "body", "w": 5, "when": { "pfm": [0, 45] },
+      "id": "bo_mental_burnout", "group": "burnout", "groupCd": 52, "cat": "body", "w": 5, "when": { "pfm": [0, 45] },
       "title": "{J} Is Burnt Out",
       "text": "Everything feels heavy. Training feels like a job, matches feel like exams, his phone feels like a weight. {J} forgot his own sister's birthday last week.",
       "prompt": "What do you do?",
@@ -136,7 +136,7 @@
       ]
     },
     {
-      "id": "bo_dengue", "cat": "body", "w": 2, "when": { "country": ["Indonesia", "Thailand", "Vietnam", "Malaysia", "Philippines", "Brazil", "India"] },
+      "id": "bo_dengue", "cd": 150, "cat": "body", "w": 2, "when": { "country": ["Indonesia", "Thailand", "Vietnam", "Malaysia", "Philippines", "Brazil", "India"] },
       "title": "Dengue Fever",
       "text": "A high fever, aching bones, a rash. The blood test confirms dengue. The doctor says rest, fluids, and close monitoring of his platelets. Two weeks at least.",
       "fx": { "pfm": -20, "mood": "Numb" }
@@ -168,7 +168,7 @@
       "fx": { "unflag": "painkillers", "stat": { "pace": -1 }, "injury": "moderate", "mood": "Broken" }
     },
     {
-      "id": "bo_weight_gain", "cat": "body", "w": 3, "when": { "phase": ["pre"] },
+      "id": "bo_weight_gain", "cd": 52, "cat": "body", "w": 3, "when": { "phase": ["pre"] },
       "title": "{J} Returns From Holiday Overweight",
       "text": "The scale at the first pre-season weigh-in says three kilos more than when {J} left. The fitness coach raises one eyebrow. The squad notices.",
       "fx": { "pfm": -6, "trust": -2 },
@@ -189,7 +189,7 @@
       ]
     },
     {
-      "id": "bo_eye_test", "cat": "body", "w": 2, "when": { "pos": ["GK", "CB", "ST"] },
+      "id": "bo_eye_test", "once": true, "cat": "body", "w": 2, "when": { "pos": ["GK", "CB", "ST"] },
       "title": "{J} Needs Glasses",
       "text": "A routine medical reveals {J}'s eyesight isn't perfect. He's been misjudging high balls under floodlights. The optician suggests contact lenses.",
       "fx": { "growth": ["mental"] }
@@ -208,13 +208,13 @@
       ]
     },
     {
-      "id": "bo_longevity_bonus", "cat": "body", "w": 4, "when": { "flags": ["longevity"], "age": [31, 40] },
+      "id": "bo_longevity_bonus", "once": true, "cat": "body", "w": 4, "when": { "flags": ["longevity"], "age": [31, 40] },
       "title": "Sports Science Says {J}'s Body Is Years Younger",
       "text": "The club's annual physical testing shows something unusual: {J}'s recovery markers look like a player five years younger. The nutritionist, the sleep work, the stretching: it paid off.",
       "fx": { "pfm": 10, "mood": "Confident" }
     },
     {
-      "id": "bo_blood_test", "cat": "body", "w": 2,
+      "id": "bo_blood_test", "cd": 150, "cat": "body", "w": 2,
       "title": "Blood Test Reveals an Iron Deficiency",
       "text": "{J} has been unusually tired for weeks. A blood test reveals low iron. The doctor prescribes supplements and spinach.",
       "fx": { "pfm": 8 }
@@ -249,7 +249,7 @@
       ]
     },
     {
-      "id": "bo_meditation", "cat": "body", "w": 2,
+      "id": "bo_meditation", "once": true, "cat": "body", "w": 2,
       "title": "{J} Discovers Meditation",
       "text": "A teammate swears by ten minutes of meditation every morning. {J} tries it, sitting cross-legged on his bedroom floor, mind racing for the first five minutes, then, briefly, quiet.",
       "fx": { "growth": ["mental"], "pfm": 3 }

@@ -132,7 +132,7 @@
       "vars": { "deal": ["endorse", 3000] },
       "choices": [
         { "label": "Ask {Pf} first", "desc": "Her face, her choice.", "risk": "low", "hint": "Respect.", "text": "He asks. Her answer depends on who she is — but she appreciates being asked, either way.", "fx": { "love": 5 } },
-        { "label": "Sign it for both of you", "desc": "Surprise her!", "risk": "high", "hint": "Big money. Big assumption.", "text": "He signs. She finds out from the brand's email. Whether it's a gift or a betrayal depends entirely on her.", "fx": { "love": -5, "endorsement": { "brand": "Couple campaign", "value": "deal", "years": 1 }, "followers": 20000 } },
+        { "label": "Sign it for both of you", "desc": "Surprise her!", "risk": "high", "hint": "Big money. Big assumption.", "text": "He signs. She finds out from the brand's email. Whether it's a gift or a betrayal depends entirely on her.", "fx": { "love": -5, "endorsement": { "brand": "{BRAND_fashion}", "value": "deal", "years": 1 }, "followers": 20000 } },
         { "label": "Decline", "desc": "Keep love out of marketing.", "risk": "low", "hint": "Private.", "text": "He declines. The brand signs another couple. Their billboard is enormous. {J} doesn't mind.", "fx": { "love": 2 } }
       ]
     },

@@ -1,7 +1,7 @@
 {
   "scenarios": [
     {
-      "id": "fa_money_request", "cat": "family", "w": 5, "when": { "wealth": [800, 999999999] }, "cd": 30,
+      "id": "fa_money_request", "group": "money_ask", "groupCd": 40, "cat": "family", "w": 5, "when": { "wealth": [800, 999999999] }, "cd": 30,
       "vars": { "amount": ["wealthPct", 30, 150] },
       "title": "Family Calls: {J} Asked for Help",
       "text": [
@@ -32,7 +32,7 @@
       "fx": { "parental": 10, "mood": "Relieved", "form": 0.2 }
     },
     {
-      "id": "fa_sibling_footballer", "cat": "family", "w": 3, "when": { "age": [19, 35] },
+      "id": "fa_sibling_footballer", "once": true, "group": "sib_sport", "groupCd": 104, "cat": "family", "w": 3, "when": { "sibKind": ["brother"], "sibAge": [10, 17], "age": [19, 35] },
       "title": "{J}'s Younger Brother Wants to Be a Footballer",
       "text": "His fifteen-year-old brother calls: an academy has offered him a trial. He's good, but not as good as {J} was. Their mother wants {J} to decide whether he should go.",
       "prompt": "What do you advise?",
@@ -63,7 +63,7 @@
       ]
     },
     {
-      "id": "fa_hometown_return", "cat": "family", "w": 4, "when": { "phase": ["off"] },
+      "id": "fa_hometown_return", "group": "hometown", "groupCd": 52, "cat": "family", "w": 4, "when": { "phase": ["off"] },
       "title": "Back in {J}'s Hometown",
       "text": "Off-season. {J} goes home. The streets feel smaller. Old friends work in shops and drive ojek. Kids follow him everywhere. Everyone wants something: a photo, an autograph, a loan, advice.",
       "prompt": "How do you spend your time at home?",
@@ -77,7 +77,7 @@
       ]
     },
     {
-      "id": "fa_wedding_cousin", "cat": "family", "w": 3,
+      "id": "fa_wedding_cousin", "cd": 104, "cat": "family", "w": 3,
       "title": "Cousin's Wedding on Match Day",
       "text": "His favourite cousin is getting married. The wedding is on the same day as a league match. The family expects {J} to be there. The club expects him on the pitch.",
       "prompt": "Ask for permission to miss the match?",
@@ -100,7 +100,7 @@
       ]
     },
     {
-      "id": "fa_parents_visit", "cat": "family", "w": 4, "when": { "abroad": true },
+      "id": "fa_parents_visit", "cd": 104, "group": "parents_abroad", "groupCd": 80, "cat": "family", "w": 4, "when": { "abroad": true },
       "title": "{J}'s Parents Visit Him Abroad",
       "text": "His parents arrive for a week: first time on a plane, first time abroad. His mother has packed sambal, krupuk and dried fish in a suitcase that set off two alarms at customs. His father wears a new shirt bought for the trip.",
       "prompt": "How do you spend the week?",
@@ -116,7 +116,7 @@
       "fx": { "parental": 10, "form": 0.2, "mood": "Motivated" }
     },
     {
-      "id": "fa_family_pressure_marriage", "cat": "family", "w": 3, "when": { "age": [24, 32], "partner": ["none", "dating"] },
+      "id": "fa_family_pressure_marriage", "cd": 120, "cat": "family", "w": 3, "when": { "age": [24, 32], "partner": ["none", "dating"] },
       "title": "Family Asks: When Will {J} Get Married?",
       "text": "At every family gathering, every phone call, the same question. Aunts suggest daughters of friends. His mother sends photos “just to look”.",
       "prompt": "How do you handle it?",
@@ -129,7 +129,7 @@
       ]
     },
     {
-      "id": "fa_business_scam_relative", "cat": "family", "w": 3, "when": { "wealth": [5000, 999999999] }, "vars": { "cost": ["wealthPct", 25, 500] },
+      "id": "fa_business_scam_relative", "once": true, "cat": "family", "w": 3, "when": { "wealth": [5000, 999999999] }, "vars": { "cost": ["wealthPct", 25, 500] },
       "title": "Uncle's Business Proposal",
       "text": "An uncle has a business proposal: a fleet of minibuses, a guaranteed route, “everyone in the family is in”. He needs {cost} from {J}.",
       "prompt": "Invest in your uncle's business?",
@@ -148,7 +148,7 @@
       "fx": { "wealth": "cost*0.7", "parental": 6, "mood": "Relieved" }
     },
     {
-      "id": "fa_father_criticism", "cat": "family", "w": 4, "when": { "played": true, "lastRating": [0, 6.3] },
+      "id": "fa_father_criticism", "cd": 80, "cat": "family", "w": 4, "when": { "played": true, "lastRating": [0, 6.3] },
       "title": "{J}'s Father Has Notes",
       "text": "His father calls after every match with a list of mistakes. Tonight the list is long. “Why didn't you pass? Why didn't you run back?” He means well. It doesn't feel like it.",
       "prompt": "How do you respond?",
@@ -161,7 +161,7 @@
       ]
     },
     {
-      "id": "fa_home_flood", "cat": "family", "w": 2, "when": { "nationality": ["Indonesia", "Philippines", "Vietnam", "Thailand", "Malaysia", "Bangladesh", "India"] }, "vars": { "cost": ["wealthPct", 20, 200] },
+      "id": "fa_home_flood", "once": true, "cat": "family", "w": 2, "when": { "nationality": ["Indonesia", "Philippines", "Vietnam", "Thailand", "Malaysia", "Bangladesh", "India"] }, "vars": { "cost": ["wealthPct", 20, 200] },
       "title": "Floods Hit {J}'s Home Village",
       "text": "The rainy season brings floods to {J}'s home village. His parents' house has water up to the windows. They're staying at a school hall with two hundred other families.",
       "prompt": "Help?",
@@ -182,7 +182,7 @@
       ]
     },
     {
-      "id": "fa_family_fame_problem", "cat": "family", "w": 3, "when": { "followers": [50000, 999999999] },
+      "id": "fa_family_fame_problem", "once": true, "cat": "family", "w": 3, "when": { "followers": [50000, 999999999] },
       "title": "{J}'s Family Gets Unwanted Attention",
       "text": "Fans have started visiting his parents' house. Some bring gifts. Some just stand outside taking photos. Yesterday someone climbed the fence.",
       "prompt": "What do you do?",
@@ -192,7 +192,7 @@
       ]
     },
     {
-      "id": "fa_sister_wedding_cost", "cat": "family", "w": 3, "when": { "wealth": [3000, 999999999] }, "vars": { "cost": ["wealthPct", 20, 300] },
+      "id": "fa_sister_wedding_cost", "once": true, "cat": "family", "w": 3, "when": { "sibKind": ["sister"], "sibAge": [21, 40], "wealth": [3000, 999999999] }, "vars": { "cost": ["wealthPct", 20, 300] },
       "title": "Sister's Wedding: Who Pays?",
       "text": "His sister is getting married. The family expects {J}, the famous one, to help pay for a big wedding: five hundred guests, a band, a full buffet. The total is {cost}.",
       "prompt": "Pay for it?",
@@ -218,7 +218,7 @@
       ]
     },
     {
-      "id": "fa_old_coach_sick", "cat": "family", "w": 2, "when": { "age": [20, 38] }, "vars": { "cost": ["wealthPct", 10, 100] },
+      "id": "fa_old_coach_sick", "once": true, "group": "old_coach", "groupCd": 9999, "cat": "family", "w": 2, "when": { "age": [20, 38] }, "vars": { "cost": ["wealthPct", 10, 100] },
       "title": "{J}'s First Coach Is Sick",
       "text": "News from home: the coach who found {J} at nine years old, who drove him to tournaments in his own car, who bought his first proper boots, is sick and can't afford treatment.",
       "prompt": "Help him?",
@@ -228,7 +228,7 @@
       ]
     },
     {
-      "id": "fa_brother_trouble", "cat": "family", "w": 2, "when": { "age": [20, 38] }, "vars": { "cost": ["wealthPct", 15, 150] },
+      "id": "fa_brother_trouble", "once": true, "cat": "family", "w": 2, "when": { "sibKind": ["brother"], "sibAge": [15, 35], "age": [20, 38] }, "vars": { "cost": ["wealthPct", 15, 150] },
       "title": "{J}'s Brother Is in Trouble",
       "text": "His younger brother has fallen in with the wrong crowd at home: debts, gambling, a fight at a night market. His mother calls in a panic. Someone is threatening him.",
       "prompt": "How do you help?",
@@ -242,19 +242,19 @@
       ]
     },
     {
-      "id": "fa_family_proud_tv", "cat": "family", "w": 3, "when": { "role": ["starter"], "rep": [15, 100] },
+      "id": "fa_family_proud_tv", "once": true, "cat": "family", "w": 3, "when": { "role": ["starter"], "rep": [15, 100] },
       "title": "{J}'s Parents on National TV",
       "text": "A national TV station visits {J}'s parents for a feature on his career. His father wears a suit for the first time since his wedding. His mother shows the shoebox of newspaper clippings to the camera.",
       "fx": { "parental": 8, "followers": 12000, "rep": 0.5 }
     },
     {
-      "id": "fa_ex_teacher", "cat": "family", "w": 2,
+      "id": "fa_ex_teacher", "once": true, "cat": "family", "w": 2,
       "title": "A Message From {J}'s Old Teacher",
       "text": "His primary school teacher, the one who told him he'd never amount to anything because he only cared about football, sends a message: “I was wrong about you. My whole class watches your matches now.”",
       "fx": { "mood": "Confident" }
     },
     {
-      "id": "fa_family_gathering_pressure", "cat": "family", "w": 3, "when": { "phase": ["off"], "wealth": [2000, 999999999] },
+      "id": "fa_family_gathering_pressure", "group": "money_ask", "groupCd": 40, "cat": "family", "w": 3, "when": { "phase": ["off"], "wealth": [2000, 999999999] },
       "title": "Every Relative Has a Request",
       "text": "At the family gathering, the requests come one after another: a cousin wants a phone, an aunt wants help with rent, a distant relative wants him to invest in a durian farm.",
       "prompt": "How do you handle it?",
@@ -264,7 +264,7 @@
       ]
     },
     {
-      "id": "fa_family_member_in_stands", "cat": "family", "w": 2, "when": { "role": ["starter", "rotation"] },
+      "id": "fa_family_member_in_stands", "once": true, "cat": "family", "w": 2, "when": { "role": ["starter", "rotation"] },
       "title": "Little Cousin's First Match in the Stadium",
       "text": "{J} gets tickets for his little cousin, eight years old, to watch his first ever live match. The boy wears {J}'s shirt down to his knees.",
       "fx": { "parental": 4, "form": 0.1, "mood": "Motivated" }
@@ -280,7 +280,7 @@
       ]
     },
     {
-      "id": "fa_hometown_club", "cat": "family", "w": 2, "when": { "age": [24, 40], "rep": [20, 100] },
+      "id": "fa_hometown_club", "cd": 150, "cat": "family", "w": 2, "when": { "age": [24, 40], "rep": [20, 100] },
       "title": "Hometown Club Asks for Help",
       "text": "The amateur club in {J}'s hometown, where he played as a boy, is about to fold. They need money for pitch rental and kit. The chairman, an old man who used to referee his games, writes a letter by hand.",
       "prompt": "Save the club?",
@@ -314,13 +314,13 @@
       ]
     },
     {
-      "id": "fa_family_supports_fully", "cat": "family", "w": 3, "when": { "parental": [85, 100] },
+      "id": "fa_family_supports_fully", "cd": 150, "cat": "family", "w": 3, "when": { "parental": [85, 100] },
       "title": "Family Banner in the Stands",
       "text": "His whole family — parents, siblings, cousins, an elderly aunt in a wheelchair — arrive at the stadium with a homemade banner: “{J}, OUR PRIDE”. The TV cameras find it in the first minute.",
       "fx": { "form": 0.2, "followers": 5000, "mood": "Motivated" }
     },
     {
-      "id": "fa_new_nephew", "cat": "family", "w": 2, "when": { "age": [20, 40] },
+      "id": "fa_new_nephew", "once": true, "cat": "family", "w": 2, "when": { "sibAge": [22, 45], "age": [20, 40] },
       "title": "{J} Becomes an Uncle",
       "text": "His older sister has given birth to a baby boy. The first photo arrives at 4am: tiny, wrinkled, furious. His sister writes: “He's going to be a footballer like his uncle.”",
       "prompt": "Gift?",
@@ -330,7 +330,7 @@
       ]
     },
     {
-      "id": "fa_school_promise", "cat": "family", "w": 2, "when": { "age": [18, 30] },
+      "id": "fa_school_promise", "once": true, "cat": "family", "w": 2, "when": { "age": [18, 30] },
       "title": "{J}'s Mother Wants Him to Finish His Studies",
       "text": "{J} left school at sixteen for football. His mother has never stopped mentioning it. She's found an online university programme designed for athletes.",
       "prompt": "Enrol?",

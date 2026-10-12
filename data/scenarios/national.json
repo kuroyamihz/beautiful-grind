@@ -461,7 +461,7 @@
    ]
   },
   {
-   "id": "nt_youth_tournament",
+   "id": "nt_youth_tournament", "cd": 52,
    "cat": "national",
    "w": 5,
    "when": {
@@ -614,7 +614,7 @@
    ]
   },
   {
-   "id": "nt_tournament_hero",
+   "id": "nt_tournament_hero", "cd": 104,
    "cat": "national",
    "w": 3,
    "when": {
@@ -643,7 +643,7 @@
    }
   },
   {
-   "id": "nt_villain_miss",
+   "id": "nt_villain_miss", "cd": 150,
    "cat": "national",
    "w": 2,
    "when": {
@@ -1012,7 +1012,7 @@
    ]
   },
   {
-   "id": "nt_youth_captain",
+   "id": "nt_youth_captain", "once": true,
    "cat": "national",
    "w": 3,
    "when": {
@@ -1036,7 +1036,7 @@
    }
   },
   {
-   "id": "nt_world_cup_dream",
+   "id": "nt_world_cup_dream", "once": true,
    "cat": "national",
    "w": 2,
    "when": {
