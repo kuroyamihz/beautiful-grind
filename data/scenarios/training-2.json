@@ -1,0 +1,253 @@
+{
+  "scenarios": [
+    { "id": "t2_weak_foot", "cat": "training", "w": 5, "cd": 60, "when": { "injured": false },
+      "title": "The Other Foot", "text": "The analyst shows him a statistic: ninety-two per cent of his touches are with his stronger foot. Opponents have noticed. They're showing him onto the other one every time.",
+      "prompt": "Work on your weaker foot?",
+      "choices": [
+        { "label": "An hour extra every day for a month", "desc": "Boring, painful, essential.", "risk": "low", "hint": "Slow, real improvement.", "text": "An hour a day against a wall with the wrong foot. By the end of the month he scores with it in training and the whole squad cheers.", "fx": { "growth": ["rel", "rel"], "pfm": -4, "trust": 2 } },
+        { "label": "Play to your strengths", "desc": "Be so good on one side it doesn't matter.", "risk": "medium", "hint": "Works until it doesn't.", "text": "He doubles down on his strong side. Some weeks it works. Some weeks a clever full-back shuts him down completely.", "fx": { "tacticalFit": -2 } }
+      ] },
+    { "id": "t2_gk_coach", "cat": "training", "w": 5, "cd": 60, "when": { "pos": ["GK"], "injured": false },
+      "title": "The Goalkeeping Coach", "text": "The goalkeeping coach wants to rebuild his technique: hand position, footwork, the way he sets himself before a shot. Six weeks of drills that will make him worse before they make him better.",
+      "prompt": "Rebuild your technique?",
+      "choices": [
+        { "label": "Commit fully", "desc": "Trust the process.", "risk": "medium", "hint": "Short-term errors, long-term gain.", "text": "Two awkward weeks, one howler in a match, then something clicks. He's a better keeper than he's ever been.", "fx": { "growth": ["handling", "gkPositioning"], "form": -0.2, "trust": 2 } },
+        { "label": "Small tweaks only", "desc": "Don't fix what works.", "risk": "low", "hint": "Safe.", "text": "A few small changes. Nothing breaks. Nothing transforms either.", "fx": { "growth": ["reflexes"] } }
+      ] },
+    { "id": "t2_cb_heading_drill", "cat": "training", "w": 5, "cd": 60, "when": { "pos": ["CB", "ST"], "injured": false },
+      "title": "The Heading Machine", "text": "The club has bought a machine that fires balls at head height, a hundred an hour. The coach wants {J} on it every day. The physio is worried about how many headers that is.",
+      "prompt": "Use the heading machine?",
+      "choices": [
+        { "label": "Use it, but limit the reps", "desc": "Quality over quantity.", "risk": "low", "hint": "Sensible.", "text": "Twenty perfect headers a day. His timing in the air improves. His head stays clear.", "fx": { "growth": ["aerial"] } },
+        { "label": "Go all in", "desc": "A hundred a day.", "risk": "medium", "hint": "Big gains, headaches.", "text": "A hundred a day. His heading improves hugely. So do his headaches. The physio cuts it in half.", "fx": { "growth": ["aerial", "aerial"], "pfm": -3, "stress": 2 } }
+      ] },
+    { "id": "t2_fb_crossing", "cat": "training", "w": 5, "cd": 60, "when": { "pos": ["FB", "W"], "injured": false },
+      "title": "Cross Until It Hurts", "text": "The assistant coach has a challenge: hit a target zone with fifty crosses in a row. Nobody in the squad has done it. The record is thirty-one.",
+      "prompt": "Take on the crossing challenge?",
+      "choices": [
+        { "label": "Stay every day until you beat it", "desc": "Obsession.", "risk": "low", "hint": "Crossing improves.", "text": "It takes nine days. On day nine he hits fifty-two. The assistant coach writes his name on the whiteboard in permanent marker.", "fx": { "growth": ["crossing"], "trust": 3, "dressing": 2 } },
+        { "label": "Try it once for fun", "desc": "No pressure.", "risk": "low", "hint": "Light.", "text": "He hits nineteen and laughs. Not bad for a first go.", "fx": { "morale": 1 } }
+      ] },
+    { "id": "t2_dm_scanning", "cat": "training", "w": 4, "cd": 80, "when": { "pos": ["DM", "CM"], "injured": false },
+      "title": "Look Over Your Shoulder", "text": "The analyst counts how often he scans before receiving the ball: four times a minute. The best midfielders in the world do it eight times. 'Look more,' says the coach. 'Look before you need to.'",
+      "prompt": "Train your scanning?",
+      "choices": [
+        { "label": "Drills with coloured cards and shouted numbers", "desc": "Rewire your habits.", "risk": "low", "hint": "Weird at first, powerful later.", "text": "Coaches hold up coloured cards behind him while he receives passes. It's ridiculous. Three weeks later he sees the whole pitch.", "fx": { "growth": ["vision", "mental"], "tacticalFit": 3 } },
+        { "label": "Watch videos of the best", "desc": "Learn by watching.", "risk": "low", "hint": "Gentler.", "text": "He watches hours of the world's best midfielders. He starts copying the way they move their heads.", "fx": { "growth": ["vision"] } }
+      ] },
+    { "id": "t2_st_finishing_school", "cat": "training", "w": 5, "cd": 60, "when": { "pos": ["ST", "W", "AM"], "injured": false },
+      "title": "Finishing School", "text": "A retired striker, a club legend with three hundred goals, comes in twice a week to work with the forwards. He watches {J} take ten shots and then says, 'You're thinking. Stop thinking.'",
+      "prompt": "Work with the old striker?",
+      "choices": [
+        { "label": "Every session he's here", "desc": "Learn from a master.", "risk": "low", "hint": "Priceless.", "text": "He teaches {J} where to look, when to shoot early and how to stay calm when the keeper comes out. Little things. Everything.", "fx": { "growth": ["finishing", "offBall"], "morale": 3 } },
+        { "label": "Ask him about the mental side", "desc": "How did he handle droughts?", "risk": "low", "hint": "Wisdom.", "text": "'I once went eleven games without a goal,' says the legend. 'On the twelfth I scored three. You are never as bad as the drought says.'", "fx": { "growth": ["mental"], "stress": -3 } }
+      ] },
+    { "id": "t2_sports_science", "cat": "training", "w": 5, "cd": 80, "when": { "leagueQ": [60, 100] },
+      "title": "The Data", "text": "The club's new sports scientist puts a GPS vest on everyone. His data says {J}'s sprints drop by a third after the 70th minute and his sleep is terrible.",
+      "prompt": "Act on the data?",
+      "choices": [
+        { "label": "Overhaul sleep and recovery", "desc": "Blackout curtains, no phone after ten.", "risk": "low", "hint": "Unsexy. Transformative.", "text": "No phone after ten, blackout blinds, a sleep coach. His late-match numbers climb within a month.", "fx": { "pfm": 6, "stress": -4, "form": 0.1 } },
+        { "label": "Ignore it", "desc": "Football isn't spreadsheets.", "risk": "medium", "hint": "The data doesn't care.", "text": "He ignores it. The sports scientist shows the manager the graphs anyway.", "fx": { "trust": -2 } }
+      ] },
+    { "id": "t2_nutritionist", "cat": "training", "w": 5, "cd": 80,
+      "title": "No More Fried Food", "text": "The club nutritionist has looked at his food diary and gone quiet. She wants him to cut out fried food, sugar and the late-night snacks he thinks nobody knows about.",
+      "prompt": "Follow the nutritionist's plan?",
+      "choices": [
+        { "label": "Follow it strictly", "desc": "Discipline.", "risk": "low", "hint": "Your body thanks you. Your soul complains.", "text": "Three miserable weeks, then he feels lighter, sharper and less tired. He still dreams about fried chicken.", "fx": { "pfm": 6, "growth": ["physical"], "morale": -2 } },
+        { "label": "Mostly follow it, with a cheat day", "desc": "Balance.", "risk": "low", "hint": "Sustainable.", "text": "Six days of discipline, one day of joy. It works and he stays sane.", "fx": { "pfm": 3, "morale": 1 } },
+        { "label": "Ignore it", "desc": "You're young. It's fine.", "risk": "medium", "hint": "Until it isn't.", "text": "He ignores it. His body fat numbers go up. So do the nutritionist's eyebrows.", "fx": { "pfm": -3, "trust": -1 } }
+      ] },
+    { "id": "t2_yoga", "cat": "training", "w": 4, "cd": 80,
+      "title": "Yoga", "text": "The fitness coach wants the squad doing yoga twice a week. The senior players laugh. The physio says the hamstring injuries would halve.",
+      "prompt": "Take yoga seriously?",
+      "choices": [
+        { "label": "Commit to it", "desc": "Flexibility is longevity.", "risk": "low", "hint": "Fewer injuries.", "text": "He can't touch his toes in week one. By week ten he's the most flexible player in the squad and the teasing has stopped.", "fx": { "pfm": 4, "stress": -3, "flag": "yoga" } },
+        { "label": "Go through the motions", "desc": "Turn up, lie down.", "risk": "low", "hint": "Nothing gained.", "text": "He mostly naps in the corpse pose. Not entirely useless.", "fx": { "stress": -1 } }
+      ] },
+    { "id": "t2_overtraining_warning", "cat": "training", "w": 4, "cd": 80, "when": { "pfm": [0, 55], "injured": false },
+      "title": "Red Numbers", "text": "His training load numbers are flashing red on the sports scientist's screen. 'One more hard week,' she says, 'and something will tear.'",
+      "prompt": "Your body is close to breaking.",
+      "choices": [
+        { "label": "Take a full rest week", "desc": "Listen to the numbers.", "risk": "low", "hint": "Short-term frustration.", "text": "He rests. He hates it. A week later the numbers are green and so is he.", "fx": { "pfm": 10, "stress": -4, "trust": -1 } },
+        { "label": "Push through", "desc": "You're not soft.", "risk": "high", "hint": "The numbers rarely lie.", "out": [ { "w": 1, "text": "He pushes through, somehow, and the numbers recover. Lucky.", "fx": { "pfm": -4, "trust": 2 } }, { "w": 1, "text": "On Thursday, the hamstring goes.", "fx": { "injury": "moderate", "trust": -2 } } ] }
+      ] },
+    { "id": "t2_set_piece_specialist", "cat": "training", "w": 4, "cd": 100, "when": { "pos": ["AM", "CM", "W", "FB"], "injured": false },
+      "title": "Dead Balls", "text": "The club's set-piece coach wants a new free-kick taker. The current one is ageing. He's watching {J} curl balls over the wall after training.",
+      "prompt": "Become the set-piece taker?",
+      "choices": [
+        { "label": "Practise two hundred a week", "desc": "Earn the job.", "risk": "low", "hint": "Hours of repetition.", "text": "Two hundred free kicks a week. A month later, he's given the job. The first one he takes in a match hits the bar. The second goes in.", "fx": { "growth": ["longShots", "crossing"], "trust": 3, "flag": "set_piece_taker" } },
+        { "label": "Leave it to the veteran", "desc": "Not your job yet.", "risk": "low", "hint": "Respect.", "text": "He leaves it to the veteran. One day the job will come to him.", "fx": { "dressing": 1 } }
+      ] },
+    { "id": "t2_altitude_camp", "cat": "training", "w": 3, "cd": 150, "when": { "phase": ["pre"] },
+      "title": "Altitude", "text": "Pre-season camp at altitude: thin air, brutal runs, nothing to do in the evenings but sleep and play cards. Some players love it. Most players hate it.",
+      "prompt": "How do you approach altitude camp?",
+      "choices": [
+        { "label": "Go all out", "desc": "Win every run.", "risk": "medium", "hint": "Fitness or exhaustion.", "text": "He wins every run. The coaches love it. On day six, he throws up on a mountain.", "fx": { "pfm": 4, "trust": 4, "growth": ["physical"], "stress": 2 } },
+        { "label": "Pace yourself", "desc": "It's a long season.", "risk": "low", "hint": "Smart.", "text": "He finishes strong, not first. Fresh legs for the season.", "fx": { "pfm": 6 } },
+        { "label": "Become the card-game champion", "desc": "Evenings are long.", "risk": "low", "hint": "Team bonding.", "text": "He runs the evening card tournament. The squad has never been closer, or poorer.", "fx": { "dressing": 5, "pfm": 3 } }
+      ] },
+    { "id": "t2_young_coach_idea", "cat": "manager", "w": 4, "cd": 100, "when": { "freeAgent": false, "level": [2, 5] },
+      "title": "An Idea", "text": "Watching the video of the last match, {J} sees something: their left-back always steps up too early. If he drifts wide at the right moment, he's in behind. Should he tell {M}?",
+      "prompt": "Share your tactical idea with the manager?",
+      "choices": [
+        { "label": "Tell {Mf}", "desc": "It could win a game.", "risk": "medium", "hint": "Managers have egos.", "out": [ { "w": 2, "text": "{Mf} watches the clip, says nothing, then builds the next week's training around it. They win. {Mf} winks at him on the bus.", "fx": { "trust": 7, "tacticalFit": 6 } }, { "w": 1, "text": "{Mf} says, 'I'll do the tactics. You do the running.' Message received.", "fx": { "trust": -3 } } ] },
+        { "label": "Just do it on the pitch", "desc": "Let it speak for itself.", "risk": "medium", "hint": "If it works, nobody minds.", "text": "He drifts wide. It works twice. {Mf} asks him afterwards whose idea that was.", "fx": { "trust": 3, "tacticalFit": 3 } }
+      ] },
+    { "id": "t2_manager_family", "cat": "manager", "w": 3, "cd": 150, "when": { "freeAgent": false, "trust": [50, 100] },
+      "title": "The Manager's Son", "text": "{M}'s son plays in the academy and idolises {J}. {Mf} asks, a little awkwardly, whether {J} would spend an hour with the boy.",
+      "prompt": "Spend time with the manager's son?",
+      "choices": [
+        { "label": "Spend a whole afternoon", "desc": "Training, lunch, advice.", "risk": "low", "hint": "Kind. Noticed.", "text": "He spends the afternoon with the boy, who doesn't stop talking for four hours. {Mf} looks at {J} differently after that.", "fx": { "trust": 6, "image": 1 } },
+        { "label": "An hour, as asked", "desc": "Friendly, professional.", "risk": "low", "hint": "Fine.", "text": "A good hour. The boy goes home happy.", "fx": { "trust": 3 } }
+      ] },
+    { "id": "t2_manager_criticism_public", "cat": "manager", "w": 5, "cd": 60, "when": { "freeAgent": false, "lastRating": [3, 6.2] },
+      "title": "Named in the Press Conference", "text": "After the defeat, {M} tells the press that 'some players need to look at themselves'. Then, asked to name them, he names {J}.",
+      "prompt": "The manager criticised you publicly.",
+      "choices": [
+        { "label": "Accept it and work harder", "desc": "Maybe he's right.", "risk": "low", "hint": "Humility wins managers.", "text": "He says nothing, trains harder and plays better the following week. {Mf} praises him in the next press conference.", "fx": { "trust": 5, "stress": 2, "growth": ["mental"] } },
+        { "label": "Ask for a private meeting", "desc": "Not in public, boss.", "risk": "medium", "hint": "Fair point, delivered well or badly.", "out": [ { "w": 1, "text": "{Mf} agrees that should have been private. Respect, rebuilt.", "fx": { "trust": 4 } }, { "w": 1, "text": "{Mf} says he'll say what he likes. The meeting makes it worse.", "fx": { "trust": -5 } } ] },
+        { "label": "Answer back in the media", "desc": "Your side.", "risk": "high", "hint": "War.", "text": "His reply is the back-page lead. {Mf} drops him for three matches.", "fx": { "trust": -12, "press": 3, "fans": 2 } }
+      ] },
+    { "id": "t2_manager_praise", "cat": "manager", "w": 5, "cd": 60, "when": { "freeAgent": false, "lastRating": [7.5, 10] },
+      "title": "'He Can Go to the Very Top'", "text": "{M} tells the press that {J} 'can go to the very top'. Agents start calling. Teammates start teasing. His mother frames the newspaper.",
+      "prompt": "The manager praised you publicly.",
+      "choices": [
+        { "label": "Stay humble", "desc": "'The team made me look good.'", "risk": "low", "hint": "The dressing room likes this.", "text": "He credits the team. The dressing room approves.", "fx": { "dressing": 4, "trust": 2 } },
+        { "label": "Use it as motivation", "desc": "Prove him right.", "risk": "low", "hint": "Hunger.", "text": "He writes the quote on a sticky note and puts it on his mirror next to the other one.", "fx": { "morale": 4, "mood": "Determined" } }
+      ] },
+    { "id": "t2_manager_cultural_clash", "cat": "manager", "w": 4, "cd": 100, "when": { "freeAgent": false, "abroad": true },
+      "title": "Different Ways", "text": "The manager shouts. In {J}'s culture, being shouted at in front of others is humiliating. In the manager's culture, it means he cares. {J} has started to dread training.",
+      "prompt": "The manager's style clashes with your culture.",
+      "choices": [
+        { "label": "Explain it to {Mf} privately", "desc": "Honest, respectful.", "risk": "medium", "hint": "Most managers adapt.", "text": "{Mf} listens, surprised. He keeps shouting at everyone else. With {J}, he talks quietly. Things improve.", "fx": { "trust": 4, "stress": -4 } },
+        { "label": "Adapt yourself", "desc": "It's his dressing room.", "risk": "low", "hint": "Thicker skin.", "text": "He learns to hear the care behind the volume. It takes months.", "fx": { "growth": ["mental"], "stress": 2 } }
+      ] },
+    { "id": "t2_double_session", "cat": "training", "w": 4, "cd": 60, "when": { "injured": false, "phase": ["pre", "in"] },
+      "title": "Double Session", "text": "After a bad result, {M} announces double sessions for a week. Morning and afternoon. The senior players are grumbling about it in the canteen.",
+      "prompt": "How do you respond to the double sessions?",
+      "choices": [
+        { "label": "Lead from the front", "desc": "First in, last out, no complaints.", "risk": "low", "hint": "Manager's favourite.", "text": "He leads every drill. {Mf} notices. Some senior players roll their eyes.", "fx": { "trust": 5, "pfm": -5, "growth": ["physical"], "dressing": -1 } },
+        { "label": "Join the grumbling", "desc": "It's too much.", "risk": "medium", "hint": "Team spirit, of a kind.", "text": "He grumbles with the seniors. The manager hears about it.", "fx": { "trust": -3, "dressing": 3, "pfm": -4 } }
+      ] },
+    { "id": "t2_video_humiliation", "cat": "training", "w": 4, "cd": 80, "when": { "freeAgent": false, "lastRating": [3, 6] },
+      "title": "The Clip", "text": "In the video session, the analyst plays the same clip of {J}'s mistake six times. Slow motion. From three angles. The squad watches in silence.",
+      "prompt": "Your mistake is on the big screen.",
+      "choices": [
+        { "label": "Own it out loud", "desc": "'That's on me. Won't happen again.'", "risk": "low", "hint": "Respect.", "text": "He says it before anyone else can. The silence turns into nods.", "fx": { "dressing": 4, "trust": 3 } },
+        { "label": "Explain what happened", "desc": "There was context.", "risk": "medium", "hint": "Sounds like excuses.", "text": "He explains the context. It sounds like an excuse. Even though it isn't.", "fx": { "trust": -2 } }
+      ] },
+    { "id": "t2_loan_player_trains", "cat": "training", "w": 3, "cd": 150, "when": { "loan": true },
+      "title": "Only Here on Loan", "text": "Some players treat the loan player like a temporary guest. Others treat him like competition. {J} isn't sure if anyone thinks of him as one of the team.",
+      "prompt": "How do you approach life as a loan player?",
+      "choices": [
+        { "label": "Act like you'll be here forever", "desc": "Commit fully.", "risk": "low", "hint": "Belonging is a choice.", "text": "He commits to everything: the team nights, the charity visits, the club's anthem. By spring, nobody remembers he's on loan.", "fx": { "dressing": 6, "fans": 3, "trust": 3 } },
+        { "label": "Focus only on minutes", "desc": "You're here to develop.", "risk": "low", "hint": "Practical.", "text": "He focuses on his own development. It works on the pitch. Off it, he's a stranger.", "fx": { "growth": ["rel"], "dressing": -2 } }
+      ] },
+    { "id": "t2_bench_frustration", "cat": "training", "w": 5, "cd": 50, "when": { "role": ["bench", "outcast"], "freeAgent": false },
+      "title": "The Training-Pitch Champion", "text": "He's been the best player in training for weeks. On matchday, he's on the bench again. One of the coaches whispers, 'Keep going. He sees it.'",
+      "prompt": "You're excelling in training but not playing.",
+      "choices": [
+        { "label": "Keep going", "desc": "Your chance will come.", "risk": "low", "hint": "Patience.", "text": "He keeps going. Three weeks later, an injury opens the door and he walks through it.", "fx": { "trust": 6, "morale": 2 } },
+        { "label": "Ask the coach what more you can do", "desc": "Specifics.", "risk": "low", "hint": "Information.", "text": "The coach says the manager wants more defensive work from him. Specific, fixable, annoying.", "fx": { "tacticalFit": 5, "trust": 2 } },
+        { "label": "Let your effort drop", "desc": "What's the point?", "risk": "high", "hint": "They're watching.", "text": "His effort drops. The coaches notice instantly. So does the manager.", "fx": { "trust": -8, "morale": -2 } }
+      ] },
+    { "id": "t2_personal_trainer", "cat": "training", "w": 4, "cd": 150, "when": { "wealth": [5000, 999999999] },
+      "title": "A Private Coach", "text": "A famous private performance coach, who works with several superstars, has a slot. He's expensive and intense, and his methods sometimes clash with clubs.",
+      "prompt": "Hire a private performance coach?",
+      "choices": [
+        { "label": "Hire him", "desc": "Invest in your body.", "risk": "medium", "hint": "Gains, maybe friction with the club.", "out": [ { "w": 2, "text": "Twice a week, extra work at 6am. His explosiveness improves. The club's fitness coach is a little jealous.", "fx": { "growth": ["pace", "physical"], "wealth": -4000, "pfm": -2 } }, { "w": 1, "text": "The private coach's plan clashes with the club's. {J} is overloaded. A tweak in his calf.", "fx": { "wealth": -4000, "injury": "minor", "trust": -2 } } ] },
+        { "label": "Trust the club's staff", "desc": "They know your body.", "risk": "low", "hint": "Team player.", "text": "He trusts the club's staff. They appreciate it.", "fx": { "trust": 1 } }
+      ] },
+    { "id": "t2_ice_bath_war", "cat": "training", "w": 4, "cd": 100,
+      "title": "The Ice Bath", "text": "The ice bath is two degrees. The rule is five minutes. The squad record is twenty-one minutes, held by a centre-back nobody likes.",
+      "prompt": "Go for the ice-bath record?",
+      "choices": [
+        { "label": "Break the record", "desc": "Glory or hypothermia.", "risk": "medium", "hint": "Legendary or silly.", "out": [ { "w": 1, "text": "Twenty-two minutes. He can't feel his legs. He is a legend.", "fx": { "dressing": 5, "morale": 3 } }, { "w": 1, "text": "Fourteen minutes and the physio pulls him out, blue-lipped. Respect for trying.", "fx": { "dressing": 3, "pfm": -2 } } ] },
+        { "label": "Five minutes, as prescribed", "desc": "Recovery, not ego.", "risk": "low", "hint": "Sensible.", "text": "Five minutes, out, warm shower. His legs thank him.", "fx": { "pfm": 2 } }
+      ] },
+    { "id": "t2_boxing", "cat": "training", "w": 3, "cd": 150, "when": { "injured": false },
+      "title": "Boxing Gym", "text": "A teammate swears by boxing training for footwork and fitness. There's an old gym downtown run by a former champion who doesn't care who anyone is.",
+      "prompt": "Try boxing training?",
+      "choices": [
+        { "label": "Go every week", "desc": "Footwork and humility.", "risk": "low", "hint": "Fitness, discipline.", "text": "The old champion makes him skip until his calves scream. His footwork sharpens. His ego shrinks.", "fx": { "growth": ["physical"], "pfm": 2, "stress": -3 } },
+        { "label": "Spar, for real", "desc": "Test yourself.", "risk": "high", "hint": "The club will not approve.", "text": "He spars. He takes a punch on the nose. The club physio's face, when he sees it on Monday, is a picture.", "fx": { "trust": -4, "pfm": -2, "morale": 2 } }
+      ] },
+    { "id": "t2_manager_last_chance", "cat": "manager", "w": 4, "cd": 100, "when": { "freeAgent": false, "trust": [0, 30] },
+      "title": "Last Chance", "text": "{M} calls him into his office and shuts the door. 'I'll be honest. You're not in my plans. But I'll give you one match. If you want to stay, show me.'",
+      "prompt": "One last chance.",
+      "choices": [
+        { "label": "Grab it", "desc": "Everything on one match.", "risk": "medium", "hint": "Pressure.", "out": [ { "w": 1, "text": "He plays like his career depends on it, because it does. {Mf} shakes his hand afterwards and says, 'Okay. Stay.'", "fx": { "trust": 18, "form": 0.3, "morale": 6 } }, { "w": 1, "text": "Nerves get him. A quiet, forgettable ninety minutes. {Mf} doesn't say anything. He doesn't need to.", "fx": { "trust": -5, "listed": true, "morale": -6 } } ] },
+        { "label": "Say you'd rather leave", "desc": "No point forcing it.", "risk": "medium", "hint": "Honest.", "text": "He thanks {Mf} and asks to be listed. A clean ending to a messy chapter.", "fx": { "listed": true, "stress": -3 } }
+      ] },
+    { "id": "t2_captain_tactical", "cat": "manager", "w": 3, "cd": 120, "when": { "isCaptain": true },
+      "title": "The Captain's Voice", "text": "As captain, {M} asks for {J}'s opinion on the team selection for a big match. It's a privilege and a trap: whatever he says, some teammates will find out.",
+      "prompt": "The manager wants your opinion on selection.",
+      "choices": [
+        { "label": "Give your honest view", "desc": "The team comes first.", "risk": "medium", "hint": "Trust from the manager. Risk with the squad.", "text": "He gives his honest view, including that a friend should be dropped. The friend is dropped. He never finds out who suggested it.", "fx": { "trust": 6, "dressing": -1 } },
+        { "label": "Say selection is the manager's job", "desc": "Stay out of it.", "risk": "low", "hint": "Safe.", "text": "'You're the boss.' {Mf} nods, a little disappointed.", "fx": { "trust": -1, "dressing": 2 } }
+      ] },
+    { "id": "t2_youth_coaching_course", "cat": "training", "w": 3, "cd": 200, "once": true, "when": { "age": [24, 38], "notFlags": ["coaching_badges"] },
+      "title": "Coaching Badges", "text": "The federation runs a coaching course for current players: evenings and off-days, two years, the first step to managing one day.",
+      "prompt": "Start your coaching badges?",
+      "choices": [
+        { "label": "Sign up", "desc": "Think about the future.", "risk": "low", "hint": "Tired evenings. A future.", "text": "Evenings in a classroom with other players and former players. He sees the game differently: as a puzzle, not just a fight.", "fx": { "flag": "coaching_badges", "tacticalFit": 5, "growth": ["mental"], "pfm": -2 } },
+        { "label": "Not yet", "desc": "Focus on playing.", "risk": "low", "hint": "Later.", "text": "Not yet. One day.", "fx": {} }
+      ] },
+    { "id": "t2_session_injury_teammate", "cat": "training", "w": 3, "cd": 120, "when": { "injured": false, "freeAgent": false }, "uses": { "T": "any" },
+      "title": "The Tackle", "text": "In a training match, {J} goes in hard on {T}. A fair tackle, mostly. {T} doesn't get up. Ankle. The physio is shaking his head.",
+      "prompt": "You hurt a teammate in training.",
+      "choices": [
+        { "label": "Go to the hospital with him", "desc": "Show you care.", "risk": "low", "hint": "Repair.", "text": "He sits in the waiting room for three hours. {T} is out for a month. He visits every week. They're closer after it.", "fx": { "bond": 8, "dressing": 2, "stress": 3 } },
+        { "label": "Apologise and keep training", "desc": "These things happen.", "risk": "medium", "hint": "Some will think you're cold.", "text": "He apologises and gets back to work. {T} thinks it was cold. The squad is split.", "fx": { "bond": -10, "dressing": -2 } }
+      ] },
+    { "id": "t2_position_change", "cat": "manager", "w": 3, "cd": 200, "once": true, "when": { "freeAgent": false, "age": [20, 30] },
+      "title": "A New Position?", "text": "The coaches think {J} could be better somewhere else on the pitch: a different role, a different set of skills. It would mean starting again in some ways.",
+      "prompt": "Consider a change of role?",
+      "choices": [
+        { "label": "Try it in training", "desc": "Open mind.", "risk": "medium", "hint": "New skills, some frustration.", "text": "Weeks of training in a new role. Some of it works. The coaches decide he's best where he is, but now he understands the game better.", "fx": { "growth": ["mental", "rel"], "tacticalFit": 4 } },
+        { "label": "Refuse", "desc": "You know who you are.", "risk": "low", "hint": "Clear identity.", "text": "He refuses, politely. The coaches respect a player who knows himself.", "fx": { "trust": -1 } }
+      ] },
+    { "id": "t2_new_tactic_install", "cat": "training", "w": 4, "cd": 80, "when": { "freeAgent": false, "phase": ["pre"] },
+      "title": "The New System", "text": "Pre-season: the manager is installing a new system. Complicated pressing triggers, new positions, a binder of instructions as thick as a dictionary.",
+      "prompt": "How do you learn the new system?",
+      "choices": [
+        { "label": "Study the binder at home", "desc": "Know it better than anyone.", "risk": "low", "hint": "Becomes your system.", "text": "He studies it like a law student. By the first match he's explaining it to teammates.", "fx": { "tacticalFit": 10, "trust": 4, "stress": 2 } },
+        { "label": "Learn it on the pitch", "desc": "Doing, not reading.", "risk": "low", "hint": "Slower.", "text": "He learns it by doing. Slower, but it sticks.", "fx": { "tacticalFit": 5 } }
+      ] },
+    { "id": "t2_assistant_bond", "cat": "training", "w": 4, "cd": 100, "when": { "freeAgent": false },
+      "title": "The Assistant Coach", "text": "The assistant coach, a quiet former defender, has started staying after training to work with {J} one-on-one. He doesn't say why. He just keeps turning up.",
+      "prompt": "Work with the assistant coach?",
+      "choices": [
+        { "label": "Every day he offers", "desc": "Learn from someone who cares.", "risk": "low", "hint": "Mentorship.", "text": "Six months of extra sessions. He improves in ways nobody can quite explain. The assistant becomes a friend for life.", "fx": { "growth": ["rel", "mental"], "pfm": -2, "trust": 3 } },
+        { "label": "Ask him why", "desc": "Curious.", "risk": "low", "hint": "There's a story.", "text": "'You remind me of me,' he says. 'Except you can still do something about it.'", "fx": { "morale": 3, "growth": ["mental"] } }
+      ] },
+    { "id": "t2_contract_year_motivation", "cat": "training", "w": 4, "cd": 60, "when": { "contractYears": [0, 0.8], "freeAgent": false },
+      "title": "Contract Year", "text": "His contract is up at the end of the season. Every training session feels like an audition, for this club or another one.",
+      "prompt": "How do you handle a contract year?",
+      "choices": [
+        { "label": "Ignore it and play", "desc": "The football takes care of it.", "risk": "low", "hint": "Calm.", "text": "He blocks it out. His football speaks. The phone starts ringing.", "fx": { "stress": -2, "form": 0.1 } },
+        { "label": "Train like it's the last year of your life", "desc": "Prove everything.", "risk": "medium", "hint": "Peak form or burnout.", "text": "He trains like a man possessed. His numbers are the best they've ever been. So is his stress.", "fx": { "growth": ["rel"], "stress": 5, "trust": 3 } }
+      ] },
+    { "id": "t2_pre_season_weight", "cat": "training", "w": 4, "cd": 52, "when": { "phase": ["pre"] },
+      "title": "The Scales", "text": "Pre-season weigh-in. Some players have clearly enjoyed their holidays. The manager reads the numbers out loud, in front of everyone.",
+      "prompt": "How was your off-season?",
+      "choices": [
+        { "label": "You trained all summer", "desc": "Lighter than ever.", "risk": "low", "hint": "The manager notices.", "text": "He's two kilos lighter than last season. {Mf} reads it out with a nod.", "fx": { "trust": 4, "pfm": 4 } },
+        { "label": "You enjoyed yourself", "desc": "Holidays are holidays.", "risk": "medium", "hint": "Public embarrassment.", "text": "Three kilos heavier. The squad cheers sarcastically. Double sessions for a week.", "fx": { "trust": -3, "pfm": -3, "dressing": 2 } }
+      ] },
+    { "id": "t2_rehab_partner", "cat": "training", "w": 4, "cd": 100, "when": { "injured": true }, "uses": { "T": "any" },
+      "title": "The Rehab Room", "text": "{T} is injured too. For weeks, they're the only two in the rehab gym: same exercises, same boredom, same fear of not coming back as good.",
+      "prompt": "Rehab with a teammate.",
+      "choices": [
+        { "label": "Push each other", "desc": "Turn it into a competition.", "risk": "low", "hint": "Faster recovery, a friendship.", "text": "Every exercise is a competition. They come back within a week of each other, best friends.", "fx": { "bond": 18, "morale": 4, "stress": -2 } },
+        { "label": "Keep to yourself", "desc": "Your own head.", "risk": "low", "hint": "Lonely.", "text": "He keeps to himself, headphones in. The weeks drag.", "fx": { "stress": 2 } }
+      ] },
+    { "id": "t2_manager_mind_games", "cat": "manager", "w": 3, "cd": 120, "when": { "freeAgent": false, "role": ["starter"] },
+      "title": "Dropped for No Reason", "text": "He's been the best player for a month. Then he's dropped, without explanation. The assistant coach whispers that the manager does this 'to keep players hungry'.",
+      "prompt": "The manager is playing mind games.",
+      "choices": [
+        { "label": "Play the game: train harder", "desc": "Show him you're hungry.", "risk": "low", "hint": "He wants a reaction. Give him one.", "text": "He trains like an animal all week. He's back in the team on Saturday and scores. {Mf} smiles for the first time all season.", "fx": { "trust": 6, "growth": ["rel"] } },
+        { "label": "Demand an explanation", "desc": "You deserve one.", "risk": "medium", "hint": "Honest.", "text": "{Mf} says he doesn't owe explanations. Then, a week later, he gives one anyway.", "fx": { "trust": -2 } }
+      ] }
+  ]
+}

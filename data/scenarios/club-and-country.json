@@ -1,0 +1,200 @@
+{
+  "scenarios": [
+    { "id": "n2_club_vs_country", "cat": "national", "w": 5, "cd": 80, "when": { "nt": ["called", "regular"], "freeAgent": false },
+      "title": "Club or Country", "text": "The national team has called him up for a friendly tournament. His club needs him for a crucial league match the same week. Both coaches are calling his phone.",
+      "prompt": "Both your club and your country want you.",
+      "choices": [
+        { "label": "Go with the national team", "desc": "Country first.", "risk": "medium", "hint": "The club manager won't forget.", "text": "He goes. The nation celebrates. His club loses without him, and the manager's face in the press conference says everything.", "fx": { "fans": -2, "trust": -6, "rep": 0.5, "image": 2 } },
+        { "label": "Ask to stay with the club", "desc": "The league matters more right now.", "risk": "medium", "hint": "National team coaches have long memories.", "text": "The national coach agrees, coldly. The club wins. The next squad list is announced without his name.", "fx": { "trust": 6, "board": 3, "flag": "nt_snub" } },
+        { "label": "Let the two coaches decide together", "desc": "Diplomacy.", "risk": "low", "hint": "Grown-ups talk.", "text": "The two coaches speak. He plays the first friendly, then flies back for the league match. Exhausted, and everyone's happy.", "fx": { "pfm": -6, "trust": 2 } }
+      ] },
+    { "id": "n2_naturalisation_offer", "cat": "national", "w": 3, "cd": 300, "once": true, "when": { "abroad": true, "nt": ["none", "monitoring"], "level": [3, 5], "age": [21, 29] },
+      "title": "Another Flag", "text": "His adopted country's federation has made an approach: if he takes citizenship, he could play for their national team. They're stronger than his own country, with a World Cup qualifying campaign ahead.",
+      "prompt": "Switch nationality for international football?",
+      "choices": [
+        { "label": "Stay loyal to your country", "desc": "One flag. Yours.", "risk": "low", "hint": "Pride at home.", "text": "He says no. Back home, it's front-page news: 'HE CHOSE US'. His mother cries reading it.", "fx": { "family": 8, "fans": 3, "image": 4 } },
+        { "label": "Consider it seriously", "desc": "The biggest stage.", "risk": "extreme", "hint": "Some at home will never forgive you.", "text": "He starts the process. At home, the reaction is volcanic. His father defends him on local TV. It costs the family a lot.", "fx": { "family": -10, "image": -6, "rep": 2, "flag": "naturalisation" } }
+      ] },
+    { "id": "n2_anthem_moment", "cat": "national", "w": 4, "cd": 100, "when": { "nt": ["called", "regular"] },
+      "title": "The Anthem", "text": "Standing in line for the anthem, he hears the crowd singing louder than the speakers. Somewhere up there, his father is singing too. It's too much. He can feel it coming.",
+      "prompt": "Emotions during the anthem.",
+      "choices": [
+        { "label": "Let the tears come", "desc": "No shame.", "risk": "low", "hint": "The camera will find you.", "text": "The TV director finds his face. The image of a player crying during the anthem is everywhere that night.", "fx": { "fans": 5, "image": 4, "followers": 20000, "family": 4 } },
+        { "label": "Sing louder than everyone", "desc": "Channel it.", "risk": "low", "hint": "Pride.", "text": "He sings so loudly the microphones pick him out. The crowd roars.", "fx": { "fans": 3, "morale": 4 } }
+      ] },
+    { "id": "n2_captaincy_country", "cat": "national", "w": 3, "cd": 300, "once": true, "when": { "nt": ["regular"], "caps": [20, 999], "age": [24, 36], "level": [3, 5] },
+      "title": "Captain of Your Country", "text": "The national coach calls him into a hotel meeting room. On the table is the captain's armband. 'If you want it,' says the coach. 'It's yours.'",
+      "prompt": "Captain your country?",
+      "choices": [
+        { "label": "Accept with pride", "desc": "The greatest honour.", "risk": "low", "hint": "Pressure, glory.", "text": "He accepts. His father watches the first match as captain with a hand on his heart the whole ninety minutes.", "fx": { "flag": ["captain", "nt_captain"], "rep": 3, "family": 10, "fans": 5, "stress": 3 } },
+        { "label": "Suggest the senior player deserves it more", "desc": "Humility.", "risk": "low", "hint": "Respect from the squad.", "text": "He suggests the older player. The coach is impressed. Two years later, it comes back to him anyway.", "fx": { "dressing": 4, "image": 3 } }
+      ] },
+    { "id": "n2_federation_bonus_row", "cat": "national", "w": 3, "cd": 150, "when": { "nt": ["called", "regular"], "level": [3, 5] },
+      "title": "The Unpaid Bonuses", "text": "The national team players haven't been paid their match bonuses for a year. The senior players are threatening to boycott the next match. They want {J} to stand with them.",
+      "prompt": "A national team bonus dispute.",
+      "choices": [
+        { "label": "Stand with the players", "desc": "Solidarity.", "risk": "high", "hint": "The federation will be furious.", "out": [ { "w": 2, "text": "The threat works. The federation pays within a week. The players' respect for {J} is enormous.", "fx": { "dressing": 5, "image": 2, "wealth": 3000 } }, { "w": 1, "text": "The federation drops the senior players and calls up youngsters. {J} watches the next match from home.", "fx": { "image": 1, "flag": "nt_snub", "morale": -4 } } ] },
+        { "label": "Play anyway, for the fans", "desc": "Not their fault.", "risk": "medium", "hint": "Some teammates will resent you.", "text": "He plays. The fans love him. Some teammates don't speak to him at the next camp.", "fx": { "fans": 4, "dressing": -3 } }
+      ] },
+    { "id": "n2_youth_tournament_star", "cat": "national", "w": 4, "cd": 200, "once": true, "when": { "age": [16, 20], "nt": ["called", "regular"] },
+      "title": "The Youth Tournament", "text": "An international youth tournament: scouts from every big club in the world in the stands, every match streamed globally. For a young player, there's no bigger shop window.",
+      "prompt": "How do you approach the youth tournament?",
+      "choices": [
+        { "label": "Play for the team", "desc": "Team success shines on everyone.", "risk": "low", "hint": "Scouts love team players too.", "text": "He plays the team's way. They reach the semi-finals. Three scouts write his name in their notebooks.", "fx": { "rep": 2, "abroadWish": true, "dressing": 2 } },
+        { "label": "Play for yourself", "desc": "Show the scouts.", "risk": "medium", "hint": "Highlights or selfishness.", "out": [ { "w": 1, "text": "He scores a stunning solo goal that goes around the world. Agents start calling.", "fx": { "rep": 3, "followers": 40000, "offerAbroad": true } }, { "w": 1, "text": "He tries too much and the team goes out early. The coach calls him selfish in the press.", "fx": { "rep": 0.5, "image": -2 } } ] }
+      ] },
+    { "id": "n2_dropped_explanation", "cat": "national", "trigger": "ntDropped", "w": 5, "cd": 60,
+      "title": "Left Out", "text": "The national squad has been announced. His name isn't on it. Nobody from the federation has called. He found out from a journalist's message.",
+      "prompt": "Dropped from the national team without a word.",
+      "choices": [
+        { "label": "Ask the coach for honest feedback", "desc": "What do you need to see?", "risk": "low", "hint": "Information is power.", "text": "The coach calls back, surprisingly. Two specific things. He works on both.", "fx": { "growth": ["rel"], "mood": "Determined" } },
+        { "label": "Answer with performances", "desc": "Make them regret it.", "risk": "low", "hint": "Fuel.", "text": "He says nothing and plays the best month of his season. The next call-up arrives early.", "fx": { "form": 0.2, "mood": "Determined" } },
+        { "label": "Say publicly that it's political", "desc": "Everyone knows it is.", "risk": "high", "hint": "Burns the bridge.", "text": "His interview burns the bridge completely. The fans agree with him. The federation doesn't.", "fx": { "fans": 4, "press": 3, "flag": "nt_snub" } }
+      ] },
+    { "id": "n2_rival_country_hostile", "cat": "national", "w": 4, "cd": 100, "when": { "nt": ["called", "regular"] },
+      "title": "Hostile Away Match", "text": "An away qualifier against a bitter regional rival. The hotel is surrounded by fans with drums all night. Someone pulls the fire alarm at 3am. The bus is pelted on the way to the stadium.",
+      "prompt": "A hostile away international.",
+      "choices": [
+        { "label": "Embrace the hostility", "desc": "Use it.", "risk": "medium", "hint": "Some players thrive in it.", "text": "He feeds on it. After the final whistle, he puts a finger to his lips in front of the home fans. The photo is front page back home.", "fx": { "fans": 5, "image": -1, "rep": 1, "stress": 3 } },
+        { "label": "Stay calm and professional", "desc": "Ignore the noise.", "risk": "low", "hint": "Steady.", "text": "Headphones, focus, calm. A professional performance in a madhouse.", "fx": { "stress": 1, "image": 1 } }
+      ] },
+    { "id": "n2_country_tragedy", "cat": "national", "w": 2, "cd": 300, "once": true, "when": { "rep": [20, 100] },
+      "title": "Disaster at Home", "text": "An earthquake has struck a region of his country. Thousands are homeless. The national team's next match has become a fundraiser. Everyone is asking what {J} will do.",
+      "prompt": "A disaster has hit your country.",
+      "choices": [
+        { "label": "Donate big and go there yourself", "desc": "Money and presence.", "risk": "low", "hint": "Real help.", "text": "He donates a huge sum and spends three days in the affected area handing out supplies. No cameras, at first. Then the photos leak and the country weeps.", "fx": { "wealth": -30000, "image": 10, "fans": 6, "pfm": -3, "family": 4 } },
+        { "label": "Auction your shirts and boots", "desc": "Raise as much as possible.", "risk": "low", "hint": "Clever giving.", "text": "His auction raises more than any single donation. His teammates join in. Club badges from rivals appear in the auction too.", "fx": { "image": 7, "fans": 4, "followers": 30000 } }
+      ] },
+    { "id": "n2_national_coach_feud", "cat": "national", "w": 3, "cd": 150, "when": { "nt": ["called", "regular"] },
+      "title": "The National Coach", "text": "The national coach plays him out of position every match and then criticises his performances. The media is starting to ask whether the two of them have a problem.",
+      "prompt": "Trouble with the national coach.",
+      "choices": [
+        { "label": "Talk to him privately at camp", "desc": "Clear the air.", "risk": "low", "hint": "Mature.", "text": "They talk for an hour in the team hotel. The coach admits he's been experimenting. Next match: his proper position.", "fx": { "rep": 0.5, "stress": -2 } },
+        { "label": "Play wherever he asks without complaining", "desc": "The badge matters.", "risk": "low", "hint": "Respect.", "text": "He plays out of position without a word. The fans notice and sing his name.", "fx": { "fans": 3, "image": 2 } }
+      ] },
+    { "id": "n2_diaspora_fans", "cat": "national", "w": 4, "cd": 100, "when": { "abroad": true, "rep": [10, 100] },
+      "title": "Fans From Home", "text": "There's a community from his country in his new city: a few thousand people. They've started coming to every match with flags from home. Today they've invited him for dinner.",
+      "prompt": "Fans from your home country abroad.",
+      "choices": [
+        { "label": "Go to the dinner", "desc": "Home food, home voices.", "risk": "low", "hint": "Belonging.", "text": "Three hundred people, home cooking, home music. He signs every flag. For one night, he's home.", "fx": { "morale": 6, "stress": -4, "fans": 3, "family": 3 } },
+        { "label": "Visit their community centre", "desc": "A proper visit.", "risk": "low", "hint": "Community.", "text": "He visits the community centre and plays football with the kids. The local news covers it. He becomes their son abroad.", "fx": { "image": 4, "fans": 3, "morale": 4 } }
+      ] },
+    { "id": "p2_board_election", "cat": "politics", "w": 3, "cd": 200, "when": { "freeAgent": false, "rep": [20, 100] },
+      "title": "The Election", "text": "The club's presidential election is coming. Both candidates want {J}'s public support. One promises a new stadium. The other promises to pay the staff on time.",
+      "prompt": "The club election wants you involved.",
+      "choices": [
+        { "label": "Stay neutral", "desc": "You work for the club, not a candidate.", "risk": "low", "hint": "Safe.", "text": "He stays neutral. Both candidates respect it, after losing.", "fx": { "board": 1 } },
+        { "label": "Back the staff-wages candidate", "desc": "The people who work here.", "risk": "medium", "hint": "If he loses, the winner remembers.", "out": [ { "w": 1, "text": "His candidate wins. The kit man sends him a thank-you card.", "fx": { "board": 6, "dressing": 3 } }, { "w": 1, "text": "His candidate loses. The new president remembers.", "fx": { "board": -8 } } ] },
+        { "label": "Back the stadium candidate", "desc": "Dream big.", "risk": "medium", "hint": "Fans love a new stadium.", "out": [ { "w": 1, "text": "His candidate wins. The stadium plans are unveiled with {J} in the front row.", "fx": { "board": 7, "fans": 2 } }, { "w": 1, "text": "His candidate loses. The new president has a long memory.", "fx": { "board": -8 } } ] }
+      ] },
+    { "id": "p2_ticket_prices", "cat": "politics", "w": 4, "cd": 100, "when": { "freeAgent": false, "level": [3, 5] },
+      "title": "Ticket Prices", "text": "The club has raised ticket prices by forty per cent. The ultras are planning a walkout in the 20th minute. They've asked the players to support them.",
+      "prompt": "Support the fans' protest about ticket prices?",
+      "choices": [
+        { "label": "Support them publicly", "desc": "Football is for everyone.", "risk": "high", "hint": "Fans adore you. The board won't.", "text": "His post backing the fans is shared everywhere. The club reverses half the increase. The board is furious.", "fx": { "fans": 12, "board": -10, "image": 3 } },
+        { "label": "Talk to the board privately", "desc": "Use your influence quietly.", "risk": "low", "hint": "Effective, invisible.", "text": "He talks to the board. A compromise is reached. The fans never know he was involved.", "fx": { "board": 2, "fans": 2 } },
+        { "label": "Stay out of it", "desc": "Not your job.", "risk": "low", "hint": "Fans may notice.", "text": "He stays out of it. The walkout happens. In the 20th minute, the stadium is half-empty and eerily silent.", "fx": { "fans": -2 } }
+      ] },
+    { "id": "p2_stadium_naming", "cat": "politics", "w": 3, "cd": 200, "when": { "freeAgent": false },
+      "title": "The Stadium's New Name", "text": "The club has sold the naming rights of the stadium to an energy-drink company. The historic name, a hundred years old, is gone. The fans are devastated.",
+      "prompt": "The stadium has been renamed.",
+      "choices": [
+        { "label": "Keep calling it by the old name", "desc": "In every interview.", "risk": "medium", "hint": "Fans love it. The sponsor doesn't.", "text": "He uses the old name in every interview. The fans adopt him as their spokesman. The commercial director sends an email.", "fx": { "fans": 8, "board": -4 } },
+        { "label": "Accept it", "desc": "Money keeps the club alive.", "risk": "low", "hint": "Pragmatic.", "text": "He accepts it. Football is a business. Some fans call him a sellout.", "fx": { "board": 3, "fans": -2 } }
+      ] },
+    { "id": "p2_president_son", "cat": "politics", "w": 3, "cd": 200, "when": { "freeAgent": false },
+      "title": "The President's Son", "text": "{PRES}'s son, nineteen and average, has been put in the first-team squad. He's taking minutes from players who deserve them. Nobody dares say anything.",
+      "prompt": "The president's son is in the team for the wrong reasons.",
+      "choices": [
+        { "label": "Help the kid improve", "desc": "It's not his fault.", "risk": "low", "hint": "Kindness, and the president notices.", "text": "He trains extra with the boy. The kid improves, and {PRESl} is grateful in ways that matter later.", "fx": { "board": 8, "dressing": 1 } },
+        { "label": "Raise it with the manager", "desc": "Selection should be fair.", "risk": "high", "hint": "The president will hear.", "text": "The manager agrees, privately, but can't do anything. {PRESl} hears about it.", "fx": { "board": -8, "dressing": 4 } },
+        { "label": "Say nothing", "desc": "Not your fight.", "risk": "low", "hint": "Silence.", "text": "He says nothing. The squad grumbles among themselves.", "fx": {} }
+      ] },
+    { "id": "p2_academy_closure", "cat": "politics", "w": 3, "cd": 200, "when": { "freeAgent": false, "rep": [15, 100] },
+      "title": "The Academy", "text": "To save money, the board wants to close the club's academy: the place where dozens of local boys dream every evening. It's where {J} started.",
+      "prompt": "The club wants to close the academy.",
+      "choices": [
+        { "label": "Fund it yourself for a year", "desc": "Buy time.", "risk": "low", "hint": "Very expensive, very loved.", "text": "He funds the academy for a year. The board is embarrassed into finding the money after that.", "fx": { "wealth": -40000, "fans": 10, "image": 8, "board": -2, "flag": "saved_academy" } },
+        { "label": "Lead a public campaign", "desc": "Rally the fans.", "risk": "medium", "hint": "Pressure.", "text": "Thousands sign the petition. The board backs down. They're not happy with him.", "fx": { "fans": 8, "board": -6, "image": 4 } },
+        { "label": "Accept it", "desc": "Hard times.", "risk": "medium", "hint": "Sad.", "text": "The academy closes. The boys find other clubs, or don't.", "fx": { "fans": -2, "morale": -2 } }
+      ] },
+    { "id": "p2_club_sale_rumour", "cat": "politics", "w": 4, "cd": 150, "when": { "freeAgent": false },
+      "title": "For Sale", "text": "Rumours say the club is about to be sold to a billionaire. Some fans are excited. Others are terrified. The players are being told nothing.",
+      "prompt": "The club may be sold.",
+      "choices": [
+        { "label": "Ask the board for the truth", "desc": "On behalf of the squad.", "risk": "medium", "hint": "Respect from the squad.", "text": "The board says 'talks are ongoing'. At least the squad knows something.", "fx": { "dressing": 4, "board": -1 } },
+        { "label": "Focus on football", "desc": "Not your business.", "risk": "low", "hint": "Calm.", "text": "He focuses on football. Whatever happens, happens.", "fx": { "stress": -1 } }
+      ] },
+    { "id": "p2_fan_representative", "cat": "politics", "w": 3, "cd": 200, "when": { "freeAgent": false, "fans": [60, 100] },
+      "title": "The Fans' Voice", "text": "The supporters' trust has asked {J} to be their honorary ambassador: monthly meetings, fan events, a voice for the fans inside the club.",
+      "prompt": "Become the fans' ambassador?",
+      "choices": [
+        { "label": "Accept", "desc": "The fans are the club.", "risk": "low", "hint": "Loved by fans, watched by the board.", "text": "He accepts. Monthly meetings in a pub with fans who have followed the club for sixty years. He learns more there than anywhere.", "fx": { "fans": 10, "board": -2, "flag": "fan_ambassador" } },
+        { "label": "Decline politely", "desc": "Too political.", "risk": "low", "hint": "Neutral.", "text": "He declines kindly. The fans understand.", "fx": {} }
+      ] },
+    { "id": "p2_board_wants_post", "cat": "politics", "w": 4, "cd": 80, "when": { "freeAgent": false, "followers": [50000, 999999999] },
+      "title": "Promote the Sponsor", "text": "The commercial director wants every first-team player to post a sponsored video for the club's new betting partner. {J} has a lot of young followers.",
+      "prompt": "The club wants you to promote its betting sponsor.",
+      "choices": [
+        { "label": "Refuse", "desc": "Not to your young fans.", "risk": "medium", "hint": "Principled. The commercial department sulks.", "text": "He refuses and explains why. Several teammates follow his lead. The board grumbles.", "fx": { "board": -5, "image": 5, "dressing": 3 } },
+        { "label": "Post it", "desc": "Club rules.", "risk": "medium", "hint": "Parents won't like it.", "text": "He posts it. Parents in the comments are angry. The club is happy.", "fx": { "board": 4, "image": -4 } }
+      ] },
+    { "id": "p2_club_anniversary", "cat": "politics", "w": 3, "cd": 300, "once": true, "when": { "freeAgent": false, "apps": [50, 9999] },
+      "title": "The Centenary", "text": "The club is celebrating a hundred years: a gala, a special kit, a parade of legends. The organisers want {J} to give a speech representing the current squad.",
+      "prompt": "Speak at the club's centenary?",
+      "choices": [
+        { "label": "Write something unforgettable", "desc": "A hundred years of heart.", "risk": "medium", "hint": "History.", "check": { "stat": "mental", "dc": 55 }, "ok": { "text": "His speech about the people in the stands, past and present, moves the whole hall. The legends stand to applaud.", "fx": { "fans": 10, "board": 6, "image": 4 } }, "bad": { "text": "His speech is fine. Not memorable. The legends are polite.", "fx": { "fans": 2, "board": 2 } } },
+        { "label": "Let the captain speak", "desc": "Hierarchy.", "risk": "low", "hint": "Humble.", "text": "The captain speaks. {J} stands beside him.", "fx": { "dressing": 2 } }
+      ] },
+    { "id": "p2_president_dinner", "cat": "politics", "w": 4, "cd": 100, "when": { "freeAgent": false, "level": [2, 5] },
+      "title": "Dinner With the President", "text": "{PRES} invites {J} to dinner at his house. Just the two of them. He talks about 'the future' a lot without saying anything specific.",
+      "prompt": "A private dinner with the club president.",
+      "choices": [
+        { "label": "Listen and be respectful", "desc": "Let him talk.", "risk": "low", "hint": "Relationships matter.", "text": "He listens for three hours. At the end, {PRESl} says, 'I like you. You'll be here a long time.'", "fx": { "board": 8 } },
+        { "label": "Ask direct questions about your future", "desc": "What's the plan for you?", "risk": "medium", "hint": "Clarity or offence.", "out": [ { "w": 1, "text": "{PRESl} appreciates the directness: a new contract is coming.", "fx": { "board": 5, "renewalPush": true } }, { "w": 1, "text": "{PRESl} finds the questions impertinent. The evening ends early.", "fx": { "board": -4 } } ] }
+      ] },
+    { "id": "p2_rival_club_approach_illegal", "cat": "politics", "w": 3, "cd": 150, "when": { "freeAgent": false, "level": [3, 5], "contractYears": [1, 9] },
+      "title": "Tapping Up", "text": "A director of another club approaches him at a charity event and openly discusses a transfer. It's against the rules: he's under contract. A photographer nearby may have seen it.",
+      "prompt": "Another club is illegally approaching you.",
+      "choices": [
+        { "label": "Walk away", "desc": "Not while you're under contract.", "risk": "low", "hint": "Clean.", "text": "He walks away mid-sentence. If the photographer got anything, it's just a handshake.", "fx": { "board": 2, "image": 1 } },
+        { "label": "Listen", "desc": "Information is useful.", "risk": "high", "hint": "If it gets out, sanctions.", "out": [ { "w": 2, "text": "He listens. Nobody finds out. An official offer arrives in the next window.", "fx": { "offerAbroad": true, "stress": 2 } }, { "w": 1, "text": "The photo is published. The league opens an inquiry. His club is livid.", "fx": { "board": -10, "trust": -6, "image": -4, "press": -3 } } ] }
+      ] },
+    { "id": "p2_ultras_leader", "cat": "politics", "w": 4, "cd": 100, "when": { "freeAgent": false, "rep": [8, 100] },
+      "title": "The Capo", "text": "The leader of the ultras, a heavily tattooed man everyone calls 'the Capo', wants a meeting. He says the curva will support {J} through anything, but they'll need tickets, and 'small favours'.",
+      "prompt": "The ultras' leader wants a relationship.",
+      "choices": [
+        { "label": "Meet him, respectfully, but owe nothing", "desc": "Respect, boundaries.", "risk": "medium", "hint": "Hard to stay owed-nothing.", "text": "He meets the Capo, shakes his hand and promises effort, not favours. The Capo laughs and respects it.", "fx": { "fans": 5 } },
+        { "label": "Give him tickets", "desc": "Keep the curva happy.", "risk": "high", "hint": "This becomes a debt.", "text": "Tickets every match. Then a request for a signed shirt for an 'auction'. Then a request for something bigger.", "fx": { "fans": 8, "flag": "ultras_debt", "image": -2 } },
+        { "label": "Decline the meeting", "desc": "Keep your distance.", "risk": "medium", "hint": "The curva notices.", "text": "He declines. The curva goes noticeably quieter when he touches the ball.", "fx": { "fans": -4 } }
+      ] },
+    { "id": "p2_ultras_debt_called", "cat": "politics", "w": 5, "cd": 100, "when": { "flags": ["ultras_debt"], "freeAgent": false },
+      "title": "The Capo's Favour", "text": "The Capo calls in the favour: he wants {J} to publicly criticise the club's president, who has banned the ultras' banners.",
+      "prompt": "The ultras want you to attack the president.",
+      "choices": [
+        { "label": "Refuse, firmly", "desc": "You're not their puppet.", "risk": "high", "hint": "The curva may turn.", "text": "He refuses. The next home match, the curva unfurls a banner with his name and a word that isn't kind.", "fx": { "fans": -8, "board": 4, "unflag": "ultras_debt" } },
+        { "label": "Do it", "desc": "Pay the debt.", "risk": "extreme", "hint": "The board will be furious.", "text": "He criticises the president in a post. The curva sings his name. The board starts looking for buyers.", "fx": { "fans": 8, "board": -18, "listed": true, "unflag": "ultras_debt" } }
+      ] },
+    { "id": "p2_womens_team", "cat": "politics", "w": 3, "cd": 200, "when": { "freeAgent": false, "rep": [15, 100] },
+      "title": "The Women's Team", "text": "The club's women's team trains on a muddy pitch with no lights while the men's team has three perfect pitches. Their captain has asked whether any first-team players would speak up.",
+      "prompt": "The women's team needs support.",
+      "choices": [
+        { "label": "Speak up publicly", "desc": "Equal respect.", "risk": "medium", "hint": "Some fans and directors won't like it.", "text": "His interview makes the board act: lights, a proper pitch, shared facilities. The women's captain sends him a signed shirt.", "fx": { "image": 6, "board": -3, "followers": 15000 } },
+        { "label": "Go and watch their matches", "desc": "Show up.", "risk": "low", "hint": "Presence matters.", "text": "He starts going to their matches with teammates. The crowds grow. The board notices the crowds.", "fx": { "image": 4, "fans": 2 } }
+      ] },
+    { "id": "p2_charity_kit", "cat": "politics", "w": 3, "cd": 150, "when": { "freeAgent": false, "level": [2, 5] },
+      "title": "The Charity Shirt", "text": "The club wants to replace the sponsor on the shirt with a children's charity for one match, but only if a senior player gives up his match fee to cover the lost money.",
+      "prompt": "Give up your match fee for a charity shirt?",
+      "choices": [
+        { "label": "Yes", "desc": "One week's money for a good cause.", "risk": "low", "hint": "Generous.", "text": "He gives it up. Two teammates follow. The charity's logo is on the shirt, and the shirts sell out.", "fx": { "wealth": -2000, "image": 5, "fans": 4, "board": 2 } },
+        { "label": "Suggest the board pays", "desc": "They can afford it.", "risk": "medium", "hint": "Fair. Awkward.", "text": "The board pays, grudgingly. The charity still gets its day.", "fx": { "board": -3, "image": 2 } }
+      ] },
+    { "id": "p2_derby_security", "cat": "politics", "w": 3, "cd": 150, "when": { "freeAgent": false },
+      "title": "Away Fans Banned", "text": "After violence at the last derby, the police want to ban away fans from the next one. His club's fans are furious. The league is asking the players for their view.",
+      "prompt": "Should away fans be banned?",
+      "choices": [
+        { "label": "Back the ban for safety", "desc": "Nobody should get hurt.", "risk": "medium", "hint": "Sensible. Unpopular.", "text": "He backs the ban. Some fans call him a coward. Nobody gets hurt at the next derby.", "fx": { "fans": -4, "image": 3 } },
+        { "label": "Oppose the ban", "desc": "Punish the violent few, not everyone.", "risk": "medium", "hint": "Popular with fans.", "text": "He argues for targeted bans instead. The fans love it. The police disagree.", "fx": { "fans": 5, "press": 1 } }
+      ] }
+  ]
+}

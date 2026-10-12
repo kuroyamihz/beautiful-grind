@@ -1,0 +1,306 @@
+{
+  "scenarios": [
+    { "id": "i3_fan_at_petrol", "cat": "interlude", "w": 5, "cd": 60, "time": "Tuesday, 21:15", "when": { "rep": [5, 100] },
+      "title": "At the Petrol Station", "text": "A man filling up his motorbike recognises him and starts telling him, in great detail, what he did wrong last Saturday. His little son is hiding behind his leg, staring at {J} like he's a superhero.",
+      "choices": [
+        { "label": "Listen, then sign the boy's arm", "risk": "low", "text": "He nods through the tactical lecture, then crouches and signs the boy's arm with a marker. The father forgets his criticism entirely.", "fx": { "fans": 2, "morale": 2 } },
+        { "label": "Smile and leave", "risk": "low", "text": "He smiles, says thank you for the advice, and drives off. In the mirror, the boy is waving.", "fx": {} }
+      ] },
+    { "id": "i3_teammate_text_late", "cat": "interlude", "w": 5, "cd": 40, "time": "Wednesday, 23:48", "uses": { "T": "ally" },
+      "title": "A Message From {T}", "text": "'You awake? Can't sleep. Big game Saturday. You?' It's {T}, and it's nearly midnight.",
+      "choices": [
+        { "label": "Call him", "risk": "low", "text": "They talk for half an hour about nothing: films, food, an old coach. Both of them sleep better afterwards.", "fx": { "bond": 6, "stress": -2 } },
+        { "label": "Reply 'Go to sleep, legend'", "risk": "low", "text": "A thumbs up comes back. Sometimes that's all anyone needs.", "fx": { "bond": 2 } }
+      ] },
+    { "id": "i3_partner_cooks", "cat": "interlude", "w": 5, "cd": 40, "time": "Thursday, 19:30", "when": { "partner": ["dating", "serious", "engaged", "married"], "partnerNear": true },
+      "title": "Dinner Is Ready", "text": "{Pf} has cooked his favourite meal, lit a candle and put her phone in a drawer. She looks nervous, like she's going to say something important.",
+      "choices": [
+        { "label": "Ask what's on her mind", "risk": "low", "out": [ { "w": 2, "text": "She just wanted a normal evening with him. That's all. They have one.", "fx": { "love": 6, "stress": -2 } }, { "w": 1, "text": "She's been offered a job she really wants. They talk about it until midnight.", "fx": { "love": 4 } } ] },
+        { "label": "Eat and enjoy it", "risk": "low", "text": "He eats two helpings and tells her it's the best meal he's had all year. She doesn't say whatever it was. Maybe next time.", "fx": { "love": 3 } }
+      ] },
+    { "id": "i3_mum_voice_note", "cat": "interlude", "w": 6, "cd": 30, "time": "Monday, 07:10",
+      "title": "Voice Note From {MUM}", "text": "A four-minute voice note from {MUM}: the neighbours, the price of rice, {SIB}'s exams, a dream she had about him scoring, and, at the very end, 'Eat properly.'",
+      "choices": [
+        { "label": "Send a long voice note back", "risk": "low", "text": "He walks around the flat telling her everything. She replies with eleven heart emojis and a photo of her cooking.", "fx": { "family": 4, "morale": 2 } },
+        { "label": "Reply with a heart", "risk": "low", "text": "A heart. She sends back 'okay 😊'. Mothers know.", "fx": { "family": 1 } }
+      ] },
+    { "id": "i3_kid_in_car_park", "cat": "interlude", "w": 5, "cd": 50, "time": "Friday, 12:40", "when": { "freeAgent": false },
+      "title": "The Boy at the Gate", "text": "A boy, maybe ten, is waiting at the training-ground gate in a homemade shirt with {J}'s name hand-painted on the back. He's been there since 8am, says the security guard.",
+      "choices": [
+        { "label": "Get out of the car", "risk": "low", "text": "He gets out, signs the shirt, takes a photo and gives the boy his own training top. The boy's mother cries. So does the security guard, nearly.", "fx": { "fans": 3, "image": 2, "morale": 3 } },
+        { "label": "Wave from the car", "risk": "low", "text": "He waves. The boy waves back like it's the best moment of his life. Maybe it is.", "fx": { "fans": 1 } }
+      ] },
+    { "id": "i3_bad_review", "cat": "interlude", "w": 5, "cd": 40, "time": "Sunday, 10:05", "when": { "rep": [5, 100], "lastResult": ["L"] },
+      "title": "Player Ratings", "text": "The newspaper's player ratings are out. He got a 4/10. The comment underneath says 'Anonymous. Should be dropped.' He was not anonymous; he was everywhere, badly.",
+      "choices": [
+        { "label": "Read it and use it", "risk": "low", "text": "He screenshots it and saves it in a folder called 'Fuel'. It's getting quite full.", "fx": { "mood": "Determined" } },
+        { "label": "Throw the phone on the sofa", "risk": "low", "text": "The phone bounces off the sofa and onto the floor. The screen survives. His mood doesn't.", "fx": { "stress": 2 } }
+      ] },
+    { "id": "i3_neighbour_noise", "cat": "interlude", "w": 4, "cd": 60, "time": "Saturday, 01:30",
+      "title": "The Neighbours", "text": "The flat upstairs is having a party. It's 1:30am. He has a match tomorrow afternoon. The bass is coming through the ceiling like a second heartbeat.",
+      "choices": [
+        { "label": "Knock and ask nicely", "risk": "low", "out": [ { "w": 2, "text": "They recognise him, apologise and turn it down. One of them asks for a selfie at the door.", "fx": { "stress": -1 } }, { "w": 1, "text": "They invite him in. He declines. They turn it down slightly.", "fx": { "stress": 1 } } ] },
+        { "label": "Earplugs and suffering", "risk": "low", "text": "Earplugs, a pillow over his head, and a very long night.", "fx": { "pfm": -2, "stress": 2 } }
+      ] },
+    { "id": "i3_old_photo", "cat": "interlude", "w": 5, "cd": 60, "time": "Tuesday, 22:00",
+      "title": "An Old Photo", "text": "{SIB} sends an old photo: {J} at eight, in a shirt three sizes too big, holding a ball with no air in it, grinning like he's already won something.",
+      "choices": [
+        { "label": "Post it", "risk": "low", "text": "He posts it. 'Same dream, better ball.' It's the most-liked thing he's posted all year.", "fx": { "followers": 3000, "family": 2, "fans": 1 } },
+        { "label": "Set it as your phone background", "risk": "low", "text": "He sets it as his background. Every time he picks up the phone, the eight-year-old reminds him why.", "fx": { "morale": 3 } }
+      ] },
+    { "id": "i3_bf_needs_advice", "cat": "interlude", "w": 5, "cd": 40, "time": "Wednesday, 20:20",
+      "title": "{BFf} Needs Advice", "text": "{BFf} calls: he's thinking of quitting his job as {BFjob} to start something of his own. He wants {J}'s honest opinion, not the encouraging one.",
+      "choices": [
+        { "label": "Be honest", "risk": "medium", "text": "He asks hard questions about money and plans. {BFf} goes quiet, then thanks him. 'That's why I called you.'", "fx": { "friends": 5 } },
+        { "label": "Encourage him", "risk": "low", "text": "'Do it. Life's short.' {BFf} is fired up. Whether it's wise, time will tell.", "fx": { "friends": 3 } }
+      ] },
+    { "id": "i3_gym_selfie_request", "cat": "interlude", "w": 4, "cd": 50, "time": "Thursday, 06:45", "when": { "rep": [8, 100] },
+      "title": "The Public Gym", "text": "Early session at a public gym. A man asks for a selfie mid-set. Then his friend. Then the friend's friend. He has eight reps left and a growing queue.",
+      "choices": [
+        { "label": "Finish the set, then photos", "risk": "low", "text": "'Two minutes, I promise.' He finishes, then does twelve selfies. Everyone's happy.", "fx": { "fans": 1 } },
+        { "label": "Photos now, workout ruined", "risk": "low", "text": "Thirty photos later, his muscles have gone cold. He goes home.", "fx": { "fans": 2, "pfm": -1 } }
+      ] },
+    { "id": "i3_delivery_driver", "cat": "interlude", "w": 4, "cd": 60, "time": "Tuesday, 20:55",
+      "title": "The Delivery", "text": "The delivery driver bringing his dinner is wearing the shirt of {R}, the rival club. He hands over the bag, looks up, and freezes.",
+      "choices": [
+        { "label": "Make a joke and tip big", "risk": "low", "text": "'I won't tell anyone.' He tips double. The driver posts about it that night: 'Respect.'", "fx": { "image": 2, "followers": 1000 } },
+        { "label": "Ask for his opinion on the derby", "risk": "low", "text": "They argue happily about the derby on the doorstep for ten minutes. The food goes cold. Worth it.", "fx": { "morale": 2 } }
+      ] },
+    { "id": "i3_physio_gossip", "cat": "interlude", "w": 4, "cd": 60, "time": "Friday, 15:30", "when": { "freeAgent": false },
+      "title": "On the Massage Table", "text": "The physio, digging into his calf, mentions casually that the manager was asking about {J}'s attitude this week. Just asking. Probably nothing.",
+      "choices": [
+        { "label": "Ask what exactly he said", "risk": "low", "text": "The physio says the manager just wants to see more hunger. Useful to know.", "fx": { "trust": 1, "stress": 1 } },
+        { "label": "Let it go", "risk": "low", "text": "He lets it go and enjoys the massage. Mostly.", "fx": { "stress": 1 } }
+      ] },
+    { "id": "i3_rain_run", "cat": "interlude", "w": 4, "cd": 60, "time": "Sunday, 06:00",
+      "title": "Rain", "text": "His day off. It's pouring. His body says stay in bed. A small voice says: the players who make it run in the rain.",
+      "choices": [
+        { "label": "Run in the rain", "risk": "low", "text": "Eight kilometres in the rain. He comes home soaked and grinning like an idiot.", "fx": { "pfm": 1, "morale": 3, "growth": ["physical"] } },
+        { "label": "Stay in bed", "risk": "low", "text": "He stays in bed. Rest is training too.", "fx": { "pfm": 3, "stress": -2 } }
+      ] },
+    { "id": "i3_sibling_exam", "cat": "interlude", "w": 5, "cd": 60, "time": "Monday, 21:00", "when": { "sibAge": [12, 22] },
+      "title": "{SIB}'s Exams", "text": "{SIB} has a big exam tomorrow and is panicking. {SIBhe} calls {J}, of all people, because 'you're good under pressure'.",
+      "choices": [
+        { "label": "Give the pre-match speech", "risk": "low", "text": "He gives {SIB} his best pre-match speech, adapted for maths. {SIB} laughs, calms down, and passes.", "fx": { "family": 4, "sibBond": 6 } },
+        { "label": "Tell {SIBhim} to sleep", "risk": "low", "text": "'Sleep is the best revision.' {SIB} doesn't believe him. {SIBhe} passes anyway.", "fx": { "sibBond": 2 } }
+      ] },
+    { "id": "i3_ex_like", "cat": "interlude", "w": 4, "cd": 80, "time": "Saturday, 23:10", "when": { "flags": ["broke_up"] },
+      "title": "A Like", "text": "{EXFLAME} has liked a photo of his from three years ago. Accidentally? Deliberately? At 11pm on a Saturday?",
+      "choices": [
+        { "label": "Ignore it", "risk": "low", "text": "He ignores it. Some doors are better closed.", "fx": { "stress": 1 } },
+        { "label": "Send a message", "risk": "medium", "out": [ { "w": 1, "text": "She replies: 'Oops. Old photos. Hope you're well.' Polite. Done.", "fx": { "exBond": 3 } }, { "w": 1, "text": "They talk until 3am. It's nice. It's also confusing.", "fx": { "exBond": 10, "stress": 2 } } ] }
+      ] },
+    { "id": "i3_wrong_kit", "cat": "interlude", "w": 4, "cd": 80, "time": "Saturday, 13:00", "when": { "freeAgent": false },
+      "title": "The Wrong Boots", "text": "In the dressing room before the match, he opens his bag. Two left boots. The kit man is already on the bus back to the training ground.",
+      "choices": [
+        { "label": "Borrow a teammate's spares", "risk": "low", "text": "A teammate has spares half a size too big. Three pairs of socks later, they fit. Mostly.", "fx": { "stress": 2, "dressing": 1 } },
+        { "label": "Call {DAD} to drive them over", "risk": "low", "when": { "familyNear": true }, "text": "{DAD} drives across the city in record time and arrives at the players' entrance waving the boot. He's never been prouder to be useful.", "fx": { "family": 4, "stress": 1 } }
+      ] },
+    { "id": "i3_lucky_charm", "cat": "interlude", "w": 4, "cd": 100, "time": "Friday, 22:30",
+      "title": "The Lucky Charm", "text": "His lucky bracelet, the one {MUM} gave him before his first trial, has snapped. Big match tomorrow. He knows it's silly. He also knows how he feels.",
+      "choices": [
+        { "label": "Fix it tonight", "risk": "low", "text": "He spends an hour fixing it with fishing line from a hardware shop. Superstition satisfied.", "fx": { "stress": -1 } },
+        { "label": "Decide luck is in your legs", "risk": "low", "text": "He puts it in a drawer. Luck is in the legs. He hopes.", "fx": { "stress": 2, "growth": ["mental"] } }
+      ] },
+    { "id": "i3_cleaner_story", "cat": "interlude", "w": 4, "cd": 100, "time": "Wednesday, 17:20", "when": { "freeAgent": false },
+      "title": "The Cleaner", "text": "The woman who cleans the dressing room after training stops him. Her grandson is a huge fan and is in hospital. She's embarrassed to ask, but would he record a message?",
+      "choices": [
+        { "label": "Visit the hospital himself", "risk": "low", "text": "He visits on his day off with a signed ball. The grandson doesn't stop smiling for an hour. The cleaner can't speak.", "fx": { "image": 3, "morale": 5, "dressing": 2 } },
+        { "label": "Record the message", "risk": "low", "text": "A heartfelt video message. The cleaner plays it for the whole ward.", "fx": { "image": 1, "morale": 2 } }
+      ] },
+    { "id": "i3_journalist_call", "cat": "interlude", "w": 4, "cd": 50, "time": "Tuesday, 18:00", "when": { "rep": [5, 100] },
+      "title": "Unknown Number", "text": "An unknown number calls three times. Then a message: '{JR} from {OUT}. Just want to confirm a story about you. Call me.'",
+      "choices": [
+        { "label": "Call back", "risk": "medium", "out": [ { "w": 2, "text": "The story is wrong and he corrects it. {JRl} thanks him. The article never runs.", "fx": { "press": 3 } }, { "w": 1, "text": "The story is right, and now he's confirmed it.", "fx": { "press": 1, "stress": 3 } } ] },
+        { "label": "Pass it to the club's press officer", "risk": "low", "text": "The press officer handles it. Safe, slow and a little cold.", "fx": { "press": -1 } }
+      ] },
+    { "id": "i3_supermarket_aunties", "cat": "interlude", "w": 4, "cd": 60, "time": "Saturday, 10:15",
+      "title": "Supermarket", "text": "Three women in the supermarket have recognised him and are discussing, loudly, whether he's eating properly. One of them has taken a vegetable out of his trolley and replaced it with a better one.",
+      "choices": [
+        { "label": "Accept their wisdom", "risk": "low", "text": "He leaves with a trolley curated by three strangers and their phone numbers in case he needs recipes.", "fx": { "morale": 3, "fans": 1 } },
+        { "label": "Politely escape", "risk": "low", "text": "He thanks them and escapes to the frozen aisle. They follow.", "fx": { "stress": 1 } }
+      ] },
+    { "id": "i3_physical_coach_challenge", "cat": "interlude", "w": 4, "cd": 60, "time": "Thursday, 11:40", "when": { "freeAgent": false, "injured": false },
+      "title": "The Challenge", "text": "The fitness coach has set a squad challenge: a hundred push-ups as fast as possible. The current record holder is a forty-second centre-back who won't stop talking about it.",
+      "choices": [
+        { "label": "Go for the record", "risk": "medium", "out": [ { "w": 1, "text": "Forty-one seconds. The squad erupts. The centre-back demands a recount.", "fx": { "dressing": 4, "morale": 3 } }, { "w": 2, "text": "Fifty-two seconds and he collapses at ninety-three. Respect, and laughter.", "fx": { "dressing": 2 } } ] },
+        { "label": "Film everyone else", "risk": "low", "text": "He films the attempts. The video of the reserve goalkeeper collapsing at twelve is the best thing on the club channel all month.", "fx": { "dressing": 2, "followers": 1000 } }
+      ] },
+    { "id": "i3_car_breakdown", "cat": "interlude", "w": 4, "cd": 80, "time": "Monday, 08:20", "when": { "freeAgent": false },
+      "title": "Broken Down", "text": "His car dies on the motorway on the way to training. The tow truck will be an hour. Training starts in forty minutes.",
+      "choices": [
+        { "label": "Call a teammate for a lift", "risk": "low", "text": "A teammate picks him up, laughing all the way to the training ground. He's three minutes late. The fine is small. The teasing is enormous.", "fx": { "dressing": 2, "wealth": -100 } },
+        { "label": "Call the manager to explain", "risk": "low", "text": "{Mf} appreciates the call. 'Take a taxi. Don't be late again.'", "fx": { "trust": 1, "wealth": -60 } }
+      ] },
+    { "id": "i3_sponsor_package", "cat": "interlude", "w": 4, "cd": 60, "time": "Wednesday, 16:00", "when": { "sponsors": [1, 20] },
+      "title": "A Big Box", "text": "A huge box from {BRAND} has arrived: free products, a handwritten note and a request for 'just one story'.",
+      "choices": [
+        { "label": "Post a genuine story", "risk": "low", "text": "He posts it honestly. The brand is thrilled. His followers barely notice it's an advert.", "fx": { "followers": 500 } },
+        { "label": "Give it all to the youth team", "risk": "low", "text": "He gives the whole box to the academy boys. Pandemonium. Better than any story.", "fx": { "dressing": 2, "image": 2 } }
+      ] },
+    { "id": "i3_rival_dm", "cat": "interlude", "w": 4, "cd": 80, "time": "Sunday, 22:40", "when": { "rep": [10, 100] }, "uses": { "T": "outsider" },
+      "title": "A DM From the Enemy", "text": "{T}, who plays for {R} and has been winding {J} up all season in public, sends a private message: 'Respect for Saturday. You were the best player on the pitch. Don't tell anyone I said that.'",
+      "choices": [
+        { "label": "Reply with respect", "risk": "low", "text": "'Respect back. See you in the derby.' Rivals in public, something else in private.", "fx": { "morale": 3, "flag": "rival_respect", "cast": { "rival": "T" } } },
+        { "label": "Screenshot it for the group chat", "risk": "medium", "text": "He screenshots it for his teammates. It leaks within the week. {T} never messages him again.", "fx": { "dressing": 3, "flag": "rival_enemy", "cast": { "rival": "T" } } }
+      ] },
+    { "id": "i3_late_bus", "cat": "interlude", "w": 4, "cd": 80, "time": "Saturday, 23:50", "when": { "freeAgent": false },
+      "title": "Back of the Bus", "text": "On the long coach home from an away match, the back of the bus has started a sing-along. It's terrible. Everyone is singing. The manager is pretending to sleep.",
+      "choices": [
+        { "label": "Sing louder than anyone", "risk": "low", "text": "He takes the lead on a song from his childhood. By the end, the whole bus knows the words.", "fx": { "dressing": 4, "morale": 3 } },
+        { "label": "Headphones and sleep", "risk": "low", "text": "He sleeps through it. Someone draws on his face. Classic.", "fx": { "dressing": 1, "pfm": 1 } }
+      ] },
+    { "id": "i3_coffee_order", "cat": "interlude", "w": 4, "cd": 60, "time": "Tuesday, 08:00",
+      "title": "Your Usual?", "text": "The barista at {PLACE} has his order ready before he reaches the counter. She also has a small note on the cup: 'Good luck on Saturday 💪'.",
+      "choices": [
+        { "label": "Leave a big tip and a signed napkin", "risk": "low", "text": "He leaves a big tip and a signed napkin. It's framed behind the counter the next day.", "fx": { "morale": 2, "fans": 1 } },
+        { "label": "Ask her name", "risk": "low", "when": { "partner": ["none"], "crush": false }, "out": [ { "w": 1, "text": "Her name is {F}. They talk for ten minutes. He's late for training and doesn't care.", "fx": { "crush": { "who": "F", "heat": 30 }, "morale": 3 } }, { "w": 1, "text": "She tells him her name and that her boyfriend is a huge fan. Fair enough.", "fx": { "morale": 1 } } ] }
+      ] },
+    { "id": "i3_grandparent_call", "cat": "interlude", "w": 4, "cd": 80, "time": "Sunday, 17:30",
+      "title": "Grandpa", "text": "His grandfather has learned how to use video calls. He's holding the phone upside down and shouting. He wants to know why {J} isn't married yet.",
+      "choices": [
+        { "label": "Talk for as long as he wants", "risk": "low", "text": "Forty minutes of the ceiling, half of grandpa's face, and very strong opinions about football in 1974. Wonderful.", "fx": { "family": 5, "morale": 3 } },
+        { "label": "Promise to visit soon", "risk": "low", "text": "He promises a visit. Grandpa says he'll hold him to it. He will.", "fx": { "family": 2 } }
+      ] },
+    { "id": "i3_fake_account", "cat": "interlude", "w": 4, "cd": 100, "time": "Thursday, 14:00", "when": { "followers": [10000, 999999999] },
+      "title": "The Imposter", "text": "Someone has made a fake account pretending to be him and is messaging fans asking for money 'for charity'. Three people have already sent some.",
+      "choices": [
+        { "label": "Warn your followers immediately", "risk": "low", "text": "His warning goes out within minutes. The fake account is reported into oblivion.", "fx": { "fans": 2, "image": 1 } },
+        { "label": "Refund the victims yourself", "risk": "low", "text": "He finds the three fans and refunds them. They become fans for life.", "fx": { "fans": 3, "image": 3, "wealth": -300 } }
+      ] },
+    { "id": "i3_young_fan_trial", "cat": "interlude", "w": 3, "cd": 120, "time": "Wednesday, 18:10", "when": { "rep": [15, 100] },
+      "title": "The Video", "text": "A father sends a video of his fourteen-year-old daughter's skills. She's genuinely brilliant. There's no girls' academy in their town. He asks if {J} knows anyone.",
+      "choices": [
+        { "label": "Make some calls", "risk": "low", "text": "Two calls, one email. A women's club academy offers her a trial. The father sends a voice note crying with joy.", "fx": { "image": 3, "morale": 4 } },
+        { "label": "Share the video", "risk": "low", "text": "He shares the video. Within a day, three clubs have contacted the family.", "fx": { "image": 3, "followers": 3000 } }
+      ] },
+    { "id": "i3_insomnia_stars", "cat": "interlude", "w": 4, "cd": 80, "time": "Thursday, 03:15",
+      "title": "3am Thoughts", "text": "3:15am. Wide awake. Thoughts about contracts, form, home and whether he left the oven on. The ceiling has no answers.",
+      "choices": [
+        { "label": "Get up and write it all down", "risk": "low", "text": "He writes every thought on paper. Out of his head, onto the page. He sleeps by four.", "fx": { "stress": -3 } },
+        { "label": "Scroll the phone", "risk": "low", "text": "Scrolling until 5am. Bad idea, as always.", "fx": { "stress": 1, "pfm": -2 } }
+      ] },
+    { "id": "i3_school_visit_question", "cat": "interlude", "w": 4, "cd": 80, "time": "Monday, 10:30", "when": { "rep": [5, 100] },
+      "title": "The Question", "text": "At a school visit, a small girl puts her hand up: 'Are you scared when you play?' Two hundred children wait for the answer.",
+      "choices": [
+        { "label": "'Yes, every time.'", "risk": "low", "text": "'Yes, every time. Being scared and doing it anyway is called courage.' The teachers write it on the board.", "fx": { "image": 3, "morale": 3 } },
+        { "label": "'Never!'", "risk": "low", "text": "The children cheer. The girl looks a little disappointed. She wanted the real answer.", "fx": { "image": 1 } }
+      ] },
+    { "id": "i3_partner_ex_sighting", "cat": "interlude", "w": 3, "cd": 120, "time": "Saturday, 20:00", "when": { "partner": ["dating", "serious", "engaged", "married"], "partnerNear": true },
+      "title": "Her Ex", "text": "At a restaurant, {Pf}'s ex walks in with friends. He nods at {Pf}. She nods back. {J} feels something he doesn't like.",
+      "choices": [
+        { "label": "Stay relaxed", "risk": "low", "text": "He keeps the conversation flowing. {Pf} squeezes his hand under the table. Nothing to worry about.", "fx": { "love": 3 } },
+        { "label": "Ask about him on the way home", "risk": "medium", "text": "She answers patiently. Then she asks why he's being jealous. Fair question.", "fx": { "love": -2 } }
+      ] },
+    { "id": "i3_free_meal", "cat": "interlude", "w": 4, "cd": 80, "time": "Friday, 19:45", "when": { "rep": [10, 100] },
+      "title": "On the House", "text": "The owner of a small family restaurant refuses to let him pay. 'You make us proud,' he says, and puts a photo of {J} on the wall next to his grandmother's.",
+      "choices": [
+        { "label": "Accept graciously, come back often", "risk": "low", "text": "He accepts, then comes back every month with teammates who do pay. The restaurant is packed on matchdays now.", "fx": { "fans": 2, "morale": 3 } },
+        { "label": "Insist on paying, tip enormously", "risk": "low", "text": "He leaves money under the plate while the owner isn't looking. The owner chases him down the street. They both laugh.", "fx": { "fans": 1, "wealth": -100 } }
+      ] },
+    { "id": "i3_language_mistake", "cat": "interlude", "w": 4, "cd": 100, "time": "Tuesday, 12:30", "when": { "abroad": true },
+      "title": "Wrong Word", "text": "In the canteen, trying to ask for 'more rice' in the local language, he says something that makes three teammates choke on their food. The chef goes very red.",
+      "choices": [
+        { "label": "Laugh with them", "risk": "low", "text": "He laughs harder than anyone. The squad adopts the phrase forever. The chef forgives him eventually.", "fx": { "dressing": 4, "morale": 2 } },
+        { "label": "Ask what he said", "risk": "low", "text": "They tell him. He wants the floor to swallow him. It becomes his favourite story.", "fx": { "dressing": 2, "growth": ["mental"] } }
+      ] },
+    { "id": "i3_photo_shoot_kid", "cat": "interlude", "w": 3, "cd": 100, "time": "Sunday, 11:00", "when": { "hasKid": true },
+      "title": "Photographer Kid", "text": "{KID} has taken his phone and filmed forty minutes of the ceiling, the dog and the inside of a nostril. Also one genuinely beautiful photo of {J} laughing.",
+      "choices": [
+        { "label": "Post the beautiful one", "risk": "low", "text": "Credited to 'my photographer'. Two million likes. {KID} demands a fee.", "fx": { "followers": 5000, "family": 3 } },
+        { "label": "Keep it private", "risk": "low", "text": "He keeps it. It's on his lock screen for years.", "fx": { "family": 3 } }
+      ] },
+    { "id": "i3_wrong_hotel_room", "cat": "interlude", "w": 3, "cd": 120, "time": "Friday, 23:30", "when": { "freeAgent": false },
+      "title": "Room 412", "text": "Team hotel. His key card opens the wrong room. Inside: the manager, in pyjamas, watching a romantic comedy and eating ice cream.",
+      "choices": [
+        { "label": "Apologise and leave, say nothing ever", "risk": "low", "text": "He leaves. The next day, {Mf} nods at him with an expression that means: never speak of this.", "fx": { "trust": 2 } },
+        { "label": "Ask what film it is", "risk": "medium", "out": [ { "w": 1, "text": "{Mf} laughs, invites him in for ten minutes, and they bond over a terrible film.", "fx": { "trust": 4 } }, { "w": 1, "text": "{Mf} closes the door without a word. Sunday training is very hard.", "fx": { "trust": -2, "pfm": -2 } } ] }
+      ] },
+    { "id": "i3_mum_watching_alone", "cat": "interlude", "w": 4, "cd": 80, "time": "Sunday, 20:30",
+      "title": "{MUM} Watched Alone", "text": "{MUM} mentions on the phone, casually, that she watched his last match alone because {DAD} fell asleep and {SIB} was out. She narrated it to the cat.",
+      "choices": [
+        { "label": "Set up a family watch party", "risk": "low", "text": "He organises a screen, food and the whole extended family for the next match. {MUM} sends twenty photos.", "fx": { "family": 6, "wealth": -200 } },
+        { "label": "Promise to call at half-time", "risk": "low", "text": "He calls at half-time next match. Thirty seconds. She tells everyone.", "fx": { "family": 4 } }
+      ] },
+    { "id": "i3_teammate_baby_photo", "cat": "interlude", "w": 3, "cd": 80, "time": "Monday, 09:15", "when": { "freeAgent": false }, "uses": { "T": "any" },
+      "title": "Godfather?", "text": "{T} shows him a photo of his newborn son, then asks, very seriously, whether {J} would be the godfather.",
+      "choices": [
+        { "label": "Yes, honoured", "risk": "low", "text": "He says yes and means it. A tiny person now has his number saved under 'Uncle'.", "fx": { "bond": 15, "morale": 4 } },
+        { "label": "Ask for time to think", "risk": "low", "text": "He asks for a few days. {T} looks a little hurt, then understands.", "fx": { "bond": -2 } }
+      ] },
+    { "id": "i3_ultras_song", "cat": "interlude", "w": 4, "cd": 100, "time": "Thursday, 21:00", "when": { "fans": [60, 100], "freeAgent": false },
+      "title": "A Song About Him", "text": "The ultras have written a song about him. {T} sends the video: two hundred people in a bar singing his name to the tune of a pop song. It's absurd and wonderful.",
+      "uses": { "T": "ally" },
+      "choices": [
+        { "label": "Learn the words and sing it at training", "risk": "low", "text": "He sings it in the dressing room. The squad joins in. Someone posts it. The ultras go wild.", "fx": { "fans": 5, "dressing": 3 } },
+        { "label": "Just enjoy it", "risk": "low", "text": "He watches it eleven times. Then sends it to {MUM}, who watches it forty.", "fx": { "morale": 5, "family": 2 } }
+      ] },
+    { "id": "i3_lost_wallet", "cat": "interlude", "w": 3, "cd": 120, "time": "Saturday, 16:00",
+      "title": "The Wallet", "text": "He finds a wallet on the street with a few notes, an ID card and a photo of a baby. The address is twenty minutes away.",
+      "choices": [
+        { "label": "Return it in person", "risk": "low", "text": "He returns it himself. The owner, a young father, nearly faints when he sees who's at the door.", "fx": { "image": 2, "morale": 3 } },
+        { "label": "Hand it to the police", "risk": "low", "text": "He hands it in. The owner gets it back the next day and never knows who found it.", "fx": { "morale": 1 } }
+      ] },
+    { "id": "i3_club_mascot_suit", "cat": "interlude", "w": 3, "cd": 200, "once": true, "time": "Wednesday, 15:00", "when": { "freeAgent": false },
+      "title": "The Mascot Suit", "text": "The club's mascot performer is sick. The marketing team is desperate: a children's event in an hour, and the suit is roughly his size.",
+      "choices": [
+        { "label": "Wear the suit", "risk": "medium", "text": "He spends two hours as a giant furry animal. Nobody knows. He's never had more fun. Then a child pulls off the head.", "fx": { "morale": 5, "fans": 3, "followers": 8000 } },
+        { "label": "Politely decline", "risk": "low", "text": "He declines. The assistant kit man does it instead and is a natural.", "fx": {} }
+      ] },
+    { "id": "i3_pre_match_nap", "cat": "interlude", "w": 4, "cd": 60, "time": "Saturday, 12:30", "when": { "freeAgent": false },
+      "title": "Pre-Match Nap", "text": "The team hotel. Three hours before kick-off. His roommate is snoring like a broken engine. He needs this nap.",
+      "uses": { "T": "any" },
+      "choices": [
+        { "label": "Earplugs and patience", "risk": "low", "text": "Earplugs in. Thirty minutes of half-sleep. Better than nothing.", "fx": { "pfm": 1 } },
+        { "label": "Wake {T} up", "risk": "low", "text": "He throws a pillow. {T} wakes up offended, then laughs. Neither of them sleeps.", "fx": { "bond": 2 } }
+      ] },
+    { "id": "i3_kid_lookalike", "cat": "interlude", "w": 3, "cd": 120, "time": "Sunday, 14:00", "when": { "rep": [20, 100] },
+      "title": "Mini-Me", "text": "A video of a five-year-old perfectly copying his celebration, hairstyle and walk is going viral. The boy's mother has tagged him.",
+      "choices": [
+        { "label": "Recreate it with the boy", "risk": "low", "text": "He invites the boy to training. They film the celebration together. Forty million views.", "fx": { "followers": 30000, "image": 3, "fans": 3 } },
+        { "label": "Send him a mini kit", "risk": "low", "text": "A tiny kit with his name and number arrives at the boy's house. The mother sends the photo. Pure joy.", "fx": { "image": 2, "followers": 5000 } }
+      ] },
+    { "id": "i3_old_teacher", "cat": "interlude", "w": 3, "cd": 200, "time": "Thursday, 17:00",
+      "title": "Your Old Teacher", "text": "An email from his primary school teacher: 'You were the worst-behaved boy in my class and I knew you'd be someone. I'm retiring next month.'",
+      "choices": [
+        { "label": "Go to her retirement party", "risk": "low", "when": { "familyNear": true }, "text": "He turns up at the retirement party unannounced. She cries. The whole school staff takes photos.", "fx": { "image": 3, "morale": 4, "family": 2 } },
+        { "label": "Write back a long letter", "risk": "low", "text": "A long letter about the things she taught him that weren't on any exam. She reads it at her party.", "fx": { "morale": 3 } }
+      ] },
+    { "id": "i3_flight_upgrade", "cat": "interlude", "w": 3, "cd": 100, "time": "Monday, 06:30",
+      "title": "Seat 2A", "text": "On a commercial flight, the crew offer him a free upgrade. In the economy seat next to his is an elderly woman travelling alone, terrified of flying.",
+      "choices": [
+        { "label": "Give her the upgrade", "risk": "low", "text": "He asks the crew to upgrade her instead. She holds his hand during take-off before she moves forward. A passenger posts about it.", "fx": { "image": 4, "followers": 5000, "morale": 3 } },
+        { "label": "Take the upgrade", "risk": "low", "text": "He takes it and sleeps the whole flight. Fair enough.", "fx": { "pfm": 2 } }
+      ] },
+    { "id": "i3_chant_mistake", "cat": "interlude", "w": 3, "cd": 120, "time": "Saturday, 18:30", "when": { "freeAgent": false, "rep": [10, 100] },
+      "title": "The Chant", "text": "In a video from the stands, some of his club's fans are singing a nasty chant about a rival player's family. His name is in the next line of the song.",
+      "choices": [
+        { "label": "Ask the fans to stop", "risk": "medium", "text": "His post asks fans to keep the passion and drop the cruelty. Most agree. Some don't like being told.", "fx": { "image": 4, "fans": -1 } },
+        { "label": "Say nothing", "risk": "low", "text": "He says nothing. It's not his chant. It's still uncomfortable.", "fx": { "stress": 1 } }
+      ] },
+    { "id": "i3_bike_ride", "cat": "interlude", "w": 3, "cd": 80, "time": "Sunday, 07:00", "when": { "injured": false },
+      "title": "Sunday Ride", "text": "A cycling group passes his house every Sunday morning: thirty middle-aged men in very tight clothes. Today they've slowed down and are shouting his name through the gate.",
+      "choices": [
+        { "label": "Join them for an hour", "risk": "low", "text": "He borrows a bike and rides with them for an hour. They talk tactics the whole way. Best recovery session of the month.", "fx": { "pfm": 1, "fans": 2, "morale": 3 } },
+        { "label": "Wave from the window", "risk": "low", "text": "He waves in his pyjamas. They cheer anyway.", "fx": { "fans": 1 } }
+      ] },
+    { "id": "i3_partner_gift_surprise", "cat": "interlude", "w": 4, "cd": 60, "time": "Tuesday, 19:00", "when": { "partner": ["dating", "serious", "engaged", "married"] },
+      "title": "A Parcel", "text": "A parcel from {Pf}: a framed collage of every match ticket from every game she's watched him play, with a note: 'All of these, and all the ones to come.'",
+      "choices": [
+        { "label": "Call her straight away", "risk": "low", "text": "He calls her and can't quite get the words out. She laughs at him, lovingly.", "fx": { "love": 7, "morale": 3 } },
+        { "label": "Hang it where you'll see it every day", "risk": "low", "text": "It goes up in the hallway. He touches it on the way out to every match.", "fx": { "love": 5 } }
+      ] },
+    { "id": "i3_tired_legs_stairs", "cat": "interlude", "w": 3, "cd": 80, "time": "Sunday, 10:00", "when": { "age": [28, 40] },
+      "title": "The Stairs", "text": "The morning after a match, he takes the stairs one at a time, holding the rail, like an old man. His neighbour's kid watches with concern.",
+      "choices": [
+        { "label": "Ice bath and stretching", "risk": "low", "text": "Ice bath, stretching, foam roller. By lunchtime he's merely stiff.", "fx": { "pfm": 3 } },
+        { "label": "Laugh at yourself", "risk": "low", "text": "'This is what thirty looks like, kid.' The kid nods seriously.", "fx": { "stress": -1 } }
+      ] },
+    { "id": "i3_fan_tattoo", "cat": "interlude", "w": 3, "cd": 200, "once": true, "time": "Wednesday, 13:00", "when": { "rep": [20, 100] },
+      "title": "The Tattoo", "text": "A fan has tattooed {J}'s face on his calf. It looks a bit like {J} and a bit like a confused goat. The fan is extremely proud and has sent photos.",
+      "choices": [
+        { "label": "Post it with love", "risk": "low", "text": "'Best likeness yet.' The fan is famous for a week. The goat jokes are endless.", "fx": { "followers": 10000, "fans": 3 } },
+        { "label": "Send him a signed photo to fix it", "risk": "low", "text": "He sends a high-resolution photo 'for the touch-up'. The fan frames the photo instead.", "fx": { "fans": 2 } }
+      ] }
+  ]
+}

@@ -19,7 +19,7 @@
       <div class="brand-big">BEAUTIFUL GRIND</div>
       <p class="tagline">Age 16. One week at a time. Every choice ripples.</p>
       <ul class="pitch-list">
-        <li><b>Football</b> — training, matches, key moments, transfers</li>
+        <li><b>Football</b> — training, line-ups, xG, transfers, contracts</li>
         <li><b>Life</b> — family, love, friends, money, fame</li>
         <li><b>Politics</b> — the manager, the board, the fans, the press</li>
       </ul>
@@ -41,6 +41,10 @@
         <label>Position<select name="position" id="sel-position"></select></label>
         <label>Nationality<select name="nationality" id="sel-nationality"></select></label>
       </div>
+      <details class="fold setup-look" open>
+        <summary><span class="fold-title">Your look</span><span class="fold-right muted">optional · change it any time</span></summary>
+        <div id="setup-avatar" class="fold-body"></div>
+      </details>
       <h3>Where does it begin?</h3>
       <div class="grid3">
         <label>Country<select id="sel-country"></select></label>
@@ -71,24 +75,42 @@
       <main class="col col-center">
         <article id="week-card" class="card week-card"></article>
         <section id="decisions"></section>
-        <section id="freetime" class="card freetime"></section>
-        <section id="social" class="card freetime social"></section>
+        <section id="actions" class="card actions"></section>
         <section id="planner" class="card planner"></section>
-        <section id="feed" class="card feed"></section>
+        <section id="media" class="card media"></section>
       </main>
       <aside id="col-world" class="col col-right"></aside>
     </div>
   </div>
+
+  <!-- Pop-up results (free time, posts, purchases, people): 10 seconds, then gone -->
+  <div id="toasts" class="toasts" aria-live="polite"></div>
 
   <!-- ═════════ INTERLUDE (a mid-week scene; time stands still) ═════════ -->
   <dialog id="interlude" class="modal modal-interlude">
     <div id="interlude-body" class="modal-inner"></div>
   </dialog>
 
+  <!-- ═════════ A PERSON (start something with them) ═════════ -->
+  <dialog id="person" class="modal modal-person">
+    <div id="person-body" class="modal-inner"></div>
+  </dialog>
+
+  <!-- ═════════ YOUR LOOK ═════════ -->
+  <dialog id="avatar-dlg" class="modal">
+    <div class="modal-inner">
+      <h2>Your look</h2>
+      <div id="avatar-body"></div>
+      <div class="modal-foot"><button type="button" id="avatar-cancel" class="btn">Cancel</button><button type="button" id="avatar-save" class="btn btn-primary">Save</button></div>
+    </div>
+  </dialog>
+
   <!-- ═════════ SETTINGS ═════════ -->
   <dialog id="settings" class="modal">
     <form method="dialog" class="modal-inner">
       <h2>Settings</h2>
+      <h3>Your player</h3>
+      <div class="row-btns"><button type="button" id="btn-edit-look" class="btn">✎ Edit your look</button></div>
       <h3>Save</h3>
       <p class="hint">Your career saves automatically in this browser. Export a backup to keep it safe or move it to another device.</p>
       <div class="row-btns">
@@ -97,6 +119,8 @@
         <button type="button" id="btn-new" class="btn btn-danger">New career</button>
       </div>
       <p id="settings-msg" class="hint" role="status"></p>
+      <h3>Tips</h3>
+      <p class="hint">Every section folds: click its title to hide it. <b>Play month</b> plays until the month ends, leaves small decisions to instinct and stops for big ones; the Reports tab keeps a weekly and monthly summary.</p>
       <div class="modal-foot"><button class="btn btn-primary">Close</button></div>
     </form>
   </dialog>

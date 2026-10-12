@@ -10,7 +10,7 @@ nationality and any country's football pyramid must work.
 The project owner is a beginner programmer and the game designer. Explain technical choices in
 plain language, keep changes small and playable, and ask before big design changes.
 
-## Architecture (v0.4, fully standalone, no AI)
+## Architecture (v0.5, fully standalone, no AI)
 - The owner decided (2026-10-11): NO AI at play time. All content is prepared data. Do not add Claude/LLM features back.
 - Browser game, plain ES modules, no build step. `server.js` is a tiny static server for local play (start-game.bat).
   Online: GitHub Pages via .github/workflows/pages.yml (validates scenarios, runs tools/build-site.mjs, deploys dist/).
@@ -29,6 +29,16 @@ plain language, keep changes small and playable, and ask before big design chang
   avoiding recently used lines. `ui.js` + `icons.js` (hand-drawn SVG icons) render it.
 - Saves: browser localStorage key `beautifulGrind.save.v1`, plus export/import JSON. `state.version` (now 3) + `migrate()` in engine.js
   upgrade older saves; bump the version and extend migrate() whenever the state shape changes.
+
+## v0.5 systems
+- Position attributes (config.js ATTRS/POSITIONS, 7 per position; old stat names in scenarios map via LEGACY_STATS/SIMILAR_ATTRS).
+- `squad.js`: real squad (state.squad), transfers in/out each window, lineups, match detail (events, xG, team + personal stats). Scenario {T} comes from the squad.
+- `contracts.js`: full club/sponsor contract terms, bonuses, clauses. `assets.js` + data/text/assets.json: shop/owned assets (assets.json is still a small placeholder).
+- `people.js` + data/text/interactions.json: actions the player starts toward people (free-time slots). Love interests via p.crush, affairs via flag affair.
+- `media.js` + data/text/media.json: weekly media timeline scaled by fame (media.json is still a small placeholder).
+- `journal.js`: weekly records, monthly digests, Play month (main.js) with autoAnswer for non-critical decisions.
+- Partner location (partner.near/visitWeek, conditions partnerNear/longDistance), familyNear, career level (player.js careerLevel).
+- SAVE_VERSION 5; migrate() converts v4 saves.
 
 ## Key files
 - `public/js/engine.js` — rules; `config.js` — balancing numbers; `scenarios.js` — scenario engine

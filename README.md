@@ -27,7 +27,7 @@ Your career saves automatically in the browser. **⚙ Settings → Export save**
 
 ## What's in the game
 - ~2,000 real clubs in 160+ countries and regions, with real league formats, cups and transfer windows (2025-26 start)
-- 740+ hand-written scenarios (plus long storylines that span years and change how your career ends): training, dressing room, manager, 47 in-match key moments, media and press conferences, family, love, friends, club politics, lifestyle, money, culture, national team, health, veteran years
+- 1,390+ hand-written scenarios (plus long storylines that span years and change how your career ends): training, dressing room, manager, 47 in-match key moments, media and press conferences, family, love, friends, club politics, lifestyle, money, culture, national team, health, veteran years
 - ~100 interludes (mid-week scenes that don't advance time) and 20 free-time activities
 - A life web: 11 relationships and moods that react to each other, a cast of people (parents, sibling, best friend, captain, president, journalist, partner, agent), and long weekly stories with press clippings and phone messages
 - Transfers, loans, contracts, injuries and rehab choices, national team call-ups, promotion and relegation, retirement and a legacy rating

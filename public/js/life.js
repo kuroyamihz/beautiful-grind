@@ -8,8 +8,10 @@
 //   self    → morale, stress (high stress is bad)
 // Ripple rules and their text live in data/text/life.json, so the wording can be edited without code.
 import { chance, clamp, pick, randint, round1, weightedPick } from './util.js';
-import { personName } from './player.js';
+import { personName, careerLevel } from './player.js';
 import { LIFE } from './config.js';
+import { grownFollowers } from './social.js';
+import { ageAt } from './time.js';
 
 export const METERS = {
   trust: { label: 'Manager', icon: 'whistle', group: 'club', tip: 'How much the manager trusts you. Decides your minutes.' },
@@ -30,6 +32,8 @@ export const LIFE_FX = ['board', 'dressing', 'fans', 'press', 'image', 'love', '
 
 const MUM = { Indonesia: 'Ibu', Malaysia: 'Ibu', Brazil: 'Mãe', Portugal: 'Mãe', Spain: 'Mamá', Argentina: 'Mamá', Mexico: 'Mamá', Colombia: 'Mamá', Uruguay: 'Mamá', Chile: 'Mamá', Japan: 'Okaasan', 'South Korea': 'Eomma', Italy: 'Mamma', France: 'Maman', Germany: 'Mama', Netherlands: 'Mama' };
 const DAD = { Indonesia: 'Bapak', Malaysia: 'Ayah', Brazil: 'Pai', Portugal: 'Pai', Spain: 'Papá', Argentina: 'Papá', Mexico: 'Papá', Colombia: 'Papá', Uruguay: 'Papá', Chile: 'Papá', Japan: 'Otousan', 'South Korea': 'Appa', Italy: 'Papà', France: 'Papa', Germany: 'Papa', Netherlands: 'Papa' };
+const PARTNER_JOBS = ['a nurse', 'a university student', 'a model', 'a singer', 'a lawyer', 'a graphic designer', 'a primary-school teacher', 'a doctor', 'a flight attendant', 'a fashion designer', 'an influencer', 'a TV presenter', 'an architect', 'a physiotherapist', 'a pastry chef', 'a marketing manager', 'a dancer', 'a journalist', 'a pharmacist', 'a small-business owner'];
+export const partnerJob = () => pick(PARTNER_JOBS);
 const FRIEND_JOBS = ['a mechanic', 'a university student', 'a barista', 'a motorbike-taxi driver', 'a junior accountant', 'a primary-school teacher', 'a street-food seller', 'an aspiring rapper', 'a nurse', 'a delivery rider', 'a gym instructor', 'a phone-shop salesman'];
 
 // ── Getting and setting meters ──
@@ -54,6 +58,11 @@ export function addMeter(state, k, delta, res, raw = false) {
   const p = state.player;
   const before = meter(p, k);
   if (before === null || !delta) return 0;
+  if (delta > 0 && k === 'dressing') {
+    const cap = standingCap(state);
+    if (before >= cap) return 0;
+    delta = Math.min(delta, cap - before);
+  }
   if (!raw && k !== 'trust') {
     const f = delta > 0 && before > LIFE.softCap ? Math.max(0.15, (100 - before) / (100 - LIFE.softCap))
       : delta < 0 && before < 100 - LIFE.softCap ? Math.max(0.15, before / (100 - LIFE.softCap)) : 1;
@@ -70,6 +79,13 @@ export function addMeter(state, k, delta, res, raw = false) {
   // Positive contact with someone resets the "you've been neglecting me" clock.
   if (d > 0 && ['family', 'love', 'friends'].includes(k)) p.contact[k] = state.week;
   return d;
+}
+
+// How much standing he can have in a dressing room: grows with age and games played.
+export function standingCap(state) {
+  const p = state.player;
+  const age = ageAt(p.dob, state.week);
+  return Math.min(100, 58 + Math.max(0, age - 16) * 2 + Math.min(30, (p.career?.apps ?? 0) / 5));
 }
 
 // ── The cast ──
@@ -130,7 +146,7 @@ export function lifeTokens(state) {
     BF: c.bestFriend?.name ?? 'his best friend', BFf: pf(c.bestFriend?.name) || 'his best friend', BFjob: c.bestFriend?.job ?? 'a mechanic',
     JR: c.journalist?.name ?? 'a journalist', JRl: pl(c.journalist?.name) || 'the journalist', OUT: c.journalist?.outlet ?? 'the local paper',
     CAP: c.captain ?? 'the captain', CAPl: pl(c.captain) || 'the captain', PRES: c.president ?? 'the president', PRESl: pl(c.president) || 'the president',
-    Pf: pf(p.partner.name) || 'his partner',
+    Pf: pf(p.partner.name) || 'his partner', Pjob: p.partner.job ?? 'a student', CRUSH: p.crush?.name ?? 'someone new', CRUSHf: pf(p.crush?.name) || 'her',
     ...ageTokens(state),
   };
 }
@@ -212,7 +228,14 @@ export function ripple(state, world, d, res, source = 'decision') {
   for (const r of chosen) {
     const applied = {};
     for (const [k, x] of Object.entries(r.changes)) {
-      if (k === 'followers') { p.followers = Math.max(0, Math.round(p.followers + x)); applied.followers = x; continue; }
+      if (k === 'followers') {
+        // Ripples respect the same follower ceiling as everything else (fame decides how big an audience can get).
+        const before = p.followers;
+        p.followers = grownFollowers(p, x);
+        const real = p.followers - before;
+        if (real) applied.followers = real;
+        continue;
+      }
       const real = addMeter(state, k, x, res);
       if (real) applied[k] = real;
     }
@@ -233,6 +256,8 @@ export function lifeWeek(state, world, res, plan) {
   const N = LIFE.neglect;
   if (w - (p.contact.family ?? 0) > N.family) addMeter(state, 'family', abroad ? -3 : -2, res, true);
   if (hasPartner && w - (p.contact.love ?? 0) > N.love) addMeter(state, 'love', p.partner.status === 'married' ? -2 : -3, res, true);
+  const apart = hasPartner && p.partner.near === false && p.partner.visitWeek !== w;
+  if (apart && chance(0.5)) addMeter(state, 'love', -1, res, true);
   if (w - (p.contact.friends ?? 0) > N.friends) addMeter(state, 'friends', abroad ? -3 : -2, res, true);
   for (const k of ['family', 'friends', 'love']) if ((meter(p, k) ?? 0) > LIFE.coolAbove && chance(0.6)) addMeter(state, k, -1, res, true);
   // Stress: matches, training load, money, headlines, injuries, the size of the stage. Love and friends soak it up.
@@ -248,6 +273,7 @@ export function lifeWeek(state, world, res, plan) {
   if (res.matches.some((m) => m.minutes > 0 && m.rating < 6)) ds += 3;
   if (hasPartner && meter(p, 'love') >= 70) ds -= 2;
   if (meter(p, 'friends') >= 70) ds -= 1;
+  if (apart) ds += 1;
   if (meter(p, 'family') >= 70) ds -= 1;
   ds += (LIFE.stressRest - meter(p, 'stress')) * 0.12; // drifts back towards normal
   addMeter(state, 'stress', Math.round(ds), res, true);
@@ -297,9 +323,19 @@ function thresholds(state, res) {
     const inZone = kind === 'low' ? v < at : v > at;
     // A little hysteresis so a meter hovering on the line doesn't fire every week.
     const outZone = kind === 'low' ? v >= at + 10 : v <= at - 10;
-    if (inZone && !p.zones[id]) { p.zones[id] = true; res.triggers.push(trig); }
+    if (inZone && !p.zones[id] && peakAllowed(state, trig)) { p.zones[id] = true; res.triggers.push(trig); }
     else if (outZone && p.zones[id]) p.zones[id] = false;
   }
+}
+
+function peakAllowed(state, trig) {
+  const p = state.player;
+  const age = ageAt(p.dob, state.week), apps = p.career?.apps ?? 0, lvl = careerLevel(p, age);
+  if (trig === 'leader') return age >= 21 && apps >= 60 && ['starter', 'rotation'].includes(p.squadRole);
+  if (trig === 'roleModel') return lvl >= 3;
+  if (trig === 'pressDarling') return lvl >= 2 && p.reputation >= 12;
+  if (trig === 'fanFavourite') return apps >= 15;
+  return true;
 }
 
 // ── How the life web changes performance on the pitch ──
@@ -343,6 +379,11 @@ export function freeTimeLeft(state) {
   if (p.freeTime?.week !== state.week) p.freeTime = { week: state.week, used: 0, done: [], words: {} };
   return Math.max(0, (p.injury ? LIFE.freeTimePerWeek + 1 : LIFE.freeTimePerWeek) - p.freeTime.used);
 }
+export function useFreeTime(state, id, cost = 1) {
+  freeTimeLeft(state);
+  state.player.freeTime.used += cost;
+  state.player.freeTime.done.push(id);
+}
 
 export function freeTimeOptions(state, world, ctx, conditionsMet) {
   const acts = world.life?.actions ?? [];
@@ -363,6 +404,8 @@ export function doFreeTime(state, world, id, applyEffects) {
   const res = { statChanges: {}, notes: [], triggers: [], milestones: [], outcomes: [], matches: [], intl: [] };
   const fx = { ...(o.fx ?? {}) };
   if (fx.wealthWeeks) { fx.wealth = -Math.round((p.club?.wageWeekly ?? 100) * fx.wealthWeeks); delete fx.wealthWeeks; }
+  // Someone new: a love interest with a name (they have to be met, then dated, before it's official).
+  if (fx.crush === 'new') { if (p.crush) delete fx.crush; else fx.crush = { name: personName(p.club?.country ?? p.nationality, true), heat: 30 + Math.round(Math.random() * 15), where: { meet_someone: 'on a blind date', night_out_single: 'on a night out', gym_class_crush: 'at a gym class' }[a.id] ?? 'by chance' }; }
   applyEffects(state, world, fx, res, { source: 'free time' });
   const text = fillLife(pick([].concat(o.text)), state, p.freeTime.words?.[id] ?? {});
   return { action: { ...a, label: fillLife(a.label, state, p.freeTime.words?.[id] ?? {}) }, text, res };

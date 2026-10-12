@@ -1,0 +1,11 @@
+{
+  "_about": "placeholder",
+  "categories": {
+    "car": { "label": "Cars", "icon": "car", "growth": -0.14, "vol": 0.02, "upkeep": 0.006, "sell": 0.85 },
+    "invest": { "label": "Investments", "icon": "chart", "growth": 0.07, "vol": 0.16, "upkeep": 0, "sell": 0.99 }
+  },
+  "items": [
+    { "id": "car_toyota_fortuner", "brand": "Toyota", "name": "Fortuner GR Sport", "cat": "car", "price": 42000, "flex": 1 },
+    { "id": "inv_sp500", "brand": "Vanguard", "name": "S&P 500 ETF", "cat": "invest", "invest": true, "price": 1000, "growth": 0.08, "vol": 0.16 }
+  ]
+}

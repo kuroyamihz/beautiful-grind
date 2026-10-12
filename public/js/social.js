@@ -1,4 +1,4 @@
-// Social media: once a week the player can post something. What he posts, and when, decides how it lands:
+// Social media: up to three times a week the player can post something. What he posts, and when, decides how it lands:
 // a goal celebration after a win flies, a car selfie after a defeat gets torn apart, a sponsored post keeps a brand
 // happy but too many make him look like a billboard. Posting doesn't move the clock.
 import { chance, clamp, pick, randint, weightedPick } from './util.js';
@@ -41,12 +41,26 @@ export function postOptions(state, world) {
   return out.map((o) => ({ ...o, key: o.brand ? `sponsor:${o.brand}` : o.id }));
 }
 
+// Add followers without ever jumping past the ceiling: big gains close the gap, they can't overshoot it.
+export function grownFollowers(p, n) {
+  if (n <= 0) return Math.max(0, Math.round(p.followers + n));
+  const c = followerCeiling(p);
+  if (p.followers >= c) return Math.round(p.followers + n * 0.03);
+  return Math.round(p.followers + (c - p.followers) * (1 - Math.exp(-n / c)));
+}
+
 // How many followers someone of his fame can realistically have (football-mad countries go higher).
 export function followerCeiling(p) {
   return Math.round(SOCIAL.ceilingBase * Math.exp(p.reputation / 9) * (SOCIAL_BOOST[p.nationality] ?? 1.5));
 }
 
-export const canPost = (state) => ensureSocial(state.player).lastWeek !== state.week && !state.ended;
+// Three posts a week. The same kind of post twice in one week lands worse.
+export function postsLeft(state) {
+  const s = ensureSocial(state.player);
+  if (s.week !== state.week) { s.week = state.week; s.weekPosts = 0; s.weekKinds = []; }
+  return Math.max(0, SOCIAL.perWeek - (s.weekPosts ?? 0));
+}
+export const canPost = (state) => !state.ended && postsLeft(state) > 0;
 
 // Do the post. Returns { post, fx } — the caller applies fx (with ripples) and shows the result.
 export function makePost(state, world, key) {
@@ -60,9 +74,10 @@ export function makePost(state, world, key) {
   const img = p.life ? meter(p, 'image') : 55;
   const month = Math.floor(state.week / 4.33);
   if (s.month !== month) { s.month = month; s.sponsoredMonth = 0; }
-  // Fatigue: posting every single week slowly wears out your audience.
-  s.fatigue = clamp(state.week - s.lastWeek <= 1 ? s.fatigue + 0.08 : s.fatigue - 0.05 * (state.week - s.lastWeek - 1), 0, 0.6);
-  let mult = SOCIAL.mult[opt.id] ?? 1;
+  // Fatigue: posting constantly slowly wears out your audience; a quiet week lets it recover.
+  const gap = state.week - s.lastWeek;
+  s.fatigue = clamp(gap === 0 ? s.fatigue + 0.05 : gap === 1 ? s.fatigue + 0.02 : s.fatigue - 0.05 * (gap - 1), 0, 0.6);
+  let mult = (SOCIAL.mult[opt.id] ?? 1) * ((s.weekKinds ?? []).includes(opt.id) ? 0.55 : 1);
   let pos = 0.65; // chance the reaction is mostly positive
   const fx = {};
   let viral = SOCIAL.viralBase;
@@ -112,6 +127,7 @@ export function makePost(state, world, key) {
   if (positive && chance(0.5) && (T.comments?.default?.pos ?? []).length) comments.push({ handle: pick(handles), text: fill(pick(T.comments.default.pos)) });
   const caption = fill(pick(T.captions?.[opt.id] ?? T.captions?.default ?? ['⚽']));
   s.lastWeek = state.week; s.posts++;
+  s.weekPosts = (s.weekPosts ?? 0) + 1; s.weekKinds = [...(s.weekKinds ?? []), opt.id];
   s.recent = [...s.recent.slice(-15), { id: opt.id, week: state.week, likes, positive }];
   const post = { kind: opt.id, label: opt.label, icon: opt.icon, caption, likes, comments, gained, positive, viral: isViral, brand: opt.brand ?? null, platform: pick(['Instagram', 'TikTok', 'X']) };
   s.last = post;
@@ -126,7 +142,8 @@ export function socialMilestones(state, res) {
     if (p.followers >= n && !s.milestones[label]) {
       s.milestones[label] = state.week;
       res.milestones.push(`${label} followers`);
-      res.triggers.push(n >= 1e6 ? 'followers1M' : 'followers100K');
+      if (n === 100000) res.triggers.push('followers100K');
+      if (n === 1000000) res.triggers.push('followers1M');
       if (n === 100000) s.verified = true;
     }
   }

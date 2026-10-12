@@ -1,0 +1,1284 @@
+{
+ "scenarios": [
+  {
+   "id": "cl_first_agent_pitch",
+   "cat": "money",
+   "w": 6,
+   "cd": 80,
+   "when": {
+    "agent": false,
+    "age": [
+     16,
+     23
+    ],
+    "level": [
+     1,
+     3
+    ]
+   },
+   "uses": {
+    "A": "new"
+   },
+   "title": "An Agent Calls",
+   "text": [
+    "A man called {A} has been watching his matches. He has a nice watch, a business card and a list of players he 'looks after'. He promises a move abroad within two years.",
+    "{A}, an agent who represents three national-team players, sends a message: 'You're better than your club. Let me prove it.'"
+   ],
+   "prompt": "An agent wants to represent you.",
+   "choices": [
+    {
+     "label": "Sign with {A}",
+     "desc": "Ten per cent of everything.",
+     "risk": "medium",
+     "hint": "Doors open. A cut goes out.",
+     "text": "He signs. {Al} starts making calls the same afternoon. Within a month, two scouts are at his matches.",
+     "fx": {
+      "agent": {
+       "who": "A",
+       "quality": [
+        35,
+        65
+       ],
+       "cut": 10
+      },
+      "rep": 0.5
+     }
+    },
+    {
+     "label": "Check him out first",
+     "desc": "Ask around.",
+     "risk": "low",
+     "hint": "Smart.",
+     "out": [
+      {
+       "w": 2,
+       "text": "The players he represents say he's honest and tough. He signs with confidence.",
+       "fx": {
+        "agent": {
+         "who": "A",
+         "quality": [
+          45,
+          70
+         ],
+         "cut": 10
+        }
+       }
+      },
+      {
+       "w": 1,
+       "text": "One player says {Al} took thirty per cent of his signing fee. He passes.",
+       "fx": {
+        "stress": -1
+       }
+      }
+     ]
+    },
+    {
+     "label": "Not yet",
+     "desc": "Focus on football.",
+     "risk": "low",
+     "hint": "Fewer offers for now.",
+     "text": "He says not yet. {Al} leaves his card. 'You'll call.'",
+     "fx": {}
+    }
+   ]
+  },
+  {
+   "id": "cl_agent_poach",
+   "cat": "money",
+   "w": 4,
+   "cd": 100,
+   "when": {
+    "agent": true,
+    "level": [
+     3,
+     5
+    ]
+   },
+   "uses": {
+    "A": "new"
+   },
+   "title": "A Super-Agent",
+   "text": "{A}, one of the most powerful agents in world football, wants to take him from his current agent. 'Your man is small-time. I make players global.'",
+   "prompt": "A super-agent wants you.",
+   "choices": [
+    {
+     "label": "Switch to {A}",
+     "desc": "Bigger deals, bigger clubs.",
+     "risk": "high",
+     "hint": "Your old agent may sue. Your new one takes more.",
+     "text": "He switches. His old agent sends a lawyer's letter and a very sad voice note. {Al} gets him a sponsor meeting within a week.",
+     "fx": {
+      "agent": {
+       "who": "A",
+       "quality": [
+        70,
+        92
+       ],
+       "cut": 15
+      },
+      "wealth": -5000,
+      "sponsorPitch": true
+     }
+    },
+    {
+     "label": "Stay loyal",
+     "desc": "He's been with you since the start.",
+     "risk": "low",
+     "hint": "Loyalty.",
+     "text": "He stays. His agent finds out and works twice as hard for him.",
+     "fx": {
+      "agentBond": 15
+     }
+    }
+   ]
+  },
+  {
+   "id": "cl_agent_steals",
+   "cat": "money",
+   "w": 3,
+   "cd": 200,
+   "when": {
+    "agent": true,
+    "worth": [
+     50000,
+     999999999
+    ]
+   },
+   "uses": {
+    "A": "agent"
+   },
+   "title": "The Numbers Don't Add Up",
+   "text": "His accountant flags something: commissions taken twice, a 'consultancy fee' to a company in {Al}'s wife's name, a signing bonus that seems smaller than it should be.",
+   "prompt": "Your agent may be stealing from you.",
+   "choices": [
+    {
+     "label": "Confront {Al} with the evidence",
+     "desc": "Face to face.",
+     "risk": "medium",
+     "hint": "He'll lie or confess.",
+     "out": [
+      {
+       "w": 1,
+       "text": "{Al} admits it, blames a 'misunderstanding' and pays most of it back. Trust gone.",
+       "fx": {
+        "wealth": 8000,
+        "agentBond": -30,
+        "stress": 4
+       }
+      },
+      {
+       "w": 1,
+       "text": "{Al} denies everything and threatens to sue for defamation. He has better lawyers.",
+       "fx": {
+        "stress": 8,
+        "agentBond": -40
+       }
+      }
+     ]
+    },
+    {
+     "label": "Fire him and go to the authorities",
+     "desc": "No second chances.",
+     "risk": "medium",
+     "hint": "Clean break, slow justice.",
+     "text": "He fires {Al} and files a complaint with the federation. It takes two years. Some of the money comes back.",
+     "fx": {
+      "agent": null,
+      "flag": "agent_lawsuit",
+      "stress": 5,
+      "wealth": 4000
+     }
+    }
+   ]
+  },
+  {
+   "id": "cl_contract_clause_discovered",
+   "cat": "money",
+   "w": 4,
+   "cd": 150,
+   "when": {
+    "freeAgent": false,
+    "level": [
+     2,
+     5
+    ]
+   },
+   "title": "The Small Print",
+   "text": "Reading his contract properly for the first time, he finds a clause he didn't know about: the club can extend his deal by a year without his agreement.",
+   "prompt": "A hidden clause in your contract.",
+   "choices": [
+    {
+     "label": "Ask your agent to challenge it",
+     "desc": "That wasn't explained.",
+     "risk": "medium",
+     "hint": "The club won't love this.",
+     "text": "His agent challenges it. The club agrees to remove it in exchange for a smaller raise next year.",
+     "fx": {
+      "board": -3,
+      "agentBond": 3
+     }
+    },
+    {
+     "label": "Learn from it",
+     "desc": "Read everything next time.",
+     "risk": "low",
+     "hint": "A lesson.",
+     "text": "He hires a lawyer to read every contract from now on. Expensive, sensible.",
+     "fx": {
+      "wealth": -1000,
+      "growth": [
+       "mental"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "cl_prospect_first_boots",
+   "cat": "money",
+   "w": 5,
+   "cd": 200,
+   "once": true,
+   "when": {
+    "level": [
+     1,
+     2
+    ],
+    "age": [
+     16,
+     20
+    ],
+    "sponsors": [
+     0,
+     0
+    ]
+   },
+   "title": "Free Boots",
+   "text": "A boot company's local rep offers him free boots for a year if he wears them in matches. No money, just boots. For a kid who used to share boots with his cousin, it feels enormous.",
+   "prompt": "Your first boot deal: free boots.",
+   "choices": [
+    {
+     "label": "Accept gratefully",
+     "desc": "Free boots!",
+     "risk": "low",
+     "hint": "A first step.",
+     "text": "Six pairs of boots arrive in a box. He photographs them like a trophy. {MUM} keeps the box.",
+     "fx": {
+      "morale": 5,
+      "family": 2,
+      "followers": 500
+     }
+    },
+    {
+     "label": "Ask for a small fee too",
+     "desc": "Know your worth.",
+     "risk": "medium",
+     "hint": "Bold for a nobody.",
+     "out": [
+      {
+       "w": 1,
+       "text": "The rep laughs and adds a tiny fee. Respect for asking.",
+       "fx": {
+        "wealth": 300,
+        "morale": 3
+       }
+      },
+      {
+       "w": 1,
+       "text": "The rep withdraws the offer. Lesson learned.",
+       "fx": {
+        "morale": -2
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cl_prospect_bus_fare",
+   "cat": "money",
+   "w": 5,
+   "cd": 100,
+   "when": {
+    "level": [
+     1,
+     1
+    ],
+    "wealth": [
+     0,
+     2000
+    ]
+   },
+   "title": "Small Wages",
+   "text": "His first wage barely covers rent, food and the bus to training. Some of the older players drive expensive cars. He counts coins for the bus.",
+   "prompt": "Money is tight.",
+   "choices": [
+    {
+     "label": "Live very cheaply and save",
+     "desc": "Rice and discipline.",
+     "risk": "low",
+     "hint": "Good habits for life.",
+     "text": "Rice, eggs, the bus, a shared room. He saves a little every month. It's the best financial habit he'll ever form.",
+     "fx": {
+      "lifestyle": -0.1,
+      "stress": 2,
+      "flag": "money_advice"
+     }
+    },
+    {
+     "label": "Ask {DAD} for help",
+     "desc": "Just for now.",
+     "risk": "low",
+     "hint": "Family support.",
+     "text": "{DAD} sends money he doesn't have. {J} promises himself he'll pay it back ten times over.",
+     "fx": {
+      "wealth": 300,
+      "family": 3,
+      "morale": -1
+     }
+    },
+    {
+     "label": "Borrow from a teammate",
+     "desc": "He offered.",
+     "risk": "medium",
+     "hint": "Debts between teammates get awkward.",
+     "text": "A senior player lends him money with no deadline. It creates a bond, and a quiet obligation.",
+     "fx": {
+      "wealth": 400,
+      "dressing": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "cl_prospect_shared_flat",
+   "cat": "lifestyle",
+   "w": 5,
+   "cd": 200,
+   "once": true,
+   "when": {
+    "level": [
+     1,
+     2
+    ],
+    "age": [
+     16,
+     19
+    ]
+   },
+   "uses": {
+    "T": "peer"
+   },
+   "title": "The Club Flat",
+   "text": "The club puts its young players in a shared flat. {J} is sharing with {T}, who plays the same position, snores like a motorbike and steals his food.",
+   "prompt": "Life in the shared flat.",
+   "choices": [
+    {
+     "label": "Make it work, become friends",
+     "desc": "You're both far from home.",
+     "risk": "low",
+     "hint": "A bond for life.",
+     "text": "They cook terrible meals together and watch films until 2am. Rivals on the pitch, brothers at home.",
+     "fx": {
+      "bond": 18,
+      "friends": 3,
+      "morale": 3
+     }
+    },
+    {
+     "label": "Set strict rules",
+     "desc": "Your food, your shelf.",
+     "risk": "low",
+     "hint": "Peace through order.",
+     "text": "Labels on everything. The stealing stops. So does the warmth.",
+     "fx": {
+      "bond": -4,
+      "stress": -1
+     }
+    }
+   ]
+  },
+  {
+   "id": "cl_prospect_scout_watching",
+   "cat": "milestone",
+   "w": 5,
+   "cd": 80,
+   "when": {
+    "level": [
+     1,
+     2
+    ],
+    "age": [
+     16,
+     21
+    ],
+    "freeAgent": false
+   },
+   "title": "Someone in the Stands",
+   "text": "A man in a long coat is in the stands with a notebook. The kit man whispers: 'Scout. From abroad.' Suddenly everyone is playing for the man in the coat.",
+   "prompt": "A scout is watching.",
+   "choices": [
+    {
+     "label": "Play your normal game",
+     "desc": "Don't change for him.",
+     "risk": "low",
+     "hint": "Scouts want the real you.",
+     "text": "He plays his normal game. The scout writes three lines about him and leaves at half-time. Normal is good.",
+     "fx": {
+      "rep": 0.5,
+      "abroadWish": true
+     }
+    },
+    {
+     "label": "Try to impress",
+     "desc": "This is your chance.",
+     "risk": "medium",
+     "hint": "Brilliant or selfish.",
+     "out": [
+      {
+       "w": 1,
+       "text": "A moment of magic in the 60th minute. The scout stops writing and just watches.",
+       "fx": {
+        "rep": 1,
+        "offerAbroad": true
+       }
+      },
+      {
+       "w": 1,
+       "text": "He tries too much and loses the ball six times. The scout leaves early.",
+       "fx": {
+        "trust": -2
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cl_star_endorsement_overload",
+   "cat": "money",
+   "w": 4,
+   "cd": 100,
+   "when": {
+    "level": [
+     4,
+     5
+    ],
+    "sponsors": [
+     3,
+     20
+    ]
+   },
+   "title": "Too Many Brands",
+   "text": "Sponsor duties take up two days a week now: shoots, appearances, posts. His training is suffering. His agent says no player at his level turns down money.",
+   "prompt": "Sponsor commitments are taking over.",
+   "choices": [
+    {
+     "label": "Cut back to the brands you believe in",
+     "desc": "Quality over quantity.",
+     "risk": "medium",
+     "hint": "Less money, more football.",
+     "text": "He keeps three and lets the rest go. His training improves. His agent sulks for a month.",
+     "fx": {
+      "pfm": 5,
+      "trust": 3,
+      "agentBond": -5,
+      "stress": -3
+     }
+    },
+    {
+     "label": "Hire a team to manage it",
+     "desc": "Efficiency.",
+     "risk": "low",
+     "hint": "More staff, fewer hours.",
+     "text": "A small team handles scheduling and content. His duty days shrink to one.",
+     "fx": {
+      "wealth": -5000,
+      "stress": -2,
+      "pfm": 2
+     }
+    },
+    {
+     "label": "Do it all",
+     "desc": "Make hay while the sun shines.",
+     "risk": "high",
+     "hint": "Football suffers.",
+     "text": "He does it all. The money is extraordinary. His form isn't.",
+     "fx": {
+      "wealth": 20000,
+      "pfm": -6,
+      "trust": -3
+     }
+    }
+   ]
+  },
+  {
+   "id": "cl_star_hometown_club_buy",
+   "cat": "money",
+   "w": 2,
+   "cd": 300,
+   "once": true,
+   "when": {
+    "level": [
+     4,
+     5
+    ],
+    "worth": [
+     3000000,
+     999999999
+    ]
+   },
+   "title": "Buy the Club?",
+   "text": "His first club, {FIRSTCLUB}, is in financial trouble. A lawyer suggests a crazy idea: buy it. Become the owner of the club where it all began.",
+   "prompt": "Buy your first club?",
+   "choices": [
+    {
+     "label": "Buy it",
+     "desc": "Save the club that made you.",
+     "risk": "high",
+     "hint": "Expensive. Legendary.",
+     "text": "He buys {FIRSTCLUB}. The town celebrates for a week. The finances are a nightmare. It's the best thing he's ever done.",
+     "fx": {
+      "wealth": -500000,
+      "image": 10,
+      "family": 8,
+      "flag": [
+       "owns_club",
+       "hometown_hero"
+      ],
+      "fans": 5
+     }
+    },
+    {
+     "label": "Invest a share",
+     "desc": "Help without owning.",
+     "risk": "medium",
+     "hint": "Support.",
+     "text": "He buys a minority stake. The club survives. He gets a seat on the board and a lot of phone calls.",
+     "fx": {
+      "wealth": -100000,
+      "image": 5,
+      "flag": "hometown_hero"
+     }
+    },
+    {
+     "label": "Donate, don't buy",
+     "desc": "A gift, not a business.",
+     "risk": "low",
+     "hint": "Generous.",
+     "text": "A large donation keeps the lights on. They name the youth stand after him.",
+     "fx": {
+      "wealth": -50000,
+      "image": 6
+     }
+    }
+   ]
+  },
+  {
+   "id": "cl_icon_statue",
+   "cat": "milestone",
+   "w": 2,
+   "cd": 300,
+   "once": true,
+   "when": {
+    "level": [
+     5,
+     5
+    ],
+    "age": [
+     28,
+     40
+    ],
+    "apps": [
+     250,
+     9999
+    ]
+   },
+   "title": "The Statue",
+   "text": "The club has commissioned a statue of him outside the stadium. The sculptor wants three sessions. The first clay model looks a bit like him and a lot like his uncle.",
+   "prompt": "A statue of you.",
+   "choices": [
+    {
+     "label": "Accept with humility",
+     "desc": "An honour.",
+     "risk": "low",
+     "hint": "Legacy in bronze.",
+     "text": "The statue is unveiled in front of twenty thousand people. {MUM} touches its face and cries. It does look a bit like his uncle.",
+     "fx": {
+      "fans": 10,
+      "image": 6,
+      "family": 8,
+      "morale": 10,
+      "flag": "statue"
+     }
+    },
+    {
+     "label": "Ask for a statue of the fans instead",
+     "desc": "They made you.",
+     "risk": "low",
+     "hint": "Unforgettable gesture.",
+     "text": "He asks them to sculpt the fans in the stands instead. The bronze crowd outside the stadium becomes the club's most-photographed spot.",
+     "fx": {
+      "fans": 15,
+      "image": 10,
+      "flag": "statue"
+     }
+    }
+   ]
+  },
+  {
+   "id": "cl_icon_world_stage",
+   "cat": "milestone",
+   "w": 3,
+   "cd": 200,
+   "when": {
+    "level": [
+     5,
+     5
+    ]
+   },
+   "title": "Global",
+   "text": "He lands in a country he has never visited, and people at the airport know his name. Kids in his shirt. A taxi driver with his face on a keyring. He is famous in places he can't find on a map.",
+   "prompt": "You're a global icon.",
+   "choices": [
+    {
+     "label": "Spend a day with local kids",
+     "desc": "Give back everywhere you go.",
+     "risk": "low",
+     "hint": "Legacy.",
+     "text": "He spends a day on a dusty pitch with a hundred kids. Somewhere among them is a future footballer who'll tell this story in thirty years.",
+     "fx": {
+      "image": 6,
+      "fans": 3,
+      "followers": 100000
+     }
+    },
+    {
+     "label": "Stay in the hotel",
+     "desc": "Rest. It's a business trip.",
+     "risk": "low",
+     "hint": "Fine.",
+     "text": "He rests. The fans camp outside the hotel anyway.",
+     "fx": {
+      "pfm": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "cl_star_jealous_old_coach",
+   "cat": "milestone",
+   "w": 3,
+   "cd": 200,
+   "when": {
+    "level": [
+     4,
+     5
+    ]
+   },
+   "title": "'He Owes Me'",
+   "text": "A former youth coach is telling journalists that {J} owes his whole career to him, and that he's never been thanked. It's partly true. It's mostly not.",
+   "prompt": "An old coach claims credit for your career.",
+   "choices": [
+    {
+     "label": "Thank him publicly anyway",
+     "desc": "Grace costs nothing.",
+     "risk": "low",
+     "hint": "Class.",
+     "text": "He thanks the coach in an interview. The coach goes quiet, then sends a kind message. It wasn't really about credit.",
+     "fx": {
+      "image": 4,
+      "press": 2
+     }
+    },
+    {
+     "label": "Set the record straight",
+     "desc": "The truth matters.",
+     "risk": "medium",
+     "hint": "Petty, possibly.",
+     "text": "He tells the real story. It's accurate and slightly ungracious. The story runs for a week.",
+     "fx": {
+      "press": -1,
+      "image": -2
+     }
+    }
+   ]
+  },
+  {
+   "id": "cl_level_up_squad_respect",
+   "cat": "dressing",
+   "w": 4,
+   "cd": 200,
+   "once": true,
+   "when": {
+    "level": [
+     3,
+     5
+    ],
+    "apps": [
+     45,
+     9999
+    ]
+   },
+   "title": "One of the Seniors",
+   "text": "Without anyone saying it, something has changed: the young players come to him for advice now, the senior players include him in the meetings with the manager, and nobody makes him carry the balls.",
+   "prompt": "You've become a senior player.",
+   "choices": [
+    {
+     "label": "Take the responsibility seriously",
+     "desc": "Lead.",
+     "risk": "low",
+     "hint": "The squad will follow.",
+     "text": "He starts arriving earlier, checking on the young players, standing up in meetings. The squad notices.",
+     "fx": {
+      "dressing": 8,
+      "trust": 3,
+      "flag": "senior_player"
+     }
+    },
+    {
+     "label": "Stay the same",
+     "desc": "Just play.",
+     "risk": "low",
+     "hint": "Some leaders are quiet.",
+     "text": "He stays the same. Quiet, reliable. Some lead with words, some with presence.",
+     "fx": {
+      "dressing": 3
+     }
+    }
+   ]
+  },
+  {
+   "id": "cl_old_promise_kept",
+   "cat": "milestone",
+   "w": 3,
+   "cd": 300,
+   "once": true,
+   "when": {
+    "level": [
+     4,
+     5
+    ],
+    "worth": [
+     500000,
+     999999999
+    ]
+   },
+   "title": "The Promise to {MUM}",
+   "text": "At nine years old, after a match in the rain, he promised {MUM} that one day she would never have to work again. She's still working. She says she likes it.",
+   "prompt": "Keep a childhood promise?",
+   "choices": [
+    {
+     "label": "Make her retire, with love",
+     "desc": "A monthly allowance and a holiday.",
+     "risk": "low",
+     "hint": "A promise kept.",
+     "text": "He hands her a card that says 'You're retired.' She argues for a week, then goes on holiday and comes back a different woman.",
+     "fx": {
+      "family": 15,
+      "monthlySupport": 400,
+      "morale": 8,
+      "flag": "promise_kept"
+     }
+    },
+    {
+     "label": "Let her keep working if she wants",
+     "desc": "Her choice.",
+     "risk": "low",
+     "hint": "Respect.",
+     "text": "He tells her she never has to, and she chooses to. That was the promise, really.",
+     "fx": {
+      "family": 8
+     }
+    }
+   ]
+  },
+  {
+   "id": "cl_star_double_standards",
+   "cat": "media",
+   "w": 3,
+   "cd": 150,
+   "when": {
+    "level": [
+     4,
+     5
+    ]
+   },
+   "title": "The Star Treatment",
+   "text": "He was late to training twice this week. A young player was late once and was fined and dropped. He wasn't. The dressing room has noticed the double standard.",
+   "prompt": "You're getting star treatment.",
+   "choices": [
+    {
+     "label": "Ask the manager to fine you too",
+     "desc": "Same rules for everyone.",
+     "risk": "low",
+     "hint": "Respect.",
+     "text": "He asks for the fine and pays it publicly. The young player gets his place back. The dressing room's respect is total.",
+     "fx": {
+      "dressing": 10,
+      "trust": 2,
+      "wealth": -500
+     }
+    },
+    {
+     "label": "Enjoy it",
+     "desc": "You've earned it.",
+     "risk": "medium",
+     "hint": "Resentment.",
+     "text": "He enjoys it. The young players stop looking up to him.",
+     "fx": {
+      "dressing": -6
+     }
+    }
+   ]
+  },
+  {
+   "id": "cl_free_agent_waiting",
+   "cat": "milestone",
+   "w": 5,
+   "cd": 30,
+   "when": {
+    "freeAgent": true
+   },
+   "title": "The Phone",
+   "text": [
+    "No club. Every morning he trains alone in a public park. Every evening he checks his phone for messages from his agent. Some days there's nothing.",
+    "Free agency. He has a training plan, a cheap gym membership and too much time to think."
+   ],
+   "prompt": "You're without a club.",
+   "choices": [
+    {
+     "label": "Train like a professional anyway",
+     "desc": "Be ready.",
+     "risk": "low",
+     "hint": "When the call comes, be fit.",
+     "text": "6am runs, gym, ball work, every day. When the call comes, he'll be ready.",
+     "fx": {
+      "pfm": 4,
+      "mood": "Determined"
+     }
+    },
+    {
+     "label": "Accept a trial anywhere",
+     "desc": "Lower your standards.",
+     "risk": "medium",
+     "hint": "More offers, smaller clubs.",
+     "text": "He tells his agent: any trial, anywhere. Two calls come within a week.",
+     "fx": {
+      "offerAbroad": true,
+      "stress": 2
+     }
+    },
+    {
+     "label": "Use the time for family",
+     "desc": "Rare free weeks.",
+     "risk": "low",
+     "hint": "Rest for the soul.",
+     "text": "He goes home and spends real time with his family for the first time in years. It's strangely the happiest month in ages.",
+     "fx": {
+      "family": 10,
+      "stress": -5,
+      "pfm": -2
+     }
+    }
+   ]
+  },
+  {
+   "id": "cl_level_followers_mismatch",
+   "cat": "media",
+   "w": 4,
+   "cd": 100,
+   "when": {
+    "level": [
+     1,
+     2
+    ],
+    "followers": [
+     50000,
+     999999999
+    ]
+   },
+   "title": "Famous for the Wrong Thing",
+   "text": "He has more followers than half the first team, mostly from a viral video, but he's barely played. The senior players have started calling him 'Influencer'.",
+   "prompt": "You're more famous online than on the pitch.",
+   "choices": [
+    {
+     "label": "Post less, train more",
+     "desc": "Earn it on the pitch.",
+     "risk": "low",
+     "hint": "The squad respects it.",
+     "text": "He goes quiet online and works harder. A few months later, the nickname fades.",
+     "fx": {
+      "dressing": 4,
+      "trust": 3,
+      "followers": -2000
+     }
+    },
+    {
+     "label": "Embrace it",
+     "desc": "Fame is fame.",
+     "risk": "medium",
+     "hint": "The manager will be wary.",
+     "text": "He keeps posting. The squad keeps teasing. The manager keeps him on the bench.",
+     "fx": {
+      "followers": 5000,
+      "trust": -3,
+      "dressing": -3
+     }
+    }
+   ]
+  },
+  {
+   "id": "cl_late_bloomer",
+   "cat": "milestone",
+   "w": 3,
+   "cd": 300,
+   "once": true,
+   "when": {
+    "age": [
+     24,
+     30
+    ],
+    "level": [
+     1,
+     2
+    ]
+   },
+   "title": "Late Bloomer",
+   "text": "At an age when some players are at their peak, he's still waiting for his moment. Friends from the academy are playing abroad. He's beginning to wonder.",
+   "prompt": "You're a late bloomer.",
+   "choices": [
+    {
+     "label": "Keep going",
+     "desc": "Some players peak late.",
+     "risk": "low",
+     "hint": "Belief.",
+     "text": "He keeps going. Plenty of great players didn't break through until their mid-twenties. He might be one of them.",
+     "fx": {
+      "mood": "Determined",
+      "potential": 1
+     }
+    },
+    {
+     "label": "Drop down a level to play every week",
+     "desc": "Minutes matter.",
+     "risk": "medium",
+     "hint": "A step back to step forward.",
+     "text": "He tells his agent: a smaller club, where he'll play every week.",
+     "fx": {
+      "listed": true,
+      "abroadWish": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "cl_contract_wage_leak",
+   "cat": "money",
+   "w": 3,
+   "cd": 200,
+   "when": {
+    "level": [
+     3,
+     5
+    ],
+    "freeAgent": false
+   },
+   "title": "Everyone Knows",
+   "text": "A newspaper has published his salary. The fans are debating whether he's worth it. A man on the radio says he earns more in a week than the man does in two years.",
+   "prompt": "Your wage has been published.",
+   "choices": [
+    {
+     "label": "Talk about it honestly",
+     "desc": "Acknowledge the privilege.",
+     "risk": "low",
+     "hint": "Humility.",
+     "text": "He says he knows how lucky he is and talks about what he does with it. It lands well.",
+     "fx": {
+      "image": 4,
+      "fans": 2
+     }
+    },
+    {
+     "label": "Say nothing",
+     "desc": "Not your business.",
+     "risk": "low",
+     "hint": "It'll pass.",
+     "text": "He says nothing. For a month, every bad pass is followed by a chant about his wage.",
+     "fx": {
+      "fans": -3
+     }
+    }
+   ]
+  },
+  {
+   "id": "cl_star_mentor_call",
+   "cat": "milestone",
+   "w": 3,
+   "cd": 200,
+   "when": {
+    "level": [
+     4,
+     5
+    ],
+    "age": [
+     24,
+     40
+    ]
+   },
+   "title": "A Kid From Home",
+   "text": "A sixteen-year-old from his hometown has just signed his first contract and sent {J} a message: 'You're the reason I play. Any advice?'",
+   "prompt": "A kid who idolises you asks for advice.",
+   "choices": [
+    {
+     "label": "Call him and talk for an hour",
+     "desc": "Everything you wish you'd known.",
+     "risk": "low",
+     "hint": "Pay it forward.",
+     "text": "An hour on the phone: money, agents, family, injuries, staying humble. The boy writes it all down.",
+     "fx": {
+      "image": 3,
+      "morale": 4,
+      "flag": "mentor_kid"
+     }
+    },
+    {
+     "label": "Send a signed shirt and a short message",
+     "desc": "Kind, quick.",
+     "risk": "low",
+     "hint": "Nice.",
+     "text": "A shirt and three sentences. The boy frames both.",
+     "fx": {
+      "image": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "cl_agent_family_conflict",
+   "cat": "money",
+   "w": 3,
+   "cd": 200,
+   "when": {
+    "agent": true,
+    "family": [
+     0,
+     60
+    ]
+   },
+   "uses": {
+    "A": "agent"
+   },
+   "title": "{Al} vs {DAD}",
+   "text": "{DAD} doesn't trust {A}. {A} thinks {DAD} interferes. Both have called {J} to complain about the other. Both are a bit right.",
+   "prompt": "Your agent and your father are at war.",
+   "choices": [
+    {
+     "label": "Back {Al} on business",
+     "desc": "He's the professional.",
+     "risk": "medium",
+     "hint": "{DAD} will be hurt.",
+     "text": "He backs {Al} on business decisions. {DAD} is hurt and stays away for a month.",
+     "fx": {
+      "agentBond": 8,
+      "family": -6
+     }
+    },
+    {
+     "label": "Back {DAD}",
+     "desc": "Family first.",
+     "risk": "medium",
+     "hint": "{Al} may lose interest.",
+     "text": "He backs {DAD}. {Al} works with less enthusiasm afterwards.",
+     "fx": {
+      "agentBond": -10,
+      "family": 6
+     }
+    },
+    {
+     "label": "Get them in a room",
+     "desc": "Fix it.",
+     "risk": "medium",
+     "hint": "Could work.",
+     "out": [
+      {
+       "w": 1,
+       "text": "Three hours, a lot of tea and some shouting. They come out with a grudging respect.",
+       "fx": {
+        "agentBond": 4,
+        "family": 4
+       }
+      },
+      {
+       "w": 1,
+       "text": "It goes badly. Now they both blame {J}.",
+       "fx": {
+        "agentBond": -5,
+        "family": -4,
+        "stress": 3
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cl_icon_humble_moment",
+   "cat": "lifestyle",
+   "w": 3,
+   "cd": 200,
+   "when": {
+    "level": [
+     5,
+     5
+    ]
+   },
+   "title": "The Street Game",
+   "text": "Driving through a poor neighbourhood, he sees kids playing on a concrete pitch with a deflated ball. He tells his driver to stop.",
+   "prompt": "A street game.",
+   "choices": [
+    {
+     "label": "Join the game",
+     "desc": "No cameras.",
+     "risk": "low",
+     "hint": "Pure football.",
+     "text": "He plays for an hour in his expensive shoes. The kids can't believe it. Neither can he. It's the most fun he's had in months.",
+     "fx": {
+      "morale": 8,
+      "stress": -5,
+      "image": 3
+     }
+    },
+    {
+     "label": "Send them proper balls and a coach",
+     "desc": "Help that lasts.",
+     "risk": "low",
+     "hint": "Lasting impact.",
+     "text": "The next week, a van arrives with balls, nets, kits and a coach paid for a year.",
+     "fx": {
+      "image": 5,
+      "wealth": -3000
+     }
+    }
+   ]
+  },
+  {
+   "id": "cl_contract_minimum_minutes",
+   "cat": "politics",
+   "w": 3,
+   "cd": 200,
+   "when": {
+    "freeAgent": false,
+    "role": [
+     "bench",
+     "outcast"
+    ],
+    "level": [
+     3,
+     5
+    ]
+   },
+   "title": "Not Playing, Not Leaving",
+   "text": "He's not playing, but the club won't sell him: his wages are high, the fee they want is higher. He's stuck, paid well, and miserable.",
+   "prompt": "You're stuck at a club that won't play or sell you.",
+   "choices": [
+    {
+     "label": "Offer to take a pay cut to leave",
+     "desc": "Freedom has a price.",
+     "risk": "medium",
+     "hint": "Less money, more football.",
+     "text": "He offers a cut. The club listens. A transfer becomes possible.",
+     "fx": {
+      "listed": true,
+      "board": 3
+     }
+    },
+    {
+     "label": "Stay and fight for your place",
+     "desc": "Prove them wrong.",
+     "risk": "low",
+     "hint": "Patience.",
+     "text": "He keeps training brilliantly. The manager eventually has no choice.",
+     "fx": {
+      "trust": 6,
+      "stress": 3
+     }
+    },
+    {
+     "label": "Go public",
+     "desc": "Pressure the club.",
+     "risk": "high",
+     "hint": "Bridges burn.",
+     "text": "His interview makes headlines. The club is furious. It also works: an offer comes in a month.",
+     "fx": {
+      "board": -12,
+      "listed": true,
+      "press": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "cl_star_pay_cut_crisis",
+   "cat": "politics",
+   "w": 2,
+   "cd": 300,
+   "when": {
+    "level": [
+     4,
+     5
+    ],
+    "board": [
+     0,
+     50
+    ],
+    "freeAgent": false
+   },
+   "title": "The Club Can't Pay",
+   "text": "The club is in a financial crisis. The president asks the best-paid players to take a pay cut of a third for the rest of their contracts. Junior staff jobs depend on the answer.",
+   "prompt": "Take a big pay cut to save jobs?",
+   "choices": [
+    {
+     "label": "Take the cut, and say so publicly",
+     "desc": "Lead by example.",
+     "risk": "low",
+     "hint": "The squad follows.",
+     "text": "He takes the cut and announces it. The whole squad follows. Nobody at the club loses their job.",
+     "fx": {
+      "wageRaise": -33,
+      "fans": 10,
+      "image": 8,
+      "board": 8,
+      "dressing": 6,
+      "flag": "pay_cut_hero"
+     }
+    },
+    {
+     "label": "Take the cut quietly",
+     "desc": "No publicity.",
+     "risk": "low",
+     "hint": "Humble.",
+     "text": "He takes the cut quietly. The staff find out anyway, and the kit man hugs him in the corridor.",
+     "fx": {
+      "wageRaise": -33,
+      "board": 6,
+      "dressing": 4
+     }
+    },
+    {
+     "label": "Refuse",
+     "desc": "Your contract is your contract.",
+     "risk": "high",
+     "hint": "Legally fine. Morally lonely.",
+     "text": "He refuses. Two junior staff lose their jobs. Everyone knows why.",
+     "fx": {
+      "board": -10,
+      "dressing": -8,
+      "image": -6
+     }
+    }
+   ]
+  }
+ ]
+}

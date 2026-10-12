@@ -4,6 +4,9 @@
 import { chance, clamp, pick, randint, weightedPick } from './util.js';
 import { meter } from './life.js';
 import { SPONSOR } from './config.js';
+import { sponsorTerms, sponsorSheet } from './contracts.js';
+
+const eur = (v) => `€${Math.round(v).toLocaleString('en')}`;
 
 export const activeDeals = (state) => (state.player.endorsements ?? []).filter((e) => e.expiryWeek > state.week);
 
@@ -80,6 +83,15 @@ export function sponsorMonth(state, world, res, push) {
   push(offerDecision(state, world, b));
 }
 
+// His agent pitches him to brands: an approach now, if any brand would have him.
+export function forceSponsorApproach(state, world, push) {
+  if (state.pending.some((d) => d.kind === 'sponsor')) return false;
+  const all = eligibleBrands(state, world, { ignoreCat: false });
+  if (!all.length) return false;
+  push(offerDecision(state, world, weightedPick(all, (x) => (SPONSOR.tier[x.tier] ?? 5000) ** 0.3)));
+  return true;
+}
+
 function endDeal(state, e, res, text) {
   e.expiryWeek = state.week;
   res.sponsorNotes.push(text);
@@ -98,6 +110,7 @@ function offerDecision(state, world, b) {
   const conflict = activeDeals(state).find((e) => e.cat === b.cat);
   const buyout = conflict ? Math.round(conflict.annualValue * 0.5 / 100) * 100 : 0;
   const pitch = pick(SPONSOR_PITCH[b.ind] ?? SPONSOR_PITCH.default);
+  const terms = sponsorTerms(b, value, years);
   const choices = [
     { id: 'sign', label: conflict ? `Switch from ${conflict.brand} to ${b.name}` : `Sign with ${b.name}`, description: `€${value.toLocaleString()} a year for ${years} year${years > 1 ? 's' : ''}.${conflict ? ` Ending ${conflict.brand} early costs about €${buyout.toLocaleString()}.` : ''}`, risk: conflict ? 'medium' : 'low', consequence: `Duties: ${dutyText(b.duty)}. Skip them and the brand cools.`, aspects: ['money', 'image', 'social'] },
     { id: 'negotiate', label: p.agent ? `Let ${p.agent.name} negotiate` : 'Negotiate yourself', description: 'Push for a better number.', risk: 'medium', consequence: 'More money — or they walk away.', aspects: ['money'] },
@@ -108,7 +121,8 @@ function offerDecision(state, world, b) {
     headline: `${b.name} Want ${p.jerseyName}`,
     scene: `${pitch.replace(/\{BRAND\}/g, b.name).replace(/\{J\}/g, p.jerseyName)} ${b.name} is a ${b.tier === 'local' ? 'local' : b.tier === 'regional' ? 'regional' : b.tier === 'luxury' ? 'luxury' : 'global'} ${ind} brand.`,
     prompt: `${b.name} offer €${value.toLocaleString()} a year (${years} yr). Duties: ${dutyText(b.duty)}.`,
-    data: { brand: b.name, ind: b.ind, cat: b.cat, tier: b.tier, value, years, duty: b.duty, minRep: b.rep, conflict: conflict?.brand ?? null, buyout },
+    data: { brand: b.name, ind: b.ind, cat: b.cat, tier: b.tier, value, years, duty: b.duty, minRep: b.rep, conflict: conflict?.brand ?? null, buyout, terms },
+    sheet: sponsorSheet({ value, years, duty: b.duty, terms }, eur),
     choices,
   };
 }
@@ -117,12 +131,15 @@ function renewalDecision(state, world, e) {
   const p = state.player;
   const b = (world.brands?.brands ?? []).find((x) => x.name === e.brand) ?? { tier: 'global', duty: e.duty, rep: 0 };
   const value = Math.round(Math.max(e.annualValue * (1 + e.sat / 300), brandValue(state, b)) / 100) * 100;
+  const years = randint(1, 3);
+  const terms = e.terms ? { ...e.terms, years } : sponsorTerms(b, value, years);
   return {
     kind: 'sponsor', type: 'sponsor', arena: 'lifestyle', ui: 'letter', cat: 'money', renewal: true,
     headline: `${e.brand} Want to Extend`,
     scene: `${e.brand}'s marketing team are happy: your posts landed, you turned up when it mattered. They want to keep you.`,
     prompt: `${e.brand} offer a new deal: €${value.toLocaleString()} a year (was €${e.annualValue.toLocaleString()}).`,
-    data: { brand: e.brand, ind: e.ind, cat: e.cat, tier: e.tier, value, years: randint(1, 3), duty: e.duty, minRep: e.minRep, renewal: true },
+    data: { brand: e.brand, ind: e.ind, cat: e.cat, tier: e.tier, value, years, duty: e.duty, minRep: e.minRep, renewal: true, terms },
+    sheet: sponsorSheet({ value, years, duty: e.duty, terms }, eur),
     choices: [
       { id: 'sign', label: 'Renew', description: `€${value.toLocaleString()} a year.`, risk: 'low', consequence: 'Same duties, more money.', aspects: ['money'] },
       { id: 'negotiate', label: 'Ask for more', description: 'They want you. Use it.', risk: 'medium', consequence: 'A raise — or a polite goodbye.', aspects: ['money'] },
@@ -141,7 +158,7 @@ export function resolveSponsor(state, world, d, choiceId, res, fx) {
       if (old) { old.expiryWeek = state.week; p.wealthEUR -= d.buyout; }
     }
     if (d.renewal) p.endorsements = p.endorsements.filter((e) => e.brand !== d.brand || e.expiryWeek <= state.week);
-    p.endorsements.push({ brand: d.brand, ind: d.ind, cat: d.cat, tier: d.tier, type: d.tier, annualValue: value, expiryWeek: state.week + 52 * d.years, since: state.week, yearStart: state.week, duty: d.duty, done: { posts: 0, events: 0 }, sat: 65, minRep: d.minRep });
+    p.endorsements.push({ brand: d.brand, ind: d.ind, cat: d.cat, tier: d.tier, type: d.tier, annualValue: value, years: d.years, expiryWeek: state.week + 52 * d.years, since: state.week, yearStart: state.week, duty: d.duty, done: { posts: 0, events: 0 }, sat: 65, minRep: d.minRep, terms: d.terms ?? null });
     const big = d.tier === 'global' || d.tier === 'luxury';
     fx({ followers: Math.round(p.followers * (big ? 0.03 : 0.01)) + 500, image: big ? 2 : 1, board: big ? 2 : 0, morale: 3 });
   };

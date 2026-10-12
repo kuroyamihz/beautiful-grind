@@ -363,48 +363,6 @@
       ]
     },
     {
-      "id": "date_night",
-      "icon": "heart",
-      "label": "Date night",
-      "desc": "Switch off football. Take {Pf} out.",
-      "when": {
-        "partner": [
-          "dating",
-          "serious",
-          "engaged",
-          "married"
-        ]
-      },
-      "out": [
-        {
-          "w": 3,
-          "text": [
-            "Dinner at {PLACE}. No phones, no football talk. {Pf} laughs at a joke he didn't know was funny.",
-            "They cook together and burn the rice. It's the best evening in weeks.",
-            "A long drive with no destination and all of {Pf}'s favourite songs. He knows every word now."
-          ],
-          "fx": {
-            "love": 6,
-            "stress": -3,
-            "wealthWeeks": 0.2
-          }
-        },
-        {
-          "w": 1,
-          "text": [
-            "A fan asks for a selfie mid-dinner. Then another. Then a queue. {Pf} eats dessert alone.",
-            "A photographer catches them leaving {PLACE}. The photo is everywhere by morning."
-          ],
-          "fx": {
-            "love": 1,
-            "followers": 3000,
-            "press": 1,
-            "wealthWeeks": 0.2
-          }
-        }
-      ]
-    },
-    {
       "id": "meet_someone",
       "icon": "heart",
       "label": "Say yes to a blind date",
@@ -422,11 +380,12 @@
         {
           "w": 2,
           "text": [
-            "Coffee turns into dinner turns into a three-hour walk. Her name is {P}. He texts her before he's even home."
+            "Coffee turns into dinner turns into a three-hour walk. Her name is {CRUSH}. He texts her before he is even home.",
+            "She is funny, sharp and completely unimpressed by footballers. Her name is {CRUSHf}. He wants to see her again."
           ],
           "fx": {
-            "newPartner": true,
-            "morale": 5
+            "crush": "new",
+            "morale": 4
           }
         },
         {
@@ -448,41 +407,6 @@
             "followers": 2000,
             "image": -2,
             "press": -1
-          }
-        }
-      ]
-    },
-    {
-      "id": "hang_bestfriend",
-      "icon": "friends",
-      "label": "Hang out with {BFf}",
-      "desc": "Your best friend, {BFjob}. Knows you from before.",
-      "when": {
-        "abroad": false
-      },
-      "out": [
-        {
-          "w": 3,
-          "text": [
-            "They eat {FOOD} and argue about nothing for three hours. {BFf} doesn't ask about football once. Bliss.",
-            "{BFf} drags him to the old pitch behind the school. They play one-on-one until it's dark. {BFf} still cheats.",
-            "Mopeds, midnight, {FOOD} from the same stall as when they were fourteen."
-          ],
-          "fx": {
-            "friends": 7,
-            "stress": -4,
-            "morale": 3
-          }
-        },
-        {
-          "w": 1,
-          "text": [
-            "{BFf} needs to borrow money for his mother's medicine. {J} doesn't hesitate."
-          ],
-          "fx": {
-            "friends": 8,
-            "wealthWeeks": 1,
-            "family": 1
           }
         }
       ]
@@ -556,41 +480,6 @@
             "image": -2,
             "pfm": -4,
             "trust": -1
-          }
-        }
-      ]
-    },
-    {
-      "id": "post_social",
-      "icon": "camera",
-      "label": "Post on {APP}",
-      "desc": "Give the fans something.",
-      "when": {},
-      "out": [
-        {
-          "w": 3,
-          "text": [
-            "A training-ground photo with a caption about hard work. It does numbers.",
-            "A throwback picture of himself aged eight in a shirt three sizes too big. The internet melts.",
-            "A clip of him juggling a lemon in the kitchen. It is inexplicably his most-liked post ever."
-          ],
-          "fx": {
-            "followers": 2500,
-            "fans": 1,
-            "image": 1
-          }
-        },
-        {
-          "w": 1,
-          "text": [
-            "A cryptic caption — 'some people will see' — is read as a dig at {Mf}. It wasn't. It doesn't matter.",
-            "An old tweet of his from age fourteen resurfaces in the replies. It's very bad. Mostly spelling."
-          ],
-          "fx": {
-            "followers": 4000,
-            "trust": -2,
-            "press": -2,
-            "image": -2
           }
         }
       ]
@@ -1030,41 +919,6 @@
       ]
     },
     {
-      "id": "want_abroad",
-      "icon": "map",
-      "label": "Tell your agent: I want to play abroad",
-      "desc": "Offers from abroad become much likelier. Your club may hear about it.",
-      "when": {
-        "wantsAbroad": false,
-        "agent": true
-      },
-      "out": [
-        {
-          "w": 3,
-          "text": [
-            "Your agent grins. \"Finally. Give me two windows.\" He starts sending clips to clubs in five countries that same night.",
-            "Your agent makes a list on a napkin: Japan, Korea, Thailand, Belgium, the Netherlands, Portugal. \"We aim high and land well.\""
-          ],
-          "fx": {
-            "abroadWish": true,
-            "stress": 1
-          }
-        },
-        {
-          "w": 1,
-          "text": [
-            "Your agent agrees — and somehow, by Friday, {OUT} reports that {J} \"wants to leave\". The board is not amused."
-          ],
-          "fx": {
-            "abroadWish": true,
-            "board": -4,
-            "fans": -2,
-            "press": 1
-          }
-        }
-      ]
-    },
-    {
       "id": "want_abroad_noagent",
       "icon": "map",
       "label": "Send your highlights to clubs abroad",
@@ -1098,16 +952,17 @@
     {
       "id": "stay_home",
       "icon": "home",
-      "label": "Tell your agent you're happy here",
-      "desc": "Stop chasing a move abroad.",
+      "label": "Stop chasing a move abroad",
+      "desc": "Stay and build where you are.",
       "when": {
-        "wantsAbroad": true
+        "wantsAbroad": true,
+        "agent": false
       },
       "out": [
         {
           "w": 1,
           "text": [
-            "\"Understood. We stay and build.\" Your family is relieved. So, quietly, are you."
+            "\"We stay and build,\" he tells his family. They are relieved. So, quietly, is he."
           ],
           "fx": {
             "abroadWish": false,
@@ -1162,6 +1017,95 @@
             "Your agent can't get a trial in the middle of the season. \"Next window. I promise.\""
           ],
           "fx": {}
+        }
+      ]
+    },
+    {
+      "id": "night_out_single",
+      "icon": "moon",
+      "label": "Go out with friends",
+      "desc": "Single, free, a city full of people.",
+      "when": {
+        "partner": [
+          "none"
+        ],
+        "age": [
+          18,
+          40
+        ],
+        "crush": false
+      },
+      "out": [
+        {
+          "w": 2,
+          "text": [
+            "A friend of a friend introduces him to {CRUSH}. They talk on the balcony for an hour while the party happens without them.",
+            "He meets {CRUSHf} in a queue for food and they argue happily about which stall is best. Numbers are swapped."
+          ],
+          "fx": {
+            "crush": "new",
+            "friends": 3,
+            "stress": -2
+          }
+        },
+        {
+          "w": 2,
+          "text": [
+            "A good night with the boys. Nobody special, nothing to regret."
+          ],
+          "fx": {
+            "friends": 4,
+            "stress": -3,
+            "pfm": -2
+          }
+        },
+        {
+          "w": 1,
+          "text": [
+            "Someone films him dancing badly. It is everywhere by breakfast."
+          ],
+          "fx": {
+            "friends": 3,
+            "image": -2,
+            "followers": 1500,
+            "pfm": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "gym_class_crush",
+      "icon": "dumbbell",
+      "label": "Try a new class at the gym",
+      "desc": "Yoga, boxing, pilates: something different.",
+      "when": {
+        "injured": false
+      },
+      "out": [
+        {
+          "w": 3,
+          "text": [
+            "Boxing class. He is humbled by a sixty-year-old woman with a terrifying jab. Great workout.",
+            "Pilates. Muscles he did not know existed are on fire. The physio approves."
+          ],
+          "fx": {
+            "pfm": 2,
+            "stress": -3,
+            "growth": [
+              "physical"
+            ]
+          }
+        },
+        {
+          "w": 1,
+          "text": [
+            "The instructor, {CRUSHf}, corrects his form twice and laughs at his jokes once. He signs up for the whole course."
+          ],
+          "fx": {
+            "crush": "new",
+            "stress": -2,
+            "pfm": 1
+          }
         }
       ]
     }

@@ -29,6 +29,18 @@ export function hash(str) {
   return (h >>> 0) / 4294967295;
 }
 
+// A repeatable random sequence from a text seed: the same club always gets the same squad names.
+export function seeded(seed) {
+  let a = Math.floor(hash(String(seed)) * 4294967295) >>> 0;
+  return () => {
+    a = (a + 0x6D2B79F5) >>> 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
 export function weightedPick(items, weightFn) {
   const ws = items.map(weightFn);
   const total = ws.reduce((a, b) => a + b, 0);

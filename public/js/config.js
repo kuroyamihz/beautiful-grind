@@ -4,24 +4,70 @@
 export const START_DATE_UTC = Date.UTC(2025, 6, 7);
 export const START_AGE = 16;
 
-// ── Overall rating ─────────────────────────────────────────────
-// 'positional' = weighted by position (default; fixes goalkeepers/defenders, see docs/OPEN-QUESTIONS.md #2)
-// 'original'   = plain average of pace/shooting/passing/dribbling/defending/physical (original design)
-export const OVR_MODE = 'positional';
+// ── Attributes: every position has its own set ────────────────
+// A goalkeeper is judged on reflexes and handling, not dribbling; a centre-back on tackling, positioning,
+// heading and ball-playing. Each position has seven attributes; the overall rating is a weighted mix of them.
+export const ATTRS = {
+  pace: { label: 'Pace', icon: 'zap' },
+  physical: { label: 'Strength & stamina', icon: 'dumbbell' },
+  mental: { label: 'Composure', icon: 'spark' },
+  finishing: { label: 'Finishing', icon: 'target' },
+  longShots: { label: 'Long shots', icon: 'target' },
+  dribbling: { label: 'Dribbling', icon: 'ball' },
+  passing: { label: 'Passing', icon: 'share' },
+  vision: { label: 'Vision', icon: 'map' },
+  crossing: { label: 'Crossing', icon: 'share' },
+  offBall: { label: 'Movement', icon: 'arrow' },
+  aerial: { label: 'Heading', icon: 'user' },
+  tackling: { label: 'Tackling', icon: 'flag' },
+  marking: { label: 'Positioning', icon: 'target' },
+  ballPlaying: { label: 'Ball-playing', icon: 'share' },
+  reflexes: { label: 'Reflexes', icon: 'zap' },
+  handling: { label: 'Handling', icon: 'user' },
+  gkPositioning: { label: 'Positioning', icon: 'target' },
+  command: { label: 'Command of area', icon: 'megaphone' },
+  distribution: { label: 'Distribution', icon: 'share' },
+};
+export const STAT_KEYS = Object.keys(ATTRS);
 
 export const POSITIONS = {
-  GK: { name: 'Goalkeeper', weights: { goalkeeping: 0.7, mental: 0.15, physical: 0.1, passing: 0.05 } },
-  CB: { name: 'Centre-back', weights: { defending: 0.45, physical: 0.25, mental: 0.15, pace: 0.1, passing: 0.05 } },
-  FB: { name: 'Full-back', weights: { defending: 0.3, pace: 0.25, physical: 0.15, passing: 0.15, dribbling: 0.1, mental: 0.05 } },
-  DM: { name: 'Defensive midfielder', weights: { defending: 0.3, passing: 0.25, physical: 0.2, mental: 0.2, pace: 0.05 } },
-  CM: { name: 'Central midfielder', weights: { passing: 0.35, mental: 0.2, dribbling: 0.15, physical: 0.1, defending: 0.1, shooting: 0.1 } },
-  AM: { name: 'Attacking midfielder', weights: { passing: 0.3, dribbling: 0.25, shooting: 0.2, mental: 0.15, pace: 0.1 } },
-  W:  { name: 'Winger', weights: { pace: 0.3, dribbling: 0.3, shooting: 0.15, passing: 0.15, mental: 0.1 } },
-  ST: { name: 'Striker', weights: { shooting: 0.4, pace: 0.2, dribbling: 0.15, physical: 0.15, mental: 0.1 } },
+  GK: { name: 'Goalkeeper', weights: { reflexes: 0.28, handling: 0.2, gkPositioning: 0.2, command: 0.1, distribution: 0.1, mental: 0.08, physical: 0.04 } },
+  CB: { name: 'Centre-back', weights: { tackling: 0.25, marking: 0.25, aerial: 0.15, physical: 0.15, pace: 0.08, ballPlaying: 0.07, mental: 0.05 } },
+  FB: { name: 'Full-back', weights: { pace: 0.22, tackling: 0.2, crossing: 0.16, marking: 0.12, physical: 0.12, dribbling: 0.1, mental: 0.08 } },
+  DM: { name: 'Defensive midfielder', weights: { tackling: 0.24, marking: 0.2, passing: 0.2, physical: 0.14, vision: 0.1, mental: 0.08, pace: 0.04 } },
+  CM: { name: 'Central midfielder', weights: { passing: 0.26, vision: 0.18, dribbling: 0.14, physical: 0.12, tackling: 0.1, longShots: 0.1, mental: 0.1 } },
+  AM: { name: 'Attacking midfielder', weights: { vision: 0.24, passing: 0.2, dribbling: 0.2, finishing: 0.14, longShots: 0.08, mental: 0.08, pace: 0.06 } },
+  W: { name: 'Winger', weights: { pace: 0.24, dribbling: 0.24, crossing: 0.14, finishing: 0.14, passing: 0.1, offBall: 0.08, mental: 0.06 } },
+  ST: { name: 'Striker', weights: { finishing: 0.32, offBall: 0.2, pace: 0.14, aerial: 0.1, physical: 0.1, dribbling: 0.08, mental: 0.06 } },
 };
 
-export const STAT_KEYS = ['pace', 'shooting', 'passing', 'dribbling', 'defending', 'physical', 'mental', 'goalkeeping'];
-export const ORIGINAL_OVR_KEYS = ['pace', 'shooting', 'passing', 'dribbling', 'defending', 'physical'];
+// Older scenarios talk about eight general stats (shooting, passing, dribbling, defending, goalkeeping…).
+// Each is translated to the first attribute in its list that the player's position actually has.
+export const LEGACY_STATS = {
+  pace: ['pace', 'reflexes', 'command'],
+  shooting: ['finishing', 'longShots', 'ballPlaying', 'distribution'],
+  passing: ['passing', 'ballPlaying', 'vision', 'crossing', 'distribution'],
+  dribbling: ['dribbling', 'ballPlaying', 'offBall', 'distribution'],
+  defending: ['tackling', 'marking', 'gkPositioning'],
+  physical: ['physical'],
+  mental: ['mental'],
+  goalkeeping: ['reflexes', 'handling'],
+};
+// When a scene tests an attribute this position doesn't have, use the closest one it does.
+export const SIMILAR_ATTRS = {
+  finishing: ['longShots', 'offBall', 'dribbling'], longShots: ['finishing', 'passing', 'vision'], dribbling: ['ballPlaying', 'offBall', 'pace'],
+  passing: ['ballPlaying', 'vision', 'distribution', 'crossing'], vision: ['passing', 'ballPlaying', 'mental'], crossing: ['passing', 'distribution'],
+  offBall: ['pace', 'finishing', 'mental'], aerial: ['physical', 'command'], tackling: ['marking', 'physical'], marking: ['tackling', 'gkPositioning', 'mental'],
+  ballPlaying: ['passing', 'distribution', 'vision'], reflexes: ['pace', 'mental'], handling: ['reflexes', 'mental'], gkPositioning: ['marking', 'mental'],
+  command: ['aerial', 'physical'], distribution: ['passing', 'ballPlaying'],
+};
+// How to build the new attributes from an old (v0.4) save's eight stats.
+export const FROM_LEGACY = {
+  pace: ['pace'], physical: ['physical'], mental: ['mental'], finishing: ['shooting'], longShots: ['shooting', 'passing'], dribbling: ['dribbling'],
+  passing: ['passing'], vision: ['passing', 'mental'], crossing: ['passing', 'dribbling'], offBall: ['pace', 'mental', 'shooting'], aerial: ['physical', 'defending'],
+  tackling: ['defending'], marking: ['defending', 'mental'], ballPlaying: ['passing', 'defending'], reflexes: ['goalkeeping'], handling: ['goalkeeping'],
+  gkPositioning: ['goalkeeping', 'mental'], command: ['goalkeeping', 'physical'], distribution: ['passing', 'goalkeeping'],
+};
 
 // Share of the team's goals / assists a player in this position typically gets.
 export const GOAL_SHARE = { GK: 0, CB: 0.05, FB: 0.04, DM: 0.05, CM: 0.1, AM: 0.2, W: 0.22, ST: 0.36 };
@@ -129,7 +175,7 @@ export const LIFE = {
   coolAbove: 60,                              // above this, family/friends/partner cool by about 1 a week unless you keep investing
   softCap: 60,                                // above this (or below 100 minus this), each step further is harder
   stressRest: 30,                             // the level stress drifts back to on its own
-  freeTimePerWeek: 2,                         // free-time actions per week (+1 while injured)
+  freeTimePerWeek: 3,                         // free-time actions per week, shared by activities and people (+1 while injured)
   stressInjury: 0.02,                         // extra weekly injury chance when stress is above 75
   interludeChance: 0.38,                      // share of "Play week" clicks that open a mid-week scene instead (time stands still)
   weeklyDecisions: { 1: 14, 2: 34, 3: 34, 4: 18 }, // how many story decisions a week brings (weights)
@@ -155,7 +201,8 @@ export const SOCIAL = {
   conversion: 0.06,     // new followers per like
   viralBase: 0.03,      // chance any post goes viral (more for goals, trends, replies)
   ceilingBase: 1500,    // follower ceiling = this × e^(fame/9) × country boost (fame 60 ≈ 1-5M, fame 90 ≈ 30-130M)
-  adFatigueAfter: 2,    // sponsored posts per month before fans start calling you a billboard
+  adFatigueAfter: 3,    // sponsored posts per month before fans start calling you a billboard
+  perWeek: 3,           // posts per week
   mult: { goal: 1.6, matchday: 1.1, training: 0.8, fans: 1, teammate: 0.8, family: 1.1, partner: 1.3, flex: 1.2, charity: 1, trend: 1.2, cryptic: 1.1, reply: 1, throwback: 1.1, greeting: 0.9, nation: 1.3, sponsor: 1 },
 };
 

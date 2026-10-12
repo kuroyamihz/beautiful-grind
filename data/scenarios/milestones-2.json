@@ -1,0 +1,237 @@
+{
+  "scenarios": [
+    { "id": "ms2_debut_shirt", "cat": "milestone", "trigger": "debut", "w": 5, "cd": 999,
+      "title": "The Debut Shirt", "text": "His debut shirt, still damp, is in his kit bag. Everybody wants it: {MUM}, his first coach, a charity auction, the club museum.",
+      "prompt": "Who gets your debut shirt?",
+      "choices": [
+        { "label": "{MUM}", "desc": "She washed his first kits.", "risk": "low", "hint": "Family.", "text": "{MUM} frames it in the living room. She tells every visitor the story, with new details each time.", "fx": { "family": 8, "morale": 3 } },
+        { "label": "Your first coach", "desc": "He believed first.", "risk": "low", "hint": "Gratitude.", "text": "His first coach hangs it in the clubhouse of his tiny club. Kids train under it every Saturday.", "fx": { "image": 3, "morale": 3 } },
+        { "label": "Keep it yourself", "desc": "It's yours.", "risk": "low", "hint": "Your memory.", "text": "He puts it in a box under his bed. Some nights he takes it out and looks at it.", "fx": { "morale": 4 } }
+      ] },
+    { "id": "ms2_first_goal_ball", "cat": "milestone", "trigger": "firstGoal", "w": 5, "cd": 999,
+      "title": "The Ball", "text": "The referee hands him the match ball after the final whistle: his first professional goal. Every teammate has signed it. Someone has drawn a moustache on it.",
+      "prompt": "Your first goal ball.",
+      "choices": [
+        { "label": "Give it to {DAD}", "desc": "He drove you to every match.", "risk": "low", "hint": "Tears guaranteed.", "text": "{DAD} holds it like a newborn and doesn't speak for a full minute. Then he says, 'I knew.'", "fx": { "family": 10, "morale": 4 } },
+        { "label": "Post a photo with it", "desc": "Share the moment.", "risk": "low", "hint": "Fans love it.", "text": "The photo with the ball (and the moustache) is his most-liked post ever.", "fx": { "followers": 3000, "fans": 2 } }
+      ] },
+    { "id": "ms2_hattrick_ball", "cat": "milestone", "trigger": "hatTrick", "w": 5, "cd": 52,
+      "title": "Hat-Trick", "text": "Three goals. The match ball is his. His phone has two hundred messages. The fans have already made a chant about it. The captain wants to know if he's buying drinks.",
+      "prompt": "How do you celebrate a hat-trick?",
+      "choices": [
+        { "label": "Dinner for the whole squad", "desc": "They made it possible.", "risk": "low", "hint": "Gratitude.", "text": "He pays for the squad's dinner and thanks every player for every pass. The dressing room loves him.", "fx": { "dressing": 6, "wealth": -1500 } },
+        { "label": "Quiet night with family", "desc": "Home.", "risk": "low", "hint": "Grounded.", "text": "He goes home and eats {MUM}'s cooking. The match ball sits on the table between the dishes.", "fx": { "family": 6, "stress": -3 } },
+        { "label": "A big night out", "desc": "You've earned it.", "risk": "medium", "hint": "Photos.", "text": "A big night. A few too many photos. A great story.", "fx": { "friends": 5, "image": -1, "pfm": -3 } }
+      ] },
+    { "id": "ms2_trophy_lift", "cat": "milestone", "trigger": "trophy", "w": 5, "cd": 52,
+      "title": "Silverware", "text": "The trophy is heavier than it looks. Confetti everywhere. Champagne in his eyes. Somewhere in the stands, his family is screaming.",
+      "prompt": "Trophy celebrations.",
+      "choices": [
+        { "label": "Run to the stands with the trophy", "desc": "Find your family.", "risk": "low", "hint": "The photo of a lifetime.", "text": "He climbs into the stands with the trophy. {MUM} holds it and cries. The photo is on every front page.", "fx": { "family": 10, "fans": 5, "followers": 20000 } },
+        { "label": "Celebrate with the kit man and staff", "desc": "The unseen heroes.", "risk": "low", "hint": "Class.", "text": "He hands the trophy to the kit man and the groundsman first. The staff will never forget it.", "fx": { "dressing": 6, "image": 4 } }
+      ] },
+    { "id": "ms2_champion_parade", "cat": "milestone", "trigger": "champion", "w": 5, "cd": 52,
+      "title": "Champions", "text": "League champions. The open-top bus parade is tomorrow. A million people are expected. He hasn't slept. He doesn't want to.",
+      "prompt": "The champions' parade.",
+      "choices": [
+        { "label": "Lead the singing on the bus", "desc": "Microphone, top deck.", "risk": "low", "hint": "Iconic.", "text": "He leads the singing on the top deck for four hours. His voice is gone by the end. The videos live forever.", "fx": { "fans": 10, "followers": 40000, "rep": 1 } },
+        { "label": "Take it all in quietly", "desc": "Remember every face.", "risk": "low", "hint": "Precious.", "text": "He stands at the back of the bus and tries to remember every face. It's the happiest day of his life.", "fx": { "morale": 10, "fans": 5 } }
+      ] },
+    { "id": "ms2_relegation_tears", "cat": "milestone", "trigger": "relegated", "w": 5, "cd": 52,
+      "title": "Down", "text": "Relegated. The players sit on the pitch. Fans are crying in the stands. A small boy in his shirt is holding his father's hand, both of them sobbing.",
+      "prompt": "Relegation.",
+      "choices": [
+        { "label": "Go to the fans and apologise", "desc": "Face them.", "risk": "medium", "hint": "Some will applaud. Some won't.", "text": "He walks to the stand and applauds them. Some boo. Most applaud back. The boy waves.", "fx": { "fans": 6, "image": 3, "morale": -4 } },
+        { "label": "Promise to bring the club back up", "desc": "Publicly.", "risk": "high", "hint": "A promise you'll be held to.", "text": "'We'll be back. I'll be here.' The fans will hold him to it.", "fx": { "fans": 10, "flag": "promised_to_stay", "board": 5 } },
+        { "label": "Walk straight to the tunnel", "desc": "Too painful.", "risk": "medium", "hint": "Understandable. Noticed.", "text": "He walks straight off. Some fans see it as heartbreak. Some see it as abandonment.", "fx": { "fans": -3, "morale": -6 } }
+      ] },
+    { "id": "ms2_promoted_party", "cat": "milestone", "trigger": "promoted", "w": 5, "cd": 52,
+      "title": "Promoted", "text": "Promotion. The pitch invasion lasts forty minutes. Someone has taken his boots. Someone else has taken a piece of the goal net. Next season: the big league.",
+      "prompt": "Promotion celebrations.",
+      "choices": [
+        { "label": "Celebrate with the fans on the pitch", "desc": "In the middle of it all.", "risk": "low", "hint": "Pure joy.", "text": "He's lifted onto the fans' shoulders and carried around the pitch. He loses his shirt, his socks and his voice.", "fx": { "fans": 10, "morale": 8 } },
+        { "label": "Think about next season", "desc": "The real test is coming.", "risk": "low", "hint": "Focus.", "text": "Even in the celebrations, he's thinking about the level above. The manager notices.", "fx": { "trust": 4, "mood": "Determined" } }
+      ] },
+    { "id": "ms2_birthday_18_party", "cat": "milestone", "trigger": "birthday18", "w": 5, "cd": 999,
+      "title": "Eighteen", "text": "He's eighteen. Legally an adult. The squad has organised a surprise. {MUM} has organised a different surprise. The two surprises are on the same evening.",
+      "prompt": "Two surprise parties.",
+      "choices": [
+        { "label": "Go to {MUM}'s first, then the squad's", "desc": "Both, somehow.", "risk": "low", "hint": "Two cakes.", "text": "He eats two cakes and hears two very different speeches. Both make him cry, for different reasons.", "fx": { "family": 6, "dressing": 4, "pfm": -2 } },
+        { "label": "Bring the squad to {MUM}'s", "desc": "Merge the parties.", "risk": "medium", "hint": "Chaos.", "text": "Twenty footballers in {MUM}'s living room. She feeds them all. It's the best party anyone has ever been to.", "fx": { "family": 8, "dressing": 6 } }
+      ] },
+    { "id": "ms2_birthday_30", "cat": "milestone", "trigger": "birthday30", "w": 5, "cd": 999,
+      "title": "Thirty", "text": "Thirty. The squad has bought him a walking stick and a pair of slippers. The young players are calling him 'Grandpa'. He's never felt better, apart from his knees.",
+      "prompt": "Turning thirty.",
+      "choices": [
+        { "label": "Laugh and use the walking stick in the warm-up", "desc": "Own it.", "risk": "low", "hint": "Legend.", "text": "He hobbles out for the warm-up with the stick. The crowd loves it. Then he scores.", "fx": { "dressing": 5, "fans": 4, "followers": 10000 } },
+        { "label": "Reflect on the decade", "desc": "Twenties, done.", "risk": "low", "hint": "Perspective.", "text": "He writes a long letter to his twenty-year-old self. It's funny and sad and wise.", "fx": { "growth": ["mental"], "morale": 3 } }
+      ] },
+    { "id": "ms2_red_card_shame", "cat": "milestone", "trigger": "redCard", "w": 5, "cd": 40,
+      "title": "The Walk", "text": "The long walk to the tunnel after the red card. Twenty thousand people watching. The manager won't look at him. A child in the front row is crying.",
+      "prompt": "After the red card.",
+      "choices": [
+        { "label": "Apologise to the dressing room immediately", "desc": "Own it.", "risk": "low", "hint": "Respect.", "text": "He apologises to every teammate at full time. Nobody is angry by the end. Mostly.", "fx": { "dressing": 4, "trust": 2 } },
+        { "label": "Blame the referee", "desc": "It wasn't a red.", "risk": "medium", "hint": "Might be true. Doesn't help.", "text": "He blames the referee in the tunnel. The replays don't help him.", "fx": { "trust": -3, "image": -2 } },
+        { "label": "Write to the child in the front row", "desc": "Make it right.", "risk": "low", "hint": "Kindness.", "text": "The club finds the child. He sends a signed shirt and a note: 'Sorry I let you down. Never again.'", "fx": { "image": 4, "fans": 3 } }
+      ] },
+    { "id": "ms2_bad_run_meeting", "cat": "milestone", "trigger": "badRun", "w": 5, "cd": 40,
+      "title": "Three Defeats", "text": "Three defeats in a row. Training is silent. The manager has called a players-only meeting and left the room.",
+      "prompt": "A players-only meeting.",
+      "choices": [
+        { "label": "Speak first", "desc": "Break the silence.", "risk": "medium", "hint": "Leadership.", "check": { "stat": "mental", "dc": 55 }, "ok": { "text": "He speaks honestly about his own mistakes first. Others follow. The meeting becomes the turning point of the season.", "fx": { "dressing": 8, "trust": 4, "morale": 4 } }, "bad": { "text": "He speaks, but it comes out as blame. The meeting gets worse.", "fx": { "dressing": -4 } } },
+        { "label": "Listen", "desc": "Let the seniors speak.", "risk": "low", "hint": "Humble.", "text": "He listens. The captain talks. The room settles.", "fx": { "dressing": 2 } }
+      ] },
+    { "id": "ms2_nightmare_aftermath", "cat": "milestone", "trigger": "nightmare", "w": 5, "cd": 40,
+      "title": "The Worst Game", "text": "The worst game of his career. Every touch went wrong. The fans booed when he was subbed. The internet is calling him a disgrace.",
+      "prompt": "After a nightmare performance.",
+      "choices": [
+        { "label": "Watch it back, every minute", "desc": "Face it.", "risk": "low", "hint": "Learn.", "text": "He watches every minute twice. It's agony. By the end he knows exactly what went wrong.", "fx": { "growth": ["mental"], "stress": 2, "tacticalFit": 3 } },
+        { "label": "Switch off completely", "desc": "One bad game.", "risk": "low", "hint": "Move on.", "text": "Phone off, family, sleep. One bad game. It doesn't define him.", "fx": { "stress": -3 } },
+        { "label": "Apologise to the fans online", "desc": "Own it publicly.", "risk": "low", "hint": "Honesty.", "text": "'Not good enough. I'll be better.' The fans respond warmly. Most of them.", "fx": { "fans": 4, "image": 2 } }
+      ] },
+    { "id": "ms2_goal_streak_superstition", "cat": "milestone", "trigger": "goalStreak", "w": 5, "cd": 40,
+      "title": "On a Streak", "text": "Three games, three goals. He has worn the same socks, eaten the same breakfast and driven the same route to every match. The socks are becoming a problem.",
+      "prompt": "Superstition on a scoring streak.",
+      "choices": [
+        { "label": "Keep everything the same", "desc": "Don't break the streak.", "risk": "low", "hint": "Smelly.", "text": "Same socks. Same breakfast. Same route. The kit man refuses to touch the socks.", "fx": { "morale": 4, "dressing": 2 } },
+        { "label": "Wash the socks", "desc": "You make your own luck.", "risk": "low", "hint": "Brave.", "text": "He washes the socks. The squad gasps. He scores anyway.", "fx": { "morale": 3, "growth": ["mental"] } }
+      ] },
+    { "id": "ms2_bench_streak_talk", "cat": "milestone", "trigger": "benchStreak", "w": 5, "cd": 40,
+      "title": "Four Weeks on the Bench", "text": "Four matches on the bench without getting on. His family has stopped asking. His agent has started calling.",
+      "prompt": "Stuck on the bench.",
+      "choices": [
+        { "label": "Ask the manager what's missing", "desc": "Specific answers.", "risk": "low", "hint": "Clarity.", "text": "The manager gives him two clear things. He works on both. Three weeks later, he's back in.", "fx": { "trust": 4, "tacticalFit": 3 } },
+        { "label": "Tell your agent to find a loan", "desc": "You need minutes.", "risk": "medium", "hint": "A loan might come.", "text": "His agent starts making calls. The manager hears about it.", "fx": { "abroadWish": true, "trust": -2 } },
+        { "label": "Be the best substitute in the world", "desc": "Cheer, warm up hard, be ready.", "risk": "low", "hint": "Good teammate.", "text": "He's the loudest voice on the bench. When his chance comes, he's ready.", "fx": { "dressing": 4, "trust": 3 } }
+      ] },
+    { "id": "ms2_role_starter_pressure", "cat": "milestone", "trigger": "roleStarter", "w": 5, "cd": 60,
+      "title": "First Choice", "text": "The manager has told him: he's first choice now. The shirt is his. Every week. The pressure feels different when it's yours to lose.",
+      "prompt": "You're a regular starter now.",
+      "choices": [
+        { "label": "Never relax", "desc": "Work harder than when you were fighting for it.", "risk": "low", "hint": "The secret.", "text": "He trains harder than ever. The shirt stays his.", "fx": { "trust": 4, "pfm": -2, "mood": "Determined" } },
+        { "label": "Enjoy it", "desc": "You earned this.", "risk": "low", "hint": "Confidence.", "text": "He enjoys every minute. His confidence soars. So does his form.", "fx": { "morale": 5, "form": 0.1 } }
+      ] },
+    { "id": "ms2_outcast_lowpoint", "cat": "milestone", "trigger": "roleOutcast", "w": 5, "cd": 60,
+      "title": "Frozen Out", "text": "He's been told to train with the youth team. No explanation. His locker has been moved. His name has disappeared from the matchday programme.",
+      "prompt": "You've been frozen out.",
+      "choices": [
+        { "label": "Train with the youth team like a professional", "desc": "Dignity.", "risk": "low", "hint": "Clubs notice character.", "text": "He trains with the kids and helps them. The youth coaches tell the manager. Slowly, the door opens.", "fx": { "trust": 6, "image": 3, "dressing": 3 } },
+        { "label": "Demand a transfer", "desc": "Get out.", "risk": "medium", "hint": "A move will come.", "text": "He demands a move. The club is happy to oblige.", "fx": { "listed": true, "board": -4 } },
+        { "label": "Go public", "desc": "Fans should know.", "risk": "high", "hint": "War.", "text": "He goes public. The fans are split. The club is furious.", "fx": { "board": -10, "trust": -10, "fans": 3, "press": 3 } }
+      ] },
+    { "id": "ms2_callup_family", "cat": "milestone", "trigger": "callup", "w": 5, "cd": 60,
+      "title": "The Call-Up", "text": "His name is on the national team list. {DAD} heard it on the radio before {J} did and has been crying in the car outside the market for twenty minutes.",
+      "prompt": "Your first national team call-up.",
+      "choices": [
+        { "label": "Call {DAD} first", "desc": "Before anyone.", "risk": "low", "hint": "Family.", "text": "{DAD} can't speak on the phone. {MUM} takes over. Then {SIB}. Then the whole street.", "fx": { "family": 10, "morale": 6 } },
+        { "label": "Visit your first club", "desc": "Where it began.", "risk": "low", "hint": "Gratitude.", "text": "He drives to his first club and tells the kids. They lift him on their shoulders.", "fx": { "image": 4, "morale": 5 } }
+      ] },
+    { "id": "ms2_moved_first_night", "cat": "milestone", "trigger": "moved", "w": 4, "cd": 60,
+      "title": "The First Night", "text": "First night in a new city. An empty flat, a suitcase, a takeaway, the noise of a city he doesn't know. Tomorrow, he meets his new teammates.",
+      "prompt": "Your first night at a new club.",
+      "choices": [
+        { "label": "Walk the city", "desc": "Get to know it.", "risk": "low", "hint": "Belonging starts somewhere.", "text": "He walks for two hours. A bakery, a park, a mosque, a football pitch with kids. The city feels a little more his.", "fx": { "morale": 4, "stress": -2 } },
+        { "label": "Study your new teammates' names", "desc": "Be ready.", "risk": "low", "hint": "First impressions.", "text": "He learns every name and number from the squad list. Tomorrow, he greets everyone by name. They notice.", "fx": { "dressing": 4 } },
+        { "label": "Call home for hours", "desc": "Familiar voices.", "risk": "low", "hint": "Comfort.", "text": "He talks to everyone at home. It helps. It also makes it harder.", "fx": { "family": 4, "stress": -1 } }
+      ] },
+    { "id": "ms2_loan_start", "cat": "milestone", "trigger": "loanStart", "w": 4, "cd": 60,
+      "title": "On Loan", "text": "A loan player is always a guest. Some teammates will see him as a threat, some as a short-term guy who doesn't care. He has one season to prove both groups wrong.",
+      "prompt": "Starting a loan spell.",
+      "choices": [
+        { "label": "Commit like you're staying forever", "desc": "Total commitment.", "risk": "low", "hint": "Belonging.", "text": "He commits completely. By Christmas, the fans are asking the club to buy him.", "fx": { "fans": 4, "dressing": 4 } },
+        { "label": "Focus on development", "desc": "Minutes, growth.", "risk": "low", "hint": "Pragmatic.", "text": "He focuses on playing and improving. Efficient, a little lonely.", "fx": { "growth": ["rel"] } }
+      ] },
+    { "id": "ms2_loan_return", "cat": "milestone", "trigger": "loanReturn", "w": 4, "cd": 60,
+      "title": "Back Again", "text": "Back at his parent club after the loan. Some faces are new. Some are gone. The manager says, 'Show me what you learned.'",
+      "prompt": "Returning from loan.",
+      "choices": [
+        { "label": "Show him in the first session", "desc": "Hit the ground running.", "risk": "medium", "hint": "First impressions.", "text": "He's the best player in the first session. The manager raises an eyebrow. Good sign.", "fx": { "trust": 6, "pfm": -2 } },
+        { "label": "Reconnect with old teammates first", "desc": "People matter.", "risk": "low", "hint": "Belonging.", "text": "He spends the first week catching up with everyone. The squad feels like home again.", "fx": { "dressing": 5 } }
+      ] },
+    { "id": "ms2_free_agent_day_one", "cat": "milestone", "trigger": "freeAgent", "w": 5, "cd": 60,
+      "title": "No Club", "text": "Contract over. No new club yet. For the first time since he was a child, there's no training tomorrow.",
+      "prompt": "Your first day as a free agent.",
+      "choices": [
+        { "label": "Train alone at 7am anyway", "desc": "Stay sharp.", "risk": "low", "hint": "Be ready when it comes.", "text": "A park, a ball, cones, a stopwatch. He trains like he's still at a club.", "fx": { "pfm": 3, "mood": "Determined" } },
+        { "label": "Rest and reflect", "desc": "A breath.", "risk": "low", "hint": "Recharge.", "text": "He sleeps until ten and has breakfast with his family. It's terrifying and lovely.", "fx": { "stress": -4, "family": 4 } }
+      ] },
+    { "id": "ms2_followers_100k_reaction", "cat": "milestone", "trigger": "followers100K", "w": 4, "cd": 999,
+      "title": "One Hundred Thousand", "text": "One hundred thousand followers. {SIB} screenshots it and sends it to the entire family group. {MUM} asks what a follower is.",
+      "prompt": "100K followers.",
+      "choices": [
+        { "label": "A thank-you video", "desc": "Gratitude.", "risk": "low", "hint": "Warm.", "text": "A short thank-you video filmed in his kitchen. Simple. It does well.", "fx": { "followers": 5000, "fans": 2 } },
+        { "label": "Explain followers to {MUM}", "desc": "A long call.", "risk": "low", "hint": "Comedy.", "text": "Forty minutes later, {MUM} understands followers and has opened an account. She follows him and nobody else.", "fx": { "family": 5 } }
+      ] },
+    { "id": "ms2_followers_1m", "cat": "milestone", "trigger": "followers1M", "w": 4, "cd": 999,
+      "title": "One Million", "text": "One million people follow him. More than the population of the town he grew up in. He stares at the number for a long time.",
+      "prompt": "A million followers.",
+      "choices": [
+        { "label": "Do something for the town", "desc": "One for each person back home.", "risk": "low", "hint": "Meaningful.", "text": "He funds a new pitch for his hometown, one 'for every follower', as the local paper puts it.", "fx": { "image": 5, "wealth": -10000, "family": 4 } },
+        { "label": "A live Q&A", "desc": "Talk to them.", "risk": "low", "hint": "Connection.", "text": "Two hours of questions. Someone asks about his first boots. He gets emotional.", "fx": { "followers": 20000, "fans": 3 } }
+      ] },
+    { "id": "ms2_season_end_reflection", "cat": "milestone", "trigger": "seasonEnd", "w": 4, "cd": 40,
+      "title": "Season Over", "text": "The last match is over. The stadium empties. He sits alone in the dressing room for a while, boots off, thinking about the season: the good, the bad, the things he'd do differently.",
+      "prompt": "End-of-season reflection.",
+      "choices": [
+        { "label": "Write down three lessons", "desc": "For next season.", "risk": "low", "hint": "Growth.", "text": "Three lessons in his notes app. He'll read them on the first day of pre-season.", "fx": { "growth": ["mental"], "stress": -2 } },
+        { "label": "Thank the staff before leaving", "desc": "Physios, kit men, cooks.", "risk": "low", "hint": "Class.", "text": "He thanks every member of staff by name. The cook gives him a hug and a container of food.", "fx": { "dressing": 4, "image": 2 } },
+        { "label": "Just go home", "desc": "Rest.", "risk": "low", "hint": "You earned it.", "text": "Home. Sleep. A summer of rest.", "fx": { "stress": -4 } }
+      ] },
+    { "id": "ms2_hundredth_appearance", "cat": "milestone", "w": 4, "cd": 999, "once": true, "when": { "apps": [100, 110] },
+      "title": "One Hundred", "text": "His hundredth professional appearance. The club has made a special shirt with '100' on the back. His family is in the stands with a homemade banner.",
+      "prompt": "Your hundredth game.",
+      "choices": [
+        { "label": "Give the shirt to {MUM}", "desc": "Another one for her wall.", "risk": "low", "hint": "Family.", "text": "{MUM}'s wall is running out of space. She doesn't care.", "fx": { "family": 6, "morale": 4 } },
+        { "label": "Auction it for charity", "desc": "Give back.", "risk": "low", "hint": "Generous.", "text": "The shirt raises a lot of money for a children's hospital.", "fx": { "image": 4, "fans": 2 } }
+      ] },
+    { "id": "ms2_season_best_goal", "cat": "milestone", "w": 3, "cd": 100, "when": { "goalsSeason": [8, 99] },
+      "title": "Goal of the Season?", "text": "His solo goal from last month has been nominated for the league's goal of the season. Fans are voting. A rival's tap-in is somehow leading.",
+      "prompt": "Goal of the season voting.",
+      "choices": [
+        { "label": "Campaign for votes", "desc": "Rally the fans.", "risk": "low", "hint": "Fun.", "out": [ { "w": 1, "text": "He wins. The trophy is tiny. He loves it.", "fx": { "followers": 15000, "fans": 3, "rep": 0.5 } }, { "w": 1, "text": "The tap-in wins. The internet is outraged on his behalf.", "fx": { "followers": 10000, "fans": 2 } } ] },
+        { "label": "Stay quiet", "desc": "Let it happen.", "risk": "low", "hint": "Dignified.", "text": "He stays out of it and comes second. Fine.", "fx": {} }
+      ] },
+    { "id": "ms2_first_assist_record", "cat": "milestone", "w": 3, "cd": 999, "once": true, "when": { "apps": [30, 9999], "pos": ["MID", "W", "FB"] },
+      "title": "The Provider", "text": "A stats account points out that he's created more chances than any other player in the league this season. The strikers have started buying him dinner.",
+      "prompt": "You're the league's top creator.",
+      "choices": [
+        { "label": "Credit the strikers", "desc": "They finish them.", "risk": "low", "hint": "Team player.", "text": "'They do the hard part.' The strikers love him even more.", "fx": { "dressing": 5, "image": 2 } },
+        { "label": "Accept the dinners", "desc": "You earned them.", "risk": "low", "hint": "Free food.", "text": "A season of free dinners. Excellent.", "fx": { "dressing": 3, "morale": 3 } }
+      ] },
+    { "id": "ms2_clean_sheet_record", "cat": "milestone", "w": 3, "cd": 200, "when": { "pos": ["GK", "CB"], "apps": [20, 9999] },
+      "title": "Clean Sheets", "text": "Five clean sheets in a row. The defence is being called 'the wall'. The goalkeeper has started bringing cake for the defenders after every shut-out.",
+      "prompt": "A clean-sheet streak.",
+      "choices": [
+        { "label": "Celebrate as a unit", "desc": "Defenders' dinner.", "risk": "low", "hint": "Bond.", "text": "A defenders-only dinner. They plan the next clean sheet like a military operation.", "fx": { "dressing": 5, "morale": 3 } },
+        { "label": "Stay humble", "desc": "The whole team defends.", "risk": "low", "hint": "Unity.", "text": "He credits the strikers' pressing. The whole squad appreciates it.", "fx": { "dressing": 4 } }
+      ] },
+    { "id": "ms2_player_of_month", "cat": "milestone", "w": 3, "cd": 100, "when": { "form": [7.4, 10], "level": [2, 5] },
+      "title": "Player of the Month", "text": "He's been named the league's player of the month. The trophy is presented before a home match. His face is on a giant banner outside the stadium.",
+      "prompt": "Player of the month.",
+      "choices": [
+        { "label": "Dedicate it to the team", "desc": "Nobody wins alone.", "risk": "low", "hint": "Class.", "text": "He lifts it and points at his teammates. The dressing room loves it.", "fx": { "dressing": 4, "fans": 3, "rep": 1 } },
+        { "label": "Dedicate it to your family", "desc": "They sacrificed most.", "risk": "low", "hint": "Heartfelt.", "text": "He dedicates it to {MUM} and {DAD}. They watch at home and cry.", "fx": { "family": 6, "rep": 1 } }
+      ] },
+    { "id": "ms2_first_captain_game", "cat": "milestone", "w": 4, "cd": 999, "once": true, "when": { "isCaptain": true },
+      "title": "The Armband", "text": "His first match as captain. The armband feels heavier than it looks. Before kick-off, he has to lead the team talk.",
+      "prompt": "Your first team talk as captain.",
+      "choices": [
+        { "label": "Short and fierce", "desc": "Three sentences.", "risk": "low", "hint": "Punchy.", "text": "Three sentences. The roar afterwards shakes the dressing room.", "fx": { "dressing": 6, "morale": 4 } },
+        { "label": "Personal and emotional", "desc": "What this club means.", "risk": "medium", "hint": "Powerful if it lands.", "check": { "stat": "mental", "dc": 52 }, "ok": { "text": "He talks about the first time he walked into this stadium. Grown men are blinking hard.", "fx": { "dressing": 8, "morale": 5 } }, "bad": { "text": "He loses his words halfway through. The vice-captain finishes for him.", "fx": { "dressing": 1, "stress": 3 } } }
+      ] },
+    { "id": "ms2_national_goal_family", "cat": "milestone", "w": 3, "cd": 999, "once": true, "when": { "caps": [1, 999], "nt": ["called", "regular"] },
+      "title": "For the Country", "text": "Representing his country has changed something at home. Strangers stop {DAD} in the street. {MUM}'s friends ask her for tickets. {SIB}'s teachers mention it in class.",
+      "prompt": "Your family is famous by association.",
+      "choices": [
+        { "label": "Buy tickets for the whole family for the next international", "desc": "All of them.", "risk": "low", "hint": "Pride.", "text": "The whole family in national colours, singing the anthem. {DAD} cries through it.", "fx": { "family": 10, "wealth": -800 } },
+        { "label": "Visit their neighbourhood in national kit", "desc": "Share it.", "risk": "low", "hint": "Pride at home.", "text": "He visits in the national kit. The street throws a party.", "fx": { "family": 6, "fans": 4 } }
+      ] },
+    { "id": "ms2_seasonstart_goals", "cat": "milestone", "trigger": "seasonStart", "w": 4, "cd": 40,
+      "title": "New Season", "text": "Pre-season starts today. New season, new kit, new targets. The coach asks every player to write down one goal for the season and put it in an envelope.",
+      "prompt": "What do you write in the envelope?",
+      "choices": [
+        { "label": "A football target", "desc": "Goals, games, a trophy.", "risk": "low", "hint": "Clear.", "text": "He writes a number and seals it. Only he and the coach will know.", "fx": { "mood": "Determined", "trust": 1 } },
+        { "label": "A personal target", "desc": "Be a better son, partner, friend.", "risk": "low", "hint": "Balance.", "text": "He writes something about the people at home. The coach reads it at the end of the season and smiles.", "fx": { "family": 2, "stress": -2 } }
+      ] }
+  ]
+}

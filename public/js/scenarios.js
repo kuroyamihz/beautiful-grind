@@ -2,8 +2,10 @@
 // decides which ones fit the player's life right now, and resolves choices.
 // Scenario format: see data/scenarios/README.md
 import { chance, clamp, gauss, pick, randint, weightedPick } from './util.js';
-import { STAT_KEYS, EUR_IDR, RAMADAN, POSITIONS } from './config.js';
-import { personName, overall } from './player.js';
+import { EUR_IDR, RAMADAN, POSITIONS, LEGACY_STATS, ATTRS } from './config.js';
+import { personName, overall, attrValue, careerLevel } from './player.js';
+import { teammateFor } from './squad.js';
+import { ownedCar, netWorth } from './assets.js';
 import { leagueQuality, leagueClubs } from './world.js';
 import { monthOf, ageAt, inRange } from './time.js';
 import { meter, lifeTokens, LIFE_FX, castAges } from './life.js';
@@ -52,6 +54,13 @@ export function scenarioContext(state, world, res = null) {
     ...(p.circle ? castAges(state) : {}), sibKind: p.circle?.sibling?.kind ?? null, week: w, flagWeeks: state.flags.story ?? {},
     partnerYears: p.partner.status === 'none' ? null : (w - (p.partner.since ?? w)) / 52, potential: p.potential ?? null, wantsAbroad: !!p.wantsAbroad,
     sponsors: (p.endorsements ?? []).length, followersM: p.followers / 1e6,
+    level: careerLevel(p, ageAt(p.dob, w)),
+    // Where the people are: a partner back home can't come to dinner; parents abroad can't drop by.
+    partnerNear: p.partner.status !== 'none' && (p.partner.near !== false || p.partner.visitWeek === w),
+    longDistance: p.partner.status !== 'none' && p.partner.near === false,
+    familyNear: !(!!club && club.country !== p.nationality) || !!state.flags.story?.family_moved_in,
+    crush: !!p.crush, crushHeat: p.crush?.heat ?? null, hasKid: (p.kids ?? []).length > 0, worth: p.assets ? netWorth(state) : p.wealthEUR,
+    isCaptain: !!state.squad?.captainIsMe, ownsCar: !!ownedCar(state), lifestyle: p.lifestyle ?? 1,
     ...Object.fromEntries(LIFE_RANGES.map((k) => [k, p.life ? meter(p, k) : 50])),
   };
 }
@@ -66,6 +75,7 @@ export function conditionsMet(when = {}, c) {
       case 'ovr': case 'pfm': case 'goalsSeason': case 'tacticalFit':
       case 'board': case 'dressing': case 'fans': case 'press': case 'image': case 'love': case 'friends': case 'morale': case 'stress': case 'family':
       case 'sibAge': case 'mumAge': case 'dadAge': case 'kidAge': case 'partnerYears': case 'potential': case 'sponsors':
+      case 'level': case 'crushHeat': case 'worth': case 'bond': case 'lifestyle':
         if (!inRangeOf(c[k], v)) return false; break;
       case 'role': case 'partner': case 'phase': case 'nt': case 'lastResult': case 'partnerStyle': case 'sibKind':
         if (!v.includes(c[k])) return false; break;
@@ -79,6 +89,7 @@ export function conditionsMet(when = {}, c) {
       case 'notFlags': if (v.some((f) => c.flags.has(f))) return false; break;
       case 'injured': case 'abroad': case 'ramadan': case 'agent': case 'listed': case 'played': case 'matchWeek':
       case 'freeAgent': case 'hasAlly': case 'hasRival': case 'loan': case 'debt': case 'wantsAbroad':
+      case 'partnerNear': case 'longDistance': case 'familyNear': case 'crush': case 'hasKid': case 'isCaptain': case 'ownsCar':
         if (!!c[k] !== v) return false; break;
       // Weeks since a story flag was set: { "since": { "promised_ultras": [100, 9999] } }
       case 'since':
@@ -138,12 +149,19 @@ function brandWords(state, world) {
 }
 
 // ── Instances: names and amounts fixed when the scenario fires ──
-function nameFor(kind, mode, state) {
+function nameFor(kind, mode, state, taken = []) {
   const p = state.player;
   const country = p.club?.country ?? p.nationality;
+  // Teammates come from the real squad, so the same names keep turning up (and leave when they're sold).
+  if ((kind === 'T' || kind === 'T2') && state.squad && mode !== 'outsider') {
+    const n = teammateFor(state, mode, taken, ageAt(p.dob, state.week));
+    if (n) return n;
+  }
   if (kind === 'T' && mode === 'ally') return pick(p.keyTeammates.filter((t) => t.relationship === 'ally'))?.name;
   if (kind === 'T' && mode === 'rival') return pick(p.keyTeammates.filter((t) => ['rival', 'enemy'].includes(t.relationship)))?.name;
   if (kind === 'T' && mode === 'any' && p.keyTeammates.length) return pick(p.keyTeammates).name;
+  if (kind === 'F' && mode === 'crush' && p.crush) return p.crush.name;
+  if (kind === 'F' && mode === 'ex' && p.cast?.exflame) return p.cast.exflame;
   if (kind === 'F') return mode === 'partner' && p.partner.name ? p.partner.name : personName(country, true);
   if (kind === 'A') return mode === 'agent' && p.agent ? p.agent.name : personName(pick([p.nationality, 'England', 'Netherlands']));
   return personName(country);
@@ -166,10 +184,13 @@ export function instantiate(s, state, world, carried = null) {
   const inst = carried ? { ...carried, sid: s.id } : { sid: s.id, names: {}, vars: {} };
   // Random words ({PLACE}, {FOOD}, {DAY}…) are picked once, so the scene and its outcome agree.
   inst.words = { ...Object.fromEntries(Object.entries(world.life?.words ?? {}).map(([k, list]) => [k, pick(list)])), ...brandWords(state, world), ...(carried?.words ?? {}) };
+  // His own car, if he has one, is the car in the story.
+  const car = ownedCar(state);
+  if (car && !carried?.words?.CAR) inst.words.CAR = `his ${car.brand} ${car.name}`;
   for (const k of ['T', 'T2', 'F', 'A', 'K']) {
     if (inst.names[k]) continue;
     const mode = s.uses?.[k] ?? 'new';
-    inst.names[k] = nameFor(k, mode, state) ?? personName(p.club?.country ?? p.nationality);
+    inst.names[k] = nameFor(k, mode, state, Object.values(inst.names)) ?? personName(p.club?.country ?? p.nationality);
   }
   if (!inst.names.R && p.club) inst.names.R = pick(leagueClubs(state, world, p.club.key).filter((c) => c !== p.club.name)) ?? 'their rivals';
   const defs = Object.assign({}, ...(s.choices ?? []).map((c) => c.vars ?? {}), s.vars ?? {});
@@ -198,6 +219,7 @@ export function fill(str, inst, state) {
     ...(p.circle ? lifeTokens(state) : {}), ...(inst.words ?? {}),
     // People the story remembers across years (set with fx cast): {RIVAL} {MENTEE} {EXFLAME} {FIXER} {OLDBOSS}
     RIVAL: p.cast?.rival ?? inst.names.T, MENTEE: p.cast?.mentee ?? inst.names.K, EXFLAME: p.cast?.exflame ?? inst.names.F, FIXER: p.cast?.fixer ?? inst.names.A, OLDBOSS: p.cast?.oldboss ?? p.manager.name,
+    CRUSH: p.crush?.name ?? inst.names.F, CRUSHf: (p.crush?.name ?? inst.names.F)?.split(' ')[0], FORMER: p.formerTeammates?.at(-1)?.name ?? inst.names.T, FORMERCLUB: p.formerTeammates?.at(-1)?.club ?? 'his old club',
   };
   return String(str).replace(/\{(\w+)\}/g, (m, k) => (k in map ? map[k] : k in inst.vars ? fmtMoney(state, inst.vars[k]) : m));
 }
@@ -216,7 +238,9 @@ export function resolveFx(fx, inst, state) {
   if (!fx) return null;
   const out = {};
   for (const [k, v] of Object.entries(fx)) {
-    if (['trust', 'rep', 'followers', 'wealth', 'pfm', 'form', 'tacticalFit', 'parental', 'monthlySupport', 'suspension', 'lifestyle', 'potential', ...LIFE_FX].includes(k)) out[k] = num(v, inst);
+    if (['trust', 'rep', 'followers', 'wealth', 'pfm', 'form', 'tacticalFit', 'parental', 'monthlySupport', 'suspension', 'lifestyle', 'potential', 'crushHeat', 'sibBond', 'exBond', 'agentBond', 'wealthWeeks', 'wageRaise', 'supportWeeks', 'agentCut', ...LIFE_FX].includes(k)) out[k] = num(v, inst);
+    else if (k === 'bond') { out.bond = num(v, inst); out.bondWho = out.bondWho ?? inst.names.T; }
+    else if (k === 'crush') out.crush = v === null ? null : { name: inst.names[v.who ?? 'F'], heat: v.heat ?? 30, where: v.where ?? null };
     else if (k === 'newManager') out.newManager = !!v;
     else if (k === 'teammate') out.teammate = { name: inst.names[v.who ?? 'T'], rel: v.rel };
     else if (k === 'partner') out.partner = v.status === 'none' ? { name: '', status: 'none' } : { name: v.who ? inst.names[v.who] : state.player.partner.name, status: v.status };
@@ -230,19 +254,21 @@ export function resolveFx(fx, inst, state) {
   return out;
 }
 
-function rollCheck(check, state) {
+function rollCheck(check, state, extra = {}) {
   const p = state.player;
-  const value = STAT_KEYS.includes(check.stat) ? p.stats[check.stat]
-    : check.stat === 'trust' ? p.manager.trust : check.stat === 'rep' ? p.reputation : check.stat === 'parental' ? p.family.parentalSupport
-      : check.stat === 'pfm' ? p.pfm : check.stat === 'agent' ? (p.agent?.quality ?? 20) : check.stat === 'tacticalFit' ? p.manager.tacticalFit : overall(p);
+  const k = check.stat;
+  const value = ATTRS[k] || LEGACY_STATS[k] ? attrValue(p, k)
+    : k === 'trust' ? p.manager.trust : k === 'rep' ? p.reputation : k === 'parental' ? p.family.parentalSupport
+      : k === 'pfm' ? p.pfm : k === 'agent' ? (p.agent?.quality ?? 20) : k === 'tacticalFit' ? p.manager.tacticalFit
+        : k === 'bond' ? (extra.bond ?? 50) : k === 'crushHeat' ? (p.crush?.heat ?? 30) : LIFE_RANGES.includes(k) ? (meter(p, k) ?? 40) : overall(p);
   return value + gauss() * 10 >= check.dc;
 }
 
-export function resolveChoice(state, s, inst, choiceId) {
+export function resolveChoice(state, s, inst, choiceId, extra = {}) {
   const idx = Math.max(0, Number(choiceId));
   const c = s.choices[idx] ?? s.choices[0];
   let out;
-  if (c.check) out = rollCheck(c.check, state) ? c.ok : c.bad;
+  if (c.check) out = rollCheck(c.check, state, extra) ? c.ok : c.bad;
   else if (c.out) out = weightedPick(c.out, (o) => o.w ?? 1);
   else out = c;
   return { text: fill(pickText(out.text ?? '', state), inst, state), fx: resolveFx(out.fx, inst, state), label: fill(c.label, inst, state) };
@@ -254,6 +280,7 @@ const FX_ASPECT = {
   press: 'press', image: 'image', rep: 'image', followers: 'social', wealth: 'money', lifestyle: 'money', monthlySupport: 'money', endorsement: 'money', agent: 'money',
   parental: 'family', family: 'family', love: 'love', partner: 'love', friends: 'friends', morale: 'morale', mood: 'morale', stress: 'stress',
   pfm: 'body', injury: 'body', suspension: 'body', growth: 'skills', stat: 'skills', form: 'form', matchMod: 'match',
+  bond: 'dressing', crush: 'love', crushHeat: 'love', partnerNear: 'love', partnerVisit: 'love', partnerFromCrush: 'love', kid: 'family', sibBond: 'family', exBond: 'love', agentBond: 'money', wealthWeeks: 'money', assetLoss: 'money',
 };
 export function aspectsOf(c) {
   const outs = c.check ? [c.ok, c.bad] : c.out ? c.out : [c];
@@ -263,10 +290,12 @@ export function aspectsOf(c) {
 }
 
 export function decisionFor(s, inst, state) {
+  const ctx = s.choices.some((c) => c.when) ? scenarioContext(state, null) : null;
+  const choices = s.choices.map((c, i) => [c, i]).filter(([c]) => !c.when || conditionsMet(c.when, ctx));
   return {
     kind: 'scenario', sid: s.id, data: inst, cat: s.cat, ui: s.ui ?? null, type: s.dtype ?? (s.moment ? 'in-match' : s.cat),
     prompt: fill(s.prompt ?? s.title, inst, state),
-    choices: s.choices.map((c, i) => ({ id: String(i), label: fill(c.label, inst, state), description: fill(c.desc ?? '', inst, state), risk: c.risk ?? 'medium', consequence: fill(c.hint ?? '', inst, state), aspects: aspectsOf(c) })),
+    choices: (choices.length ? choices : [[s.choices[0], 0]]).map(([c, i]) => ({ id: String(i), label: fill(c.label, inst, state), description: fill(c.desc ?? '', inst, state), risk: c.risk ?? 'medium', consequence: fill(c.hint ?? '', inst, state), aspects: aspectsOf(c) })),
   };
 }
 

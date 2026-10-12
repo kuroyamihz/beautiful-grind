@@ -49,13 +49,27 @@ const P = {
   target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',
   table: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M9 9v11"/>',
   list: '<path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/>',
+  car: '<path d="M3 16v-3l2.2-5.2A2 2 0 0 1 7 6.5h10a2 2 0 0 1 1.8 1.3L21 13v3"/><path d="M2.5 16h19v2.5h-19z"/><circle cx="7" cy="18.5" r="1.8"/><circle cx="17" cy="18.5" r="1.8"/><path d="M5 12.5h14"/>',
+  chevron: '<path d="M7 10l5 5 5-5"/>',
+  swap: '<path d="M4 8h14l-3-3M20 16H6l3 3"/>',
+  watch: '<circle cx="12" cy="12" r="6"/><path d="M12 9v3l2 1.5M9 6.5L9.8 3h4.4l.8 3.5M9 17.5l.8 3.5h4.4l.8-3.5"/>',
+  gem: '<path d="M6 4h12l3 5-9 11L3 9z"/><path d="M3 9h18M9 4l3 16M15 4l-3 16"/>',
+  boat: '<path d="M3 15h18l-2.5 4.5h-13z"/><path d="M12 3v12M12 4l6 8h-6"/>',
+  plane: '<path d="M21 15.5l-8-4.5V5a1.5 1.5 0 0 0-3 0v6l-8 4.5V17l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-4.5l8 2.5z"/>',
+  palette: '<path d="M12 3a9 9 0 1 0 0 18c1.2 0 1.8-.8 1.8-1.8 0-1.2-1-1.5-1-2.6 0-1 .8-1.6 1.8-1.6H17a4 4 0 0 0 4-4C21 6.6 17 3 12 3z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7" r="1"/>',
+  shop: '<path d="M4 8h16l-1.2 12H5.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>',
+  eye: '<path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  report: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/>',
+  fast: '<path d="M4 5l8 7-8 7zM12 5l8 7-8 7z"/>',
+  edit: '<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>',
+  house: '<path d="M3 11l9-7 9 7"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-5h4v5"/>',
 };
 
 // Which icon each part of life uses everywhere in the UI.
 export const ASPECT_ICON = {
   trust: 'whistle', board: 'building', dressing: 'users', fans: 'megaphone', press: 'newspaper', image: 'star',
   family: 'home', love: 'heart', friends: 'friends', morale: 'smile', stress: 'zap', social: 'share', followers: 'share',
-  money: 'coin', wealthEUR: 'coin', body: 'pulse', pfm: 'pulse', skills: 'spark', form: 'chart', reputation: 'star', match: 'ball',
+  money: 'coin', wealthEUR: 'coin', crush: 'spark', body: 'pulse', pfm: 'pulse', skills: 'spark', form: 'chart', reputation: 'star', match: 'ball',
 };
 export const ASPECT_LABEL = {
   trust: 'Manager', board: 'Board', dressing: 'Dressing room', fans: 'Fans', press: 'Press', image: 'Image', family: 'Family',

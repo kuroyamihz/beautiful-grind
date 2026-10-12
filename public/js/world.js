@@ -22,8 +22,11 @@ export async function loadWorld(fetchJson) {
   const brands = await fetchJson('data/text/brands.json');
   const social = await fetchJson('data/text/social.json');
   const epilogue = await fetchJson('data/text/epilogue.json');
+  const assets = await fetchJson('data/text/assets.json');
+  const interactions = await fetchJson('data/text/interactions.json');
+  const media = await fetchJson('data/text/media.json');
   return {
-    countries, nationalTeams, scenarios, text, life, brands, social, epilogue,
+    countries, nationalTeams, scenarios, text, life, brands, social, epilogue, assets, interactions, media,
     byName: Object.fromEntries(countries.map((c) => [c.country, c])),
     scenarioById: Object.fromEntries(scenarios.map((s) => [s.id, s])),
   };
