@@ -1,0 +1,1113 @@
+{
+  "_about": "Life web text. ripples = side-effect lines shown under a decision's result (tokens: {J} {P} {Pf} {M} {Mf} {MUM} {DAD} {SIB} {SIBr} {BF} {BFf} {JR} {OUT} {CAP} {CAPl} {PRES} {PRESl} {club}; moves also {NEWCLUB} {COUNTRY}). words = random words for {PLACE} {FOOD} etc. in scenarios. actions = free-time activities (they don't advance time). outlets = fictional media per country.",
+  "ripples": {
+    "splashPrivatePartner": [
+      "{Pf} hates seeing their life in the comments. She goes quiet on the phone that night.",
+      "A stranger tags {Pf} in a meme about {J}. She deletes her account for a week and doesn't say why.",
+      "{Pf}: 'Can we have one week where nobody is talking about you?' It isn't really a question.",
+      "{Pf}'s cousin screenshots the whole thing into the family group chat. {Pf} is not amused."
+    ],
+    "splashPublicPartner": [
+      "{Pf} reposts it with three fire emojis. Her followers double overnight and she is glowing.",
+      "{Pf} loves the attention more than she admits. Dinner that night is a celebration.",
+      "{Pf} sends him a screenshot of her notifications: 'we're famous 😂'.",
+      "Fan accounts start calling {Pf} 'the queen of {club}'. She pretends to be embarrassed."
+    ],
+    "viralFamily": [
+      "{MUM} prints out a screenshot and sticks it on the fridge, next to his school certificates.",
+      "{SIB} has told the whole {SIBplace}. Twice.",
+      "{DAD} says nothing about it on the phone, but his cousins say he showed the clip to everyone at the café.",
+      "The neighbours keep knocking on his parents' door to say they saw him on their phones."
+    ],
+    "badImageFamily": [
+      "{MUM} calls, voice tight: 'People at the market are talking.' The worry costs her more sleep than him.",
+      "{DAD} sends a single message: 'Is this how we raised you?' {J} reads it ten times.",
+      "{SIB} gets teased at school about the headlines. {J} only finds out from his mother.",
+      "His grandmother asks his mother whether {J} is 'in trouble with the police'. He is not. It doesn't matter."
+    ],
+    "goodImageFamily": [
+      "{MUM} forwards the article to forty people. {J} knows because thirty-nine of them message him.",
+      "{DAD} calls just to read the headline out loud. Then he hangs up. That's his way of saying he's proud.",
+      "{SIB} posts '{SIBr} of a legend 😎' on every platform there is."
+    ],
+    "imageBoard": [
+      "President {PRESl} asks the media department for 'a full summary' of {J}'s week. Nobody wants to be in that meeting.",
+      "A sponsor's representative calls the club. The commercial director makes a note next to {J}'s name.",
+      "The board discuss {J} for eleven minutes at their monthly meeting. Not the good kind of eleven minutes."
+    ],
+    "imageBoardUp": [
+      "The commercial department want {J} in the new shirt launch. The board like a player who sells shirts.",
+      "President {PRESl} mentions {J} by name in a speech to sponsors. That doesn't happen to everyone."
+    ],
+    "clashBacked": [
+      "In the canteen, three senior players sit down next to {J} without a word. The message is clear: they've got his back.",
+      "{CAP} pulls {J} aside: 'Say less in public. But for what it's worth — you're not wrong.'",
+      "The dressing-room group chat goes suspiciously quiet whenever {Mf} posts in it."
+    ],
+    "clashIsolated": [
+      "Nobody saves {J} a seat at lunch. The dressing room has picked the manager's side.",
+      "{CAP}: 'You've made it about you. That's not how it works here.' Two teammates nod along.",
+      "A teammate leaks to the press that 'some of the lads are tired of the noise around {J}'."
+    ],
+    "clashFans": [
+      "The fans pick a side in the {J}–{Mf} saga, and on the forums it's loud.",
+      "A banner appears at the training ground gate the next morning. It's about {J}. It's about {Mf} too."
+    ],
+    "teachersPet": [
+      "'Coach's favourite,' someone mutters in the dressing room. Laughter. {J} pretends not to hear it.",
+      "The squad WhatsApp has a new sticker of {J}'s face on {Mf}'s body. It's funny. Mostly."
+    ],
+    "splurge": [
+      "{BFf} can't stop laughing at the new purchase. 'Look at you, big shot.' The friends love it.",
+      "The old crew from home call it 'the {J} effect' — suddenly every night out is on him.",
+      "{MUM} sees the photos and asks, gently, whether he's saving anything."
+    ],
+    "windfall": [
+      "For the first time in months {J} looks at his bank balance without his stomach dropping.",
+      "Money in the account. {J} sleeps through the night for the first time in weeks."
+    ],
+    "familyUp": [
+      "Things are good at home, and it shows: {J} walks into training lighter.",
+      "{MUM}'s voice notes are all laughter this week. It's the best kind of medicine.",
+      "A long, easy phone call with {DAD} about nothing at all. {J} feels sixteen again, in the good way."
+    ],
+    "familyDown": [
+      "The tension at home follows {J} into the training ground. He snaps at a physio and apologises.",
+      "{J} can't stop replaying the argument with {DAD}. His first touch in training goes with it.",
+      "{MUM} doesn't send her usual good-luck message. He notices the silence all day."
+    ],
+    "loveUp": [
+      "{Pf} leaves a note in his kitbag: 'Go get them.' He keeps it in his locker.",
+      "A good week with {Pf}. {J} catches himself smiling in the middle of a fitness test.",
+      "{Pf} cooks his favourite and they don't talk about football once. Perfect."
+    ],
+    "powerCouplePost": [
+      "{Pf} posts a photo of the two of them. The internet decides they're the cutest couple in football. Followers pour in.",
+      "Their couple photo goes viral on Indonesian Twitter. Brands start sliding into {Pf}'s DMs."
+    ],
+    "loveDown": [
+      "{Pf} sleeps at her sister's place. The flat is very quiet.",
+      "The argument with {Pf} plays on a loop in his head during the tactics meeting. {Mf} has to repeat himself.",
+      "{Pf} leaves him on read. For a whole day. He checks his phone between every drill."
+    ],
+    "friendsUp": [
+      "The old group chat comes alive again: memes, voice notes, insults. {J} laughs until he cries.",
+      "{BFf} sends him a photo from their school days. Muddy pitch, borrowed boots. It resets everything.",
+      "A night with real friends who don't care about his stats. Exactly what he needed."
+    ],
+    "friendsDown": [
+      "{BFf}'s messages get shorter. Then they stop. {J} notices on a Sunday, alone.",
+      "The group chat has moved on without him. Inside jokes he doesn't understand anymore."
+    ],
+    "friendLeak": [
+      "Someone from {J}'s old circle has been talking to {JR}. A 'source close to the player' appears in {OUT}.",
+      "A blurry photo of {J} from a private party ends up on a gossip account. Only friends were there."
+    ],
+    "fansUp": [
+      "The supporters' club vote {J} their player of the month. The board notice the shirt sales.",
+      "A new chant. It's about {J}. It's terrible, it doesn't rhyme, and it's the best thing he's ever heard.",
+      "Kids at the training-ground gate are wearing his number now."
+    ],
+    "fansDown": [
+      "Every touch from {J} is greeted with a groan now. You can hear it from the bench.",
+      "The fan podcast spend twenty minutes on 'the {J} problem'. He listens to four of them."
+    ],
+    "dressingTalk": [
+      "What's said in the dressing room reaches {Mf}'s office by Friday. It always does.",
+      "{CAP} has a word with the coaching staff. {J}'s name comes up."
+    ],
+    "dressingRespect": [
+      "{CAP} mentions {J} to {Mf}: 'The lads trust him.' It counts for a lot.",
+      "The senior players have started including {J} in the leadership chats. {Mf} notices."
+    ],
+    "pressUp": [
+      "{JR} at {OUT} writes a glowing piece. Other papers copy whole paragraphs.",
+      "The media like {J} now. The questions get softer, the headlines kinder."
+    ],
+    "pressHit": [
+      "{OUT} runs it on the back page with an unflattering photo. {MUM} sees it first.",
+      "The tone of the coverage turns. 'Talented, but…' is how every article starts now.",
+      "{JR} writes a column titled 'What is going on with {J}?'. It is shared widely."
+    ],
+    "boardPressure": [
+      "President {PRESl} has a word with {Mf}. Nobody hears what was said. Everybody can guess.",
+      "The board want 'clarity' on {J}. {Mf} is the one who has to provide it."
+    ],
+    "boardHappy": [
+      "President {PRESl} shakes {J}'s hand in the corridor and remembers his name. {Mf} sees it.",
+      "The board are pleased. A word from upstairs makes {Mf}'s life easier."
+    ],
+    "restStress": [
+      "Proper rest. The knot in {J}'s shoulders finally lets go.",
+      "Ten hours of sleep and a slow breakfast. The world feels smaller and more manageable."
+    ],
+    "tiredStress": [
+      "His legs are heavy and his mind is heavier. The fatigue is starting to talk.",
+      "Exhaustion makes everything look worse. {J} knows it, and it doesn't help."
+    ],
+    "stressSpill": [
+      "{J} brings the pressure home. {Pf} gets the short answers and the closed door.",
+      "{Pf}: 'You're here, but you're not here.' She's right."
+    ],
+    "badMoodHome": [
+      "The mood follows him through the front door. Nobody at home deserves it.",
+      "{J} drives home in silence and stays in the car for twenty minutes before going in."
+    ],
+    "goodMood": [
+      "There's a bounce in his step. Even the kit man notices.",
+      "{J} hums in the shower after training. The physios exchange a look."
+    ],
+    "moveAbroad": [
+      "The move to {COUNTRY} means saying goodbye to everyone. {MUM} cries at the airport. {BFf} pretends he doesn't.",
+      "A new country, a new language, a new loneliness. {DAD} says, 'Make us proud.' The group chat says, 'Don't forget us.'"
+    ],
+    "moveAbroadPartner": [
+      "{Pf} has to decide whether to follow him to {COUNTRY}. The conversation goes on until 3am and ends without an answer.",
+      "Long distance with {Pf} starts tonight: video calls across time zones and a lot of 'are you awake?'"
+    ],
+    "moveDomestic": [
+      "A new city, same country. {MUM} has already found the cheapest bus route to visit him.",
+      "Moving to {NEWCLUB} means new streets, new faces, and old friends slightly further away."
+    ]
+  },
+  "outlets": {
+    "Indonesia": [
+      "Suara Bola",
+      "Harian Garuda",
+      "Lapangan Hijau",
+      "Bola Nusantara",
+      "Tribun Lapangan",
+      "Gelora Sport"
+    ],
+    "England": [
+      "The Touchline",
+      "Back Page Daily",
+      "The Terrace Post",
+      "Matchday Herald",
+      "The Final Third"
+    ],
+    "Spain": [
+      "Diario del Balón",
+      "El Área",
+      "Marcador Total"
+    ],
+    "Brazil": [
+      "Gazeta da Bola",
+      "Lance Livre",
+      "Placar Popular"
+    ],
+    "Japan": [
+      "Pitch Shimbun",
+      "Sports Hibi"
+    ],
+    "Germany": [
+      "Anstoß Zeitung",
+      "Der Abpfiff"
+    ],
+    "Italy": [
+      "Corriere del Calcio",
+      "La Fascia"
+    ],
+    "France": [
+      "Le Coup Franc",
+      "Tribune Libre"
+    ],
+    "Netherlands": [
+      "Het Strafschopgebied",
+      "Voetbal Dagblad"
+    ],
+    "default": [
+      "The Touchline",
+      "Football Daily",
+      "The Matchday Herald",
+      "Pitchside Weekly",
+      "The Dugout"
+    ]
+  },
+  "words": {
+    "PLACE": [
+      "a quiet café near the training ground",
+      "the mall on the edge of town",
+      "a rooftop restaurant",
+      "a 24-hour minimarket",
+      "the hotel lobby",
+      "a petrol station at midnight",
+      "the cinema car park",
+      "a noodle stall under a flyover",
+      "the beach after sunset",
+      "a karaoke bar",
+      "a barbershop",
+      "the airport arrivals hall"
+    ],
+    "FOOD": [
+      "nasi goreng",
+      "a giant plate of fried chicken",
+      "grilled fish",
+      "instant noodles at 2am",
+      "a protein shake that tastes like chalk",
+      "his mother's rendang",
+      "street satay",
+      "pizza nobody should be eating in season",
+      "a smoothie bowl the nutritionist approved",
+      "boiled eggs and rice"
+    ],
+    "DAY": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+    "TIME": [
+      "Tuesday, 22:40",
+      "Wednesday morning",
+      "Thursday, after training",
+      "Monday, 07:15",
+      "Friday night",
+      "Wednesday, 13:05",
+      "Sunday afternoon",
+      "Thursday, 23:55",
+      "Tuesday lunchtime",
+      "Saturday, 06:30"
+    ],
+    "SET": [
+      "the pre-match press conference",
+      "a mixed-zone interview",
+      "a radio phone-in",
+      "a TV studio segment",
+      "a podcast recording",
+      "a sponsor's media day",
+      "a live Instagram session"
+    ],
+    "APP": [
+      "Instagram",
+      "TikTok",
+      "X",
+      "YouTube"
+    ],
+    "CAR": [
+      "a matte-black SUV",
+      "a white sports coupé",
+      "a second-hand hatchback",
+      "a borrowed scooter",
+      "a hybrid the club gave him",
+      "a vintage pickup"
+    ],
+    "SHOW": [
+      "a Korean drama",
+      "a true-crime documentary",
+      "an old cartoon from his childhood",
+      "a cooking competition",
+      "a football documentary about a club he hates"
+    ],
+    "GIFT": [
+      "a watch",
+      "a pair of trainers",
+      "a bouquet the size of a small child",
+      "a signed shirt",
+      "a new phone",
+      "a handwritten letter"
+    ],
+    "WEATHER": [
+      "pouring rain",
+      "suffocating heat",
+      "a cold wind off the sea",
+      "fog so thick the far goal disappears",
+      "perfect blue sky"
+    ],
+    "HOBBY": [
+      "learning guitar",
+      "chess online",
+      "fishing",
+      "photography",
+      "drawing",
+      "cooking",
+      "learning English",
+      "badminton"
+    ]
+  },
+  "actions": [
+    {
+      "id": "call_home",
+      "icon": "phone",
+      "label": "Call home",
+      "desc": "An hour on the phone with family.",
+      "when": {},
+      "out": [
+        {
+          "w": 3,
+          "text": [
+            "{MUM} talks for forty minutes about the neighbours' goat, a wedding, and whether he's eating vegetables. He feels human again.",
+            "{DAD} picks up, says 'Good, good,' four times, and then passes the phone to {MUM}. Classic. Perfect.",
+            "{SIB} hijacks the call to show him something ridiculous. He pretends to be impressed."
+          ],
+          "fx": {
+            "family": 5,
+            "stress": -3,
+            "morale": 2
+          }
+        },
+        {
+          "w": 1,
+          "text": [
+            "The call starts nicely and ends in an argument about money, as calls with {DAD} sometimes do.",
+            "{MUM} cries a little on the phone. She says she's fine. He doesn't sleep well."
+          ],
+          "fx": {
+            "family": 2,
+            "stress": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "meet_someone",
+      "icon": "heart",
+      "label": "Say yes to a blind date",
+      "desc": "A friend knows someone. 'Trust me.'",
+      "when": {
+        "partner": [
+          "none"
+        ],
+        "age": [
+          18,
+          45
+        ]
+      },
+      "out": [
+        {
+          "w": 2,
+          "text": [
+            "Coffee turns into dinner turns into a three-hour walk. Her name is {CRUSH}. He texts her before he is even home.",
+            "She is funny, sharp and completely unimpressed by footballers. Her name is {CRUSHf}. He wants to see her again."
+          ],
+          "fx": {
+            "crush": "new",
+            "morale": 4
+          }
+        },
+        {
+          "w": 2,
+          "text": [
+            "She spends the whole evening asking about other footballers. {J} pays the bill and goes home.",
+            "Nice person, zero spark. They agree to be friends and both mean it."
+          ],
+          "fx": {
+            "friends": 2
+          }
+        },
+        {
+          "w": 1,
+          "text": [
+            "She posts a photo of the date before dessert arrives. The comments are a war zone."
+          ],
+          "fx": {
+            "followers": 2000,
+            "image": -2,
+            "press": -1
+          }
+        }
+      ]
+    },
+    {
+      "id": "video_call_friends",
+      "icon": "friends",
+      "label": "Video call the old crew",
+      "desc": "{BFf} and the gang, across the time zones.",
+      "when": {
+        "abroad": true
+      },
+      "out": [
+        {
+          "w": 3,
+          "text": [
+            "Six faces on a cracked screen, everyone talking at once. {BFf} has dyed his hair orange. Nobody knows why.",
+            "They make him show them his new apartment. They are deeply unimpressed by the view and very impressed by the fridge."
+          ],
+          "fx": {
+            "friends": 6,
+            "stress": -2,
+            "morale": 3
+          }
+        },
+        {
+          "w": 1,
+          "text": [
+            "Only {BFf} turns up. The others 'are busy'. It stings more than it should."
+          ],
+          "fx": {
+            "friends": 2,
+            "morale": -1
+          }
+        }
+      ]
+    },
+    {
+      "id": "squad_night",
+      "icon": "users",
+      "label": "Team night out",
+      "desc": "Bowling and dinner with the squad.",
+      "when": {
+        "freeAgent": false,
+        "age": [
+          17,
+          45
+        ]
+      },
+      "out": [
+        {
+          "w": 3,
+          "text": [
+            "Bowling. {CAPl} is shockingly good. {J} is shockingly bad. The squad will mention this for a month.",
+            "A long dinner where the veterans tell stories about managers past. {J} laughs until his ribs hurt."
+          ],
+          "fx": {
+            "dressing": 5,
+            "morale": 3,
+            "pfm": -1
+          }
+        },
+        {
+          "w": 1,
+          "text": [
+            "Someone posts a video from the night. It's harmless. The comments are not.",
+            "The night goes on too late. Training the next morning is a blurry nightmare."
+          ],
+          "fx": {
+            "dressing": 4,
+            "image": -2,
+            "pfm": -4,
+            "trust": -1
+          }
+        }
+      ]
+    },
+    {
+      "id": "stream_games",
+      "icon": "gamepad",
+      "label": "Stream a game night",
+      "desc": "Go live and play with fans.",
+      "when": {
+        "age": [
+          16,
+          34
+        ]
+      },
+      "out": [
+        {
+          "w": 3,
+          "text": [
+            "Three hours live. He loses every match and roasts himself the whole time. Chat loves him.",
+            "A teammate joins the stream uninvited. The chemistry is chaos. The clips go everywhere."
+          ],
+          "fx": {
+            "followers": 5000,
+            "fans": 2,
+            "stress": -2,
+            "pfm": -1
+          }
+        },
+        {
+          "w": 1,
+          "text": [
+            "He rage-quits on stream and says something about the referee from last week. The league is watching too.",
+            "A troll spams the chat with his family's address. He ends the stream shaking."
+          ],
+          "fx": {
+            "followers": 3000,
+            "image": -3,
+            "press": -2,
+            "stress": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "extra_analysis",
+      "icon": "video",
+      "label": "Video session with the analyst",
+      "desc": "Two hours of clips: your last match, frame by frame.",
+      "when": {
+        "freeAgent": false
+      },
+      "out": [
+        {
+          "w": 3,
+          "text": [
+            "The analyst pauses on one moment forty times. By the end, {J} sees the pitch differently.",
+            "They go through every one of his touches. It's humbling. It's useful."
+          ],
+          "fx": {
+            "growth": [
+              "mental"
+            ],
+            "trust": 1,
+            "stress": 1
+          }
+        },
+        {
+          "w": 1,
+          "text": [
+            "{Mf} walks in halfway through, raises an eyebrow, and sits down to watch with them. That's new."
+          ],
+          "fx": {
+            "growth": [
+              "mental"
+            ],
+            "trust": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "extra_gym",
+      "icon": "dumbbell",
+      "label": "Extra gym session",
+      "desc": "Push the body further.",
+      "when": {
+        "injured": false
+      },
+      "out": [
+        {
+          "w": 3,
+          "text": [
+            "An extra hour of squats and sprint drills after everyone's gone home.",
+            "Plyometrics until his legs shake. The fitness coach nods approvingly from the doorway."
+          ],
+          "fx": {
+            "growth": [
+              "physical"
+            ],
+            "pfm": -3,
+            "stress": 1
+          }
+        },
+        {
+          "w": 1,
+          "text": [
+            "A tweak in the hamstring on the last set. Probably nothing. Probably."
+          ],
+          "fx": {
+            "pfm": -6,
+            "stress": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "talk_manager",
+      "icon": "whistle",
+      "label": "Knock on {Mf}'s door",
+      "desc": "Ask what you need to do to play more.",
+      "when": {
+        "freeAgent": false
+      },
+      "out": [
+        {
+          "w": 2,
+          "text": [
+            "{Mf} talks for twenty minutes about pressing triggers. {J} takes notes. The door stays open after that.",
+            "'You want to play? Good. That's the right question.' A short, useful conversation."
+          ],
+          "fx": {
+            "trust": 3,
+            "tacticalFit": 3
+          }
+        },
+        {
+          "w": 1,
+          "text": [
+            "{Mf} is busy and irritated. 'Not now.' It feels worse than a no.",
+            "{Mf} listens, then says, 'You'll play when you deserve it.' The meeting lasts ninety seconds."
+          ],
+          "fx": {
+            "trust": -1,
+            "stress": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "coffee_journalist",
+      "icon": "newspaper",
+      "label": "Coffee with {JR}",
+      "desc": "Off the record with the {OUT} reporter.",
+      "when": {
+        "rep": [
+          5,
+          100
+        ]
+      },
+      "out": [
+        {
+          "w": 3,
+          "text": [
+            "{JR} is easy company. Off the record means off the record. A friend in the press is worth a lot.",
+            "They talk about their hometowns. {JR} writes a kind line about him the next week."
+          ],
+          "fx": {
+            "press": 6,
+            "image": 1
+          }
+        },
+        {
+          "w": 1,
+          "text": [
+            "One 'off the record' sentence appears in {OUT} on Saturday, attributed to 'a source close to the player'."
+          ],
+          "fx": {
+            "press": 2,
+            "trust": -3,
+            "dressing": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "charity_visit",
+      "icon": "star",
+      "label": "Visit a children's hospital",
+      "desc": "Signed shirts and an afternoon with the kids.",
+      "when": {
+        "freeAgent": false
+      },
+      "out": [
+        {
+          "w": 4,
+          "text": [
+            "A boy with a shaved head asks him to sign his cast and then critiques his finishing. {J} has never been so happy to be insulted.",
+            "The children's ward chant his name. A nurse cries. {J} sits in the car afterwards for a long time."
+          ],
+          "fx": {
+            "image": 4,
+            "fans": 3,
+            "morale": 5,
+            "stress": -2
+          }
+        },
+        {
+          "w": 1,
+          "text": [
+            "The club's media team film everything. It feels less like a visit and more like content. He says so. They don't like that."
+          ],
+          "fx": {
+            "image": 2,
+            "board": -2,
+            "morale": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "rest_day",
+      "icon": "bed",
+      "label": "Full day of rest",
+      "desc": "Sleep, {SHOW}, nothing.",
+      "when": {},
+      "out": [
+        {
+          "w": 4,
+          "text": [
+            "Eleven hours of sleep and three episodes of {SHOW}. The body says thank you.",
+            "He switches off his phone at noon. By evening, he can't remember why he was stressed."
+          ],
+          "fx": {
+            "pfm": 4,
+            "stress": -5
+          }
+        },
+        {
+          "w": 1,
+          "text": [
+            "He tries to rest but scrolls through criticism for three hours instead. Not rest."
+          ],
+          "fx": {
+            "pfm": 2,
+            "stress": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "send_money",
+      "icon": "wallet",
+      "label": "Send money home",
+      "desc": "Help with the bills.",
+      "when": {
+        "wealth": [
+          300,
+          999999999
+        ]
+      },
+      "out": [
+        {
+          "w": 3,
+          "text": [
+            "{MUM} sends a voice note that is mostly crying and a little bit scolding. 'You need it more than us!' They need it more.",
+            "The roof gets fixed. {DAD} sends a photo of it, no caption."
+          ],
+          "fx": {
+            "family": 6,
+            "wealthWeeks": 1.5,
+            "morale": 2
+          }
+        },
+        {
+          "w": 1,
+          "text": [
+            "Word gets around the extended family. Three uncles call the same week, all with 'opportunities'."
+          ],
+          "fx": {
+            "family": 3,
+            "wealthWeeks": 1.5,
+            "stress": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "explore_city",
+      "icon": "map",
+      "label": "Explore the city",
+      "desc": "Get to know your new home.",
+      "when": {
+        "abroad": true
+      },
+      "out": [
+        {
+          "w": 3,
+          "text": [
+            "He gets lost on purpose and finds a tiny restaurant that cooks almost like home. He'll be back.",
+            "A walk by the river. An old man playing chess beats him in nine moves and gives him a lesson for free."
+          ],
+          "fx": {
+            "morale": 4,
+            "stress": -3,
+            "friends": 1
+          }
+        },
+        {
+          "w": 1,
+          "text": [
+            "Locals recognise him and a crowd forms. He spends the afternoon signing receipts."
+          ],
+          "fx": {
+            "fans": 3,
+            "followers": 1500,
+            "stress": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "language_class",
+      "icon": "book",
+      "label": "Language lesson",
+      "desc": "Learn the dressing-room language.",
+      "when": {
+        "abroad": true
+      },
+      "out": [
+        {
+          "w": 3,
+          "text": [
+            "Verbs, verbs, verbs. He tries a joke in the dressing room the next day. Half of them laugh. Progress.",
+            "His teacher makes him order lunch in the language. He gets chicken instead of fish. Close enough."
+          ],
+          "fx": {
+            "dressing": 3,
+            "tacticalFit": 3,
+            "growth": [
+              "mental"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "fan_signing",
+      "icon": "megaphone",
+      "label": "Fan signing session",
+      "desc": "An hour at the club shop.",
+      "when": {
+        "freeAgent": false,
+        "rep": [
+          3,
+          100
+        ]
+      },
+      "out": [
+        {
+          "w": 3,
+          "text": [
+            "A queue out the door. An old man shows him a photo of himself at the club's first-ever match. A kid asks him to sign his forehead.",
+            "Two hundred signatures and a hand cramp. Worth every one."
+          ],
+          "fx": {
+            "fans": 5,
+            "followers": 1500,
+            "board": 1,
+            "pfm": -1
+          }
+        },
+        {
+          "w": 1,
+          "text": [
+            "Only eleven people turn up. One of them wanted the other player."
+          ],
+          "fx": {
+            "fans": 1,
+            "morale": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "quiet_reflection",
+      "icon": "moon",
+      "label": "Quiet time alone",
+      "desc": "Prayer, a walk, a notebook. Just think.",
+      "when": {},
+      "out": [
+        {
+          "w": 3,
+          "text": [
+            "An hour alone with his thoughts. He writes down three things he's grateful for and one thing he's afraid of.",
+            "He sits by the window until the city goes dark. Some weeks, that's the most important training session."
+          ],
+          "fx": {
+            "stress": -4,
+            "morale": 2,
+            "growth": [
+              "mental"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "hobby_time",
+      "icon": "spark",
+      "label": "Time for a hobby",
+      "desc": "{HOBBY}. Something that isn't football.",
+      "when": {},
+      "out": [
+        {
+          "w": 3,
+          "text": [
+            "An evening of {HOBBY}. He is bad at it, and being bad at something without an audience feels wonderful.",
+            "{HOBBY}, two hours, no phone. He's improving. Slowly. Like everything that matters."
+          ],
+          "fx": {
+            "stress": -3,
+            "morale": 3
+          }
+        },
+        {
+          "w": 1,
+          "text": [
+            "He posts a clip of himself {HOBBY}. The comments are delighted. A brand gets in touch."
+          ],
+          "fx": {
+            "stress": -2,
+            "followers": 2000,
+            "image": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "want_abroad_noagent",
+      "icon": "map",
+      "label": "Send your highlights to clubs abroad",
+      "desc": "No agent? Do it yourself. Slower, but it can work.",
+      "when": {
+        "wantsAbroad": false,
+        "agent": false
+      },
+      "out": [
+        {
+          "w": 2,
+          "text": [
+            "You email a highlights video to forty clubs. Three reply. One wants to know more.",
+            "A friend of a friend knows a scout in Japan. He watches your clips and says \"maybe\". Maybe is a start."
+          ],
+          "fx": {
+            "abroadWish": true
+          }
+        },
+        {
+          "w": 1,
+          "text": [
+            "Silence. Not one reply. Hiring an agent might be the real first step."
+          ],
+          "fx": {
+            "morale": -2
+          }
+        }
+      ]
+    },
+    {
+      "id": "stay_home",
+      "icon": "home",
+      "label": "Stop chasing a move abroad",
+      "desc": "Stay and build where you are.",
+      "when": {
+        "wantsAbroad": true,
+        "agent": false
+      },
+      "out": [
+        {
+          "w": 1,
+          "text": [
+            "\"We stay and build,\" he tells his family. They are relieved. So, quietly, is he."
+          ],
+          "fx": {
+            "abroadWish": false,
+            "family": 3,
+            "stress": -2,
+            "board": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "agent_trial",
+      "icon": "briefcase",
+      "label": "Ask your agent for a trial abroad",
+      "desc": "A week with a foreign club. Impress them and an offer follows.",
+      "when": {
+        "wantsAbroad": true,
+        "agent": true,
+        "freeAgent": false,
+        "age": [
+          16,
+          29
+        ]
+      },
+      "out": [
+        {
+          "w": 2,
+          "text": [
+            "A week at a club abroad: cold mornings, new drills, coaches with clipboards. On the last day the sporting director shakes your hand for a long time. An offer is coming."
+          ],
+          "fx": {
+            "offerAbroad": true,
+            "pfm": -3,
+            "stress": 2,
+            "board": -2
+          }
+        },
+        {
+          "w": 2,
+          "text": [
+            "The trial goes fine. Just fine. \"We will be in touch,\" they say, which in football means no."
+          ],
+          "fx": {
+            "pfm": -3,
+            "morale": -3,
+            "board": -2
+          }
+        },
+        {
+          "w": 1,
+          "text": [
+            "Your agent can't get a trial in the middle of the season. \"Next window. I promise.\""
+          ],
+          "fx": {}
+        }
+      ]
+    },
+    {
+      "id": "night_out_single",
+      "icon": "moon",
+      "label": "Go out with friends",
+      "desc": "Single, free, a city full of people.",
+      "when": {
+        "partner": [
+          "none"
+        ],
+        "age": [
+          18,
+          40
+        ],
+        "crush": false
+      },
+      "out": [
+        {
+          "w": 2,
+          "text": [
+            "A friend of a friend introduces him to {CRUSH}. They talk on the balcony for an hour while the party happens without them.",
+            "He meets {CRUSHf} in a queue for food and they argue happily about which stall is best. Numbers are swapped."
+          ],
+          "fx": {
+            "crush": "new",
+            "friends": 3,
+            "stress": -2
+          }
+        },
+        {
+          "w": 2,
+          "text": [
+            "A good night with the boys. Nobody special, nothing to regret."
+          ],
+          "fx": {
+            "friends": 4,
+            "stress": -3,
+            "pfm": -2
+          }
+        },
+        {
+          "w": 1,
+          "text": [
+            "Someone films him dancing badly. It is everywhere by breakfast."
+          ],
+          "fx": {
+            "friends": 3,
+            "image": -2,
+            "followers": 1500,
+            "pfm": -3
+          }
+        }
+      ]
+    },
+    {
+      "id": "gym_class_crush",
+      "icon": "dumbbell",
+      "label": "Try a new class at the gym",
+      "desc": "Yoga, boxing, pilates: something different.",
+      "when": {
+        "injured": false
+      },
+      "out": [
+        {
+          "w": 3,
+          "text": [
+            "Boxing class. He is humbled by a sixty-year-old woman with a terrifying jab. Great workout.",
+            "Pilates. Muscles he did not know existed are on fire. The physio approves."
+          ],
+          "fx": {
+            "pfm": 2,
+            "stress": -3,
+            "growth": [
+              "physical"
+            ]
+          }
+        },
+        {
+          "w": 1,
+          "text": [
+            "The instructor, {CRUSHf}, corrects his form twice and laughs at his jokes once. He signs up for the whole course."
+          ],
+          "fx": {
+            "crush": "new",
+            "stress": -2,
+            "pfm": 1
+          }
+        }
+      ]
+    }
+  ]
+}

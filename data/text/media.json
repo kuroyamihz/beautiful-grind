@@ -1,0 +1,8 @@
+{
+  "_about": "placeholder",
+  "sources": {},
+  "topics": {
+    "result": { "x_club": ["FT | {score} {clubtag}"], "news": ["{club} result||{score}."] },
+    "quiet": { "x_fan": ["Quiet week for {J}."] }
+  }
+}

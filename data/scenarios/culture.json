@@ -1,0 +1,370 @@
+{
+  "scenarios": [
+    {
+      "id": "cu_ramadan_plan", "cat": "culture", "w": 25, "when": { "ramadan": true, "nationality": ["Indonesia", "Malaysia", "Saudi Arabia", "Egypt", "Morocco", "Algeria", "Tunisia", "Senegal", "Jordan", "Iraq", "Iran", "Turkey", "Qatar", "United Arab Emirates"] }, "cd": 40,
+      "title": "Ramadan Begins: {J} Plans His Month",
+      "text": "Sahur at 3:30am, training in the afternoon heat, matches kicking off around iftar. {J} grew up fasting through school football; doing it as a professional is a different kind of test. The club nutritionist has a plan ready if he wants it.",
+      "prompt": "How do you manage Ramadan this season?",
+      "choices": [
+        { "label": "Fast with the club plan", "desc": "Adjust sleep, meal timing and training load with the staff.", "risk": "low", "hint": "Small fitness dip, handled professionally.", "text": "The plan works: shorter, sharper sessions, dates and water on the touchline at iftar. {J} feels the month, but manages it.", "fx": { "pfm": -3, "growth": ["mental"], "parental": 3 } },
+        { "label": "Fast and train as normal", "desc": "No adjustments. Tough it out.", "risk": "medium", "hint": "Bigger fitness dip; character on show.", "text": "The last ten days are hard. {J} finishes sessions grey-faced — and finishes them.", "fx": { "pfm": -7, "growth": ["mental"], "parental": 3, "trust": 1 } }
+      ]
+    },
+    {
+      "id": "cu_ramadan_iftar_squad", "cat": "culture", "w": 6, "when": { "ramadan": true },
+      "title": "Iftar With the Whole Squad",
+      "text": "The club organises an iftar dinner for the whole squad: Muslim and non-Muslim players, staff, families. Long tables, dates, kolak, a short prayer. The foreign players ask questions; the local players explain.",
+      "fx": { "teammate": { "who": "T", "rel": "ally" }, "mood": "Relieved" }
+    },
+    {
+      "id": "cu_bobotoh", "group": "ultras", "groupCd": 52, "cat": "culture", "w": 6, "when": { "country": ["Indonesia"], "apps": [5, 9999] },
+      "title": "The Supporter Groups Invite {J}",
+      "text": "The club's biggest supporter group invites {J} to their headquarters: a small building covered in murals, drums stacked in the corner, three generations of fans. They want him to sing the chants with them.",
+      "prompt": "Go?",
+      "choices": [
+        { "label": "Go and sing", "desc": "Become one of them.", "risk": "low", "hint": "The terraces will adopt you.", "text": "{J} sings every chant, badly, beating a drum out of time. The leaders laugh, then give him a scarf. Saturday, the whole stand sings his name.", "fx": { "followers": 15000, "rep": 0.8, "flag": "ultras_love" } },
+        { "label": "Politely decline", "desc": "Keep a professional distance.", "risk": "medium", "hint": "Some supporters take it personally.", "text": "{J} sends a signed shirt instead. The leaders are polite. The terrace is cooler.", "fx": { "rep": -0.2 } }
+      ]
+    },
+    {
+      "id": "cu_rival_derby_banned_fans", "cat": "culture", "w": 4, "when": { "country": ["Indonesia"] },
+      "title": "Away Fans Banned for the Big Derby",
+      "text": "The police ban away supporters from the derby after last season's violence. The away stand will be empty. The home crowd will be 40,000 people who hate {club}.",
+      "prompt": "The captain asks how you feel about it.",
+      "choices": [
+        { "label": "“Good. More noise for us to silence.”", "desc": "Confidence.", "risk": "medium", "hint": "Brave words travel.", "text": "Someone tells a journalist. The quote is printed on a rival banner. It's going to be a loud afternoon.", "fx": { "followers": 8000, "mood": "Determined" } },
+        { "label": "“I hope everyone gets home safe.”", "desc": "Perspective.", "risk": "low", "hint": "Respected on both sides.", "text": "The quote is shared by supporters of both clubs. A rare moment of peace.", "fx": { "rep": 0.6 } }
+      ]
+    },
+    {
+      "id": "cu_kanjuruhan_memorial", "cd": 52, "cat": "culture", "w": 3, "when": { "country": ["Indonesia"], "months": [10] },
+      "title": "Kanjuruhan Remembered",
+      "text": "October. Before kick-off, the stadium falls silent for the 135 people who died at Kanjuruhan in 2022. Players link arms in the centre circle. Some supporters cry. Indonesian football still carries that night.",
+      "fx": { "mood": "Numb", "growth": ["mental"] }
+    },
+    {
+      "id": "cu_flare_ban", "cat": "culture", "w": 3, "when": { "country": ["Indonesia", "Turkey", "Greece", "Serbia", "Croatia", "Argentina", "Brazil", "Poland"] },
+      "title": "Flares Stop the Match",
+      "text": "Twenty minutes in, flares rain onto the pitch from the home end. The referee takes the players off. Smoke drifts across the stadium. The club faces a fine, maybe a stadium ban.",
+      "prompt": "The supporters' leaders ask players to calm the crowd.",
+      "choices": [
+        { "label": "Walk to the stand and appeal", "desc": "Hands up, ask them to stop.", "risk": "medium", "hint": "Could calm them. Could be ignored.", "check": { "stat": "mental", "dc": 50 },
+          "ok": { "text": "{J} walks to the stand with his palms raised. The flares stop. The crowd chants his name instead.", "fx": { "rep": 0.8, "followers": 10000 } },
+          "bad": { "text": "Nobody listens. Another flare lands near his feet. The match is abandoned.", "fx": { "mood": "Anxious" } } },
+        { "label": "Stay in the tunnel", "desc": "Leave it to the officials.", "risk": "low", "hint": "Safe.", "text": "The match restarts after forty minutes. The club is fined.", "fx": {} }
+      ]
+    },
+    {
+      "id": "cu_mudik_traffic", "cat": "culture", "w": 3, "when": { "nationality": ["Indonesia"], "months": [3, 4] },
+      "title": "Stuck in Mudik Traffic",
+      "text": "{J} tries to drive home for Lebaran like everyone else in Java. Eighteen hours in traffic on the toll road. People in other cars recognise him and wave. A family in a pickup truck passes him lontong through the window.",
+      "fx": { "followers": 5000, "parental": 6, "pfm": -4 }
+    },
+    {
+      "id": "cu_independence_day", "cd": 52, "cat": "culture", "w": 3, "when": { "nationality": ["Indonesia"], "months": [8] },
+      "title": "17 Agustus: {J} at the Village Games",
+      "text": "Independence Day. Every kampung holds games: sack races, climbing the greased pinang pole, krupuk-eating contests. {J}'s old neighbourhood invites him to judge. They want him to climb the pole.",
+      "prompt": "Climb the pole?",
+      "choices": [
+        { "label": "Climb it", "desc": "For the kids.", "risk": "medium", "hint": "Glory. Grease. Possible injury.", "out": [
+          { "w": 2, "text": "Covered in grease, {J} reaches the prizes at the top and throws them down to the children. The video goes national.", "fx": { "followers": 30000, "rep": 0.8 } },
+          { "w": 1, "text": "He slips from halfway and lands on two uncles. Everyone laughs. His ankle is sore for a week.", "fx": { "followers": 20000, "pfm": -6 } }
+        ] },
+        { "label": "Judge only", "desc": "Your club would want you to.", "risk": "low", "hint": "Safe and fun.", "text": "{J} judges the krupuk contest with total seriousness. A seven-year-old wins.", "fx": { "followers": 5000 } }
+      ]
+    },
+    {
+      "id": "cu_local_food_abroad", "cat": "culture", "w": 4, "when": { "abroad": true },
+      "title": "{J} Can't Find Food From Home",
+      "text": "Three months abroad and {J} would trade a goal for a plate of his mother's cooking. The supermarket has nothing he recognises. His weight is dropping.",
+      "prompt": "Solution?",
+      "choices": [
+        { "label": "Learn to cook it yourself", "desc": "Video calls with your mother.", "risk": "low", "hint": "Homesickness eases.", "text": "His mother teaches him over video, shouting instructions. The first attempt is terrible. The fifth is perfect. Teammates start asking for invitations.", "fx": { "mood": "Relieved", "parental": 5, "teammate": { "who": "T", "rel": "ally" } } },
+        { "label": "Adapt to local food", "desc": "When in Rome.", "risk": "low", "hint": "Integration.", "text": "{J} learns to love the local food. Mostly. He still dreams about sambal.", "fx": { "growth": ["mental"] } }
+      ]
+    },
+    {
+      "id": "cu_racism_abroad", "cat": "culture", "w": 3, "when": { "abroad": true },
+      "title": "Racist Abuse From the Stands",
+      "text": "During an away match, a group of home fans make monkey noises every time {J} touches the ball. The referee hears it. {M} hears it. The whole stadium hears it.",
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Report it, follow protocol", "desc": "The match stops; announcements are made.", "risk": "low", "hint": "The right process.", "text": "The match is stopped. An announcement. The fans are identified and banned for life. {J}'s teammates stand around him.", "fx": { "rep": 1, "followers": 20000, "teammate": { "who": "T", "rel": "ally" } } },
+        { "label": "Walk off the pitch", "desc": "Refuse to continue.", "risk": "high", "hint": "A statement the world will see.", "text": "{J} walks off. His whole team follows. The match is abandoned. The story is everywhere, and the governing body is forced to act.", "fx": { "rep": 2, "followers": 60000, "mood": "Angry" } },
+        { "label": "Keep playing", "desc": "Don't give them the satisfaction.", "risk": "medium", "hint": "Strength or swallowing it?", "text": "{J} keeps playing and scores the winner later, staring at the stand. It doesn't make the noises hurt less.", "fx": { "mood": "Angry", "growth": ["mental"] } }
+      ]
+    },
+    {
+      "id": "cu_language_milestone", "cat": "culture", "w": 4, "when": { "flags": ["learning_language"] }, "once": true,
+      "title": "{J} Gives His First Interview in the Local Language",
+      "text": "After months of lessons, {J} gives a post-match interview in the local language. Grammar mistakes, a strong accent, one wrong word that makes the reporter laugh. The fans love it.",
+      "fx": { "followers": 15000, "rep": 0.8, "tacticalFit": 5, "unflag": "learning_language" }
+    },
+    {
+      "id": "cu_hometown_hero_return", "once": true, "group": "hometown", "groupCd": 52, "cat": "culture", "w": 3, "when": { "rep": [25, 100], "phase": ["off"] },
+      "title": "Hometown Holds a Parade for {J}",
+      "text": "{J}'s hometown wants to honour him: a parade, a ceremony at the town hall, a mural on the market wall. The mayor is very enthusiastic. Elections are next year.",
+      "prompt": "Attend?",
+      "choices": [
+        { "label": "Attend gladly", "desc": "For the people, not the mayor.", "risk": "low", "hint": "Pure joy.", "text": "The parade goes past his old school. Children run beside the car. His grandmother waves from her porch.", "fx": { "rep": 1, "followers": 20000, "parental": 10 } },
+        { "label": "Ask them to skip the politics", "desc": "Only if there are no speeches.", "risk": "low", "hint": "Principled.", "text": "No speeches, just a football clinic in the town square. The mayor sulks. The children don't care.", "fx": { "rep": 1.2, "followers": 12000 } }
+      ]
+    },
+    {
+      "id": "cu_weather_rainy_season", "cat": "culture", "w": 3, "when": { "country": ["Indonesia", "Thailand", "Vietnam", "Malaysia", "Philippines"], "months": [11, 12, 1, 2] },
+      "title": "Rainy Season Chaos",
+      "text": "Rain every afternoon. The training pitch is a lake. The match on Saturday was postponed after the pitch flooded. The fixture list is now chaos.",
+      "fx": { "pfm": 3 }
+    },
+    {
+      "id": "cu_superstition", "cat": "culture", "w": 3,
+      "title": "The Lucky Charm",
+      "text": "Before a big match, {J}'s grandmother sends a small amulet from a village shaman: “Wear it in your sock.” Some teammates laugh. Others quietly have their own.",
+      "prompt": "Wear it?",
+      "choices": [
+        { "label": "Wear it", "desc": "It can't hurt.", "risk": "low", "hint": "Belief is powerful.", "text": "{J} plays with the amulet in his sock. He plays well. Coincidence. Probably.", "fx": { "form": 0.2, "parental": 4, "mood": "Confident" } },
+        { "label": "Keep it at home", "desc": "Respect it, don't rely on it.", "risk": "low", "hint": "Grounded.", "text": "The amulet stays on his bedside table.", "fx": {} }
+      ]
+    },
+    {
+      "id": "cu_pilgrimage", "once": true, "cat": "culture", "w": 2, "when": { "nationality": ["Indonesia", "Malaysia", "Egypt", "Morocco", "Turkey", "Senegal"], "phase": ["off"], "wealth": [5000, 999999999] }, "vars": { "cost": ["wealthPct", 15, 400] },
+      "title": "Umrah With His Parents",
+      "text": "{J}'s parents have dreamed their whole lives of going to Mecca for umrah. The off-season is long enough. The trip would cost {cost}.",
+      "prompt": "Take them?",
+      "choices": [
+        { "label": "Go together", "desc": "A once-in-a-lifetime journey.", "risk": "low", "hint": "Spiritual, emotional.", "text": "Two weeks in Mecca and Medina with his parents. His father holds his hand at the Kaaba and can't speak. {J} comes back changed.", "fx": { "wealth": "-cost", "parental": 20, "growth": ["mental"], "mood": "Relieved", "pfm": 5 } },
+        { "label": "Pay for them, stay and train", "desc": "Their dream, your career.", "risk": "low", "hint": "Generous.", "text": "{J} pays for his parents' umrah. They send photos every day.", "fx": { "wealth": "-cost*0.6", "parental": 12 } }
+      ]
+    },
+    {
+      "id": "cu_christmas_abroad", "cat": "culture", "w": 3, "when": { "abroad": true, "months": [12] },
+      "title": "Holidays Alone Abroad",
+      "text": "The league pauses for the holidays. Teammates fly home to families. {J}'s flight home is too long for the break. He'll spend it in an empty apartment.",
+      "prompt": "How do you spend it?",
+      "choices": [
+        { "label": "Accept a teammate's invitation", "desc": "Spend it with {Tl}'s family.", "risk": "low", "hint": "Warmth.", "text": "{T}'s grandmother feeds {J} until he can't move and gives him a knitted scarf. He's part of the family now.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "mood": "Relieved" } },
+        { "label": "Fly home anyway", "desc": "Thirty hours of travel for four days at home.", "risk": "medium", "hint": "Worth it?", "text": "Thirty hours of travel for four days at home. Worth every minute.", "fx": { "parental": 10, "pfm": -6 } },
+        { "label": "Stay and rest", "desc": "Recover and train alone.", "risk": "low", "hint": "Quiet.", "text": "{J} sleeps, trains alone in an empty gym, watches films. It's peaceful, and a bit sad.", "fx": { "pfm": 8, "mood": "Homesick" } }
+      ]
+    },
+    {
+      "id": "cu_ultras_demand", "cat": "culture", "w": 3, "when": { "flags": ["ultras_love"], "listed": true },
+      "title": "The Ultras Hear {J} Might Leave",
+      "text": "The supporters who adopted {J} have heard the transfer rumours. A banner appears at training: “LOYALTY OR NOTHING.” His name is painted under it, then crossed out, then painted again.",
+      "prompt": "Reassure them?",
+      "choices": [
+        { "label": "Meet them", "desc": "Tell them the truth.", "risk": "medium", "hint": "Honest conversations are hard.", "text": "{J} meets the leaders. They don't like what they hear, but they respect that he came.", "fx": { "rep": 0.3 } },
+        { "label": "Say nothing", "desc": "Your career, your choice.", "risk": "medium", "hint": "They may turn on you.", "text": "Silence. The next match, his name isn't sung.", "fx": { "unflag": "ultras_love", "mood": "Numb" } }
+      ]
+    },
+    {
+      "id": "cu_derby_week", "cat": "culture", "w": 4, "when": { "country": ["Indonesia", "England", "Spain", "Italy", "Argentina", "Brazil", "Turkey", "Scotland", "Mexico", "Egypt", "Morocco"] },
+      "title": "Derby Week: The City Holds Its Breath",
+      "text": "Derby week. Every taxi driver, every street vendor, every old man at the mosque or the market has advice for {J}. His neighbours have painted their fence in the club colours.",
+      "prompt": "A rival fan corners you at a petrol station, friendly but intense.",
+      "choices": [
+        { "label": "Banter back", "desc": "Have fun with it.", "risk": "low", "hint": "Viral if filmed.", "text": "Five minutes of hilarious banter. The video makes both fanbases laugh.", "fx": { "followers": 8000, "rep": 0.3 } },
+        { "label": "Smile, sign, leave", "desc": "Keep it simple.", "risk": "low", "hint": "Safe.", "text": "{J} signs the man's arm, of all things. Rival or not.", "fx": {} }
+      ]
+    },
+    {
+      "id": "cu_traffic_jakarta", "cat": "culture", "w": 2, "when": { "country": ["Indonesia"] },
+      "title": "Three Hours to Training",
+      "text": "A protest, a flood and a broken-down truck at the same intersection. {J} has been in the car for three hours and training started forty minutes ago.",
+      "prompt": "Options?",
+      "choices": [
+        { "label": "Ojek!", "desc": "Hop on a motorbike taxi.", "risk": "medium", "hint": "Fast, slightly terrifying.", "text": "{J} abandons the car and jumps on an ojek. The driver realises who he is and drives like it's a cup final. He makes the end of training.", "fx": { "followers": 6000, "trust": 1 } },
+        { "label": "Call {M} and apologise", "desc": "Nothing else to do.", "risk": "low", "hint": "He'll understand. Probably.", "text": "{M} sighs. Half the squad is stuck too.", "fx": {} }
+      ]
+    },
+    {
+      "id": "cu_volunteer_disaster", "cd": 150, "cat": "culture", "w": 2, "when": { "country": ["Indonesia", "Philippines", "Japan", "Turkey", "Morocco", "Mexico"] },
+      "title": "Earthquake Hits the Region",
+      "text": "An earthquake hits a region near the club's home. Hundreds of families have lost their houses. The club suspends training for two days. Several players drive to help.",
+      "prompt": "Go and help?",
+      "choices": [
+        { "label": "Drive there and help", "desc": "Carry boxes, cook food.", "risk": "low", "hint": "Tired, proud.", "text": "Two days of carrying rice sacks and building tents. Nobody films it, at {J}'s request. Somebody does anyway.", "fx": { "rep": 1.5, "followers": 15000, "pfm": -5, "growth": ["mental"] } },
+        { "label": "Donate", "desc": "Money is what's needed most.", "risk": "low", "hint": "Practical.", "text": "{J} donates quietly through a relief agency.", "fx": { "wealth": -500, "rep": 0.5 } }
+      ]
+    },
+    {
+      "id": "cu_naturalised_debate", "cd": 104, "cat": "culture", "w": 3, "when": { "nationality": ["Indonesia"], "age": [18, 30] },
+      "title": "The Naturalisation Debate Gets Personal",
+      "text": "On a talk show, a pundit argues that local players like {J} are being overlooked for the national team because of naturalised players from Europe. He uses {J} as his example. Nobody asked {J}.",
+      "prompt": "Respond?",
+      "choices": [
+        { "label": "Support the naturalised players", "desc": "“We're all Garuda.”", "risk": "low", "hint": "Unity.", "text": "“We're all Garuda. Make the team better and we all win.” The national team staff notice.", "fx": { "rep": 0.6, "followers": 8000 } },
+        { "label": "Agree with the pundit", "desc": "Local players deserve more chances.", "risk": "high", "hint": "Popular with some fans, unpopular with federation.", "text": "The quote becomes a culture-war headline. Some fans love it. The national team coach doesn't call.", "fx": { "followers": 20000, "rep": -0.5 } },
+        { "label": "Stay out of it", "desc": "Just play.", "risk": "low", "hint": "Neutral.", "text": "{J} says nothing. His football does the arguing.", "fx": {} }
+      ]
+    },
+    {
+      "id": "cu_dutch_heritage_teammate", "once": true, "cat": "culture", "w": 3, "when": { "nationality": ["Indonesia"], "nt": ["called", "regular"] },
+      "title": "Teaching a Dutch-Born Teammate Bahasa",
+      "text": "At national team camp, a newly naturalised player born in the Netherlands, {T}, asks {J} to teach him some Bahasa Indonesia for the anthem and the fans. He's nervous about pronouncing things wrong.",
+      "fx": { "teammate": { "who": "T", "rel": "ally" }, "rep": 0.4, "mood": "Motivated" }
+    },
+    {
+      "id": "cu_batik_day", "cat": "culture", "w": 2, "when": { "nationality": ["Indonesia"], "months": [10] },
+      "title": "Batik Day Photoshoot",
+      "text": "National Batik Day. The club asks every player to wear batik for a photoshoot. {J}'s mother sends a shirt she had made specially, in the pattern of their home region.",
+      "fx": { "followers": 6000, "parental": 4 }
+    },
+    {
+      "id": "cu_fasting_match_decision", "cat": "culture", "w": 8, "when": { "ramadan": true, "role": ["starter", "rotation"] }, "cd": 52,
+      "title": "Match Kicks Off Before Iftar",
+      "text": "Saturday's match kicks off at 4pm. Sunset is at 5:55pm. {J} will play most of the match while fasting, in the heat. The club doctor wants to discuss options.",
+      "prompt": "What do you decide?",
+      "choices": [
+        { "label": "Keep fasting, break it at the break in play", "desc": "The referee allows a short pause at sunset.", "risk": "medium", "hint": "Many players do this.", "text": "At sunset, the referee pauses play for a minute. {J} drinks water and eats a date by the touchline. The crowd applauds.", "fx": { "pfm": -4, "parental": 3, "growth": ["mental"] } },
+        { "label": "Make up the fast another day", "desc": "Permitted for travellers and those with heavy work.", "risk": "low", "hint": "Practical, personal.", "text": "{J} decides to make up the day later, after speaking with an ustaz. Full energy for the match.", "fx": { "pfm": 2 } }
+      ]
+    },
+    {
+      "id": "cu_city_life_abroad", "cat": "culture", "w": 3, "when": { "abroad": true },
+      "title": "Exploring the New City",
+      "text": "{J} has lived here for months but only knows the route between his apartment and the training ground. A teammate offers to show him the city on their day off.",
+      "prompt": "Go?",
+      "choices": [
+        { "label": "Explore", "desc": "Museums, markets, the old town.", "risk": "low", "hint": "Feel at home.", "text": "A day of markets, old streets and a strange local dessert. For the first time, the city feels like his.", "fx": { "mood": "Relieved", "teammate": { "who": "T", "rel": "ally" }, "growth": ["mental"] } },
+        { "label": "Rest at home", "desc": "Recovery day.", "risk": "low", "hint": "Fresh legs, same loneliness.", "text": "{J} stays home and plays video games with friends back home.", "fx": { "pfm": 3, "mood": "Homesick" } }
+      ]
+    },
+    {
+      "id": "cu_fan_gift", "cat": "culture", "w": 3, "when": { "apps": [20, 9999] },
+      "title": "A Fan's Handmade Gift",
+      "text": "An elderly supporter waits at the training ground gate every day for a week. When {J} finally stops, she gives him a hand-painted portrait of him celebrating a goal, made over two months.",
+      "fx": { "mood": "Motivated", "rep": 0.2 }
+    },
+    {
+      "id": "cu_childhood_pitch", "once": true, "cat": "culture", "w": 2, "when": { "phase": ["off"], "age": [20, 40] },
+      "title": "The Pitch Where It All Started",
+      "text": "{J} visits the dusty field where he learned to play: a rice-paddy edge, two bamboo goalposts, a ball made of plastic bags. It's going to be sold to a developer.",
+      "prompt": "Save it?",
+      "vars": { "cost": ["wealthPct", 20, 500] },
+      "choices": [
+        { "label": "Buy the land", "desc": "{cost}: a pitch for the village forever.", "risk": "low", "hint": "Legacy.", "text": "{J} buys the land and builds a proper pitch with real goals. The village kids christen it with a match that lasts until dark.", "fx": { "wealth": "-cost", "rep": 1.5, "followers": 20000, "parental": 10 } },
+        { "label": "Let it go", "desc": "Things change.", "risk": "low", "hint": "Nostalgia only.", "text": "{J} takes a photo of the bamboo goalposts and lets it go.", "fx": { "mood": "Numb" } }
+      ]
+    },
+    {
+      "id": "cu_derby_hostile_away", "cat": "culture", "w": 3, "when": { "country": ["Indonesia", "Argentina", "Brazil", "Turkey", "Serbia", "Egypt"] },
+      "title": "Team Bus Attacked Before an Away Match",
+      "text": "On the way to an away match, stones hit the team bus. A window shatters. Nobody is seriously hurt, but the players are shaken. The match is still on.",
+      "prompt": "Play?",
+      "choices": [
+        { "label": "Play — don't let them win", "desc": "Defiance.", "risk": "medium", "hint": "Adrenaline and nerves.", "text": "The team plays with fury. {J} celebrates the goal in front of the home end with a finger to his lips.", "fx": { "mood": "Angry", "teammate": { "who": "T", "rel": "ally" } } },
+        { "label": "Support postponing", "desc": "Safety first.", "risk": "low", "hint": "The federation decides.", "text": "The captain asks for postponement. The federation agrees. The match is replayed months later behind closed doors.", "fx": { "mood": "Anxious" } }
+      ]
+    },
+    {
+      "id": "cu_local_slang", "cat": "culture", "w": 2, "when": { "abroad": true },
+      "title": "{J} Learns the Wrong Words",
+      "text": "His teammates have been teaching {J} local slang. He confidently uses one phrase with the club president's wife. The squad is crying with laughter. The president's wife is not.",
+      "fx": { "teammate": { "who": "T", "rel": "ally" }, "followers": 3000 }
+    },
+    {
+      "id": "cu_pressure_jersey_number", "cat": "culture", "w": 2, "when": { "country": ["Indonesia"], "rep": [20, 100] },
+      "title": "Street Vendors Sell Fake {J} Shirts",
+      "text": "Outside the stadium, street vendors sell knock-off shirts with {J}'s name and number for a fraction of the official price. The club wants him to post a warning against fakes.",
+      "prompt": "Post the warning?",
+      "choices": [
+        { "label": "Post it", "desc": "Support the club.", "risk": "low", "hint": "Some fans will be annoyed.", "text": "The post annoys fans who can't afford official shirts.", "fx": { "trust": 1, "rep": -0.2 } },
+        { "label": "Refuse", "desc": "Not every fan can afford the real one.", "risk": "medium", "hint": "Popular with fans.", "text": "{J} refuses. The club is annoyed. The fans love him for it.", "fx": { "trust": -2, "rep": 0.6, "followers": 8000 } }
+      ]
+    },
+    {
+      "id": "cu_snow_first", "cat": "culture", "w": 4, "when": { "abroad": true, "months": [12, 1, 2], "notCountry": ["Indonesia", "Thailand", "Vietnam", "Malaysia", "Singapore", "Saudi Arabia", "Qatar", "United Arab Emirates", "Brazil", "Australia", "Mexico", "Egypt", "Morocco"] }, "once": true,
+      "title": "{J} Sees Snow for the First Time",
+      "text": "{J} opens the curtains and the world is white. He has never seen snow. He runs outside in slippers, takes forty photos and a video for his mother, and makes the worst snowman in history.",
+      "fx": { "followers": 10000, "mood": "Relieved", "parental": 3 }
+    },
+    {
+      "id": "cu_karaoke_tradition", "cat": "culture", "w": 2, "when": { "country": ["Indonesia", "Japan", "South Korea", "Philippines", "Thailand", "Vietnam"] },
+      "title": "Team Karaoke Night",
+      "text": "Karaoke is mandatory after a big win. {M} sings a love song terribly and the squad films it. Now everyone is looking at {J}.",
+      "prompt": "Your song?",
+      "choices": [
+        { "label": "A dangdut classic", "desc": "Get the room dancing.", "risk": "low", "hint": "Crowd pleaser.", "text": "The whole squad, coaches included, dances. A dressing-room classic is born.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "trust": 1 } },
+        { "label": "A heartfelt ballad", "desc": "Let them see your soul.", "risk": "medium", "hint": "Respect or ridicule.", "text": "Silence, then applause. Someone is wiping their eyes and blaming the air conditioning.", "fx": { "teammate": { "who": "T", "rel": "ally" } } }
+      ]
+    },
+    {
+      "id": "cu_haters_hometown", "cat": "culture", "w": 2, "when": { "rep": [15, 100] },
+      "title": "Hometown Gossip Turns Sour",
+      "text": "Back home, gossip has started: that {J} forgot where he came from, that his family has become arrogant, that he doesn't help anyone. His mother heard it at the market and came home upset.",
+      "prompt": "How do you respond?",
+      "choices": [
+        { "label": "Do something visible at home", "desc": "A free clinic, a donation.", "risk": "low", "hint": "Actions silence gossip.", "text": "A free football clinic for two hundred kids ends the gossip in one afternoon.", "fx": { "rep": 0.6, "parental": 8, "pfm": -2 } },
+        { "label": "Ignore it", "desc": "Gossip is gossip.", "risk": "low", "hint": "Your mother still hears it.", "text": "{J} ignores it. His mother doesn't go to that market any more.", "fx": { "parental": -4 } }
+      ]
+    },
+    {
+      "id": "cu_heritage_trip", "once": true, "cat": "culture", "w": 2, "when": { "nationality": ["Indonesia"], "phase": ["off"] },
+      "title": "A Trip to Papua With a Teammate",
+      "text": "{T}, a teammate from Papua, invites {J} home for a week in the off-season: mountains, rivers, a village where every boy plays football barefoot on red earth, and many of them are better than {J} was at their age.",
+      "fx": { "teammate": { "who": "T", "rel": "ally" }, "growth": ["mental"], "mood": "Relieved" }
+    },
+    {
+      "id": "cu_halal_food_abroad", "cat": "culture", "w": 3, "when": { "abroad": true, "nationality": ["Indonesia", "Malaysia", "Saudi Arabia", "Egypt", "Morocco", "Senegal", "Turkey"] },
+      "title": "Halal Food at the Club Canteen",
+      "text": "The club canteen doesn't label halal options clearly. {J} has been eating salads and rice for weeks to be safe. The nutritionist has noticed his protein intake is too low.",
+      "prompt": "Raise it with the club?",
+      "choices": [
+        { "label": "Ask the club", "desc": "Politely, formally.", "risk": "low", "hint": "Clubs usually help.", "text": "The club introduces clearly labelled halal options within a month. Three other players thank {J}.", "fx": { "pfm": 6, "rep": 0.3 } },
+        { "label": "Bring your own food", "desc": "Cook at home, bring lunch.", "risk": "low", "hint": "Self-reliant.", "text": "{J} meal-preps every Sunday. His lunchbox becomes famous in the dressing room.", "fx": { "pfm": 3 } }
+      ]
+    },
+    {
+      "id": "cu_language_misunderstanding", "cat": "culture", "w": 2, "when": { "abroad": true },
+      "title": "Lost in Translation at a Press Conference",
+      "text": "A translator mistranslates {J}'s answer at a press conference. He said he was “happy to be here”; the translation said he was “happy to be here for now”. The headline: “{J} HINTS AT EXIT.”",
+      "prompt": "Correct it?",
+      "choices": [
+        { "label": "Post a correction video", "desc": "In the local language.", "risk": "low", "hint": "Effort is appreciated.", "text": "His clumsy but sincere video in the local language wins the fans over completely.", "fx": { "followers": 8000, "rep": 0.5 } },
+        { "label": "Ask the club to correct it", "desc": "Official statement.", "risk": "low", "hint": "Fine.", "text": "The club issues a correction. Most fans believe it.", "fx": {} }
+      ]
+    },
+    {
+      "id": "cu_new_year_fireworks", "cat": "culture", "w": 2, "when": { "months": [12, 1] },
+      "title": "New Year's Eve Before a Match",
+      "text": "New Year's Eve. The city is exploding with fireworks and parties. There's a match on the 2nd. Teammates are going out. {J}'s phone is full of invitations.",
+      "prompt": "How do you celebrate?",
+      "choices": [
+        { "label": "Watch fireworks from the balcony, early night", "desc": "Professional.", "risk": "low", "hint": "Fresh legs.", "text": "Fireworks from the balcony, a video call home at midnight, asleep by 12:30.", "fx": { "pfm": 3 } },
+        { "label": "Go out with teammates", "desc": "Once a year.", "risk": "medium", "hint": "Fun, tired.", "out": [
+          { "w": 2, "text": "A brilliant night, home by 2am, feeling fine.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "pfm": -3 } },
+          { "w": 1, "text": "Photos from the club at 4am reach {M}'s phone.", "fx": { "trust": -5, "pfm": -6 } }
+        ] }
+      ]
+    },
+    {
+      "id": "cu_climate_heat_abroad", "cat": "culture", "w": 3, "when": { "abroad": true, "country": ["Saudi Arabia", "Qatar", "United Arab Emirates"] },
+      "title": "Forty-Five Degrees in the Gulf",
+      "text": "Training starts at 9pm because the day is too hot. {J} sleeps in the afternoon and lives at night. His body clock is completely broken.",
+      "fx": { "pfm": -3, "mood": "Homesick" }
+    },
+    {
+      "id": "cu_school_visit", "cd": 104, "cat": "culture", "w": 3, "when": { "rep": [8, 100] },
+      "title": "Visit to an Inner-City School",
+      "text": "The club's community programme sends {J} to a school in the poorest part of the city. The pitch is concrete. The goals have no nets. Three hundred children are waiting.",
+      "fx": { "rep": 0.5, "followers": 4000, "growth": ["mental"], "mood": "Motivated" }
+    },
+    {
+      "id": "cu_national_anthem_club", "cat": "culture", "w": 2, "when": { "country": ["Indonesia"], "months": [8, 10] },
+      "title": "Indonesia Raya Before Kick-Off",
+      "text": "Before every match in Indonesia, the national anthem plays. Today, a little girl in the mascot line sings it so loudly and so out of tune that the whole stadium joins in, laughing and singing. {J} sings with his hand on his heart, grinning.",
+      "fx": { "mood": "Motivated" }
+    },
+    {
+      "id": "cu_away_fan_journey", "cat": "culture", "w": 3, "when": { "country": ["Indonesia"], "apps": [10, 9999] },
+      "title": "Fans Ride Twelve Hours to an Away Match",
+      "text": "Three hundred supporters travelled twelve hours by bus, motorbike and boat to an away match across the archipelago. After the final whistle they're still singing. {J} sees a boy of ten among them, asleep on his father's shoulders.",
+      "prompt": "Thank them?",
+      "choices": [
+        { "label": "Give them your shirt and boots", "desc": "Go to the fence.", "risk": "low", "hint": "Unforgettable for them.", "text": "{J} walks to the fence and hands his shirt to the boy, now awake and speechless. The supporters sing his name all the way home.", "fx": { "rep": 0.6, "followers": 10000 } },
+        { "label": "Applaud them", "desc": "From the pitch.", "risk": "low", "hint": "Respectful.", "text": "{J} applauds them with the team. They applaud back.", "fx": { "rep": 0.2 } }
+      ]
+    }
+  ]
+}

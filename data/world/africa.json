@@ -1,0 +1,139 @@
+{
+  "_meta": {
+    "region": "Africa (CAF)",
+    "baseline": "2025-26 season",
+    "continentalNote": "CAF Champions League (2024-25 winners: Pyramids FC) and CAF Confederation Cup (2024-25 winners: RS Berkane). CAF Super Cup between the two. African Football League was a one-off (2023). Many top African players leave for Europe, the Gulf, or North African leagues; North Africa (Egypt, Morocco, Algeria, Tunisia) and South Africa pay the continent's best wages."
+  },
+  "countries": [
+    {
+      "country": "Egypt", "code": "EGY", "flag": "🇪🇬", "currency": "EGP",
+      "leagues": [{ "tier": 1, "name": "Egyptian Premier League (Nile League)", "teams": 21, "season": "Aug-May", "complete": false,
+        "clubs": ["Al Ahly", "Pyramids FC", "Zamalek", "Al Masry", "Ceramica Cleopatra", "Modern Sport (formerly Future FC)", "ENPPI", "Smouha", "Ismaily", "Al Ittihad Alexandria", "ZED FC", "Pharco", "El Gouna", "Ghazl El Mahalla", "Petrojet", "National Bank of Egypt", "Haras El Hodoud", "Talaea El Gaish", "Wadi Degla", "Kahraba Ismailia", "El Mokawloon El Arab"],
+        "notes": "Al Ahly are Africa's most decorated club (12 CAF Champions Leagues; won the 2024-25 league). Cairo derby (Al Ahly vs Zamalek). Stars: Mohamed El Shenawy, Trezeguet, Ahmed Sayed 'Zizo' (Al Ahly); Fiston Mayele (Pyramids)." }],
+      "cups": ["Egypt Cup", "Egyptian Super Cup", "EFA League Cup"]
+    },
+    {
+      "country": "Morocco", "code": "MAR", "flag": "🇲🇦", "currency": "MAD",
+      "leagues": [{ "tier": 1, "name": "Botola Pro Inwi", "teams": 16, "matchdays": 30, "season": "Sep-Jun", "complete": false,
+        "clubs": ["RS Berkane", "Wydad AC", "Raja CA", "AS FAR", "FUS Rabat", "Ittihad Tanger", "Maghreb de Fès", "Hassania Agadir", "Olympique Safi", "CODM Meknès", "Kawkab Marrakech", "Difaâ El Jadidi", "Renaissance Zemamra", "Union Touarga"],
+        "notes": "2024-25 champions: RS Berkane. Casablanca derby (Wydad vs Raja) is one of the world's great atmospheres. Morocco hosted AFCON 2025 and co-hosts the 2030 World Cup; national team reached the 2022 World Cup semi-finals and won the 2025 U-20 World Cup." }],
+      "cups": ["Coupe du Trône (Throne Cup)"]
+    },
+    {
+      "country": "Algeria", "code": "ALG", "flag": "🇩🇿", "currency": "DZD",
+      "leagues": [{ "tier": 1, "name": "Ligue Professionnelle 1 (Mobilis)", "teams": 16, "season": "Sep-Jun", "complete": false,
+        "clubs": ["MC Alger", "CR Belouizdad", "USM Alger", "JS Kabylie", "CS Constantine", "ES Sétif", "MC Oran", "Paradou AC", "ASO Chlef", "JS Saoura", "Olympique Akbou", "USM Khenchela", "ES Mostaganem", "MB Rouissat", "ES Ben Aknoun"],
+        "notes": "MC Alger won 2023-24 and 2024-25." }],
+      "cups": ["Algerian Cup"]
+    },
+    {
+      "country": "Tunisia", "code": "TUN", "flag": "🇹🇳", "currency": "TND",
+      "leagues": [{ "tier": 1, "name": "Ligue Professionnelle 1", "teams": 16, "season": "Aug-May", "complete": false,
+        "clubs": ["Espérance de Tunis", "Étoile du Sahel", "Club Africain", "CS Sfaxien", "US Monastir", "Stade Tunisien", "CA Bizertin", "US Ben Guerdane", "ES Métlaoui", "AS Gabès", "JS Omrane", "ES Zarzis"],
+        "notes": "Espérance are dominant." }],
+      "cups": ["Tunisian Cup"]
+    },
+    {
+      "country": "Libya", "code": "LBY", "flag": "🇱🇾", "currency": "LYD",
+      "leagues": [{ "tier": 1, "name": "Libyan Premier League", "format": "Regional groups then championship stage", "complete": false, "clubs": ["Al-Ittihad Tripoli", "Al-Ahli Tripoli", "Al-Ahly Benghazi", "Al-Nasr Benghazi", "Al-Hilal Benghazi"] }]
+    },
+    {
+      "country": "Sudan", "code": "SDN", "flag": "🇸🇩", "currency": "SDG",
+      "leagues": [{ "tier": 1, "name": "Sudan Premier League", "complete": false, "clubs": ["Al-Hilal Omdurman", "Al-Merrikh"] }],
+      "notes": "Domestic football halted by the civil war; Al-Hilal and Al-Merrikh were allowed to play in foreign leagues (Mauritania, then Rwanda; verify) while still entering CAF competitions."
+    },
+    {
+      "country": "Nigeria", "code": "NGA", "flag": "🇳🇬", "currency": "NGN",
+      "leagues": [{ "tier": 1, "name": "Nigeria Premier Football League (NPFL)", "teams": 20, "matchdays": 38, "season": "Aug-May", "complete": false,
+        "clubs": ["Remo Stars", "Rivers United", "Enyimba", "Kano Pillars", "Shooting Stars", "Plateau United", "Nasarawa United", "Enugu Rangers", "Bendel Insurance", "Kwara United", "Katsina United", "Ikorodu City", "Abia Warriors", "Niger Tornadoes", "Kun Khalifat", "Wikki Tourists", "Bayelsa United", "El-Kanemi Warriors", "Barau FC", "Warri Wolves"],
+        "notes": "2024-25 champions: Remo Stars. Pay is low and sometimes late; most talent leaves young for Europe via academies or trials. Sunshine Stars, Lobi Stars, Heartland (in the original prompt) are no longer in the top flight (verify)." }],
+      "cups": ["President Federation Cup"]
+    },
+    {
+      "country": "Ghana", "code": "GHA", "flag": "🇬🇭", "currency": "GHS",
+      "leagues": [{ "tier": 1, "name": "Ghana Premier League", "teams": 18, "matchdays": 34, "season": "Sep-Jun", "complete": false,
+        "clubs": ["Bibiani Gold Stars", "Asante Kotoko", "Accra Hearts of Oak", "Medeama SC", "Aduana FC", "Dreams FC", "Nations FC", "Heart of Lions", "Karela United", "Berekum Chelsea", "Samartex 1996", "Vision FC", "Basake Holy Stars", "Young Apostles", "Swedru All Blacks", "Hohoe United", "Eleven Wonders", "Bechem United"],
+        "notes": "2024-25 champions: Bibiani Gold Stars (first title). The original prompt listed Asante Kotoko twice." }],
+      "cups": ["Ghana FA Cup (MTN FA Cup)"]
+    },
+    {
+      "country": "South Africa", "code": "RSA", "flag": "🇿🇦", "currency": "ZAR",
+      "leagues": [
+        { "tier": 1, "name": "Betway Premiership", "formerName": "DStv Premiership (renamed 2024)", "teams": 16, "matchdays": 30, "season": "Aug-May",
+          "clubs": ["Mamelodi Sundowns", "Orlando Pirates", "Kaizer Chiefs", "Stellenbosch FC", "Sekhukhune United", "AmaZulu FC", "TS Galaxy", "Polokwane City", "Golden Arrows", "Chippa United", "Richards Bay", "Magesi FC", "Marumo Gallants", "Durban City", "Orbit College", "Siwelele FC (took over SuperSport United's licence)"],
+          "notes": "Mamelodi Sundowns have won 8 straight titles (to 2024-25). Cape Town City were relegated in 2025. Clubs can buy/sell top-flight licences ('status') — a uniquely South African storyline. Soweto derby (Chiefs vs Pirates)." },
+        { "tier": 2, "name": "Motsepe Foundation Championship", "teams": 16, "complete": false, "clubs": ["Cape Town City", "Milford FC", "Casric Stars", "Hungry Lions"] }
+      ],
+      "cups": ["Nedbank Cup", "Carling Knockout", "MTN8"]
+    },
+    {
+      "country": "Senegal", "code": "SEN", "flag": "🇸🇳", "currency": "XOF",
+      "leagues": [{ "tier": 1, "name": "Ligue 1 Sénégal", "teams": 14, "complete": false, "clubs": ["Teungueth FC", "ASC Jaraaf", "Génération Foot", "Casa Sports", "AS Pikine", "US Gorée", "Guédiawaye FC", "US Ouakam", "Dakar Sacré-Cœur", "ASC Linguère"], "notes": "Génération Foot and Diambars academies feed France (Metz partnership)." }]
+    },
+    {
+      "country": "Côte d'Ivoire", "code": "CIV", "flag": "🇨🇮", "currency": "XOF",
+      "leagues": [{ "tier": 1, "name": "Ligue 1 Côte d'Ivoire (MTN Ligue 1)", "teams": 16, "complete": false, "clubs": ["ASEC Mimosas", "Stade d'Abidjan", "SOA", "Séwé Sport", "Africa Sports", "AFAD Djékanou", "San Pédro FC", "Racing Club Abidjan", "Mouna FC"], "notes": "Côte d'Ivoire won AFCON 2023 at home." }]
+    },
+    {
+      "country": "Cameroon", "code": "CMR", "flag": "🇨🇲", "currency": "XAF",
+      "leagues": [{ "tier": 1, "name": "Elite One (MTN Elite One)", "teams": 18, "complete": false, "clubs": ["Coton Sport FC de Garoua", "Colombe du Dja et Lobo", "Canon Yaoundé", "Fovu Club", "PWD Bamenda", "Bamboutos FC", "Dynamo Douala", "Victoria United", "Gazelle FA"] }]
+    },
+    {
+      "country": "DR Congo", "code": "COD", "flag": "🇨🇩", "currency": "CDF",
+      "leagues": [{ "tier": 1, "name": "Linafoot (Ligue 1)", "complete": false, "clubs": ["TP Mazembe", "AS Vita Club", "DC Motema Pembe", "FC Saint-Éloi Lupopo", "AS Maniema Union", "FC Les Aigles du Congo"] }]
+    },
+    {
+      "country": "Tanzania", "code": "TAN", "flag": "🇹🇿", "currency": "TZS",
+      "leagues": [{ "tier": 1, "name": "NBC Premier League", "teams": 16, "complete": false, "clubs": ["Young Africans (Yanga)", "Simba SC", "Azam FC", "Singida Black Stars", "Coastal Union", "Namungo FC"], "notes": "Kariakoo derby (Yanga vs Simba). Co-hosting AFCON 2027." }]
+    },
+    {
+      "country": "Kenya", "code": "KEN", "flag": "🇰🇪", "currency": "KES",
+      "leagues": [{ "tier": 1, "name": "FKF Premier League", "teams": 18, "complete": false, "clubs": ["Gor Mahia", "AFC Leopards", "Tusker FC", "KCB", "Kenya Police FC", "Kakamega Homeboyz"], "notes": "Co-hosting AFCON 2027." }]
+    },
+    {
+      "country": "Uganda", "code": "UGA", "flag": "🇺🇬", "currency": "UGX",
+      "leagues": [{ "tier": 1, "name": "Uganda Premier League (StarTimes UPL)", "teams": 16, "complete": false, "clubs": ["Vipers SC", "KCCA FC", "SC Villa", "URA FC", "BUL FC", "NEC FC"], "notes": "Co-hosting AFCON 2027." }]
+    },
+    {
+      "country": "Zambia", "code": "ZAM", "flag": "🇿🇲", "currency": "ZMW",
+      "leagues": [{ "tier": 1, "name": "Zambia Super League (MTN/FAZ Super League)", "teams": 18, "complete": false, "clubs": ["ZESCO United", "Power Dynamos", "Red Arrows", "Zanaco", "Nkana FC", "Green Eagles"] }]
+    },
+    {
+      "country": "Zimbabwe", "code": "ZIM", "flag": "🇿🇼", "currency": "ZWG/USD",
+      "leagues": [{ "tier": 1, "name": "Castle Lager Premier Soccer League", "teams": 18, "complete": false, "clubs": ["Dynamos FC", "CAPS United", "Highlanders FC", "FC Platinum", "Simba Bhora", "Scottland FC", "Ngezi Platinum Stars"] }]
+    },
+    {
+      "country": "Angola", "code": "ANG", "flag": "🇦🇴", "currency": "AOA",
+      "leagues": [{ "tier": 1, "name": "Girabola", "teams": 16, "complete": false, "clubs": ["Petro de Luanda", "Primeiro de Agosto", "Sagrada Esperança", "Wiliete SC", "Kabuscorp"] }]
+    },
+    {
+      "country": "Mali", "code": "MLI", "flag": "🇲🇱", "currency": "XOF",
+      "leagues": [{ "tier": 1, "name": "Malian Première Division", "complete": false, "clubs": ["Stade Malien", "Djoliba AC", "Real Bamako", "AS Bamako"] }]
+    },
+    {
+      "country": "Burkina Faso", "code": "BFA", "flag": "🇧🇫", "currency": "XOF",
+      "leagues": [{ "tier": 1, "name": "Burkinabé Premier League", "complete": false, "clubs": ["ASFA Yennenga", "Rahimo FC", "AS Douanes", "Salitas FC"] }]
+    },
+    {
+      "country": "Guinea", "code": "GUI", "flag": "🇬🇳", "currency": "GNF",
+      "leagues": [{ "tier": 1, "name": "Guinée Championnat National (Ligue 1 Pro)", "complete": false, "clubs": ["Horoya AC", "Hafia FC", "Milo FC", "CI Kamsar"] }]
+    },
+    {
+      "country": "Cape Verde", "code": "CPV", "flag": "🇨🇻", "currency": "CVE",
+      "leagues": [{ "tier": 1, "name": "Campeonato Nacional de Cabo Verde", "format": "Island leagues, then short national championship", "complete": false, "clubs": ["CS Mindelense", "Sporting Praia", "Académica do Mindelo", "Boavista Praia"] }],
+      "notes": "Cape Verde qualified for the 2026 World Cup (first time), with many players developed in Portugal and the Netherlands."
+    },
+    {
+      "country": "Ethiopia", "code": "ETH", "flag": "🇪🇹", "currency": "ETB",
+      "leagues": [{ "tier": 1, "name": "Ethiopian Premier League", "complete": false, "clubs": ["Saint George SC", "Fasil Kenema", "Ethiopian Coffee", "Bahir Dar Kenema"] }]
+    },
+    {
+      "country": "Rwanda", "code": "RWA", "flag": "🇷🇼", "currency": "RWF",
+      "leagues": [{ "tier": 1, "name": "Rwanda Premier League", "complete": false, "clubs": ["APR FC", "Rayon Sports", "Police FC (Rwanda)", "AS Kigali"] }]
+    },
+    {
+      "country": "Other CAF nations",
+      "notes": "All have domestic leagues, mostly semi-professional: Benin, Togo, Gabon, Congo, Equatorial Guinea, Central African Republic, Chad, Niger, Mauritania, Gambia, Sierra Leone, Liberia, Guinea-Bissau, São Tomé and Príncipe, Mozambique (Moçambola: Black Bulls, Ferroviário de Maputo), Madagascar, Mauritius, Seychelles, Comoros, Botswana (Jwaneng Galaxy, Township Rollers), Namibia, Lesotho, Eswatini, Malawi (Nyasa Big Bullets), Burundi, South Sudan, Somalia, Djibouti, Eritrea. Use realistic small-league conditions: low wages, poor pitches, big ambition to move abroad."
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "_meta": {
+    "region": "North & Central America and the Caribbean (CONCACAF)",
+    "baseline": "2025-26 / 2026 season",
+    "continentalNote": "Concacaf Champions Cup (27 clubs, two-leg knockouts, single-match final; winner → FIFA Intercontinental Cup and Club World Cup). Leagues Cup (all MLS + Liga MX clubs, summer). Concacaf Central American Cup and Caribbean Cup feed the Champions Cup. The 'CONCACAF League' in the original prompt was discontinued in 2022."
+  },
+  "countries": [
+    {
+      "country": "United States",
+      "code": "USA",
+      "flag": "🇺🇸",
+      "currency": "USD",
+      "transferWindows": { "primary": "~late Jan - late Apr", "secondary": "~mid Jul - mid Aug" },
+      "leagues": [
+        {
+          "tier": 1, "name": "Major League Soccer (MLS)", "teams": 30, "matchdays": 34, "season": "Feb-Oct + MLS Cup Playoffs (Oct-Dec)",
+          "format": "Eastern & Western Conferences of 15. Top 9 per conference → playoffs. No promotion/relegation. Salary cap with Designated Players (3 allowed above the cap), U22 Initiative slots, General Allocation Money. Draft for college players. MLS NEXT Pro is the reserve league.",
+          "conferences": {
+            "Eastern": ["Atlanta United", "Charlotte FC", "Chicago Fire FC", "FC Cincinnati", "Columbus Crew", "D.C. United", "Inter Miami CF", "CF Montréal", "Nashville SC", "New England Revolution", "New York City FC", "New York Red Bulls", "Orlando City SC", "Philadelphia Union", "Toronto FC"],
+            "Western": ["Austin FC", "Colorado Rapids", "FC Dallas", "Houston Dynamo FC", "LA Galaxy", "Los Angeles FC", "Minnesota United FC", "Portland Timbers", "Real Salt Lake", "San Diego FC", "San Jose Earthquakes", "Seattle Sounders FC", "Sporting Kansas City", "St. Louis CITY SC", "Vancouver Whitecaps FC"]
+          },
+          "notes": "2025 MLS Cup: Inter Miami beat Vancouver Whitecaps. MLS announced a switch to an August-May calendar from 2027 (verify). The original prompt listed 29 clubs (CF Montréal twice); it is 30."
+        },
+        { "tier": 2, "name": "USL Championship", "teams": 25, "season": "Mar-Nov", "complete": false, "clubs": ["Louisville City FC", "Tampa Bay Rowdies", "San Antonio FC", "Sacramento Republic FC", "Indy Eleven", "Pittsburgh Riverhounds SC", "Detroit City FC", "Phoenix Rising FC", "Oakland Roots SC", "New Mexico United", "Charleston Battery", "Colorado Springs Switchbacks", "Orange County SC", "Hartford Athletic", "Las Vegas Lights FC", "Lexington SC", "Rhode Island FC", "North Carolina FC", "Birmingham Legion FC", "FC Tulsa", "El Paso Locomotive FC", "Monterey Bay FC", "Loudoun United FC", "Miami FC"] },
+        { "tier": 3, "name": "USL League One", "teams": 14, "complete": false, "clubs": ["Union Omaha", "Chattanooga Red Wolves", "Greenville Triumph", "Forward Madison", "Richmond Kickers", "Charlotte Independence", "One Knoxville SC", "Spokane Velocity", "Westchester SC"] }
+      ],
+      "cups": ["Lamar Hunt U.S. Open Cup", "Leagues Cup (with Liga MX)"],
+      "stars": ["Lionel Messi (Inter Miami)", "Luis Suárez (Inter Miami)", "Rodrigo De Paul (Inter Miami)", "Son Heung-min (LAFC)", "Denis Bouanga (LAFC)", "Thomas Müller (Vancouver Whitecaps)", "Riqui Puig (LA Galaxy)", "Hirving Lozano (San Diego FC)", "Emil Forsberg (NY Red Bulls)", "Evander (FC Cincinnati)"],
+      "notes": "Sergio Busquets and Jordi Alba retired after the 2025 season. Maarten Paes (Indonesia GK) built his reputation at FC Dallas."
+    },
+    {
+      "country": "Mexico",
+      "code": "MEX",
+      "flag": "🇲🇽",
+      "currency": "MXN",
+      "transferWindows": { "winter": "Dec - Jan", "summer": "Jun - Jul" },
+      "leagues": [
+        {
+          "tier": 1, "name": "Liga BBVA MX", "teams": 18, "matchdays": 17, "season": "Apertura (Jul-Dec) + Clausura (Jan-May)",
+          "format": "17 rounds each tournament; top 6 → Liguilla quarter-finals, 7th-10th → play-in. Promotion/relegation suspended (clubs pay fines based on a coefficient table instead).",
+          "clubs": ["Club América", "C.D. Guadalajara (Chivas)", "Tigres UANL", "C.F. Monterrey", "Cruz Azul", "Deportivo Toluca", "Atlas", "Necaxa", "Santos Laguna", "Club León", "C.F. Pachuca", "Pumas UNAM", "Club Tijuana", "Mazatlán FC", "Club Puebla", "Querétaro FC", "FC Juárez", "Atlético de San Luis"],
+          "notes": "Toluca won both the 2025 Clausura and 2025 Apertura. Cruz Azul won the 2025 Concacaf Champions Cup. verify: Mazatlán's franchise may be replaced by Atlante for 2026-27."
+        },
+        { "tier": 2, "name": "Liga de Expansión MX", "teams": 17, "complete": false, "clubs": ["Atlante", "Alebrijes de Oaxaca", "Cimarrones de Sonora", "Cancún FC", "Dorados de Sinaloa", "Mineros de Zacatecas", "Correcaminos UAT", "Venados FC", "Tapatío", "Tepatitlán FC", "Leones Negros UdeG", "Celaya FC", "Tlaxcala FC", "Club Atlético Morelia"], "notes": "No promotion to Liga MX at present." }
+      ],
+      "cups": ["Leagues Cup", "Campeón de Campeones"],
+      "stars": ["Sergio Ramos (Monterrey)", "Lucas Ocampos (Monterrey)", "Ángel Correa (Tigres)", "Allan Saint-Maximin (América)", "Paulinho (Toluca)"],
+      "notes": "Clásico Nacional (América vs Chivas). Chivas only field Mexican players — a unique club policy."
+    },
+    {
+      "country": "Canada", "code": "CAN", "flag": "🇨🇦", "currency": "CAD",
+      "leagues": [{ "tier": 1, "name": "Canadian Premier League", "teams": 8, "matchdays": 28, "season": "Apr-Oct", "clubs": ["Forge FC", "Cavalry FC", "Pacific FC", "Atlético Ottawa", "HFX Wanderers FC", "Valour FC", "Vancouver FC", "Inter Toronto FC (formerly York United, verify)"], "notes": "FC Edmonton (in the original prompt) folded in 2022. Toronto FC, CF Montréal and Vancouver Whitecaps play in MLS." }],
+      "cups": ["Canadian Championship (Voyageurs Cup; includes MLS Canadian clubs)"]
+    },
+    {
+      "country": "Costa Rica", "code": "CRC", "flag": "🇨🇷", "currency": "CRC",
+      "leagues": [{ "tier": 1, "name": "Liga Promérica (Primera División)", "teams": 12, "season": "Apertura + Clausura", "complete": false, "clubs": ["Deportivo Saprissa", "LD Alajuelense", "CS Herediano", "CS Cartaginés", "Pérez Zeledón", "Sporting FC", "Puntarenas FC", "Municipal Liberia", "AD San Carlos", "Guanacasteca"] }]
+    },
+    {
+      "country": "Honduras", "code": "HON", "flag": "🇭🇳", "currency": "HNL",
+      "leagues": [{ "tier": 1, "name": "Liga Nacional de Fútbol Profesional", "teams": 10, "season": "Apertura + Clausura", "complete": false, "clubs": ["CD Olimpia", "FC Motagua", "Real CD España", "CD Marathón", "Olancho FC", "CD Génesis", "Lobos UPNFM", "Juticalpa FC", "CD Victoria", "Platense FC"] }]
+    },
+    {
+      "country": "Guatemala", "code": "GUA", "flag": "🇬🇹", "currency": "GTQ",
+      "leagues": [{ "tier": 1, "name": "Liga Nacional de Guatemala", "teams": 12, "complete": false, "clubs": ["CSD Comunicaciones", "CSD Municipal", "CD Xelajú MC", "Antigua GFC", "Cobán Imperial", "Deportivo Mixco"] }]
+    },
+    {
+      "country": "El Salvador", "code": "SLV", "flag": "🇸🇻", "currency": "USD",
+      "leagues": [{ "tier": 1, "name": "Primera División de El Salvador", "teams": 12, "complete": false, "clubs": ["Alianza FC", "CD FAS", "CD Águila", "Isidro Metapán", "Municipal Limeño"] }]
+    },
+    {
+      "country": "Panama", "code": "PAN", "flag": "🇵🇦", "currency": "PAB/USD",
+      "leagues": [{ "tier": 1, "name": "Liga Panameña de Fútbol", "teams": 12, "complete": false, "clubs": ["CD Plaza Amador", "Tauro FC", "CAI", "San Francisco FC", "CD Árabe Unido", "Sporting San Miguelito"] }],
+      "notes": "Panama qualified for the 2026 World Cup."
+    },
+    {
+      "country": "Nicaragua", "code": "NCA", "flag": "🇳🇮", "currency": "NIO",
+      "leagues": [{ "tier": 1, "name": "Liga Primera", "complete": false, "clubs": ["Real Estelí", "Diriangén FC", "Managua FC"] }]
+    },
+    {
+      "country": "Jamaica", "code": "JAM", "flag": "🇯🇲", "currency": "JMD",
+      "leagues": [{ "tier": 1, "name": "Jamaica Premier League", "teams": 14, "complete": false, "clubs": ["Cavalier SC", "Mount Pleasant FA", "Harbour View FC", "Waterhouse FC", "Arnett Gardens", "Portmore United", "Montego Bay United"] }]
+    },
+    {
+      "country": "Trinidad and Tobago", "code": "TRI", "flag": "🇹🇹", "currency": "TTD",
+      "leagues": [{ "tier": 1, "name": "TT Premier League", "complete": false, "clubs": ["Defence Force", "Police FC", "AC Port of Spain", "Club Sando", "Miscellaneous Police"] }]
+    },
+    {
+      "country": "Haiti", "code": "HAI", "flag": "🇭🇹", "currency": "HTG",
+      "leagues": [{ "tier": 1, "name": "Championnat National D1", "complete": false, "clubs": ["Violette AC", "Racing CH", "Don Bosco FC", "Arcahaie FC"] }],
+      "notes": "The domestic league is heavily disrupted by the security crisis; the national team plays home games abroad. Haiti qualified for the 2026 World Cup (first since 1974)."
+    },
+    {
+      "country": "Curaçao", "code": "CUW", "flag": "🇨🇼", "currency": "XCG",
+      "leagues": [{ "tier": 1, "name": "Promé Divishon", "complete": false, "clubs": ["SV Jong Holland", "CRKSV Jong Colombia", "SV Hubentut Fortuna", "Scherpenheuvel"] }],
+      "notes": "Curaçao qualified for the 2026 World Cup — the smallest nation ever to do so — with a mostly Dutch-born squad under Dick Advocaat."
+    },
+    {
+      "country": "Suriname", "code": "SUR", "flag": "🇸🇷", "currency": "SRD",
+      "leagues": [{ "tier": 1, "name": "SML (Suriname Major League)", "complete": false, "clubs": ["SV Robinhood", "Inter Moengotapoe", "SV Transvaal", "SV Leo Victor"] }],
+      "notes": "Like Indonesia, Suriname uses Dutch-born heritage players."
+    },
+    {
+      "country": "Dominican Republic", "code": "DOM", "flag": "🇩🇴", "currency": "DOP",
+      "leagues": [{ "tier": 1, "name": "Liga Dominicana de Fútbol", "complete": false, "clubs": ["Cibao FC", "Atlético Pantoja", "Moca FC"] }]
+    },
+    {
+      "country": "Cuba", "code": "CUB", "flag": "🇨🇺", "currency": "CUP",
+      "leagues": [{ "tier": 1, "name": "Campeonato Nacional de Fútbol", "complete": false, "clubs": ["FC Santiago de Cuba", "FC Cienfuegos", "FC Pinar del Río"] }],
+      "notes": "Players who defect during tournaments abroad is a real recurring storyline."
+    },
+    {
+      "country": "Other Caribbean & Central American nations",
+      "notes": "Belize (Premier League of Belize), Guyana (GFF Elite League), Puerto Rico (Liga Puerto Rico), Bermuda, Grenada, St Kitts & Nevis, Saint Lucia, Barbados, Antigua & Barbuda, Martinique and Guadeloupe (French overseas departments; CONCACAF members but not FIFA members). All amateur or semi-professional."
+    }
+  ]
+}

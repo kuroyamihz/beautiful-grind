@@ -1,0 +1,503 @@
+{
+  "scenarios": [
+    {
+      "id": "tr_tactical_role", "cat": "training", "w": 6,
+      "title": "{M} Tests {J} in a New Tactical Role",
+      "text": "Tuesday's session stops three times. Each time, {M} walks over, takes {J} by the shoulder and moves him two metres. The plan is clear: a new role, one he hasn't played since the academy. Around the pitch, the assistants watch his reaction more than his feet.",
+      "prompt": "{M} wants you in a new role. How do you respond?",
+      "choices": [
+        { "label": "Embrace it", "desc": "Commit fully, stay late with the analysts.", "risk": "medium", "hint": "Trust rises; the first weeks may be messy.", "text": "{J} throws himself into the new role. The analysts send clips at midnight; he watches them all. {M} notices.", "fx": { "trust": 4, "tacticalFit": 10, "growth": ["mental"] } },
+        { "label": "Ask why", "desc": "Request a one-to-one to understand the plan.", "risk": "low", "hint": "Some managers like curiosity. Some don't.", "out": [
+          { "w": 2, "text": "The one-to-one goes well. {M} draws the shape on a napkin and seems pleased somebody asked.", "fx": { "trust": 2, "tacticalFit": 5 } },
+          { "w": 1, "text": "“Because I said so,” is roughly the answer. {M} doesn't enjoy being questioned.", "fx": { "trust": -3 } }
+        ] },
+        { "label": "Refuse it", "desc": "Tell him you're not built for that role.", "risk": "high", "hint": "Refusing a tactical role badly damages trust.", "text": "{J} says no. {M} nods, says nothing, and leaves him out of the shape work for the rest of the week. The message is received by everyone.", "fx": { "trust": -12, "mood": "Angry" } }
+      ]
+    },
+    {
+      "id": "tr_gps_quicker", "cat": "training", "w": 4, "when": { "age": [16, 26] },
+      "title": "GPS Data Shows {J} Getting Quicker",
+      "text": "The sports science report lands on the dressing-room screen: {J}'s top speed and repeat-sprint numbers are the best of his career. The fitness coach circles them in red marker and writes nothing else. Nobody needs to.",
+      "fx": { "growth": ["pace"] }
+    },
+    {
+      "id": "tr_overtraining", "cat": "training", "w": 7, "when": { "pfm": [0, 70] },
+      "title": "Sports Scientists Flag {J}'s Load",
+      "text": "The numbers are red: heart-rate variability down, sleep scores down, hamstring readings tight. The physio recommends two days off. {J} looks at the team sheet pinned to the wall and does the maths on what two days off means.",
+      "prompt": "The medical staff want you to rest. Do you?",
+      "choices": [
+        { "label": "Rest", "desc": "Take the two days, follow the recovery plan.", "risk": "low", "hint": "Fitness recovers; the manager may read it as softness.", "text": "{J} rests. The legs feel lighter by Thursday.", "fx": { "pfm": 10, "trust": -1 } },
+        { "label": "Push through", "desc": "Train anyway. Places are earned on the grass.", "risk": "high", "hint": "Might build toughness — or cause an injury.", "out": [
+          { "w": 3, "text": "Thursday, sprint drill, third rep: something twangs high in the hamstring. {J} walks off before anyone tells him to.", "fx": { "injury": "minor", "trust": -2 } },
+          { "w": 7, "text": "{J} grinds through the week. It hurts. It also earns a grunt of approval from the captain.", "fx": { "pfm": -4, "growth": ["physical"], "trust": 1 } }
+        ] }
+      ]
+    },
+    {
+      "id": "tr_extra_sessions", "cat": "training", "w": 6,
+      "title": "Veteran {Tl} Offers {J} Extra Work",
+      "text": "{T}, thirty-four, two hundred league games, knees like old rope, catches {J} in the car park. “Forty minutes after training. Every day. I'll show you what nobody showed me.” He doesn't wait for an answer before walking off.",
+      "prompt": "Accept the extra sessions?",
+      "choices": [
+        { "label": "Accept", "desc": "Forty extra minutes a day.", "risk": "medium", "hint": "Could improve a key stat; costs fitness.", "out": [
+          { "w": 11, "text": "The extra sessions are brutal and boring and they work. {T} says “better” once, which from him is a speech.", "fx": { "pfm": -5, "growth": ["rel"], "teammate": { "who": "T", "rel": "ally" } } },
+          { "w": 9, "text": "Two weeks of extra work and nothing to show for it yet but sore calves. {T} shrugs: “It comes later.”", "fx": { "pfm": -5, "teammate": { "who": "T", "rel": "ally" } } }
+        ] },
+        { "label": "Decline politely", "desc": "Recovery matters too.", "risk": "low", "hint": "No gain, no cost. He might take it personally.", "text": "{T} raises an eyebrow and walks away. He won't offer twice.", "fx": { "teammate": { "who": "T", "rel": "neutral" } } }
+      ]
+    },
+    {
+      "id": "tr_video_review", "cat": "training", "w": 5, "when": { "apps": [3, 9999] },
+      "title": "{J} Faces the Video Room",
+      "text": "The lights go down. Eleven clips, all of {J}: a lost duel, a pass to nobody, a jog back that should have been a sprint. The assistant coach pauses on each one and lets the silence do the talking.",
+      "prompt": "How do you take the criticism?",
+      "choices": [
+        { "label": "Own it", "desc": "Nod, take notes, ask for more clips.", "risk": "low", "hint": "Staff respect; mental growth possible.", "out": [
+          { "w": 1, "text": "{J} asks for the clips on a USB stick and watches them twice more at home.", "fx": { "trust": 2, "growth": ["mental"] } },
+          { "w": 1, "text": "{J} takes notes and thanks the coach. It stings for a day, then it helps.", "fx": { "trust": 2 } }
+        ] },
+        { "label": "Argue back", "desc": "Some of those weren't your fault.", "risk": "medium", "hint": "You might be right. They won't care.", "text": "{J} points out that the full-back left him two-on-one. The assistant coach writes something down. It isn't “good point”.", "fx": { "trust": -4 } }
+      ]
+    },
+    {
+      "id": "tr_youth_rival", "cat": "training", "w": 5, "when": { "age": [19, 34] },
+      "title": "Academy Kid {Kl} Turns Heads in Training",
+      "text": "He's seventeen, he plays {J}'s position, and on Wednesday he nutmegs two senior players before lunch. {K}. The staff are already saying his name the way they used to say {J}'s.",
+      "prompt": "{K} is coming for your shirt. What do you do?",
+      "choices": [
+        { "label": "Mentor him", "desc": "Take him under your wing.", "risk": "medium", "hint": "Respect from staff and players. You might be training your replacement.", "text": "{J} starts staying behind with {K}. The coaches see it. So does the kid.", "fx": { "trust": 3, "rep": 0.5, "chain": { "id": "tr_youth_rival_debut", "in": [8, 16] } } },
+        { "label": "Freeze him out", "desc": "Make sure he knows his place.", "risk": "high", "hint": "Could protect your spot — or make you look small.", "out": [
+          { "w": 1, "text": "A late tackle in training, a cold shoulder in the canteen. {M} saw the tackle. He says nothing, which is worse.", "fx": { "trust": -5, "mood": "Anxious" } },
+          { "w": 1, "text": "{K} gets the message and goes quiet. {J} keeps his shirt — for now.", "fx": { "mood": "Focused" } }
+        ] },
+        { "label": "Ignore it", "desc": "Focus on your own game.", "risk": "low", "hint": "Nothing changes. Yet.", "text": "{J} keeps his head down. {K} keeps getting better.", "fx": {} }
+      ]
+    },
+    {
+      "id": "tr_youth_rival_debut", "cat": "training", "chainOnly": true,
+      "title": "{Kl} Makes His Debut — and Runs to {J}",
+      "text": "{K} makes his first-team debut this week. When he scores in training afterwards, the first person he runs to is {J}. Whatever happens to the shirt, that moment is not nothing.",
+      "fx": { "rep": 0.5, "followers": 2000, "mood": "Relieved" }
+    },
+    {
+      "id": "tr_set_piece_duty", "cat": "training", "w": 4, "when": { "pos": ["AM", "CM", "W", "ST", "FB"], "role": ["starter", "rotation"] },
+      "title": "Set-Piece Audition: Who Takes the Free Kicks?",
+      "text": "The regular free-kick taker has left. {M} lines up five players at the edge of the box, twenty-two metres out, with a mannequin wall. Ten shots each. The best scorer takes them on Saturday.",
+      "prompt": "Ten shots. How do you approach it?",
+      "choices": [
+        { "label": "Go for power", "desc": "Blast it over the wall.", "risk": "medium", "hint": "Spectacular when it works.", "check": { "stat": "shooting", "dc": 60 },
+          "ok": { "text": "Seven out of ten, three of them into the top corner. {M} tosses {J} the ball. “Yours.”", "fx": { "trust": 3, "flag": "set_piece_taker", "growth": ["shooting"] } },
+          "bad": { "text": "Three out of ten, two into the car park. Somebody else gets the job.", "fx": { "mood": "Frustrated" } } },
+        { "label": "Go for placement", "desc": "Curl it around the wall.", "risk": "low", "hint": "Consistent.", "check": { "stat": "passing", "dc": 55 },
+          "ok": { "text": "Six out of ten, every one curled low inside the post. {M} likes it. “Smart.” The job is his.", "fx": { "trust": 2, "flag": "set_piece_taker" } },
+          "bad": { "text": "Four out of ten. Fine, but not enough.", "fx": {} } }
+      ]
+    },
+    {
+      "id": "tr_weak_foot", "cat": "training", "w": 4, "when": { "pos": ["W", "ST", "AM", "CM", "FB"] },
+      "title": "Opponents Have Noticed {J}'s Weaker Foot",
+      "text": "The analysis department has noticed what opposition scouts noticed first: {J} almost never uses his weaker foot. Defenders show him that way and wait. The skills coach offers a six-week programme: two hundred touches a day with the weak foot only.",
+      "prompt": "Commit to the weak-foot programme?",
+      "choices": [
+        { "label": "Commit to it", "desc": "Two hundred touches, every day, for six weeks.", "risk": "medium", "hint": "Boring, tiring, valuable.", "text": "The first two weeks are humiliating. By week five, {J} is curling passes with the wrong foot without thinking.", "fx": { "growth": ["dribbling"], "pfm": -4, "flag": "two_footed" } },
+        { "label": "Focus on your strengths", "desc": "Make the strong foot unstoppable.", "risk": "low", "hint": "Defenders will keep showing you one way.", "text": "{J} decides to be so good with one foot that it doesn't matter. Some of the greats did that. Most didn't.", "fx": {} }
+      ]
+    },
+    {
+      "id": "tr_heading_drill", "cat": "training", "w": 4, "when": { "pos": ["CB", "ST", "DM"] },
+      "title": "Aerial Duels: {M} Wants More from {J}",
+      "text": "Crosses, crosses, crosses. The assistant coach has a machine that fires balls into the box at different heights and speeds. {M} wants {J} to dominate in the air. After forty headers, {J}'s neck aches and his forehead is red.",
+      "prompt": "Keep going?",
+      "choices": [
+        { "label": "Forty more", "desc": "Own the air.", "risk": "medium", "hint": "Strength and timing; headaches.", "text": "Eighty headers. {J}'s timing improves visibly. So does his headache.", "fx": { "growth": ["physical"], "pfm": -3, "trust": 1 } },
+        { "label": "Ask to stop", "desc": "Concussion research is serious.", "risk": "low", "hint": "Sensible. Old-school coaches may roll eyes.", "out": [
+          { "w": 1, "text": "The physio backs {J} up. The club introduces a new heading limit for all players.", "fx": { "rep": 0.2 } },
+          { "w": 1, "text": "The assistant coach mutters about soft modern players.", "fx": { "trust": -2 } }
+        ] }
+      ]
+    },
+    {
+      "id": "tr_goalkeeper_coach", "cat": "training", "w": 7, "when": { "pos": ["GK"] },
+      "title": "The Goalkeeper Coach Rebuilds {J}'s Footwork",
+      "text": "The goalkeeper coach has watched {J}'s last six matches frame by frame. His diagnosis: the footwork before a dive is half a step slow. He proposes rebuilding it from scratch — slower before it gets faster.",
+      "prompt": "Rebuild your technique mid-season?",
+      "choices": [
+        { "label": "Rebuild it", "desc": "Short-term pain, long-term gain.", "risk": "medium", "hint": "A few shaky weeks.", "text": "Three weeks of feeling like a beginner. Then something clicks, and {J} is reaching shots he used to watch go past him.", "fx": { "growth": ["goalkeeping"], "form": -0.2 } },
+        { "label": "Wait for the summer", "desc": "Don't change things mid-season.", "risk": "low", "hint": "Stability now.", "text": "They agree to rebuild in pre-season. The coach writes it in his notebook.", "fx": {} }
+      ]
+    },
+    {
+      "id": "tr_gk_distribution", "cat": "training", "w": 5, "when": { "pos": ["GK"] },
+      "title": "{M} Wants a Keeper Who Plays Out From the Back",
+      "text": "{M} wants his goalkeeper to be the first playmaker: short passes under pressure, long switches to the full-backs, no hoofing. In training, the strikers press {J} relentlessly while he tries to pass out.",
+      "prompt": "The press is coming. Training game.",
+      "choices": [
+        { "label": "Play it short", "desc": "Trust the system.", "risk": "medium", "hint": "Brave keepers get coached. Bad passes get punished.", "check": { "stat": "passing", "dc": 50 },
+          "ok": { "text": "Three clean passes through the press and a goal at the other end. {M} applauds from the touchline.", "fx": { "trust": 4, "growth": ["passing"] } },
+          "bad": { "text": "An intercepted pass, a goal, laughter from the strikers. {M} says: “Again.”", "fx": { "trust": 1 } } },
+        { "label": "Kick it long", "desc": "Safety first.", "risk": "low", "hint": "Safe and not what he wants.", "text": "{J} goes long. {M} stops the session and explains the plan again, slowly.", "fx": { "trust": -2 } }
+      ]
+    },
+    {
+      "id": "tr_pressing_drill", "cat": "training", "w": 5, "when": { "pos": ["ST", "W", "AM", "CM"] },
+      "title": "Pressing Drills: {M} Wants Hunters, Not Watchers",
+      "text": "{M}'s new obsession is the press. Six seconds after losing the ball, everyone hunts. Anybody who jogs gets a lap of the pitch. By Thursday half the squad has run laps. {J} is on the edge.",
+      "prompt": "The drill is exhausting. Your lungs are gone.",
+      "choices": [
+        { "label": "Hunt every ball", "desc": "Sprint until the whistle.", "risk": "medium", "hint": "Manager loves it. Legs don't.", "text": "{J} presses like a man possessed. {M} uses him as the example for the rest of the squad, which is both a compliment and a curse.", "fx": { "trust": 4, "pfm": -6, "tacticalFit": 6 } },
+        { "label": "Pick your moments", "desc": "Press smart, not always.", "risk": "medium", "hint": "Could look lazy.", "out": [
+          { "w": 1, "text": "{M} likes the intelligence. “You see the trigger. Good.”", "fx": { "trust": 2, "growth": ["mental"] } },
+          { "w": 1, "text": "{M} sees a jog and sends {J} on a lap. The squad cheers ironically.", "fx": { "trust": -2 } }
+        ] }
+      ]
+    },
+    {
+      "id": "tr_finishing_masterclass", "cat": "training", "w": 4, "when": { "pos": ["ST", "W", "AM"] },
+      "title": "A Club Legend Gives {J} a Finishing Masterclass",
+      "text": "A former club legend, now a television pundit with grey hair and a bad knee, visits training. After the session he takes {J} aside with a bag of balls. “Stop looking at the goal. Look at the keeper's feet.”",
+      "fx": { "growth": ["shooting"] },
+      "prompt": "He offers his phone number. “Call me if you're struggling.”",
+      "choices": [
+        { "label": "Save it and call him", "desc": "A mentor is priceless.", "risk": "low", "hint": "A friend in the media.", "text": "{J} calls him after a bad game a month later. They talk for an hour. The pundit is kinder about {J} on television ever after.", "fx": { "rep": 0.5, "growth": ["mental"] } },
+        { "label": "Thank him politely", "desc": "You don't need advice from pundits.", "risk": "low", "hint": "Nothing lost.", "text": "{J} thanks him and never calls. The number sits unused in his phone.", "fx": {} }
+      ]
+    },
+    {
+      "id": "tr_dribbling_coach", "cat": "training", "w": 4, "when": { "pos": ["W", "AM", "FB", "ST"], "age": [16, 24] },
+      "title": "Street Football Coach Offers {J} Private Sessions",
+      "text": "A former street-football champion runs a famous skills school. He has seen {J}'s clips and offers private sessions: cones, freestyle, small cages. “Your coaches teach you systems. I teach you to embarrass people.”",
+      "prompt": "Take the sessions?",
+      "choices": [
+        { "label": "Yes, twice a week", "desc": "Expensive and fun.", "risk": "medium", "hint": "Flair improves. The club might worry about fatigue.", "vars": { "cost": ["wageWeeks", 1, 60] }, "text": "{J} pays {cost} for a month of sessions. He comes back with three new tricks and a new confidence on the ball.", "fx": { "wealth": "-cost", "growth": ["dribbling"], "pfm": -3, "followers": 2500 } },
+        { "label": "No, stick to the club plan", "desc": "Discipline over flair.", "risk": "low", "hint": "Coaches approve.", "text": "{J} declines. {M} likes players who listen to his staff.", "fx": { "trust": 1 } }
+      ]
+    },
+    {
+      "id": "tr_injured_teammate_drill", "cat": "training", "w": 3,
+      "title": "Training Tackle Leaves {Tl} Hurt",
+      "text": "A fifty-fifty in a small-sided game. {J} goes in hard, the way the coaches always shout for. {T} goes down and stays down. The physio jogs over. The session stops. Everybody looks at {J}.",
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Apologise immediately", "desc": "Help him up, check on him.", "risk": "low", "hint": "Decent.", "out": [
+          { "w": 2, "text": "Just a dead leg. {T} limps for a day, then laughs about it.", "fx": { "teammate": { "who": "T", "rel": "neutral" } } },
+          { "w": 1, "text": "Ankle ligaments, three weeks out. {T} accepts the apology but doesn't forget it.", "fx": { "teammate": { "who": "T", "rel": "rival" }, "mood": "Anxious" } }
+        ] },
+        { "label": "Shrug it off", "desc": "It was a fair tackle. Football is physical.", "risk": "medium", "hint": "Some respect it; most don't.", "text": "{J} walks back to position. The dressing room is cooler toward him for a week.", "fx": { "teammate": { "who": "T", "rel": "enemy" }, "trust": 1 } }
+      ]
+    },
+    {
+      "id": "tr_yoga", "cat": "training", "w": 3,
+      "title": "The Club Introduces Yoga",
+      "text": "A new sports scientist introduces yoga and breathing sessions on Wednesday mornings. Half the squad attends seriously. The other half lie on the mats and giggle. {J} is somewhere in the middle, in a pose that hurts in places he didn't know existed.",
+      "prompt": "Take it seriously?",
+      "choices": [
+        { "label": "Commit to it", "desc": "Flexibility, breathing, focus.", "risk": "low", "hint": "Fewer injuries over time.", "text": "Four weeks later {J}'s hamstrings feel looser than they have in years. He starts doing the breathing exercises before penalties.", "fx": { "pfm": 5, "growth": ["mental"], "flag": "yoga" } },
+        { "label": "Mess around", "desc": "It's not real training.", "risk": "low", "hint": "Laughs with the lads.", "text": "{J} joins the gigglers. The sports scientist sighs and writes names in a notebook.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "trust": -1 } }
+      ]
+    },
+    {
+      "id": "tr_heat_training", "cat": "training", "w": 4, "when": { "country": ["Indonesia", "Thailand", "Vietnam", "Malaysia", "Saudi Arabia", "Qatar", "United Arab Emirates", "Brazil"] },
+      "title": "Thirty-Six Degrees at Training",
+      "text": "The thermometer by the dugout says 36°C. The humidity makes the air feel like soup. Training at 3pm is the coach's idea of preparing for afternoon kick-offs. Two players have already been sick behind the goal.",
+      "prompt": "You're feeling dizzy.",
+      "choices": [
+        { "label": "Tell the physio", "desc": "Sit out ten minutes, rehydrate.", "risk": "low", "hint": "Safe.", "text": "Ten minutes in the shade, electrolytes, a wet towel. {J} finishes the session strong.", "fx": { "pfm": 2 } },
+        { "label": "Keep going", "desc": "Toughness is part of the job.", "risk": "high", "hint": "Heat exhaustion is real.", "out": [
+          { "w": 2, "text": "{J} makes it through, grey-faced, and sleeps for twelve hours.", "fx": { "pfm": -8, "trust": 2 } },
+          { "w": 1, "text": "{J} collapses during the final drill. Heat exhaustion. Two days in bed, an IV drip, a lecture from the doctor.", "fx": { "pfm": -15, "trust": -1, "mood": "Anxious" } }
+        ] }
+      ]
+    },
+    {
+      "id": "tr_cold_training", "cat": "training", "w": 5, "when": { "abroad": true, "months": [11, 12, 1, 2], "notCountry": ["Indonesia", "Thailand", "Vietnam", "Malaysia", "Singapore", "Saudi Arabia", "Qatar", "United Arab Emirates", "Brazil", "Australia"] },
+      "title": "Minus Four: {J}'s First Real Winter",
+      "text": "The pitch is frozen at the edges. Breath hangs in the air like smoke. The local players wear shorts; {J} wears three layers, gloves and a snood and is still shaking. The ball feels like a stone.",
+      "prompt": "How do you cope with the cold?",
+      "choices": [
+        { "label": "Embrace it", "desc": "Shorts, like the locals.", "risk": "medium", "hint": "Respect, or a cold.", "out": [
+          { "w": 1, "text": "The locals love it. “He's one of us now.” {J} loses feeling in his thighs but gains a nickname.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "rep": 0.2 } },
+          { "w": 1, "text": "{J} catches a heavy cold and misses two days.", "fx": { "pfm": -8 } }
+        ] },
+        { "label": "Wrap up", "desc": "Gloves, thermals, whatever it takes.", "risk": "low", "hint": "Warm and slightly mocked.", "text": "{J} wraps up like an astronaut. The jokes last a week. His muscles thank him.", "fx": { "pfm": 2 } }
+      ]
+    },
+    {
+      "id": "tr_rondo_humiliation", "cat": "training", "w": 4, "when": { "age": [16, 20] },
+      "title": "Stuck in the Middle of the Rondo",
+      "text": "Eight senior players in a circle, two in the middle trying to win the ball. {J} has been in the middle for four minutes. The ball zips around him, between his legs, over his head. The circle laughs harder every time. Nobody has ever been in there this long.",
+      "prompt": "You need to get out.",
+      "choices": [
+        { "label": "Go in harder", "desc": "Win it whatever it takes.", "risk": "medium", "hint": "Aggression earns respect — or a foul.", "check": { "stat": "physical", "dc": 50 },
+          "ok": { "text": "{J} reads a pass and steals it with a slide. The circle cheers. He's out.", "fx": { "trust": 2, "teammate": { "who": "T", "rel": "ally" } } },
+          "bad": { "text": "{J} lunges and clips {T}'s ankle. “Calm down, kid.” He stays in the middle.", "fx": { "teammate": { "who": "T", "rel": "rival" } } } },
+        { "label": "Read the passes", "desc": "Anticipate, cut the angle.", "risk": "low", "hint": "Smart players escape faster.", "check": { "stat": "mental", "dc": 50 },
+          "ok": { "text": "{J} cuts the passing lane and intercepts. Quiet nods around the circle.", "fx": { "growth": ["mental"] } },
+          "bad": { "text": "{J} guesses wrong three times. The laughter gets louder. Eventually the coach takes pity.", "fx": { "mood": "Frustrated" } } }
+      ]
+    },
+    {
+      "id": "tr_reserve_match", "cat": "training", "w": 6, "when": { "role": ["bench", "outcast"] },
+      "title": "Ninety Minutes in the Reserves",
+      "text": "No crowd, a few parents, and a groundsman walking his dog behind the goal. A reserve match against another club's second team. {M} isn't here. His assistant is, with a notebook.",
+      "prompt": "How do you play it?",
+      "choices": [
+        { "label": "Play like it's a final", "desc": "Every duel, every sprint.", "risk": "low", "hint": "The notebook is watching.", "check": { "stat": "physical", "dc": 48 },
+          "ok": { "text": "{J} is the best player on the pitch by a distance. The assistant's notebook has his name underlined twice.", "fx": { "trust": 5, "form": 0.3 } },
+          "bad": { "text": "Effort everywhere, quality nowhere. A forgettable afternoon.", "fx": { "trust": 1 } } },
+        { "label": "Take it easy", "desc": "It's only the reserves.", "risk": "medium", "hint": "Somebody is always watching.", "text": "{J} coasts. The assistant writes “attitude?” in the notebook, and the notebook goes upstairs.", "fx": { "trust": -5 } }
+      ]
+    },
+    {
+      "id": "tr_fitness_test_return", "cat": "training", "w": 4, "when": { "pfm": [0, 55] },
+      "title": "{J} Fails a Fitness Benchmark",
+      "text": "The quarterly fitness benchmark is not kind. {J}'s numbers are down across the board: sprint speed, endurance, power output. The sports science department schedules a meeting.",
+      "prompt": "The plan they propose is strict.",
+      "choices": [
+        { "label": "Follow the plan", "desc": "Diet, sleep, recovery sessions.", "risk": "low", "hint": "Boring. Effective.", "text": "Two weeks of chicken, rice, ice baths and early nights. The numbers bounce back.", "fx": { "pfm": 12, "mood": "Focused" } },
+        { "label": "Do it your way", "desc": "You know your body.", "risk": "medium", "hint": "Maybe you do.", "out": [
+          { "w": 1, "text": "{J}'s own plan works. The scientists grumble.", "fx": { "pfm": 8 } },
+          { "w": 1, "text": "{J}'s numbers don't improve. The sports scientist forwards the report to {M}.", "fx": { "trust": -3, "pfm": 2 } }
+        ] }
+      ]
+    },
+    {
+      "id": "tr_captain_armband_training", "cat": "training", "w": 3, "when": { "age": [23, 40], "role": ["starter"], "trust": [65, 100] },
+      "title": "{M} Hands {J} the Armband in Training",
+      "text": "In an eleven-a-side training game, {M} tosses {J} the captain's armband for the reserves team without explanation. It's a test. Everyone knows it's a test.",
+      "prompt": "How do you lead?",
+      "choices": [
+        { "label": "Loud and demanding", "desc": "Organise, shout, drive.", "risk": "medium", "hint": "Some respond to volume.", "check": { "stat": "mental", "dc": 60 },
+          "ok": { "text": "The reserves beat the first team. {M} smiles for the first time all week.", "fx": { "trust": 5, "rep": 0.3, "flag": "leader" } },
+          "bad": { "text": "The shouting annoys more than it inspires. The first team wins easily.", "fx": { "trust": -1 } } },
+        { "label": "Lead by example", "desc": "Work harder than everyone.", "risk": "low", "hint": "Quiet leadership.", "text": "{J} wins every second ball. The reserves follow. They lose narrowly, but {M} has seen enough.", "fx": { "trust": 3, "flag": "leader" } }
+      ]
+    },
+    {
+      "id": "tr_analytics_report", "cat": "training", "w": 3, "when": { "leagueQ": [65, 99] },
+      "title": "The Data Department Has Thoughts",
+      "text": "The club's analysts have built a profile of {J} using tracking data: expected threat, progressive actions, pressing intensity. The report is fourteen pages long. Page nine says his decision-making in the final third is in the bottom quarter of the league.",
+      "prompt": "Read all fourteen pages?",
+      "choices": [
+        { "label": "Study it", "desc": "Data doesn't lie.", "risk": "low", "hint": "Insight.", "text": "{J} reads every page, twice. He starts noticing the decisions the data talked about. It changes his game.", "fx": { "growth": ["mental"], "tacticalFit": 4 } },
+        { "label": "Skim page nine", "desc": "Football isn't spreadsheets.", "risk": "low", "hint": "Instinct over numbers.", "text": "{J} reads page nine, frowns, and closes the report.", "fx": {} }
+      ]
+    },
+    {
+      "id": "tr_injury_prevention", "cat": "training", "w": 3, "when": { "age": [27, 40] },
+      "title": "Pre-hab: The Physio's Morning Routine",
+      "text": "The head physio proposes a forty-minute pre-training routine for the older players: activation, mobility, small muscles nobody ever thinks about. It means arriving at 8am.",
+      "prompt": "Arrive early every day?",
+      "choices": [
+        { "label": "Yes", "desc": "Longevity is a choice.", "risk": "low", "hint": "Fewer injuries.", "text": "{J} becomes the most reliable attendee. His body notices before he does.", "fx": { "pfm": 6, "flag": "prehab" } },
+        { "label": "No", "desc": "You've never needed it.", "risk": "medium", "hint": "Until you do.", "text": "{J} skips it. He hasn't been injured much. Yet.", "fx": {} }
+      ]
+    },
+    {
+      "id": "tr_boxing", "cat": "training", "w": 3, "when": { "pos": ["CB", "DM", "ST"] },
+      "title": "Boxing Sessions for Upper-Body Strength",
+      "text": "The strength coach brings in a boxing trainer for the defenders and strikers. Pad work, footwork, core strength. “Strikers push you around because you let them,” he tells {J}.",
+      "fx": { "growth": ["physical"], "pfm": -3 }
+    },
+    {
+      "id": "tr_mental_coach", "cat": "training", "w": 3,
+      "title": "The Club Hires a Mental Performance Coach",
+      "text": "A mental performance coach starts working with the squad: visualisation, pre-match routines, how to reset after a mistake. Some players roll their eyes. Some quietly book extra sessions.",
+      "prompt": "Book a one-to-one?",
+      "choices": [
+        { "label": "Book it", "desc": "The mind is a muscle too.", "risk": "low", "hint": "Mental growth.", "text": "Three sessions in, {J} has a routine for the tunnel, a word to say after mistakes, and a strange new calm.", "fx": { "growth": ["mental"], "mood": "Focused" } },
+        { "label": "Skip it", "desc": "You're fine.", "risk": "low", "hint": "No change.", "text": "{J} skips it. Most of the dressing room does too.", "fx": {} }
+      ]
+    },
+    {
+      "id": "tr_training_goal_viral", "cat": "training", "w": 3, "when": { "pos": ["ST", "W", "AM", "CM"] },
+      "title": "{J}'s Training-Ground Wonder Goal Goes Viral",
+      "text": "A bicycle kick in a training game, caught on the club's social media camera. It's not even a proper match. The club posts it with three fire emojis and it does more numbers than anything they've posted all month.",
+      "fx": { "followers": 12000, "rep": 0.2 },
+      "prompt": "Teammates are teasing you about it.",
+      "choices": [
+        { "label": "Lean into it", "desc": "Post your own version.", "risk": "low", "hint": "Fun.", "text": "{J} posts the clip with a slow-motion replay and a cheeky caption. Followers keep coming.", "fx": { "followers": 6000 } },
+        { "label": "Play it down", "desc": "“It's only training.”", "risk": "low", "hint": "Humble.", "text": "“It's only training.” The old pros nod approvingly.", "fx": { "trust": 1 } }
+      ]
+    },
+    {
+      "id": "tr_injured_rehab_gym", "cat": "training", "w": 6, "when": { "injured": true },
+      "title": "Alone in the Rehab Gym",
+      "text": "While the squad trains outside, {J} is in the rehab gym with the other injured players: a bike that goes nowhere, resistance bands, the same playlist on repeat. The physio sets a tough programme.",
+      "prompt": "How hard do you push rehab?",
+      "choices": [
+        { "label": "Follow the plan exactly", "desc": "No shortcuts.", "risk": "low", "hint": "Safe recovery.", "text": "{J} follows the plan to the minute. The physio trusts him with more freedom.", "fx": { "pfm": 4 } },
+        { "label": "Do extra upper-body work", "desc": "Use the time to get stronger.", "risk": "low", "hint": "Come back bigger.", "text": "Injury becomes an opportunity: {J} adds upper-body work and comes back visibly stronger.", "fx": { "growth": ["physical"] } },
+        { "label": "Use the time to study football", "desc": "Watch matches, learn positions.", "risk": "low", "hint": "Sharper mind.", "text": "{J} watches forty matches during rehab and fills two notebooks with ideas.", "fx": { "growth": ["mental"], "tacticalFit": 5 } }
+      ]
+    },
+    {
+      "id": "tr_body_composition", "cat": "training", "w": 3,
+      "title": "Body-Fat Results Are Posted on the Wall",
+      "text": "The nutritionist posts every player's body-fat percentage on the dressing-room wall. Public shaming as motivation. {J}'s number is higher than it was three months ago.",
+      "prompt": "What do you change?",
+      "choices": [
+        { "label": "Strict diet for a month", "desc": "No sugar, no fried food, no fun.", "risk": "low", "hint": "Sharper, grumpier.", "text": "No nasi goreng, no sweets, no late-night snacks. A month later, the number on the wall is the lowest in the squad.", "fx": { "pfm": 6, "growth": ["physical"], "mood": "Focused" } },
+        { "label": "Ignore the wall", "desc": "You play football, not bodybuilding.", "risk": "medium", "hint": "The nutritionist talks to the manager.", "text": "The nutritionist mentions {J} in the staff meeting.", "fx": { "trust": -2 } }
+      ]
+    },
+    {
+      "id": "tr_new_signing_competition", "cat": "training", "w": 5, "when": { "role": ["starter", "rotation"] },
+      "title": "New Signing Arrives in {J}'s Position",
+      "text": "The club announces a new signing: {T}, older, more experienced, and playing exactly {J}'s position. The press conference talks about competition for places. Everyone knows what that means.",
+      "prompt": "How do you respond to the competition?",
+      "choices": [
+        { "label": "Welcome him", "desc": "Competition makes us both better.", "risk": "low", "hint": "Grown-up.", "text": "{J} shows {T} around the city, then beats him in every training drill for two weeks.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "growth": ["rel"] } },
+        { "label": "Treat him as a rival", "desc": "Win the shirt. No friendship.", "risk": "medium", "hint": "Fire — or friction.", "text": "Every drill is a duel. {M} enjoys it. The dressing room watches it like a boxing match.", "fx": { "teammate": { "who": "T", "rel": "rival" }, "trust": 2, "mood": "Determined" } },
+        { "label": "Ask about your future", "desc": "Is this signing a message?", "risk": "medium", "hint": "Honest answers hurt sometimes.", "out": [
+          { "w": 1, "text": "{M} says the signing is about depth, not replacement. {J} isn't sure he believes it.", "fx": { "mood": "Anxious" } },
+          { "w": 1, "text": "{M} is blunt: “He's here to start. Prove me wrong.”", "fx": { "trust": -2, "mood": "Determined" } }
+        ] }
+      ]
+    },
+    {
+      "id": "tr_skills_challenge", "cat": "training", "w": 3, "when": { "followers": [5000, 999999999] },
+      "title": "Club Media Team Wants a Skills Challenge Video",
+      "text": "The club's media team wants {J} for a skills challenge: crossbar challenge, keepy-uppies, hit-the-bin from thirty metres. It's for the club's YouTube channel. A sponsor logo is on the bin.",
+      "prompt": "Film it?",
+      "choices": [
+        { "label": "Film it", "desc": "Fun content.", "risk": "low", "hint": "Followers up.", "check": { "stat": "shooting", "dc": 50 },
+          "ok": { "text": "{J} hits the crossbar three times in a row. The video does a million views.", "fx": { "followers": 15000, "rep": 0.3 } },
+          "bad": { "text": "Twenty-two attempts to hit the crossbar once. The blooper reel is more popular than the challenge.", "fx": { "followers": 8000 } } },
+        { "label": "Decline", "desc": "Focus on the real work.", "risk": "low", "hint": "Media team disappointed.", "text": "The media team films someone else.", "fx": {} }
+      ]
+    },
+    {
+      "id": "tr_bad_session", "cat": "training", "w": 4,
+      "title": "Nothing Works in Training",
+      "text": "One of those days. Passes go behind people, touches bounce off shins, a simple finish hits the corner flag. {M} watches the whole thing from the halfway line with no expression at all.",
+      "prompt": "How do you react?",
+      "choices": [
+        { "label": "Stay late to fix it", "desc": "Fifty more passes, fifty more finishes.", "risk": "low", "hint": "Resilience.", "text": "{J} stays an hour after the others leave. By the end, the ball is doing what he wants again.", "fx": { "pfm": -3, "growth": ["mental"] } },
+        { "label": "Go home and reset", "desc": "Bad days happen.", "risk": "low", "hint": "Healthy.", "text": "{J} goes home, sleeps, and comes back the next day like nothing happened. Mostly it is nothing.", "fx": {} },
+        { "label": "Kick the ball into the stands", "desc": "Let the frustration out.", "risk": "medium", "hint": "Everyone sees it.", "text": "The ball sails over the fence into the car park. {M} sends {J} in early. The fine is posted on the board.", "fx": { "trust": -4, "wealth": -60, "mood": "Angry" } }
+      ]
+    },
+    {
+      "id": "tr_great_session", "cat": "training", "w": 4,
+      "title": "{J} Owns Training All Week",
+      "text": "Some weeks the ball just obeys. {J} wins every drill, scores in every small-sided game and makes a defender fall over twice. On Friday, {M} stops the session to applaud a pass.",
+      "fx": { "trust": 3, "form": 0.2, "mood": "Confident" }
+    },
+    {
+      "id": "tr_tactical_whiteboard", "cat": "training", "w": 3, "when": { "trust": [55, 100] },
+      "title": "{M} Asks {J}'s Opinion on Tactics",
+      "text": "In a small meeting with the senior players, {M} turns the whiteboard toward {J}. “How would you play against their back three?” The room waits.",
+      "prompt": "Share your idea?",
+      "choices": [
+        { "label": "Give a bold idea", "desc": "Overload the wide areas, press the centre.", "risk": "medium", "hint": "Could impress.", "check": { "stat": "mental", "dc": 60 },
+          "ok": { "text": "{M} draws {J}'s idea on the board and uses it on Saturday. It works.", "fx": { "trust": 6, "tacticalFit": 8, "rep": 0.3 } },
+          "bad": { "text": "The idea has an obvious hole. The captain points it out. Polite silence.", "fx": { "trust": -1 } } },
+        { "label": "Defer to the coach", "desc": "“Whatever you think works.”", "risk": "low", "hint": "Safe.", "text": "{M} looks slightly disappointed and moves on.", "fx": {} }
+      ]
+    },
+    {
+      "id": "tr_teammate_skill_swap", "cat": "training", "w": 3, "uses": { "T": "ally" }, "when": { "hasAlly": true },
+      "title": "{Tl} and {J} Swap Secrets After Training",
+      "text": "After training, {T} and {J} make a deal: each teaches the other the thing he does best. Two hours, one bag of balls, a lot of laughing.",
+      "fx": { "growth": ["rel"] }
+    },
+    {
+      "id": "tr_overconfident_trick", "cat": "training", "w": 3, "when": { "pos": ["W", "AM", "ST"], "form": [7, 10] },
+      "title": "Too Much Flair in a Serious Session",
+      "text": "{J} is in form and it shows: a rainbow flick over a defender in a tactical session that was supposed to be about positioning. Half the squad laughs. {M} doesn't.",
+      "prompt": "{M} calls you over.",
+      "choices": [
+        { "label": "Apologise", "desc": "Wrong time, wrong drill.", "risk": "low", "hint": "Trust preserved.", "text": "“Sorry, boss.” {M} nods. “Save it for Saturday.”", "fx": { "trust": 1 } },
+        { "label": "“It worked, didn't it?”", "desc": "Cheek.", "risk": "medium", "hint": "Some managers like spirit.", "out": [
+          { "w": 1, "text": "{M} almost smiles. “Then do it on Saturday.”", "fx": { "trust": 2, "mood": "Confident" } },
+          { "w": 1, "text": "{M} sends {J} to run laps. Everyone stops laughing.", "fx": { "trust": -4 } }
+        ] }
+      ]
+    },
+    {
+      "id": "tr_international_coach_visit", "cat": "training", "w": 3, "when": { "nt": ["monitoring", "called"] },
+      "title": "National Team Staff Watch Training",
+      "text": "Two men in national team tracksuits are standing by the fence with clipboards. Nobody announced them. Everyone knows who they are watching.",
+      "prompt": "Do you change anything?",
+      "choices": [
+        { "label": "Show off", "desc": "Make sure they notice you.", "risk": "medium", "hint": "Impress — or look selfish.", "out": [
+          { "w": 1, "text": "{J} scores twice in the training game. One of the scouts writes for a long time.", "fx": { "rep": 1 } },
+          { "w": 1, "text": "{J} tries too hard and loses the ball repeatedly. {M} tells him to calm down.", "fx": { "trust": -2 } }
+        ] },
+        { "label": "Play your normal game", "desc": "They came to see the real you.", "risk": "low", "hint": "Consistency impresses.", "text": "{J} plays his normal, tidy, reliable game. The scouts leave without saying anything.", "fx": { "rep": 0.4 } }
+      ]
+    },
+    {
+      "id": "tr_pfm_fresh", "cat": "training", "w": 2, "when": { "pfm": [90, 100], "age": [16, 30] },
+      "title": "Fresh Legs, Full Tank",
+      "text": "{J} feels fantastic: sleeping well, eating right, legs bouncing off the grass. The GPS data agrees. These are the weeks you can push.",
+      "fx": { "growth": ["rel"], "mood": "Motivated" }
+    },
+    {
+      "id": "tr_injury_scare", "cat": "training", "w": 3,
+      "title": "Injury Scare: {J} Clutches His Ankle",
+      "text": "A turn on the wet grass, a sharp pain, a minute on the ground while the physio jogs over. The whole training ground goes quiet. {J} tries to stand.",
+      "prompt": "The physio wants a scan. You think it's fine.",
+      "choices": [
+        { "label": "Get the scan", "desc": "Better safe.", "risk": "low", "hint": "Peace of mind.", "out": [
+          { "w": 3, "text": "Scan clear. Just a knock. {J} trains again the next day.", "fx": { "pfm": -2 } },
+          { "w": 1, "text": "The scan finds a small sprain. A week of rest prevents something worse.", "fx": { "injury": "minor" } }
+        ] },
+        { "label": "Run it off", "desc": "It's nothing.", "risk": "high", "hint": "Usually fine. Sometimes not.", "out": [
+          { "w": 3, "text": "It was nothing. The pain fades by dinner.", "fx": {} },
+          { "w": 1, "text": "It wasn't nothing. By the evening the ankle is the size of a mango.", "fx": { "injury": "moderate" } }
+        ] }
+      ]
+    },
+    {
+      "id": "tr_stamina_running", "cat": "training", "w": 3, "when": { "phase": ["pre"] },
+      "title": "Hill Runs at Dawn",
+      "text": "Pre-season, day nine. {M}'s fitness coach has found a hill. Ten reps, 5:30am, before breakfast. At the top of the sixth, somebody is sick in a bush. It isn't {J}. Yet.",
+      "prompt": "Finish all ten?",
+      "choices": [
+        { "label": "All ten", "desc": "No matter what.", "risk": "medium", "hint": "Pain now, fitness later.", "text": "All ten, the last one on hands and knees. The fitness coach high-fives him.", "fx": { "growth": ["physical"], "pfm": -6, "trust": 2 } },
+        { "label": "Stop at eight", "desc": "Listen to your body.", "risk": "low", "hint": "Sensible.", "text": "{J} stops at eight. Nobody says anything. Nobody needs to.", "fx": { "pfm": -3 } }
+      ]
+    },
+    {
+      "id": "tr_teammate_cheat_drill", "cat": "training", "w": 2,
+      "title": "{Tl} Cuts Corners in the Running Drill",
+      "text": "In the timed runs, {T} cuts inside the cones every lap and finishes near the front. The coaches haven't noticed. {J}, running behind him, has.",
+      "prompt": "Say something?",
+      "choices": [
+        { "label": "Call him out", "desc": "Fair is fair.", "risk": "medium", "hint": "Integrity, at a price.", "text": "The coaches make {T} run it again properly. He doesn't speak to {J} for a week.", "fx": { "teammate": { "who": "T", "rel": "enemy" }, "trust": 2 } },
+        { "label": "Mention it privately", "desc": "Word to the wise.", "risk": "low", "hint": "Respectful.", "text": "{T} laughs, then runs it properly next time. “You're a good one,” he says, a little embarrassed.", "fx": { "teammate": { "who": "T", "rel": "ally" } } },
+        { "label": "Ignore it", "desc": "Not your problem.", "risk": "low", "hint": "Nothing.", "text": "{J} keeps running. It isn't his business.", "fx": {} }
+      ]
+    },
+    {
+      "id": "tr_futsal_session", "cat": "training", "w": 3, "when": { "country": ["Indonesia", "Brazil", "Spain", "Portugal", "Thailand", "Vietnam", "Argentina"] },
+      "title": "Futsal Night Sharpens {J}'s Touch",
+      "text": "Once a week a group of players plays futsal at an indoor court across town: small ball, tight spaces, no time to think. The club doesn't officially know.",
+      "prompt": "Join the futsal games?",
+      "choices": [
+        { "label": "Join every week", "desc": "Close control, quick feet.", "risk": "medium", "hint": "Touch improves. Small injury risk.", "out": [
+          { "w": 4, "text": "Futsal sharpens everything: first touch, quick turns, shooting from tight angles.", "fx": { "growth": ["dribbling"], "teammate": { "who": "T", "rel": "ally" } } },
+          { "w": 1, "text": "A rolled ankle on the hard court. The club finds out exactly where it happened.", "fx": { "injury": "minor", "trust": -3 } }
+        ] },
+        { "label": "Skip it", "desc": "Not worth the risk.", "risk": "low", "hint": "Safe.", "text": "{J} stays home. The others post videos all night.", "fx": {} }
+      ]
+    },
+    {
+      "id": "tr_contract_clause_training", "cat": "training", "w": 2, "when": { "role": ["starter"], "age": [22, 32] },
+      "title": "Lead by Example: {M} Asks {J} to Help the Youngsters",
+      "text": "{M} asks {J} to run the warm-up for the academy players training with the first team. Ten teenagers watching every move he makes.",
+      "fx": { "trust": 2, "rep": 0.3, "growth": ["mental"] }
+    },
+    {
+      "id": "tr_injury_return_rust", "cat": "training", "w": 4, "when": { "form": [4, 6.3] },
+      "title": "Rust: {J}'s Timing Is Off",
+      "text": "Something is off. The timing of runs, the weight of passes, the reading of a bouncing ball. The assistant coach calls it rust. {J} calls it something ruder.",
+      "prompt": "How do you shake the rust?",
+      "choices": [
+        { "label": "Extra small-sided games", "desc": "Match sharpness.", "risk": "low", "hint": "Tiring, effective.", "text": "Extra small-sided games, every afternoon. The timing comes back.", "fx": { "form": 0.3, "pfm": -3 } },
+        { "label": "Mental reset", "desc": "Breathing, visualising, sleep.", "risk": "low", "hint": "Calmer.", "text": "{J} stops forcing it. Two days later, it comes back on its own.", "fx": { "form": 0.2 } }
+      ]
+    }
+  ]
+}

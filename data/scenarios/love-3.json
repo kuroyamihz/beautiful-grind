@@ -1,0 +1,472 @@
+{
+  "scenarios": [
+    {
+      "id": "lv_move_partner_question", "cat": "love", "chainOnly": true, "system": true, "critical": true, "cd": 1,
+      "title": "A New Country, and {Pf} Back Home",
+      "text": ["The move is done. The flat is booked, the shirt is printed. There is one thing left that no club can arrange: {Pf}'s life is in the country he's leaving.", "His new club sends a welcome pack with a city guide. He reads it at the kitchen table while {Pf} pretends to be busy with her phone. Neither of them has said the obvious thing yet."],
+      "prompt": "What happens to the two of you now?",
+      "choices": [
+        { "label": "Ask {Pf} to come with you", "desc": "Her job as {Pjob}, her family, her friends, all of it.", "risk": "high", "hint": "If she's all in, she'll come. If not, this hurts.",
+          "check": { "stat": "love", "dc": 58 },
+          "ok": { "text": ["{Pf} cries, then laughs, then opens a spreadsheet. Six weeks later she's in his new kitchen arguing with the oven.", "'I already looked at flights,' she says. 'I was waiting for you to ask.'"], "fx": { "partnerNear": true, "love": 8, "stress": -3, "morale": 4, "flag": "partner_moved" } },
+          "bad": { "text": ["She can't. Not now, maybe not ever. They agree to try long distance, and both of them know how often that works.", "{Pf} says her life isn't a suitcase. She's right. They'll do it on video for now."], "fx": { "partnerNear": false, "love": -6, "stress": 4 } } },
+        { "label": "Try long distance", "desc": "Calls, visits, time zones.", "risk": "medium", "hint": "It can work. It takes effort every single week.", "text": ["They set rules: a call every night, a visit every month, no going to bed angry. The first week, they keep all of them.", "{Pf} buys him a cheap clock set to her time zone. It goes on his bedside table."], "fx": { "partnerNear": false, "love": -2, "stress": 2 } },
+        { "label": "End it before you go", "desc": "Cleaner now than slowly later.", "risk": "extreme", "hint": "Painful and final.", "text": ["They say goodbye at the airport like people in a film, except nobody runs back. He watches the clouds for the whole flight.", "It's the most adult conversation of his life and he hates every second of it."], "fx": { "partner": { "status": "none" }, "morale": -8, "stress": 3, "mood": "Numb" } }
+      ]
+    },
+    {
+      "id": "lv_baby_news_planned", "cat": "love", "chainOnly": true, "critical": true, "group": "baby_news", "cd": 1, "when": { "partner": ["married", "engaged", "serious"] },
+      "title": "Two Lines",
+      "text": ["{Pf} is standing in the bathroom doorway holding a little plastic stick, and she can't stop smiling. Two lines. He has to sit down on the edge of the bath.", "She tells him over dinner by sliding a tiny pair of football boots across the table. It takes him far too long to understand."],
+      "prompt": "You're going to be a father.",
+      "choices": [
+        { "label": "Tell everyone tonight", "desc": "Call {MUM}. Call everyone.", "risk": "low", "hint": "Joy, shared.", "text": "{MUM} screams so loudly that {DAD} thinks something terrible has happened. By midnight the whole family knows, and three aunts are already knitting.", "fx": { "flag": "father", "family": 10, "love": 8, "morale": 10, "mood": "Relieved", "unflag": "trying_for_baby" } },
+        { "label": "Keep it between the two of you for now", "desc": "A secret for a few more weeks.", "risk": "low", "hint": "Quiet, private happiness.", "text": "For six weeks it's their secret: knowing looks at dinner, a hand on her stomach in the car. Then they tell the families, who pretend not to have guessed.", "fx": { "flag": "father", "love": 10, "morale": 8, "stress": -2, "unflag": "trying_for_baby" } }
+      ]
+    },
+    {
+      "id": "lv_partner_secret", "cat": "love", "chainOnly": true, "critical": true, "cd": 1, "when": { "partner": ["dating", "serious", "engaged", "married"] },
+      "title": "The Messages",
+      "text": ["He hasn't slept. The messages are still there when he closes his eyes: late at night, every night, from a name saved as a single letter. {Pf} is making coffee like it's a normal morning.", "He has read them so many times he knows them by heart. Now he has to decide what to do with them."],
+      "prompt": "What do you do about what you found on {Pf}'s phone?",
+      "choices": [
+        { "label": "Confront her calmly", "desc": "Show her. Ask for the truth.", "risk": "high", "hint": "The truth could end it, or save it.",
+          "out": [
+            { "w": 2, "text": "She doesn't deny it. It was a colleague, it went too far, it's over, she's sorry. She cries. He cries. Nobody knows what happens next.", "fx": { "love": -12, "stress": 8, "flag": "partner_cheated", "unflag": "partner_secret", "mood": "Broken" } },
+            { "w": 1, "text": "It's her cousin. The single letter is a nickname from childhood. The late-night messages are about her grandmother's surgery. He has never felt smaller.", "fx": { "love": -6, "stress": -4, "unflag": "partner_secret", "mood": "Relieved" } }
+          ] },
+        { "label": "Leave without a word", "desc": "Pack a bag. Go.", "risk": "extreme", "hint": "No conversation. No going back.", "text": "He packs while she's at work and leaves the phone on the kitchen table, open on the messages. That's the whole conversation.", "fx": { "partner": { "status": "none" }, "morale": -12, "stress": 6, "family": -2, "unflag": "partner_secret", "flag": "partner_cheated", "mood": "Broken" } },
+        { "label": "Say nothing and watch", "desc": "Pretend you didn't see. For now.", "risk": "high", "hint": "Secrets rot.", "text": "He says nothing. He watches her phone light up at dinner and says nothing. It eats him from the inside, one meal at a time.", "fx": { "stress": 10, "love": -5, "morale": -5, "chain": { "id": "lv_partner_secret_2", "in": [3, 6] } } }
+      ]
+    },
+    {
+      "id": "lv_partner_secret_2", "cat": "love", "chainOnly": true, "cd": 1, "when": { "partner": ["dating", "serious", "engaged", "married"] },
+      "title": "It Comes Out Anyway",
+      "text": "He didn't say anything, so she does. {Pf} sits him down and tells him everything he already knew, and some things he didn't. She thought he'd be angrier. He's just tired.",
+      "prompt": "Now it's out. What now?",
+      "choices": [
+        { "label": "Try to rebuild", "desc": "Counselling, honesty, time.", "risk": "high", "hint": "Some couples survive this. It takes years.", "text": "They find a counsellor whose office smells of lavender and silence. It is the hardest work he has ever done, harder than any pre-season.", "fx": { "love": 4, "stress": 4, "flag": "couples_counselling", "unflag": "partner_secret" } },
+        { "label": "End it", "desc": "You've been grieving it for weeks already.", "risk": "medium", "hint": "Clean break.", "text": "It ends quietly, two adults dividing up a life. The cat goes with her. He misses the cat the most, which says something.", "fx": { "partner": { "status": "none" }, "morale": -6, "stress": -2, "unflag": "partner_secret" } }
+      ]
+    },
+    {
+      "id": "lv_affair_exposed", "cat": "love", "trigger": "affairExposed", "critical": true, "cd": 20, "when": { "flags": ["affair"] }, "uses": { "F": "crush" },
+      "title": "The Photos",
+      "text": ["A gossip account posts three blurry photos: {J} and {F} leaving a hotel at 2am. Within an hour {Pf} has seen them. Within two, so has everyone.", "{Pf} is waiting in the living room with the lights off and her phone in her hand. On the screen: him and {F}, a hotel lobby, a date stamp from last Tuesday."],
+      "prompt": "You've been caught. What now?",
+      "choices": [
+        { "label": "Tell {Pf} the whole truth", "desc": "Everything. No excuses.", "risk": "extreme", "hint": "She might stay. She might not. At least it's true.",
+          "check": { "stat": "love", "dc": 70 },
+          "ok": { "text": "{Pf} listens to all of it, then asks him to sleep somewhere else for a while. Weeks later, she agrees to try. Slowly. On her terms.", "fx": { "love": -18, "stress": 8, "image": -5, "press": -3, "unflag": "affair", "flag": ["affair_exposed", "affair_survived"], "crushClear": true } },
+          "bad": { "text": "{Pf} hears the truth and leaves anyway. Her statement to the press is one sentence long and devastating.", "fx": { "partner": { "status": "none" }, "image": -10, "family": -6, "morale": -12, "stress": 10, "unflag": "affair", "flag": "affair_exposed", "crushClear": true, "mood": "Broken" } } },
+        { "label": "Deny everything", "desc": "It was a meeting. The photos are misleading.", "risk": "extreme", "hint": "If it holds, fine. If not, it's worse.",
+          "out": [
+            { "w": 1, "text": "Somehow, it holds. {Pf} chooses to believe him. He has never felt guiltier.", "fx": { "love": -6, "stress": 12, "image": -4, "flag": "affair_exposed" } },
+            { "w": 2, "text": "Then a video surfaces, and then {F} gives an interview. The denial becomes the story.", "fx": { "partner": { "status": "none" }, "image": -15, "press": -10, "family": -8, "morale": -12, "unflag": "affair", "flag": ["affair_exposed", "secret_exposed"], "crushClear": true, "mood": "Lost" } }
+          ] },
+        { "label": "Choose {Ff}", "desc": "Stop pretending. Be with her openly.", "risk": "extreme", "hint": "The fans, your family and the papers will judge you.", "text": "He packs his things and goes to {F}'s flat. The photos stop being a scandal and start being a relationship. His mother doesn't call for a month.", "fx": { "partnerFromCrush": true, "image": -10, "family": -8, "press": -4, "unflag": "affair", "flag": "affair_exposed" } }
+      ]
+    },
+    {
+      "id": "lv_ld_strain", "cat": "love", "trigger": "longDistanceStrain", "cd": 20, "when": { "longDistance": true },
+      "title": "Missed Calls",
+      "text": ["Three missed calls from {Pf} while he was in a team meeting. Then a message: 'I can't keep doing this on a screen.'", "Their nightly call lasts four minutes. Neither of them can think of anything to say. He stares at the clock she gave him, still set to her time."],
+      "prompt": "The distance is winning. What do you do?",
+      "choices": [
+        { "label": "Fly home this weekend", "desc": "Even if it's only for a day.", "risk": "medium", "hint": "Exhausting, expensive and maybe exactly right.", "text": "Fourteen hours of travel for thirty-one hours together. Worth every minute. On the plane back he sleeps like a child.", "fx": { "love": 10, "pfm": -6, "wealth": "-cost", "partnerVisit": true }, "vars": { "cost": ["wageWeeks", 0.6, 300] } },
+        { "label": "Ask her to move here", "desc": "Time to stop pretending this is temporary.", "risk": "high", "hint": "She'll either come, or tell you the truth.",
+          "check": { "stat": "love", "dc": 62 },
+          "ok": { "text": "'Okay,' she says, very quietly. 'Okay. Yes.' Two months later her suitcase is in his hallway.", "fx": { "partnerNear": true, "love": 8, "morale": 6, "flag": "partner_moved" } },
+          "bad": { "text": "She says she can't, and then she says the thing they've both been avoiding: maybe they want different lives.", "fx": { "love": -10, "stress": 6 } } },
+        { "label": "Let it go", "desc": "Maybe this has run its course.", "risk": "high", "hint": "It ends. It hurts.", "text": "They end it on a video call, which feels wrong, because everything about the last year has felt wrong.", "fx": { "partner": { "status": "none" }, "morale": -6, "stress": -2 } }
+      ]
+    },
+    {
+      "id": "lv_ld_timezones", "cat": "love", "w": 5, "cd": 40, "when": { "longDistance": true },
+      "title": "Wrong Side of the Clock",
+      "text": ["When he wakes up, {Pf} is going to bed. When he finishes training, she's asleep. They have one hour a day where both of them are awake and free, and something always happens to it.", "{Pf} sends a photo of her breakfast at the exact moment he's eating dinner. It's sweet. It's also a reminder."],
+      "prompt": "How do you make the hours work?",
+      "choices": [
+        { "label": "Set an alarm for 5am to call her", "desc": "Your sleep, her evening.", "risk": "medium", "hint": "Romantic. Tiring.", "text": "Every morning at 5am he calls, half-awake. She notices. She'll remember it for years.", "fx": { "love": 8, "pfm": -4, "stress": 2 } },
+        { "label": "Write to her instead", "desc": "Long messages she can read whenever.", "risk": "low", "hint": "Slower, deeper.", "text": "He starts writing long messages on the bus to training. She says they're the best thing he's ever said to her, because he's never said most of it out loud.", "fx": { "love": 6, "stress": -1 } },
+        { "label": "Accept it's hard and carry on", "desc": "It is what it is.", "risk": "medium", "hint": "Distance doesn't care about acceptance.", "text": "They carry on, a little further apart every week, both too tired to notice.", "fx": { "love": -4 } }
+      ]
+    },
+    {
+      "id": "lv_ld_visit_surprise", "cat": "love", "w": 4, "cd": 60, "when": { "longDistance": true },
+      "title": "Knock Knock",
+      "text": ["A knock on the door on a Wednesday night. It's {Pf}, with one bag and a grin. She booked the flight on Monday and told nobody.", "His phone buzzes during warm-up: a photo of the stadium from the away end. {Pf} is here. She flew in to surprise him."],
+      "prompt": "{Pf} is here for three days. How do you spend them?",
+      "choices": [
+        { "label": "Clear your schedule completely", "desc": "No sponsors, no extra gym, no phone.", "risk": "low", "hint": "Everything else can wait.", "text": "Three days of breakfast in bed, long walks, and talking until three in the morning. When she leaves, the flat smells like her for a week.", "fx": { "love": 12, "stress": -5, "morale": 5, "partnerVisit": true } },
+        { "label": "Show her your whole life here", "desc": "Training ground, teammates, your favourite places.", "risk": "low", "hint": "Let her see where you are.", "text": "She meets the squad, the kit man, the bakery lady. 'Now I know where you are when you're not with me,' she says.", "fx": { "love": 9, "dressing": 2, "partnerVisit": true } }
+      ]
+    },
+    {
+      "id": "lv_ld_temptation", "cat": "love", "w": 4, "cd": 60, "when": { "longDistance": true, "crush": false }, "uses": { "F": "new" },
+      "title": "Someone Here",
+      "text": ["{F} works at the café near the training ground. She remembers his order, laughs at his terrible attempts at the local language, and is very much here, which {Pf} very much isn't.", "At a team dinner he's seated next to {F}, a friend of the captain's wife. She's funny, she's local, and she keeps finding reasons to touch his arm."],
+      "prompt": "You're lonely, and {Ff} is interested.",
+      "choices": [
+        { "label": "Keep your distance", "desc": "You have a partner. Act like it.", "risk": "low", "hint": "Loyalty, and an awkward café visit from now on.", "text": "He changes cafés. It's a small sacrifice, he tells himself, and calls {Pf} that night just to hear her voice.", "fx": { "love": 4, "stress": 1 } },
+        { "label": "Let the friendship grow", "desc": "It's innocent. For now.", "risk": "high", "hint": "This is how it starts.", "text": "They swap numbers 'for language practice'. The practice is mostly laughing.", "fx": { "crush": { "who": "F", "heat": 40 }, "love": -3, "morale": 3 } },
+        { "label": "Tell {Pf} about it", "desc": "Total honesty.", "risk": "medium", "hint": "She'll appreciate it. Or worry.", "out": [ { "w": 2, "text": "{Pf} is quiet, then grateful. 'Thank you for telling me.' It's somehow the most romantic call they've had in months.", "fx": { "love": 7 } }, { "w": 1, "text": "{Pf} can't stop thinking about it. Every call now has a little question in it.", "fx": { "love": -3, "stress": 2 } } ] }
+      ]
+    },
+    {
+      "id": "lv_crush_appears", "cat": "love", "w": 5, "cd": 50, "when": { "partner": ["dating", "serious", "engaged", "married"], "crush": false, "age": [18, 40] }, "uses": { "F": "new" },
+      "title": "A Look That Lasts Too Long",
+      "text": ["At a sponsor event, {F} from the brand's team keeps finding reasons to stand near him. She's sharp and funny and asks about him, not his goals. When she hands him her card, her number is written on the back.", "{F} is a physio at the private clinic where he does his recovery. She's the only person who tells him off for skipping his stretches. He finds himself looking forward to Thursdays."],
+      "prompt": "{Ff} is clearly interested. You're not single.",
+      "choices": [
+        { "label": "Make it clear you're taken", "desc": "Mention {Pf} early and often.", "risk": "low", "hint": "Nothing happens. Nothing to regret.", "text": "He mentions {Pf} three times in one conversation. {F} gets the message with a rueful smile. Nothing happens, which is exactly right.", "fx": { "love": 3, "image": 1 } },
+        { "label": "Enjoy the attention", "desc": "Flattering. Harmless?", "risk": "high", "hint": "Harmless until it isn't.", "text": "He keeps her card. He doesn't call. He doesn't throw it away either.", "fx": { "crush": { "who": "F", "heat": 35 }, "morale": 3, "love": -2 } },
+        { "label": "Tell {Pf} about her", "desc": "No secrets.", "risk": "medium", "hint": "Trust, or jealousy.", "out": [ { "w": 2, "text": "{Pf} laughs and says she'd be worried if nobody fancied him. Then she kisses him, slightly possessively.", "fx": { "love": 5 } }, { "w": 1, "text": "{Pf} asks a lot of questions about Thursdays. He starts to wish he hadn't said anything.", "fx": { "love": -2, "stress": 2 } } ] }
+      ]
+    },
+    {
+      "id": "lv_crush_single", "cat": "love", "w": 5, "cd": 40, "when": { "partner": ["none"], "crush": false, "age": [17, 40] }, "uses": { "F": "new" },
+      "title": "{Ff}",
+      "text": ["{T}'s girlfriend brings a friend to the team barbecue: {F}. She beats him at table tennis twice and doesn't let him forget it. He can't stop smiling.", "{F} runs the youth programme at a local charity the club works with. After the visit, she messages: 'The kids want you back. So do I, a bit.'", "At {SIB}'s birthday he's seated next to {F}, a friend of the family. {MUM} has very obviously arranged it. Annoyingly, {MUM} might be right."],
+      "prompt": "There's someone. What do you do?",
+      "choices": [
+        { "label": "Ask her out", "desc": "Simple. Terrifying.", "risk": "medium", "hint": "Could be the start of something.", "out": [ { "w": 3, "text": "She says yes before he finishes. They go to {PLACE} and talk until they're the last two people there.", "fx": { "crush": { "who": "F", "heat": 55 }, "morale": 6, "stress": -2 } }, { "w": 1, "text": "She says she's flattered, but she's seeing someone. He laughs it off and is a bit gutted for a week.", "fx": { "morale": -3 } } ] },
+        { "label": "Play it cool", "desc": "Follow her online. See what happens.", "risk": "low", "hint": "Slow burn.", "text": "He likes one photo. Then another. She replies to his story with an emoji. Things are moving, at the speed of a modern romance.", "fx": { "crush": { "who": "F", "heat": 35 }, "morale": 2 } },
+        { "label": "Focus on football", "desc": "No distractions this season.", "risk": "low", "hint": "Discipline. Maybe regret.", "text": "He decides he doesn't have time. He tells himself that a lot this month.", "fx": { "trust": 1, "morale": -1 } }
+      ]
+    },
+    {
+      "id": "lv_crush_heat", "cat": "love", "w": 5, "cd": 20, "when": { "crush": true, "partner": ["dating", "serious", "engaged", "married"] }, "uses": { "F": "crush" },
+      "title": "Another Message From {Ff}",
+      "text": ["11:48pm: a message from {F}. Just a song link and 'this made me think of you'. {Pf} is asleep next to him. He puts the phone face-down and doesn't sleep.", "{F} has started showing up where he is: the same gym, the same café, the same charity event. It might be coincidence. He knows it isn't."],
+      "prompt": "This is getting harder to ignore.",
+      "choices": [
+        { "label": "End it cleanly", "desc": "Block her number. Tell her why.", "risk": "medium", "hint": "Painful for a week, then done.", "text": "He writes one honest message and blocks the number. {Pf} asks why he's quiet at dinner. 'Long day,' he says, and it's almost true.", "fx": { "crushClear": true, "love": 3, "stress": -2, "unflag": "affair" } },
+        { "label": "Reply", "desc": "Just one message.", "risk": "high", "hint": "There's no such thing as one message.", "text": "One message becomes a conversation that lasts until 2am. He deletes the thread before he gets out of bed.", "fx": { "crushHeat": 12, "love": -4, "stress": 4 } },
+        { "label": "Talk to {BFf} about it", "desc": "Someone outside it all.", "risk": "low", "hint": "Honest friends say honest things.", "text": "{BFf} listens and then says, very calmly, 'You know what you're doing, bro. Stop.' It lands harder than any coach's shout.", "fx": { "friends": 4, "crushHeat": -10, "stress": -1 } }
+      ]
+    },
+    {
+      "id": "lv_crush_ultimatum", "cat": "love", "w": 4, "cd": 30, "when": { "crush": true, "crushHeat": [55, 100], "partner": ["dating", "serious", "engaged", "married"] }, "uses": { "F": "crush" },
+      "title": "'Me or Her'",
+      "text": ["{F} is done being a secret. 'I'm not going to be your Tuesday,' she says. 'Decide.' Then she leaves him sitting alone in the car park.", "{F} sends a long message: she's in love with him, she knows he's with {Pf}, and she can't do half of something any more. He reads it in the dressing room toilet four times."],
+      "prompt": "{Ff} wants an answer.",
+      "choices": [
+        { "label": "Choose {Pf}", "desc": "End it with {Ff} for good.", "risk": "medium", "hint": "{Ff} won't go quietly forever.", "out": [ { "w": 2, "text": "It's an awful conversation. {F} cries, then goes cold, then wishes him luck in a way that sounds like a warning.", "fx": { "crushClear": true, "love": 3, "stress": 4, "unflag": "affair" } }, { "w": 1, "text": "He ends it. A week later {F} sends {Pf} a message. Not everything, but enough.", "fx": { "crushClear": true, "love": -15, "stress": 8, "unflag": "affair", "flag": "affair_exposed", "mood": "Anxious" } } ] },
+        { "label": "Choose {Ff}", "desc": "Leave {Pf}. Be honest at last.", "risk": "extreme", "hint": "It will be messy, public and painful.", "text": "He tells {Pf} the truth that same night. It's the worst night of both their lives. A month later he and {F} are photographed together, and the internet takes sides.", "fx": { "partnerFromCrush": true, "image": -7, "family": -5, "morale": -2, "stress": 6, "unflag": "affair" } },
+        { "label": "Stall", "desc": "'Give me time.'", "risk": "extreme", "hint": "Everyone loses patience eventually.", "text": "He asks for time. {F} gives him two weeks and a look that means less.", "fx": { "crushHeat": -5, "stress": 8, "love": -4 } }
+      ]
+    },
+    {
+      "id": "lv_partner_jealous", "cat": "love", "w": 5, "cd": 50, "when": { "partner": ["dating", "serious", "engaged", "married"], "followers": [20000, 999999999], "partnerNear": true },
+      "title": "The Comments",
+      "text": ["{Pf} has been reading the comments under his photos again. Women he's never met, emojis he doesn't want to understand. 'Why do you follow her?' she asks, holding out her phone.", "A fan account posts 'Rate {J}'s wife' polls. Then '{J}'s top 5 ex-girlfriends', four of whom he's never met. {Pf} is not amused."],
+      "prompt": "{Pf} is jealous of your online life.",
+      "choices": [
+        { "label": "Give her your passwords", "desc": "Nothing to hide.", "risk": "medium", "hint": "Trust through transparency. Or a new kind of pressure.", "text": "He hands her the phone and the passwords. She doesn't look, as it turns out. She just needed to know she could.", "fx": { "love": 7, "stress": 1 } },
+        { "label": "Clean up who you follow", "desc": "A purge of the follow list.", "risk": "low", "hint": "Small gesture, big signal.", "text": "He unfollows three hundred accounts on the sofa while she watches. It's ridiculous. It works.", "fx": { "love": 5, "followers": -500 } },
+        { "label": "Tell her she's overreacting", "desc": "It's just social media.", "risk": "high", "hint": "Technically true. Strategically disastrous.", "text": "'It's just social media.' The silence that follows lasts two days.", "fx": { "love": -8, "stress": 3 } }
+      ]
+    },
+    {
+      "id": "lv_partner_career", "cat": "love", "w": 5, "cd": 70, "when": { "partner": ["serious", "engaged", "married"], "partnerNear": true, "partnerYears": [1, 99] },
+      "title": "Her Big Chance",
+      "text": ["{Pf} has been offered a promotion: a big job, the one she's been working towards as {Pjob}. It's in another city, and it starts in a month.", "{Pf} gets the call she's been waiting for for years. It's a dream job. It's also five hundred kilometres from his training ground."],
+      "prompt": "{Pf}'s career needs her somewhere else.",
+      "choices": [
+        { "label": "Tell her to take it", "desc": "Her dream matters as much as yours.", "risk": "medium", "hint": "Long distance again, but she'll never forget this.", "text": "'Take it,' he says, and means it. She's crying when she accepts. They'll make it work: weekends, trains, video calls.", "fx": { "love": 10, "partnerNear": false, "morale": 2, "stress": 2 } },
+        { "label": "Ask her to stay", "desc": "You need her here.", "risk": "high", "hint": "She might. She'll remember why.", "out": [ { "w": 1, "text": "She stays. She never says she regrets it. She doesn't have to; it's in the way she talks about her old job.", "fx": { "love": -6, "stress": -1, "flag": "partner_sacrificed" } }, { "w": 1, "text": "'You're asking me to give up everything for your career. Again.' She takes the job. And a bit of distance.", "fx": { "love": -10, "partnerNear": false, "stress": 3 } } ] },
+        { "label": "Offer to look for a club near her new job", "desc": "Move for her, for once.", "risk": "high", "hint": "Your agent will hate it. She'll love it.", "text": "He tells his agent to look at clubs near her new city. {Pf} hears about it from his agent's wife and cries for an hour.", "fx": { "love": 14, "abroadWish": false, "trust": -2, "flag": "moved_for_love" } }
+      ]
+    },
+    {
+      "id": "lv_partner_famous", "cat": "love", "w": 4, "cd": 80, "when": { "partner": ["dating", "serious", "engaged", "married"], "partnerStyle": ["public"], "followers": [100000, 999999999] },
+      "title": "{Pf} Goes Viral",
+      "text": ["{Pf}'s video about life as a footballer's partner gets four million views. Brands are messaging her. Talk shows want her. Suddenly she's famous in her own right.", "A fashion brand wants {Pf} for a campaign. Not with him: just her. She's thrilled. He's surprised by how complicated that makes him feel."],
+      "prompt": "{Pf} is becoming famous too.",
+      "choices": [
+        { "label": "Back her completely", "desc": "Her moment. Cheer the loudest.", "risk": "low", "hint": "A power couple is born.", "text": "He shares everything she does and turns up to her shoot with coffee for the whole crew. The comments call them couple goals.", "fx": { "love": 8, "followers": 15000, "image": 2 } },
+        { "label": "Ask her to keep it low-key", "desc": "One famous person in the house is enough.", "risk": "high", "hint": "Sounds like jealousy. Is jealousy.", "text": "She hears exactly what he means. The campaign goes ahead anyway. The kitchen is colder for a while.", "fx": { "love": -9, "stress": 2 } }
+      ]
+    },
+    {
+      "id": "lv_partner_family_money", "cat": "love", "w": 4, "cd": 80, "when": { "partner": ["serious", "engaged", "married"], "wealth": [20000, 999999999] }, "vars": { "cost": ["wealthPct", 12, 3000] },
+      "title": "Her Family Needs Help",
+      "text": ["{Pf}'s father has lost his job, and the family house is at risk. {Pf} hasn't asked for anything. She doesn't have to; he can see it in her face.", "{Pf}'s brother has debts. Big ones. {Pf} is mortified to even mention it, but the people he owes are not patient."],
+      "prompt": "{Pf}'s family needs {cost}.",
+      "choices": [
+        { "label": "Pay it, quietly", "desc": "No speeches, no conditions.", "risk": "low", "hint": "Generous. Expensive.", "text": "He transfers the money and tells her not to mention it to anyone. Her father calls him 'son' for the first time.", "fx": { "wealth": "-cost", "love": 12 } },
+        { "label": "Lend it, with conditions", "desc": "A plan, a repayment schedule.", "risk": "medium", "hint": "Sensible. A bit cold.", "text": "He sets up a proper loan with a repayment plan. Her family thanks him stiffly. {Pf} understands, mostly.", "fx": { "wealth": "-cost*0.5", "love": 3 } },
+        { "label": "Say no", "desc": "Their problems aren't yours.", "risk": "high", "hint": "Defensible. Memorable.", "text": "He says no. {Pf} says she understands. She tells her mother something different.", "fx": { "love": -10, "stress": 2 } }
+      ]
+    },
+    {
+      "id": "lv_engagement_pressure", "cat": "love", "w": 4, "cd": 70, "when": { "partner": ["serious"], "partnerYears": [2, 99], "age": [21, 40] },
+      "title": "'When Are You Two Getting Married?'",
+      "text": ["Every family dinner ends with the same question. {MUM} asks it. {Pf}'s mother asks it louder. {Pf} doesn't ask it at all, which is worse.", "{T} gets engaged and the whole dressing room turns to look at {J}. 'You're next,' says the captain. {Pf} is in the stands, pretending not to hear."],
+      "prompt": "Everyone is waiting for a proposal.",
+      "choices": [
+        { "label": "Start ring shopping", "desc": "Quietly. Seriously.", "risk": "low", "hint": "The beginning of the biggest question.", "text": "He spends three hours in a jeweller's being shown things that cost more than his first car. He leaves with a business card and a racing heart.", "fx": { "love": 4, "flag": "ring_shopping" } },
+        { "label": "Talk to {Pf} about it honestly", "desc": "What do you both want?", "risk": "medium", "hint": "Better than guessing.", "text": "They talk about marriage like two adults, which is new. They want the same thing, it turns out, just not on the same timeline.", "fx": { "love": 6, "stress": -2 } },
+        { "label": "Tell everyone to back off", "desc": "It's your life.", "risk": "medium", "hint": "Fair. Also noticed by {Pf}.", "text": "He snaps at {MUM} over dinner. {Pf} stays quiet in the car, and he wonders who he was really talking to.", "fx": { "family": -4, "love": -4 } }
+      ]
+    },
+    {
+      "id": "lv_wedding_planning", "cat": "love", "w": 5, "cd": 60, "when": { "partner": ["engaged"], "partnerNear": true }, "vars": { "cost": ["wageWeeks", 6, 2000] },
+      "title": "The Guest List",
+      "text": ["The wedding guest list has reached four hundred people. {MUM} has added cousins he's never met. {Pf}'s mother has added a choir. Nobody has asked what the groom wants.", "A wedding planner arrives with a folder the size of a tactics manual. The first page says {cost}. The second page says 'minimum'."],
+      "prompt": "What kind of wedding?",
+      "choices": [
+        { "label": "The big one", "desc": "Everyone. Everything. Once in a lifetime.", "risk": "medium", "hint": "Unforgettable. Unaffordable?", "text": "It's going to be enormous. {MUM} is happier than she has been since the day he signed his first contract.", "fx": { "wealth": "-cost", "family": 8, "love": 6, "followers": 5000 } },
+        { "label": "Small and private", "desc": "Close family, best friends.", "risk": "low", "hint": "Some relatives will sulk.", "text": "Thirty people, a garden, fairy lights. {Pf} says it's exactly what she wanted. Two aunts never forgive him.", "fx": { "wealth": "-cost*0.3", "love": 10, "family": -2 } },
+        { "label": "Let {Pf} decide everything", "desc": "Just tell me where to stand.", "risk": "low", "hint": "Wise. Possibly expensive.", "text": "{Pf} decides everything with military precision. He is told where to stand. He stands there. It's beautiful.", "fx": { "wealth": "-cost*0.7", "love": 8 } }
+      ]
+    },
+    {
+      "id": "lv_cold_feet", "cat": "love", "w": 3, "cd": 999, "once": true, "when": { "partner": ["engaged"] },
+      "title": "Cold Feet",
+      "text": "It's three in the morning and he's sitting on the bathroom floor, wondering whether he's ready to be anyone's husband. {Pf} is asleep in the next room. The wedding is in seven weeks.",
+      "prompt": "Doubts. Real ones.",
+      "choices": [
+        { "label": "Talk to {Pf} about it", "desc": "Tonight, before it grows.", "risk": "medium", "hint": "Honesty, even about this.", "out": [ { "w": 2, "text": "She admits she's scared too. They laugh, then cry, then laugh again. In the morning, everything is clearer.", "fx": { "love": 8, "stress": -4 } }, { "w": 1, "text": "Saying it out loud makes it real. The wedding is postponed. Not cancelled. Postponed.", "fx": { "love": -8, "family": -3, "stress": 4 } } ] },
+        { "label": "Talk to {DAD}", "desc": "He was a groom once.", "risk": "low", "hint": "Old wisdom.", "text": "{DAD} laughs. 'I was sick twice on the morning of my wedding. Best day of my life.' {J} sleeps for the first time in a week.", "fx": { "family": 5, "stress": -4 } },
+        { "label": "Push it down", "desc": "Everyone gets nervous.", "risk": "medium", "hint": "Maybe it's nothing.", "text": "He pushes it down. It stays down. Mostly.", "fx": { "stress": 3 } }
+      ]
+    },
+    {
+      "id": "lv_ex_back_in_town", "cat": "love", "w": 4, "cd": 80, "when": { "flags": ["broke_up"] }, "uses": { "F": "ex" },
+      "title": "{EXFLAME} Is Back in Town",
+      "text": ["{EXFLAME} has moved back to the city. He finds out from {BFf}, then from Instagram, then by bumping into her at {PLACE}. She looks happy. He doesn't know how he feels about that.", "A message from {EXFLAME}, after months of silence: 'I saw your goal. I was proud of you. That's all.'"],
+      "prompt": "Your ex is back in your life.",
+      "choices": [
+        { "label": "Meet up and talk", "desc": "Closure, finally.", "risk": "medium", "hint": "Might reopen things. Might close them.", "out": [ { "w": 2, "text": "They talk for two hours like old friends. It's sad and warm and finished. He goes home lighter.", "fx": { "exBond": 15, "morale": 3 } }, { "w": 1, "text": "They talk for two hours and it doesn't feel finished at all.", "fx": { "exBond": 20, "crush": { "who": "F", "heat": 45 } } } ] },
+        { "label": "Reply kindly and leave it there", "desc": "A thank-you. Nothing more.", "risk": "low", "hint": "Grown-up.", "text": "'Thank you. That means a lot.' He means it. That's the end of it, and it's a good end.", "fx": { "exBond": 6, "morale": 1 } },
+        { "label": "Ignore her", "desc": "Some doors stay shut.", "risk": "low", "hint": "Protects you. Or your partner.", "text": "He reads it and doesn't reply. Some doors are better closed.", "fx": { "exBond": -5 } }
+      ]
+    },
+    {
+      "id": "lv_ex_tellall", "cat": "love", "w": 3, "cd": 120, "when": { "flags": ["broke_up"], "rep": [25, 100] },
+      "title": "The Ex Talks",
+      "text": ["{EXFLAME} gives an interview to a celebrity magazine: 'Life With a Footballer'. Most of it is fair. Two paragraphs are not.", "A gossip podcast has {EXFLAME} on as a guest. The episode title is 'The Truth About {J}'. Half a million people listen to it in a day."],
+      "prompt": "Your ex is talking about you in public.",
+      "choices": [
+        { "label": "Stay dignified and silent", "desc": "No comment. Ever.", "risk": "low", "hint": "The story dies faster without fuel.", "text": "He says nothing. The story burns bright for a weekend and then goes out, as stories do.", "fx": { "image": 3, "stress": 2, "press": 1 } },
+        { "label": "Tell your side of the story", "desc": "An interview of your own.", "risk": "high", "hint": "A public he-said-she-said.", "text": "His interview is calm and kind and changes nothing except doubling the number of articles.", "fx": { "press": -3, "image": -2, "followers": 8000, "stress": 4 } },
+        { "label": "Call your lawyer", "desc": "Two paragraphs were lies.", "risk": "medium", "hint": "Legally sound. PR risky.", "text": "The magazine prints a correction in tiny letters on page forty. {EXFLAME} calls him a bully on her story. Nobody wins.", "fx": { "press": -2, "image": -1, "wealth": -2000 } }
+      ]
+    },
+    {
+      "id": "lv_partner_affair_rumour", "cat": "love", "w": 3, "cd": 90, "when": { "partner": ["dating", "serious", "engaged", "married"], "rep": [20, 100] },
+      "title": "A Rumour About {Pf}",
+      "text": ["A gossip page posts a photo of {Pf} having lunch with a man he doesn't recognise. The caption is three question marks. The comments are thousands of exclamation marks.", "Somebody in the dressing room has seen a rumour: {Pf} and a TV presenter, seen together twice. {T} shows {J} the screenshots with a worried face."],
+      "uses": { "T": "ally" },
+      "prompt": "There's a rumour about your partner.",
+      "choices": [
+        { "label": "Ask {Pf} directly", "desc": "Just ask.", "risk": "medium", "hint": "Trust, tested.", "out": [ { "w": 3, "text": "It's her cousin. Or her colleague. Or her friend's husband. It's nothing, and she's hurt that he asked, and glad that he did.", "fx": { "love": 2, "stress": -2 } }, { "w": 1, "text": "She hesitates for exactly one second too long.", "fx": { "love": -8, "stress": 6, "flag": "partner_secret", "chain": { "id": "lv_partner_secret", "in": [1, 3] } } } ] },
+        { "label": "Defend her publicly", "desc": "A post: 'Leave my family alone.'", "risk": "medium", "hint": "Loyal. Loud.", "text": "His post gets two million likes and the gossip page deletes the photo. {Pf} sends him a long message he keeps forever.", "fx": { "love": 8, "image": 2, "press": -1, "followers": 10000 } },
+        { "label": "Ignore it", "desc": "Gossip is gossip.", "risk": "low", "hint": "Probably right.", "text": "He ignores it. It doesn't ignore him: he checks the comments at 2am anyway.", "fx": { "stress": 3 } }
+      ]
+    },
+    {
+      "id": "lv_dating_app", "cat": "love", "w": 4, "cd": 60, "when": { "partner": ["none"], "crush": false, "age": [18, 35] }, "uses": { "F": "new" },
+      "title": "Swipe",
+      "text": ["{BFf} sets up a dating profile for him under a fake name, with photos where his face is partly hidden. Three hours later: a match. {F}. Her bio says she hates football.", "The dating app is a disaster: half his matches recognise him and screenshot the chat. Then there's {F}, who has no idea who he is and seems to like him anyway."],
+      "prompt": "A match on the app.",
+      "choices": [
+        { "label": "Go on the date", "desc": "Fake name and all.", "risk": "medium", "hint": "Fun, until she googles you.", "out": [ { "w": 2, "text": "They have a lovely evening. At the end he tells her who he is. She laughs so hard she snorts. 'I knew,' she says. 'I didn't care.'", "fx": { "crush": { "who": "F", "heat": 50 }, "morale": 5 } }, { "w": 1, "text": "The date is fine. The next day she posts a screenshot of their chat with his real name. Lesson learned.", "fx": { "image": -2, "followers": 2000, "stress": 2 } } ] },
+        { "label": "Delete the app", "desc": "Not for you.", "risk": "low", "hint": "Peace of mind.", "text": "He deletes the app and tells {BFf} never to touch his phone again. {BFf} says he'll do it again.", "fx": { "friends": 1, "stress": -1 } }
+      ]
+    },
+    {
+      "id": "lv_new_love_meet_family", "cat": "love", "w": 4, "cd": 60, "when": { "partner": ["dating"], "partnerYears": [0, 1], "familyNear": true },
+      "title": "{MUM} Wants to Meet Her",
+      "text": "{MUM} has found out about {Pf} from a cousin who saw a photo. She is hurt that he didn't tell her and insists, in the voice that ended many arguments in his childhood, on dinner. This Sunday.",
+      "prompt": "Dinner with {MUM} this Sunday?",
+      "choices": [
+        { "label": "Bring {Pf} to dinner", "desc": "Face it together.", "risk": "medium", "hint": "Could go wonderfully. Or not.", "out": [ { "w": 3, "text": "{MUM} interrogates {Pf} for an hour and then hugs her at the door. A good sign. A great sign, actually.", "fx": { "love": 6, "family": 6 } }, { "w": 1, "text": "{MUM} is polite. Too polite. {Pf} notices every pause.", "fx": { "love": -3, "family": -2, "stress": 2 } } ] },
+        { "label": "Say it's too early", "desc": "Not yet.", "risk": "medium", "hint": "{MUM} will remember. So will {Pf}.", "text": "{MUM} sulks for a week. {Pf} wonders why he's hiding her.", "fx": { "family": -4, "love": -3 } }
+      ]
+    },
+    {
+      "id": "lv_partner_doubts_football", "cat": "love", "w": 5, "cd": 60, "when": { "partner": ["serious", "engaged", "married"], "partnerNear": true, "stress": [55, 100] },
+      "title": "'I Married You, Not Football'",
+      "text": ["He gets home at 9pm after a recovery session, eats in silence and falls asleep on the sofa. {Pf} wakes him at midnight and says, very quietly, that she feels like a guest in her own life.", "Another anniversary dinner cancelled for a sponsor event. {Pf} doesn't shout. She just puts the reservation confirmation on the fridge, where he'll see it every day."],
+      "prompt": "Football is taking everything. {Pf} has noticed.",
+      "choices": [
+        { "label": "Make a real change", "desc": "One night a week, no football. Protected.", "risk": "low", "hint": "Hard to keep. Worth it.", "text": "Thursday nights become theirs. No phone, no football, no exceptions. He breaks it once in three months and apologises properly.", "fx": { "love": 8, "stress": -3, "trust": -1 } },
+        { "label": "Promise the off-season will be different", "desc": "It's just a busy stretch.", "risk": "medium", "hint": "Promises cost nothing until they're broken.", "text": "She nods. She's heard it before. She'll hold him to it.", "fx": { "love": 2, "flag": "promised_offseason" } },
+        { "label": "Explain this is the job", "desc": "She knew who you were.", "risk": "high", "hint": "True. Unwise.", "text": "'You knew who I was.' 'I thought I did,' she says.", "fx": { "love": -9, "stress": 3 } }
+      ]
+    },
+    {
+      "id": "lv_kid_first_steps", "cat": "love", "w": 5, "cd": 999, "once": true, "when": { "kidAge": [0, 1], "partnerNear": true },
+      "title": "First Steps",
+      "text": "{Pf} sends a video during the team meeting: {KID}, wobbling across the living room, three steps, four, five, then a triumphant sit-down. He watches it eleven times under the table.",
+      "prompt": "You missed it.",
+      "choices": [
+        { "label": "Rush home after training", "desc": "Skip the recovery session.", "risk": "medium", "hint": "The physio will be annoyed. You won't care.", "text": "{KID} does it again for him in the hallway and falls into his arms. He doesn't care about anything else that week.", "fx": { "family": 8, "love": 6, "pfm": -2, "trust": -1, "morale": 6 } },
+        { "label": "Watch the video again tonight", "desc": "You'll see the next ones.", "risk": "low", "hint": "Football waits for nobody. Neither do children.", "text": "He watches it again in bed, and again in the morning. He'll be there for the next ones, he promises himself.", "fx": { "family": 2, "morale": 3 } }
+      ]
+    },
+    {
+      "id": "lv_kid_school_play", "cat": "love", "w": 4, "cd": 80, "when": { "kidAge": [4, 12] },
+      "title": "{KID}'s School Play",
+      "text": "{KID} has been cast as a tree in the school play. It's a very important tree, apparently: it has one line. The play is on Friday afternoon, the day before a big match.",
+      "prompt": "Will you be there?",
+      "choices": [
+        { "label": "Be there, front row", "desc": "Ask the manager for the afternoon.", "risk": "medium", "hint": "Your kid will remember. So will the manager.", "text": "{KID} sees him from the stage and forgets the line completely, then waves. The other parents film him filming {KID}.", "fx": { "family": 10, "trust": -2, "morale": 6, "followers": 3000 } },
+        { "label": "Ask {Pf} to film it", "desc": "The match is too important.", "risk": "medium", "hint": "Practical. A small heartbreak.", "text": "He watches the video in the team hotel. {KID} looks for him in the crowd twice.", "fx": { "family": -3, "love": -2, "stress": 2 } }
+      ]
+    },
+    {
+      "id": "lv_ex_partner_wedding_invite", "cat": "love", "w": 2, "cd": 200, "when": { "flags": ["broke_up"], "age": [22, 40] },
+      "title": "An Invitation",
+      "text": "A heavy envelope with gold edges: {EXFLAME} is getting married, and she has invited him. A handwritten note says, 'It would mean a lot.'",
+      "prompt": "Go to your ex's wedding?",
+      "choices": [
+        { "label": "Go, and wish her well", "desc": "Grown-up closure.", "risk": "medium", "hint": "Awkward. Probably healing.", "text": "He goes, dances once, gives a generous gift and leaves early. On the drive home he realises he's genuinely happy for her.", "fx": { "exBond": 15, "morale": 3, "love": -1 } },
+        { "label": "Send a gift and your regrets", "desc": "Kind, from a distance.", "risk": "low", "hint": "Safe.", "text": "A beautiful gift and a kind card. She replies with a photo of it on her new kitchen shelf.", "fx": { "exBond": 6 } }
+      ]
+    },
+    {
+      "id": "lv_partner_needs_you_matchday", "cat": "love", "w": 4, "cd": 60, "when": { "partner": ["serious", "engaged", "married"], "matchWeek": true },
+      "title": "The Call Before Kick-off",
+      "text": "Ninety minutes before kick-off, {Pf} calls in tears. Her grandmother has been taken to hospital. She's alone in the waiting room.",
+      "prompt": "Kick-off is in ninety minutes.",
+      "choices": [
+        { "label": "Leave the stadium and go to her", "desc": "Some things matter more.", "risk": "high", "hint": "The manager will be furious. She will never forget it.", "text": "He tells {M} and leaves without waiting for an answer. He's at the hospital in forty minutes, holding {Pf}'s hand while the match plays on a TV nobody watches.", "fx": { "love": 15, "trust": -8, "board": -3, "fans": -2, "family": 3 } },
+        { "label": "Play, then go straight there", "desc": "Ninety minutes, then the hospital.", "risk": "medium", "hint": "She'll understand. Mostly.", "text": "He plays with his mind elsewhere and drives to the hospital still in his kit. {Pf} is asleep in a plastic chair. He sits with her until morning.", "fx": { "love": 4, "form": -0.2, "stress": 3 } },
+        { "label": "Ask {MUM} to go and be with her", "desc": "Family looks after family.", "risk": "low", "hint": "Thoughtful. Not the same as you.", "text": "{MUM} gets there in twenty minutes with food and prayers. {Pf} says it helped. She also says she wanted him.", "fx": { "love": -2, "family": 4 } }
+      ]
+    },
+    {
+      "id": "lv_proposal_moment", "cat": "love", "w": 4, "cd": 120, "when": { "partner": ["serious"], "partnerYears": [1.5, 99], "flags": ["ring_shopping"], "partnerNear": true },
+      "title": "The Ring Is in His Pocket",
+      "text": "The ring has been in his jacket pocket for nineteen days. Every time he touches it, his heart rate goes higher than it does in a cup final. Tonight might be the night.",
+      "prompt": "How do you propose?",
+      "choices": [
+        { "label": "On the pitch, after the match", "desc": "Big, public, unforgettable.", "risk": "high", "hint": "Spectacular if she loves it. Mortifying if she doesn't.",
+          "check": { "stat": "love", "dc": 68 },
+          "ok": { "text": "After the final whistle, in front of twenty thousand people, he kneels on the centre spot. {Pf} says yes into the stadium microphone. The video does fifty million views.", "fx": { "partner": { "status": "engaged" }, "love": 12, "followers": 60000, "fans": 6, "morale": 10, "unflag": "ring_shopping", "flag": "engaged" } },
+          "bad": { "text": "{Pf} freezes. Twenty thousand people watch her whisper 'not here'. She says yes later, in the car, but the video is already everywhere.", "fx": { "partner": { "status": "engaged" }, "love": -2, "image": -3, "followers": 30000, "stress": 6, "unflag": "ring_shopping" } } },
+        { "label": "Somewhere quiet, just the two of you", "desc": "The place where it started.", "risk": "low", "hint": "Intimate.", "text": "He takes her back to {PLACE}, where they had their first date. He forgets the whole speech. She says yes anyway, crying and laughing.", "fx": { "partner": { "status": "engaged" }, "love": 14, "morale": 10, "unflag": "ring_shopping", "flag": "engaged" } },
+        { "label": "Wait a little longer", "desc": "Not tonight.", "risk": "low", "hint": "The ring stays in the pocket.", "text": "The ring stays in his pocket. Day twenty.", "fx": { "stress": 2 } }
+      ]
+    },
+    {
+      "id": "lv_partner_moves_in_trouble", "cat": "love", "w": 4, "cd": 80, "when": { "flags": ["living_together"], "partnerNear": true },
+      "title": "Living Together",
+      "text": ["Living together turns out to be ninety per cent arguments about towels. {Pf} has opinions about his kit drying on every radiator. He has opinions about her eleven pillows.", "{Pf} has rearranged the flat. His trophies are in a cupboard. His signed shirts are in a box. A plant now lives where his PlayStation used to be."],
+      "prompt": "Domestic life. How do you handle it?",
+      "choices": [
+        { "label": "Compromise on everything", "desc": "Your trophies for her pillows.", "risk": "low", "hint": "Peace in the home.", "text": "Treaty signed: three trophies on display, seven pillows on the bed. Both sides claim victory.", "fx": { "love": 6, "stress": -2 } },
+        { "label": "Fight for the PlayStation", "desc": "A man needs something.", "risk": "medium", "hint": "Hill worth dying on?", "text": "The PlayStation returns. The plant moves to the bedroom, where it watches him, judgementally.", "fx": { "love": -1, "morale": 2 } }
+      ]
+    },
+    {
+      "id": "lv_valentine", "cat": "love", "w": 5, "cd": 40, "when": { "partner": ["dating", "serious", "engaged", "married"], "months": [2] },
+      "title": "Valentine's Day",
+      "text": ["Valentine's Day falls on a matchday this year. {Pf} says she doesn't mind. Her voice says otherwise.", "Every brand on earth wants him to post something romantic for Valentine's Day. {Pf} just wants dinner where nobody takes photos."],
+      "prompt": "Valentine's Day.",
+      "choices": [
+        { "label": "Plan something private and perfect", "desc": "Just the two of you.", "risk": "low", "hint": "She'll remember.", "text": "Dinner at home, candles, a playlist he spent three evenings making. {Pf} says it's the best Valentine's she's ever had.", "fx": { "love": 8, "wealth": -300 } },
+        { "label": "A big romantic post", "desc": "Let the world know.", "risk": "medium", "hint": "Great for followers. Depends on her.", "text": "The post gets a million likes. {Pf}'s reaction depends on whether she likes being a million people's business.", "fx": { "followers": 8000, "love": 2 } },
+        { "label": "Forget completely", "desc": "Matchweek brain.", "risk": "high", "hint": "This will be brought up again. For years.", "text": "He forgets. Completely. Until 11:40pm. The petrol-station flowers do not help.", "fx": { "love": -9 } }
+      ]
+    },
+    {
+      "id": "lv_partner_pregnant_scare", "cat": "love", "w": 2, "cd": 200, "when": { "partner": ["dating"], "age": [17, 23] },
+      "title": "Late",
+      "text": "{Pf} calls him from a pharmacy car park. Her voice is shaking. She's late. Very late. She hasn't taken a test yet; she wanted to tell him first.",
+      "prompt": "{Pf} might be pregnant.",
+      "choices": [
+        { "label": "Drive to her right now", "desc": "Whatever it is, together.", "risk": "low", "hint": "The right thing.", "text": "He's there in fifteen minutes. They sit in the car and do the test together in a petrol-station toilet. Negative. They hold each other for a long time anyway.", "fx": { "love": 10, "stress": 4 } },
+        { "label": "Panic", "desc": "You're too young for this.", "risk": "high", "hint": "She'll remember how you reacted.", "text": "He says all the wrong things. The test is negative. The relationship doesn't fully recover.", "fx": { "love": -10, "stress": 6 } }
+      ]
+    },
+    {
+      "id": "lv_cheating_rumour_teammate_partner", "cat": "love", "w": 2, "cd": 200, "when": { "partner": ["none"], "freeAgent": false, "age": [19, 35] }, "uses": { "T": "any", "F": "new" },
+      "title": "{T}'s Girlfriend",
+      "text": "{F}, {T}'s girlfriend, has been messaging {J}. Friendly at first. Less friendly now: last night she sent a photo that she definitely did not mean for {T} to see.",
+      "prompt": "Your teammate's girlfriend is coming on to you.",
+      "choices": [
+        { "label": "Shut it down and tell nobody", "desc": "Not your business. Not your problem.", "risk": "medium", "hint": "Clean. But secrets have a way of surfacing.", "text": "He replies 'Please don't message me again' and blocks her. He can't look {T} in the eye for a week.", "fx": { "stress": 3 } },
+        { "label": "Tell {T}", "desc": "He'd want to know.", "risk": "high", "hint": "Loyalty, or shooting the messenger.", "out": [ { "w": 1, "text": "{T} reads the messages in silence, then hugs him. 'Thank you, brother.' They're closer than ever.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "dressing": 3 } }, { "w": 1, "text": "{T} accuses him of starting it. The dressing room picks sides.", "fx": { "teammate": { "who": "T", "rel": "enemy" }, "dressing": -6, "stress": 5 } } ] },
+        { "label": "Reply", "desc": "...", "risk": "extreme", "hint": "This will end badly.", "text": "It starts. It ends three weeks later when {T} finds the messages. The fight in the car park makes the national news.", "fx": { "teammate": { "who": "T", "rel": "enemy" }, "dressing": -12, "image": -8, "trust": -6, "press": -5, "flag": "teammate_scandal" } }
+      ]
+    },
+    {
+      "id": "lv_love_letter_fan", "cat": "love", "w": 4, "cd": 80, "when": { "rep": [20, 100], "partner": ["dating", "serious", "engaged", "married"] },
+      "title": "The Superfan",
+      "text": "A fan has been sending letters to the training ground every week for a year. The latest one includes a drawing of {J} and the fan getting married, with {Pf} crossed out in red pen. Security is involved now.",
+      "prompt": "An obsessive fan.",
+      "choices": [
+        { "label": "Let the club and the police handle it", "desc": "Professionals, procedures.", "risk": "low", "hint": "Safe.", "text": "The club's security team and the police deal with it quietly. {Pf} gets a panic button for her phone. Nobody sleeps well for a while.", "fx": { "stress": 4, "love": 2 } },
+        { "label": "Hire private security for {Pf}", "desc": "Spare no expense.", "risk": "low", "hint": "Expensive peace of mind.", "text": "A very large, very quiet man now follows {Pf} to yoga. She hates it and is grateful for it.", "fx": { "wealth": -4000, "love": 5, "stress": -2 } }
+      ]
+    },
+    {
+      "id": "lv_divorce_threat", "cat": "love", "trigger": "partnerCrisis", "w": 6, "cd": 60, "when": { "partner": ["married"] },
+      "title": "The Word Nobody Says",
+      "text": ["{Pf} says it at breakfast, calmly, like a weather report: 'I've talked to a lawyer.' Then she drinks her coffee.", "He comes home to find a box of his things by the door. Not all of his things. Just enough to make a point."],
+      "prompt": "Your marriage is in serious trouble.",
+      "choices": [
+        { "label": "Fight for it: counselling, time, everything", "desc": "Whatever it takes.", "risk": "high", "hint": "Months of work. Maybe enough.", "check": { "stat": "love", "dc": 22 },
+          "ok": { "text": "The counsellor's office becomes the most important room in his life. Slowly, painfully, they find each other again.", "fx": { "love": 15, "stress": 4, "flag": "couples_counselling", "wealth": -3000 } },
+          "bad": { "text": "They try. They really try. In the end, trying isn't enough. The divorce is quiet and civilised and it destroys him.", "fx": { "partner": { "status": "none" }, "morale": -15, "stress": 8, "wealth": "-cost", "flag": "divorced", "mood": "Broken" } } },
+        { "label": "Agree it's over", "desc": "Let her go with dignity.", "risk": "extreme", "hint": "Final.", "text": "They divide twenty years of life in four meetings with two lawyers. The settlement is fair. The silence afterwards is not.", "fx": { "partner": { "status": "none" }, "wealth": "-cost", "morale": -12, "stress": 4, "flag": "divorced", "mood": "Numb" } }
+      ],
+      "vars": { "cost": ["wealthPct", 30, 5000] }
+    },
+    {
+      "id": "lv_reconcile_after_affair", "cat": "love", "w": 4, "cd": 80, "when": { "flags": ["affair_survived"], "since": { "affair_survived": [10, 200] } },
+      "title": "Rebuilding",
+      "text": "It's been months since everything came out. {Pf} still checks his phone sometimes; he lets her. Last night, for the first time, she fell asleep on his shoulder during a film.",
+      "prompt": "Trust is coming back, slowly.",
+      "choices": [
+        { "label": "Renew your promises", "desc": "A small ceremony. Just the two of you.", "risk": "low", "hint": "A line drawn under it.", "text": "On a beach at sunrise, with nobody watching, they make new promises. He intends to keep every one.", "fx": { "love": 12, "stress": -4, "unflag": "affair_survived", "flag": "renewed_vows" } },
+        { "label": "Keep doing the work, quietly", "desc": "No grand gestures. Just consistency.", "risk": "low", "hint": "The slow way is the real way.", "text": "No grand gestures, just a man who comes home when he says he will. It's enough. It's starting to be enough.", "fx": { "love": 7 } }
+      ]
+    },
+    {
+      "id": "lv_single_star_rumours", "cat": "love", "w": 4, "cd": 80, "when": { "partner": ["none"], "rep": [35, 100] },
+      "title": "Linked",
+      "text": ["A tabloid links him with a famous singer he has met exactly once, at a charity gala, for nine seconds. By Tuesday they're 'engaged'.", "Three different gossip pages claim three different women are his girlfriend. He has spoken to one of them. About parking."],
+      "prompt": "The tabloids have invented a love life for you.",
+      "choices": [
+        { "label": "Laugh it off online", "desc": "A funny post denying everything.", "risk": "low", "hint": "Charm offensive.", "text": "His post is a picture of his fridge with the caption 'My only relationship this season.' It goes viral and the rumours die laughing.", "fx": { "followers": 20000, "image": 2, "press": 1 } },
+        { "label": "Say nothing", "desc": "Let them guess.", "risk": "low", "hint": "Mystery sells.", "text": "He says nothing. The rumours run their course. He gains forty thousand followers, mostly curious.", "fx": { "followers": 15000 } }
+      ]
+    },
+    {
+      "id": "lv_partner_meets_teammates_wives", "cat": "love", "w": 4, "cd": 80, "when": { "partner": ["serious", "engaged", "married"], "partnerNear": true, "freeAgent": false },
+      "title": "The Partners' Group Chat",
+      "text": "{Pf} has been added to the squad partners' group chat. It has four hundred unread messages, three factions and one very powerful captain's wife. {Pf} doesn't know whether to be thrilled or terrified.",
+      "prompt": "{Pf} is navigating the partners' circle.",
+      "choices": [
+        { "label": "Encourage her to make friends", "desc": "It's lonely being a footballer's partner.", "risk": "low", "hint": "A support network.", "text": "{Pf} becomes close with two of them. They have a running joke about their husbands' terrible fashion. Life gets less lonely.", "fx": { "love": 5, "dressing": 2 } },
+        { "label": "Warn her about the politics", "desc": "That chat is a minefield.", "risk": "low", "hint": "Forewarned.", "text": "{Pf} stays polite and careful. She mutes the chat and gets invited to everything anyway.", "fx": { "love": 2 } }
+      ]
+    },
+    {
+      "id": "lv_honeymoon", "cat": "love", "w": 5, "cd": 999, "once": true, "when": { "partner": ["married"], "partnerYears": [0, 2], "phase": ["off"] }, "vars": { "cost": ["wageWeeks", 3, 1500] },
+      "title": "The Honeymoon",
+      "text": "The off-season finally gives them two weeks. {Pf} has made a shortlist of honeymoon destinations: an island, a mountain lodge, a city with too many museums.",
+      "prompt": "Where do you go?",
+      "choices": [
+        { "label": "The island", "desc": "Sun, sea, nothing to do.", "risk": "low", "hint": "Pure rest.", "text": "Two weeks of nothing. He reads a whole book for the first time since school. {Pf} gets a tan in the shape of his arm.", "fx": { "love": 12, "stress": -10, "wealth": "-cost", "pfm": 5 } },
+        { "label": "Somewhere she has always wanted to go", "desc": "Her dream trip.", "risk": "low", "hint": "Her choice. Her happiness.", "text": "He lets her plan everything. She takes him somewhere he'd never have chosen. It's perfect.", "fx": { "love": 15, "stress": -6, "wealth": "-cost" } }
+      ]
+    },
+    {
+      "id": "lv_long_distance_reunion", "cat": "love", "w": 4, "cd": 999, "once": true, "when": { "partnerNear": true, "flags": ["partner_moved"] },
+      "title": "Home Is a Person",
+      "text": "{Pf} has been living in his city for a few weeks now. She already knows the shortcuts he doesn't. Last night she cooked a dish from home and the whole flat smelled like his childhood.",
+      "prompt": "Together in the same city at last.",
+      "choices": [
+        { "label": "Help her build her own life here", "desc": "Her job, her friends, her city too.", "risk": "low", "hint": "So she's not just here for you.", "text": "He introduces her to everyone he knows and finds her a language teacher. Within two months she has more friends here than he does.", "fx": { "love": 8, "morale": 4 } },
+        { "label": "Make the most of every evening", "desc": "You've waited long enough.", "risk": "low", "hint": "Romance, at last.", "text": "Every evening is theirs. He's never been better rested, or happier.", "fx": { "love": 6, "stress": -4, "morale": 3 } }
+      ]
+    }
+  ]
+}

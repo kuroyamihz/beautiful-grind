@@ -1,0 +1,104 @@
+{
+  "_meta": { "baseline": "2025-26", "note": "Corrected versions of the original prompt's competition section plus everything that was missing." },
+
+  "clubContinental": {
+    "UEFA": [
+      { "name": "UEFA Champions League", "format": "36-team league phase (8 matches each, Sep-Jan). 1st-8th → Round of 16; 9th-24th → two-leg knockout play-off; 25th-36th eliminated. Round of 16, quarter-finals and semi-finals are TWO legs (the original prompt said one leg — wrong). Single-match final in late May/early June.", "finals": { "2025": "PSG 5-0 Inter (Munich)", "2026": "Budapest, Puskás Aréna", "2027": "Madrid, Metropolitano" }, "prizeMoney": "≈ €2.5bn total pool (2024-27 cycle)" },
+      { "name": "UEFA Europa League", "format": "36-team league phase, same structure as the UCL. Thursday nights.", "finals": { "2025": "Tottenham 1-0 Manchester United (Bilbao)", "2026": "Istanbul, Beşiktaş Stadium" } },
+      { "name": "UEFA Conference League", "format": "36-team league phase with 6 matches each, then knockouts.", "finals": { "2025": "Chelsea 4-1 Real Betis (Wrocław)", "2026": "Leipzig" } },
+      { "name": "UEFA Super Cup", "format": "UCL winner vs UEL winner, August, neutral venue." },
+      { "name": "UEFA Youth League", "format": "U19 version of the Champions League — a realistic stage for a 17-18-year-old at a big academy." }
+    ],
+    "CONMEBOL": [
+      { "name": "CONMEBOL Libertadores", "format": "3 qualifying rounds → 32-team group stage (8 groups of 4, Apr-May) → two-leg knockouts → single-match final (Nov) at a neutral venue.", "winners": { "2024": "Botafogo", "2025": "Flamengo" } },
+      { "name": "CONMEBOL Sudamericana", "format": "Group stage; 3rd-placed Libertadores group teams drop in; single-match final.", "winners": { "2024": "Racing Club", "2025": "Lanús" } },
+      { "name": "CONMEBOL Recopa", "format": "Libertadores winner vs Sudamericana winner, two legs, Feb/Mar." }
+    ],
+    "AFC": [
+      { "name": "AFC Champions League Elite", "format": "24 clubs (12 East, 12 West). League stage of 8 matches (Sep-Feb) → East/West Round of 16 (two legs) → centralised Finals (QF, SF, final) in Saudi Arabia in April-May.", "winners": { "2024-25": "Al-Ahli (Saudi Arabia)" } },
+      { "name": "AFC Champions League Two", "format": "32 clubs in 8 groups of 4 (Sep-Dec) → two-leg knockouts → single-match final. Main continental competition for Indonesian, Thai, Vietnamese and Malaysian clubs.", "winners": { "2024-25": "Sharjah FC (UAE)" } },
+      { "name": "AFC Challenge League", "format": "Third tier, replaced the AFC Cup from 2024-25. Lower-ranked associations." },
+      { "name": "ASEAN Club Championship (Shopee Cup)", "format": "Southeast Asian club competition revived in 2024-25.", "winners": { "2024-25": "Buriram United" } },
+      { "name": "AGCFF Gulf Club Champions League", "format": "Gulf Arab clubs." }
+    ],
+    "CAF": [
+      { "name": "CAF Champions League", "format": "Qualifying rounds → 16-team group stage → two-leg knockouts including a two-leg final.", "winners": { "2024-25": "Pyramids FC" } },
+      { "name": "CAF Confederation Cup", "format": "Second tier, same structure.", "winners": { "2024-25": "RS Berkane" } },
+      { "name": "CAF Super Cup", "format": "CL winner vs Confederation Cup winner." }
+    ],
+    "CONCACAF": [
+      { "name": "Concacaf Champions Cup", "format": "27 clubs, two-leg knockouts (Feb-May), single-match final.", "winners": { "2025": "Cruz Azul" } },
+      { "name": "Leagues Cup", "format": "All MLS and Liga MX clubs, July-August; top finishers qualify for the Champions Cup." },
+      { "name": "Concacaf Central American Cup", "format": "Central American clubs, Aug-Dec; top finishers → Champions Cup. Replaced the CONCACAF League." },
+      { "name": "Concacaf Caribbean Cup", "format": "Caribbean clubs." }
+    ],
+    "OFC": [
+      { "name": "OFC Champions League", "format": "Short centralised tournament." },
+      { "name": "OFC Professional League", "format": "New regional professional league launching 2026 (verify)." }
+    ],
+    "FIFA": [
+      { "name": "FIFA Club World Cup", "format": "32 clubs, every 4 years, group stage + knockouts. 2025 edition in the USA: Chelsea beat PSG 3-0 in the final. Next: 2029." },
+      { "name": "FIFA Intercontinental Cup", "format": "Annual (December). UCL winner enters the final; other continental champions play earlier rounds. 2024: Real Madrid. 2025: PSG (verify)." }
+    ]
+  },
+
+  "international": {
+    "fifaWindows": "September, October, November, March, June. Players must be released by clubs.",
+    "senior": [
+      { "name": "FIFA World Cup 2026", "hosts": "USA, Canada, Mexico", "dates": "11 Jun - 19 Jul 2026", "format": "48 teams, 12 groups of FOUR (the original prompt said 3 per group — wrong). Top 2 + 8 best third-placed → Round of 32. 104 matches. Final at MetLife Stadium, New Jersey.", "slots": { "UEFA": 16, "CAF": 9, "AFC": 8, "CONMEBOL": 6, "CONCACAF": "3 + 3 hosts", "OFC": 1, "Intercontinental play-off": 2 },
+        "qualifiedKnownAtBaseline": ["USA", "Canada", "Mexico", "Japan", "Iran", "Uzbekistan", "South Korea", "Jordan", "Australia", "Qatar", "Saudi Arabia", "Argentina", "Brazil", "Ecuador", "Uruguay", "Colombia", "Paraguay", "Morocco", "Tunisia", "Egypt", "Algeria", "Ghana", "Cape Verde", "South Africa", "Senegal", "Côte d'Ivoire", "New Zealand", "Panama", "Haiti", "Curaçao", "England", "France", "Croatia", "Portugal", "Norway", "Germany", "Netherlands", "Spain", "Belgium", "Austria", "Switzerland", "Scotland"],
+        "notes": "Remaining places came from the UEFA play-offs and the intercontinental play-off in March 2026 (verify). Indonesia reached the AFC 4th round but were eliminated in October 2025. If the career starts in July 2025, qualifying is still in progress — the simulation can decide it." },
+      { "name": "FIFA World Cup 2030", "hosts": "Spain, Portugal, Morocco (+ centenary opening matches in Uruguay, Argentina, Paraguay)" },
+      { "name": "FIFA World Cup 2034", "hosts": "Saudi Arabia" },
+      { "name": "UEFA European Championship", "next": "EURO 2028 (England, Scotland, Wales, Republic of Ireland; 24 teams)", "last": "EURO 2024 won by Spain" },
+      { "name": "UEFA Nations League", "format": "Leagues A-D, autumn; Finals in June of odd years.", "last": "2024-25 won by Portugal" },
+      { "name": "Copa América", "last": "2024 (USA) won by Argentina", "next": "2028 (verify)" },
+      { "name": "AFC Asian Cup", "next": "January 2027, Saudi Arabia, 24 teams", "last": "2023 (Qatar) won by Qatar", "notes": "Indonesia qualified for the 2027 Asian Cup (verify)." },
+      { "name": "Africa Cup of Nations", "last": "AFCON 2025 in Morocco (21 Dec 2025 - 18 Jan 2026)", "next": "AFCON 2027 (Kenya, Tanzania, Uganda)", "notes": "Held in winter — African players miss a month of the European club season." },
+      { "name": "Concacaf Gold Cup", "last": "2025 won by Mexico" },
+      { "name": "ASEAN Mitsubishi Electric Cup (AFF Championship)", "format": "Biennial, Southeast Asian senior teams; not in a FIFA window, so European clubs can refuse to release players — a big storyline for Indonesia's Europe-based players.", "last": "2024 (Dec 2024 - Jan 2025) won by Vietnam", "next": "2026 (verify dates)" },
+      { "name": "FIFA Arab Cup", "last": "Dec 2025, Qatar" },
+      { "name": "Olympic Football Tournament", "format": "U-23 + 3 overage players", "next": "Los Angeles 2028" }
+    ],
+    "youth": [
+      { "name": "FIFA U-17 World Cup", "format": "Now ANNUAL with 48 teams, hosted in Qatar 2025-2029.", "notes": "Indonesia hosted 2023 and qualified for 2025." },
+      { "name": "FIFA U-20 World Cup", "format": "Every 2 years, 24 teams.", "last": "2025 (Chile) won by Morocco" },
+      { "name": "AFC U-17 Asian Cup", "format": "Annual from 2025 (qualifies for the U-17 World Cup)." },
+      { "name": "AFC U-20 Asian Cup", "format": "Every 2 years." },
+      { "name": "AFC U-23 Asian Cup", "format": "Every 2 years; in Olympic years it decides Asia's Olympic places. 2026 edition in Saudi Arabia (January). Indonesia reached the 2024 semi-finals." },
+      { "name": "Southeast Asian Games (SEA Games)", "format": "Every 2 years, U-22 (+ overage). Indonesia won gold in 2023. 2025 edition in Thailand (December)." },
+      { "name": "ASEAN U-23 / U-19 / U-16 Championships", "format": "Regional youth tournaments; Indonesia won the 2024 ASEAN U-19." },
+      { "name": "UEFA U-17, U-19, U-21 Championships", "format": "European youth tournaments." }
+    ]
+  },
+
+  "awards": [
+    { "name": "Ballon d'Or", "when": "Sep/Oct ceremony", "recent": { "2024": "Rodri", "2025": "Ousmane Dembélé" } },
+    { "name": "Kopa Trophy (best U-21)", "recent": { "2024": "Lamine Yamal", "2025": "Lamine Yamal (verify)" } },
+    { "name": "Yashin Trophy (best goalkeeper)", "recent": { "2025": "Gianluigi Donnarumma" } },
+    { "name": "Gerd Müller Trophy (top scorer)" },
+    { "name": "The Best FIFA Men's Player", "when": "December" },
+    { "name": "Golden Boy (best U-21 in Europe)" },
+    { "name": "European Golden Shoe" },
+    { "name": "AFC Player of the Year / AFC Youth Player of the Year / AFC Foreign Player of the Year" },
+    { "name": "CAF Player of the Year" },
+    { "name": "League awards: PFA Player of the Year, Premier League Player/Young Player of the Season, LaLiga MVP, Serie A MVP, etc." },
+    { "name": "Indonesia: Super League Best Player, Best Young Player, Top Scorer; Golden Ball at the ASEAN Championship" },
+    { "name": "Club awards: Player of the Season, Young Player of the Season, Goal of the Season" }
+  ],
+
+  "globalCalendar": {
+    "July": ["Pre-season tours (Asia/USA)", "Summer transfer peak", "Calendar-year leagues mid-season", "Piala Presiden (Indonesia, pre-season)"],
+    "August": ["European leagues start (mid-August)", "UEFA Super Cup", "Community Shield / DFL-Supercup", "Indonesia Super League starts", "J1 League starts (from 2026-27)", "Transfer deadline ~1 Sep"],
+    "September": ["FIFA window", "UCL/UEL/UECL league phase begins", "AFC Champions League Elite & Two begin", "Ballon d'Or ceremony (Sep/Oct)"],
+    "October": ["FIFA window", "Continental league phases continue"],
+    "November": ["FIFA window (last of the year)", "Libertadores/Sudamericana finals", "Calendar-year leagues finish", "U-17 World Cup (Qatar)"],
+    "December": ["Premier League plays through Christmas; most others pause late Dec", "FIFA Intercontinental Cup", "MLS Cup", "ASEAN Championship (in even years) / SEA Games (odd years)", "AFCON in some cycles"],
+    "January": ["Winter transfer window", "Supercopa de España & Supercoppa Italiana (Saudi Arabia)", "AFC U-23 Asian Cup (even years)", "Asian Cup (2027)", "AFCON (some cycles)", "South American state/opening tournaments begin"],
+    "February": ["Deadline day (~2 Feb)", "UCL/UEL knockout play-offs", "Libertadores qualifying", "Concacaf Champions Cup", "MLS, K League, A-League run"],
+    "March": ["FIFA window", "UCL Round of 16", "Ramadan often falls Feb-Apr in 2025-2027 (affects Muslim players' training and fasting)"],
+    "April": ["UCL/UEL quarter-finals", "ACL Elite Finals in Saudi Arabia (Apr-May)", "Title races"],
+    "May": ["UCL/UEL/UECL semi-finals and finals", "European leagues end", "Domestic cup finals (FA Cup, Copa del Rey, DFB-Pokal, Coppa Italia)", "Indonesia Super League ends", "Promotion/relegation play-offs"],
+    "June": ["FIFA window or major tournament", "Summer transfer window opens", "World Cup (2026) / EURO (2028) / Copa América (2028?)", "Club World Cup (2029)"]
+  }
+}

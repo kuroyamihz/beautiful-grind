@@ -1,0 +1,236 @@
+{
+  "scenarios": [
+    {
+      "id": "ve_young_replacement", "once": true, "cat": "veteran", "w": 6, "when": { "age": [30, 40] },
+      "title": "The Club Signs {J}'s Replacement",
+      "text": "The club announces a new signing: twenty-one, quick, plays {J}'s position, five-year contract. At the press conference the sporting director uses the phrase “succession planning”.",
+      "prompt": "How do you handle it?",
+      "choices": [
+        { "label": "Mentor the new kid", "desc": "Help him succeed you.", "risk": "low", "hint": "Grace in decline.", "text": "{J} takes {K} under his wing. The kid calls him “old man” with real affection. {M} watches it with respect.", "fx": { "trust": 4, "rep": 0.6, "growth": ["mental"] } },
+        { "label": "Fight for your shirt", "desc": "Not yet, kid.", "risk": "medium", "hint": "Pride is a powerful engine.", "text": "{J} trains like he's nineteen again. For now, the shirt stays his.", "fx": { "pfm": -5, "mood": "Determined", "form": 0.2 } },
+        { "label": "Ask about your future", "desc": "Be clear-eyed.", "risk": "medium", "hint": "The truth might hurt.", "text": "{M} is honest: “You'll play less. But I want you here.” It's both a comfort and a sentence.", "fx": { "trust": 2, "mood": "Numb" } }
+      ]
+    },
+    {
+      "id": "ve_role_change", "cat": "veteran", "w": 5, "when": { "age": [30, 40], "pos": ["W", "ST", "AM"] },
+      "title": "{M} Suggests {J} Plays Deeper",
+      "text": "{M} watches the GPS data and makes a suggestion: “Your legs aren't what they were. Your brain is better than ever. Play deeper. Let the game come to you.”",
+      "prompt": "Reinvent yourself?",
+      "choices": [
+        { "label": "Embrace the new role", "desc": "Become a playmaker.", "risk": "medium", "hint": "Some veterans flourish. Some vanish.", "text": "Playing deeper, {J} sees the whole pitch for the first time. His passing becomes the best in the squad.", "fx": { "growth": ["passing"], "tacticalFit": 10, "trust": 4 } },
+        { "label": "Stay where you are", "desc": "You're still quick enough.", "risk": "medium", "hint": "The data says otherwise.", "text": "{J} stays wide. For a few months it works. Then a twenty-year-old full-back leaves him for dead.", "fx": { "trust": -2, "mood": "Frustrated" } }
+      ]
+    },
+    {
+      "id": "ve_last_contract", "once": true, "cat": "veteran", "w": 6, "when": { "age": [32, 40], "contractYears": [0, 1] },
+      "title": "Maybe the Last Contract",
+      "text": "Contract talks at thirty-two-plus are different. The club offers one year, less money, an option for a second year “based on appearances”. A club in a smaller league offers two years and more money. Retirement is also an option nobody says out loud.",
+      "prompt": "What do you prioritise?",
+      "choices": [
+        { "label": "Stay at a club you love", "desc": "Less money, more meaning.", "risk": "low", "hint": "Loyalty in the twilight.", "text": "{J} signs the one-year deal. The fans chant his name at the next match.", "fx": { "rep": 0.8, "trust": 4, "mood": "Relieved" } },
+        { "label": "Follow the money", "desc": "One more payday for the family.", "risk": "medium", "hint": "Some fans will call it mercenary.", "text": "{J} tells his agent to make the move happen. The smaller club will be in touch when the window opens.", "fx": { "listed": true, "mood": "Focused" } }
+      ]
+    },
+    {
+      "id": "ve_coaching_offer", "once": true, "cat": "veteran", "w": 4, "when": { "age": [31, 40], "flags": ["coaching_badges"] },
+      "title": "The Academy Wants {J} to Coach Part-Time",
+      "text": "The club's academy director asks if {J} would coach the U-16s twice a week, alongside playing. His coaching badges make it possible. The kids already know who he is.",
+      "prompt": "Coach the kids?",
+      "choices": [
+        { "label": "Say yes", "desc": "Start the next chapter.", "risk": "low", "hint": "Tiring and rewarding.", "text": "Twice a week, twenty teenagers hang on his every word. He discovers he loves it.", "fx": { "rep": 1, "pfm": -3, "growth": ["mental"], "flag": "youth_coach" } },
+        { "label": "Not yet", "desc": "Focus on playing.", "risk": "low", "hint": "The offer will come again.", "text": "{J} declines for now. The director says the door is open.", "fx": {} }
+      ]
+    },
+    {
+      "id": "ve_testimonial", "cat": "veteran", "w": 3, "when": { "age": [32, 40], "apps": [250, 9999] }, "once": true,
+      "title": "A Testimonial Match for {J}",
+      "text": "The club announces a testimonial match in {J}'s honour: old teammates, former coaches, his children as mascots. The proceeds will go wherever he chooses.",
+      "prompt": "Where should the proceeds go?",
+      "choices": [
+        { "label": "Your foundation or a children's charity", "desc": "Give it all away.", "risk": "low", "hint": "Legacy.", "text": "Twenty thousand people come. Every ticket funds scholarships. Old teammates fly in from three continents.", "fx": { "rep": 3, "followers": 50000, "mood": "Relieved" } },
+        { "label": "Your family", "desc": "They sacrificed most.", "risk": "low", "hint": "Practical gratitude.", "vars": { "gift": ["wealthPct", 20, 3000] }, "text": "The proceeds, {gift}, go to his parents. His father makes a speech at halftime and nobody can hear a word over the cheering.", "fx": { "wealth": "gift", "parental": 15, "followers": 30000 } }
+      ]
+    },
+    {
+      "id": "ve_body_breaking", "cat": "veteran", "w": 5, "when": { "age": [33, 40] },
+      "title": "The Body Starts to Say No",
+      "text": "Three days to recover from a match instead of one. Knee strapping that takes twenty minutes. A sprint that used to feel like flying now feels like pushing a car. {J} hears the young players laughing about something and realises he doesn't understand the joke.",
+      "prompt": "How do you feel about it?",
+      "choices": [
+        { "label": "Make peace with it", "desc": "Every career ends.", "risk": "low", "hint": "Calm.", "text": "{J} accepts it. Strangely, the matches feel more precious now.", "fx": { "mood": "Focused", "growth": ["mental"] } },
+        { "label": "Fight it with everything", "desc": "Not yet.", "risk": "medium", "hint": "Stubbornness extends careers. Sometimes.", "text": "Extra recovery, extra stretching, extra everything. He buys himself one more good season, maybe.", "fx": { "pfm": 6, "wealth": -300, "mood": "Determined" } }
+      ]
+    },
+    {
+      "id": "ve_farewell_tour", "cat": "veteran", "w": 4, "when": { "age": [34, 40], "rep": [30, 100] }, "once": true,
+      "title": "Opposition Fans Applaud {J}",
+      "text": "At an away ground where he's been booed for fifteen years, the home fans stand and applaud when {J} is substituted. Word has spread that this may be his last season.",
+      "fx": { "rep": 1, "mood": "Relieved", "followers": 15000 }
+    },
+    {
+      "id": "ve_mentor_teenager", "once": true, "cat": "veteran", "w": 5, "when": { "age": [29, 40] },
+      "title": "{J} Takes a Teenager Under His Wing",
+      "text": "{K}, seventeen, reminds {J} of himself: talented, nervous, too much hair gel. The kid follows him around like a shadow and asks a hundred questions a day.",
+      "prompt": "What do you teach him first?",
+      "choices": [
+        { "label": "Professionalism", "desc": "Sleep, food, punctuality.", "risk": "low", "hint": "The boring secrets.", "text": "{J} teaches him the boring things nobody told {J} at that age. A year later, the kid is in the first team.", "fx": { "rep": 0.8, "trust": 2 } },
+        { "label": "How to handle money", "desc": "Before the vultures arrive.", "risk": "low", "hint": "Saves careers.", "text": "{J} tells him every financial mistake he ever made. The kid writes them all down.", "fx": { "rep": 0.6, "growth": ["mental"] } },
+        { "label": "How to enjoy it", "desc": "It goes fast.", "risk": "low", "hint": "Perspective.", "text": "“It goes faster than you think. Enjoy it.” The kid doesn't understand yet. He will.", "fx": { "mood": "Relieved" } }
+      ]
+    },
+    {
+      "id": "ve_punditry_offer", "once": true, "cat": "veteran", "w": 3, "when": { "age": [31, 40], "rep": [25, 100] },
+      "title": "TV Wants {J} as a Pundit",
+      "text": "A television network invites {J} to guest on their weekend highlights show. If it goes well, a permanent job after retirement.",
+      "prompt": "Try it?",
+      "choices": [
+        { "label": "Do it", "desc": "Practice for life after football.", "risk": "medium", "hint": "Your colleagues will watch every word.", "check": { "stat": "mental", "dc": 55 },
+          "ok": { "text": "{J} is a natural: sharp, funny, honest without being cruel. The producer calls the next day.", "fx": { "rep": 1, "followers": 20000, "flag": "pundit_future" } },
+          "bad": { "text": "{J} is stiff and nervous on camera. The clip of him freezing becomes a meme.", "fx": { "followers": 10000, "mood": "Frustrated" } } },
+        { "label": "Decline", "desc": "Still a player.", "risk": "low", "hint": "Focus.", "text": "{J} declines. Not yet.", "fx": {} }
+      ]
+    },
+    {
+      "id": "ve_old_rival_retires", "once": true, "cat": "veteran", "w": 3, "when": { "age": [30, 40] },
+      "title": "An Old Rival Retires",
+      "text": "{T}, the defender who kicked {J} in a hundred matches over fifteen years, announces his retirement. In the farewell interview, he says {J} was the toughest opponent he ever faced.",
+      "prompt": "Respond?",
+      "choices": [
+        { "label": "Send a heartfelt message", "desc": "Respect between old enemies.", "risk": "low", "hint": "Class.", "text": "“You made me better. Thank you for every bruise.” The message goes viral.", "fx": { "rep": 0.8, "followers": 10000 } },
+        { "label": "A joke", "desc": "“Finally, my ankles can rest.”", "risk": "low", "hint": "Banter.", "text": "The rival replies with a laughing emoji and a photo of their worst tackle. The internet adores it.", "fx": { "followers": 12000 } }
+      ]
+    },
+    {
+      "id": "ve_bench_mentor_role", "cat": "veteran", "w": 5, "when": { "age": [32, 40], "role": ["bench", "rotation"] },
+      "title": "From Star to Senior Voice",
+      "text": "{J} plays less now. But in the dressing room, his voice carries further than ever. Young players come to him with problems they won't take to the coaches.",
+      "fx": { "trust": 3, "rep": 0.5, "mood": "Focused" }
+    },
+    {
+      "id": "ve_family_wants_retire", "cd": 52, "cat": "veteran", "w": 4, "when": { "partnerYears": [3, 99], "age": [33, 40], "partner": ["serious", "married"] },
+      "title": "{P} Asks When It Will End",
+      "text": "{P} says it at the kitchen table one evening, gently: “The children want their father at home. When will you stop?”",
+      "prompt": "What do you say?",
+      "choices": [
+        { "label": "“At the end of this season”", "desc": "Set a date.", "risk": "medium", "hint": "A promise is a promise.", "text": "{P} holds his hand. The decision feels lighter once it's said out loud.", "fx": { "mood": "Relieved", "flag": "promised_retire" } },
+        { "label": "“When my body tells me”", "desc": "Not a date. A feeling.", "risk": "medium", "hint": "She may not wait patiently.", "text": "{P} nods, unconvinced.", "fx": { "mood": "Anxious" } }
+      ]
+    },
+    {
+      "id": "ve_record_breaker", "cat": "veteran", "w": 3, "when": { "apps": [300, 9999] }, "once": true,
+      "title": "{J} Breaks a Club Appearance Record",
+      "text": "With his 300th appearance, {J} becomes one of the most capped players in the history of everywhere he's played. Before kick-off, the club presents a framed shirt with the number 300.",
+      "fx": { "rep": 1.5, "followers": 20000, "mood": "Relieved" }
+    },
+    {
+      "id": "ve_legend_honour", "cat": "veteran", "w": 3, "when": { "age": [32, 40], "trophies": [3, 99] }, "once": true,
+      "title": "Hall of Fame Nomination",
+      "text": "The league announces its Hall of Fame nominees for the year. {J}'s name is on the list, alongside players he idolised as a child.",
+      "fx": { "rep": 2, "followers": 25000, "mood": "Confident" }
+    },
+    {
+      "id": "ve_last_derby", "once": true, "cat": "veteran", "w": 4, "when": { "age": [34, 40] },
+      "title": "Probably {J}'s Last Derby",
+      "text": "Everyone knows this is probably {J}'s last derby. The rival fans, who have abused him for fifteen years, have made a banner. Nobody knows yet what it says.",
+      "prompt": "Walk to the rival end before kick-off?",
+      "choices": [
+        { "label": "Walk over and applaud them", "desc": "Respect for old enemies.", "risk": "medium", "hint": "Could be beautiful. Could be ugly.", "out": [
+          { "w": 2, "text": "The banner says: “THANK YOU FOR THE WAR.” Both ends applaud. Grown men cry.", "fx": { "rep": 2, "followers": 40000, "mood": "Relieved" } },
+          { "w": 1, "text": "The banner is an insult. A coin flies. He walks back smiling anyway.", "fx": { "rep": 0.5, "followers": 10000 } }
+        ] },
+        { "label": "Stay focused", "desc": "It's still a derby.", "risk": "low", "hint": "Professional to the end.", "text": "{J} warms up like it's any other derby. Later, he notices the banner says thank you.", "fx": { "rep": 0.8 } }
+      ]
+    },
+    {
+      "id": "ve_retirement_letter", "once": true, "cat": "veteran", "w": 4, "when": { "flags": ["promised_retire"], "age": [33, 40] },
+      "title": "{J} Writes His Retirement Letter",
+      "text": "He promised {P}. One night, at the kitchen table, {J} writes the letter he's been composing in his head for a year. He doesn't send it yet. He reads it to himself four times.",
+      "fx": { "mood": "Numb", "growth": ["mental"] }
+    },
+    {
+      "id": "ve_comeback_from_bench", "cat": "veteran", "w": 3, "when": { "age": [31, 40], "role": ["bench"] },
+      "title": "Old Man Still Has It",
+      "text": "Twenty minutes off the bench in a match the team was losing, and {J} changes it: an assist, a goal-saving tackle, a leadership masterclass. The commentator says, “Experience. You can't buy it.”",
+      "fx": { "trust": 6, "rep": 0.8, "form": 0.4, "mood": "On Fire" }
+    },
+    {
+      "id": "ve_wage_cut", "cd": 104, "cat": "veteran", "w": 3, "when": { "age": [32, 40], "contractYears": [0, 1.5] },
+      "title": "The Club Asks {J} to Take a Pay Cut",
+      "text": "Finances are tight. The sporting director asks the senior players to accept reduced wages for the rest of the season. {J} earns the most of anyone over thirty.",
+      "prompt": "Accept the cut?",
+      "choices": [
+        { "label": "Accept, and say so publicly", "desc": "Lead by example.", "risk": "low", "hint": "Others will follow.", "text": "{J} takes a 30% cut and says so in an interview. Within a week, every senior player has followed.", "fx": { "wealth": -1500, "rep": 1.2, "trust": 6 } },
+        { "label": "Refuse", "desc": "A contract is a contract.", "risk": "medium", "hint": "Legally right. Politically awkward.", "text": "{J} refuses politely. The board doesn't forget.", "fx": { "trust": -5 } }
+      ]
+    },
+    {
+      "id": "ve_old_club_return", "once": true, "cat": "veteran", "w": 3, "when": { "age": [31, 37], "rep": [20, 100] },
+      "title": "First Club Wants {J} Back for a Final Chapter",
+      "text": "The club where it all started calls: would {J} come home for one last season? Less money, smaller league. The fans who saw him at sixteen are waiting.",
+      "prompt": "Go home?",
+      "choices": [
+        { "label": "Tell your agent to make it happen", "desc": "Finish where it began.", "risk": "low", "hint": "A story with an ending.", "text": "The rumour leaks within an hour. The club's ticket office gets a thousand calls.", "fx": { "listed": true, "followers": 15000, "mood": "Motivated" } },
+        { "label": "Not yet", "desc": "One more season at this level.", "risk": "low", "hint": "Ambition.", "text": "{J} says not yet. The old club says the door will stay open.", "fx": {} }
+      ]
+    },
+    {
+      "id": "ve_injury_fear", "cat": "veteran", "w": 3, "when": { "age": [32, 40] },
+      "title": "The Fear of One Bad Injury",
+      "text": "At thirty-two, every injury could be the last. {J} watches a teammate of the same age go down with a serious knee injury and is quiet for the rest of the day.",
+      "prompt": "Change anything?",
+      "choices": [
+        { "label": "Play more carefully", "desc": "Fewer reckless challenges.", "risk": "low", "hint": "Smart, less fearsome.", "text": "{J} pulls out of a few 50-50s. Nobody notices except him.", "fx": { "pfm": 4 } },
+        { "label": "Play like always", "desc": "Fear is worse than injury.", "risk": "medium", "hint": "Brave or reckless.", "text": "{J} keeps playing like he's twenty-five. His body hasn't sent the bill yet.", "fx": { "mood": "Determined" } }
+      ]
+    },
+    {
+      "id": "ve_book_deal", "cat": "veteran", "w": 2, "when": { "age": [30, 40], "rep": [35, 100] }, "once": true, "vars": { "fee": ["endorse", 5000] },
+      "title": "Publisher Offers {J} an Autobiography Deal",
+      "text": "A publisher wants {J}'s autobiography: {fee} advance, a ghostwriter, a launch at the national book fair. It would mean telling the whole story, including the parts he's never told.",
+      "prompt": "Write the book?",
+      "choices": [
+        { "label": "Tell everything", "desc": "The good and the ugly.", "risk": "high", "hint": "Bestseller, and some burnt bridges.", "text": "The book is brutally honest. It's a bestseller. Two former managers stop speaking to him.", "fx": { "wealth": "fee", "rep": 1.5, "followers": 30000 } },
+        { "label": "The nice version", "desc": "Inspiring, safe.", "risk": "low", "hint": "Pleasant, forgettable.", "text": "The book is warm and inspiring. Mostly read by kids. That's fine.", "fx": { "wealth": "fee*0.6", "rep": 0.8 } },
+        { "label": "Not yet", "desc": "The story isn't finished.", "risk": "low", "hint": "Later.", "text": "{J} says the last chapter isn't written yet.", "fx": {} }
+      ]
+    },
+    {
+      "id": "ve_teaching_young_keeper", "once": true, "cat": "veteran", "w": 4, "when": { "age": [31, 40], "pos": ["GK"] },
+      "title": "Passing the Gloves",
+      "text": "The young goalkeeper who will replace {J} is talented and terrified. Every mistake in training, he looks at {J}. {J} recognises the look.",
+      "fx": { "rep": 0.6, "trust": 3, "growth": ["mental"] }
+    },
+    {
+      "id": "ve_legs_gone_match", "cat": "veteran", "w": 3, "when": { "age": [34, 40], "role": ["starter", "rotation"] },
+      "title": "A Teenager Runs Past {J}",
+      "text": "Sixty-fifth minute. A nineteen-year-old winger knocks the ball past {J} and simply outruns him. Ten years ago {J} would have caught him. Today he watches him go.",
+      "prompt": "What do you feel?",
+      "choices": [
+        { "label": "Laugh about it", "desc": "Respect the kid.", "risk": "low", "hint": "Grace.", "text": "After the match, {J} finds the kid and says, “You're going to be very good.” The kid will remember it forever.", "fx": { "rep": 0.5, "mood": "Focused" } },
+        { "label": "It hurts", "desc": "Admit it to yourself.", "risk": "low", "hint": "Honesty.", "text": "{J} drives home in silence. That night he watches old highlights of himself. He doesn't know whether it helps.", "fx": { "mood": "Numb" } }
+      ]
+    },
+    {
+      "id": "ve_brand_ambassador_club", "once": true, "cat": "veteran", "w": 3, "when": { "age": [32, 40], "rep": [30, 100], "trophies": [1, 99] },
+      "title": "Club Offers {J} an Ambassador Role After Retirement",
+      "text": "The club president offers {J} a job for life: club ambassador after retirement, representing the club around the world. A desk, a salary, a seat in the directors' box.",
+      "fx": { "flag": "club_ambassador", "mood": "Relieved", "trust": 3 }
+    },
+    {
+      "id": "ve_last_goal_feeling", "cat": "veteran", "w": 3, "when": { "age": [33, 40], "pos": ["ST", "W", "AM"] },
+      "title": "Is This the Last Goal?",
+      "text": "{J} scores, and for a moment wonders: is this the last one? He celebrates a little longer than usual, arms wide, eyes on the crowd, trying to memorise it.",
+      "fx": { "mood": "Relieved", "followers": 8000 }
+    },
+    {
+      "id": "ve_physio_honesty", "once": true, "cat": "veteran", "w": 3, "when": { "age": [34, 40], "pfm": [0, 60] },
+      "title": "The Physio's Honest Conversation",
+      "text": "The head physio, who has treated {J} for eight years, closes the treatment room door. “You can keep going. But every season now costs you something later. Your knees at sixty. Your back. I want you to know.”",
+      "prompt": "What do you do with that?",
+      "choices": [
+        { "label": "Thank him and think about it", "desc": "He's earned your trust.", "risk": "low", "hint": "Wisdom.", "text": "{J} thanks him and starts thinking seriously about the end.", "fx": { "flag": "promised_retire", "growth": ["mental"] } },
+        { "label": "Push on", "desc": "Football is now.", "risk": "medium", "hint": "Your later self will have opinions.", "text": "{J} pushes on. One more season. Then one more.", "fx": { "mood": "Determined" } }
+      ]
+    }
+  ]
+}

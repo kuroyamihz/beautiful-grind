@@ -1,0 +1,464 @@
+{
+  "scenarios": [
+    {
+      "id": "dr_mocked_publicly", "cat": "dressing", "w": 6,
+      "title": "Training-Ground Tension: {J} vs {Tl}",
+      "text": "{T} has been at the club eight years and he has opinions about young players who wear headphones on the bus, post too much online and don't carry the cones. Today he says it in front of everyone. A few people laugh. Most look at {J}.",
+      "prompt": "{T} is mocking you publicly. Response?",
+      "choices": [
+        { "label": "Confront him", "desc": "Right here, right now.", "risk": "high", "hint": "Earn respect or start a war — maybe both.", "out": [
+          { "w": 1, "text": "Face to face, chest to chest — then {T} grins and slaps his cheek. “Finally. Some fire.” Strange, but they're fine after that.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "rep": 0.3 } },
+          { "w": 1, "text": "It turns into shoving, then a club fine, then a story in the local paper. {M} isn't impressed.", "fx": { "trust": -8, "wealth": -100, "teammate": { "who": "T", "rel": "enemy" }, "mood": "Angry" } }
+        ] },
+        { "label": "Go to the captain", "desc": "Handle it through the dressing-room hierarchy.", "risk": "low", "hint": "Mature. Some will call it snitching.", "text": "The captain has a quiet word. {T} stops — but tells everyone why.", "fx": { "trust": 1, "teammate": { "who": "T", "rel": "rival" } } },
+        { "label": "Laugh it off", "desc": "Make a joke back. Move on.", "risk": "medium", "hint": "Could defuse it — or invite more.", "out": [
+          { "w": 3, "text": "{J}'s comeback gets a bigger laugh than the original. {T} raises his hands: fair.", "fx": { "teammate": { "who": "T", "rel": "neutral" } } },
+          { "w": 2, "text": "The joke falls flat. {T} smells weakness and the comments keep coming.", "fx": { "teammate": { "who": "T", "rel": "rival" }, "mood": "Frustrated" } }
+        ] }
+      ]
+    },
+    {
+      "id": "dr_initiation_song", "cat": "dressing", "w": 8, "once": true, "when": { "apps": [0, 15] },
+      "title": "Initiation: {J} Must Sing for the Squad",
+      "text": "Tradition. Every new first-team player stands on a chair in the canteen and sings in front of the whole squad. The staff film it on their phones. There is no way out. {J} climbs onto the chair.",
+      "prompt": "What do you sing?",
+      "choices": [
+        { "label": "A love ballad, full emotion", "desc": "Commit to the bit.", "risk": "medium", "hint": "Total commitment wins rooms.", "check": { "stat": "mental", "dc": 45 },
+          "ok": { "text": "{J} sings a power ballad with his eyes closed and a hand on his heart. The squad goes silent, then explodes. Instant legend.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "followers": 3000 } },
+          "bad": { "text": "His voice cracks on the high note. Spoons hit tables. He's “Kakak Ballad” for the rest of the season.", "fx": { "teammate": { "who": "T", "rel": "ally" } } } },
+        { "label": "The club anthem", "desc": "Safe and respectful.", "risk": "low", "hint": "Respect from the old guard.", "text": "The club anthem, word perfect. The captain sings along on the second verse. Approved.", "fx": { "trust": 1 } },
+        { "label": "Refuse", "desc": "You're a footballer, not a singer.", "risk": "medium", "hint": "Traditions matter to some.", "text": "{J} refuses. The squad boos for ten minutes, then forgets. Mostly.", "fx": { "teammate": { "who": "T", "rel": "rival" } } }
+      ]
+    },
+    {
+      "id": "dr_whatsapp_group", "cat": "dressing", "w": 4,
+      "title": "The Squad Group Chat Gets Out of Hand",
+      "text": "The squad group chat is mostly memes, voice notes and arguments about food. Tonight someone posts a cruel joke about {M}'s haircut. Thirty laughing emojis follow. {J}'s phone buzzes and buzzes.",
+      "prompt": "Join in?",
+      "choices": [
+        { "label": "Add a joke", "desc": "Be one of the boys.", "risk": "medium", "hint": "Screenshots exist forever.", "out": [
+          { "w": 3, "text": "{J}'s joke gets the most laughs of the night. The group adopts him a little more.", "fx": { "teammate": { "who": "T", "rel": "ally" } } },
+          { "w": 1, "text": "Somebody screenshots the chat. Somehow it reaches {M}. {J}'s message is in the screenshot.", "fx": { "trust": -8, "mood": "Anxious" } }
+        ] },
+        { "label": "Stay silent", "desc": "Read, don't type.", "risk": "low", "hint": "Nothing to regret.", "text": "{J} mutes the chat and goes to sleep.", "fx": {} }
+      ]
+    },
+    {
+      "id": "dr_prank_victim", "cat": "dressing", "w": 4,
+      "title": "Pranked: {J}'s Boots Filled With Shaving Foam",
+      "text": "{J} pulls on his boots and feels the cold foam squelch between his toes. The dressing room explodes with laughter. Everybody looks innocent. {T} looks the most innocent of all.",
+      "prompt": "Revenge?",
+      "choices": [
+        { "label": "Plan revenge", "desc": "Something better. Something legendary.", "risk": "medium", "hint": "Prank wars escalate.", "out": [
+          { "w": 2, "text": "{J} wraps {T}'s car in cling film. Forty layers. The squad votes it prank of the season.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "followers": 2000 } },
+          { "w": 1, "text": "The revenge involves the kit man's laundry and goes badly wrong. A fine from the club.", "fx": { "wealth": -80, "trust": -2 } }
+        ] },
+        { "label": "Laugh along", "desc": "Good one. You got me.", "risk": "low", "hint": "Good sport.", "text": "{J} laughs loudest of all. The pranks stop. Good sports are boring targets.", "fx": { "teammate": { "who": "T", "rel": "ally" } } }
+      ]
+    },
+    {
+      "id": "dr_captain_advice", "cat": "dressing", "w": 4, "when": { "age": [16, 22] },
+      "title": "The Captain Takes {J} Aside",
+      "text": "After training, the captain, {T}, catches {J} at his locker. “You're good. But you're trying to prove it every minute. Football is long. Breathe.”",
+      "fx": { "teammate": { "who": "T", "rel": "ally" }, "growth": ["mental"] }
+    },
+    {
+      "id": "dr_fight_teammates", "cat": "dressing", "w": 3,
+      "title": "Two Teammates Fight in the Dressing Room",
+      "text": "{T} and {T2} have been at each other all week. After a training-ground argument it boils over in the dressing room: a shove, a punch, a bench knocked over. {J} is the closest person to them.",
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Separate them", "desc": "Get between them.", "risk": "medium", "hint": "Brave. You might catch one.", "out": [
+          { "w": 2, "text": "{J} gets between them and holds {T} back until the coaches arrive. Both thank him later, separately.", "fx": { "rep": 0.3, "teammate": { "who": "T", "rel": "ally" }, "trust": 2 } },
+          { "w": 1, "text": "{J} catches an elbow on the cheekbone. A black eye and a story nobody believes.", "fx": { "pfm": -3, "teammate": { "who": "T2", "rel": "ally" } } }
+        ] },
+        { "label": "Call the staff", "desc": "Not your fight.", "risk": "low", "hint": "Sensible.", "text": "{J} fetches the assistant coach. Both players are fined.", "fx": {} },
+        { "label": "Film it", "desc": "Content.", "risk": "extreme", "hint": "This will end badly.", "text": "The video leaks within an hour. Everyone knows who filmed it. {M} drops {J} for the next match.", "fx": { "trust": -15, "teammate": { "who": "T", "rel": "enemy" }, "followers": 10000 } }
+      ]
+    },
+    {
+      "id": "dr_birthday_teammate", "cat": "dressing", "w": 3, "vars": { "cost": ["wageWeeks", 0.5, 30] },
+      "title": "{Tl}'s Birthday: Who Pays for Dinner?",
+      "text": "It's {T}'s birthday and the squad is going out for dinner. Tradition says the youngest player pays for the cake. Tonight, that's {J}.",
+      "prompt": "Pay for the cake ({cost})?",
+      "choices": [
+        { "label": "Pay, and make it a good one", "desc": "A big cake with his face on it.", "risk": "low", "hint": "Generous.", "text": "The cake has {T}'s face on it in sugar. He nearly cries laughing.", "fx": { "wealth": "-cost", "teammate": { "who": "T", "rel": "ally" } } },
+        { "label": "Pay the minimum", "desc": "Supermarket cake.", "risk": "low", "hint": "Teasing incoming.", "text": "A supermarket cake with the price sticker still on. The teasing lasts until Christmas.", "fx": { "wealth": -20 } }
+      ]
+    },
+    {
+      "id": "dr_loan_out_friend", "cat": "dressing", "w": 3, "uses": { "T": "ally" }, "when": { "hasAlly": true },
+      "title": "{Tl} Is Leaving the Club",
+      "text": "{T}, {J}'s closest friend in the squad, is being sold. He tells {J} before he tells anyone else, in the car park, with his bags already in the boot.",
+      "prompt": "How do you say goodbye?",
+      "choices": [
+        { "label": "Organise a send-off", "desc": "Dinner for the whole squad.", "risk": "low", "hint": "A proper goodbye.", "text": "A long dinner, speeches, an embarrassing slideshow. {T} hugs everyone twice.", "fx": { "teammate": { "who": "T", "rel": "neutral" }, "wealth": -100, "mood": "Numb" } },
+        { "label": "Quiet goodbye", "desc": "Just the two of you.", "risk": "low", "hint": "Real friends don't need a party.", "text": "Coffee at the petrol station at midnight, like old times. “Keep my seat warm,” says {T}.", "fx": { "teammate": { "who": "T", "rel": "neutral" }, "mood": "Numb" } }
+      ]
+    },
+    {
+      "id": "dr_religious_room", "cat": "dressing", "w": 3, "when": { "nationality": ["Indonesia", "Malaysia", "Saudi Arabia", "Egypt", "Morocco", "Algeria", "Tunisia", "Turkey", "Iran", "Iraq", "Jordan", "Senegal", "Nigeria"] },
+      "title": "A Prayer Room at the Training Ground",
+      "text": "There's no quiet place to pray at the training ground. {J} has been using a storage room between the boot room and the laundry. One of the kit men suggests he ask the club for a proper prayer room.",
+      "prompt": "Ask the club?",
+      "choices": [
+        { "label": "Ask formally", "desc": "Write to the club secretary.", "risk": "low", "hint": "Clubs usually say yes.", "out": [
+          { "w": 3, "text": "The club converts an unused office into a prayer room within a month. Several players use it.", "fx": { "rep": 0.3, "mood": "Relieved", "teammate": { "who": "T", "rel": "ally" } } },
+          { "w": 1, "text": "The request sits in an inbox for months. {J} keeps using the storage room.", "fx": {} }
+        ] },
+        { "label": "Keep using the storage room", "desc": "Don't make a fuss.", "risk": "low", "hint": "Fine.", "text": "The storage room it is. The kit men start leaving a clean towel there for him.", "fx": {} }
+      ]
+    },
+    {
+      "id": "dr_rival_steals_spot", "cat": "dressing", "w": 4, "uses": { "T": "rival" }, "when": { "hasRival": true },
+      "title": "{Tl} Talks About {J} Behind His Back",
+      "text": "A friendly teammate tells {J} what {T} has been saying: that {J} only plays because the club paid for him, that the manager has favourites, that he's soft.",
+      "prompt": "Respond?",
+      "choices": [
+        { "label": "Confront him privately", "desc": "Settle it face to face.", "risk": "medium", "hint": "Clear the air or deepen the feud.", "out": [
+          { "w": 1, "text": "{T} denies everything, then admits some of it, then apologises. Uneasy peace.", "fx": { "teammate": { "who": "T", "rel": "neutral" } } },
+          { "w": 1, "text": "{T} doubles down. The feud is now official.", "fx": { "teammate": { "who": "T", "rel": "enemy" }, "mood": "Angry" } }
+        ] },
+        { "label": "Answer on the pitch", "desc": "Be better than him.", "risk": "low", "hint": "Football settles arguments.", "text": "{J} says nothing and outplays {T} in every training drill. The talking stops.", "fx": { "growth": ["rel"], "mood": "Determined" } }
+      ]
+    },
+    {
+      "id": "dr_rival_injured", "cat": "dressing", "w": 3, "uses": { "T": "rival" }, "when": { "hasRival": true },
+      "title": "Rival {Tl} Suffers a Bad Injury",
+      "text": "{T} — the teammate {J} has been fighting for months — goes down in training with a serious knee injury. Stretcher, ambulance, silence. Everyone knows {J} will probably get more minutes now.",
+      "prompt": "How do you respond?",
+      "choices": [
+        { "label": "Visit him in hospital", "desc": "Rivalry ends at the hospital door.", "risk": "low", "hint": "Class.", "out": [
+          { "w": 2, "text": "{J} brings fruit and an awkward silence. Ten minutes in, {T} laughs. “You're the last person I expected.” Something changes.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "rep": 0.3 } },
+          { "w": 1, "text": "{T} won't see him. The nurse delivers the fruit.", "fx": {} }
+        ] },
+        { "label": "Message, keep distance", "desc": "Respect, nothing more.", "risk": "low", "hint": "Polite.", "text": "A short message: “Get well soon.” Two blue ticks, no reply.", "fx": {} }
+      ]
+    },
+    {
+      "id": "dr_veteran_retiring", "cat": "dressing", "w": 3, "when": { "age": [16, 25] },
+      "title": "Club Veteran {Tl} Announces Retirement",
+      "text": "{T}, thirty-six, five hundred appearances, announces he'll retire at the end of the season. In the dressing room he gives away his old boots, one pair each, to the young players. {J}'s pair is two sizes too big and full of history.",
+      "fx": { "growth": ["mental"], "mood": "Motivated" }
+    },
+    {
+      "id": "dr_language_barrier_teammate", "cat": "dressing", "w": 3,
+      "title": "New Foreign Signing Sits Alone",
+      "text": "The club's new foreign signing, {T}, eats lunch alone every day, earphones in, scrolling photos from home. He speaks almost none of the local language.",
+      "prompt": "Reach out?",
+      "choices": [
+        { "label": "Invite him to dinner", "desc": "Show him the city.", "risk": "low", "hint": "Kindness, and a friend.", "text": "Dinner, a tour of the city's best street food, translation apps on both phones. {T} becomes his best friend at the club.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "growth": ["mental"] } },
+        { "label": "Leave him be", "desc": "He'll adapt.", "risk": "low", "hint": "Nothing gained.", "text": "{T} adapts, eventually, without {J}.", "fx": {} }
+      ]
+    },
+    {
+      "id": "dr_bet_on_match", "cat": "dressing", "w": 3,
+      "title": "A Teammate Is Betting on Football",
+      "text": "{J} sees it by accident: {T}'s phone, open on a betting app, a stake on a match in another league. Footballers are banned from betting on football anywhere. {T} looks up and sees him looking.",
+      "prompt": "{T} says: “You didn't see anything, right?”",
+      "choices": [
+        { "label": "“I didn't see anything”", "desc": "Protect your teammate.", "risk": "high", "hint": "If it comes out, you knew.", "out": [
+          { "w": 3, "text": "Nothing comes of it. {T} owes {J} one and both of them know it.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "flag": "knows_betting" } },
+          { "w": 1, "text": "Months later the federation investigates {T}. Investigators ask who else knew. {J} is interviewed for three hours.", "fx": { "trust": -5, "rep": -1, "mood": "Anxious" } }
+        ] },
+        { "label": "Tell him to stop", "desc": "Friendly warning.", "risk": "medium", "hint": "He might listen.", "text": "“Delete it, bro. It's not worth your career.” {T} deletes the app in front of him.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "rep": 0.2 } },
+        { "label": "Report it", "desc": "Integrity first.", "risk": "high", "hint": "Right thing. Dressing room may turn on you.", "text": "{J} reports it to the club's integrity officer. {T} is suspended. Half the dressing room stops talking to {J}.", "fx": { "teammate": { "who": "T", "rel": "enemy" }, "rep": 0.5, "trust": 2 } }
+      ]
+    },
+    {
+      "id": "dr_match_fixing_approach", "cat": "dressing", "w": 3, "when": { "leagueQ": [0, 66] }, "once": true,
+      "title": "A Stranger's Offer at the Hotel Bar",
+      "text": "The night before an away match, a well-dressed man buys {J} a drink in the hotel lobby. He knows his name, his salary, his mother's name. He talks about how “some results don't matter much” and how much money a yellow card in the first ten minutes might be worth.",
+      "prompt": "This is a match-fixing approach.",
+      "choices": [
+        { "label": "Walk away and report it", "desc": "Tell the club and the federation tonight.", "risk": "low", "hint": "The only right answer. It may be frightening.", "text": "{J} walks straight to the team manager's room. The federation's integrity unit calls him the next morning. A month later, three men are arrested.", "fx": { "rep": 2, "trust": 5, "mood": "Anxious", "flag": "reported_fixer" } },
+        { "label": "Walk away, say nothing", "desc": "You don't want trouble.", "risk": "high", "hint": "Not reporting an approach is itself an offence.", "text": "{J} walks away and tells nobody. He doesn't sleep. The man's face stays with him for weeks.", "fx": { "mood": "Anxious", "flag": "unreported_fixer" } }
+      ]
+    },
+    {
+      "id": "dr_younger_player_mentor", "cat": "dressing", "w": 4, "when": { "age": [24, 40] },
+      "title": "A Homesick Teenager Knocks on {J}'s Door",
+      "text": "{K}, seventeen, just promoted from the academy, knocks on {J}'s hotel door on an away trip at midnight. He can't sleep. He misses home. He thinks he isn't good enough. He reminds {J} of someone.",
+      "prompt": "What do you tell him?",
+      "choices": [
+        { "label": "Tell him your story", "desc": "Your own first year, honestly.", "risk": "low", "hint": "Being a mentor.", "text": "They talk until 2am. {K} plays the best match of his young career the next day and points at {J} when he scores.", "fx": { "rep": 0.5, "growth": ["mental"], "mood": "Relieved" } },
+        { "label": "Tell him to get some sleep", "desc": "Match tomorrow.", "risk": "low", "hint": "Practical.", "text": "“Sleep. It'll look better in the morning.” It does, mostly.", "fx": {} }
+      ]
+    },
+    {
+      "id": "dr_kit_man_friend", "cat": "dressing", "w": 3,
+      "title": "The Kit Man's Secret",
+      "text": "{T}, the kit man, has been at the club for thirty years. He knows which players are kind and which are not. He tells {J} that his wife is in hospital and he can't afford the treatment.",
+      "prompt": "Help him?",
+      "vars": { "cost": ["wealthPct", 15, 150] },
+      "choices": [
+        { "label": "Pay quietly", "desc": "{cost}, anonymously.", "risk": "low", "hint": "Nobody needs to know.", "text": "The hospital bill is paid by “a friend of the club”. The kit man knows anyway. Every pair of boots {J} owns is now polished like glass.", "fx": { "wealth": "-cost", "mood": "Relieved" } },
+        { "label": "Organise a squad collection", "desc": "Everyone chips in.", "risk": "low", "hint": "Shared kindness.", "text": "The squad raises the money in one afternoon. The kit man cries in the boot room.", "fx": { "teammate": { "who": "T2", "rel": "ally" }, "rep": 0.3 } },
+        { "label": "Wish him well", "desc": "It's not your responsibility.", "risk": "low", "hint": "Fair, but cold.", "text": "{J} wishes him well. The kit man nods and goes back to folding shirts.", "fx": {} }
+      ]
+    },
+    {
+      "id": "dr_card_school", "cat": "dressing", "w": 3,
+      "title": "Card School on the Team Bus",
+      "text": "Long away trip, six hours on the bus. At the back, the card school is in full flow — real money, real arguments. A seat opens up. Someone waves {J} over.",
+      "prompt": "Join?",
+      "choices": [
+        { "label": "Join", "desc": "Bonding costs money sometimes.", "risk": "medium", "hint": "Could make friends — or lose.", "out": [
+          { "w": 1, "text": "{J} loses a week's lunch money, gains a seat at the back of the bus forever.", "fx": { "wealth": -120, "teammate": { "who": "T", "rel": "ally" } } },
+          { "w": 1, "text": "{J} wins big and the veterans demand a rematch every trip.", "fx": { "wealth": 200, "teammate": { "who": "T", "rel": "rival" } } }
+        ] },
+        { "label": "Sleep instead", "desc": "Fresh for tomorrow.", "risk": "low", "hint": "Fresh legs.", "text": "{J} sleeps against the window and wakes up with a sore neck and fresh legs.", "fx": { "pfm": 3 } }
+      ]
+    },
+    {
+      "id": "dr_leader_vacuum", "cat": "dressing", "w": 3, "when": { "age": [22, 40], "role": ["starter"] },
+      "title": "The Captain Is Injured: Who Leads Now?",
+      "text": "The captain will be out for two months. The armband passes to the vice-captain, but the dressing room needs more than one voice. The younger players look at {J}.",
+      "prompt": "Step up?",
+      "choices": [
+        { "label": "Step up", "desc": "Speak in the huddle, organise, demand.", "risk": "medium", "hint": "Leadership can be learned.", "check": { "stat": "mental", "dc": 58 },
+          "ok": { "text": "{J} becomes the voice in the huddle. The results improve. {M} notices everything.", "fx": { "trust": 5, "rep": 0.6, "flag": "leader" } },
+          "bad": { "text": "{J} tries, but the words don't come out right. The old pros take over again.", "fx": { "mood": "Frustrated" } } },
+        { "label": "Let others lead", "desc": "Focus on your own game.", "risk": "low", "hint": "Fine.", "text": "{J} focuses on his own game. It's not wrong.", "fx": {} }
+      ]
+    },
+    {
+      "id": "dr_dressing_music", "cat": "dressing", "w": 2,
+      "title": "Battle for the Dressing-Room Speaker",
+      "text": "The dressing room has one speaker and twenty-five musical tastes. Dangdut, drill, reggaeton, K-pop. The fight for the aux cable is the most competitive thing at the club. Today {J} has it.",
+      "prompt": "What do you play?",
+      "choices": [
+        { "label": "Something from home", "desc": "Share your culture.", "risk": "low", "hint": "Some will love it.", "out": [
+          { "w": 1, "text": "The squad is confused, then dancing. A new pre-match tradition is born.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "mood": "Confident" } },
+          { "w": 1, "text": "Boos. The cable is confiscated.", "fx": {} }
+        ] },
+        { "label": "Whatever the captain likes", "desc": "Diplomacy.", "risk": "low", "hint": "Smart politics.", "text": "The captain nods approvingly at his own playlist.", "fx": { "trust": 1 } }
+      ]
+    },
+    {
+      "id": "dr_salary_leak", "cat": "dressing", "w": 3, "when": { "role": ["starter", "rotation"] },
+      "title": "Salaries Leak: Teammates Learn What {J} Earns",
+      "text": "A newspaper publishes the squad's salaries. Some are accurate; some are not. {J}'s number is higher than several senior players'. The mood in the canteen shifts.",
+      "prompt": "A senior player makes a sarcastic remark about your wages.",
+      "choices": [
+        { "label": "Pay for a squad meal", "desc": "Defuse it with generosity.", "risk": "low", "hint": "Money talks.", "vars": { "cost": ["wageWeeks", 0.5, 50] }, "text": "{J} pays {cost} for a team dinner. Hard to stay jealous with a mouth full of grilled fish.", "fx": { "wealth": "-cost", "teammate": { "who": "T", "rel": "ally" } } },
+        { "label": "Ignore it", "desc": "Not your fault.", "risk": "low", "hint": "It fades.", "text": "{J} ignores it. It fades by the weekend.", "fx": {} }
+      ]
+    },
+    {
+      "id": "dr_nickname", "cat": "dressing", "w": 3, "once": true,
+      "title": "{J} Gets a Dressing-Room Nickname",
+      "text": "Nobody decides it. It just happens. After an incident involving {J}, a ball and a referee in training, the squad starts calling him something new. Even the coaching staff use it now.",
+      "prompt": "Accept the nickname?",
+      "choices": [
+        { "label": "Embrace it", "desc": "Put it on your boots.", "risk": "low", "hint": "Belonging.", "text": "{J} has the nickname stitched on his boots. The fans adopt it too.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "followers": 2000 } },
+        { "label": "Hate it quietly", "desc": "It'll go away.", "risk": "low", "hint": "It won't.", "text": "It doesn't go away. It never goes away.", "fx": {} }
+      ]
+    },
+    {
+      "id": "dr_teammate_depression", "cat": "dressing", "w": 3,
+      "title": "{Tl} Isn't Himself",
+      "text": "{T}, usually the loudest man in the dressing room, has gone silent. He's late to training, eats alone, leaves before the warm-down. Yesterday {J} found him sitting in his car in the car park for an hour.",
+      "prompt": "Talk to him?",
+      "choices": [
+        { "label": "Ask if he's okay", "desc": "And mean it.", "risk": "low", "hint": "It could matter more than you know.", "out": [
+          { "w": 2, "text": "{T} says he's fine. Then he isn't fine, and he talks for an hour. The next week he sees the club psychologist. Months later he says that conversation mattered.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "growth": ["mental"] } },
+          { "w": 1, "text": "{T} brushes it off. But {J} sees him reading the club psychologist's flyer the next day.", "fx": { "teammate": { "who": "T", "rel": "ally" } } }
+        ] },
+        { "label": "Tell the staff", "desc": "They're trained for this.", "risk": "low", "hint": "Responsible.", "text": "{J} quietly tells the team doctor. Help arrives. {T} never finds out who noticed.", "fx": { "trust": 1 } },
+        { "label": "Mind your business", "desc": "Everyone has bad weeks.", "risk": "medium", "hint": "Sometimes it isn't a bad week.", "text": "{J} leaves it. Two weeks later {T} takes a leave of absence.", "fx": { "mood": "Numb" } }
+      ]
+    },
+    {
+      "id": "dr_star_player_ego", "cat": "dressing", "w": 3, "when": { "leagueQ": [64, 99] },
+      "title": "The Club's Star Player Ignores {J}",
+      "text": "{T}, the club's highest-paid star, has a personal chef, a personal driver and, apparently, a personal policy of not passing to young players. In the last game {J} was free three times. Three times {T} shot instead.",
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Talk to him directly", "desc": "Respectfully, privately.", "risk": "medium", "hint": "Stars have egos.", "out": [
+          { "w": 1, "text": "{T} listens, then laughs. “Make better runs and you'll get the ball.” Next game, he passes to {J} twice.", "fx": { "teammate": { "who": "T", "rel": "neutral" } } },
+          { "w": 1, "text": "{T} is offended. A young player telling him how to play? The dressing room splits into camps.", "fx": { "teammate": { "who": "T", "rel": "enemy" } } }
+        ] },
+        { "label": "Complain to {M}", "desc": "Let the manager handle it.", "risk": "medium", "hint": "Managers protect stars.", "text": "{M} nods and says he'll handle it. He doesn't.", "fx": { "trust": -1 } },
+        { "label": "Earn it", "desc": "Become impossible to ignore.", "risk": "low", "hint": "Hard but clean.", "text": "{J} works on his movement until even {T} can't pretend not to see him.", "fx": { "growth": ["mental"] } }
+      ]
+    },
+    {
+      "id": "dr_carpool", "cat": "dressing", "w": 2, "when": { "age": [16, 19] },
+      "title": "{Tl} Offers {J} a Lift Every Day",
+      "text": "{J} has been taking two buses and an ojek to training. {T}, who lives nearby, notices and offers him a lift every morning. Forty minutes in a car every day with a senior player.",
+      "fx": { "teammate": { "who": "T", "rel": "ally" }, "pfm": 3, "growth": ["mental"] }
+    },
+    {
+      "id": "dr_fine_board", "cat": "dressing", "w": 3,
+      "title": "The Fines Board",
+      "text": "The fines committee — three senior players with too much power — have posted the weekly fines. {J} has been fined for wearing flip-flops in the gym, for being two minutes late to a meeting, and for “excessive hair product”.",
+      "prompt": "Pay or protest?",
+      "choices": [
+        { "label": "Pay without complaint", "desc": "It all goes to the end-of-season party.", "risk": "low", "hint": "Good sport.", "text": "{J} pays. The fines committee adds him to their list of “good lads”.", "fx": { "wealth": -50, "teammate": { "who": "T", "rel": "ally" } } },
+        { "label": "Appeal the hair fine", "desc": "Some principles matter.", "risk": "low", "hint": "Comedy.", "out": [
+          { "w": 1, "text": "The appeal is heard in a mock trial in the canteen. {J} wins. The hair is legally allowed.", "fx": { "followers": 2000, "teammate": { "who": "T", "rel": "ally" } } },
+          { "w": 1, "text": "The appeal fails. The fine doubles. Justice is dead.", "fx": { "wealth": -100 } }
+        ] }
+      ]
+    },
+    {
+      "id": "dr_rival_reconcile", "cat": "dressing", "w": 3, "uses": { "T": "rival" }, "when": { "hasRival": true },
+      "title": "A Chance to End the Feud With {Tl}",
+      "text": "Away trip, two hotel rooms short. The team manager rooms {J} with {T}. The man he's been feuding with for months is unpacking on the next bed.",
+      "prompt": "Three nights in the same room.",
+      "choices": [
+        { "label": "Offer a truce", "desc": "Life's too short.", "risk": "low", "hint": "Peace or rejection.", "out": [
+          { "w": 2, "text": "They talk until 3am about their families, their towns, their fears. By the end of the trip they're laughing together.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "mood": "Relieved" } },
+          { "w": 1, "text": "{T} puts in his earphones. Three silent nights.", "fx": {} }
+        ] },
+        { "label": "Ignore him", "desc": "Headphones in, lights off.", "risk": "low", "hint": "Cold war.", "text": "Three nights of silence. The feud continues.", "fx": {} }
+      ]
+    },
+    {
+      "id": "dr_team_dinner_bonding", "cat": "dressing", "w": 3, "when": { "role": ["starter", "rotation", "bench"] },
+      "title": "Team Bonding Night: Bowling and Bad Decisions",
+      "text": "The club organises a team bonding night: bowling, karaoke, a curfew of midnight that everybody already plans to break.",
+      "prompt": "How long do you stay?",
+      "choices": [
+        { "label": "Until the end", "desc": "Be part of the group.", "risk": "medium", "hint": "Bonding, and a late night.", "out": [
+          { "w": 3, "text": "Midnight comes and goes. {J} and the squad end up eating noodles at a street stall at 2am, laughing about nothing. A team is a team.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "pfm": -4 } },
+          { "w": 1, "text": "The curfew is checked. Six players are fined, {J} among them.", "fx": { "wealth": -100, "trust": -3, "teammate": { "who": "T", "rel": "ally" } } }
+        ] },
+        { "label": "Leave at the curfew", "desc": "Professional.", "risk": "low", "hint": "Fresh. Slightly outside.", "text": "{J} leaves at midnight. The photos in the group chat the next morning show what he missed.", "fx": { "pfm": 2 } }
+      ]
+    },
+    {
+      "id": "dr_old_friend_academy", "cat": "dressing", "w": 3, "when": { "age": [18, 26] },
+      "title": "An Academy Friend Was Released",
+      "text": "{T} — {J}'s best friend from the academy, the one everyone thought would make it first — has been released by his club. He calls {J} from a bus station, laughing too hard about it.",
+      "prompt": "Help him?",
+      "choices": [
+        { "label": "Ask your club to give him a trial", "desc": "Use your influence.", "risk": "medium", "hint": "Your reputation is on the line too.", "out": [
+          { "w": 1, "text": "The trial goes well. {T} signs for the reserves. He'll never forget it.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "trust": 1 } },
+          { "w": 1, "text": "The trial goes badly. {M} raises an eyebrow at {J}'s judgement.", "fx": { "trust": -2, "teammate": { "who": "T", "rel": "ally" } } }
+        ] },
+        { "label": "Let him stay at your place", "desc": "Until he finds something.", "risk": "low", "hint": "A real friend.", "text": "{T} sleeps on {J}'s sofa for three weeks and leaves for a club in the second division with a hug and a promise.", "fx": { "mood": "Relieved", "teammate": { "who": "T", "rel": "ally" } } }
+      ]
+    },
+    {
+      "id": "dr_teammate_scored_celebration", "cat": "dressing", "w": 3, "when": { "played": true },
+      "title": "Celebration Copycat",
+      "text": "{T} scored last weekend with {J}'s signature celebration. He says it was a tribute. The fans think {T} invented it.",
+      "prompt": "Respond?",
+      "choices": [
+        { "label": "Laugh it off", "desc": "Imitation is flattery.", "risk": "low", "hint": "Fun.", "text": "{J} posts a side-by-side video with the caption “who did it better?” The fans vote for {J}.", "fx": { "followers": 3000, "teammate": { "who": "T", "rel": "ally" } } },
+        { "label": "Invent a new one", "desc": "Keep them guessing.", "risk": "low", "hint": "A new signature.", "text": "{J} spends a whole evening inventing a new celebration in the mirror. It better be worth it.", "fx": { "mood": "Motivated" } }
+      ]
+    },
+    {
+      "id": "dr_hazing_youth", "cat": "dressing", "w": 3, "when": { "age": [22, 40] },
+      "title": "Senior Players Haze a Young Player Too Hard",
+      "text": "The initiation of a new academy player has gone too far: his clothes thrown in the ice bath, his phone hidden, a cruel nickname that isn't funny. {K} is trying not to cry. Some of the senior players are still laughing.",
+      "prompt": "Intervene?",
+      "choices": [
+        { "label": "Put a stop to it", "desc": "Enough.", "risk": "medium", "hint": "Right, and maybe unpopular.", "text": "“Enough.” The room goes quiet. {J} gets {K}'s phone back. Two senior players mutter. Most of the room respects it.", "fx": { "rep": 0.5, "trust": 2, "teammate": { "who": "T", "rel": "rival" } } },
+        { "label": "Stay out of it", "desc": "It's tradition.", "risk": "low", "hint": "Nothing for you. Nothing for him.", "text": "{J} stays out of it. {K} transfers to another club at the end of the season.", "fx": {} }
+      ]
+    },
+    {
+      "id": "dr_squad_strike", "cat": "dressing", "w": 3, "when": { "country": ["Indonesia", "Thailand", "Vietnam", "Malaysia", "India", "Greece", "Turkey", "Brazil", "Argentina", "Nigeria", "Ghana"] }, "once": true,
+      "title": "Wages Unpaid: The Squad Talks About a Strike",
+      "text": "The club has not paid wages for two months. The board keeps promising “next week”. Some players can't pay rent. The senior players want to boycott training until the money arrives.",
+      "prompt": "Join the boycott?",
+      "choices": [
+        { "label": "Join the boycott", "desc": "Solidarity.", "risk": "high", "hint": "The board may punish everyone. Or pay up.", "out": [
+          { "w": 2, "text": "Two days of boycott. The money arrives on day three. The players won, and the board will remember.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "trust": -2 } },
+          { "w": 1, "text": "The board threatens to sack everyone. The players return. Half the wages arrive a month later.", "fx": { "mood": "Angry", "trust": -4 } }
+        ] },
+        { "label": "Keep training", "desc": "Professional, whatever happens.", "risk": "medium", "hint": "The manager respects it. Teammates may not.", "text": "{J} trains alone with the staff. The coaches are grateful. The squad is not.", "fx": { "trust": 4, "teammate": { "who": "T", "rel": "enemy" } } }
+      ]
+    },
+    {
+      "id": "dr_captain_vote", "cat": "dressing", "w": 3, "when": { "age": [23, 40], "role": ["starter"], "apps": [80, 9999] },
+      "title": "Players' Vote: {J} for Vice-Captain?",
+      "text": "The club lets the players vote for the vice-captain. {J}'s name comes up. So does {T}'s. The vote is secret, but the lobbying is not.",
+      "prompt": "Campaign for it?",
+      "choices": [
+        { "label": "Campaign openly", "desc": "Talk to everyone.", "risk": "medium", "hint": "Win or look desperate.", "check": { "stat": "mental", "dc": 55 },
+          "ok": { "text": "{J} wins the vote by three. The armband for when the captain is absent.", "fx": { "rep": 1, "trust": 3, "flag": "vice_captain" } },
+          "bad": { "text": "{T} wins. {J} shakes his hand and means it, mostly.", "fx": { "teammate": { "who": "T", "rel": "rival" } } } },
+        { "label": "Let your play speak", "desc": "No campaigning.", "risk": "low", "hint": "Respectable.", "out": [
+          { "w": 1, "text": "The players vote for {J} anyway. It means more because he didn't ask.", "fx": { "rep": 1, "flag": "vice_captain" } },
+          { "w": 1, "text": "{T} wins. {J} wasn't sure he wanted it anyway.", "fx": {} }
+        ] }
+      ]
+    },
+    {
+      "id": "dr_injured_teammate_visit", "cat": "dressing", "w": 2,
+      "title": "{Tl}'s Long Rehab",
+      "text": "{T} has been injured for four months. Players stop visiting injured teammates after the first few weeks. {J} realises he hasn't seen {T} in a month.",
+      "prompt": "Visit?",
+      "choices": [
+        { "label": "Visit with food", "desc": "His favourite takeaway.", "risk": "low", "hint": "A small thing that isn't small.", "text": "{T} is so happy he talks for three hours. Months later, back fit, he's the first to defend {J} in every argument.", "fx": { "teammate": { "who": "T", "rel": "ally" } } },
+        { "label": "Send a message", "desc": "Better than nothing.", "risk": "low", "hint": "Fine.", "text": "A thumbs-up reply. Rehab is lonely.", "fx": {} }
+      ]
+    },
+    {
+      "id": "dr_shared_house", "cat": "dressing", "w": 3, "when": { "age": [16, 20] },
+      "title": "Shared House With the Other Young Players",
+      "text": "The club houses its youngest professionals together. {J} shares a house with three others: one who never washes dishes, one who games until 4am, one who cooks for everyone. House rules are needed.",
+      "prompt": "Who do you become in the house?",
+      "choices": [
+        { "label": "The organiser", "desc": "Rotas, rules, shopping lists.", "risk": "low", "hint": "Respect; occasional resentment.", "text": "A cleaning rota on the fridge, a shopping budget, a curfew. The house works. Mostly.", "fx": { "growth": ["mental"], "teammate": { "who": "T", "rel": "ally" } } },
+        { "label": "The gamer", "desc": "Join the late-night sessions.", "risk": "medium", "hint": "Fun, tired legs.", "text": "Nightly tournaments until 3am. {J} becomes the house champion and the worst trainer at 9am.", "fx": { "pfm": -6, "teammate": { "who": "T", "rel": "ally" } } },
+        { "label": "The quiet one", "desc": "Headphones, early nights.", "risk": "low", "hint": "Rested. Outside the jokes.", "text": "{J} keeps to himself. He's always fresh. He's never in the house stories.", "fx": { "pfm": 3 } }
+      ]
+    },
+    {
+      "id": "dr_teammate_wedding", "cat": "dressing", "w": 2, "when": { "age": [19, 40] },
+      "title": "Invited to {Tl}'s Wedding",
+      "text": "{T} is getting married and has invited the squad. The wedding is in his hometown, eight hours away, on the only free weekend in two months.",
+      "prompt": "Go?",
+      "choices": [
+        { "label": "Go", "desc": "Friendship matters.", "risk": "low", "hint": "Tired legs, closer friendship.", "text": "{J} dances badly, sings worse, and gets photographed with the bride's grandmother. {T} will never forget he came.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "pfm": -4 } },
+        { "label": "Send a gift", "desc": "Rest is important.", "risk": "low", "hint": "Polite.", "text": "A generous gift and a video message. {T} understands.", "fx": { "wealth": -100 } }
+      ]
+    },
+    {
+      "id": "dr_sub_snub", "cat": "dressing", "w": 3, "when": { "played": true },
+      "title": "{J} Snubs {M}'s Handshake After Substitution",
+      "text": "Substituted with twenty minutes left in a tight game, {J} walks past {M}'s outstretched hand straight to the bench. The TV cameras caught it from three angles.",
+      "prompt": "The clip is being discussed everywhere.",
+      "choices": [
+        { "label": "Apologise privately", "desc": "Heat of the moment.", "risk": "low", "hint": "Repairable.", "text": "{J} knocks on {M}'s door on Monday. “Heat of the moment, boss.” {M} accepts it. Barely.", "fx": { "trust": -3 } },
+        { "label": "Apologise publicly", "desc": "On social media.", "risk": "low", "hint": "Fans appreciate it.", "text": "A public apology. The fans move on. {M} doesn't mention it.", "fx": { "trust": -2, "followers": 2000 } },
+        { "label": "Say nothing", "desc": "You had a right to be angry.", "risk": "high", "hint": "This may linger.", "text": "{J} says nothing. {M} says nothing. The silence speaks for both of them.", "fx": { "trust": -10, "mood": "Angry" } }
+      ]
+    },
+    {
+      "id": "dr_supporter_teammate_conflict", "cat": "dressing", "w": 2, "uses": { "T": "ally" }, "when": { "hasAlly": true },
+      "title": "Fans Turn on {Tl}, {J}'s Friend",
+      "text": "{T} — {J}'s closest friend in the squad — is being destroyed online after a bad performance. The abuse is personal, about his family.",
+      "prompt": "Defend him publicly?",
+      "choices": [
+        { "label": "Defend him publicly", "desc": "Post in support.", "risk": "medium", "hint": "Some fans will turn on you too.", "text": "“Leave my brother alone.” Half the fanbase applauds. The other half adds {J} to the target list.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "followers": 3000, "rep": 0.3 } },
+        { "label": "Support him privately", "desc": "Be there for him off the pitch.", "risk": "low", "hint": "Quiet loyalty.", "text": "{J} spends the evening with {T} playing video games and saying nothing about football. It helps.", "fx": { "teammate": { "who": "T", "rel": "ally" } } }
+      ]
+    },
+    {
+      "id": "dr_bad_influence", "cat": "dressing", "w": 3, "when": { "age": [17, 24] },
+      "title": "{Tl} Wants to Show {J} the Nightlife",
+      "text": "{T} is the club's party king: designer clothes, VIP tables, a different city every off-day. He likes {J} and wants to introduce him to “the people who matter”.",
+      "prompt": "Go out with {T}?",
+      "choices": [
+        { "label": "Go once", "desc": "See what it's about.", "risk": "medium", "hint": "Fun. Photos. Consequences?", "out": [
+          { "w": 2, "text": "One night of loud music and expensive bottles that someone else pays for. {J} is home by 2am and decides it's not his world.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "pfm": -3 } },
+          { "w": 1, "text": "A photo of {J} at a VIP table with a bottle of something circulates online. His mother calls in the morning. So does {M}.", "fx": { "trust": -5, "parental": -6, "followers": 6000 } }
+        ] },
+        { "label": "Decline", "desc": "Not your scene.", "risk": "low", "hint": "Professional.", "text": "{T} shrugs. “Your loss, kid.” It isn't.", "fx": { "pfm": 2 } }
+      ]
+    },
+    {
+      "id": "dr_mutual_respect_opponent", "cat": "dressing", "w": 2, "when": { "played": true },
+      "title": "Shirt Swap With a Star Opponent",
+      "text": "After the match, the opposition's best player walks over and asks for {J}'s shirt. In return he gives his own and says something kind that {J} will repeat to people for years.",
+      "fx": { "mood": "Confident", "rep": 0.2 }
+    }
+  ]
+}

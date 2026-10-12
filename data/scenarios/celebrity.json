@@ -1,0 +1,2405 @@
+{
+ "scenarios": [
+  {
+   "id": "ce_magazine_cover",
+   "cat": "media",
+   "w": 5,
+   "cd": 80,
+   "when": {
+    "rep": [
+     40,
+     100
+    ],
+    "level": [
+     3,
+     5
+    ]
+   },
+   "title": "The Cover",
+   "text": [
+    "Kick Culture magazine wants {J} on the cover of its next issue: a photo shoot in a disused swimming pool, three outfits, and a long interview about 'the man behind the shirt'.",
+    "A glossy men's magazine wants him for its style issue. The stylist has already sent a mood board with the words 'brooding' and 'velvet' on it."
+   ],
+   "prompt": "A magazine cover. How do you play it?",
+   "choices": [
+    {
+     "label": "Go all in",
+     "desc": "Let them style you. Be bold.",
+     "risk": "medium",
+     "hint": "Iconic, or a meme.",
+     "out": [
+      {
+       "w": 3,
+       "text": "The cover is stunning. Newsstands sell out. His teammates print it and stick it all over the dressing room, with moustaches.",
+       "fx": {
+        "followers": 40000,
+        "image": 3,
+        "rep": 1,
+        "dressing": 1
+       }
+      },
+      {
+       "w": 1,
+       "text": "The velvet suit becomes a meme within the hour. 'Dracula's accountant,' says one comment with 200,000 likes.",
+       "fx": {
+        "followers": 30000,
+        "image": -2,
+        "stress": 2
+       }
+      }
+     ]
+    },
+    {
+     "label": "Keep it simple: a white T-shirt",
+     "desc": "Your terms.",
+     "risk": "low",
+     "hint": "Clean. Classic.",
+     "text": "A white T-shirt, a plain background, an honest interview. The understated cover is the one people keep.",
+     "fx": {
+      "followers": 20000,
+      "image": 4,
+      "press": 2
+     }
+    },
+    {
+     "label": "Decline",
+     "desc": "Football first.",
+     "risk": "low",
+     "hint": "The manager will approve.",
+     "text": "He declines politely. {Mf} hears about it and nods his approval in a team meeting.",
+     "fx": {
+      "trust": 2,
+      "press": -1
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_podcast_invite",
+   "cat": "media",
+   "w": 5,
+   "cd": 50,
+   "when": {
+    "rep": [
+     20,
+     100
+    ]
+   },
+   "title": "Two Hours on the Mic",
+   "text": [
+    "The biggest football podcast in the country wants him for a two-hour episode. No edits. Two hosts who are famous for asking the question nobody else will.",
+    "A comedian's podcast wants him on. It has nothing to do with football and five million listeners."
+   ],
+   "prompt": "Do the podcast?",
+   "choices": [
+    {
+     "label": "Do it, and be completely honest",
+     "desc": "No media training. Just you.",
+     "risk": "high",
+     "hint": "People love honesty. Clubs don't always.",
+     "out": [
+      {
+       "w": 3,
+       "text": "Two hours of laughter, stories about his childhood and one moment where he talks about his dad and goes quiet. Fans love him more than ever.",
+       "fx": {
+        "followers": 30000,
+        "fans": 4,
+        "image": 3,
+        "press": 2
+       }
+      },
+      {
+       "w": 1,
+       "text": "In hour two he admits he doesn't rate the club's training methods. The clip is everywhere by morning.",
+       "fx": {
+        "followers": 40000,
+        "trust": -8,
+        "board": -4,
+        "press": 3
+       }
+      }
+     ]
+    },
+    {
+     "label": "Do it, carefully",
+     "desc": "Pleasant, safe, forgettable.",
+     "risk": "low",
+     "hint": "No risk, little reward.",
+     "text": "He's polite and charming and says absolutely nothing. The hosts are visibly disappointed. The club press officer is delighted.",
+     "fx": {
+      "followers": 8000,
+      "press": 1
+     }
+    },
+    {
+     "label": "Say no",
+     "desc": "Not your thing.",
+     "risk": "low",
+     "hint": "Nothing changes.",
+     "text": "He says no. The podcast has his teammate on instead, who talks about {J} for twenty minutes.",
+     "fx": {}
+    }
+   ]
+  },
+  {
+   "id": "ce_tv_show",
+   "cat": "media",
+   "w": 4,
+   "cd": 100,
+   "when": {
+    "rep": [
+     35,
+     100
+    ],
+    "phase": [
+     "off"
+    ]
+   },
+   "title": "Prime Time",
+   "text": [
+    "A national TV channel wants him as a guest judge on a talent show for the off-season. Five episodes, a lot of money, and a lot of people watching him say 'it's a yes from me'.",
+    "A celebrity cooking show wants him for its football special. He can make exactly two dishes, both of them toast."
+   ],
+   "prompt": "Prime-time TV?",
+   "choices": [
+    {
+     "label": "Say yes",
+     "desc": "Good money, new audience.",
+     "risk": "medium",
+     "hint": "Fame grows. The manager wonders about your focus.",
+     "out": [
+      {
+       "w": 2,
+       "text": "He's a natural. Kind, funny, slightly terrified. The clips are everywhere. His mother watches every episode twice.",
+       "fx": {
+        "followers": 60000,
+        "rep": 2,
+        "family": 4,
+        "wealth": 15000,
+        "image": 3
+       }
+      },
+      {
+       "w": 1,
+       "text": "He is stiff and awkward and says 'interesting' forty-one times. Somebody counts. Everybody shares.",
+       "fx": {
+        "followers": 30000,
+        "wealth": 15000,
+        "image": -1,
+        "stress": 3
+       }
+      }
+     ]
+    },
+    {
+     "label": "No: the off-season is for rest",
+     "desc": "Body first.",
+     "risk": "low",
+     "hint": "Your body will thank you.",
+     "text": "He turns it down and spends the off-season sleeping and running on a beach. Pre-season feels easier than ever.",
+     "fx": {
+      "pfm": 6,
+      "stress": -4
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_paparazzi",
+   "cat": "media",
+   "w": 6,
+   "cd": 40,
+   "when": {
+    "rep": [
+     30,
+     100
+    ]
+   },
+   "title": "Long Lens",
+   "text": [
+    "A photographer has been following him for three days. His car, his gym, his parents' house. This morning there was a long lens pointing at his bedroom window.",
+    "Paparazzi outside the restaurant, blocking the pavement. {P} tries to hide behind him. A flash goes off a foot from her face."
+   ],
+   "prompt": "The paparazzi won't leave you alone.",
+   "choices": [
+    {
+     "label": "Smile, wave, move on",
+     "desc": "Give them their shot, keep your dignity.",
+     "risk": "low",
+     "hint": "They'll be back. You'll be fine.",
+     "text": "He gives them their photo, says good morning, and drives away. The picture is boring. That's the point.",
+     "fx": {
+      "image": 2,
+      "stress": 2
+     }
+    },
+    {
+     "label": "Confront the photographer",
+     "desc": "That's your home. That's your family.",
+     "risk": "high",
+     "hint": "Justified. Filmed.",
+     "out": [
+      {
+       "w": 1,
+       "text": "He walks over and asks the photographer, calmly, to leave. The photographer leaves. Nobody films it. A rare win.",
+       "fx": {
+        "stress": -2
+       }
+      },
+      {
+       "w": 2,
+       "text": "The confrontation gets heated. The photographer's partner films everything. 'STAR ATTACKS PHOTOGRAPHER' says a headline. He touched a camera, once.",
+       "fx": {
+        "image": -7,
+        "press": -6,
+        "stress": 6,
+        "followers": 20000
+       }
+      }
+     ]
+    },
+    {
+     "label": "Hire security and change your routines",
+     "desc": "Expensive. Effective.",
+     "risk": "low",
+     "hint": "Privacy has a price.",
+     "text": "A security consultant, a new gym, a different route to training every day. The photographers get bored and go after someone else.",
+     "fx": {
+      "wealth": -6000,
+      "stress": -3,
+      "love": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_fashion_week",
+   "cat": "lifestyle",
+   "w": 4,
+   "cd": 100,
+   "when": {
+    "rep": [
+     45,
+     100
+    ],
+    "phase": [
+     "off",
+     "pre"
+    ]
+   },
+   "title": "Front Row",
+   "text": [
+    "An invitation to sit front row at {BRAND_fashion}'s show during fashion week. Flights, hotel, an outfit made to measure. The other front-row guests are film stars.",
+    "{BRAND_luxury} wants him at their runway show and the dinner afterwards. He has never been to a fashion show. He has never knowingly worn a scarf."
+   ],
+   "prompt": "Fashion week?",
+   "choices": [
+    {
+     "label": "Go, and enjoy it",
+     "desc": "A world nothing like football.",
+     "risk": "low",
+     "hint": "Style points, global reach.",
+     "out": [
+      {
+       "w": 3,
+       "text": "He sits between a film star and a famous chef and fits in surprisingly well. The photos are everywhere. He gets the scarf.",
+       "fx": {
+        "followers": 50000,
+        "rep": 1,
+        "image": 2,
+        "pfm": -2
+       }
+      },
+      {
+       "w": 1,
+       "text": "The outfit is very brave. The internet is not. It's fine; next season everyone is wearing it.",
+       "fx": {
+        "followers": 40000,
+        "image": -1
+       }
+      }
+     ]
+    },
+    {
+     "label": "Decline: pre-season matters",
+     "desc": "Another time.",
+     "risk": "low",
+     "hint": "Football first.",
+     "text": "He declines. The fitness coach sends him a thumbs up without being asked.",
+     "fx": {
+      "trust": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_awards_gala",
+   "cat": "media",
+   "w": 5,
+   "cd": 60,
+   "when": {
+    "rep": [
+     30,
+     100
+    ],
+    "months": [
+     11,
+     12,
+     1,
+     5,
+     6
+    ]
+   },
+   "title": "Black Tie",
+   "text": [
+    "The national sports awards gala: black tie, red carpet, live TV. He's been nominated for an award and asked to present another.",
+    "A glittering awards night. He's been asked to bring a guest and wear something that isn't a tracksuit."
+   ],
+   "prompt": "Awards night. Who do you bring?",
+   "choices": [
+    {
+     "label": "Bring {MUM}",
+     "desc": "Her first red carpet.",
+     "risk": "low",
+     "hint": "The cameras will adore her.",
+     "text": "{MUM} wears a dress she's been saving for a wedding that never came. The photographers love her. She waves at them like old friends.",
+     "fx": {
+      "family": 10,
+      "followers": 15000,
+      "image": 3,
+      "fans": 2
+     }
+    },
+    {
+     "label": "Bring {Pf}",
+     "desc": "Your first red carpet together.",
+     "risk": "medium",
+     "hint": "A public moment for the two of you.",
+     "when": {
+      "partner": [
+       "dating",
+       "serious",
+       "engaged",
+       "married"
+      ]
+     },
+     "text": "They walk the carpet hand in hand. 'Couple of the night,' says a fashion site. {Pf} keeps the photo as her phone background.",
+     "fx": {
+      "love": 7,
+      "followers": 20000,
+      "image": 2
+     }
+    },
+    {
+     "label": "Go alone and leave early",
+     "desc": "In, award, out.",
+     "risk": "low",
+     "hint": "Efficient.",
+     "text": "He collects, smiles, thanks his team and is home by eleven. He watches the rest on TV in his pyjamas.",
+     "fx": {
+      "stress": -1,
+      "press": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_viral_dance",
+   "cat": "media",
+   "w": 5,
+   "cd": 40,
+   "when": {
+    "followers": [
+     5000,
+     999999999
+    ]
+   },
+   "title": "The Dance",
+   "text": [
+    "A clip of him dancing at {T}'s birthday party has twelve million views. It's a very specific dance. His sister is mortified. His fans are delighted.",
+    "Someone filmed him doing a goal celebration practice in the gym mirror. It was supposed to be private. It's now the most-used sound on TikTok."
+   ],
+   "uses": {
+    "T": "any"
+   },
+   "prompt": "You've gone viral for the wrong (or right?) reasons.",
+   "choices": [
+    {
+     "label": "Lean into it",
+     "desc": "Do the dance after your next goal.",
+     "risk": "medium",
+     "hint": "Fans love a man who can laugh at himself.",
+     "text": "He scores and does the dance. The stadium does it with him. It becomes his thing, whether he likes it or not.",
+     "fx": {
+      "followers": 50000,
+      "fans": 5,
+      "image": 2
+     }
+    },
+    {
+     "label": "Pretend it never happened",
+     "desc": "Dignity, restored by silence.",
+     "risk": "low",
+     "hint": "It'll fade. Eventually.",
+     "text": "He refuses to acknowledge it. The clip fades in a week. {SIB} brings it up every Christmas for the rest of his life.",
+     "fx": {
+      "followers": 10000
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_influencer_collab",
+   "cat": "media",
+   "w": 5,
+   "cd": 50,
+   "when": {
+    "followers": [
+     50000,
+     999999999
+    ],
+    "age": [
+     17,
+     34
+    ]
+   },
+   "title": "The Collab",
+   "text": [
+    "A huge lifestyle influencer wants to film a 'day in the life' with him. Thirty million followers, a camera crew, and a lot of filming him eating breakfast.",
+    "A famous prank YouTuber wants to do a video with him. Their last video got a stadium evacuated."
+   ],
+   "prompt": "A collab with a big creator?",
+   "choices": [
+    {
+     "label": "Say yes",
+     "desc": "Massive reach.",
+     "risk": "medium",
+     "hint": "Big numbers, some risk.",
+     "out": [
+      {
+       "w": 3,
+       "text": "The video does sixty million views. Kids who've never watched football now know his name.",
+       "fx": {
+        "followers": 120000,
+        "rep": 1,
+        "image": 1
+       }
+      },
+      {
+       "w": 1,
+       "text": "The video is fun, but one joke about the club's owner goes too far. The club's lawyers make a phone call.",
+       "fx": {
+        "followers": 90000,
+        "board": -6,
+        "trust": -3
+       }
+      }
+     ]
+    },
+    {
+     "label": "Only if the club approves the script",
+     "desc": "Safe, controlled.",
+     "risk": "low",
+     "hint": "Less fun, less risk.",
+     "text": "The club's media team rewrites the script into something wholesome. It does fine. Nobody remembers it.",
+     "fx": {
+      "followers": 30000,
+      "board": 2
+     }
+    },
+    {
+     "label": "Decline",
+     "desc": "Not your world.",
+     "risk": "low",
+     "hint": "Nothing gained, nothing lost.",
+     "text": "He declines. The influencer makes a video with a rival player instead. It does very well.",
+     "fx": {}
+    }
+   ]
+  },
+  {
+   "id": "ce_documentary",
+   "cat": "media",
+   "w": 3,
+   "cd": 150,
+   "once": true,
+   "when": {
+    "rep": [
+     55,
+     100
+    ],
+    "age": [
+     22,
+     35
+    ]
+   },
+   "title": "The Documentary",
+   "text": "A streaming platform wants to make a documentary series about his life: cameras at home, at training, at his parents' house, for a whole season. The money is extraordinary. So is the access they want.",
+   "prompt": "Let the cameras into your life for a season?",
+   "choices": [
+    {
+     "label": "Full access",
+     "desc": "Everything. Unfiltered.",
+     "risk": "high",
+     "hint": "Legendary, or a disaster.",
+     "out": [
+      {
+       "w": 2,
+       "text": "The series is a hit. People who hate his club love him. His mother becomes a national treasure.",
+       "fx": {
+        "followers": 500000,
+        "rep": 4,
+        "family": 5,
+        "wealth": 80000,
+        "image": 5,
+        "flag": "documentary"
+       }
+      },
+      {
+       "w": 1,
+       "text": "The cameras catch a fight with {Pf} and a meltdown at the manager. It's brilliant television and a terrible season.",
+       "fx": {
+        "followers": 400000,
+        "rep": 3,
+        "love": -10,
+        "trust": -8,
+        "wealth": 80000,
+        "image": -4,
+        "flag": "documentary"
+       }
+      }
+     ]
+    },
+    {
+     "label": "Limited access, final edit",
+     "desc": "Your story, your rules.",
+     "risk": "medium",
+     "hint": "Less dramatic. Safer.",
+     "text": "With his own final edit, the series is warm and careful. Critics call it 'a long advert'. Fans love it anyway.",
+     "fx": {
+      "followers": 200000,
+      "rep": 2,
+      "wealth": 40000,
+      "image": 3,
+      "flag": "documentary"
+     }
+    },
+    {
+     "label": "No",
+     "desc": "Some things are private.",
+     "risk": "low",
+     "hint": "Privacy kept.",
+     "text": "He says no. The producers make a documentary about his rival instead.",
+     "fx": {
+      "love": 2,
+      "family": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_autobiography",
+   "cat": "media",
+   "w": 3,
+   "cd": 200,
+   "once": true,
+   "when": {
+    "rep": [
+     40,
+     100
+    ],
+    "age": [
+     26,
+     40
+    ]
+   },
+   "title": "The Book",
+   "text": "A publisher wants his autobiography. A ghostwriter will spend six months with him. The advance is big. The first question in the proposal is: 'What has never been said?'",
+   "prompt": "Write the book?",
+   "choices": [
+    {
+     "label": "Tell everything",
+     "desc": "The managers, the rows, the truth.",
+     "risk": "high",
+     "hint": "Bestseller. Burned bridges.",
+     "text": "The book is a bestseller and a bomb. Three former teammates stop speaking to him. One former manager sues. His mother reads it twice and cries both times.",
+     "fx": {
+      "followers": 100000,
+      "wealth": 50000,
+      "rep": 2,
+      "press": 5,
+      "dressing": -8,
+      "trust": -5,
+      "flag": "tell_all_book"
+     }
+    },
+    {
+     "label": "Write something kind and honest",
+     "desc": "Your journey, without the knives.",
+     "risk": "low",
+     "hint": "Warm, respected.",
+     "text": "The book is gentle, funny and honest about his doubts. Schools put it on reading lists. Kids send him letters about it.",
+     "fx": {
+      "followers": 50000,
+      "wealth": 30000,
+      "image": 6,
+      "flag": "autobiography"
+     }
+    },
+    {
+     "label": "Not yet",
+     "desc": "The story isn't finished.",
+     "risk": "low",
+     "hint": "Maybe after retirement.",
+     "text": "'Ask me when I've retired,' he says. The publisher puts a reminder in the diary.",
+     "fx": {}
+    }
+   ]
+  },
+  {
+   "id": "ce_fake_quote",
+   "cat": "media",
+   "w": 5,
+   "cd": 60,
+   "when": {
+    "rep": [
+     15,
+     100
+    ]
+   },
+   "title": "He Never Said That",
+   "text": [
+    "A quote is going viral: {J} supposedly calling his club's fans 'small-time'. He has never said it. The account that posted it has a blue tick and no conscience.",
+    "A fake interview with {J} criticising the national team coach is being shared by thousands of accounts. The words are invented. The anger is real."
+   ],
+   "prompt": "A fake quote is spreading.",
+   "choices": [
+    {
+     "label": "Post a clear denial",
+     "desc": "Short, factual, calm.",
+     "risk": "low",
+     "hint": "Most people will believe you.",
+     "text": "His denial is shared more than the fake. The account deletes the post. Some people still believe it, because some people always do.",
+     "fx": {
+      "fans": 2,
+      "press": 1,
+      "stress": 1
+     }
+    },
+    {
+     "label": "Let the club's lawyers deal with it",
+     "desc": "Legal letter, formal statement.",
+     "risk": "low",
+     "hint": "Slow but thorough.",
+     "text": "The club issues a statement and a legal letter. The account apologises. It takes a week, which is a year on the internet.",
+     "fx": {
+      "board": 2,
+      "stress": 2,
+      "fans": -1
+     }
+    },
+    {
+     "label": "Fire back angrily",
+     "desc": "Name and shame.",
+     "risk": "high",
+     "hint": "Satisfying. Becomes its own story.",
+     "text": "His furious reply becomes the new story. 'Thin-skinned,' say the pundits, who haven't checked whether the quote was real.",
+     "fx": {
+      "press": -4,
+      "image": -2,
+      "stress": 3,
+      "followers": 15000
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_deepfake_ad",
+   "cat": "media",
+   "w": 3,
+   "cd": 120,
+   "when": {
+    "rep": [
+     30,
+     100
+    ]
+   },
+   "title": "That Isn't Me",
+   "text": "A video is circulating of {J} promoting a crypto-trading app called 'GoalCoin'. It's his face, his voice, his gestures. He has never heard of GoalCoin. Some fans have already lost money.",
+   "prompt": "A deepfake scam is using your face.",
+   "choices": [
+    {
+     "label": "Warn your fans immediately",
+     "desc": "A video, clear and fast.",
+     "risk": "low",
+     "hint": "Protects people.",
+     "text": "He films a warning in his kitchen: 'This is the real me. That is not.' It saves a lot of people a lot of money.",
+     "fx": {
+      "fans": 5,
+      "image": 4,
+      "followers": 20000
+     }
+    },
+    {
+     "label": "Pursue the scammers legally",
+     "desc": "Lawyers, police, platforms.",
+     "risk": "low",
+     "hint": "Expensive. Righteous.",
+     "text": "The platforms take the videos down. The scammers are never found. His lawyer's invoice is very real.",
+     "fx": {
+      "wealth": -5000,
+      "image": 2,
+      "stress": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_fan_kid_viral",
+   "cat": "media",
+   "w": 5,
+   "cd": 50,
+   "when": {
+    "rep": [
+     10,
+     100
+    ]
+   },
+   "title": "The Little Fan",
+   "text": [
+    "A video goes round: a little boy in a homemade {J} shirt, crying with joy in the stands because {J} waved at him. Millions of views. People want to know who the boy is.",
+    "A girl in a wheelchair holds up a sign at the away end: '{J}, you are my hero.' The photo is everywhere."
+   ],
+   "prompt": "A young fan's moment has gone viral.",
+   "choices": [
+    {
+     "label": "Find them and surprise them",
+     "desc": "A visit, a shirt, an afternoon.",
+     "risk": "low",
+     "hint": "Pure joy.",
+     "text": "He turns up at the family's door with a signed shirt and an afternoon of his time. The video of the moment is the most-watched thing he ever posts.",
+     "fx": {
+      "fans": 6,
+      "image": 6,
+      "followers": 60000,
+      "morale": 5
+     }
+    },
+    {
+     "label": "A thank-you post",
+     "desc": "Simple, warm.",
+     "risk": "low",
+     "hint": "Kind.",
+     "text": "He reposts it with a heart and 'This is why we play.' Simple. People love it.",
+     "fx": {
+      "fans": 3,
+      "image": 2,
+      "followers": 15000
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_celebrity_friend",
+   "cat": "lifestyle",
+   "w": 4,
+   "cd": 80,
+   "when": {
+    "rep": [
+     40,
+     100
+    ]
+   },
+   "title": "New Famous Friends",
+   "text": [
+    "A famous actor has been messaging him. They met at a gala; now he's invited to a private birthday party on a rooftop with people he's only seen on screens.",
+    "A chart-topping singer wants him in her music video. Not acting, she says. Just being 'effortlessly cool' for forty seconds."
+   ],
+   "prompt": "The celebrity world is pulling you in.",
+   "choices": [
+    {
+     "label": "Embrace it",
+     "desc": "New friends, new world.",
+     "risk": "medium",
+     "hint": "Fame grows. Your old friends notice.",
+     "text": "He's suddenly in group chats with people from magazines. His old friends see the photos and stop inviting him to things, because they assume he's busy.",
+     "fx": {
+      "followers": 40000,
+      "rep": 1,
+      "friends": -6,
+      "image": 1
+     }
+    },
+    {
+     "label": "Dip in, stay grounded",
+     "desc": "One party. Then home.",
+     "risk": "low",
+     "hint": "Balance.",
+     "text": "He goes, enjoys it, leaves at midnight, and spends the next day with {BFf} eating {FOOD}.",
+     "fx": {
+      "followers": 15000,
+      "friends": 2
+     }
+    },
+    {
+     "label": "Politely decline",
+     "desc": "Not your crowd.",
+     "risk": "low",
+     "hint": "Your friends will be glad.",
+     "text": "He declines. {BFf} finds out and is weirdly proud of him.",
+     "fx": {
+      "friends": 3
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_reality_show",
+   "cat": "media",
+   "w": 3,
+   "cd": 200,
+   "when": {
+    "rep": [
+     25,
+     100
+    ],
+    "partner": [
+     "serious",
+     "engaged",
+     "married"
+    ],
+    "partnerStyle": [
+     "public"
+    ]
+   },
+   "title": "The Reality Show",
+   "text": "{Pf} has been offered a reality show about footballers' partners. She'd be the star. Cameras in their home twice a week. She's very, very excited about it.",
+   "prompt": "{Pf} wants to do a reality show.",
+   "choices": [
+    {
+     "label": "Support her",
+     "desc": "Her dream, her show.",
+     "risk": "high",
+     "hint": "Your private life becomes content.",
+     "text": "The show is a hit. {Pf} becomes famous. Half the episodes are about his habits. The dressing room watches it on Tuesdays.",
+     "fx": {
+      "love": 8,
+      "followers": 80000,
+      "press": -2,
+      "dressing": -2,
+      "image": -1
+     }
+    },
+    {
+     "label": "Ask her not to",
+     "desc": "Your home isn't a set.",
+     "risk": "high",
+     "hint": "She'll hear jealousy, or control.",
+     "text": "She turns it down. She brings it up in every argument for a year.",
+     "fx": {
+      "love": -10
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_fan_meet_chaos",
+   "cat": "media",
+   "w": 4,
+   "cd": 60,
+   "when": {
+    "rep": [
+     30,
+     100
+    ]
+   },
+   "title": "Mall Chaos",
+   "text": "A planned meet-and-greet at a shopping mall: two hundred fans were expected. Four thousand turn up. Barriers are bending. Security is panicking.",
+   "prompt": "The crowd is getting dangerous.",
+   "choices": [
+    {
+     "label": "Calm them down with the microphone",
+     "desc": "Talk to them.",
+     "risk": "medium",
+     "hint": "Your voice might be enough.",
+     "out": [
+      {
+       "w": 2,
+       "text": "He grabs the microphone and asks everyone to take one step back. Four thousand people take one step back. Then they sing his name.",
+       "fx": {
+        "fans": 6,
+        "image": 5,
+        "followers": 30000
+       }
+      },
+      {
+       "w": 1,
+       "text": "Nobody can hear him. The event is cancelled and a barrier collapses. Nobody is badly hurt, but the headlines are ugly.",
+       "fx": {
+        "image": -4,
+        "press": -3,
+        "stress": 5
+       }
+      }
+     ]
+    },
+    {
+     "label": "Leave immediately for safety",
+     "desc": "Security's advice.",
+     "risk": "low",
+     "hint": "Safe. Disappointing.",
+     "text": "He's ushered out through a kitchen. Fans are disappointed. Nobody is hurt, which is what matters.",
+     "fx": {
+      "fans": -2,
+      "stress": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_brand_controversy",
+   "cat": "media",
+   "w": 4,
+   "cd": 100,
+   "when": {
+    "sponsors": [
+     1,
+     20
+    ]
+   },
+   "title": "The Advert Everyone Hates",
+   "text": "The new advert he filmed for {BRAND} is out, and it's terrible: a cringe script, a song he never agreed to, and a moment where he winks at the camera. The internet is having a wonderful time.",
+   "prompt": "Your sponsor's advert is being mocked.",
+   "choices": [
+    {
+     "label": "Laugh at yourself",
+     "desc": "Post a reaction video.",
+     "risk": "low",
+     "hint": "Self-awareness wins.",
+     "text": "His reaction video, cringing at himself, gets more views than the advert. The brand is thrilled. Everybody wins.",
+     "fx": {
+      "followers": 30000,
+      "image": 3
+     }
+    },
+    {
+     "label": "Say nothing",
+     "desc": "It'll pass.",
+     "risk": "low",
+     "hint": "It will. Slowly.",
+     "text": "The wink lives on as a reaction GIF for years.",
+     "fx": {
+      "image": -1
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_prospect_nobody",
+   "cat": "media",
+   "w": 5,
+   "cd": 60,
+   "when": {
+    "level": [
+     1,
+     1
+    ],
+    "age": [
+     16,
+     19
+    ]
+   },
+   "title": "Nobody Knows Your Name",
+   "text": [
+    "At the club shop, a kid buys a shirt with another player's name on it, walks right past {J}, and doesn't look up. Nobody outside the club knows who he is yet.",
+    "A local radio station spells his name wrong three times in one report. The fourth time, they call him by a teammate's name."
+   ],
+   "prompt": "You're a nobody, for now.",
+   "choices": [
+    {
+     "label": "Use it as fuel",
+     "desc": "Write it down. Remember it.",
+     "risk": "low",
+     "hint": "Hunger is a weapon.",
+     "text": "He writes the misspelled name on a sticky note and puts it on his mirror. Every morning: proof that he has work to do.",
+     "fx": {
+      "morale": 2,
+      "mood": "Determined",
+      "growth": [
+       "mental"
+      ]
+     }
+    },
+    {
+     "label": "Start building your own profile",
+     "desc": "Post more. Get noticed.",
+     "risk": "medium",
+     "hint": "Attention before achievement can backfire.",
+     "text": "He starts posting daily training clips. A few hundred people follow. The coaches notice he's on his phone a lot.",
+     "fx": {
+      "followers": 800,
+      "trust": -1
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_prospect_local_paper",
+   "cat": "media",
+   "w": 5,
+   "cd": 60,
+   "when": {
+    "level": [
+     1,
+     2
+    ],
+    "age": [
+     16,
+     21
+    ]
+   },
+   "title": "Page Thirty-Four",
+   "text": [
+    "The local paper runs a small piece on him on page thirty-four, between a lost cat and a bakery opening. {MUM} buys twenty copies.",
+    "{JR} from {OUT} wants a short interview for a series about the club's young players. Four questions, one photo. His first interview ever."
+   ],
+   "prompt": "Your first press. How do you handle it?",
+   "choices": [
+    {
+     "label": "Be humble and grateful",
+     "desc": "Thank everyone who helped.",
+     "risk": "low",
+     "hint": "A good first impression.",
+     "text": "He thanks his parents, his first coach and {M}. The piece is small and kind. {MUM} frames it.",
+     "fx": {
+      "press": 4,
+      "family": 4,
+      "followers": 300
+     }
+    },
+    {
+     "label": "Say you'll be a star one day",
+     "desc": "Big ambitions, out loud.",
+     "risk": "medium",
+     "hint": "Confidence or arrogance, depending on the next year.",
+     "text": "'One day I'll play for the national team.' The headline uses it. Some teammates use it too, at every opportunity.",
+     "fx": {
+      "press": 2,
+      "dressing": -2,
+      "followers": 600
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_star_recognised_everywhere",
+   "cat": "lifestyle",
+   "w": 5,
+   "cd": 60,
+   "when": {
+    "level": [
+     4,
+     5
+    ]
+   },
+   "title": "No More Normal",
+   "text": [
+    "He tries to buy toothpaste at a pharmacy. Twenty minutes and sixty selfies later, he still hasn't bought toothpaste. A normal errand is no longer possible.",
+    "He can't take {SIB} to the cinema any more. They tried. The film was forty minutes in before anyone sat down."
+   ],
+   "prompt": "Fame has taken away normal life.",
+   "choices": [
+    {
+     "label": "Accept it with grace",
+     "desc": "Smile, sign, move on.",
+     "risk": "low",
+     "hint": "Fans love it. It's exhausting.",
+     "text": "He smiles, signs, and takes the photo every time. The fans adore him. He sleeps eleven hours on Sunday.",
+     "fx": {
+      "fans": 3,
+      "image": 3,
+      "stress": 3
+     }
+    },
+    {
+     "label": "Disguise and escape",
+     "desc": "Cap, glasses, back entrances.",
+     "risk": "low",
+     "hint": "Freedom, sort of.",
+     "text": "A cap, glasses and a mask. He buys his toothpaste in peace and feels like a spy.",
+     "fx": {
+      "stress": -2
+     }
+    },
+    {
+     "label": "Retreat into your bubble",
+     "desc": "Delivery, home, training.",
+     "risk": "medium",
+     "hint": "Safe. Lonely.",
+     "text": "Everything delivered. Every evening at home. It's safe and quiet and slowly very lonely.",
+     "fx": {
+      "stress": -1,
+      "friends": -4,
+      "morale": -2
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_hall_of_fame_fan_page",
+   "cat": "media",
+   "w": 4,
+   "cd": 100,
+   "when": {
+    "followers": [
+     200000,
+     999999999
+    ]
+   },
+   "title": "The Fan Account",
+   "text": "A fan account dedicated entirely to him has two million followers, posts twelve times a day, and somehow knew about his transfer before his agent did. The owner is a nineteen-year-old student in another country.",
+   "prompt": "Your biggest fan account.",
+   "choices": [
+    {
+     "label": "Follow it back and DM thanks",
+     "desc": "A small gesture for a big fan.",
+     "risk": "low",
+     "hint": "Pure joy for one person.",
+     "text": "The admin posts a screenshot of the DM with forty crying emojis. The account's followers triple. They will defend him to the death.",
+     "fx": {
+      "followers": 30000,
+      "fans": 2
+     }
+    },
+    {
+     "label": "Ask your agent to find out how they know so much",
+     "desc": "Someone is leaking.",
+     "risk": "medium",
+     "hint": "A mole somewhere.",
+     "text": "The leak turns out to be a cousin's group chat. {J} has a long talk with his family about what 'private' means.",
+     "fx": {
+      "family": -2,
+      "stress": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_charity_gala_auction",
+   "cat": "media",
+   "w": 4,
+   "cd": 80,
+   "when": {
+    "rep": [
+     25,
+     100
+    ],
+    "wealth": [
+     20000,
+     999999999
+    ]
+   },
+   "vars": {
+    "bid": [
+     "wealthPct",
+     8,
+     3000
+    ]
+   },
+   "title": "Going Once",
+   "text": "A charity gala auction. The lot: a boot worn by a legend of the game, all proceeds to a children's hospital. The bidding stalls. Everyone is looking at {J}.",
+   "prompt": "Bid {bid}?",
+   "choices": [
+    {
+     "label": "Win it, and donate it back",
+     "desc": "Pay, then return the boot to be auctioned again.",
+     "risk": "low",
+     "hint": "Generous twice over.",
+     "text": "He wins and hands the boot straight back to the auctioneer. The room stands up. The hospital raises double.",
+     "fx": {
+      "wealth": "-bid",
+      "image": 7,
+      "fans": 3,
+      "press": 3,
+      "followers": 20000
+     }
+    },
+    {
+     "label": "Win it and keep it",
+     "desc": "A piece of history for your wall.",
+     "risk": "low",
+     "hint": "Good cause, nice boot.",
+     "text": "The boot goes into a glass case in his hallway. He touches it for luck before every match.",
+     "fx": {
+      "wealth": "-bid",
+      "image": 3,
+      "morale": 3
+     }
+    },
+    {
+     "label": "Stay still",
+     "desc": "Not tonight.",
+     "risk": "low",
+     "hint": "Cameras are on you.",
+     "text": "He keeps his paddle down. A businessman wins. A gossip site notes that {J} 'didn't bid'.",
+     "fx": {
+      "image": -1
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_rival_trash_talk",
+   "cat": "media",
+   "w": 5,
+   "cd": 50,
+   "when": {
+    "rep": [
+     15,
+     100
+    ],
+    "freeAgent": false
+   },
+   "title": "Trash Talk",
+   "text": [
+    "Before the derby, {R}'s star player tells a TV crew that {J} is 'overrated, a social media player'. The clip is everywhere.",
+    "A player from {R} posts a photo of a clown emoji right after {J}'s miss last weekend. Everyone knows who it's for."
+   ],
+   "prompt": "Someone from {R} is coming at you in public.",
+   "choices": [
+    {
+     "label": "Answer on the pitch",
+     "desc": "Say nothing. Score.",
+     "risk": "low",
+     "hint": "The classiest reply. If you deliver.",
+     "text": "He says nothing all week. The whole country is waiting for the derby.",
+     "fx": {
+      "fans": 2,
+      "press": 1,
+      "mood": "Determined"
+     }
+    },
+    {
+     "label": "A witty reply",
+     "desc": "One perfect line.",
+     "risk": "medium",
+     "hint": "Win the internet.",
+     "out": [
+      {
+       "w": 2,
+       "text": "His reply ('I'd answer, but I can't find you on the highlights') is the most-liked football post of the week.",
+       "fx": {
+        "followers": 40000,
+        "fans": 4,
+        "image": -1
+       }
+      },
+      {
+       "w": 1,
+       "text": "The reply lands badly. 'Arrogant,' says every pundit who's never been trash-talked.",
+       "fx": {
+        "press": -3,
+        "image": -3,
+        "followers": 15000
+       }
+      }
+     ]
+    },
+    {
+     "label": "Go after him hard",
+     "desc": "Say what you really think.",
+     "risk": "high",
+     "hint": "A war of words. The league may get involved.",
+     "text": "It escalates into a public feud. The league warns both players. Ticket sales for the derby double.",
+     "fx": {
+      "press": -2,
+      "board": 2,
+      "trust": -2,
+      "followers": 30000,
+      "stress": 3
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_rumoured_transfer_tabloid",
+   "cat": "media",
+   "w": 5,
+   "cd": 40,
+   "when": {
+    "rep": [
+     20,
+     100
+    ],
+    "freeAgent": false
+   },
+   "title": "'Sources Say'",
+   "text": [
+    "A tabloid claims {J} has agreed personal terms with a giant European club. Nobody has called his agent. The fans are already burning his shirts on video.",
+    "'EXCLUSIVE: {J} WANTS OUT,' says a front page. He read it at breakfast. He has never said or thought it."
+   ],
+   "prompt": "A fake transfer story is causing chaos.",
+   "choices": [
+    {
+     "label": "Deny it in front of the fans",
+     "desc": "Kiss the badge. Say it clearly.",
+     "risk": "medium",
+     "hint": "Fans will believe it. Will you have to keep it?",
+     "text": "He kisses the badge after his next goal and points at the tabloid's reporter in the press box. The fans go wild. The tabloid prints a smaller story.",
+     "fx": {
+      "fans": 7,
+      "board": 3,
+      "press": -1
+     }
+    },
+    {
+     "label": "Say nothing",
+     "desc": "Your agent will handle it.",
+     "risk": "medium",
+     "hint": "Silence is read as a yes.",
+     "text": "His silence is read as confirmation. The forums melt down for a week, then move on to someone else.",
+     "fx": {
+      "fans": -5,
+      "stress": 3
+     }
+    },
+    {
+     "label": "Use it as leverage",
+     "desc": "Let the club sweat.",
+     "risk": "high",
+     "hint": "Contract talks may start. Or trust may end.",
+     "text": "He lets it run. The club calls his agent within a week to talk about a new contract. The manager is not amused.",
+     "fx": {
+      "renewalPush": true,
+      "trust": -5,
+      "board": -3,
+      "fans": -4
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_ad_shoot_long_day",
+   "cat": "lifestyle",
+   "w": 5,
+   "cd": 40,
+   "when": {
+    "sponsors": [
+     1,
+     20
+    ]
+   },
+   "title": "Take Forty-Seven",
+   "text": "A sponsor shoot for {BRAND} was booked for two hours. It's now hour nine. The director wants 'more joy' and has asked him to jump forty-seven times. His legs have training tomorrow.",
+   "prompt": "The shoot is running long.",
+   "choices": [
+    {
+     "label": "Keep smiling and do it",
+     "desc": "Professional to the end.",
+     "risk": "low",
+     "hint": "The brand will love you. Your legs won't.",
+     "text": "Take fifty-three is the one. The brand sends a case of free products and a gushing email. He sleeps in the car.",
+     "fx": {
+      "pfm": -5,
+      "stress": 3,
+      "followers": 5000
+     }
+    },
+    {
+     "label": "Call time politely",
+     "desc": "You have training tomorrow.",
+     "risk": "medium",
+     "hint": "Fair. The brand may grumble.",
+     "text": "He thanks everyone and leaves at hour nine. The brand's marketing director calls his agent. His agent backs him.",
+     "fx": {
+      "pfm": -1,
+      "stress": -1
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_social_detox",
+   "cat": "media",
+   "w": 5,
+   "cd": 60,
+   "when": {
+    "followers": [
+     20000,
+     999999999
+    ],
+    "stress": [
+     55,
+     100
+    ]
+   },
+   "title": "Delete the Apps?",
+   "text": [
+    "He catches himself reading comments at 3am again. A man in another country thinks he should retire. A teenager thinks he's ugly. Thousands think he's brilliant, and somehow those don't count.",
+    "His screen time last week: nine hours a day. Most of it in the comments."
+   ],
+   "prompt": "Social media is eating your head.",
+   "choices": [
+    {
+     "label": "Delete the apps for a month",
+     "desc": "Let someone else post for you.",
+     "risk": "low",
+     "hint": "Peace, fewer followers.",
+     "text": "A month without the apps. He sleeps better, trains better and reads a book. His follower growth slows. He doesn't notice.",
+     "fx": {
+      "stress": -8,
+      "morale": 4,
+      "followers": -2000,
+      "form": 0.1
+     }
+    },
+    {
+     "label": "Hire a social media manager",
+     "desc": "A professional runs it.",
+     "risk": "low",
+     "hint": "Distance, at a price.",
+     "text": "A social media manager takes his passwords and his anxiety. The posts get better. He stops reading the comments.",
+     "fx": {
+      "stress": -5,
+      "wealth": -1500,
+      "followers": 3000
+     }
+    },
+    {
+     "label": "Keep scrolling",
+     "desc": "It's fine. It's fine.",
+     "risk": "medium",
+     "hint": "It isn't.",
+     "text": "He keeps scrolling. It isn't fine.",
+     "fx": {
+      "stress": 4,
+      "morale": -3
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_cancel_old_tweet",
+   "cat": "media",
+   "w": 3,
+   "cd": 200,
+   "once": true,
+   "when": {
+    "rep": [
+     20,
+     100
+    ],
+    "age": [
+     19,
+     30
+    ]
+   },
+   "title": "The Old Post",
+   "text": "Someone has dug up a post he wrote at fifteen: a stupid joke, the kind fifteen-year-olds make. It reads very differently with a million followers watching.",
+   "prompt": "An old post has resurfaced.",
+   "choices": [
+    {
+     "label": "Apologise sincerely",
+     "desc": "No excuses about age.",
+     "risk": "low",
+     "hint": "Most people respect a real apology.",
+     "text": "His apology is short and genuine. Most people move on. He does a workshop with a charity about online abuse.",
+     "fx": {
+      "image": 2,
+      "press": 1,
+      "stress": 2
+     }
+    },
+    {
+     "label": "Say you were a kid",
+     "desc": "Everyone said dumb things at fifteen.",
+     "risk": "medium",
+     "hint": "True. Sounds defensive.",
+     "text": "'I was fifteen.' It's true. It's also what everyone says, and the story runs another week.",
+     "fx": {
+      "image": -3,
+      "press": -2
+     }
+    },
+    {
+     "label": "Delete it and say nothing",
+     "desc": "Gone.",
+     "risk": "medium",
+     "hint": "Screenshots are forever.",
+     "text": "He deletes it. The screenshots live on. The silence is noted.",
+     "fx": {
+      "image": -2
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_award_nominee",
+   "cat": "media",
+   "w": 4,
+   "cd": 100,
+   "when": {
+    "level": [
+     4,
+     5
+    ],
+    "form": [
+     7,
+     10
+    ]
+   },
+   "title": "Shortlisted",
+   "text": "He's on the shortlist for the continent's Player of the Year. Five names. His face is on a poster next to men he grew up watching. Voting closes in three weeks.",
+   "prompt": "You're shortlisted for a major award.",
+   "choices": [
+    {
+     "label": "Campaign for votes",
+     "desc": "Videos, posts, a push.",
+     "risk": "medium",
+     "hint": "Some think campaigning is undignified.",
+     "out": [
+      {
+       "w": 1,
+       "text": "The campaign works. He finishes second, the highest ever for a player from his country.",
+       "fx": {
+        "rep": 2,
+        "followers": 50000,
+        "fans": 3
+       }
+      },
+      {
+       "w": 1,
+       "text": "The campaign is mocked by rival fans. He finishes fourth and wishes he'd stayed quiet.",
+       "fx": {
+        "rep": 1,
+        "image": -2,
+        "followers": 30000
+       }
+      }
+     ]
+    },
+    {
+     "label": "Let the football speak",
+     "desc": "Say nothing.",
+     "risk": "low",
+     "hint": "Dignified.",
+     "text": "He says nothing and finishes third. His speech for the third-place prize is so humble it goes viral anyway.",
+     "fx": {
+      "rep": 2,
+      "image": 3,
+      "followers": 30000
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_rich_list",
+   "cat": "media",
+   "w": 3,
+   "cd": 150,
+   "when": {
+    "worth": [
+     1000000,
+     999999999
+    ]
+   },
+   "title": "The Rich List",
+   "text": "A business magazine puts him on its list of the country's richest young people. The estimate of his net worth is wildly wrong, in both directions, depending on which paragraph you read.",
+   "prompt": "Your wealth is now public gossip.",
+   "choices": [
+    {
+     "label": "Laugh it off",
+     "desc": "'I wish.'",
+     "risk": "low",
+     "hint": "Light touch.",
+     "text": "He posts the article with the caption 'Can someone tell my bank?' Relatives he hasn't heard from in years start messaging.",
+     "fx": {
+      "followers": 10000,
+      "family": -1
+     }
+    },
+    {
+     "label": "Use it to talk about giving back",
+     "desc": "Announce a charity pledge.",
+     "risk": "low",
+     "hint": "Turn gossip into good.",
+     "text": "He pledges a percentage of his income to youth football. The story changes from 'how rich' to 'how generous'.",
+     "fx": {
+      "image": 6,
+      "wealth": -10000,
+      "fans": 3,
+      "flag": "foundation_seed"
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_stalker_partner",
+   "cat": "love",
+   "w": 3,
+   "cd": 150,
+   "when": {
+    "rep": [
+     35,
+     100
+    ],
+    "partner": [
+     "serious",
+     "engaged",
+     "married"
+    ],
+    "partnerNear": true
+   },
+   "title": "Someone Is Watching {Pf}",
+   "text": "{Pf} has noticed the same car outside their building three mornings in a row. Today, someone left flowers on her windscreen with a card that says 'He doesn't deserve you.'",
+   "prompt": "Someone is following {Pf}.",
+   "choices": [
+    {
+     "label": "Police and security, now",
+     "desc": "No risks.",
+     "risk": "low",
+     "hint": "Expensive. Necessary.",
+     "text": "The police identify the car. A restraining order follows. {Pf} gets a driver for six months. She hates needing it.",
+     "fx": {
+      "love": 6,
+      "stress": 4,
+      "wealth": -5000
+     }
+    },
+    {
+     "label": "Move house",
+     "desc": "A gated community, a fresh start.",
+     "risk": "low",
+     "hint": "Safer. A big upheaval.",
+     "text": "They move within a month to somewhere with a gate and a guard. {Pf} sleeps through the night for the first time in weeks.",
+     "fx": {
+      "love": 8,
+      "stress": -2,
+      "wealth": -15000
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_bodyguard",
+   "cat": "lifestyle",
+   "w": 3,
+   "cd": 200,
+   "when": {
+    "level": [
+     4,
+     5
+    ],
+    "followers": [
+     1000000,
+     999999999
+    ]
+   },
+   "title": "The Bodyguard",
+   "text": "The club's head of security sits him down: his profile is now big enough that he needs personal protection. A bodyguard costs a lot. Not having one might cost more.",
+   "prompt": "Hire a full-time bodyguard?",
+   "choices": [
+    {
+     "label": "Hire one",
+     "desc": "Safety first.",
+     "risk": "low",
+     "hint": "Expensive. Secure.",
+     "text": "His bodyguard, a former soldier called Dimas, speaks about ten words a day. Within a month he's part of the family. {MUM} feeds him constantly.",
+     "fx": {
+      "stress": -3,
+      "wealth": -8000,
+      "lifestyle": 0.1
+     }
+    },
+    {
+     "label": "Not yet",
+     "desc": "You still want a normal life.",
+     "risk": "medium",
+     "hint": "Freedom with risk.",
+     "text": "He keeps his freedom. He also keeps looking over his shoulder.",
+     "fx": {
+      "stress": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_youtube_channel",
+   "cat": "media",
+   "w": 4,
+   "cd": 120,
+   "when": {
+    "followers": [
+     30000,
+     999999999
+    ],
+    "age": [
+     17,
+     33
+    ]
+   },
+   "title": "His Own Channel",
+   "text": "A media company wants to run a YouTube channel for him: vlogs, challenges, behind-the-scenes. They'll do the editing; he just has to film a bit every week.",
+   "prompt": "Start your own channel?",
+   "choices": [
+    {
+     "label": "Yes, and make it fun",
+     "desc": "Challenges, pranks, real life.",
+     "risk": "medium",
+     "hint": "Big audience. Time and focus.",
+     "text": "The first video, him trying to cook {FOOD} with {T}, gets three million views. The channel is a hit. His mornings get busier.",
+     "fx": {
+      "followers": 80000,
+      "wealth": 5000,
+      "pfm": -2,
+      "trust": -1,
+      "flag": "youtube_channel"
+     }
+    },
+    {
+     "label": "Yes, but make it about football",
+     "desc": "Training, analysis, tips.",
+     "risk": "low",
+     "hint": "Smaller, respected.",
+     "text": "His tactical breakdowns become popular with coaches and young players. Small channel, big respect.",
+     "fx": {
+      "followers": 30000,
+      "trust": 2,
+      "image": 2,
+      "flag": "youtube_channel"
+     }
+    },
+    {
+     "label": "No",
+     "desc": "One job is enough.",
+     "risk": "low",
+     "hint": "Focus.",
+     "text": "He says no. His time stays his own.",
+     "fx": {}
+    }
+   ],
+   "uses": {
+    "T": "ally"
+   }
+  },
+  {
+   "id": "ce_vlog_drama",
+   "cat": "media",
+   "w": 4,
+   "cd": 80,
+   "when": {
+    "flags": [
+     "youtube_channel"
+    ]
+   },
+   "title": "The Vlog Leak",
+   "text": "His latest vlog accidentally shows the tactics board in the background. Rival fans have zoomed in and are analysing his club's set-pieces. The manager has seen it too.",
+   "prompt": "Your vlog leaked club secrets.",
+   "choices": [
+    {
+     "label": "Apologise to {M} immediately",
+     "desc": "Own it.",
+     "risk": "low",
+     "hint": "Contrition helps.",
+     "text": "{Mf} accepts the apology through clenched teeth. The club now has a rule about cameras near the tactics board. It's called the {J} Rule.",
+     "fx": {
+      "trust": -4,
+      "dressing": -2
+     }
+    },
+    {
+     "label": "Delete it and hope",
+     "desc": "Maybe nobody important saw.",
+     "risk": "high",
+     "hint": "Everybody saw.",
+     "text": "Everybody important saw. The team changes its set-pieces. {Mf} doesn't speak to him for a week.",
+     "fx": {
+      "trust": -9,
+      "dressing": -3
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_old_coach_interview",
+   "cat": "media",
+   "w": 4,
+   "cd": 100,
+   "when": {
+    "rep": [
+     20,
+     100
+    ],
+    "age": [
+     19,
+     40
+    ]
+   },
+   "title": "'I Always Knew'",
+   "text": "His very first youth coach gives a TV interview: 'I always knew he'd make it.' He clearly didn't; he once left {J} out of a tournament squad. But he's sweet about it, and the clip is lovely.",
+   "prompt": "Your first coach is on TV.",
+   "choices": [
+    {
+     "label": "Send him a signed shirt and a thank-you",
+     "desc": "He did teach you something.",
+     "risk": "low",
+     "hint": "Kindness.",
+     "text": "The old coach frames the shirt and puts it in the clubhouse of his tiny team. Kids train under it every Saturday.",
+     "fx": {
+      "image": 3,
+      "fans": 1,
+      "morale": 2
+     }
+    },
+    {
+     "label": "Joke about the tournament he left you out of",
+     "desc": "Gently. Lovingly.",
+     "risk": "low",
+     "hint": "Funny if you get the tone right.",
+     "text": "'You left me out of the under-12 cup, coach.' The old man laughs on live TV. Everyone loves it.",
+     "fx": {
+      "followers": 10000,
+      "image": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_nickname",
+   "cat": "media",
+   "w": 4,
+   "cd": 200,
+   "once": true,
+   "when": {
+    "rep": [
+     15,
+     100
+    ]
+   },
+   "title": "The Nickname",
+   "text": [
+    "A commentator calls him something during a match, half-joking, and it sticks. By Monday it's on banners. By Friday it's on unofficial shirts.",
+    "The fans have a nickname for him now. It's either very affectionate or slightly mocking, depending on who's singing it."
+   ],
+   "prompt": "You have a nickname now.",
+   "choices": [
+    {
+     "label": "Embrace it",
+     "desc": "Trademark it, even.",
+     "risk": "low",
+     "hint": "Brand-building.",
+     "text": "His agent trademarks it. It's on a clothing line within six months.",
+     "fx": {
+      "fans": 4,
+      "followers": 20000,
+      "wealth": 3000
+     }
+    },
+    {
+     "label": "Politely ask people not to",
+     "desc": "Your name is fine.",
+     "risk": "medium",
+     "hint": "Fans don't stop because you ask.",
+     "text": "He asks nicely. The fans sing it louder.",
+     "fx": {
+      "fans": -1
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_kids_book",
+   "cat": "media",
+   "w": 3,
+   "cd": 200,
+   "once": true,
+   "when": {
+    "rep": [
+     40,
+     100
+    ],
+    "image": [
+     60,
+     100
+    ]
+   },
+   "title": "A Children's Book",
+   "text": "A publisher wants to make a children's picture book about a little boy who dreams of becoming a footballer. The boy would be based on him. It would be read in schools.",
+   "prompt": "A children's book about you?",
+   "choices": [
+    {
+     "label": "Yes, with the money going to schools",
+     "desc": "Every copy funds a library.",
+     "risk": "low",
+     "hint": "A legacy beyond football.",
+     "text": "The book sells well, and every copy funds books for village schools. His mother reads it to the neighbours' children.",
+     "fx": {
+      "image": 8,
+      "family": 5,
+      "fans": 3,
+      "flag": "kids_book"
+     }
+    },
+    {
+     "label": "No",
+     "desc": "You're not a role model yet.",
+     "risk": "low",
+     "hint": "Humility.",
+     "text": "He says no. He doesn't feel like he's earned it yet.",
+     "fx": {}
+    }
+   ]
+  },
+  {
+   "id": "ce_game_cover",
+   "cat": "media",
+   "w": 2,
+   "cd": 300,
+   "once": true,
+   "when": {
+    "rep": [
+     70,
+     100
+    ]
+   },
+   "title": "The Cover Star",
+   "text": "A video game publisher wants him on the cover of next year's football game. Millions of copies, in every shop, in every country.",
+   "prompt": "The cover of the biggest football game?",
+   "choices": [
+    {
+     "label": "Yes",
+     "desc": "Immortality, in plastic.",
+     "risk": "low",
+     "hint": "A childhood dream.",
+     "text": "He plays as himself for the first time and rates himself, ruthlessly, as too slow. The cover shoot photo hangs in his parents' living room.",
+     "fx": {
+      "followers": 500000,
+      "rep": 3,
+      "wealth": 100000,
+      "morale": 8,
+      "flag": "game_cover"
+     }
+    },
+    {
+     "label": "Ask for {SIB} to be in the game too",
+     "desc": "A cameo for family.",
+     "risk": "low",
+     "hint": "Unusual. Maybe possible.",
+     "text": "The developers add {SIB} as a fan in the crowd. {SIB} finds {SIBhim}self in the game within an hour and screams.",
+     "fx": {
+      "followers": 450000,
+      "rep": 3,
+      "wealth": 90000,
+      "family": 8,
+      "flag": "game_cover"
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_photo_with_fan_rude",
+   "cat": "media",
+   "w": 5,
+   "cd": 50,
+   "when": {
+    "rep": [
+     10,
+     100
+    ]
+   },
+   "title": "The Selfie",
+   "text": "He's rushing to the team bus after a defeat, head down, when a fan asks for a photo. He shakes his head and keeps walking. The fan films it: 'He used to be one of us.'",
+   "prompt": "A clip of you refusing a fan is spreading.",
+   "choices": [
+    {
+     "label": "Find the fan and make it right",
+     "desc": "A call, a shirt, an apology.",
+     "risk": "low",
+     "hint": "Turns it around.",
+     "text": "He finds the fan through the club and invites him to training. The new clip, of them laughing together, gets ten times the views.",
+     "fx": {
+      "fans": 5,
+      "image": 5,
+      "followers": 15000
+     }
+    },
+    {
+     "label": "Explain: it was after a defeat",
+     "desc": "Context matters.",
+     "risk": "medium",
+     "hint": "Some will understand.",
+     "text": "Some people understand. Some people say he should always have time. Both are right.",
+     "fx": {
+      "fans": -1,
+      "image": -1
+     }
+    },
+    {
+     "label": "Ignore it",
+     "desc": "You can't please everyone.",
+     "risk": "medium",
+     "hint": "It sticks.",
+     "text": "The clip becomes part of his story. 'Arrogant' appears in comment sections for months.",
+     "fx": {
+      "fans": -4,
+      "image": -4
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_music_hobby",
+   "cat": "lifestyle",
+   "w": 3,
+   "cd": 150,
+   "when": {
+    "rep": [
+     20,
+     100
+    ],
+    "age": [
+     18,
+     35
+    ]
+   },
+   "title": "The Song",
+   "text": "He's been writing songs in secret for years. A producer heard one by accident at a party and wants to release it. 'Nobody will take you seriously,' says {BFf}. 'Do it anyway.'",
+   "prompt": "Release your song?",
+   "choices": [
+    {
+     "label": "Release it",
+     "desc": "Under your own name.",
+     "risk": "high",
+     "hint": "Hit or mockery.",
+     "out": [
+      {
+       "w": 1,
+       "text": "The song is surprisingly good. It charts. The squad sings it on the bus, at first ironically, then not.",
+       "fx": {
+        "followers": 100000,
+        "image": 3,
+        "dressing": 3,
+        "morale": 6
+       }
+      },
+      {
+       "w": 1,
+       "text": "The song is mocked mercilessly. Rival fans sing it at him for two seasons.",
+       "fx": {
+        "followers": 50000,
+        "image": -3,
+        "stress": 4,
+        "fans": -2
+       }
+      }
+     ]
+    },
+    {
+     "label": "Release it under a fake name",
+     "desc": "Let the music stand alone.",
+     "risk": "low",
+     "hint": "Safe, anonymous, satisfying.",
+     "text": "The song quietly gets a million streams under a made-up name. Only {BFf} knows. It's the best secret he's ever had.",
+     "fx": {
+      "morale": 6,
+      "stress": -3
+     }
+    },
+    {
+     "label": "Keep it private",
+     "desc": "Some things are just for you.",
+     "risk": "low",
+     "hint": "Yours alone.",
+     "text": "He keeps the songs on his phone, in a folder called 'tactics'.",
+     "fx": {
+      "stress": -1
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_tattoo",
+   "cat": "lifestyle",
+   "w": 4,
+   "cd": 150,
+   "when": {
+    "age": [
+     18,
+     35
+    ]
+   },
+   "title": "Ink",
+   "text": [
+    "He wants a tattoo: {MUM}'s name across his forearm. {MUM} says she'll disown him. {DAD} says nothing, which means he secretly loves it.",
+    "The squad's tattoo artist has a free slot. {T} has a full sleeve. {J} has nothing. The peer pressure is gentle but relentless."
+   ],
+   "uses": {
+    "T": "any"
+   },
+   "prompt": "Get a tattoo?",
+   "choices": [
+    {
+     "label": "Something meaningful",
+     "desc": "Family, faith, home.",
+     "risk": "low",
+     "hint": "Forever.",
+     "text": "A small tattoo with a date and two initials: the day he signed his first contract, and his parents. {MUM} cries, then forgives.",
+     "fx": {
+      "family": 3,
+      "morale": 3,
+      "followers": 3000
+     }
+    },
+    {
+     "label": "Something huge and bold",
+     "desc": "Go big.",
+     "risk": "medium",
+     "hint": "Fans will either love it or make memes.",
+     "text": "A lion. Across his entire back. The internet has views. The lion does not care.",
+     "fx": {
+      "followers": 15000,
+      "family": -3,
+      "image": -1
+     }
+    },
+    {
+     "label": "No tattoos",
+     "desc": "Not for you.",
+     "risk": "low",
+     "hint": "Clean slate.",
+     "text": "He says no. {T} calls him 'the blank page' for a month.",
+     "fx": {}
+    }
+   ]
+  },
+  {
+   "id": "ce_haircut_viral",
+   "cat": "lifestyle",
+   "w": 5,
+   "cd": 60,
+   "when": {
+    "followers": [
+     3000,
+     999999999
+    ]
+   },
+   "title": "The Haircut",
+   "text": [
+    "His barber was distracted by a phone call. The result is... a statement. He has a match on Saturday and a photo shoot on Sunday.",
+    "He bleached his hair on a dare from {T}. Under the stadium lights it glows. The commentators can't stop talking about it."
+   ],
+   "uses": {
+    "T": "ally"
+   },
+   "prompt": "Your new look is a talking point.",
+   "choices": [
+    {
+     "label": "Own it with confidence",
+     "desc": "It's a look.",
+     "risk": "low",
+     "hint": "Confidence sells anything.",
+     "text": "He walks out with his chin up. By the end of the month, kids in the stands have the same haircut.",
+     "fx": {
+      "followers": 8000,
+      "fans": 2
+     }
+    },
+    {
+     "label": "Shave it all off",
+     "desc": "Reset.",
+     "risk": "low",
+     "hint": "Clean.",
+     "text": "He shaves it off. It looks fine. Everyone is slightly disappointed.",
+     "fx": {
+      "followers": 1000
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_ambassador_un",
+   "cat": "media",
+   "w": 2,
+   "cd": 300,
+   "once": true,
+   "when": {
+    "rep": [
+     55,
+     100
+    ],
+    "image": [
+     70,
+     100
+    ]
+   },
+   "title": "Goodwill Ambassador",
+   "text": "An international children's charity wants him as a goodwill ambassador: field visits, speeches, a role far bigger than football.",
+   "prompt": "Become a goodwill ambassador?",
+   "choices": [
+    {
+     "label": "Accept, and mean it",
+     "desc": "Field visits, real work.",
+     "risk": "low",
+     "hint": "Time, travel, meaning.",
+     "text": "He visits schools, clinics and refugee camps in the off-season. It changes what he thinks football is for.",
+     "fx": {
+      "image": 10,
+      "rep": 2,
+      "stress": 2,
+      "pfm": -3,
+      "flag": "foundation",
+      "fans": 4
+     }
+    },
+    {
+     "label": "Decline, for now",
+     "desc": "You can't give it enough time.",
+     "risk": "low",
+     "hint": "Honest.",
+     "text": "He says he can't do it properly yet, and would rather not do it badly. They respect that.",
+     "fx": {}
+    }
+   ]
+  },
+  {
+   "id": "ce_teammate_jealous_fame",
+   "cat": "media",
+   "w": 4,
+   "cd": 80,
+   "when": {
+    "followers": [
+     100000,
+     999999999
+    ],
+    "freeAgent": false
+   },
+   "uses": {
+    "T": "any"
+   },
+   "title": "'Instagram Player'",
+   "text": "{T} has a few hundred thousand fewer followers and a lot more opinions. In the canteen, loud enough for everyone: 'Some of us play football. Some of us play Instagram.'",
+   "prompt": "A teammate resents your fame.",
+   "choices": [
+    {
+     "label": "Laugh it off",
+     "desc": "Don't take the bait.",
+     "risk": "low",
+     "hint": "Defuses it.",
+     "text": "'At least I'm good at one of them,' he says, smiling. Even {T} laughs, eventually.",
+     "fx": {
+      "dressing": 2,
+      "bond": 4
+     }
+    },
+    {
+     "label": "Talk to {T} privately",
+     "desc": "What's really going on?",
+     "risk": "low",
+     "hint": "There's usually something underneath.",
+     "text": "It turns out {T}'s contract talks are going badly and he's scared. They end up talking for an hour.",
+     "fx": {
+      "bond": 12,
+      "dressing": 2
+     }
+    },
+    {
+     "label": "Fire back",
+     "desc": "In front of everyone.",
+     "risk": "high",
+     "hint": "A feud is born.",
+     "text": "He fires back. The canteen goes silent. {T} doesn't speak to him for a month.",
+     "fx": {
+      "teammate": {
+       "who": "T",
+       "rel": "rival"
+      },
+      "dressing": -3
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_fame_family_pressure",
+   "cat": "family",
+   "w": 4,
+   "cd": 100,
+   "when": {
+    "rep": [
+     35,
+     100
+    ]
+   },
+   "title": "Famous by Association",
+   "text": [
+    "{SIB} is being followed around {SIBhis} {SIBplace} by people who want to get close to {J}. {SIBhe} has started lying about who {SIBhis} brother is.",
+    "Journalists have found {MUM} and {DAD}'s house. A TV van has been parked outside for two days. {DAD} has started going out the back door."
+   ],
+   "prompt": "Your fame is affecting your family.",
+   "choices": [
+    {
+     "label": "Move them somewhere private",
+     "desc": "A new home with a gate.",
+     "risk": "low",
+     "hint": "Expensive. Safer.",
+     "text": "They move to a quiet house with a gate. {DAD} misses his neighbours. {MUM} misses nothing.",
+     "fx": {
+      "family": 8,
+      "wealth": -25000,
+      "stress": -2,
+      "flag": "parents_house"
+     }
+    },
+    {
+     "label": "Ask the press to respect their privacy",
+     "desc": "A public appeal.",
+     "risk": "low",
+     "hint": "Some will listen.",
+     "text": "His appeal works on most outlets. One tabloid prints a photo of the gate.",
+     "fx": {
+      "family": 4,
+      "press": 2,
+      "image": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "ce_cameo_film",
+   "cat": "media",
+   "w": 2,
+   "cd": 300,
+   "once": true,
+   "when": {
+    "rep": [
+     50,
+     100
+    ]
+   },
+   "title": "Lights, Camera",
+   "text": "A director wants him for a cameo in a big local film: one scene, two lines, playing a footballer who 'looks a lot like {J}'.",
+   "prompt": "A film cameo?",
+   "choices": [
+    {
+     "label": "Yes",
+     "desc": "Two lines. How hard can it be?",
+     "risk": "medium",
+     "hint": "Very hard, it turns out.",
+     "text": "It takes thirty-one takes to say two lines. The cameo becomes the most memed moment of the film, affectionately.",
+     "fx": {
+      "followers": 60000,
+      "rep": 1,
+      "morale": 4
+     }
+    },
+    {
+     "label": "No",
+     "desc": "Stick to football.",
+     "risk": "low",
+     "hint": "Safe.",
+     "text": "He declines. The role goes to a famous comedian, who plays him as a parody. It's very funny. He watches it twice.",
+     "fx": {}
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,1596 @@
+{
+ "scenarios": [
+  {
+   "id": "i4_tunnel_handshake",
+   "cat": "interlude",
+   "w": 4,
+   "cd": 80,
+   "time": "Saturday, 14:55",
+   "when": {
+    "freeAgent": false
+   },
+   "title": "The Tunnel",
+   "text": "In the tunnel before kick-off, the opposition captain refuses to shake his hand. The cameras are right there.",
+   "choices": [
+    {
+     "label": "Smile and keep the hand out",
+     "risk": "low",
+     "text": "He keeps his hand out, smiling. The captain looks petty on TV. Round one to {J}.",
+     "fx": {
+      "image": 2,
+      "fans": 1
+     }
+    },
+    {
+     "label": "Say something in his ear",
+     "risk": "medium",
+     "text": "Whatever he says, the captain is furious for ninety minutes and gets booked in the 20th minute.",
+     "fx": {
+      "fans": 2,
+      "stress": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_rain_delay",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 120,
+   "time": "Saturday, 16:20",
+   "when": {
+    "freeAgent": false
+   },
+   "title": "Rain Delay",
+   "text": "A thunderstorm has stopped the match. Forty minutes in the dressing room, half-time talk long over, nobody knows what to do. Someone has found a football quiz on their phone.",
+   "choices": [
+    {
+     "label": "Run the quiz",
+     "risk": "low",
+     "text": "He runs a squad quiz. The reserve goalkeeper turns out to know everything. Spirits rise. They win the second half.",
+     "fx": {
+      "dressing": 4,
+      "morale": 2
+     }
+    },
+    {
+     "label": "Stay focused, headphones on",
+     "risk": "low",
+     "text": "He stays in his own bubble, stretching. When play resumes, he's the sharpest man on the pitch.",
+     "fx": {
+      "form": 0.1
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_mum_sends_food",
+   "cat": "interlude",
+   "w": 5,
+   "cd": 40,
+   "time": "Wednesday, 12:00",
+   "when": {
+    "familyNear": true
+   },
+   "title": "Lunch Delivery",
+   "text": "{MUM} has sent lunch to the training ground. For him. And for the entire squad. Twenty-five containers, labelled, with a note telling everyone to eat their vegetables.",
+   "choices": [
+    {
+     "label": "Share it proudly",
+     "risk": "low",
+     "text": "The squad devours it. The foreign players ask for recipes. The kitchen staff are slightly offended and very impressed.",
+     "fx": {
+      "dressing": 5,
+      "family": 3
+     }
+    },
+    {
+     "label": "Hide it from the nutritionist",
+     "risk": "low",
+     "text": "The nutritionist finds it anyway, tries some, and asks for the recipe.",
+     "fx": {
+      "dressing": 3,
+      "family": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_scooter_ride",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 100,
+   "time": "Friday, 20:00",
+   "when": {
+    "familyNear": true,
+    "nationality": [
+     "Indonesia",
+     "Vietnam",
+     "Thailand",
+     "Malaysia",
+     "Philippines"
+    ]
+   },
+   "title": "Like Old Times",
+   "text": "{BFf} turns up on his old scooter. 'Get on. Like old times.' The club's insurance would have a heart attack.",
+   "choices": [
+    {
+     "label": "Get on",
+     "risk": "medium",
+     "text": "Helmet, helmet, a ride through the old streets to the old food stall. Nobody recognises him with the helmet on. Bliss.",
+     "fx": {
+      "friends": 7,
+      "stress": -4
+     }
+    },
+    {
+     "label": "Suggest walking instead",
+     "risk": "low",
+     "text": "They walk. Slower, safer, still wonderful.",
+     "fx": {
+      "friends": 4,
+      "stress": -2
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_brand_store_crowd",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 80,
+   "time": "Saturday, 11:00",
+   "when": {
+    "rep": [
+     20,
+     100
+    ]
+   },
+   "title": "Shopping",
+   "text": "He only wanted a new phone charger. Now there are two hundred people outside the electronics store and the manager is offering him the back exit.",
+   "choices": [
+    {
+     "label": "Go out the front and sign things",
+     "risk": "low",
+     "text": "He goes out the front and signs for an hour. Two hundred people go home happy. He still doesn't have a charger.",
+     "fx": {
+      "fans": 3,
+      "stress": 1
+     }
+    },
+    {
+     "label": "Back exit",
+     "risk": "low",
+     "text": "Back exit, quick getaway. The crowd waits another hour, just in case.",
+     "fx": {}
+    }
+   ]
+  },
+  {
+   "id": "i4_coach_birthday",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 100,
+   "time": "Tuesday, 09:30",
+   "when": {
+    "freeAgent": false
+   },
+   "title": "The Manager's Birthday",
+   "text": "It's {M}'s birthday. Nobody has organised anything. The squad is looking at each other.",
+   "choices": [
+    {
+     "label": "Organise a cake in ten minutes",
+     "risk": "low",
+     "text": "A cake from the canteen, a terrible song, twenty-five grown men. {Mf} pretends to hate it.",
+     "fx": {
+      "trust": 3,
+      "dressing": 2
+     }
+    },
+    {
+     "label": "Leave it",
+     "risk": "low",
+     "text": "Nobody does anything. {Mf} doesn't mention it either.",
+     "fx": {}
+    }
+   ]
+  },
+  {
+   "id": "i4_dog_on_pitch",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 200,
+   "once": true,
+   "time": "Thursday, 10:15",
+   "when": {
+    "freeAgent": false
+   },
+   "title": "The Dog",
+   "text": "A stray dog has wandered onto the training pitch and refuses to leave. It keeps stealing the ball. The session has descended into chaos.",
+   "choices": [
+    {
+     "label": "Adopt the dog",
+     "risk": "low",
+     "text": "He takes the dog home. It sleeps on his feet that night. The club makes it an honorary mascot.",
+     "fx": {
+      "morale": 5,
+      "flag": "has_dog",
+      "followers": 5000
+     }
+    },
+    {
+     "label": "Help the staff find its owner",
+     "risk": "low",
+     "text": "The owner turns up an hour later, mortified. The dog gets a signed ball.",
+     "fx": {
+      "morale": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_jersey_number_fan",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 100,
+   "time": "Monday, 18:00",
+   "when": {
+    "rep": [
+     10,
+     100
+    ]
+   },
+   "title": "Number {num}",
+   "text": "A fan writes: their baby was born at 10:{num} pm on the day {J} scored his best goal, so they've named the baby after him. Photo attached.",
+   "choices": [
+    {
+     "label": "Send the baby a tiny kit",
+     "risk": "low",
+     "text": "A tiny kit with his number on it. The parents frame the delivery note.",
+     "fx": {
+      "fans": 3,
+      "morale": 4
+     }
+    },
+    {
+     "label": "Reply with a voice message",
+     "risk": "low",
+     "text": "A voice note: 'Welcome to the world, little one.' The parents play it at the christening.",
+     "fx": {
+      "fans": 2,
+      "morale": 3
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_old_ball",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 200,
+   "once": true,
+   "time": "Sunday, 16:00",
+   "when": {
+    "familyNear": true
+   },
+   "title": "The Old Ball",
+   "text": "Clearing out his parents' storeroom, he finds it: the ball he played with every day from age six to twelve. Flat, patched, held together with tape and memory.",
+   "choices": [
+    {
+     "label": "Put it in a glass case",
+     "risk": "low",
+     "text": "It goes in a glass case next to his medals. It's the thing visitors ask about first.",
+     "fx": {
+      "morale": 4,
+      "family": 2
+     }
+    },
+    {
+     "label": "Pump it up and play",
+     "risk": "low",
+     "text": "He pumps it up and plays keepy-uppy in the garden while {DAD} watches. Forty-one. {DAD} claps.",
+     "fx": {
+      "family": 4,
+      "morale": 3
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_physio_secret",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 120,
+   "time": "Wednesday, 15:00",
+   "when": {
+    "freeAgent": false
+   },
+   "uses": {
+    "T": "any"
+   },
+   "title": "What the Physio Saw",
+   "text": "The physio, wrapping his ankle, says quietly: '{T}'s knee is worse than he's telling anyone. He's hiding it from the manager.'",
+   "choices": [
+    {
+     "label": "Talk to {T}",
+     "risk": "low",
+     "text": "{T} admits it. He's terrified of losing his place. {J} persuades him to get it treated properly.",
+     "fx": {
+      "bond": 8
+     }
+    },
+    {
+     "label": "Stay out of it",
+     "risk": "low",
+     "text": "He stays out of it. Two weeks later, {T}'s knee gives way in a match.",
+     "fx": {
+      "stress": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_late_night_snack",
+   "cat": "interlude",
+   "w": 4,
+   "cd": 40,
+   "time": "Thursday, 23:30",
+   "title": "The Fridge",
+   "text": "Midnight. The meal plan says no. The fridge says yes: leftover {FOOD}, still in its container, calling his name.",
+   "choices": [
+    {
+     "label": "Eat it",
+     "risk": "low",
+     "text": "He eats it standing up in the dark. It is magnificent. The scales will know.",
+     "fx": {
+      "morale": 2,
+      "pfm": -1
+     }
+    },
+    {
+     "label": "Close the fridge",
+     "risk": "low",
+     "text": "He closes the fridge. Discipline. He dreams about it.",
+     "fx": {
+      "pfm": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_fan_proposal_help",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 150,
+   "time": "Friday, 14:00",
+   "when": {
+    "rep": [
+     15,
+     100
+    ],
+    "freeAgent": false
+   },
+   "title": "Help Me Propose",
+   "text": "A fan has emailed the club: he wants to propose to his girlfriend at Saturday's match, and he wants {J} to hand him the ring on the pitch at half-time.",
+   "choices": [
+    {
+     "label": "Do it",
+     "risk": "low",
+     "text": "At half-time he walks over with the ring. She says yes. The stadium roars. He's in the wedding photos a year later.",
+     "fx": {
+      "fans": 5,
+      "image": 3,
+      "followers": 15000
+     }
+    },
+    {
+     "label": "Send a video message instead",
+     "risk": "low",
+     "text": "A video message on the big screen. She says yes. Lovely.",
+     "fx": {
+      "fans": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_power_cut",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 100,
+   "time": "Tuesday, 20:10",
+   "title": "Power Cut",
+   "text": "The whole neighbourhood has lost power. No TV, no phone charge, no internet. Just candles and silence.",
+   "choices": [
+    {
+     "label": "Go outside and talk to the neighbours",
+     "risk": "low",
+     "text": "Half the street is outside. Someone has a guitar. It's the most social evening he's had in months.",
+     "fx": {
+      "stress": -4,
+      "friends": 3
+     }
+    },
+    {
+     "label": "Go to bed early",
+     "risk": "low",
+     "text": "Ten hours of sleep. His body thanks the power company.",
+     "fx": {
+      "pfm": 4,
+      "stress": -2
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_rival_fan_neighbour",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 150,
+   "time": "Sunday, 09:00",
+   "when": {
+    "freeAgent": false
+   },
+   "title": "The Neighbour's Flag",
+   "text": "His new neighbour has hung a giant flag of {R}, the hated rivals, from the balcony directly opposite his bedroom window.",
+   "choices": [
+    {
+     "label": "Hang a bigger one",
+     "risk": "low",
+     "text": "He hangs an even bigger flag. The street takes sides. The neighbours become friends through pure competitive pettiness.",
+     "fx": {
+      "fans": 3,
+      "morale": 2
+     }
+    },
+    {
+     "label": "Invite him for a coffee",
+     "risk": "low",
+     "text": "Over coffee, the neighbour admits he's a closet fan of {J}. The flag stays. So does the friendship.",
+     "fx": {
+      "morale": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_gym_pb",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 60,
+   "time": "Monday, 16:30",
+   "when": {
+    "injured": false
+   },
+   "title": "Personal Best",
+   "text": "In the gym, he's about to try a lift heavier than ever before. The strength coach is spotting him. Three teammates have stopped to watch.",
+   "choices": [
+    {
+     "label": "Go for it",
+     "risk": "medium",
+     "out": [
+      {
+       "w": 3,
+       "text": "Up it goes. The teammates cheer. The coach writes the number on the board.",
+       "fx": {
+        "growth": [
+         "physical"
+        ],
+        "morale": 3
+       }
+      },
+      {
+       "w": 1,
+       "text": "Something twinges in his back. Nothing serious. Ice and pride.",
+       "fx": {
+        "pfm": -4
+       }
+      }
+     ]
+    },
+    {
+     "label": "Not today",
+     "risk": "low",
+     "text": "He leaves it for another day. Smart, says the coach.",
+     "fx": {}
+    }
+   ]
+  },
+  {
+   "id": "i4_wedding_crash",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 120,
+   "time": "Saturday, 20:00",
+   "when": {
+    "rep": [
+     10,
+     100
+    ]
+   },
+   "title": "Wedding Crashers",
+   "text": "The hotel he's staying in is hosting a wedding. The groom has spotted him in the lobby and is begging him to come in for five minutes. 'My wife will never believe it.'",
+   "choices": [
+    {
+     "label": "Go in for five minutes",
+     "risk": "low",
+     "text": "Five minutes become forty. He dances with the grandmother. The couple say it was the best moment of their wedding.",
+     "fx": {
+      "fans": 3,
+      "image": 2,
+      "followers": 8000
+     }
+    },
+    {
+     "label": "Send congratulations",
+     "risk": "low",
+     "text": "He signs a napkin: 'Congratulations!' The groom frames it.",
+     "fx": {
+      "fans": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_kids_letter_teacher",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 120,
+   "time": "Thursday, 16:00",
+   "when": {
+    "rep": [
+     8,
+     100
+    ]
+   },
+   "title": "Thirty Letters",
+   "text": "A primary school class has written him thirty letters. Most ask what he eats for breakfast. One asks if he's ever been sad. One says 'my dad says you're rubbish but I like you'.",
+   "choices": [
+    {
+     "label": "Reply to all thirty",
+     "risk": "low",
+     "text": "Thirty handwritten replies. It takes three evenings. The class pins them to the wall.",
+     "fx": {
+      "image": 3,
+      "morale": 4,
+      "stress": 1
+     }
+    },
+    {
+     "label": "Send one class letter and a signed ball",
+     "risk": "low",
+     "text": "One letter for the class and a signed ball. The 'rubbish' kid gets the ball.",
+     "fx": {
+      "image": 2,
+      "morale": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_bad_haircut_teammate",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 80,
+   "time": "Tuesday, 09:00",
+   "when": {
+    "freeAgent": false
+   },
+   "uses": {
+    "T": "any"
+   },
+   "title": "{T}'s New Hair",
+   "text": "{T} has arrived at training with a new haircut that can only be described as a mistake. He's asking everyone whether they like it.",
+   "choices": [
+    {
+     "label": "Tell the truth",
+     "risk": "low",
+     "text": "'No.' {T} laughs so hard he has to sit down. 'Thank you. Everyone else lied.'",
+     "fx": {
+      "bond": 6
+     }
+    },
+    {
+     "label": "Lie kindly",
+     "risk": "low",
+     "text": "'Looks great, bro.' {T} beams. The squad will be merciless anyway.",
+     "fx": {
+      "bond": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_taxi_driver_story",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 100,
+   "time": "Friday, 22:15",
+   "title": "The Taxi Driver",
+   "text": "The taxi driver doesn't recognise him. He talks the whole way about his son, who wants to be a footballer, and how they can't afford boots.",
+   "choices": [
+    {
+     "label": "Reveal yourself and help",
+     "risk": "low",
+     "text": "At the end of the ride, he hands over a card with his agent's number and money for boots. The driver doesn't understand until he reads the card.",
+     "fx": {
+      "image": 2,
+      "morale": 4,
+      "wealth": -150
+     }
+    },
+    {
+     "label": "Listen and tip well",
+     "risk": "low",
+     "text": "He listens to every word and leaves a generous tip. The driver never knows.",
+     "fx": {
+      "morale": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_birthday_squad_prank",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 52,
+   "time": "Monday, 10:00",
+   "when": {
+    "freeAgent": false
+   },
+   "title": "Birthday Ambush",
+   "text": "Something is wrong. The squad is being too nice. Someone has asked him to step into the shower area 'for a quick photo'.",
+   "choices": [
+    {
+     "label": "Walk in bravely",
+     "risk": "low",
+     "text": "Ice water, flour, a cake to the face and twenty-five men singing badly. Best birthday in years.",
+     "fx": {
+      "dressing": 5,
+      "morale": 4
+     }
+    },
+    {
+     "label": "Run",
+     "risk": "low",
+     "text": "He runs. They catch him in the car park. Same outcome, more dramatic.",
+     "fx": {
+      "dressing": 5,
+      "morale": 3
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_charity_run",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 120,
+   "time": "Sunday, 07:30",
+   "when": {
+    "injured": false,
+    "rep": [
+     5,
+     100
+    ]
+   },
+   "title": "Fun Run",
+   "text": "A local charity fun run. He's agreed to start it. The organisers now ask if he'd run it too: five kilometres, three thousand participants, one footballer.",
+   "choices": [
+    {
+     "label": "Run it, at the back",
+     "risk": "low",
+     "text": "He runs at the back with the slowest walkers, chatting the whole way. The photos are lovely.",
+     "fx": {
+      "image": 3,
+      "fans": 2
+     }
+    },
+    {
+     "label": "Run it to win",
+     "risk": "medium",
+     "text": "He wins by four minutes. A twelve-year-old comes second and is furious.",
+     "fx": {
+      "fans": 2,
+      "followers": 3000
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_hotel_fire_alarm",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 150,
+   "time": "Saturday, 03:00",
+   "when": {
+    "freeAgent": false
+   },
+   "title": "3am Alarm",
+   "text": "The fire alarm in the team hotel goes off at 3am. The whole squad is in the car park in pyjamas. Rival fans are filming from across the road. Kick-off is in twelve hours.",
+   "choices": [
+    {
+     "label": "Lead a car-park sing-along",
+     "risk": "low",
+     "text": "He starts a song. The squad joins. The rival fans stop filming, confused. Morale, weirdly, is high.",
+     "fx": {
+      "dressing": 4,
+      "pfm": -2
+     }
+    },
+    {
+     "label": "Find a quiet corner and doze",
+     "risk": "low",
+     "text": "He sleeps on a bench. Survival.",
+     "fx": {
+      "pfm": -1
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_language_tutor",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 100,
+   "time": "Wednesday, 19:00",
+   "when": {
+    "abroad": true
+   },
+   "title": "The Tutor",
+   "text": "His language tutor has set homework: describe your family in five sentences. He's been staring at the page for twenty minutes, thinking about home.",
+   "choices": [
+    {
+     "label": "Write about them honestly",
+     "risk": "low",
+     "text": "Five sentences become two pages. The tutor reads it and gently corrects nothing. 'Send this to your mother.'",
+     "fx": {
+      "family": 3,
+      "growth": [
+       "mental"
+      ]
+     }
+    },
+    {
+     "label": "Call home instead",
+     "risk": "low",
+     "text": "He calls home and forgets about the homework. The tutor understands.",
+     "fx": {
+      "family": 4
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_rookie_question",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 80,
+   "time": "Thursday, 13:00",
+   "when": {
+    "freeAgent": false,
+    "age": [
+     22,
+     40
+    ]
+   },
+   "title": "The Rookie's Question",
+   "text": "A seventeen-year-old just up from the academy sits next to him at lunch and asks, very quietly, 'How do you deal with it when the crowd boos you?'",
+   "choices": [
+    {
+     "label": "Tell him the truth",
+     "risk": "low",
+     "text": "'You remember it's not personal, and you go home to people who love you.' The kid nods like it's scripture.",
+     "fx": {
+      "dressing": 3,
+      "image": 1
+     }
+    },
+    {
+     "label": "Make him laugh",
+     "risk": "low",
+     "text": "'You pretend they're singing.' The kid laughs. It helps more than he expected.",
+     "fx": {
+      "dressing": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_phone_dropped_toilet",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 120,
+   "time": "Saturday, 13:30",
+   "title": "Splash",
+   "text": "His phone has fallen into the toilet two hours before kick-off. It contains his pre-match playlist, his lucky photos and three unanswered messages from {MUM}.",
+   "choices": [
+    {
+     "label": "Rice and prayer",
+     "risk": "low",
+     "text": "Bowl of rice, a prayer, a teammate's phone for the playlist. Somehow, the phone survives.",
+     "fx": {
+      "stress": 1
+     }
+    },
+    {
+     "label": "Embrace phone-free matchday",
+     "risk": "low",
+     "text": "No phone all day. He's calmer than ever. Maybe this is the secret.",
+     "fx": {
+      "stress": -2,
+      "form": 0.1
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_barber_chat",
+   "cat": "interlude",
+   "w": 4,
+   "cd": 60,
+   "time": "Friday, 17:00",
+   "title": "The Barber",
+   "text": "His barber has opinions on everything: the manager's tactics, the president's car, the price of fuel, and whether {J} should play further forward. He is often right.",
+   "choices": [
+    {
+     "label": "Listen to his tactical advice",
+     "risk": "low",
+     "text": "The barber draws a formation on a napkin with hair gel. It's not bad, actually.",
+     "fx": {
+      "stress": -2,
+      "tacticalFit": 1
+     }
+    },
+    {
+     "label": "Ask him about life instead",
+     "risk": "low",
+     "text": "The barber talks about his late wife and his three daughters. {J} leaves with a haircut and a full heart.",
+     "fx": {
+      "stress": -3,
+      "morale": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_old_shirt_sold",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 200,
+   "time": "Tuesday, 15:00",
+   "when": {
+    "rep": [
+     15,
+     100
+    ]
+   },
+   "title": "For Sale",
+   "text": "His very first professional shirt, signed and given to a fan years ago, is for sale online. The seller's listing says: 'Need money for medical bills.'",
+   "choices": [
+    {
+     "label": "Buy it, and send the money anyway",
+     "risk": "low",
+     "text": "He buys it at full price and sends the seller extra for the bills. The seller sends a long, emotional thank-you.",
+     "fx": {
+      "wealth": -800,
+      "morale": 4,
+      "image": 2
+     }
+    },
+    {
+     "label": "Let it sell to someone else",
+     "risk": "low",
+     "text": "It sells. He hopes the bills got paid.",
+     "fx": {}
+    }
+   ]
+  },
+  {
+   "id": "i4_traffic_jam_fans",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 100,
+   "time": "Saturday, 12:00",
+   "when": {
+    "freeAgent": false,
+    "rep": [
+     10,
+     100
+    ]
+   },
+   "title": "Gridlock",
+   "text": "Stuck in traffic on the way to the stadium. Fans in the cars around him have spotted him. Someone is passing a shirt through a window to be signed.",
+   "choices": [
+    {
+     "label": "Sign everything passed to you",
+     "risk": "low",
+     "text": "Windows down, shirts going car to car. A traffic jam becomes a party.",
+     "fx": {
+      "fans": 3,
+      "morale": 2
+     }
+    },
+    {
+     "label": "Windows up, focus",
+     "risk": "low",
+     "text": "Windows up, headphones on. Matchday mode.",
+     "fx": {
+      "form": 0.05
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_pharmacy_prescription",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 120,
+   "time": "Tuesday, 18:30",
+   "title": "Is This Allowed?",
+   "text": "He has a terrible cold. The pharmacist hands him a strong medicine. He suddenly remembers the anti-doping talk.",
+   "choices": [
+    {
+     "label": "Call the club doctor before taking it",
+     "risk": "low",
+     "text": "The doctor says no: banned ingredient. He gets a safe alternative. Close call.",
+     "fx": {
+      "stress": 1
+     }
+    },
+    {
+     "label": "Just tea and honey",
+     "risk": "low",
+     "text": "Tea, honey, sleep. The cold lasts a day longer. His career stays safe.",
+     "fx": {
+      "pfm": -1
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_partner_dancing",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 80,
+   "time": "Saturday, 22:00",
+   "when": {
+    "partner": [
+     "dating",
+     "serious",
+     "engaged",
+     "married"
+    ],
+    "partnerNear": true
+   },
+   "title": "Dance With Me",
+   "text": "{Pf} puts on a song from when they first met and holds out her hand in the middle of the kitchen.",
+   "choices": [
+    {
+     "label": "Dance",
+     "risk": "low",
+     "text": "They dance badly in the kitchen until the song ends, then play it again.",
+     "fx": {
+      "love": 7,
+      "stress": -3
+     }
+    },
+    {
+     "label": "'My legs are dead'",
+     "risk": "low",
+     "text": "She laughs and dances by herself. He watches. It's still lovely.",
+     "fx": {
+      "love": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_mosque_church_community",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 100,
+   "time": "Friday, 13:00",
+   "title": "After Prayers",
+   "text": "After Friday prayers, an old man stops him: 'I prayed for your knee last month. Did it work?' Half the congregation is waiting for the answer.",
+   "choices": [
+    {
+     "label": "'It did. Thank you.'",
+     "risk": "low",
+     "text": "The old man is delighted and promises to keep praying, especially before derbies.",
+     "fx": {
+      "morale": 3,
+      "fans": 2
+     }
+    },
+    {
+     "label": "Stay and talk with the community",
+     "risk": "low",
+     "text": "He stays for an hour, drinking tea, hearing stories. He feels at home for the first time in weeks.",
+     "fx": {
+      "stress": -3,
+      "morale": 3
+     }
+    }
+   ],
+   "when": {
+    "nationality": [
+     "Indonesia",
+     "Malaysia",
+     "Saudi Arabia",
+     "Egypt",
+     "Morocco",
+     "Algeria",
+     "Tunisia",
+     "Senegal",
+     "Iraq",
+     "Iran",
+     "Jordan",
+     "Qatar",
+     "United Arab Emirates",
+     "Kuwait",
+     "Oman",
+     "Turkey",
+     "Nigeria"
+    ]
+   }
+  },
+  {
+   "id": "i4_fan_cooking_video",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 100,
+   "time": "Sunday, 18:00",
+   "when": {
+    "followers": [
+     20000,
+     999999999
+    ]
+   },
+   "title": "Cook-Along",
+   "text": "Fans keep asking what he cooks. He's never cooked on camera. {SIB} dares him to do a live cooking stream.",
+   "choices": [
+    {
+     "label": "Go live",
+     "risk": "medium",
+     "out": [
+      {
+       "w": 2,
+       "text": "He burns the rice and forgets the salt. A hundred thousand people watch. It's the most charming thing he's ever done.",
+       "fx": {
+        "followers": 15000,
+        "image": 2
+       }
+      },
+      {
+       "w": 1,
+       "text": "The smoke alarm goes off live. The clip is everywhere.",
+       "fx": {
+        "followers": 20000
+       }
+      }
+     ]
+    },
+    {
+     "label": "No way",
+     "risk": "low",
+     "text": "He refuses. {SIB} calls him a coward. He is a coward, about cooking.",
+     "fx": {
+      "sibBond": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_wrong_bus",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 200,
+   "once": true,
+   "time": "Saturday, 11:30",
+   "when": {
+    "freeAgent": false,
+    "age": [
+     16,
+     20
+    ]
+   },
+   "title": "The Wrong Bus",
+   "text": "He's got on the wrong team bus: the women's team's bus, heading to a different stadium. The women are delighted. The driver is not.",
+   "choices": [
+    {
+     "label": "Laugh and enjoy the ride",
+     "risk": "low",
+     "text": "They drop him off with a lot of jokes. He's on the club's social media as the 'newest women's team signing'.",
+     "fx": {
+      "followers": 3000,
+      "dressing": 2
+     }
+    },
+    {
+     "label": "Panic",
+     "risk": "low",
+     "text": "He panics. They laugh. A taxi gets him to the right place just in time.",
+     "fx": {
+      "stress": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_pundit_meeting",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 120,
+   "time": "Wednesday, 20:00",
+   "when": {
+    "rep": [
+     20,
+     100
+    ]
+   },
+   "title": "Face to Face",
+   "text": "At a restaurant, the pundit who has criticised him on TV all season is at the next table. He's noticed {J}. The silence is very loud.",
+   "choices": [
+    {
+     "label": "Go over and shake his hand",
+     "risk": "low",
+     "text": "He goes over, shakes his hand and says, 'Keep watching.' The pundit is speechless. His next segment is noticeably kinder.",
+     "fx": {
+      "press": 3,
+      "image": 2
+     }
+    },
+    {
+     "label": "Send him a dessert",
+     "risk": "low",
+     "text": "A dessert arrives at the pundit's table with a note: 'From your favourite player.' He laughs despite himself.",
+     "fx": {
+      "press": 2,
+      "followers": 2000
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_ill_child_fan_call",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 150,
+   "time": "Monday, 17:00",
+   "when": {
+    "rep": [
+     10,
+     100
+    ]
+   },
+   "title": "A Video Call",
+   "text": "A children's hospital asks if he'd video-call a boy who's very ill and talks about {J} constantly. Fifteen minutes. The boy doesn't know.",
+   "choices": [
+    {
+     "label": "Call him, for as long as he wants",
+     "risk": "low",
+     "text": "The call lasts an hour. They talk about football, dogs and dinosaurs. The boy's mother sends a message afterwards he'll keep forever.",
+     "fx": {
+      "morale": 5,
+      "image": 3
+     }
+    },
+    {
+     "label": "Call, then send a care package",
+     "risk": "low",
+     "text": "A call and a box of signed things. The boy sleeps with the ball.",
+     "fx": {
+      "morale": 4,
+      "image": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_sports_car_test",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 120,
+   "time": "Friday, 16:00",
+   "when": {
+    "worth": [
+     100000,
+     999999999
+    ]
+   },
+   "title": "Test Drive",
+   "text": "A car dealership has invited him to test-drive a supercar. The salesman keeps saying 'no obligation' in a way that clearly means 'please buy this'.",
+   "choices": [
+    {
+     "label": "Drive it and walk away",
+     "risk": "low",
+     "text": "Ten minutes of absurd speed, then he hands back the keys. The salesman's face falls. His savings don't.",
+     "fx": {
+      "morale": 3
+     }
+    },
+    {
+     "label": "Drive it to {MUM}'s house to show her",
+     "risk": "low",
+     "when": {
+      "familyNear": true
+     },
+     "text": "He drives it to {MUM}'s. She asks what it costs and then makes him sit through a lecture. Worth it.",
+     "fx": {
+      "family": 3,
+      "morale": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_volunteer_flood",
+   "cat": "interlude",
+   "w": 2,
+   "cd": 200,
+   "time": "Sunday, 08:00",
+   "when": {
+    "familyNear": true
+   },
+   "title": "Flooded Streets",
+   "text": "Heavy rain has flooded part of his old neighbourhood. Neighbours are moving furniture out of houses. He has a free morning.",
+   "choices": [
+    {
+     "label": "Grab a shovel and help",
+     "risk": "low",
+     "text": "Four hours of mud, furniture and sandbags. Nobody takes photos until the end, and then everybody does.",
+     "fx": {
+      "image": 5,
+      "family": 3,
+      "pfm": -3,
+      "fans": 3
+     }
+    },
+    {
+     "label": "Pay for emergency supplies",
+     "risk": "low",
+     "text": "He pays for food, water and cleaning supplies for the whole street.",
+     "fx": {
+      "image": 3,
+      "wealth": -1500,
+      "family": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_trophy_cabinet",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 200,
+   "time": "Monday, 21:00",
+   "when": {
+    "trophies": [
+     1,
+     99
+    ]
+   },
+   "title": "The Cabinet",
+   "text": "{MUM} has built a trophy cabinet in the living room. It currently holds his medals, a photo of his first goal and, for some reason, a ceramic cat.",
+   "choices": [
+    {
+     "label": "Ask about the cat",
+     "risk": "low",
+     "text": "The cat, apparently, was in the room when he scored his first goal on TV. It is now part of history.",
+     "fx": {
+      "family": 3,
+      "morale": 2
+     }
+    },
+    {
+     "label": "Add something new",
+     "risk": "low",
+     "text": "He adds his first boots. {MUM} rearranges everything around them for an hour.",
+     "fx": {
+      "family": 4
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_bus_fan_singing",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 100,
+   "time": "Saturday, 13:00",
+   "when": {
+    "freeAgent": false,
+    "fans": [
+     50,
+     100
+    ]
+   },
+   "title": "Arrival",
+   "text": "As the team bus pulls up to the stadium, thousands of fans line the road, flares, scarves, singing. Someone has made a banner with his face on it.",
+   "choices": [
+    {
+     "label": "Stand at the window and salute them",
+     "risk": "low",
+     "text": "He stands at the window with his fist on his heart. The roar shakes the bus.",
+     "fx": {
+      "fans": 3,
+      "morale": 4
+     }
+    },
+    {
+     "label": "Film it for {MUM}",
+     "risk": "low",
+     "text": "He films it. {MUM} watches it twenty times and shows the neighbours.",
+     "fx": {
+      "family": 3,
+      "morale": 3
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_coach_old_tape",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 200,
+   "once": true,
+   "time": "Thursday, 18:00",
+   "when": {
+    "age": [
+     23,
+     40
+    ]
+   },
+   "title": "The Old Video",
+   "text": "A former youth coach sends him a video of his first academy match, age twelve: tiny, fast, terrible at defending, and celebrating a goal like he'd won the World Cup.",
+   "choices": [
+    {
+     "label": "Watch it with the squad",
+     "risk": "low",
+     "text": "The squad watches it on the big screen. They cheer the twelve-year-old's goal louder than anything all season.",
+     "fx": {
+      "dressing": 4,
+      "morale": 4
+     }
+    },
+    {
+     "label": "Send it to your family",
+     "risk": "low",
+     "text": "{DAD} watches it and calls him, voice thick. 'I remember that day.'",
+     "fx": {
+      "family": 5
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_queue_jump",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 100,
+   "time": "Saturday, 19:30",
+   "when": {
+    "rep": [
+     20,
+     100
+    ]
+   },
+   "title": "The Queue",
+   "text": "A long queue outside a popular restaurant. The manager spots him and offers to take him straight in, past forty people who've been waiting an hour.",
+   "choices": [
+    {
+     "label": "Wait like everyone else",
+     "risk": "low",
+     "text": "He waits. Somebody films it. 'Humble king,' says the internet.",
+     "fx": {
+      "image": 3,
+      "followers": 3000
+     }
+    },
+    {
+     "label": "Accept and go in",
+     "risk": "low",
+     "text": "He goes in. Some of the queue grumbles. One person films that, too.",
+     "fx": {
+      "image": -1
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_partner_parents_visit",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 100,
+   "time": "Sunday, 13:00",
+   "when": {
+    "partner": [
+     "serious",
+     "engaged",
+     "married"
+    ],
+    "partnerNear": true
+   },
+   "title": "Sunday Lunch With Her Parents",
+   "text": "{Pf}'s father has been talking for forty minutes about a match from 1989. {Pf} is mouthing 'sorry' across the table.",
+   "choices": [
+    {
+     "label": "Ask follow-up questions",
+     "risk": "low",
+     "text": "He asks about the match. The father's face lights up. Forty more minutes. {Pf} loves him for it.",
+     "fx": {
+      "love": 5
+     }
+    },
+    {
+     "label": "Change the subject gently",
+     "risk": "low",
+     "text": "He steers it to the father's garden. Also a long story, but a better one.",
+     "fx": {
+      "love": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_teammate_language_help",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 100,
+   "time": "Tuesday, 14:00",
+   "when": {
+    "freeAgent": false
+   },
+   "uses": {
+    "T": "signing"
+   },
+   "title": "Translate for Me?",
+   "text": "{T}, the new signing, can't make himself understood at the bank. He's called {J}, of all people, to help translate a mortgage form.",
+   "choices": [
+    {
+     "label": "Go to the bank with him",
+     "risk": "low",
+     "text": "Two hours at the bank, one mortgage, a new friendship.",
+     "fx": {
+      "bond": 12,
+      "dressing": 2
+     }
+    },
+    {
+     "label": "Send the club's translator",
+     "risk": "low",
+     "text": "The translator handles it. {T} is grateful, if a bit lonely.",
+     "fx": {
+      "bond": 3
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_old_flatmate",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 150,
+   "time": "Wednesday, 21:30",
+   "when": {
+    "age": [
+     21,
+     40
+    ]
+   },
+   "title": "The Old Flatmate",
+   "text": "His first flatmate from the academy, who didn't make it, messages out of nowhere: he's working in a warehouse now, has a daughter, and just wanted to say he's proud.",
+   "choices": [
+    {
+     "label": "Meet him for dinner",
+     "risk": "low",
+     "text": "They meet and laugh about the old flat, the burnt rice, the coach who hated them both. A friendship rekindled.",
+     "fx": {
+      "friends": 6,
+      "morale": 3
+     }
+    },
+    {
+     "label": "Send something for his daughter",
+     "risk": "low",
+     "text": "A signed shirt and a toy for the daughter. The flatmate sends back a photo of her wearing it as a dress.",
+     "fx": {
+      "friends": 3,
+      "morale": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_sleepwalk_hotel",
+   "cat": "interlude",
+   "w": 2,
+   "cd": 300,
+   "once": true,
+   "time": "Saturday, 02:00",
+   "when": {
+    "freeAgent": false
+   },
+   "title": "Sleepwalking",
+   "text": "He wakes up in the corridor of the team hotel in his underwear, holding a pillow, with the assistant manager staring at him.",
+   "choices": [
+    {
+     "label": "Say nothing and walk back",
+     "risk": "low",
+     "text": "He walks back with great dignity. At breakfast, the assistant manager says nothing. His eyes say everything.",
+     "fx": {
+      "stress": 2
+     }
+    },
+    {
+     "label": "Explain everything",
+     "risk": "low",
+     "text": "He explains. The assistant manager nods slowly and tells the whole squad by lunch.",
+     "fx": {
+      "dressing": 3
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_kid_asks_money",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 100,
+   "time": "Monday, 15:30",
+   "title": "A Boy Selling Snacks",
+   "text": "At a traffic light, a boy selling snacks knocks on his window. He recognises {J} and forgets to sell anything; he just wants to talk about the last match.",
+   "choices": [
+    {
+     "label": "Buy everything he's carrying",
+     "risk": "low",
+     "text": "He buys the whole tray and tells the boy to go home early. The boy runs off grinning.",
+     "fx": {
+      "morale": 3,
+      "wealth": -20
+     }
+    },
+    {
+     "label": "Talk until the light changes",
+     "risk": "low",
+     "text": "They talk football for one red light. The boy waves until the car is out of sight.",
+     "fx": {
+      "morale": 2
+     }
+    }
+   ]
+  },
+  {
+   "id": "i4_squad_film_night",
+   "cat": "interlude",
+   "w": 3,
+   "cd": 80,
+   "time": "Thursday, 20:00",
+   "when": {
+    "freeAgent": false
+   },
+   "title": "Film Night",
+   "text": "The squad is having a film night at the training ground. The argument about which film is now in its second hour.",
+   "choices": [
+    {
+     "label": "Pick a film nobody will agree with",
+     "risk": "low",
+     "text": "He picks a cartoon about a talking fish. Twenty-five grown men cry at the ending.",
+     "fx": {
+      "dressing": 4
+     }
+    },
+    {
+     "label": "Suggest a documentary about a football legend",
+     "risk": "low",
+     "text": "The documentary about an old legend fires everyone up. Training the next day is ferocious.",
+     "fx": {
+      "dressing": 3,
+      "morale": 2
+     }
+    }
+   ]
+  }
+ ]
+}

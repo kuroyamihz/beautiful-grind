@@ -1,0 +1,554 @@
+{
+  "scenarios": [
+    {
+      "id": "ms_start_generic", "cat": "milestone", "trigger": "start", "w": 5,
+      "title": "{J}, 16, Steps Into {club}'s First-Team Dressing Room",
+      "text": [
+        "Monday, 7am. The first-team dressing room smells of liniment and coffee. {J}'s peg is in the corner, next to the kit man's boxes, with a number nobody else wanted: {num}. Grown men with mortgages and children walk past without looking up. {M}, the head coach, shakes his hand once, firmly, and says only: “We'll see.” Pre-season starts today.",
+        "The letter from the club came on a Thursday. By Monday {J} is standing in the tunnel at {club}'s training ground holding a bag his mother packed twice. The senior players are doing stretches and telling jokes he doesn't understand yet. {M} points to a cone at the end of the line. “Stand there. Watch. Learn.”"
+      ],
+      "prompt": "First day with the first team. How do you carry yourself?",
+      "choices": [
+        { "label": "Introduce yourself to everyone", "desc": "Handshakes around the room, names learned by lunch.", "risk": "low", "hint": "Some warmth; some will think you are trying too hard.", "text": "{J} learns twenty-three names before lunch. Most of the squad warm to the kid; one veteran mutters something about influencers.", "fx": { "followers": 300 } },
+        { "label": "Keep your head down", "desc": "Speak with your feet. Carry the cones.", "risk": "low", "hint": "Respect from the old guard. Easy to be overlooked.", "text": "{J} carries the cones, collects the bibs, says almost nothing all week. On Friday the captain throws him a ball in the rondo without being asked.", "fx": { "trust": 2 } },
+        { "label": "Ask the captain for advice", "desc": "Find the leader and learn the rules.", "risk": "medium", "hint": "Could earn a protector — or an eye-roll.",
+          "out": [
+            { "w": 2, "text": "The captain, {T}, looks him up and down, then gives him three rules: never be late, never sulk, never celebrate in training. “Follow those and I'll look after you.”", "fx": { "teammate": { "who": "T", "rel": "ally" }, "growth": ["mental"] } },
+            { "w": 1, "text": "The captain is polite and busy and forgets the conversation by Wednesday.", "fx": {} }
+          ] }
+      ]
+    },
+    {
+      "id": "ms_start_epa", "cat": "milestone", "trigger": "start", "w": 8, "when": { "country": ["Indonesia"] },
+      "title": "From EPA to the First Team: {J} Promoted at 16",
+      "text": "Three seasons in {club}'s Elite Pro Academy, a hundred bus rides to away games in the U-16 league, and now this: a first-team training kit with {J} on the back. His father took the day off from work to drive him. The motorbike is still parked outside the gate. In the canteen the senior players are arguing about last season's referee decisions, and nobody has noticed the boy holding his tray.",
+      "prompt": "Your father is waiting outside to say goodbye. What do you do?",
+      "choices": [
+        { "label": "Run out and hug him", "desc": "The players can wait five minutes.", "risk": "low", "hint": "A moment you'll remember. Someone might film it.", "out": [
+          { "w": 2, "text": "{J} runs out in his new training top. His father, who never cries, cries. Neither of them knows a kit man filmed it from the gate. By evening the club has posted it and it has 400,000 views.", "fx": { "followers": 6000, "parental": 8, "mood": "Motivated" } },
+          { "w": 1, "text": "A quick hug at the gate, a pat on the helmet. “Jangan malu-maluin keluarga,” his father says. Don't embarrass the family. Then he rides away.", "fx": { "parental": 6 } }
+        ] },
+        { "label": "Send a message instead", "desc": "Stay in the canteen and start fitting in.", "risk": "low", "hint": "Professional. Your father will understand. Probably.", "text": "{J} sends a voice note and sits down next to the senior players. One of them, {T}, slides him a plate of fried tempeh without a word. It is the first friendly thing that happens all day.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "parental": -2 } }
+      ]
+    },
+    {
+      "id": "ms_start_bigclub", "cat": "milestone", "trigger": "start", "w": 9, "when": { "leagueQ": [74, 99] },
+      "title": "{J} Joins {club}: One of Two Hundred Who Dream",
+      "text": "The academy building at {club} has more physios than his old school had teachers. Every boy here was the best player in his town. {J} counts eleven other teenagers who play his position across the age groups. On the wall of the gym, photos of the academy graduates who made it. There are not many photos.",
+      "prompt": "How do you approach your first months at an elite club?",
+      "choices": [
+        { "label": "Out-work everyone", "desc": "First in, last out, every single day.", "risk": "medium", "hint": "Coaches notice; bodies break.", "text": "{J} is in the gym at 7:15 every morning. The fitness coach starts leaving the lights on for him.", "fx": { "trust": 3, "pfm": -6, "growth": ["rel"] } },
+        { "label": "Study the senior players", "desc": "Watch how the professionals live.", "risk": "low", "hint": "Slow gains in understanding the game.", "text": "{J} watches how the first-team players eat, rest and prepare. He fills a notebook. The notebook becomes a habit.", "fx": { "growth": ["mental"] } },
+        { "label": "Enjoy it", "desc": "You made it here. Take it in.", "risk": "medium", "hint": "Happier, maybe. Some coaches read it as complacency.", "text": "{J} posts a photo in the new kit, gets a hundred thousand likes, and spends a week smiling. One coach writes “settled quickly — needs edge” in his report.", "fx": { "followers": 15000, "trust": -2, "mood": "Confident" } }
+      ]
+    },
+    {
+      "id": "ms_start_abroad", "cat": "milestone", "trigger": "start", "w": 10, "when": { "abroad": true },
+      "title": "Sixteen and Alone: {J} Begins Abroad at {club}",
+      "text": "The club has found him a room with a host family who speak slowly and kindly in a language he half-understands. His mother calls twice before the plane has even landed. At training, the drills are explained once, fast, in a language he doesn't speak. {J} copies whoever is in front of him.",
+      "prompt": "The language barrier is real. What do you prioritise?",
+      "choices": [
+        { "label": "Language lessons every night", "desc": "Two hours with an app and the host family.", "risk": "low", "hint": "Tiring. Pays off in the dressing room.", "text": "By week three {J} can follow the coach's instructions. By week six he understands the jokes, which is when a dressing room starts to feel like home.", "fx": { "growth": ["mental"], "pfm": -3, "flag": "learning_language" } },
+        { "label": "Find someone from home", "desc": "Look for a countryman in the squad or city.", "risk": "low", "hint": "Comfort now, slower integration.", "text": "{J} finds a restaurant run by people from home and eats there every night. It helps the homesickness. It doesn't help his vocabulary.", "fx": { "mood": "Relieved", "parental": 3 } },
+        { "label": "Let football talk", "desc": "Nobody needs words for a nutmeg.", "risk": "medium", "hint": "Works on the pitch. Off it, you stay an outsider.", "text": "{J} does his talking on the training pitch. The coaches like it. In the canteen, he sits alone more often than he admits on the phone.", "fx": { "trust": 2, "mood": "Homesick" } }
+      ]
+    },
+    {
+      "id": "ms_preseason_target", "cat": "milestone", "trigger": "seasonStart", "w": 6,
+      "title": "Pre-Season Begins: {M} Sets the Targets",
+      "text": "First day back. The bleep test, the body-fat callipers, the new signings standing awkwardly in fresh kit. {M} gathers the squad in the centre circle and says the same thing every manager says, but means it: “Every shirt is open.” Then he looks directly at {J}.",
+      "prompt": "What do you set as your target this season?",
+      "choices": [
+        { "label": "Win a starting place", "desc": "Tell {M} you want to start.", "risk": "medium", "hint": "Ambition impresses — if you back it up.", "out": [
+          { "w": 1, "text": "{M} nods slowly. “Then take it from someone.” It sounds like a challenge. It is meant as one.", "fx": { "trust": 3, "mood": "Determined" } },
+          { "w": 1, "text": "{M} laughs, not unkindly. “Everybody wants to start. Show me in August.”", "fx": { "trust": -1 } }
+        ] },
+        { "label": "Improve quietly", "desc": "Keep targets private, work on weaknesses.", "risk": "low", "hint": "Slow and steady.", "text": "{J} writes three goals on a note and sticks it inside his locker door. Nobody else sees it.", "fx": { "growth": ["rel"] } },
+        { "label": "Ask what he needs from you", "desc": "Let the coach define the role.", "risk": "low", "hint": "Good for tactical fit.", "text": "{M} talks for ten minutes about pressing triggers and positional discipline. {J} remembers about half, then writes the rest down from memory in the car.", "fx": { "tacticalFit": 8, "trust": 2 } }
+      ]
+    },
+    {
+      "id": "ms_preseason_fitness", "cat": "milestone", "trigger": "seasonStart", "w": 5,
+      "title": "Bleep Test Day: {J} Has Something to Prove",
+      "text": "Twenty-one players, one line of cones, one speaker counting out levels in a robotic voice. Pre-season fitness testing is half science, half public humiliation. The sports scientists stand with clipboards. {M} watches with his arms folded.",
+      "prompt": "Level 12. Your lungs are burning.",
+      "choices": [
+        { "label": "Go until you drop", "desc": "Win this, whatever it costs.", "risk": "medium", "hint": "Respect, or a muscle strain on day one.", "check": { "stat": "physical", "dc": 55 },
+          "ok": { "text": "{J} is the last man running at level 14.3. The squad applauds. {M} writes something on his clipboard and underlines it.", "fx": { "trust": 4, "rep": 0.3, "pfm": -6 } },
+          "bad": { "text": "At level 13 something pulls in the back of his thigh. {J} limps off as the robot voice keeps counting. Not the first impression he wanted.", "fx": { "injury": "minor", "trust": -1 } } },
+        { "label": "Pace yourself", "desc": "Finish respectably, save your legs.", "risk": "low", "hint": "Nobody remembers mid-table bleep scores.", "text": "{J} drops out at level 11.8, middle of the pack. Nobody mentions it, which is the point.", "fx": { "pfm": -2 } }
+      ]
+    },
+    {
+      "id": "ms_preseason_number", "cat": "milestone", "trigger": "seasonStart", "w": 4, "when": { "apps": [10, 9999], "role": ["starter", "rotation"] },
+      "title": "Squad Numbers Released: Will {J} Change His?",
+      "text": "The kit man pins the new squad list to the board. A senior player has left, and his shirt number, a proper number, a number fans associate with heroes, is free. The kit man raises an eyebrow at {J}. “Want it? Decide by Friday. Shirts go to print.”",
+      "prompt": "Take the iconic number?",
+      "choices": [
+        { "label": "Take it", "desc": "Big number, big expectations.", "risk": "medium", "hint": "Shirt sales up. So is the pressure.", "out": [
+          { "w": 2, "text": "The shirts sell out in the club shop by Monday. Every mistake now comes with the number attached.", "fx": { "followers": 8000, "rep": 0.5, "mood": "Confident" } },
+          { "w": 1, "text": "The previous owner of the number calls him from his new club. “Respect it,” he says, and hangs up. Fans call it arrogance on talk radio.", "fx": { "followers": 3000, "mood": "Anxious" } }
+        ] },
+        { "label": "Keep {num}", "desc": "It got you here.", "risk": "low", "hint": "Loyalty to your own story.", "text": "{J} keeps {num}. The kit man shrugs and gives the famous number to a new signing.", "fx": {} }
+      ]
+    },
+    {
+      "id": "ms_preseason_tour", "cat": "milestone", "trigger": "seasonStart", "w": 4, "when": { "leagueQ": [65, 99] },
+      "title": "Pre-Season Tour: {J} on the Plane",
+      "text": "The squad flies out for a pre-season tour: three friendlies, a sponsor's event, a hotel with a swimming pool nobody is allowed to use. On the plane, the senior players play cards for real money. {J} is invited to join.",
+      "prompt": "Join the card game?",
+      "choices": [
+        { "label": "Join in", "desc": "Bonding costs money sometimes.", "risk": "medium", "hint": "Could make friends — or lose a week's wages.", "out": [
+          { "w": 1, "text": "{J} wins three hands and loses nine. The veterans adopt him as their favourite mark. It's the best money he's ever lost.", "fx": { "wealth": -150, "teammate": { "who": "T", "rel": "ally" } } },
+          { "w": 1, "text": "Beginner's luck: {J} cleans out the table. Half the squad thinks it's hilarious. {T} does not speak to him for the rest of the tour.", "fx": { "wealth": 300, "teammate": { "who": "T", "rel": "rival" } } }
+        ] },
+        { "label": "Sleep", "desc": "Rest for the friendlies.", "risk": "low", "hint": "Fresh legs.", "text": "{J} sleeps through the flight and plays the first friendly with fresh legs.", "fx": { "pfm": 5 } }
+      ]
+    },
+    {
+      "id": "ms_season_end_reflect", "cat": "milestone", "trigger": "seasonEnd", "w": 5,
+      "title": "Season Over: {J} Looks Back",
+      "text": "The last match is played. The dressing room empties faster than usual: holidays, national team camps, contract talks, goodbyes. {J} sits on the bench in front of his locker with his boots in his lap and thinks about the whole year at once.",
+      "prompt": "How do you spend the off-season?",
+      "choices": [
+        { "label": "Holiday and switch off", "desc": "Rest the body and mind completely.", "risk": "low", "hint": "Recharged, maybe slightly rusty.", "text": "Two weeks without a football. {J} sleeps ten hours a night and comes back lighter in the head.", "fx": { "pfm": 15, "mood": "Relieved" } },
+        { "label": "Private training camp", "desc": "Hire a personal coach for the summer.", "risk": "medium", "hint": "Costs money and rest. Could give you an edge.", "vars": {}, "out": [
+          { "w": 2, "text": "Six weeks of dawn sessions with a personal coach. {J} reports back for pre-season in the best shape of his life.", "fx": { "growth": ["rel"], "wealth": -400, "pfm": -4 } },
+          { "w": 1, "text": "The personal coach is mostly a social-media personality. Lots of videos, little improvement.", "fx": { "wealth": -400, "followers": 4000 } }
+        ] },
+        { "label": "Go home", "desc": "Family, old friends, mother's cooking.", "risk": "low", "hint": "Good for the soul.", "text": "{J} spends the summer at home. Neighbours come round to look at him. His grandmother asks when he's going to get a real job, then hides his photo in her wallet.", "fx": { "parental": 10, "mood": "Relieved", "pfm": 8 } }
+      ]
+    },
+    {
+      "id": "ms_season_end_awards", "cat": "milestone", "trigger": "seasonEnd", "w": 4, "when": { "seasonApps": [15, 99] },
+      "title": "End-of-Season Awards Night",
+      "text": "Suits, a hotel ballroom, the club's sponsors at round tables. The end-of-season awards. {J} is seated at a table near the back with the younger players, rented suit slightly too long in the sleeves.",
+      "prompt": "The MC hands you the microphone for a quick word.",
+      "choices": [
+        { "label": "Thank the fans", "desc": "Short, warm, safe.", "risk": "low", "hint": "Fans like it.", "text": "Thirty seconds, sincere, a joke that lands. The supporters' club posts the clip.", "fx": { "followers": 2500, "rep": 0.2 } },
+        { "label": "Promise a better season", "desc": "Set the bar publicly.", "risk": "medium", "hint": "Fans will hold you to it.", "text": "“Next season will be ours.” The room cheers. It will be quoted back at him in November, one way or another.", "fx": { "followers": 4000, "flag": "promised_season", "mood": "Determined" } },
+        { "label": "Pass the mic", "desc": "You hate public speaking.", "risk": "low", "hint": "Nothing ventured.", "text": "{J} smiles, shakes his head, and passes it on. The MC makes a joke about shy youngsters.", "fx": {} }
+      ]
+    },
+    {
+      "id": "ms_season_end_contract_talk", "cat": "milestone", "trigger": "seasonEnd", "w": 4, "when": { "contractYears": [0, 1.2], "role": ["starter", "rotation"] },
+      "title": "Exit Interviews: {M} Asks About {J}'s Future",
+      "text": "End-of-season meetings, one by one, in {M}'s office. When it's {J}'s turn, the manager doesn't talk about football first. He asks about the contract. Only a year left.",
+      "prompt": "What do you tell {M}?",
+      "choices": [
+        { "label": "“I want to stay”", "desc": "Commit verbally.", "risk": "low", "hint": "Trust up; your agent may say you gave away leverage.", "text": "{M} shakes his hand. “Good. I'll tell the board.”", "fx": { "trust": 5 } },
+        { "label": "“Let's see what happens”", "desc": "Keep options open.", "risk": "medium", "hint": "Honest. Not what he wanted to hear.", "text": "{M} writes something down and says nothing. The meeting ends a few minutes early.", "fx": { "trust": -3 } }
+      ]
+    },
+    {
+      "id": "ms_promised_season_followup", "cat": "milestone", "trigger": "seasonEnd", "w": 20, "when": { "flags": ["promised_season"] },
+      "title": "Fans Remember {J}'s Promise",
+      "text": "Last summer {J} promised a better season. A fan account has made a video: the clip of the promise, then this season's results. The internet is very good at keeping receipts.",
+      "fx": { "unflag": "promised_season" },
+      "prompt": "Respond to the receipts video?",
+      "choices": [
+        { "label": "Own it", "desc": "“I said it. I'll keep saying it until it's true.”", "risk": "low", "hint": "Respect for accountability.", "text": "The reply gets more likes than the video. Fans like a player who doesn't hide.", "fx": { "followers": 5000, "rep": 0.3 } },
+        { "label": "Ignore it", "desc": "Don't feed it.", "risk": "low", "hint": "It fades.", "text": "The video circulates for a week and disappears.", "fx": {} }
+      ]
+    },
+    {
+      "id": "ms_champion_party", "cat": "milestone", "trigger": "champion", "w": 6,
+      "title": "Champions! {club} Celebrate the Title",
+      "text": "Champagne in the dressing room, a speaker blasting songs nobody chose, {M} soaked and laughing like a boy. Outside, the streets around the stadium are a river of flags and flares. {J} stands on a bench with the trophy and feels, for one second, completely weightless.",
+      "prompt": "The open-top bus parade is tomorrow. The party tonight might go late.",
+      "choices": [
+        { "label": "Party all night", "desc": "You only win this once. Maybe.", "risk": "medium", "hint": "Memories. Photos. Consequences?", "out": [
+          { "w": 3, "text": "The night is a blur of songs and hugs. Someone films {J} leading a chant on a table. It's the most-shared clip of the celebrations.", "fx": { "followers": 40000, "mood": "On Fire" } },
+          { "w": 1, "text": "The night ends with a photo of {J} asleep in a hotel lobby, still holding a flag. The tabloids enjoy it. The club does not.", "fx": { "followers": 30000, "trust": -3, "rep": -0.3 } }
+        ] },
+        { "label": "Celebrate with family", "desc": "Find your parents in the crowd.", "risk": "low", "hint": "A moment just for you.", "text": "{J} finds his mother at the family gate. She holds his face in both hands and says nothing at all. It is the best part of the night.", "fx": { "parental": 10, "mood": "Relieved" } }
+      ]
+    },
+    {
+      "id": "ms_champion_indonesia_convoy", "cat": "milestone", "trigger": "champion", "w": 9, "when": { "country": ["Indonesia"] },
+      "title": "Champions' Convoy Takes Over the City",
+      "text": "By the time the team bus leaves the stadium, it can't move. Motorbikes ten deep, flares, drums, grown men crying on the roofs of minibuses. The police escort gives up. A convoy that should take twenty minutes takes six hours. {J} stands at the open door of the bus, scarf over his head, deafened and happy.",
+      "fx": { "followers": 60000, "rep": 1, "mood": "On Fire" },
+      "prompt": "A supporter climbs onto the bus holding out a baby for a photo.",
+      "choices": [
+        { "label": "Take the baby, pose for the photo", "desc": "Champions belong to the people.", "risk": "low", "hint": "Pure joy.", "text": "The photo of {J} holding a baby in a tiny club shirt becomes the image of the title. The father names the baby after him the next week.", "fx": { "followers": 30000, "rep": 0.5 } },
+        { "label": "Wave from the door", "desc": "Keep safe; the bus is chaos.", "risk": "low", "hint": "Fine.", "text": "{J} waves, the crowd roars, the bus inches forward.", "fx": {} }
+      ]
+    },
+    {
+      "id": "ms_trophy_cup", "cat": "milestone", "trigger": "trophy", "w": 5,
+      "title": "Silverware: {J} Gets His Hands on a Cup",
+      "text": "A cup final win. Ribbons in the club colours, confetti cannons, a trophy heavier than it looks on television. In the dressing room someone fills it with an energy drink and passes it around.",
+      "prompt": "Who do you dedicate it to on social media?",
+      "choices": [
+        { "label": "Your family", "desc": "They gave up everything.", "risk": "low", "hint": "Heartfelt.", "text": "A photo of {J} with the trophy and his parents. The comments are full of other people's parents.", "fx": { "parental": 8, "followers": 6000 } },
+        { "label": "The fans", "desc": "They carried the team.", "risk": "low", "hint": "Popular.", "text": "“This one is yours.” The supporters' groups share it everywhere.", "fx": { "followers": 9000, "rep": 0.3 } },
+        { "label": "The doubters", "desc": "Remember everyone who said you couldn't.", "risk": "medium", "hint": "Viral, divisive.", "text": "“For everyone who said I wasn't good enough.” It goes viral, and a few former coaches recognise themselves.", "fx": { "followers": 15000, "rep": -0.2, "mood": "Confident" } }
+      ]
+    },
+    {
+      "id": "ms_promoted", "cat": "milestone", "trigger": "promoted", "w": 6,
+      "title": "Promoted! {club} Go Up",
+      "text": "The final whistle and the pitch invasion happen at the same time. Supporters lift {J} onto their shoulders and carry him somewhere he cannot see. Next season: a bigger league, bigger stadiums, bigger players. Somewhere in the chaos, an older teammate shouts in his ear: “Half of us won't be here next year. Make sure you are.”",
+      "prompt": "Next season will be a step up. How do you prepare?",
+      "choices": [
+        { "label": "Extra summer training", "desc": "You need to be ready for the higher level.", "risk": "medium", "hint": "Less rest, better shape.", "text": "{J} trains through June. When pre-season starts, he is lean and sharp.", "fx": { "growth": ["physical"], "pfm": -5, "trust": 2 } },
+        { "label": "Celebrate properly", "desc": "Promotion doesn't happen every year.", "risk": "low", "hint": "Joy now, work later.", "text": "{J} celebrates for a week with the fans and comes back rested and happy.", "fx": { "followers": 12000, "mood": "On Fire", "pfm": 8 } }
+      ]
+    },
+    {
+      "id": "ms_relegated", "cat": "milestone", "trigger": "relegated", "w": 6,
+      "title": "Relegated: Tears at {club}",
+      "text": "The other results come through on phones in the stands before the referee blows. By the final whistle everyone knows. Some supporters cry; some throw things; some just sit very still. In the dressing room nobody speaks. {M} stands in the doorway, then leaves without a word.",
+      "prompt": "Supporters are waiting outside the players' entrance. Some are angry.",
+      "choices": [
+        { "label": "Go out and face them", "desc": "Apologise, take the abuse, listen.", "risk": "medium", "hint": "Courage is remembered — so is anger.", "out": [
+          { "w": 2, "text": "{J} walks out alone. The shouting stops when he starts listening. Twenty minutes later an old man shakes his hand: “At least you came out.”", "fx": { "rep": 0.8, "followers": 4000, "mood": "Determined" } },
+          { "w": 1, "text": "A bottle shatters against the wall behind him. Security pulls him back inside. The clip is everywhere by midnight.", "fx": { "mood": "Broken", "followers": 6000 } }
+        ] },
+        { "label": "Leave by the back door", "desc": "Nothing you say tonight will help.", "risk": "low", "hint": "Safe. Some will call it cowardly.", "text": "The players' bus leaves by the service road. {J} watches the lights of the stadium shrink behind him.", "fx": { "mood": "Numb" } },
+        { "label": "Post an apology online", "desc": "Say sorry where everyone can see.", "risk": "low", "hint": "Some will appreciate it. Some never will.", "text": "{J}'s apology is short and honest. The replies are split down the middle.", "fx": { "followers": 1500, "rep": 0.2 } }
+      ]
+    },
+    {
+      "id": "ms_relegated_exit_clause", "cat": "milestone", "trigger": "relegated", "w": 5, "when": { "role": ["starter"], "rep": [10, 100] },
+      "title": "Relegation Clause? {J}'s Phone Starts Ringing",
+      "text": "Relegated players at relegated clubs get calls. {J}'s agent sends a message at 11pm: “Three clubs have asked. Your contract may have a clause. Do we talk?”",
+      "prompt": "Do you want out after relegation?",
+      "choices": [
+        { "label": "Explore options", "desc": "Your career can't afford a step down.", "risk": "medium", "hint": "Fans will notice you looking.", "text": "{J} tells the agent to listen. Within a week the rumours are in the papers and the supporters' groups have opinions.", "fx": { "listed": true, "trust": -5, "followers": 3000 } },
+        { "label": "Stay and fight", "desc": "Bring the club back up.", "risk": "low", "hint": "Loyalty earns a lot of love.", "text": "{J} posts a single line: “We'll be back. I'll be here.” The supporters print it on a banner.", "fx": { "trust": 6, "rep": 0.5, "followers": 8000, "mood": "Determined" } }
+      ]
+    },
+    {
+      "id": "ms_debut", "cat": "milestone", "trigger": "debut", "w": 6,
+      "title": "Debut Day: {J} Plays His First Professional Minutes",
+      "text": [
+        "The fourth official holds up the board with his number on it, and for a second {J} forgets how to jog. The crowd noise arrives all at once, like opening a car door on a motorway. His first touch is a simple pass back to the centre-back. It's the best simple pass he's ever played.",
+        "Warming up on the touchline for twenty minutes, then the call. {M} grabs his shirt and says two sentences he will not remember afterwards. Then he is on the pitch, in the noise, a professional footballer."
+      ],
+      "prompt": "After the match, a journalist asks how it felt.",
+      "choices": [
+        { "label": "“A dream come true”", "desc": "Honest and humble.", "risk": "low", "hint": "Nice headline.", "text": "The quote runs under a photo of him running onto the pitch. His mother buys six copies of the newspaper.", "fx": { "followers": 3000, "parental": 6 } },
+        { "label": "“Just the beginning”", "desc": "Confident, hungry.", "risk": "low", "hint": "Fans love ambition.", "text": "“This is just the beginning.” A pundit calls it the right attitude. Another calls it a lot of talk for twelve minutes of football.", "fx": { "followers": 5000, "mood": "Confident" } },
+        { "label": "Thank {M}", "desc": "Credit the coach who trusted you.", "risk": "low", "hint": "The manager will appreciate it.", "text": "{M} reads the quote the next morning and gives {J} a nod across the canteen.", "fx": { "trust": 4 } }
+      ]
+    },
+    {
+      "id": "ms_debut_shirt", "cat": "milestone", "trigger": "debut", "w": 4,
+      "title": "The Debut Shirt",
+      "text": "The kit man hands {J} his debut shirt in a plastic bag, still damp. “Frame it, kid. You only get one.” Outside, his family is waiting by the bus.",
+      "prompt": "Who gets the debut shirt?",
+      "choices": [
+        { "label": "Your parents", "desc": "It belongs on their wall.", "risk": "low", "hint": "Family first.", "text": "The shirt goes up in the front room at home, under the family photos. Visitors are shown it whether they ask or not.", "fx": { "parental": 10 } },
+        { "label": "Your first coach", "desc": "The man who found you at nine years old.", "risk": "low", "hint": "Gratitude.", "text": "{J}'s first coach, now running a village team, frames it in the clubhouse. Forty kids walk past it every week.", "fx": { "rep": 0.4, "followers": 2000 } },
+        { "label": "Keep it yourself", "desc": "A reminder for bad days.", "risk": "low", "hint": "Something to hold on to.", "text": "It goes in a drawer in his apartment. On bad days he takes it out and smells it, which he will never admit to anyone.", "fx": { "growth": ["mental"] } }
+      ]
+    },
+    {
+      "id": "ms_first_goal", "cat": "milestone", "trigger": "firstGoal", "w": 6,
+      "title": "First Goal! {J} Is Off the Mark",
+      "text": [
+        "The ball hits the back of the net and the noise comes a fraction of a second later, like thunder after lightning. {J} has rehearsed a celebration in his bedroom mirror for ten years. He forgets all of it and just runs.",
+        "The first one is never pretty, they say. {J}'s isn't either: a scuffed shot that bobbles past the keeper. Nobody in the stadium cares. His teammates bury him against the advertising boards."
+      ],
+      "prompt": "The match ball? The ball from your first goal is in the referee's bag.",
+      "choices": [
+        { "label": "Ask for the ball", "desc": "A souvenir for life.", "risk": "low", "hint": "Some referees say yes.", "out": [
+          { "w": 2, "text": "The referee hands it over with a smile. The whole squad signs it on the bus.", "fx": { "mood": "On Fire" } },
+          { "w": 1, "text": "The referee says it's against the rules. The kit man quietly swaps it into his bag anyway.", "fx": { "mood": "On Fire" } }
+        ] },
+        { "label": "Celebrate with the fans", "desc": "Go to the stand after the whistle.", "risk": "low", "hint": "Fans remember.", "text": "{J} goes to the supporters' end. They chant his name for the first time. He will hear that sound for the rest of his life.", "fx": { "followers": 8000, "rep": 0.5 } }
+      ]
+    },
+    {
+      "id": "ms_first_goal_family", "cat": "milestone", "trigger": "firstGoal", "w": 4, "when": { "nationality": ["Indonesia"] },
+      "title": "Syukuran in the Neighbourhood for {J}'s First Goal",
+      "text": "His mother calls before he has even showered. The neighbours have been watching on a TV dragged into the street. His father wants to hold a syukuran — a thanksgiving meal for the whole kampung — on Sunday. Fifty people, nasi tumpeng, the imam invited.",
+      "prompt": "Will you fly home for the syukuran?",
+      "choices": [
+        { "label": "Go home for it", "desc": "One day trip, back for training.", "risk": "medium", "hint": "Family joy. Tired legs.", "text": "The whole kampung turns out. {J} cuts the top of the tumpeng and hands it to his grandmother. He sleeps on the flight back and makes training by three minutes.", "fx": { "parental": 12, "pfm": -4, "followers": 5000, "mood": "Relieved" } },
+        { "label": "Send money for the food", "desc": "Join by video call.", "risk": "low", "hint": "Practical. Your mother will forgive you.", "vars": { "cost": ["wealthPct", 5, 80] }, "text": "{J} sends {cost} for the food and joins on video. Fifty faces crowd the phone screen to wave at him.", "fx": { "wealth": "-cost", "parental": 6 } }
+      ]
+    },
+    {
+      "id": "ms_goal_streak", "cat": "milestone", "trigger": "goalStreak", "w": 6,
+      "title": "Three in Three: {J} Can't Stop Scoring",
+      "text": "Goal, goal, goal. Three matches in a row. The stats accounts have noticed; the pundits have noticed; the bookmakers have definitely noticed. Strikers talk about the goal looking bigger when it's going well. For {J} it looks like a garage door.",
+      "fx": { "rep": 0.6, "followers": 6000 },
+      "prompt": "A tabloid wants an exclusive interview about your hot streak.",
+      "choices": [
+        { "label": "Do the interview", "desc": "Strike while it's hot.", "risk": "medium", "hint": "Exposure, and a jinx some believe in.", "text": "The interview runs over two pages. Teammates stick it on the dressing-room wall and draw a moustache on him.", "fx": { "followers": 8000, "rep": 0.4 } },
+        { "label": "Decline: stay focused", "desc": "Don't jinx it.", "risk": "low", "hint": "Superstition wins.", "text": "{J} declines politely and doesn't change his socks for a month.", "fx": { "form": 0.1 } }
+      ]
+    },
+    {
+      "id": "ms_hat_trick", "cat": "milestone", "trigger": "hatTrick", "w": 8,
+      "title": "Hat-Trick Hero: {J} Takes the Match Ball Home",
+      "text": "Three goals. The match ball signed by every teammate, the stadium announcer saying his name three times, the opposition keeper shaking his hand with a look of pure exhaustion. The clips are everywhere before the team bus leaves.",
+      "fx": { "rep": 1, "followers": 20000, "mood": "On Fire" },
+      "prompt": "What do you do with the hat-trick ball?",
+      "choices": [
+        { "label": "Auction it for charity", "desc": "Turn the moment into something good.", "risk": "low", "hint": "Good for reputation.", "text": "The ball raises enough to repair a village school's roof. The story runs on national news.", "fx": { "rep": 1, "followers": 10000 } },
+        { "label": "Give it to a young fan", "desc": "Find the kid in the front row.", "risk": "low", "hint": "Unforgettable for one child.", "text": "A boy of nine in a homemade shirt with {J} on the back goes home with the ball. His father posts the video and it breaks the internet for a day.", "fx": { "followers": 25000, "rep": 0.5 } },
+        { "label": "Keep it", "desc": "You earned it.", "risk": "low", "hint": "Yours forever.", "text": "The ball sits on a shelf in his apartment. On bad days, he looks at it.", "fx": { "growth": ["mental"] } }
+      ]
+    },
+    {
+      "id": "ms_nightmare", "cat": "milestone", "trigger": "nightmare", "w": 6,
+      "title": "Nightmare Night for {J}",
+      "text": [
+        "Everything went wrong. A misplaced pass leading to a goal, a heavy first touch in the box, the jeers when his number went up on the substitutes' board. In the dressing room nobody looks at him, which is somehow worse than shouting.",
+        "It's the kind of performance that follows you home. {J}'s phone is buzzing with notifications he doesn't want to read. On the bus, the only sound is the engine."
+      ],
+      "prompt": "How do you deal with it?",
+      "choices": [
+        { "label": "Read every comment", "desc": "Face it head on.", "risk": "high", "hint": "Some criticism helps. Most hurts.", "text": "{J} reads them all, until 3am. Some are fair. Most are cruel. He doesn't sleep.", "fx": { "mood": "Broken", "pfm": -4, "stat": { "mental": -1 } } },
+        { "label": "Phone off, watch the tape", "desc": "Only the football matters.", "risk": "low", "hint": "Learning without the noise.", "text": "{J} watches the full match twice with the sound off and writes down four things to fix. Then he sleeps.", "fx": { "growth": ["mental"], "mood": "Determined" } },
+        { "label": "Apologise to the team", "desc": "Own it in the dressing room.", "risk": "low", "hint": "Teammates respect it.", "text": "“That was on me.” The captain claps once. “Good. Now forget it.”", "fx": { "trust": 2 } }
+      ]
+    },
+    {
+      "id": "ms_red_card", "cat": "milestone", "trigger": "redCard", "w": 6,
+      "title": "Sent Off: {J} Walks the Long Walk",
+      "text": "The red card comes out and the stadium becomes a single noise. The walk to the tunnel feels like two kilometres. Somebody throws a plastic bottle. {M} doesn't look at him as he passes the dugout.",
+      "prompt": "The club wants a statement. Do you appeal or apologise?",
+      "choices": [
+        { "label": "Apologise to the team", "desc": "Take full responsibility.", "risk": "low", "hint": "Repairs trust.", "text": "{J} apologises in front of the whole squad on Monday. {M} accepts it with one word: “Learn.”", "fx": { "trust": 3 } },
+        { "label": "Appeal the decision", "desc": "You genuinely got the ball.", "risk": "medium", "hint": "Might shorten the ban — or lengthen it.", "out": [
+          { "w": 1, "text": "The appeal succeeds. The ban is cut. {J} feels vindicated; the referee does not.", "fx": { "suspension": -1, "trust": 1 } },
+          { "w": 1, "text": "The appeal is rejected and the panel adds a game for a frivolous appeal.", "fx": { "suspension": 1, "trust": -3 } }
+        ] }
+      ]
+    },
+    {
+      "id": "ms_bad_run", "cat": "milestone", "trigger": "badRun", "w": 6,
+      "title": "Three Defeats in a Row: Crisis Talk at {club}",
+      "text": "Three straight losses. The word “crisis” is in the papers. Supporters have started a hashtag calling for {M}'s head. Training is quiet and tense, everyone afraid to make a mistake in front of the coaching staff.",
+      "prompt": "A senior player calls a players-only meeting.",
+      "choices": [
+        { "label": "Speak up", "desc": "Say what nobody wants to say.", "risk": "high", "hint": "Could make you a leader — or an enemy.", "check": { "stat": "mental", "dc": 58 },
+          "ok": { "text": "{J} speaks for two minutes about effort and pressing. The room goes quiet, then the captain nods. Something shifts.", "fx": { "rep": 0.5, "teammate": { "who": "T", "rel": "ally" }, "trust": 2 } },
+          "bad": { "text": "{J} starts talking and the older players exchange looks. “Who asked you?” says {T}. The meeting moves on without him.", "fx": { "teammate": { "who": "T", "rel": "rival" }, "mood": "Frustrated" } } },
+        { "label": "Listen", "desc": "Let the leaders lead.", "risk": "low", "hint": "Safe.", "text": "{J} listens. The meeting ends with handshakes and a promise. Promises are cheap in a crisis.", "fx": {} }
+      ]
+    },
+    {
+      "id": "ms_bad_run_fans_training", "cat": "milestone", "trigger": "badRun", "w": 5, "when": { "country": ["Indonesia"] },
+      "title": "Supporters Storm Training After Third Defeat",
+      "text": "Two hundred supporters arrive at the training ground gate with banners and a megaphone. Security lets the leaders in. They want to speak to the players. They are polite, then they are not.",
+      "prompt": "The supporters' leader points at you: “You. Explain yourself.”",
+      "choices": [
+        { "label": "Answer calmly", "desc": "Respect the passion. Promise effort.", "risk": "medium", "hint": "Could defuse it.", "check": { "stat": "mental", "dc": 52 },
+          "ok": { "text": "{J} speaks calmly, admits the team hasn't been good enough, promises effort. The leader nods. “Prove it Saturday.”", "fx": { "rep": 0.5, "followers": 3000 } },
+          "bad": { "text": "{J}'s voice shakes. Somebody laughs. The clip of the confrontation goes viral for all the wrong reasons.", "fx": { "mood": "Anxious", "followers": 5000 } } },
+        { "label": "Let the captain talk", "desc": "Not your place.", "risk": "low", "hint": "Some fans will call it hiding.", "text": "The captain handles it. One fan shouts {J}'s name as they leave. It's not a friendly shout.", "fx": { "mood": "Anxious" } }
+      ]
+    },
+    {
+      "id": "ms_bench_streak", "cat": "milestone", "trigger": "benchStreak", "w": 6,
+      "title": "Four Matches, Zero Minutes: {J} Frozen Out?",
+      "text": "Four matches in a row on the bench without getting on. The local paper asks whether {J} has a future at the club. His family asks it more politely on the phone. {J} asks it at 2am staring at the ceiling.",
+      "prompt": "What do you do about it?",
+      "choices": [
+        { "label": "Ask {M} for a meeting", "desc": "Find out what's missing.", "risk": "medium", "hint": "Clarity — whatever it is.", "out": [
+          { "w": 2, "text": "{M} is honest: “Your defensive work isn't there yet. Fix it and you play.” Brutal, but useful.", "fx": { "trust": 3, "tacticalFit": 5, "mood": "Determined" } },
+          { "w": 1, "text": "{M} says the team is winning and he won't change it. That's all. {J} leaves knowing nothing new.", "fx": { "mood": "Frustrated" } }
+        ] },
+        { "label": "Ask about a loan", "desc": "Minutes elsewhere might be better.", "risk": "medium", "hint": "The club may help — or take offence.", "text": "{J}'s agent makes calls about a loan. The club doesn't say no.", "fx": { "listed": true, "trust": -3 } },
+        { "label": "Train harder", "desc": "Make it impossible to leave you out.", "risk": "low", "hint": "Slow but respected.", "text": "{J} stays after every session. The fitness coach starts timing his extra sprints.", "fx": { "trust": 3, "pfm": -4, "growth": ["rel"] } }
+      ]
+    },
+    {
+      "id": "ms_bench_streak_family", "cat": "milestone", "trigger": "benchStreak", "w": 4,
+      "title": "Back Home, the Questions Start",
+      "text": "His uncle asks at a family dinner on video: “So when do you actually play?” Everyone laughs. {J} laughs too. Later, his mother sends a private message: “Don't listen to him. Are you eating properly?”",
+      "fx": { "mood": "Frustrated" },
+      "prompt": "Reply to your mother?",
+      "choices": [
+        { "label": "Tell her the truth", "desc": "It's hard right now.", "risk": "low", "hint": "Lighter heart.", "text": "{J} tells her everything. She says she prayed for him. He doesn't know if it helps football, but it helps him.", "fx": { "parental": 6, "mood": "Relieved" } },
+        { "label": "“Everything's fine”", "desc": "Don't worry her.", "risk": "low", "hint": "Protects her. Not you.", "text": "“Everything's fine, Ma.” She doesn't believe him, but she says she does.", "fx": {} }
+      ]
+    },
+    {
+      "id": "ms_moved_first_day", "cat": "milestone", "trigger": "moved", "w": 6,
+      "title": "First Day at {club}: New Badge, New Rules",
+      "text": [
+        "New training ground, new kit, new dressing room politics. {J} doesn't know where to sit in the canteen yet, which is the most dangerous decision of any new player's first week.",
+        "The club photographer takes the official photos: arms folded, half smile, holding the scarf above his head. Then he is just another new player trying to learn the names of forty people in a building he can't navigate."
+      ],
+      "prompt": "Where do you sit at lunch on day one?",
+      "choices": [
+        { "label": "With the senior players", "desc": "Go where the power is.", "risk": "medium", "hint": "Bold. Could be welcomed or resented.", "out": [
+          { "w": 1, "text": "The captain makes room for him. By Friday {J} knows every in-joke.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "trust": 1 } },
+          { "w": 1, "text": "Silence when he sits down. “That's {T}'s seat.” He moves.", "fx": { "teammate": { "who": "T", "rel": "rival" }, "mood": "Anxious" } }
+        ] },
+        { "label": "With the young players", "desc": "Your natural group.", "risk": "low", "hint": "Easy friendships.", "text": "The younger players adopt him immediately. Group chat invitations arrive by dinner.", "fx": { "teammate": { "who": "T", "rel": "ally" } } },
+        { "label": "Alone with headphones", "desc": "Observe first.", "risk": "low", "hint": "Safe, but you stay a stranger longer.", "text": "{J} eats alone and watches. He learns a lot about the dressing room. Nobody learns anything about him.", "fx": { "growth": ["mental"] } }
+      ]
+    },
+    {
+      "id": "ms_moved_fans_welcome", "cat": "milestone", "trigger": "moved", "w": 4,
+      "title": "{club} Supporters Give {J} Their Verdict",
+      "text": "The new club's supporters do what supporters do: find every clip, every old post, every bad match. Some are excited. Some dig up an old photo of {J} wearing a rival club's shirt as a child.",
+      "prompt": "The old photo is circulating. Address it?",
+      "choices": [
+        { "label": "Joke about it", "desc": "“I was eight. I've grown up.”", "risk": "medium", "hint": "Humour usually wins.", "out": [
+          { "w": 3, "text": "The joke lands. Supporters adopt “I've grown up” as a chant.", "fx": { "followers": 8000, "rep": 0.3 } },
+          { "w": 1, "text": "Some fans don't find it funny. Rival fans find it hilarious.", "fx": { "followers": 3000 } }
+        ] },
+        { "label": "Kiss the badge in training photos", "desc": "Show commitment.", "risk": "low", "hint": "Some fans love it; others call it cheap.", "text": "The badge-kiss photo divides opinion. Most fans like it.", "fx": { "followers": 4000 } },
+        { "label": "Say nothing", "desc": "Let your football answer.", "risk": "low", "hint": "Fades.", "text": "The photo stops circulating once he plays well. Or at least until he plays badly.", "fx": {} }
+      ]
+    },
+    {
+      "id": "ms_moved_house", "cat": "milestone", "trigger": "moved", "w": 4, "vars": { "rent": ["wageWeeks", 3, 100] },
+      "title": "House Hunting in a New City",
+      "text": "The club put {J} in a hotel for two weeks. Now he needs somewhere to live. The relocation agent shows him a modern apartment near the training ground and a bigger place in the expensive part of town where the senior players live.",
+      "prompt": "Where do you live?",
+      "choices": [
+        { "label": "Near the training ground", "desc": "Practical, quiet, affordable.", "risk": "low", "hint": "Sensible.", "text": "A one-bedroom apartment ten minutes from training. He can sleep an hour longer every day.", "fx": { "pfm": 3 } },
+        { "label": "Where the stars live", "desc": "Expensive, close to teammates.", "risk": "medium", "hint": "Higher living costs. Teammates on your street.", "text": "The deposit alone is {rent}. His new neighbour is the club captain, who waves from his car.", "fx": { "wealth": "-rent", "lifestyle": 0.2, "teammate": { "who": "T", "rel": "ally" } } }
+      ]
+    },
+    {
+      "id": "ms_loan_start", "cat": "milestone", "trigger": "loanStart", "w": 6,
+      "title": "On Loan at {club}: Play or Be Forgotten",
+      "text": "A loan move is a strange thing: a club that doesn't own you, teammates who know you'll leave, a parent club watching every match through a scout's laptop. The loan manager tells {J} the deal on the first day: “You're here to play. If you don't, that's on both of us.”",
+      "prompt": "How do you approach the loan?",
+      "choices": [
+        { "label": "Commit like it's forever", "desc": "Kiss the badge, learn the songs.", "risk": "low", "hint": "Fans and teammates love it.", "text": "{J} learns the club anthem by the second week. The supporters notice.", "fx": { "trust": 4, "followers": 2000 } },
+        { "label": "Focus on your stats", "desc": "Goals and ratings get you back.", "risk": "medium", "hint": "Your parent club watches numbers. Teammates may see you as selfish.", "text": "{J} plays for his highlight reel. It works on paper. The dressing room is cooler toward him.", "fx": { "rep": 0.3, "teammate": { "who": "T", "rel": "rival" } } }
+      ]
+    },
+    {
+      "id": "ms_loan_return", "cat": "milestone", "trigger": "loanReturn", "w": 6,
+      "title": "Back From Loan: Does Anyone Remember {J}?",
+      "text": "{J} walks back into his parent club's training ground. Some faces are new, some peg numbers have changed, and the manager's door is closed. He gets the same peg as before, in the corner.",
+      "prompt": "How do you re-introduce yourself?",
+      "choices": [
+        { "label": "Ask for a clear plan", "desc": "Will you play this season?", "risk": "medium", "hint": "Honest answers aren't always nice.", "out": [
+          { "w": 1, "text": "{M} says he watched every loan match. “You're in my plans.” The best six words he's heard all year.", "fx": { "trust": 8, "mood": "Motivated" } },
+          { "w": 1, "text": "{M} is vague. “We'll see in pre-season.” {J} has heard that before.", "fx": { "mood": "Anxious" } }
+        ] },
+        { "label": "Let training speak", "desc": "Show what the loan taught you.", "risk": "low", "hint": "Slow but solid.", "text": "{J} is sharper, stronger, more confident than when he left. The coaches notice in the first week.", "fx": { "trust": 3 } }
+      ]
+    },
+    {
+      "id": "ms_free_agent", "cat": "milestone", "trigger": "freeAgent", "w": 8, "when": { "freeAgent": true },
+      "title": "Free Agent: {J} Is Out of Contract",
+      "text": "No club. No training ground. No kit. For the first time since he was a boy, {J} wakes up without anywhere to be at 9am. His agent says the phone will ring. His agent always says that.",
+      "prompt": "How do you stay sharp without a club?",
+      "choices": [
+        { "label": "Hire a personal trainer", "desc": "Stay match-fit at your own cost.", "risk": "low", "hint": "Expensive, but clubs check fitness.", "vars": { "cost": ["wealthPct", 8, 200] }, "text": "{J} pays {cost} for six weeks with a personal trainer. When the trials come, he's ready.", "fx": { "wealth": "-cost", "pfm": 8 } },
+        { "label": "Train with an amateur club", "desc": "Free, humble, real football.", "risk": "low", "hint": "Keeps your touch. Good for the soul.", "text": "An amateur side lets {J} train with them on Tuesday nights. Bricklayers and teachers try to nutmeg him. It reminds him why he started.", "fx": { "mood": "Determined", "pfm": 4 } },
+        { "label": "Post a highlight reel", "desc": "Remind the world you exist.", "risk": "medium", "hint": "Visibility — or desperation?", "text": "The reel gets shared by a few scouts. It also gets a few comments asking if he's retired.", "fx": { "followers": 3000, "rep": 0.2 } }
+      ]
+    },
+    {
+      "id": "ms_role_starter", "cat": "milestone", "trigger": "roleStarter", "w": 6,
+      "title": "{J} Earns His Place in {M}'s Starting XI",
+      "text": "There's no ceremony when you become a regular starter. Your name just keeps appearing on the team sheet, and one day the kit man stops asking which shirt size you want for the warm-up top. {J} is a starter now. Everyone knows it, including the player he replaced.",
+      "prompt": "The player who lost his place to you is clearly hurting.",
+      "choices": [
+        { "label": "Talk to him", "desc": "Acknowledge it. Respect him.", "risk": "low", "hint": "Class.", "out": [
+          { "w": 2, "text": "{T} shrugs, then smiles. “It's football. Play well or I'm taking it back.” Respect both ways.", "fx": { "teammate": { "who": "T", "rel": "ally" } } },
+          { "w": 1, "text": "{T} doesn't want sympathy. “Don't. Just don't.”", "fx": { "teammate": { "who": "T", "rel": "rival" } } }
+        ] },
+        { "label": "Leave him be", "desc": "It's not personal. It's football.", "risk": "low", "hint": "Cold, perhaps. Professional.", "text": "{J} says nothing. The dressing room moves on. {T} doesn't.", "fx": { "teammate": { "who": "T", "rel": "rival" } } }
+      ]
+    },
+    {
+      "id": "ms_role_outcast", "cat": "milestone", "trigger": "roleOutcast", "w": 6,
+      "title": "Outside the Squad: {J} Told to Train Alone",
+      "text": "The message comes from the assistant coach, not {M}: from Monday, {J} will train with the reserves. No explanation, no meeting. The squad photo is taken that afternoon. He is not in it.",
+      "prompt": "You've been frozen out. Response?",
+      "choices": [
+        { "label": "Train with total professionalism", "desc": "Be the best reserve they've ever seen.", "risk": "low", "hint": "Sometimes it works.", "text": "{J} trains with the reserves like it's a cup final. The reserve coach starts sending reports upstairs.", "fx": { "trust": 4, "mood": "Determined" } },
+        { "label": "Go to the media", "desc": "Tell the world how you're being treated.", "risk": "extreme", "hint": "Public pressure — and possibly the end at this club.", "text": "The interview is explosive. The club fines him and lists him for transfer by the weekend.", "fx": { "trust": -15, "listed": true, "followers": 20000, "rep": 0.5, "mood": "Angry" } },
+        { "label": "Demand a transfer", "desc": "Through your agent, formally.", "risk": "high", "hint": "Clean break. Fans may turn.", "text": "The transfer request is submitted. The club accepts it with suspicious speed.", "fx": { "listed": true, "trust": -8 } }
+      ]
+    },
+    {
+      "id": "ms_birthday18", "cat": "milestone", "trigger": "birthday18", "w": 8,
+      "title": "{J} Turns 18",
+      "text": "Eighteen. Legally an adult, finally allowed to sign his own contracts, open his own bank account, buy a car without his father's signature. The squad sings badly in the canteen and smashes a cake into his face. His mother calls at midnight to be the first.",
+      "prompt": "How do you celebrate?",
+      "choices": [
+        { "label": "Party with the squad", "desc": "Your first proper night out.", "risk": "medium", "hint": "Fun. Photos.", "out": [
+          { "w": 3, "text": "A good night, a few photos, nothing anyone regrets. {J} finally feels like part of the group.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "mood": "Confident" } },
+          { "w": 1, "text": "A blurry photo of {J} at a club at 3am appears online the day before training. {M} notices.", "fx": { "trust": -4, "followers": 5000 } }
+        ] },
+        { "label": "Quiet dinner", "desc": "Family on video, early night.", "risk": "low", "hint": "Calm.", "text": "Dinner alone, a long video call with the family, in bed by ten. It's his birthday; he can do what he wants.", "fx": { "parental": 5 } },
+        { "label": "Buy yourself a gift", "desc": "A watch, a console, something just for you.", "risk": "low", "hint": "You earned it.", "vars": { "cost": ["wealthPct", 10, 100] }, "text": "{J} spends {cost} on something he wanted since he was twelve. It feels exactly as good as he imagined.", "fx": { "wealth": "-cost", "mood": "Relieved" } }
+      ]
+    },
+    {
+      "id": "ms_birthday18_contract", "cat": "milestone", "trigger": "birthday18", "w": 5, "when": { "role": ["starter", "rotation"] },
+      "title": "Eighteen and Eligible: First Professional Contract Talk",
+      "text": "On his eighteenth birthday the club's sporting director calls {J} into an office with a view of the pitch. A youth contract is one thing; a professional deal is another. The director slides a folder across the desk. “Read it with your family. We'd like an answer this month.”",
+      "fx": { "rep": 0.3 },
+      "prompt": "Do you sign the first offer?",
+      "choices": [
+        { "label": "Sign immediately", "desc": "Loyalty to the club that made you.", "risk": "low", "hint": "Happy club. Maybe you left money on the table.", "text": "{J} signs with his parents beside him. The club posts the photo; the fans love it.", "fx": { "trust": 5, "followers": 5000, "wealth": 300 } },
+        { "label": "Get an agent to read it", "desc": "Know what you're signing.", "risk": "low", "hint": "Smart. Agents cost money.", "text": "An agent finds two clauses nobody explained, and gets them changed. {J} signs a better deal a week later.", "fx": { "wealth": 600, "agent": { "who": "A", "quality": [45, 70], "cut": 8 } } }
+      ]
+    },
+    {
+      "id": "ms_birthday21", "cat": "milestone", "trigger": "birthday21", "w": 8,
+      "title": "Twenty-One: No Longer a Prospect",
+      "text": "There's an invisible line in football at twenty-one. Before it, you're a prospect. After it, you're just a player — good enough, or not. A journalist writes a column about players who were the next big thing at seventeen. {J}'s name is in the second paragraph.",
+      "prompt": "Read the column?",
+      "choices": [
+        { "label": "Read it and use it", "desc": "Fuel.", "risk": "medium", "hint": "Motivation or wound.", "check": { "stat": "mental", "dc": 55 },
+          "ok": { "text": "{J} screenshots the paragraph and makes it his lock screen. Every day, a reminder.", "fx": { "mood": "Determined", "growth": ["rel"] } },
+          "bad": { "text": "{J} reads it four times. The words stick like splinters.", "fx": { "mood": "Anxious" } } },
+        { "label": "Don't read it", "desc": "Not your business.", "risk": "low", "hint": "Peace.", "text": "{J} never reads it. A teammate tries to show him; he walks away.", "fx": {} }
+      ]
+    },
+    {
+      "id": "ms_birthday25", "cat": "milestone", "trigger": "birthday25", "w": 8,
+      "title": "Twenty-Five: The Prime Years Begin",
+      "text": "Twenty-five. Sports scientists say this is when footballers peak physically and mentally. {J} knows his body better than ever: which foods make his legs heavy, which stretches matter, how many hours of sleep before a match. Peak years are short.",
+      "prompt": "What do you want from your prime?",
+      "choices": [
+        { "label": "Trophies", "desc": "Push for a bigger club.", "risk": "medium", "hint": "Your agent will start making calls.", "text": "{J} tells his agent: “Find me a club that wins.” The agent smiles. He's been waiting for this conversation.", "fx": { "flag": "wants_bigger_club", "mood": "Determined" } },
+        { "label": "Money and security", "desc": "Set your family up for life.", "risk": "medium", "hint": "Practical. Some fans will judge.", "text": "{J} tells his agent that the next contract has to change his family's life. The agent writes it down.", "fx": { "flag": "wants_money" } },
+        { "label": "Legacy here", "desc": "Become a legend at one club.", "risk": "low", "hint": "Loyalty is rare. Fans adore it.", "text": "{J} tells {M} he wants to finish his career at {club}. The manager doesn't say anything, but grips his shoulder.", "fx": { "trust": 6, "flag": "loyal" } }
+      ]
+    },
+    {
+      "id": "ms_birthday30", "cat": "milestone", "trigger": "birthday30", "w": 8,
+      "title": "{J} Turns 30: The Clock Starts Ticking",
+      "text": "Thirty. The recovery takes a day longer than it used to. The young players call him “bang” or “mate” or “old man” depending on their language. Clubs start offering two-year contracts instead of four. Every body knows its own expiry date before its owner does.",
+      "prompt": "How do you adapt?",
+      "choices": [
+        { "label": "Hire a nutritionist and sleep coach", "desc": "Invest in longevity.", "risk": "low", "hint": "Expensive. Probably worth it.", "vars": { "cost": ["wageWeeks", 2, 200] }, "text": "{J} spends {cost} on a nutritionist and a sleep programme. Within a month his recovery numbers improve.", "fx": { "wealth": "-cost", "pfm": 8, "flag": "longevity" } },
+        { "label": "Change your game", "desc": "Less running, more thinking.", "risk": "medium", "hint": "Smart players last longer.", "text": "{J} starts positioning himself instead of chasing. His coaches call it maturity.", "fx": { "growth": ["mental"], "tacticalFit": 5 } },
+        { "label": "Ignore it", "desc": "Age is a number.", "risk": "medium", "hint": "Until it isn't.", "text": "{J} keeps training like he's twenty-two. For now, his body lets him.", "fx": {} }
+      ]
+    },
+    {
+      "id": "ms_birthday33", "cat": "milestone", "trigger": "birthday33", "w": 8,
+      "title": "Thirty-Three: The Conversations Start",
+      "text": "His agent mentions coaching badges. His wife, or his mother, mentions a quieter life. Journalists start every interview with “How long can you go on?” {J} has started to answer the question privately before they ask it.",
+      "prompt": "Start planning life after football?",
+      "choices": [
+        { "label": "Begin coaching badges", "desc": "Weekend courses with the federation.", "risk": "low", "hint": "A future. Less rest.", "text": "{J} enrols in his first coaching licence. On the first day, the instructor asks him to explain a pressing trap to the class. He's good at it.", "fx": { "flag": "coaching_badges", "pfm": -3, "growth": ["mental"] } },
+        { "label": "Start a business", "desc": "Futsal courts, a café, a clothing line.", "risk": "medium", "hint": "Could set you up — or lose your savings.", "vars": { "cost": ["wealthPct", 25, 500] }, "text": "{J} invests {cost} in a futsal complex in his hometown. It opens with his photo on the wall.", "fx": { "wealth": "-cost", "chain": { "id": "ms_business_result", "in": [20, 40] } } },
+        { "label": "Not yet", "desc": "You still have years left.", "risk": "low", "hint": "Focus.", "text": "{J} tells everyone the same thing: “Ask me in two years.”", "fx": {} }
+      ]
+    },
+    {
+      "id": "ms_business_result", "cat": "milestone", "chainOnly": true, "vars": { "cost": ["wealthPct", 25, 500] },
+      "title": "{J}'s Futsal Complex: One Year On",
+      "text": "A year after opening, the accountant sends the numbers on the futsal complex.",
+      "choices": [
+        { "label": "Read the report", "risk": "medium", "hint": "Business is business.", "out": [
+          { "w": 2, "text": "Booked every evening, a youth league on weekends, a profit. The complex is the busiest place in town after dark.", "fx": { "wealth": "cost*0.6", "rep": 0.5, "mood": "Confident" } },
+          { "w": 1, "text": "It barely breaks even. The courts are full, but the manager has been skimming. {J} fires him and takes over the books.", "fx": { "mood": "Frustrated" } }
+        ] }
+      ]
+    }
+  ]
+}

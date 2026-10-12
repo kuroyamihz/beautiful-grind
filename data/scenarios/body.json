@@ -1,0 +1,270 @@
+{
+  "scenarios": [
+    {
+      "id": "bo_injury_initial", "cat": "body", "trigger": "injured", "w": 6,
+      "title": "Injured: {J} Starts the Road Back",
+      "text": "The physio's diagnosis is short. A few weeks out. {J} sits in the treatment room with ice strapped to his leg, watching the others train through the window.",
+      "prompt": "How do you spend the time?",
+      "choices": [
+        { "label": "Watch every training session", "desc": "Stay part of the group.", "risk": "low", "hint": "Teammates notice.", "text": "{J} watches every session from the touchline on crutches. The squad respects it.", "fx": { "trust": 2, "growth": ["mental"] } },
+        { "label": "Go home to recover", "desc": "Family care.", "risk": "low", "hint": "Your mother will feed you too much.", "text": "His mother's cooking heals everything except the injury.", "fx": { "parental": 6, "mood": "Relieved" } }
+      ]
+    },
+    {
+      "id": "bo_long_injury_despair", "cat": "body", "trigger": "longInjury", "w": 8,
+      "title": "Months Out: {J} Faces a Long Recovery",
+      "text": "The surgeon shows {J} the scan on a lightbox: the damage, in grey and white. Months. Maybe a season. The words “full recovery” are used carefully, with a “should” in front of them.",
+      "prompt": "How do you face it?",
+      "choices": [
+        { "label": "Set a target date and attack rehab", "desc": "Rehab as a mission.", "risk": "medium", "hint": "Drive helps. Rushing hurts.", "text": "{J} writes the target date on his bathroom mirror and attacks every session. The physios have to slow him down.", "fx": { "mood": "Determined", "growth": ["physical"] } },
+        { "label": "Talk to the club psychologist", "desc": "Long injuries break minds.", "risk": "low", "hint": "Mental armour.", "text": "Weekly sessions help {J} through the dark middle months. He comes out sharper in the head.", "fx": { "growth": ["mental"], "mood": "Focused" } },
+        { "label": "Disappear for a while", "desc": "No football, no phone.", "risk": "medium", "hint": "Recharge or drift.", "text": "{J} disappears from social media and the training ground. Some days he doesn't get out of bed.", "fx": { "mood": "Broken", "followers": -2000 } }
+      ]
+    },
+    {
+      "id": "bo_long_injury_surgery_choice", "cat": "body", "trigger": "longInjury", "w": 5, "vars": { "cost": ["wealthPct", 15, 300] },
+      "title": "Surgery Abroad or at Home?",
+      "text": "The club's surgeon can operate next week. A famous specialist abroad — the one who fixes the world's best players — has an opening in a month. The club will pay for the local surgery; the specialist would cost {J} {cost} himself.",
+      "prompt": "Where do you have surgery?",
+      "choices": [
+        { "label": "The famous specialist", "desc": "The best hands in the world.", "risk": "low", "hint": "Expensive, maybe better long-term.", "text": "The specialist is brilliant and brief. “You'll be stronger than before.” {J} believes him.", "fx": { "wealth": "-cost", "flag": "best_surgery", "mood": "Determined" } },
+        { "label": "The club's surgeon", "desc": "Sooner, and free.", "risk": "medium", "hint": "Usually fine.", "text": "The operation goes well. The club appreciates the trust.", "fx": { "trust": 3 } }
+      ]
+    },
+    {
+      "id": "bo_return_long", "cat": "body", "trigger": "returnLong", "w": 8,
+      "title": "{J} Is Back After Months Out",
+      "text": "First full training session after months away. The ball feels strange, like greeting an old friend who's changed. The squad applauds when he jogs onto the pitch. On the first sprint, he waits for the pain. It doesn't come.",
+      "prompt": "How fast do you push?",
+      "choices": [
+        { "label": "Build up slowly", "desc": "Trust the plan.", "risk": "low", "hint": "No relapses.", "text": "Ten minutes, then twenty, then a half. By the end of the month, he's himself again.", "fx": { "pfm": 6, "mood": "Relieved" } },
+        { "label": "Demand to play immediately", "desc": "You've waited long enough.", "risk": "high", "hint": "Rust and risk.", "out": [
+          { "w": 2, "text": "{M} gives him thirty minutes. He's rusty, but alive.", "fx": { "trust": 1, "form": -0.2 } },
+          { "w": 1, "text": "He pushes too hard and feels a twinge in the same place. Two more weeks.", "fx": { "injury": "minor", "mood": "Broken" } }
+        ] }
+      ]
+    },
+    {
+      "id": "bo_recovered", "cat": "body", "trigger": "recovered", "w": 5,
+      "title": "Fit Again: {J} Back in Training",
+      "text": "The physio signs the form: fit to train. {J} laces his boots slowly, savouring it. The first rondo feels like coming home.",
+      "fx": { "mood": "Motivated" }
+    },
+    {
+      "id": "bo_sleep_problems", "group": "sleep", "groupCd": 60, "cat": "body", "w": 4,
+      "title": "{J} Can't Sleep",
+      "text": "Night matches mean adrenaline at midnight, cold showers at 1am, staring at the ceiling at 3am. {J} has been running on four hours of sleep for two weeks. His reaction times are down.",
+      "prompt": "Fix it?",
+      "choices": [
+        { "label": "Sleep coach and strict routine", "desc": "No phone in bed, blackout curtains.", "risk": "low", "hint": "Boring and effective.", "text": "No screens after 10pm, blackout curtains, a cold room. Within a week, {J} sleeps eight hours.", "fx": { "pfm": 10, "mood": "Focused" } },
+        { "label": "Sleeping pills", "desc": "The quick fix.", "risk": "high", "hint": "Dependency is real.", "out": [
+          { "w": 1, "text": "The pills help, briefly. The club doctor finds out and takes him off them.", "fx": { "pfm": 4 } },
+          { "w": 1, "text": "The pills become a habit. Mornings are foggy. His reactions get worse, not better.", "fx": { "pfm": -6, "mood": "Numb", "stat": { "mental": -1 } } }
+        ] }
+      ]
+    },
+    {
+      "id": "bo_diet_change", "group": "diet", "groupCd": 104, "cat": "body", "w": 4,
+      "title": "The Nutritionist's New Plan",
+      "text": "The club's new nutritionist hands {J} a meal plan: no sugar, no fried food, timed carbohydrates, a lot of fish. It's very different from what his mother cooks.",
+      "prompt": "Follow it?",
+      "choices": [
+        { "label": "Follow it strictly", "desc": "Professional athletes eat like professionals.", "risk": "low", "hint": "Better body, sadder meals.", "text": "Six weeks later {J}'s body fat is down and his recovery is faster. He misses fried tempeh every single day.", "fx": { "pfm": 8, "growth": ["physical"] } },
+        { "label": "Follow it mostly", "desc": "With a cheat day.", "risk": "low", "hint": "Balance.", "text": "Mostly fish, sometimes nasi goreng. A reasonable compromise.", "fx": { "pfm": 4 } }
+      ]
+    },
+    {
+      "id": "bo_mental_burnout", "group": "burnout", "groupCd": 52, "cat": "body", "w": 5, "when": { "pfm": [0, 45] },
+      "title": "{J} Is Burnt Out",
+      "text": "Everything feels heavy. Training feels like a job, matches feel like exams, his phone feels like a weight. {J} forgot his own sister's birthday last week.",
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Ask for a mental-health break", "desc": "One week off, no football.", "risk": "medium", "hint": "Some managers understand. Some don't.", "out": [
+          { "w": 2, "text": "{M} agrees immediately. A week away, a beach, his family. He comes back lighter.", "fx": { "pfm": 20, "mood": "Relieved" } },
+          { "w": 1, "text": "{M} agrees, but his replacement scores twice. {J} returns rested and on the bench.", "fx": { "pfm": 20, "trust": -4 } }
+        ] },
+        { "label": "Push through", "desc": "It's a phase.", "risk": "high", "hint": "Burnout gets worse.", "text": "{J} pushes through. It gets worse before it gets better.", "fx": { "pfm": -5, "mood": "Numb" } }
+      ]
+    },
+    {
+      "id": "bo_altitude", "cat": "body", "w": 4, "when": { "country": ["Bolivia", "Ecuador", "Colombia", "Peru", "Mexico"] },
+      "title": "Away at Altitude",
+      "text": "An away match high in the Andes. At 3,600 metres, every sprint burns twice as much. The locals barely notice. {J}'s lungs feel like they belong to someone else.",
+      "prompt": "How do you prepare?",
+      "choices": [
+        { "label": "Arrive early to acclimatise", "desc": "Three days at altitude first.", "risk": "low", "hint": "Better performance.", "text": "Three days of headaches, then {J}'s body adapts. He plays the full ninety.", "fx": { "pfm": -3 } },
+        { "label": "Fly in on matchday", "desc": "Science says arrive just before.", "risk": "medium", "hint": "Some players swear by it.", "out": [
+          { "w": 1, "text": "It works. {J} is fine for an hour.", "fx": {} },
+          { "w": 1, "text": "By the 50th minute, {J} is seeing stars. Substituted.", "fx": { "pfm": -8 } }
+        ] }
+      ]
+    },
+    {
+      "id": "bo_dental", "cat": "body", "w": 2,
+      "title": "Toothache Before a Big Match",
+      "text": "A tooth that's been bothering {J} for weeks is now agony. The club dentist says it needs fixing now. The big match is in two days.",
+      "prompt": "Fix it now?",
+      "choices": [
+        { "label": "Fix it now", "desc": "Swollen face, clear head.", "risk": "low", "hint": "Short pain.", "text": "A root canal, a swollen cheek, and a big match played with a face like a hamster. He plays fine.", "fx": { "pfm": -2 } },
+        { "label": "Painkillers until after the match", "desc": "Push it back.", "risk": "medium", "hint": "Could get worse.", "out": [
+          { "w": 2, "text": "The painkillers hold. He fixes it afterwards.", "fx": {} },
+          { "w": 1, "text": "The infection spreads. Three days of fever and antibiotics.", "fx": { "pfm": -12 } }
+        ] }
+      ]
+    },
+    {
+      "id": "bo_concussion", "cat": "body", "w": 3, "when": { "pos": ["CB", "ST", "DM", "GK"] },
+      "title": "Head Knock in Training",
+      "text": "A clash of heads in a training-ground header. {J} stays down for a minute, sees two of everything, then says he's fine. The doctor wants to run the concussion protocol.",
+      "prompt": "Follow the protocol?",
+      "choices": [
+        { "label": "Follow it fully", "desc": "Six days of graduated return.", "risk": "low", "hint": "Miss a match. Protect your brain.", "text": "Six days of rest and tests. He misses one match. His head feels clear.", "fx": { "pfm": -2, "rep": 0.2 } },
+        { "label": "Hide symptoms", "desc": "Play on Saturday.", "risk": "extreme", "hint": "Brains don't heal like hamstrings.", "out": [
+          { "w": 1, "text": "He gets away with it this time. The headaches last two weeks.", "fx": { "pfm": -6 } },
+          { "w": 1, "text": "A second knock on Saturday. Serious concussion. A month out and a lecture he'll never forget.", "fx": { "injury": "moderate", "stat": { "mental": -1 } } }
+        ] }
+      ]
+    },
+    {
+      "id": "bo_illness", "cat": "body", "w": 3,
+      "title": "Fever Sweeps Through the Squad",
+      "text": "A virus is going around the squad. Five players are already ill. {J} wakes up with a sore throat and a temperature of 38.5°C.",
+      "prompt": "Train or stay home?",
+      "choices": [
+        { "label": "Stay home", "desc": "Don't infect everyone.", "risk": "low", "hint": "Responsible.", "text": "Three days in bed with soup and films. The squad is grateful.", "fx": { "pfm": -4 } },
+        { "label": "Train anyway", "desc": "Toughness.", "risk": "medium", "hint": "You'll infect others and feel worse.", "text": "{J} trains, feels terrible, and infects two teammates. The doctor sends him home anyway.", "fx": { "pfm": -10, "trust": -2 } }
+      ]
+    },
+    {
+      "id": "bo_dengue", "cd": 150, "cat": "body", "w": 2, "when": { "country": ["Indonesia", "Thailand", "Vietnam", "Malaysia", "Philippines", "Brazil", "India"] },
+      "title": "Dengue Fever",
+      "text": "A high fever, aching bones, a rash. The blood test confirms dengue. The doctor says rest, fluids, and close monitoring of his platelets. Two weeks at least.",
+      "fx": { "pfm": -20, "mood": "Numb" }
+    },
+    {
+      "id": "bo_age_body_changes", "cat": "body", "w": 4, "when": { "age": [29, 40] },
+      "title": "The Body Talks Back",
+      "text": "Mornings start with ten minutes of stretching just to walk normally. The back is stiff, the knees click, the hamstrings feel like old rope. The data says {J}'s top speed has dropped slightly.",
+      "prompt": "Adapt?",
+      "choices": [
+        { "label": "Invest in recovery tech", "desc": "Cryotherapy, massage, compression.", "risk": "low", "hint": "Expensive longevity.", "vars": { "cost": ["wageWeeks", 2, 200] }, "text": "{J} spends {cost} on a home recovery set-up. The clicks become quieter.", "fx": { "wealth": "-cost", "pfm": 8 } },
+        { "label": "Reduce training load", "desc": "Quality over quantity.", "risk": "low", "hint": "Smart.", "text": "{J} cuts extra sessions and focuses on recovery. He feels fresher on matchdays.", "fx": { "pfm": 5 } }
+      ]
+    },
+    {
+      "id": "bo_painkillers", "cat": "body", "w": 3, "when": { "age": [26, 40] },
+      "title": "Painkiller Injections Before Matches",
+      "text": "{J}'s ankle has been sore for weeks. The club doctor offers a painkilling injection before each match. Many players take them. Some regret it twenty years later.",
+      "prompt": "Take the injections?",
+      "choices": [
+        { "label": "Take them", "desc": "Play through it.", "risk": "high", "hint": "Short-term relief, long-term questions.", "text": "With the injection, {J} feels nothing for ninety minutes. Afterwards, he feels everything.", "fx": { "trust": 2, "pfm": -5, "flag": "painkillers" } },
+        { "label": "Rest the ankle properly", "desc": "Miss two weeks.", "risk": "low", "hint": "Your future self will thank you.", "text": "{J} rests it for two weeks. It heals properly.", "fx": { "pfm": 10, "trust": -2 } }
+      ]
+    },
+    {
+      "id": "bo_painkillers_cost", "cat": "body", "w": 6, "when": { "flags": ["painkillers"], "age": [29, 40] },
+      "title": "The Ankle Pays the Price",
+      "text": "Years of painkiller injections have caught up with {J}'s ankle. The specialist shows him the scan: worn cartilage, bone spurs. “You've been playing on borrowed time.”",
+      "fx": { "unflag": "painkillers", "stat": { "pace": -1 }, "injury": "moderate", "mood": "Broken" }
+    },
+    {
+      "id": "bo_weight_gain", "cd": 52, "cat": "body", "w": 3, "when": { "phase": ["pre"] },
+      "title": "{J} Returns From Holiday Overweight",
+      "text": "The scale at the first pre-season weigh-in says three kilos more than when {J} left. The fitness coach raises one eyebrow. The squad notices.",
+      "fx": { "pfm": -6, "trust": -2 },
+      "prompt": "Fix it fast?",
+      "choices": [
+        { "label": "Crash diet and double sessions", "desc": "Lose it in two weeks.", "risk": "medium", "hint": "Fast, risky.", "text": "Two weeks of misery. The weight comes off. So does some of his strength.", "fx": { "pfm": 4, "stat": { "physical": -1 } } },
+        { "label": "Steady programme", "desc": "Lose it over a month.", "risk": "low", "hint": "Sustainable.", "text": "A month later, back at fighting weight, no damage done.", "fx": { "pfm": 6 } }
+      ]
+    },
+    {
+      "id": "bo_mental_anxiety", "cat": "body", "w": 4, "when": { "form": [4, 6.3] },
+      "title": "Panic Before Kick-Off",
+      "text": "In the tunnel before a match, {J}'s chest tightens. His hands go numb. He thinks he's having a heart attack. The doctor says it's a panic attack.",
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Tell the club doctor everything", "desc": "Get help.", "risk": "low", "hint": "Brave and right.", "text": "The club connects {J} with a sports psychologist. They start working on it together. It gets better.", "fx": { "growth": ["mental"], "mood": "Relieved" } },
+        { "label": "Hide it", "desc": "Footballers don't panic.", "risk": "high", "hint": "It will come back.", "text": "{J} hides it. It happens again before the next match.", "fx": { "mood": "Anxious", "form": -0.2 } }
+      ]
+    },
+    {
+      "id": "bo_eye_test", "once": true, "cat": "body", "w": 2, "when": { "pos": ["GK", "CB", "ST"] },
+      "title": "{J} Needs Glasses",
+      "text": "A routine medical reveals {J}'s eyesight isn't perfect. He's been misjudging high balls under floodlights. The optician suggests contact lenses.",
+      "fx": { "growth": ["mental"] }
+    },
+    {
+      "id": "bo_hamstring_warning", "cat": "body", "w": 3, "when": { "pos": ["W", "ST", "FB"], "pfm": [0, 65] },
+      "title": "Hamstring Tightness Warning",
+      "text": "The physio presses on {J}'s hamstring and he winces. “It's tight. One more sprint session and it might go.” The match is in three days.",
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Skip sprint work", "desc": "Protect it.", "risk": "low", "hint": "Usually saves it.", "text": "Massage, stretching, no sprints. The hamstring holds.", "fx": { "pfm": 6 } },
+        { "label": "Train normally", "desc": "It's just tight.", "risk": "high", "hint": "That's how tears happen.", "out": [
+          { "w": 1, "text": "It holds. Lucky.", "fx": {} },
+          { "w": 1, "text": "It goes in the second sprint. Exactly as predicted.", "fx": { "injury": "moderate" } }
+        ] }
+      ]
+    },
+    {
+      "id": "bo_longevity_bonus", "once": true, "cat": "body", "w": 4, "when": { "flags": ["longevity"], "age": [31, 40] },
+      "title": "Sports Science Says {J}'s Body Is Years Younger",
+      "text": "The club's annual physical testing shows something unusual: {J}'s recovery markers look like a player five years younger. The nutritionist, the sleep work, the stretching: it paid off.",
+      "fx": { "pfm": 10, "mood": "Confident" }
+    },
+    {
+      "id": "bo_blood_test", "cd": 150, "cat": "body", "w": 2,
+      "title": "Blood Test Reveals an Iron Deficiency",
+      "text": "{J} has been unusually tired for weeks. A blood test reveals low iron. The doctor prescribes supplements and spinach.",
+      "fx": { "pfm": 8 }
+    },
+    {
+      "id": "bo_doping_test", "cat": "body", "w": 2,
+      "title": "Random Anti-Doping Test",
+      "text": "A knock on the door at 6:30am: the anti-doping agency. A random out-of-competition test. {J} rubs his eyes and fills the cup while a stranger watches. Last week he took a cold medicine from a pharmacy without checking the ingredients.",
+      "prompt": "Mention the cold medicine?",
+      "choices": [
+        { "label": "Declare it on the form", "desc": "Full honesty.", "risk": "low", "hint": "Always declare.", "text": "{J} declares it. The test comes back clean. The officer nods approvingly.", "fx": { "growth": ["mental"] } },
+        { "label": "Don't mention it", "desc": "It was only cold medicine.", "risk": "high", "hint": "Some cold medicines contain banned substances.", "out": [
+          { "w": 3, "text": "The test comes back clean. {J} starts reading every label after that.", "fx": {} },
+          { "w": 1, "text": "The test flags a stimulant from the cold medicine. A hearing, a warning, and humiliating headlines.", "fx": { "rep": -2, "suspension": 2, "mood": "Broken" } }
+        ] }
+      ]
+    },
+    {
+      "id": "bo_cramp_heat", "cat": "body", "w": 2, "when": { "country": ["Indonesia", "Thailand", "Vietnam", "Malaysia", "Saudi Arabia", "Qatar", "United Arab Emirates"] },
+      "title": "Cramp Epidemic in the Heat",
+      "text": "Afternoon kick-offs in the humidity are brutal. Three players cramped in the last match. The sports scientist introduces new hydration rules: weigh-ins before and after training.",
+      "fx": { "pfm": 4 }
+    },
+    {
+      "id": "bo_massage_therapist", "cat": "body", "w": 3, "when": { "wealth": [5000, 999999999], "age": [24, 40] }, "vars": { "cost": ["wageWeeks", 1, 100] },
+      "title": "A Personal Physio?",
+      "text": "Top players have personal physios who travel with them. {J}'s agent finds one: a former national team physio with magic hands. {cost} a month.",
+      "prompt": "Hire him?",
+      "choices": [
+        { "label": "Hire him", "desc": "Invest in your body.", "risk": "low", "hint": "Fewer injuries, sharper legs.", "text": "The physio works on {J} three evenings a week. His legs feel brand new.", "fx": { "wealth": "-cost", "pfm": 10, "flag": "personal_physio" } },
+        { "label": "Use the club's staff", "desc": "They're good enough.", "risk": "low", "hint": "Free.", "text": "{J} sticks with the club physios.", "fx": {} }
+      ]
+    },
+    {
+      "id": "bo_meditation", "once": true, "cat": "body", "w": 2,
+      "title": "{J} Discovers Meditation",
+      "text": "A teammate swears by ten minutes of meditation every morning. {J} tries it, sitting cross-legged on his bedroom floor, mind racing for the first five minutes, then, briefly, quiet.",
+      "fx": { "growth": ["mental"], "pfm": 3 }
+    },
+    {
+      "id": "bo_old_injury_ache", "cat": "body", "w": 3, "when": { "age": [27, 40] },
+      "title": "An Old Injury Aches in the Cold",
+      "text": "The knee he injured years ago aches in the cold mornings now. Not enough to stop him. Enough to remind him every day.",
+      "fx": { "pfm": -3, "mood": "Focused" }
+    },
+    {
+      "id": "bo_lucky_escape", "cat": "body", "w": 2,
+      "title": "Scan Shows It's Nothing Serious",
+      "text": "{J} heard a pop in his knee during training and feared the worst. The scan is clear: a bruise, nothing more. He drives home and sits in the car outside his apartment for twenty minutes, shaking with relief.",
+      "fx": { "mood": "Relieved" }
+    }
+  ]
+}

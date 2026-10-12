@@ -1,0 +1,277 @@
+{
+  "scenarios": [
+    {
+      "id": "po_unpaid_wages", "cat": "politics", "w": 5, "ui": "boardroom", "when": { "freeAgent": false, "leagueQ": [0, 66] },
+      "title": "The Wages Are Late",
+      "text": ["Payday comes and goes. Nothing arrives. In the dressing room, {CAP} says the board has 'cash-flow issues'. Some of the younger players can't pay rent.", "For the second month running, salaries are late. The kit man hasn't been paid at all. {CAP} wants the squad to sign a letter to President {PRESl}."],
+      "prompt": "The captain asks you to sign the letter.",
+      "choices": [
+        { "label": "Sign it", "desc": "Stand with the squad.", "risk": "medium", "hint": "The dressing room respects it. The board notes every name.", "text": "Twenty-three signatures. The money arrives a week later. So does a cold handshake from {PRESl} at the next home game.", "fx": { "dressing": 6, "board": -6, "fans": 2, "wealth": 200 } },
+        { "label": "Refuse to sign", "desc": "Stay out of politics.", "risk": "medium", "hint": "The board will remember. So will the squad.", "text": "He doesn't sign. Nobody says anything. Nobody needs to. {PRESl}'s office sends him a fruit basket. It feels like thirty pieces of silver.", "fx": { "dressing": -6, "board": 5, "morale": -2 } },
+        { "label": "Go to the players' union instead", "desc": "Official route.", "risk": "medium", "hint": "Effective. Slow. Public.", "text": "The union steps in. It becomes news. The wages are paid within days, and {J} is quietly known as the one who went outside the club.", "fx": { "dressing": 4, "board": -4, "press": 3, "image": 2, "wealth": 200 } }
+      ]
+    },
+    {
+      "id": "po_captaincy_vote", "cat": "politics", "w": 4, "once": true, "when": { "freeAgent": false, "age": [22, 36], "dressing": [55, 100], "role": ["starter", "rotation"] },
+      "title": "The Captaincy",
+      "text": ["{CAP} is leaving at the end of the season and the squad will vote for the next captain. Two names are being whispered: {J} and a veteran who has been here nine years.", "{Mf} wants a new vice-captain and is letting the squad vote. A teammate tells {J} that if he campaigns, he'll win."],
+      "prompt": "Do you go for it?",
+      "choices": [
+        { "label": "Campaign openly", "desc": "Ask for votes.", "risk": "medium", "hint": "Win and it's yours. Lose and it's awkward.", "check": { "stat": "mental", "dc": 60 },
+          "ok": { "text": "He wins by four votes. The veteran shakes his hand first. The armband fits strangely, then perfectly.", "fx": { "dressing": 6, "trust": 4, "board": 3, "fans": 4, "flag": "captain", "stress": 3 } },
+          "bad": { "text": "He loses narrowly. The veteran is gracious. Some teammates think {J} wanted it too much.", "fx": { "dressing": -3, "morale": -3 } } },
+        { "label": "Back the veteran", "desc": "Respect the elders.", "risk": "low", "hint": "Humble. Remembered.", "text": "He votes for the veteran and says so. The veteran makes {J} his vice-captain on day one.", "fx": { "dressing": 6, "trust": 2, "morale": 2 } },
+        { "label": "Stay out of it", "desc": "Just play.", "risk": "low", "hint": "Neutral.", "text": "The vote happens without him. Life goes on.", "fx": {} }
+      ]
+    },
+    {
+      "id": "po_president_favour", "cat": "politics", "w": 4, "ui": "boardroom", "when": { "freeAgent": false, "rep": [15, 100] },
+      "title": "The President's Request",
+      "text": ["President {PRES} asks {J} to appear at a political rally for a candidate he's backing. 'Just smile and wave. Wear the shirt.'", "{PRESl} wants {J} to attend a dinner with investors and 'mention how happy the players are'. The players are not happy."],
+      "prompt": "Do the favour?",
+      "choices": [
+        { "label": "Do it", "desc": "Keep the boss happy.", "risk": "high", "hint": "Board loves it. Half the fans won't.", "text": "He smiles and waves. {PRESl} is delighted. Photos of {J} at the rally split the fanbase down the middle.", "fx": { "board": 8, "fans": -4, "image": -3, "press": -2, "dressing": -2 } },
+        { "label": "Decline politely", "desc": "'I'm just a footballer.'", "risk": "medium", "hint": "Principled. The president is not used to 'no'.", "text": "'I'm just a footballer, sir.' {PRESl}'s smile doesn't move. It doesn't need to.", "fx": { "board": -5, "image": 2, "dressing": 2 } },
+        { "label": "Go, but say nothing political", "desc": "Show up, stay neutral.", "risk": "medium", "hint": "Diplomatic. Nobody's fully happy.", "text": "He attends, shakes hands, and refuses to hold a placard. Everybody is slightly annoyed. Nobody is furious.", "fx": { "board": 2, "fans": -1, "image": -1 } }
+      ]
+    },
+    {
+      "id": "po_fan_protest", "cat": "politics", "w": 4, "when": { "freeAgent": false },
+      "title": "Fans Protest Against the Owner",
+      "text": ["The fans are protesting against the club's owners: ticket prices up 40%, the youth academy cut. There will be a walk-out in the 70th minute. The ultras ask the players to show support.", "A huge banner at the training ground gate: '{PRESl} OUT'. The ultras want the players to stop and read it on camera."],
+      "prompt": "Show support?",
+      "choices": [
+        { "label": "Applaud the protest after the match", "desc": "A clear gesture.", "risk": "high", "hint": "Fans adore you. The board won't forget.", "text": "He walks to the stand and applauds them. The ultras chant his name for ten minutes. A board member watches from the box, writing nothing, remembering everything.", "fx": { "fans": 10, "board": -8, "press": 3, "image": 1 } },
+        { "label": "Say you understand both sides", "desc": "Diplomacy.", "risk": "medium", "hint": "Nobody cheers.", "text": "His careful statement pleases nobody. That might mean it was fair.", "fx": { "fans": -1, "board": 1 } },
+        { "label": "Say nothing", "desc": "Not your fight.", "risk": "medium", "hint": "Silence is noticed.", "text": "The ultras notice the silence. There's a new banner next week. It isn't about the board.", "fx": { "fans": -5, "board": 3 } }
+      ]
+    },
+    {
+      "id": "po_takeover_rumour", "cat": "politics", "w": 3, "when": { "freeAgent": false, "leagueQ": [55, 99] },
+      "title": "A Takeover Bid",
+      "text": ["A wealthy foreign consortium wants to buy the club. Fans are excited. Staff are terrified. The rumour is that the new owners will 'clear out' players on big contracts.", "The club is being sold. The new owners want to meet 'key players' before the deal closes. {J} is on the list."],
+      "prompt": "The new owners want your opinion.",
+      "choices": [
+        { "label": "Be honest about the club's problems", "desc": "Tell them what's broken.", "risk": "medium", "hint": "They might value honesty. The old board won't.", "text": "He tells them about the leaking gym roof and the unpaid staff. They take notes. When the deal closes, the roof is fixed first.", "fx": { "board": 3, "dressing": 4, "trust": 1 } },
+        { "label": "Ask about your own future", "desc": "Protect yourself.", "risk": "low", "hint": "Smart. Selfish.", "text": "They assure him he's 'central to the project'. That's what they say to everyone.", "fx": { "stress": -2, "board": 1 } },
+        { "label": "Refuse to meet them before the deal", "desc": "Loyal to the current board.", "risk": "medium", "hint": "Loyalty to the outgoing regime.", "text": "{PRESl} hears and is touched. The new owners hear too.", "fx": { "board": 2, "stress": 2 } }
+      ]
+    },
+    {
+      "id": "po_match_fixing_approach", "cat": "politics", "w": 2, "cd": 200, "when": { "freeAgent": false, "leagueQ": [0, 64] },
+      "title": "An Approach in the Car Park",
+      "text": ["A man {J} has never seen before waits by his car after training. He knows {J}'s salary to the cent. He has a proposal about 'a yellow card in the first half on Sunday'. He has an envelope.", "A message from an unknown number: 'Easy money. One mistake. Nobody gets hurt.' A number follows. It's a lot of money."],
+      "prompt": "This is a match-fixing approach.",
+      "choices": [
+        { "label": "Report it to the club and the league", "desc": "Immediately.", "risk": "medium", "hint": "Right. Scary. Necessary.", "text": "The league's integrity unit takes it seriously. The man is arrested three months later. {J} testifies anonymously. He sleeps badly for a while, and well forever after.", "fx": { "board": 6, "image": 4, "stress": 5, "trust": 3, "growth": ["mental"] } },
+        { "label": "Walk away and say nothing", "desc": "Just ignore it.", "risk": "high", "hint": "Not reporting an approach is a rule breach too.", "out": [
+          { "w": 2, "text": "Nothing happens. He changes his number. The envelope haunts him.", "fx": { "stress": 6 } },
+          { "w": 1, "text": "Months later the league investigates the man and finds {J}'s number in his phone. Not reporting the approach earns a ban and a headline.", "fx": { "suspension": 3, "image": -8, "board": -8, "press": -5, "stress": 8 } }
+        ] }
+      ]
+    },
+    {
+      "id": "po_manager_vs_board", "cat": "politics", "w": 4, "when": { "freeAgent": false },
+      "title": "Manager vs Board",
+      "text": ["{Mf} and the board are at war over transfer funds. The manager wants the senior players to back him publicly. The board wants silence.", "Leaked: {Mf} told the board the squad 'isn't good enough'. The board leaked it. Now {Mf} wants the players to show unity behind him."],
+      "prompt": "Whose side are you on?",
+      "choices": [
+        { "label": "Back the manager publicly", "desc": "He picks the team.", "risk": "high", "hint": "Manager loves you. The board doesn't.", "text": "{J} says in an interview that the squad is '100% behind the coach'. {Mf} hugs him on Monday. {PRESl} doesn't attend the next match.", "fx": { "trust": 8, "board": -7, "press": 2, "dressing": 2 } },
+        { "label": "Back the board quietly", "desc": "They pay the wages.", "risk": "high", "hint": "Board loves you. The manager will hear.", "text": "He keeps his head down and says the right things to the right people upstairs. Somehow, {Mf} finds out.", "fx": { "board": 7, "trust": -8, "dressing": -2 } },
+        { "label": "'I only talk about football'", "desc": "Neutral.", "risk": "low", "hint": "Safe. Nobody is grateful.", "text": "'I only talk about football.' Both sides respect it. Neither side trusts it.", "fx": { "press": 1 } }
+      ]
+    },
+    {
+      "id": "po_sponsor_conflict", "cat": "politics", "w": 3, "when": { "freeAgent": false, "rep": [20, 100] },
+      "title": "The Sponsor Clash",
+      "text": ["The club's main sponsor is a betting company. {J}'s family is uncomfortable with it, for religious reasons. The club wants him in the advert.", "The club has signed a sponsorship with an energy drink brand that is a direct rival of {J}'s personal sponsor. The club wants him in the launch photo."],
+      "prompt": "Take part?",
+      "choices": [
+        { "label": "Do the advert", "desc": "Contract is contract.", "risk": "medium", "hint": "Board pleased. Family uncomfortable.", "text": "He films it. The board is pleased. {MUM} watches it on TV and changes the channel without a word.", "fx": { "board": 5, "family": -5, "wealth": 300 } },
+        { "label": "Refuse on principle", "desc": "Some things aren't for sale.", "risk": "high", "hint": "Family and image up. Board down.", "text": "He refuses, respectfully. The club is furious privately. Publicly, fans and his family are proud. A religious leader praises him on TV.", "fx": { "board": -7, "family": 6, "image": 4, "fans": 2 } },
+        { "label": "Negotiate a compromise", "desc": "Appear, but no product shot.", "risk": "low", "hint": "Diplomatic.", "check": { "stat": "agent", "dc": 45 },
+          "ok": { "text": "His agent negotiates a version where he appears without the product. Everyone is mostly happy.", "fx": { "board": 2, "family": 1 } },
+          "bad": { "text": "The club says no compromises. He does the advert grudgingly and it shows on camera.", "fx": { "board": 1, "family": -3, "morale": -2 } } }
+      ]
+    },
+    {
+      "id": "po_academy_cuts", "cat": "politics", "w": 3, "when": { "freeAgent": false },
+      "title": "The Academy Is Being Cut",
+      "text": ["The board is closing two youth teams to save money. Forty kids, aged nine to fourteen, will be released. One of them is the boy who carries the corner flags on matchdays.", "The club's academy funding is being slashed. The youth coaches have been told on a Friday afternoon, the way bad news always arrives."],
+      "prompt": "Get involved?",
+      "choices": [
+        { "label": "Fund one team yourself", "desc": "Put your money where your mouth is.", "risk": "low", "hint": "Expensive. Legendary.", "vars": { "cost": ["wageWeeks", 8, 2000] }, "text": "He pays for a team's season: {cost}. The board is embarrassed into restoring the other one. The kids make him a card the size of a door.", "fx": { "wealth": "-cost", "fans": 8, "image": 6, "board": -2, "morale": 5 } },
+        { "label": "Speak out in the press", "desc": "Public pressure.", "risk": "high", "hint": "Fans love it. Board hates it.", "text": "His comments lead the sports pages. The board reverses half the cuts and freezes him out of the next sponsor event.", "fx": { "fans": 6, "press": 3, "board": -6, "image": 3 } },
+        { "label": "Stay out of it", "desc": "Not your department.", "risk": "low", "hint": "Nothing changes.", "text": "The cuts go ahead. The boy with the corner flags isn't there the next week.", "fx": { "morale": -2 } }
+      ]
+    },
+    {
+      "id": "po_ticket_prices", "cat": "politics", "w": 3, "ui": "boardroom", "when": { "freeAgent": false, "fans": [30, 100] },
+      "title": "Ticket Prices",
+      "text": ["The club has raised season-ticket prices again. The supporters' group asks the players for a statement. The board asks the players for silence.", "Fans are boycotting the first ten minutes of the next match over prices. The ultras ask the players to delay their warm-up in solidarity."],
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Buy tickets for local kids", "desc": "Quiet action.", "risk": "low", "hint": "Kind and safe.", "vars": { "cost": ["wageWeeks", 1, 150] }, "text": "He buys a block of tickets for a local school. No statement. The fans find out anyway and love him for it.", "fx": { "wealth": "-cost", "fans": 5, "image": 2 } },
+        { "label": "Join the supporters' statement", "desc": "Sign their letter.", "risk": "high", "hint": "Fans love it. Board furious.", "text": "His signature is the only player's on the letter. The board calls him in. The fans make a banner.", "fx": { "fans": 7, "board": -6, "press": 2 } },
+        { "label": "Follow the board", "desc": "Silence.", "risk": "low", "hint": "Fans notice.", "text": "He says nothing. The ultras don't sing his name on Sunday.", "fx": { "fans": -3, "board": 2 } }
+      ]
+    },
+    {
+      "id": "po_dressing_room_clique", "cat": "politics", "w": 4, "when": { "freeAgent": false },
+      "title": "Two Camps",
+      "text": ["The dressing room has split: the senior players around {CAP} on one side, the new signings on the other. Lunch tables have become borders.", "A WhatsApp group has been created without half of the squad in it. {J} has been added. He hasn't been told who wasn't."],
+      "prompt": "Pick a camp?",
+      "choices": [
+        { "label": "Bridge the gap", "desc": "Organise something for everyone.", "risk": "medium", "hint": "A leader's move. Could fail.", "check": { "stat": "mental", "dc": 55 },
+          "ok": { "text": "He organises a squad dinner and seats everyone mixed up. It's awkward for an hour, then loud, then good. {Mf} notices.", "fx": { "dressing": 8, "trust": 4, "growth": ["mental"] } },
+          "bad": { "text": "Half the squad doesn't come. The ones who do sit with their own camps. It was worth a try.", "fx": { "dressing": -1, "morale": -2 } } },
+        { "label": "Join the senior players", "desc": "Power is where it is.", "risk": "low", "hint": "Safe now. The new guys remember.", "text": "He sits with the seniors. Life is easier. The new signings call him 'the captain's dog' when they think he can't hear.", "fx": { "dressing": 2, "trust": 1 } },
+        { "label": "Leave the secret group", "desc": "Not doing this.", "risk": "medium", "hint": "Principled. Lonely.", "text": "He leaves the group and says why. Some respect it. Some think he's naive.", "fx": { "dressing": -2, "image": 1, "growth": ["mental"] } }
+      ]
+    },
+    {
+      "id": "po_agent_power_play", "cat": "politics", "w": 3, "when": { "agent": true, "freeAgent": false, "contractYears": [0.5, 2] },
+      "title": "Your Agent's Power Play",
+      "text": ["{A} has leaked to the press that {J} is 'considering his options'. He didn't ask {J}. He says it's 'leverage for the new contract'.", "{A} has told the board that three clubs are interested in {J}. Two of them don't exist."],
+      "uses": { "A": "agent" },
+      "prompt": "Your agent is playing games in your name.",
+      "choices": [
+        { "label": "Back your agent", "desc": "Trust the process.", "risk": "high", "hint": "Better contract, worse relations.", "text": "The board ups their offer. They also stop smiling at {J} in the corridors. The fans read the headlines and wonder.", "fx": { "board": -6, "fans": -3, "wealth": 500, "press": 1 } },
+        { "label": "Publicly deny it", "desc": "'I'm happy here.'", "risk": "medium", "hint": "Fans love it. Agent embarrassed.", "text": "'I'm happy here and I'm not going anywhere.' The fans cheer. {A} calls, furious, and talks about 'undermining'.", "fx": { "fans": 5, "board": 4, "press": 2 } },
+        { "label": "Fire your agent", "desc": "Nobody speaks for you without permission.", "risk": "high", "hint": "Clean slate. Expensive.", "text": "He fires {A}. The termination fee hurts. The board respects it. So does he.", "fx": { "board": 4, "wealth": -800, "growth": ["mental"] } }
+      ]
+    },
+    {
+      "id": "po_federation_dispute", "cat": "politics", "w": 3, "when": { "nt": ["called", "regular"] },
+      "title": "Club vs Country",
+      "text": ["The national team wants {J} for a friendly. The club wants him to rest. Both have called his agent. Both say they're 'disappointed' already.", "The federation has called {J} up for a tournament the club considers 'meaningless'. President {PRESl} calls him personally."],
+      "prompt": "Who do you listen to?",
+      "choices": [
+        { "label": "Country first", "desc": "The shirt matters.", "risk": "medium", "hint": "Family and fans proud. Club annoyed.", "text": "He goes. The club is cold for a week. At home, his family watches with the whole street.", "fx": { "board": -4, "family": 4, "fans": -1, "rep": 1, "pfm": -3 } },
+        { "label": "Club first", "desc": "They pay you.", "risk": "medium", "hint": "Club happy. The nation notices.", "text": "He withdraws with a 'minor knock'. The national team coach doesn't call for a while. The board sends a thank-you.", "fx": { "board": 5, "image": -2, "family": -2, "pfm": 3 } }
+      ]
+    },
+    {
+      "id": "po_staff_sacked", "cat": "politics", "w": 3, "when": { "freeAgent": false },
+      "title": "The Physio Is Sacked",
+      "text": ["The club has sacked the head physio, the man who rebuilt half the squad's knees, over a budget dispute. The players are furious. A petition is circulating.", "The club's long-serving kit man has been let go to 'restructure operations'. He found out from a letter. The dressing room is silent."],
+      "prompt": "Get involved?",
+      "choices": [
+        { "label": "Lead the petition", "desc": "Fight for him.", "risk": "high", "hint": "Squad loves it. Board doesn't.", "text": "His name is first on the list. The board backs down partially: a consultant contract. It's something.", "fx": { "dressing": 7, "board": -5, "fans": 2 } },
+        { "label": "Help him privately", "desc": "Find him a job.", "risk": "low", "hint": "Quiet kindness.", "text": "{J} calls three clubs and finds him a new job within a month. The man sends him a handwritten letter.", "fx": { "dressing": 3, "morale": 3, "image": 1 } },
+        { "label": "Accept it", "desc": "Business is business.", "risk": "low", "hint": "Cold.", "text": "He accepts it. Some teammates don't, and look at him differently.", "fx": { "dressing": -3, "board": 1 } }
+      ]
+    },
+    {
+      "id": "po_board_contract_pressure", "cat": "politics", "w": 3, "ui": "boardroom", "when": { "freeAgent": false, "board": [0, 35] },
+      "title": "Called to the Boardroom",
+      "text": ["{J} is called to the boardroom. Three directors, one empty chair for him. They mention 'attitude', 'commercial value' and 'the club's patience'. Nobody mentions football.", "A director asks {J} to his office and closes the door. 'We have concerns,' he says, and lists them, slowly."],
+      "prompt": "The board is unhappy with you.",
+      "choices": [
+        { "label": "Listen, then promise change", "desc": "Humility.", "risk": "low", "hint": "Board recovers slowly.", "text": "He listens without interrupting and promises to do better. They seem surprised. The temperature drops a degree.", "fx": { "board": 7, "stress": 2 } },
+        { "label": "Push back hard", "desc": "Defend yourself.", "risk": "high", "hint": "Respect or war.", "check": { "stat": "rep", "dc": 55 },
+          "ok": { "text": "He lists his numbers, his shirt sales, his social reach. They have no answer. They back off.", "fx": { "board": 3, "morale": 3 } },
+          "bad": { "text": "He raises his voice. A director stands up. The meeting ends with the word 'listed'.", "fx": { "board": -8, "listed": true, "stress": 5 } } },
+        { "label": "Ask for a transfer", "desc": "If they don't want you, go.", "risk": "high", "hint": "The door opens.", "text": "'Then sell me.' The room goes very quiet. A week later, he's on the transfer list.", "fx": { "listed": true, "board": -4, "fans": -3, "stress": 3 } }
+      ]
+    },
+    {
+      "id": "po_ultras_demand_loyalty", "cat": "politics", "w": 3, "when": { "freeAgent": false, "listed": true },
+      "title": "The Ultras Want Answers",
+      "text": ["The ultras have heard {J} might leave. Their leader asks to meet him at the training-ground gate. Thirty people stand behind him in silence.", "A delegation of supporters arrives at training with a banner: '{J}, ARE YOU WITH US?'"],
+      "prompt": "What do you tell them?",
+      "choices": [
+        { "label": "'I want to stay.'", "desc": "Even if it's complicated.", "risk": "medium", "hint": "They'll hold you to it.", "text": "They cheer. They hug him. They will remember these words forever, whatever happens next.", "fx": { "fans": 8, "flag": "promised_ultras", "stress": 2 } },
+        { "label": "Tell them the truth", "desc": "'It's not up to me.'", "risk": "medium", "hint": "Honest. Not what they want.", "text": "He explains the board's position. They don't like it, but they respect him for saying it. Their anger turns upstairs.", "fx": { "fans": 3, "board": -3 } },
+        { "label": "Avoid them", "desc": "Use the back exit.", "risk": "high", "hint": "They'll notice.", "text": "He leaves through the back. They see. The next banner is not kind.", "fx": { "fans": -8, "image": -2 } }
+      ]
+    },
+    {
+      "id": "po_charity_vs_club", "cat": "politics", "w": 2, "cd": 150, "when": { "freeAgent": false, "rep": [25, 100] },
+      "title": "A Cause Bigger Than Football",
+      "text": ["A flood has devastated {J}'s home region. He wants to wear a black armband and donate his match bonus. The league says armbands need approval. Approval takes weeks.", "A tragedy back home. {J} wants to dedicate the next match to the victims. The club's commercial team worries about 'brand alignment'."],
+      "prompt": "Do it anyway?",
+      "choices": [
+        { "label": "Wear it anyway, accept the fine", "desc": "Some rules are wrong.", "risk": "medium", "hint": "Fans and family proud. A small fine.", "text": "He wears it. The fine is small. The photo of him pointing to it after a goal is everywhere back home.", "fx": { "family": 6, "fans": 5, "image": 5, "board": -2, "wealth": -200 } },
+        { "label": "Donate quietly instead", "desc": "No rules broken.", "risk": "low", "hint": "Helps, silently.", "vars": { "cost": ["wageWeeks", 4, 800] }, "text": "He donates {cost} without a word. The organisers find out and thank him publicly. He wishes they hadn't.", "fx": { "wealth": "-cost", "family": 4, "image": 3, "morale": 3 } }
+      ]
+    },
+    {
+      "id": "po_rival_club_tapping", "cat": "politics", "w": 3, "when": { "freeAgent": false, "rep": [20, 100] },
+      "title": "A Secret Meeting",
+      "text": ["A director from {R} — your league rivals — invites {J} for 'a coffee, just a chat'. Tapping up a contracted player is against the rules. Everybody does it anyway.", "The sporting director of {R} 'bumps into' {J} at {PLACE}. He's very friendly and very well-informed about {J}'s contract."],
+      "prompt": "Talk to him?",
+      "choices": [
+        { "label": "Listen, then leave", "desc": "Information is power.", "risk": "medium", "hint": "If someone sees...", "out": [
+          { "w": 2, "text": "Twenty minutes of flattery and figures. Nobody sees. {J} now knows his market value. So does his agent.", "fx": { "stress": 1, "flag": "tapped_up" } },
+          { "w": 1, "text": "A fan photographs them together. The photo is everywhere by dinner. {PRESl} calls him at midnight.", "fx": { "board": -8, "fans": -6, "press": -3, "trust": -3 } }
+        ] },
+        { "label": "Walk away immediately", "desc": "Loyalty.", "risk": "low", "hint": "Clean.", "text": "'Speak to my club,' he says, and leaves his coffee. The director smiles: 'Of course.'", "fx": { "board": 2, "growth": ["mental"] } },
+        { "label": "Report it to the club", "desc": "Rules are rules.", "risk": "low", "hint": "Board loves it. {R} will hate you.", "text": "The club files a complaint. {R}'s fans boo him at the next derby with real passion.", "fx": { "board": 5, "fans": 3, "press": 2 } }
+      ]
+    },
+    {
+      "id": "po_player_rep", "cat": "politics", "w": 3, "when": { "freeAgent": false, "age": [23, 38], "dressing": [50, 100] },
+      "title": "Players' Union Representative",
+      "text": ["The players' union needs a squad representative. It means meetings, arguments with the board, and being the person teammates come to with problems.", "{CAP} suggests {J} as the squad's union rep. 'You care about people,' he says, which is a compliment and a trap."],
+      "prompt": "Take the role?",
+      "choices": [
+        { "label": "Accept", "desc": "Someone has to.", "risk": "medium", "hint": "Respect. Stress. Board wariness.", "text": "He takes it. Within a month he's fixed a bonus dispute and made one enemy upstairs. The squad trust him completely.", "fx": { "dressing": 7, "board": -3, "stress": 3, "flag": "union_rep" } },
+        { "label": "Decline", "desc": "Focus on football.", "risk": "low", "hint": "Nothing lost.", "text": "He declines. The role goes to the reserve goalkeeper, who takes it far too seriously.", "fx": {} }
+      ]
+    },
+    {
+      "id": "po_club_crisis_meeting", "cat": "politics", "w": 4, "when": { "freeAgent": false, "lastResult": ["L"] },
+      "title": "Crisis Meeting",
+      "text": ["After another defeat, President {PRESl} storms into the dressing room. He wants 'the leaders' to stay behind. Nobody is sure who that means. Everyone looks at the floor.", "The board has called a crisis meeting with the players. There are biscuits. Nobody touches the biscuits."],
+      "prompt": "Do you speak?",
+      "choices": [
+        { "label": "Stand up and take responsibility", "desc": "'It starts with me.'", "risk": "medium", "hint": "Leadership. Exposure.", "text": "He stands up first. The room changes. {PRESl} nods slowly. Afterwards, three teammates thank him.", "fx": { "dressing": 5, "board": 4, "trust": 3, "stress": 3 } },
+        { "label": "Point out the real problems", "desc": "Facilities, wages, planning.", "risk": "high", "hint": "True. Unwelcome.", "text": "He lists the problems calmly. Every player agrees silently. {PRESl}'s face goes red.", "fx": { "dressing": 6, "board": -6, "growth": ["mental"] } },
+        { "label": "Stay quiet", "desc": "Let the seniors talk.", "risk": "low", "hint": "Invisible.", "text": "He stays quiet. The meeting achieves nothing, as crisis meetings usually do.", "fx": {} }
+      ]
+    },
+    {
+      "id": "po_captain_duties", "cat": "politics", "w": 4, "when": { "flags": ["captain"], "freeAgent": false },
+      "title": "The Captain's Burden",
+      "text": ["As captain, {J} has to tell a teammate that the squad wants him to stop posting gym selfies after defeats. It's a small thing. These things are never small.", "A young teammate comes to {J}, the captain, crying: he's being bullied in the dressing room. He names two senior players."],
+      "prompt": "Handle it as captain.",
+      "choices": [
+        { "label": "Deal with it face to face", "desc": "Hard conversation.", "risk": "medium", "hint": "Respect earned, comfort lost.", "text": "He has the conversation. It's ugly for a minute. Then it's sorted. That's what the armband is for.", "fx": { "dressing": 5, "trust": 3, "stress": 3 } },
+        { "label": "Take it to the manager", "desc": "Chain of command.", "risk": "low", "hint": "Effective. Some will call it snitching.", "text": "{Mf} handles it decisively. Some senior players think a captain should handle things inside the dressing room.", "fx": { "trust": 4, "dressing": -2 } }
+      ]
+    },
+    {
+      "id": "po_new_stadium", "cat": "politics", "w": 2, "cd": 300, "when": { "freeAgent": false, "fans": [40, 100] },
+      "title": "The New Stadium",
+      "text": ["The club plans to leave its historic stadium for a new one outside the city. Fans are split. The board wants {J} at the launch event, smiling next to the model.", "A vote among season-ticket holders about moving stadiums. Both campaigns want {J}'s endorsement."],
+      "prompt": "Take a position?",
+      "choices": [
+        { "label": "Support the move", "desc": "The future.", "risk": "medium", "hint": "Board happy. Traditionalists angry.", "text": "He attends the launch and says it's 'exciting'. Half the fans call him a sellout. The other half think he's right.", "fx": { "board": 6, "fans": -4 } },
+        { "label": "Defend the old ground", "desc": "History matters.", "risk": "medium", "hint": "Fans love it. Board furious.", "text": "'Some places are more than buildings.' The ultras put it on a banner. The board puts his name on a list.", "fx": { "fans": 7, "board": -6 } },
+        { "label": "Stay neutral", "desc": "'It's the fans' decision.'", "risk": "low", "hint": "Diplomatic.", "text": "Diplomatic, sensible, forgotten.", "fx": { "fans": 1 } }
+      ]
+    },
+    {
+      "id": "po_scandal_teammate", "cat": "politics", "w": 3, "uses": { "T": "any" }, "when": { "freeAgent": false },
+      "title": "The Club Wants a Statement",
+      "text": ["{T} is in the news for a nightclub incident. The club's media team asks every player to post a pre-written statement 'condemning unacceptable behaviour'. {T} is {J}'s friend.", "A teammate has been caught in a scandal. The club wants the squad to distance themselves publicly. {T} asks {J} not to."],
+      "prompt": "Post the statement?",
+      "choices": [
+        { "label": "Post it", "desc": "Club line.", "risk": "medium", "hint": "Board happy. {T} hurt.", "text": "He posts it. The board is satisfied. {T} unfollows him that night.", "fx": { "board": 4, "teammate": { "who": "T", "rel": "rival" }, "dressing": -2 } },
+        { "label": "Refuse, support your friend privately", "desc": "Loyalty.", "risk": "medium", "hint": "{T} won't forget. The board might not either.", "text": "He doesn't post. He calls {T} instead. The media team notes his silence.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "board": -4, "dressing": 2 } },
+        { "label": "Write your own words", "desc": "Honest, balanced.", "risk": "low", "hint": "Thoughtful.", "text": "He writes his own short statement: support for the process, love for his friend. Both sides grudgingly accept it.", "fx": { "board": 1, "image": 2, "press": 1 } }
+      ]
+    },
+    {
+      "id": "po_loan_politics", "cat": "politics", "w": 3, "when": { "loan": true },
+      "title": "Two Clubs, One Player",
+      "text": ["On loan, {J} is stuck between two clubs: the parent club wants him rested for their pre-season plans, the loan club wants him to play every minute.", "His parent club's loan manager calls every week. His current manager hates the calls."],
+      "prompt": "Whose instructions do you follow?",
+      "choices": [
+        { "label": "The loan club", "desc": "Play every minute.", "risk": "medium", "hint": "Current club loves you. Parent club worries.", "text": "He plays everything. The loan club adores him. The parent club sends a passive-aggressive email about 'load management'.", "fx": { "trust": 5, "fans": 3, "pfm": -3 } },
+        { "label": "The parent club", "desc": "Your future.", "risk": "medium", "hint": "Long-term thinking.", "text": "He manages his minutes. The loan manager is frustrated. The parent club's reports are glowing.", "fx": { "trust": -3, "board": 3, "pfm": 3 } }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,284 @@
+{
+  "scenarios": [
+    {
+      "id": "ls_first_apartment", "cat": "lifestyle", "w": 5, "once": true, "when": { "age": [17, 23], "wealth": [1500, 999999999] },
+      "title": "{J}'s First Own Place",
+      "text": ["For the first time, {J} can afford his own apartment. The estate agent shows him three: a tiny studio near the training ground, a two-bed in a new tower, and a penthouse he definitely can't afford.", "{MUM} wants him to keep living in club housing. {J} wants his own front door."],
+      "prompt": "Which one?",
+      "choices": [
+        { "label": "The tiny studio", "desc": "Cheap and close to training.", "risk": "low", "hint": "Sensible. Small.", "text": "It's small enough to touch both walls. He sleeps ten minutes from training and saves money every month.", "fx": { "lifestyle": -0.1, "pfm": 2, "family": 2 } },
+        { "label": "The two-bed in the tower", "desc": "Room for visitors.", "risk": "medium", "hint": "Comfort, and friends will visit.", "text": "A spare room means {BFf} visits, and {MUM} visits, and once both at the same time, which was chaos.", "fx": { "lifestyle": 0.15, "friends": 3, "family": 2, "morale": 3 } },
+        { "label": "The penthouse", "desc": "Live the dream.", "risk": "high", "hint": "Spectacular. Expensive. Photographed.", "text": "The view is unreal. So is the rent. The squad nickname him 'the landlord'. A gossip account posts the building.", "fx": { "lifestyle": 0.5, "morale": 5, "dressing": -1, "image": -1, "followers": 2000 } }
+      ]
+    },
+    {
+      "id": "ls_watch_temptation", "group": "watch", "groupCd": 200, "cat": "lifestyle", "w": 4, "when": { "wealth": [20000, 999999999], "age": [18, 40] },
+      "title": "The Watch",
+      "text": ["Every senior player in the dressing room wears a watch that costs more than {J}'s parents' house. {T} shows him a catalogue. 'You've made it. Act like it.'", "A luxury watch brand invites {J} to a private showroom. The glass of water they offer him is in crystal."],
+      "prompt": "Buy one?",
+      "vars": { "cost": ["wealthPct", 15, 3000] },
+      "choices": [
+        { "label": "Buy it", "desc": "{cost}.", "risk": "medium", "hint": "Status. Questions from home.", "text": "It's beautiful. He checks the time constantly for a week. {DAD} sees it on TV and says nothing, which says a lot.", "fx": { "wealth": "-cost", "lifestyle": 0.1, "dressing": 2, "morale": 3, "family": -3 } },
+        { "label": "Buy one for {DAD} instead", "desc": "Turn it around.", "risk": "low", "hint": "He'll pretend he doesn't care.", "text": "{DAD} unwraps it, says 'too much', and wears it to every family gathering for the rest of his life.", "fx": { "wealth": "-cost", "family": 10, "morale": 4 } },
+        { "label": "No thanks", "desc": "Time is time.", "risk": "low", "hint": "Humble. The squad will tease.", "text": "His plastic sports watch becomes a dressing-room joke and then, slowly, a kind of badge of honour.", "fx": { "growth": ["mental"], "dressing": -1 } }
+      ]
+    },
+    {
+      "id": "ls_diet_change", "group": "diet", "groupCd": 104, "cat": "lifestyle", "w": 4,
+      "title": "A New Way of Eating",
+      "text": ["A famous veteran swears his career was extended five years by a strict new diet: no sugar, no fried food, everything weighed. He offers to share his chef.", "The club nutritionist has a new plan for {J}. It involves a lot of fish. {J} has never knowingly enjoyed a fish."],
+      "prompt": "Commit to it?",
+      "choices": [
+        { "label": "Go all in", "desc": "Weigh every meal.", "risk": "medium", "hint": "Fitter. Grumpier.", "text": "Three weeks in, he's sharper in sprints and quieter at dinner parties. His family visits and finds nothing in his fridge but broccoli.", "fx": { "pfm": 5, "growth": ["physical"], "morale": -2, "family": -1, "potential": 1 } },
+        { "label": "80% of the time", "desc": "Balance.", "risk": "low", "hint": "Sustainable.", "text": "Fish on weekdays, {FOOD} on Sundays. The nutritionist sighs but accepts it.", "fx": { "pfm": 3, "morale": 1 } },
+        { "label": "Politely ignore it", "desc": "Your body, your rules.", "risk": "low", "hint": "Happy now. Maybe not at thirty.", "text": "He keeps eating what he likes. The nutritionist writes something in a file.", "fx": { "morale": 2, "trust": -1 } }
+      ]
+    },
+    {
+      "id": "ls_nightlife", "cat": "lifestyle", "w": 4, "when": { "age": [18, 34] },
+      "title": "The Club Promoter",
+      "text": ["A nightclub promoter offers {J} a free VIP table every weekend 'for being seen'. He's done the same for half the league. Some of them have stopped being seen in matches.", "The hottest club in the city wants {J} at their opening night. There will be celebrities, photographers and a very long night."],
+      "prompt": "Go?",
+      "choices": [
+        { "label": "Go once, leave by midnight", "desc": "See what the fuss is about.", "risk": "medium", "hint": "Probably fine.", "out": [
+          { "w": 2, "text": "Loud, glamorous, slightly boring. He leaves at midnight and is in bed by one. Nothing happens. Nothing is good.", "fx": { "friends": 2, "morale": 1 } },
+          { "w": 1, "text": "He leaves at midnight — but a photo from 11:58 looks like 3am. It's on a gossip account by morning.", "fx": { "image": -3, "trust": -2, "followers": 3000 } }
+        ] },
+        { "label": "Become a regular", "desc": "VIP every Saturday.", "risk": "extreme", "hint": "Fun now. Expensive later.", "text": "The weekends blur. His touch in training gets heavier. {Mf} stops making eye contact. The people closest to him start asking questions.", "fx": { "lifestyle": 0.4, "pfm": -6, "trust": -5, "image": -5, "friends": 3, "love": -5, "family": -3, "flag": "party_regular", "potential": -2 } },
+        { "label": "Say no", "desc": "Not your scene.", "risk": "low", "hint": "Boring is professional.", "text": "He says no. He watches {SHOW} instead. On Monday, two teammates who went look exhausted.", "fx": { "pfm": 2, "trust": 1 } }
+      ]
+    },
+    {
+      "id": "ls_party_consequence", "cat": "lifestyle", "w": 6, "when": { "flags": ["party_regular"] }, "cd": 30,
+      "title": "The Weekend Catches Up",
+      "text": ["Monday morning. {J}'s fitness test results are the worst in the squad. {Mf} pins them on the wall, without names, but everyone knows.", "A gossip account has posted a video of {J} at 4am. The club's head of security forwards it to him with no message."],
+      "prompt": "Time to choose.",
+      "choices": [
+        { "label": "Quit the scene completely", "desc": "Reset.", "risk": "low", "hint": "Everything recovers. Slowly.", "text": "He deletes the promoter's number. The first quiet Saturday feels like withdrawal. By the third, he sleeps through the night.", "fx": { "unflag": "party_regular", "lifestyle": -0.3, "trust": 3, "pfm": 4, "image": 2, "morale": -1 } },
+        { "label": "Cut back, don't quit", "desc": "Just Saturdays after wins.", "risk": "medium", "hint": "Compromise. Temptation stays.", "text": "He tells himself he's in control. Some weeks, he is.", "fx": { "pfm": 1, "image": -1 } },
+        { "label": "Carry on", "desc": "You're young once.", "risk": "extreme", "hint": "This ends badly.", "text": "He carries on. The papers carry on too. {Mf} drops him for the next match without explanation.", "fx": { "trust": -8, "image": -5, "pfm": -5, "board": -4, "stress": 4, "potential": -2 } }
+      ]
+    },
+    {
+      "id": "ls_tattoo", "group": "tattoo", "groupCd": 9999, "cat": "lifestyle", "w": 3, "once": true, "when": { "age": [18, 35] },
+      "title": "The First Tattoo",
+      "text": ["Half the squad has tattoos. {J} has been thinking about one for months: something for his family, maybe. {MUM} has said, many times, 'over my dead body'.", "{T} is getting a new tattoo on Thursday and has booked a second slot 'in case {J} grows a spine'."],
+      "prompt": "Get one?",
+      "choices": [
+        { "label": "Family names on the forearm", "desc": "Meaningful.", "risk": "medium", "hint": "{MUM} will be torn.", "text": "His family's names, in his father's handwriting, copied from an old birthday card. {MUM} cries when she sees it. She says it's because she's angry.", "fx": { "family": 3, "morale": 4, "followers": 1500 } },
+        { "label": "Something wild", "desc": "A tiger. On the neck.", "risk": "high", "hint": "Iconic or regrettable.", "text": "It's enormous. The tiger looks slightly surprised. The fans love it. {MUM} doesn't speak to him for a week.", "fx": { "followers": 4000, "family": -6, "image": -1, "fans": 2 } },
+        { "label": "Not yet", "desc": "Mum wins this one.", "risk": "low", "hint": "Peace at home.", "text": "He goes with {T} and watches. {T}'s tattoo is spelled wrong. {J} feels very wise.", "fx": { "family": 1, "dressing": 1 } }
+      ]
+    },
+    {
+      "id": "ls_investment_pitch", "group": "invest_pitch", "groupCd": 104, "cat": "lifestyle", "w": 4, "when": { "wealth": [15000, 999999999] },
+      "title": "An Investment Opportunity",
+      "text": ["A smooth man in a smooth suit has an investment opportunity: crypto, real estate, 'guaranteed' returns. Three other players have already invested, he says.", "{T} swears he doubled his money in six months with 'a guy'. The guy wants to meet {J}."],
+      "prompt": "Invest?",
+      "vars": { "cost": ["wealthPct", 30, 2000] },
+      "choices": [
+        { "label": "Invest big", "desc": "{cost}.", "risk": "extreme", "hint": "Guaranteed returns don't exist.", "out": [
+          { "w": 1, "text": "It actually works. His money grows. He becomes insufferable about it.", "fx": { "wealth": "cost*0.8", "morale": 4 } },
+          { "w": 3, "text": "Six months later the smooth man's phone is disconnected. So is {J}'s money. Three other players are in the same position. None of them talk about it.", "fx": { "wealth": "-cost", "stress": 8, "morale": -5, "family": -2 } }
+        ] },
+        { "label": "Ask a real financial adviser", "desc": "Do it properly.", "risk": "low", "hint": "Boring. Safe. Smart.", "text": "The adviser laughs at the smooth man's brochure and builds {J} a boring, sensible plan. Boring is good.", "fx": { "stress": -3, "growth": ["mental"], "lifestyle": -0.1, "flag": "financial_adviser" } },
+        { "label": "Walk away", "desc": "Too good to be true.", "risk": "low", "hint": "Nothing lost.", "text": "He walks away. A year later, a teammate tells him he lost everything to the same man.", "fx": { "growth": ["mental"] } }
+      ]
+    },
+    {
+      "id": "ls_gaming_addiction", "cat": "lifestyle", "w": 3, "when": { "age": [16, 30] },
+      "title": "One More Game",
+      "text": ["It's 2:40am. {J} has been playing online since dinner. Training is at nine. He tells himself 'one more game' for the eleventh time.", "{J}'s screen-time report says nine hours a day. The physio says his sleep data is 'concerning'."],
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Put the console in a cupboard", "desc": "Weekends only.", "risk": "low", "hint": "Better sleep.", "text": "The first few nights are boring. Then he reads a book. Then he sleeps eight hours. His training numbers jump.", "fx": { "pfm": 4, "stress": -2, "trust": 1, "friends": -1, "potential": 1 } },
+        { "label": "Turn it into streaming", "desc": "If you're playing anyway...", "risk": "medium", "hint": "Followers up, sleep down.", "text": "The streams are popular. The sleep is not. His followers grow. His sprint times don't.", "fx": { "followers": 6000, "pfm": -4, "trust": -2 } },
+        { "label": "It's fine, it's relaxing", "desc": "Everyone needs a hobby.", "risk": "medium", "hint": "It isn't fine.", "text": "He keeps playing. His legs feel heavy in every Monday session.", "fx": { "pfm": -4, "stress": 2 } }
+      ]
+    },
+    {
+      "id": "ls_charity_foundation", "group": "foundation", "groupCd": 9999, "cat": "lifestyle", "w": 3, "once": true, "when": { "wealth": [30000, 999999999], "rep": [25, 100] },
+      "title": "Starting a Foundation",
+      "text": ["{J}'s agent suggests starting a foundation: good for the image, good for the tax bill, good for the soul. In that order, says the agent.", "{MUM} suggests {J} give something back to the neighbourhood. She already has a list. It's long."],
+      "prompt": "Start a foundation?",
+      "choices": [
+        { "label": "Yes, run it properly", "desc": "Hire people. Be involved.", "risk": "low", "hint": "Real impact. Real time.", "vars": { "cost": ["wealthPct", 20, 5000] }, "text": "The foundation's first project builds a futsal court in his old neighbourhood. He's at the opening, crying, pretending it's the wind.", "fx": { "wealth": "-cost", "image": 8, "family": 5, "fans": 4, "morale": 6, "flag": "foundation" } },
+        { "label": "Just donate quietly", "desc": "No name, no foundation.", "risk": "low", "hint": "Humble.", "vars": { "cost": ["wealthPct", 10, 2000] }, "text": "He donates {cost} anonymously. Nobody knows. That's the point.", "fx": { "wealth": "-cost", "morale": 4, "family": 2 } },
+        { "label": "Not yet", "desc": "Build your wealth first.", "risk": "low", "hint": "Practical.", "text": "'Later,' he says. {MUM} folds her list away and says nothing.", "fx": { "family": -2 } }
+      ]
+    },
+    {
+      "id": "ls_social_media_detox", "cat": "lifestyle", "w": 4, "when": { "followers": [5000, 999999999] },
+      "title": "Too Much Phone",
+      "text": ["{J}'s phone tells him he picked it up 247 times yesterday. He scrolled through his own mentions for three hours.", "The club psychologist asks {J} to hand over his phone for the duration of the session. He feels physically anxious without it."],
+      "prompt": "Change your habits?",
+      "choices": [
+        { "label": "Delete the apps for a month", "desc": "Cold turkey.", "risk": "medium", "hint": "Peace. Fewer followers.", "text": "The first week is strange: hands reaching for a phone that's empty. By week three he's reading again. His mind feels like a room someone has cleaned.", "fx": { "stress": -8, "morale": 3, "followers": -2000, "growth": ["mental"] } },
+        { "label": "Hire a social media manager", "desc": "Let someone else post.", "risk": "low", "hint": "Professional. Less personal.", "vars": { "cost": ["wageWeeks", 2, 300] }, "text": "The posts become polished and slightly soulless. His mentions are someone else's problem now.", "fx": { "wealth": "-cost", "stress": -4, "followers": 3000, "fans": -1 } },
+        { "label": "It's fine", "desc": "It's part of the job.", "risk": "medium", "hint": "It's not fine.", "text": "He keeps scrolling. The bad comments keep finding him.", "fx": { "stress": 3 } }
+      ]
+    },
+    {
+      "id": "ls_car_crash_minor", "cat": "lifestyle", "w": 2, "cd": 200, "when": { "flags": ["bought_car"] },
+      "title": "Scratch on the New Car",
+      "text": ["Someone has keyed the new car. Deep, deliberate, the full length of it. In the club car park. CCTV shows a hooded figure.", "{J} reverses the new car into a bollard outside {PLACE}. A crowd gathers. Phones come out."],
+      "prompt": "React?",
+      "choices": [
+        { "label": "Laugh it off", "desc": "It's just a car.", "risk": "low", "hint": "Perspective.", "text": "He posts a photo of the damage: 'At least it wasn't my hamstring.' The fans love it.", "fx": { "followers": 2000, "image": 1, "wealth": -300 } },
+        { "label": "Go after whoever did it", "desc": "Police, CCTV, the works.", "risk": "medium", "hint": "Justified. Distracting.", "text": "Weeks of statements and calls. It turns out to be a fan of {R}. The story makes the papers.", "fx": { "stress": 4, "press": 1, "wealth": -300 } }
+      ]
+    },
+    {
+      "id": "ls_house_for_parents", "cat": "lifestyle", "w": 4, "once": true, "when": { "wealth": [40000, 999999999] },
+      "title": "A House for {MUM} and {DAD}",
+      "text": ["For years {J} has dreamed of this: buying his parents a new house. He has the money now. He has the brochure. He has not asked them.", "{MUM} mentions, casually, that the roof is leaking again. {J} looks at his bank account. Then at the photo of his parents on his phone."],
+      "prompt": "Buy them a house?",
+      "vars": { "cost": ["wealthPct", 45, 20000] },
+      "choices": [
+        { "label": "Surprise them with the keys", "desc": "The dream.", "risk": "medium", "hint": "Unforgettable. {DAD} is proud and stubborn.", "out": [
+          { "w": 2, "text": "He hands {MUM} the keys on video. She screams, then cries, then hits him for spending so much. {DAD} walks through every room twice and doesn't say a word until the garden, where he says 'good soil'.", "fx": { "wealth": "-cost", "family": 18, "morale": 10, "followers": 10000, "image": 4 } },
+          { "w": 1, "text": "{DAD} refuses to move. 'This is our home.' It takes three months of arguments before he agrees to a new roof instead.", "fx": { "wealth": "-cost*0.3", "family": 4, "stress": 3 } }
+        ] },
+        { "label": "Ask them what they actually want", "desc": "Their choice.", "risk": "low", "hint": "Respectful.", "text": "They want to stay in the neighbourhood, with a new kitchen and a garden for {DAD}'s chillies. It costs a third of a new house and makes them happier.", "fx": { "wealth": "-cost*0.35", "family": 14, "morale": 6 } }
+      ]
+    },
+    {
+      "id": "ls_learning", "cat": "lifestyle", "w": 3, "when": { "age": [18, 40] },
+      "title": "Back to the Books",
+      "text": ["A teammate is doing an online business degree in his spare time. He says every footballer should plan for 'life after'. {J} has never thought about life after.", "The players' union offers free online courses: coaching, finance, languages, media."],
+      "prompt": "Sign up?",
+      "choices": [
+        { "label": "Coaching badges", "desc": "Learn the game from the other side.", "risk": "low", "hint": "Understanding improves. Time goes.", "text": "The theory sessions change how he sees training. {Mf} starts asking his opinion.", "fx": { "growth": ["mental"], "tacticalFit": 6, "trust": 2, "pfm": -1, "flag": "coaching_badges", "potential": 1 } },
+        { "label": "A language", "desc": "Open doors.", "risk": "low", "hint": "Useful for a move abroad.", "text": "Twenty minutes a day. Six months later, he can order food and flirt, badly, in a new language.", "fx": { "growth": ["mental"], "morale": 2 } },
+        { "label": "Too busy", "desc": "Football is the job.", "risk": "low", "hint": "Fair. Short-sighted?", "text": "'Later,' he says. It's what everyone says.", "fx": {} }
+      ]
+    },
+    {
+      "id": "ls_fashion_week", "cat": "lifestyle", "w": 3, "when": { "followers": [50000, 999999999], "phase": ["off", "pre"] },
+      "title": "Fashion Week",
+      "text": ["A fashion house invites {J} to sit in the front row of their show. Free clothes, free flights, a hotel with a doorman who wears gloves.", "A designer wants {J} to walk in her show. Actually walk. On a runway. In front of people."],
+      "prompt": "Go?",
+      "choices": [
+        { "label": "Walk the runway", "desc": "Why not?", "risk": "medium", "hint": "Iconic or ridiculous.", "out": [
+          { "w": 1, "text": "He walks like he's been doing it for years. Fashion magazines call him 'football's new face'. The squad calls him 'the model' forever.", "fx": { "followers": 30000, "image": 3, "dressing": 1, "morale": 4 } },
+          { "w": 1, "text": "He trips on the third step. The clip has fifty million views. The designer says it was 'intentional performance art'.", "fx": { "followers": 40000, "dressing": 3, "morale": -2 } }
+        ] },
+        { "label": "Front row only", "desc": "Watch, don't walk.", "risk": "low", "hint": "Glamorous, safe.", "text": "He sits next to a pop star who has no idea who he is. The photos are everywhere anyway.", "fx": { "followers": 10000, "image": 1 } },
+        { "label": "Decline", "desc": "Not your world.", "risk": "low", "hint": "The club prefers it.", "text": "He declines. The club's fitness coach is relieved. His {SIBr} is devastated.", "fx": { "trust": 1, "family": -1 } }
+      ]
+    },
+    {
+      "id": "ls_sleep_coach", "group": "sleep", "groupCd": 60, "cat": "lifestyle", "w": 3, "when": { "stress": [45, 100] },
+      "title": "The Sleep Problem",
+      "text": ["{J} hasn't slept more than five hours a night in three weeks. The club's sports scientist shows him the data on a tablet. It's red.", "Bags under his eyes, coffee at 4pm, staring at the ceiling at 2am. The body is talking. {J} isn't listening."],
+      "prompt": "Do something about it?",
+      "choices": [
+        { "label": "Hire a sleep specialist", "desc": "Proper help.", "risk": "low", "hint": "Expensive. Life-changing.", "vars": { "cost": ["wageWeeks", 1, 200] }, "text": "Blackout blinds, a strict routine, no phone after nine. The first full night's sleep feels like a miracle.", "fx": { "wealth": "-cost", "stress": -8, "pfm": 5, "morale": 3 } },
+        { "label": "Talk to someone about what's keeping you up", "desc": "The real problem.", "risk": "low", "hint": "Harder. Deeper.", "text": "The club psychologist asks one question and {J} talks for an hour. The sleep starts coming back.", "fx": { "stress": -10, "morale": 4, "flag": "sees_psychologist" } },
+        { "label": "More coffee", "desc": "Push through.", "risk": "high", "hint": "This won't end well.", "text": "Four coffees a day. His hands shake slightly in the warm-up.", "fx": { "stress": 4, "pfm": -3 } }
+      ]
+    },
+    {
+      "id": "ls_luxury_holiday", "cat": "lifestyle", "w": 3, "when": { "phase": ["off"], "wealth": [8000, 999999999] },
+      "title": "A Luxury Holiday",
+      "text": ["The off-season. The squad's group chat is full of yacht photos. A travel agent has sent {J} a brochure for a private island. It's very private. It's very expensive.", "{T} has invited {J} on a holiday: private villa, chef, jet skis. 'Split it six ways, it's nothing.' It's not nothing."],
+      "prompt": "Go?",
+      "vars": { "cost": ["wealthPct", 12, 1500] },
+      "choices": [
+        { "label": "Go, enjoy every minute", "desc": "{cost}. You've earned it.", "risk": "medium", "hint": "Rest and photos.", "text": "Ten days of sun and silence. He comes back tanned and calm. A paparazzi photo of him on a jet ski makes the papers.", "fx": { "wealth": "-cost", "stress": -10, "morale": 6, "image": -1, "followers": 3000 } },
+        { "label": "Take the family instead", "desc": "Their first holiday ever.", "risk": "low", "hint": "Priceless.", "text": "{MUM} has never seen the sea. She stands in it fully dressed for an hour. {DAD} falls asleep on a sunbed and gets a sunburn in the shape of his newspaper.", "fx": { "wealth": "-cost", "family": 15, "stress": -8, "morale": 8 } },
+        { "label": "Stay home, save the money", "desc": "Simple summer.", "risk": "low", "hint": "Sensible.", "text": "He stays home. The yacht photos keep coming. He's fine with it. Mostly.", "fx": { "stress": -3 } }
+      ]
+    },
+    {
+      "id": "ls_youtube_channel", "cat": "lifestyle", "w": 3, "when": { "followers": [20000, 999999999], "age": [16, 32] },
+      "title": "A YouTube Channel",
+      "text": ["A production company wants to launch a vlog channel with {J}: behind-the-scenes, daily life, pranks. They'll handle everything. They want 30% of the revenue and access to his whole life.", "{SIB} has started filming {J} for TikTok without asking. The videos are doing better than his actual account."],
+      "prompt": "Launch it?",
+      "choices": [
+        { "label": "Launch a full vlog", "desc": "Let the cameras in.", "risk": "high", "hint": "Fame, money and no privacy.", "text": "The first video gets a million views. The cameras follow him everywhere. The people closest to him start to hate the red recording light.", "fx": { "followers": 50000, "wealth": 1000, "love": -6, "family": -3, "stress": 4, "board": 2 } },
+        { "label": "Let {SIB} run a small channel", "desc": "Family business.", "risk": "low", "hint": "Authentic. Chaotic.", "text": "{SIB}'s videos are shaky, unfiltered and wildly popular. {SIB} is now more famous than most of the squad.", "fx": { "followers": 15000, "family": 6 } },
+        { "label": "No cameras", "desc": "Keep life private.", "risk": "low", "hint": "Peace.", "text": "He says no. His life stays his own.", "fx": { "stress": -2 } }
+      ]
+    },
+    {
+      "id": "ls_religion_practice", "cat": "lifestyle", "w": 3, "when": { "abroad": true },
+      "title": "Finding a Place to Pray",
+      "text": ["In a new country, {J} hasn't found a place to pray, or a community. Sunday or Friday comes and goes and feels empty.", "A teammate notices {J} praying alone in the physio room before matches. He mentions there's a community centre across town."],
+      "prompt": "Find a community?",
+      "choices": [
+        { "label": "Go and introduce yourself", "desc": "Find your people.", "risk": "low", "hint": "Belonging.", "text": "The community welcomes him like a son. An old man invites him to dinner. For an evening, he's not a footballer. He's just someone's guest.", "fx": { "morale": 6, "stress": -5, "friends": 3, "family": 2, "flag": "abroad_community" } },
+        { "label": "Keep it private", "desc": "Faith is personal.", "risk": "low", "hint": "Quiet.", "text": "He keeps his rituals to himself. They anchor him, even alone.", "fx": { "stress": -2 } }
+      ]
+    },
+    {
+      "id": "ls_gambling_temptation", "group": "gambling", "groupCd": 150, "cat": "lifestyle", "w": 2, "cd": 200, "when": { "age": [18, 40] },
+      "title": "The Card Game",
+      "text": ["On the team bus, a card game for money has been going for months. The stakes have crept up. Tonight a teammate lost a month's wages in an hour.", "A teammate invites {J} to a 'private poker night'. The address is a penthouse. The buy-in is a number with a lot of zeros."],
+      "prompt": "Play?",
+      "choices": [
+        { "label": "Play small, once", "desc": "Just to be social.", "risk": "medium", "hint": "It starts small.", "out": [
+          { "w": 2, "text": "He loses a little, laughs, leaves. That's it.", "fx": { "wealth": -100, "dressing": 2 } },
+          { "w": 1, "text": "He wins. Big. It's the worst thing that could have happened. He wants to play again.", "fx": { "wealth": 800, "dressing": 2, "flag": "gambling", "stress": 2 } }
+        ] },
+        { "label": "Never play", "desc": "Not a single card.", "risk": "low", "hint": "Some teammates will tease.", "text": "He reads on the bus instead. Six months later, two teammates owe money to people they shouldn't.", "fx": { "growth": ["mental"], "dressing": -1 } }
+      ]
+    },
+    {
+      "id": "ls_gambling_spiral", "group": "gambling_spiral", "groupCd": 30, "cat": "lifestyle", "w": 6, "cd": 40, "when": { "flags": ["gambling"] },
+      "title": "Chasing Losses",
+      "text": ["{J} has been betting online. Small at first. Then less small. Last night he lost more than a month's wages and tried to win it back. Then he lost more.", "The betting app sends {J} a notification: 'We miss you! Here's a free bet.' He opens it at 3am."],
+      "prompt": "This is becoming a problem.",
+      "vars": { "cost": ["wageWeeks", 4, 500] },
+      "choices": [
+        { "label": "Ask for help", "desc": "Tell the club welfare officer.", "risk": "low", "hint": "Hardest, best.", "text": "The welfare officer has seen this a hundred times. She doesn't judge. The road out starts with blocking the apps.", "fx": { "unflag": "gambling", "stress": -4, "board": 1, "growth": ["mental"] } },
+        { "label": "Quit alone", "desc": "Willpower.", "risk": "high", "hint": "Maybe.", "check": { "stat": "mental", "dc": 65 },
+          "ok": { "text": "He deletes everything and changes his bank settings. It's hard. He does it.", "fx": { "unflag": "gambling", "stress": -2, "growth": ["mental"] } },
+          "bad": { "text": "He lasts nine days. Then the free bet arrives.", "fx": { "wealth": "-cost", "stress": 6, "morale": -4 } } },
+        { "label": "One more big win and you'll stop", "desc": "Win it back.", "risk": "extreme", "hint": "Everybody says this.", "text": "He doesn't win it back. He loses {cost} more. The bank calls. So does {DAD}.", "fx": { "wealth": "-cost*2", "stress": 10, "family": -6, "morale": -6 } }
+      ]
+    },
+    {
+      "id": "ls_minimalist", "cat": "lifestyle", "w": 3, "when": { "wealth": [5000, 999999999], "age": [24, 40] },
+      "title": "Less Is More",
+      "text": ["A veteran teammate lives in a simple apartment, drives an old car and has saved enough to never work again. 'Nobody remembers your watch,' he says.", "{J} looks around his apartment at things he bought and never used: a massage chair, three games consoles, a coffee machine with a manual like a novel."],
+      "prompt": "Change your lifestyle?",
+      "choices": [
+        { "label": "Simplify everything", "desc": "Sell, save, breathe.", "risk": "low", "hint": "Costs fall. Peace rises.", "text": "He sells half of everything and gives the rest away. His living costs drop. Strangely, he feels lighter.", "fx": { "lifestyle": -0.4, "wealth": 800, "stress": -4, "morale": 2 } },
+        { "label": "Keep living well", "desc": "You only get one career.", "risk": "low", "hint": "Enjoy it.", "text": "He keeps the massage chair. He uses it. It's great.", "fx": { "morale": 2 } }
+      ]
+    },
+    {
+      "id": "ls_bodyguard", "cat": "lifestyle", "w": 3, "when": { "followers": [100000, 999999999] },
+      "title": "Security",
+      "text": ["Fans followed {J} home last night. Three of them. Friendly, but they now know where he lives. The club's head of security suggests a bodyguard.", "Someone has posted {J}'s apartment building online. A small crowd gathers outside every evening."],
+      "prompt": "Hire security?",
+      "vars": { "cost": ["wageWeeks", 2, 400] },
+      "choices": [
+        { "label": "Hire a bodyguard", "desc": "Safety first.", "risk": "low", "hint": "Safe, distant.", "text": "His bodyguard is huge and silent and very good at chess. Fans can't get close anymore. Some say he's 'changed'.", "fx": { "wealth": "-cost", "stress": -5, "fans": -2, "lifestyle": 0.2 } },
+        { "label": "Move somewhere private", "desc": "Gated community.", "risk": "low", "hint": "Expensive. Isolated.", "text": "A gated house outside the city. Safe. Quiet. Very far from the world he came from.", "fx": { "lifestyle": 0.3, "stress": -3, "friends": -2 } },
+        { "label": "Talk to the fans", "desc": "Set boundaries kindly.", "risk": "medium", "hint": "Might work.", "text": "He goes down, signs everything, and asks them nicely to give him privacy. Most of them do.", "fx": { "fans": 3, "stress": -1, "image": 2 } }
+      ]
+    },
+    {
+      "id": "ls_cooking_class", "cat": "lifestyle", "w": 3,
+      "title": "Learning to Cook",
+      "text": ["{J}'s fridge contains: protein shakes, three eggs, and a jar of something {MUM} sent that he's afraid to open. The nutritionist has had enough. She's booked him a cooking class.", "{J} has eaten the same chicken and rice for 41 days. A teammate's wife runs cooking classes. She has offered."],
+      "prompt": "Go?",
+      "choices": [
+        { "label": "Go every week", "desc": "Become a chef.", "risk": "low", "hint": "Healthier. Happier. Better at dinner parties.", "text": "By week six he can make three dishes properly. He cooks for {T} and his family. Everyone survives.", "fx": { "pfm": 2, "morale": 3, "dressing": 1, "lifestyle": -0.1 } },
+        { "label": "Hire a private chef", "desc": "Outsource it.", "risk": "low", "hint": "Expensive. Delicious.", "vars": { "cost": ["wageWeeks", 1, 150] }, "text": "The chef is excellent and costs {cost} a month. {J}'s fridge is now beautiful and he still can't boil an egg.", "fx": { "wealth": "-cost", "lifestyle": 0.2, "pfm": 3 } }
+      ]
+    },
+    {
+      "id": "ls_old_neighbourhood", "group": "hometown", "groupCd": 52, "cat": "lifestyle", "w": 3, "when": { "rep": [30, 100], "abroad": false },
+      "title": "Back in the Old Neighbourhood",
+      "text": ["{J} drives through the neighbourhood where he grew up. The street vendors, the broken goalpost, the wall where he used to kick a ball for hours. Everyone stops what they're doing.", "A visit home. The kids who used to call him names now ask for selfies."],
+      "prompt": "Stay a while?",
+      "choices": [
+        { "label": "Walk the whole street", "desc": "Say hello to everyone.", "risk": "low", "hint": "Roots.", "text": "Three hours, a hundred handshakes, eight plates of food he couldn't refuse. The old woman who sold him ice lollies when he was six cries.", "fx": { "family": 4, "friends": 4, "morale": 6, "image": 2 } },
+        { "label": "Fix the broken goalpost", "desc": "Leave something behind.", "risk": "low", "hint": "Small, meaningful.", "vars": { "cost": ["fixed", 300] }, "text": "A new goal, new nets, a small sign with no name on it. The kids know who did it.", "fx": { "wealth": "-cost", "image": 3, "family": 3, "morale": 4 } }
+      ]
+    }
+  ]
+}

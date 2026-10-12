@@ -1,0 +1,532 @@
+{
+  "scenarios": [
+    {
+      "id": "fd_unpaid_wages", "cat": "politics", "w": 5, "cd": 80, "when": { "freeAgent": false, "tier": [1, 4], "leagueQ": [0, 62] },
+      "title": "Payday Comes and Goes",
+      "text": ["Payday was Friday. Nobody has been paid. The club says 'administrative delays'. The kit man says this is the third time this year.", "Two months of wages, unpaid. Some of the younger players can't afford their rent. The senior players are talking about refusing to train."],
+      "prompt": "The club hasn't paid the squad.",
+      "choices": [
+        { "label": "Stand with the senior players", "desc": "No pay, no training.", "risk": "high", "hint": "The squad's respect. The board's anger.", "out": [ { "w": 2, "text": "The boycott lasts one day. The money arrives the next morning. The board will remember who led it.", "fx": { "dressing": 7, "board": -8, "wealth": "wage", "trust": -2 } }, { "w": 1, "text": "The board calls their bluff and fines everyone who missed training. The money still doesn't arrive.", "fx": { "dressing": 4, "board": -10, "wealth": "-fine", "stress": 5 } } ] },
+        { "label": "Keep training and keep quiet", "desc": "Professional. Patient.", "risk": "medium", "hint": "The board appreciates it. Some teammates won't.", "text": "He trains every day. The board notices. A few teammates call him the president's pet.", "fx": { "board": 6, "dressing": -4, "stress": 3 } },
+        { "label": "Lend money to the young players", "desc": "They can't pay rent.", "risk": "low", "hint": "Generous. Remembered.", "text": "He quietly covers rent for three academy kids. One of them cries. The dressing room finds out, as dressing rooms always do.", "fx": { "dressing": 8, "wealth": "-loan", "image": 2 } }
+      ],
+      "vars": { "wage": ["wageWeeks", 4, 200], "fine": ["wageWeeks", 1, 50], "loan": ["wageWeeks", 1.5, 300] }
+    },
+    {
+      "id": "fd_match_fixer", "cat": "politics", "w": 3, "cd": 200, "when": { "freeAgent": false, "leagueQ": [0, 70], "age": [17, 36] }, "uses": { "A": "new" },
+      "title": "A Man in a Car Park",
+      "text": ["A man in an expensive jacket stops him in the car park. Polite, friendly, very specific: a yellow card before the 20th minute on Saturday, and an envelope worth three months' wages.", "{A}, who says he's 'a friend of the club', sends a message through a burner number: a penalty conceded in the second half, and his debts disappear."],
+      "prompt": "Someone wants you to fix part of a match.",
+      "choices": [
+        { "label": "Report it to the league immediately", "desc": "Integrity unit, police, everything.", "risk": "medium", "hint": "The right thing. Scary people may be unhappy.", "text": "He reports it the same day. The league's integrity unit takes it seriously. Three months later, arrests are made. His name stays out of it, mostly.", "fx": { "image": 6, "board": 5, "stress": 6, "flag": "reported_fixer" } },
+        { "label": "Say no and walk away", "desc": "Not interested. Never contact me again.", "risk": "medium", "hint": "Clean. But you didn't report it.", "text": "He walks away. The man smiles like someone who'll try again with somebody else.", "fx": { "stress": 4 } },
+        { "label": "Take the envelope", "desc": "It's just a yellow card.", "risk": "extreme", "hint": "Careers end this way. Lives too.", "text": "He takes it. He gets the yellow card. He can't sleep for a month. Then the phone rings again, and this time it isn't a request.", "fx": { "wealth": "bribe", "stress": 15, "image": -5, "flag": ["fixer_debt", "secret"], "chain": { "id": "fd_match_fixer_2", "in": [4, 10] } } }
+      ],
+      "vars": { "bribe": ["wageWeeks", 12, 3000] }
+    },
+    {
+      "id": "fd_match_fixer_2", "cat": "politics", "chainOnly": true, "critical": true, "cd": 1,
+      "title": "They Want More",
+      "text": "The same man, a different car park. This time he isn't smiling. He shows {J} a photo of {MUM} and {DAD}'s house. He wants a full match this time.",
+      "prompt": "The fixers own you now.",
+      "choices": [
+        { "label": "Go to the police and confess everything", "desc": "End it. Whatever it costs.", "risk": "extreme", "hint": "A ban, maybe. Freedom, certainly.", "text": "He walks into a police station and tells them everything. The ban is eight months. The fixers are arrested. His mother hugs him at the door and says she is proud he told the truth.", "fx": { "suspension": 20, "image": -15, "press": -10, "board": -15, "stress": -10, "family": 4, "unflag": "fixer_debt", "flag": "confessed_fixing", "mood": "Relieved" } },
+        { "label": "Do what they say", "desc": "Just this once more.", "risk": "extreme", "hint": "There is no 'once more'.", "text": "He does it. The league's integrity unit flags the betting patterns within a week. The investigation reaches him in a month. His career ends in a hearing room.", "fx": { "image": -40, "board": -40, "fans": -40, "press": -20, "listed": true, "trust": -40, "flag": "secret_exposed", "stress": 20, "mood": "Broken" } }
+      ]
+    },
+    {
+      "id": "fd_doping_test", "cat": "body", "w": 4, "cd": 100, "when": { "freeAgent": false },
+      "title": "The Knock on the Door",
+      "text": ["6am. Two anti-doping officers at his front door, with a sealed kit and very little small talk. A random out-of-competition test.", "After the match, his number comes up for the doping test. He hasn't taken anything. He's suddenly worried about the cold medicine he had on Tuesday."],
+      "prompt": "A doping test.",
+      "choices": [
+        { "label": "Cooperate fully and declare everything", "desc": "Every supplement, every pill.", "risk": "low", "hint": "Clean and careful.", "text": "He lists everything, including the cold medicine. The test is clean. The officers leave with a signed shirt for their nephews.", "fx": { "stress": 2 } },
+        { "label": "Panic and call the club doctor", "desc": "Was that cold medicine allowed?", "risk": "medium", "hint": "Probably fine. Probably.", "out": [ { "w": 4, "text": "The doctor checks: the cold medicine is fine. He breathes for the first time in an hour.", "fx": { "stress": 4 } }, { "w": 1, "text": "Trace amounts of a banned stimulant from a contaminated supplement. A hearing, a three-month ban, and a headline he'll never escape.", "fx": { "suspension": 10, "image": -12, "press": -8, "board": -8, "stress": 12, "flag": "doping_case" } } ] }
+      ]
+    },
+    {
+      "id": "fd_dressing_fight", "cat": "dressing", "w": 5, "cd": 60, "when": { "freeAgent": false, "lastResult": ["L"] }, "uses": { "T": "any", "T2": "any" },
+      "title": "Fists at Half-Time",
+      "text": ["Half-time, 2-0 down. {T} blames {T2} for the second goal. {T2} pushes {T}. Within seconds the physio is on the floor and the tactics board is in pieces.", "After the defeat, {T} throws a boot at {T2}'s head. It misses, barely. The dressing room is a breath from a brawl."],
+      "prompt": "A fight is breaking out in the dressing room.",
+      "choices": [
+        { "label": "Get between them", "desc": "Physically.", "risk": "high", "hint": "Brave. You might take a punch.", "out": [ { "w": 2, "text": "He wraps {T} in a bear hug until the anger drains out. The manager sees it. So does everyone else.", "fx": { "dressing": 6, "trust": 4, "bond": 5 } }, { "w": 1, "text": "He gets an elbow in the face for his trouble. A split lip, and a lot of respect.", "fx": { "dressing": 6, "trust": 3, "pfm": -3 } } ] },
+        { "label": "Stay out of it", "desc": "Not your fight.", "risk": "low", "hint": "Safe. Forgettable.", "text": "He sits on the bench and looks at his boots. The captain sorts it out.", "fx": {} },
+        { "label": "Back {T}", "desc": "{Tl} was right about the goal.", "risk": "high", "hint": "An ally made, an enemy too.", "text": "He backs {T}. {T2} looks at him like he'll remember this. He will.", "fx": { "teammate": { "who": "T2", "rel": "rival" }, "bond": 8, "dressing": -2 } }
+      ]
+    },
+    {
+      "id": "fd_clique", "cat": "dressing", "w": 5, "cd": 80, "when": { "freeAgent": false, "abroad": true },
+      "title": "Two Tables",
+      "text": ["The canteen has two tables: local players and foreign players. Nobody planned it. Everybody respects it. {J} is carrying his tray and both tables are watching.", "The foreign players have their own group chat, and so do the locals. {J} has been added to both. Each is talking about the other."],
+      "prompt": "The squad is split. Where do you sit?",
+      "choices": [
+        { "label": "With the local players", "desc": "Learn the language. Be one of them.", "risk": "medium", "hint": "Integration. The foreigners may feel abandoned.", "text": "He sits with the locals and mangles their language until they adopt him out of pity, then affection.", "fx": { "dressing": 4, "growth": ["mental"], "fans": 2 } },
+        { "label": "With the foreign players", "desc": "People who understand your situation.", "risk": "low", "hint": "Comfort. Less integration.", "text": "He sits with the other foreigners. They swap stories of homesickness and find the city's one good restaurant from home.", "fx": { "friends": 3, "stress": -2 } },
+        { "label": "Push the tables together", "desc": "Literally.", "risk": "medium", "hint": "Bold. Could work.", "out": [ { "w": 2, "text": "He drags the two tables together. There's an awkward silence, then somebody laughs. Lunch is one table from now on.", "fx": { "dressing": 8, "trust": 2 } }, { "w": 1, "text": "Nobody moves. He eats alone in the middle, between two tables.", "fx": { "dressing": -2, "morale": -2 } } ] }
+      ]
+    },
+    {
+      "id": "fd_manager_sacked", "cat": "manager", "w": 4, "cd": 100, "when": { "freeAgent": false, "lastResult": ["L"], "phase": ["in"] },
+      "title": "The Manager Is Gone",
+      "text": ["A text arrives at 7am from the club: {M} has left by mutual consent. Nobody believes the 'mutual'. Training is taken by the goalkeeping coach.", "{M} clears his office at lunchtime. He shakes every player's hand. When he gets to {J}, he holds on a moment longer than necessary."],
+      "prompt": "The manager has been sacked.",
+      "choices": [
+        { "label": "Thank {Mf} publicly", "desc": "A post: 'Thank you for everything, boss.'", "risk": "low", "hint": "Loyalty, noticed by the next manager too.", "text": "His post is warm and honest. {Mf} replies with a single line: 'Stay hungry.' The new manager reads it too.", "fx": { "image": 2, "fans": 1, "newManager": true, "flag": "thanked_old_boss" } },
+        { "label": "Say nothing, prepare for the new boss", "desc": "A clean slate.", "risk": "low", "hint": "Pragmatic.", "text": "He focuses on the new manager's first session. Clean slates are opportunities.", "fx": { "newManager": true } }
+      ]
+    },
+    {
+      "id": "fd_new_manager_style", "cat": "manager", "w": 5, "cd": 80, "when": { "freeAgent": false, "tacticalFit": [0, 45] },
+      "title": "Not His Kind of Player",
+      "text": ["{M} wants pressing, high lines and endless running. {J}'s game doesn't fit, and {M} keeps saying so in team meetings without saying his name.", "In the first tactics session, {M} draws a formation on the board. There's no obvious place for a player like {J}."],
+      "prompt": "The manager's system doesn't suit you.",
+      "choices": [
+        { "label": "Reinvent your game", "desc": "Learn what he wants. All of it.", "risk": "medium", "hint": "Hard work. Big payoff.", "text": "He studies the system like an exam. Extra sessions, extra video. Slowly, {Mf} starts using his name in the good examples.", "fx": { "tacticalFit": 12, "trust": 4, "pfm": -3, "stress": 3 } },
+        { "label": "Ask {Mf} for a role that suits you", "desc": "Make your case.", "risk": "medium", "hint": "Managers rarely change systems for one player.", "text": "{Mf} listens and says no, kindly. Then he gives {J} a role nobody expected.", "fx": { "tacticalFit": 6, "trust": 2 } },
+        { "label": "Tell your agent to find a way out", "desc": "This won't work.", "risk": "high", "hint": "Offers become likelier. So does conflict.", "text": "His agent starts making calls. Word reaches the manager within a fortnight.", "fx": { "abroadWish": true, "trust": -6, "listed": true } }
+      ]
+    },
+    {
+      "id": "fd_curfew", "cat": "dressing", "w": 5, "cd": 60, "when": { "freeAgent": false, "age": [17, 32] }, "uses": { "T": "any" },
+      "title": "Curfew",
+      "text": ["Team hotel, night before an away match. Curfew is 10pm. {T} knocks on his door at 10:30: a few of the lads are going out. 'Just one drink. Back by midnight.'", "Pre-season camp. Lights out at 10. At 11, {T} appears at his window with a grin and a plan involving a fence and a nightclub."],
+      "prompt": "Break curfew?",
+      "choices": [
+        { "label": "Stay in", "desc": "Rules are rules.", "risk": "low", "hint": "Boring. Safe.", "text": "He stays in. At 2am he hears them sneaking back past his door, giggling. At breakfast two of them look grey.", "fx": { "trust": 2, "pfm": 2 } },
+        { "label": "Go out", "desc": "One drink.", "risk": "high", "hint": "Bonding, or a fine.", "out": [ { "w": 2, "text": "One drink becomes three. Nobody gets caught. The squad has a new inside joke and he's part of it.", "fx": { "bond": 10, "dressing": 4, "pfm": -4 } }, { "w": 1, "text": "The assistant coach is waiting in the lobby at 1am. Fines for everyone. Benched for the match.", "fx": { "bond": 8, "trust": -10, "wealth": "-fine", "image": -2 } } ] },
+        { "label": "Go along to make sure they get back safely", "desc": "The sensible friend.", "risk": "medium", "hint": "Noble. Still technically breaking curfew.", "text": "He drinks water all night and herds everyone back by 12:30. The squad calls him 'Dad' for a month. Affectionately.", "fx": { "bond": 6, "dressing": 5, "pfm": -2 } }
+      ],
+      "vars": { "fine": ["wageWeeks", 1, 100] }
+    },
+    {
+      "id": "fd_leaked_team_talk", "cat": "dressing", "w": 4, "cd": 100, "when": { "freeAgent": false },
+      "title": "The Leak",
+      "text": ["The starting line-up was in the newspapers before the players were told. Somebody in the dressing room is talking to journalists, and {M} is furious.", "A private team talk, word for word, is on a fan forum. {M} gathers the squad and says nobody leaves until he knows who did it."],
+      "prompt": "There's a mole in the squad.",
+      "choices": [
+        { "label": "Say you know who it is", "desc": "You've seen the messages.", "risk": "high", "hint": "The manager's gratitude. The squad's contempt.", "text": "He names the leaker. The manager is grateful. The player is sold in January. Some teammates never quite trust {J} again.", "fx": { "trust": 8, "dressing": -6 } },
+        { "label": "Stay silent", "desc": "Not your job to police the squad.", "risk": "low", "hint": "Loyal to the group.", "text": "He says nothing. The meeting lasts two hours. The leak stops anyway; the mole knows they're being watched.", "fx": { "dressing": 2, "stress": 2 } },
+        { "label": "Suggest a squad-only group chat with rules", "desc": "Fix the system, not the person.", "risk": "low", "hint": "Leadership.", "text": "He suggests new rules. The captain backs him. The leaks stop. {Mf} nods at him on the way out.", "fx": { "trust": 3, "dressing": 3 } }
+      ]
+    },
+    {
+      "id": "fd_ultras_bus", "cat": "politics", "w": 4, "cd": 100, "when": { "freeAgent": false, "fans": [0, 35] },
+      "title": "They Stopped the Bus",
+      "text": ["After another defeat, the ultras block the team bus outside the stadium. Fifty of them, hooded, banging on the windows. They want the players to come out and explain themselves.", "Flares outside the training ground. A banner: 'NOT FIT TO WEAR THE SHIRT'. The ultras want a meeting, now."],
+      "prompt": "Angry ultras want to confront the squad.",
+      "choices": [
+        { "label": "Get off the bus and talk to them", "desc": "Face them. Listen.", "risk": "high", "hint": "Courage, or danger.", "out": [ { "w": 2, "text": "He steps off, alone, and listens. After ten minutes of shouting they start to listen back. The bus drives away with a strange new respect.", "fx": { "fans": 10, "dressing": 4, "image": 3, "stress": 4 } }, { "w": 1, "text": "Somebody throws a bottle. It misses. Security drags him back on board. The video is everywhere.", "fx": { "fans": 2, "stress": 8, "pfm": -1 } } ] },
+        { "label": "Stay on the bus", "desc": "The police will handle it.", "risk": "low", "hint": "Safe.", "text": "The police clear the road after forty minutes. The ultras' leader stares at {J} through the window the whole time.", "fx": { "fans": -3, "stress": 3 } }
+      ]
+    },
+    {
+      "id": "fd_racist_abuse", "cat": "dressing", "w": 3, "cd": 150, "when": { "freeAgent": false, "abroad": true, "played": true },
+      "title": "From the Stands",
+      "text": "Late in the match, a section of the away stand starts directing abuse at him: monkey noises, words he understands perfectly. The referee hasn't noticed. His teammates have.",
+      "prompt": "You're being racially abused from the stands.",
+      "choices": [
+        { "label": "Walk off the pitch", "desc": "Refuse to play on.", "risk": "high", "hint": "A stand. The world will see it.", "text": "He walks off. His whole team follows him. The match is suspended. The next morning, it's the only football story in the world, and the club banning the fans is the second.", "fx": { "image": 8, "dressing": 8, "fans": 6, "stress": 8, "followers": 100000, "flag": "stood_against_racism" } },
+        { "label": "Tell the referee and keep playing", "desc": "Follow the protocol.", "risk": "medium", "hint": "Dignified. Exhausting.", "text": "The referee stops the match and the announcement is made. The abuse stops. He plays the last ten minutes with a fury nobody can defend against.", "fx": { "image": 5, "stress": 6, "form": 0.2 } },
+        { "label": "Score and point at the badge", "desc": "Answer them with football.", "risk": "medium", "hint": "Defiance. The abuse is still reported.", "text": "He scores and stands in front of them, pointing at his name on the back of his shirt. The photo becomes a mural in his hometown.", "fx": { "image": 6, "fans": 6, "followers": 80000, "stress": 5 } }
+      ]
+    },
+    {
+      "id": "fd_betting_teammate", "cat": "dressing", "w": 3, "cd": 150, "when": { "freeAgent": false }, "uses": { "T": "any" },
+      "title": "{T}'s Habit",
+      "text": "{T} is always on his phone in the dressing room, and it isn't messages. Betting apps, five at once, including bets on football. Their league. Maybe their games.",
+      "prompt": "A teammate is betting on football.",
+      "choices": [
+        { "label": "Talk to him privately", "desc": "Help, not punishment.", "risk": "medium", "hint": "He may listen. He may resent you.", "out": [ { "w": 2, "text": "{T} breaks down. The debts are huge. {J} helps him find a counsellor and a lawyer. It's a long road, but he's on it.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "dressing": 3, "stress": 2 } }, { "w": 1, "text": "{T} tells him to mind his own business. A month later the league opens an investigation.", "fx": { "stress": 4, "bond": -6 } } ] },
+        { "label": "Tell the club's integrity officer", "desc": "It has to be reported.", "risk": "medium", "hint": "Right. Lonely.", "text": "{T} is suspended pending investigation. Nobody says {J} reported it. Nobody needs to.", "fx": { "board": 4, "image": 3, "dressing": -5, "teammate": { "who": "T", "rel": "enemy" } } },
+        { "label": "Ignore it", "desc": "Not your business.", "risk": "high", "hint": "Until it is.", "text": "He looks away. When the scandal breaks months later, investigators ask everyone what they knew.", "fx": { "stress": 3, "flag": "knew_about_betting" } }
+      ]
+    },
+    {
+      "id": "fd_painkillers", "cat": "body", "w": 4, "cd": 80, "when": { "freeAgent": false, "pfm": [0, 60], "matchWeek": true },
+      "title": "The Injection",
+      "text": "Big match on Saturday. His ankle is screaming. The club doctor offers a painkilling injection: he'll feel nothing for ninety minutes. What happens after is a separate conversation.",
+      "prompt": "Play through the pain with an injection?",
+      "choices": [
+        { "label": "Take the injection and play", "desc": "The team needs you.", "risk": "high", "hint": "Short-term gain, long-term risk.", "out": [ { "w": 2, "text": "He plays the full ninety and feels nothing. On Sunday he can't walk. On Monday the scan says it's worse.", "fx": { "trust": 5, "fans": 3, "injury": "minor", "pfm": -5 } }, { "w": 2, "text": "He plays, they win, and the ankle settles with a week of rest. Lucky.", "fx": { "trust": 5, "fans": 3, "pfm": -6 } } ] },
+        { "label": "Refuse and rest", "desc": "Your body, your career.", "risk": "medium", "hint": "The manager won't love it.", "text": "He refuses. {Mf} is disappointed. Two weeks later, fully healed, he plays the best game of his season.", "fx": { "trust": -4, "pfm": 8, "stress": -2 } }
+      ]
+    },
+    {
+      "id": "fd_captain_clash", "cat": "dressing", "w": 4, "cd": 80, "when": { "freeAgent": false, "level": [3, 5], "dressing": [55, 100] },
+      "title": "Two Leaders",
+      "text": "{CAP} is the captain, but in the last few weeks the younger players have been coming to {J} for advice. {CAP} has noticed. In training today, he went in hard on {J}. Too hard.",
+      "prompt": "The captain feels threatened by your influence.",
+      "choices": [
+        { "label": "Reassure {CAPl} he's the leader", "desc": "Step back, publicly.", "risk": "low", "hint": "Diplomacy.", "text": "He tells {CAPl} privately that the armband is his and the dressing room knows it. {CAPl} relaxes. A strong partnership begins.", "fx": { "dressing": 4, "trust": 2 } },
+        { "label": "Keep doing what you're doing", "desc": "Leadership isn't a title.", "risk": "medium", "hint": "The squad will decide.", "text": "He carries on. The dressing room slowly divides into two orbits. The manager watches carefully.", "fx": { "dressing": 2, "trust": -2, "stress": 2 } },
+        { "label": "Challenge {CAPl} directly", "desc": "Say it to his face.", "risk": "high", "hint": "A power struggle.", "text": "The argument in the gym is loud enough for the whole building. The manager calls them both in. Nobody wins.", "fx": { "dressing": -6, "trust": -4, "stress": 5 } }
+      ]
+    },
+    {
+      "id": "fd_assistant_coach_secret", "cat": "manager", "w": 3, "cd": 120, "when": { "freeAgent": false },
+      "title": "The Assistant's Offer",
+      "text": "The assistant coach pulls {J} aside after training. He's leaving soon to manage another club, and he wants {J} to come with him. 'Don't tell {Mf},' he says. 'Not yet.'",
+      "prompt": "The assistant coach wants to take you with him.",
+      "choices": [
+        { "label": "Keep the secret and think about it", "desc": "Options are good.", "risk": "medium", "hint": "A door opens. Another may close.", "text": "He keeps it to himself. When the assistant leaves, an offer from his new club arrives within weeks.", "fx": { "stress": 2, "abroadWish": true } },
+        { "label": "Tell {Mf}", "desc": "Loyalty to the man who picks you.", "risk": "medium", "hint": "The manager's trust. The assistant's anger.", "text": "{Mf} thanks him and fires the assistant that afternoon. {J} watches him carry a box to his car.", "fx": { "trust": 8, "dressing": -2 } },
+        { "label": "Say you're happy here", "desc": "Not interested.", "risk": "low", "hint": "Simple.", "text": "The assistant shrugs. 'The offer stands.' It doesn't, after a month.", "fx": { "board": 1 } }
+      ]
+    },
+    {
+      "id": "fd_hazing", "cat": "dressing", "w": 4, "cd": 200, "once": true, "when": { "freeAgent": false, "age": [16, 19], "apps": [0, 25] },
+      "title": "Initiation Night",
+      "text": "The senior players have a tradition for new young players: a song on a chair in the canteen, then a haircut chosen by the squad, then a 'surprise'. The surprise is the part nobody talks about.",
+      "prompt": "The initiation.",
+      "choices": [
+        { "label": "Go along with all of it", "desc": "Everyone did it.", "risk": "medium", "hint": "Acceptance, at a price.", "out": [ { "w": 3, "text": "The song is bad, the haircut is worse, and the surprise is a bucket of ice water. Then everyone hugs him. He's one of them now.", "fx": { "dressing": 8, "stress": -2 } }, { "w": 1, "text": "The surprise goes too far. He goes home shaking. He doesn't tell anyone, which he'll regret.", "fx": { "dressing": 4, "stress": 8, "morale": -5 } } ] },
+        { "label": "Do the song, refuse the rest", "desc": "A line, politely drawn.", "risk": "medium", "hint": "Respect for some, mockery from others.", "text": "He sings with total commitment and then says no to the rest. Some senior players laugh at him. The captain quietly respects it.", "fx": { "dressing": 2, "image": 1 } },
+        { "label": "Tell the manager about the tradition", "desc": "It's not okay.", "risk": "high", "hint": "The right thing. Social suicide, for a while.", "text": "{Mf} bans the tradition. It's the end of it, and nearly the end of {J}'s dressing-room life for a season.", "fx": { "dressing": -10, "trust": 4, "image": 3 } }
+      ]
+    },
+    {
+      "id": "fd_thief", "cat": "dressing", "w": 4, "cd": 150, "when": { "freeAgent": false },
+      "title": "Missing Watches",
+      "text": "Watches and cash have been disappearing from the dressing room for weeks. Today it's {J}'s turn: an envelope of cash gone from his bag. And he saw who was alone in the room.",
+      "prompt": "You think you know who's stealing.",
+      "choices": [
+        { "label": "Confront him privately", "desc": "Give him a chance to explain.", "risk": "medium", "hint": "Compassion, maybe a story behind it.", "text": "The young player breaks down: his family's in trouble. {J} helps him return everything anonymously. Nobody else ever knows.", "fx": { "dressing": 3, "image": 2, "morale": 2 } },
+        { "label": "Tell the club", "desc": "Theft is theft.", "risk": "low", "hint": "Procedure.", "text": "The club investigates and the player is released. It's the right result and a sad one.", "fx": { "board": 3, "dressing": -1 } }
+      ]
+    },
+    {
+      "id": "fd_ref_bribe_rumour", "cat": "politics", "w": 3, "cd": 120, "when": { "freeAgent": false, "leagueQ": [0, 65] },
+      "title": "Strange Decisions",
+      "text": "Three matches in a row, the same referee has given decisions against {club} that even the opposition found odd. A journalist says the referee was seen having dinner with a rival club's director.",
+      "prompt": "Do you speak out about the referee?",
+      "choices": [
+        { "label": "Say what everyone is thinking", "desc": "On camera. Clearly.", "risk": "high", "hint": "Fans love it. The federation won't.", "text": "His words lead the evening news. The federation fines him and, quietly, opens an investigation into the referee.", "fx": { "fans": 8, "wealth": "-fine", "press": 3, "suspension": 1, "board": 2 } },
+        { "label": "Let the club complain officially", "desc": "Proper channels.", "risk": "low", "hint": "Slow, safe.", "text": "The club files a complaint. The referee is moved to a lower division 'for rotation'. Nothing is ever proven.", "fx": { "board": 2 } }
+      ],
+      "vars": { "fine": ["wageWeeks", 2, 300] }
+    },
+    {
+      "id": "fd_var_meltdown", "cat": "dressing", "w": 5, "cd": 50, "when": { "freeAgent": false, "played": true, "lastResult": ["L", "D"] },
+      "title": "Five Minutes at the Monitor",
+      "text": ["VAR took five minutes to disallow his goal for an offside nobody could see. Even the commentators drew different lines. He's still furious in the tunnel when a reporter shoves a microphone at him.", "His last-minute winner was ruled out by VAR. In the mixed zone, a journalist asks how he feels. Everyone knows the honest answer would cost him a fine."],
+      "prompt": "A microphone in your face after a VAR decision.",
+      "choices": [
+        { "label": "Be honest about VAR", "desc": "Say what you think.", "risk": "high", "hint": "Fans cheer. The league fines.", "text": "'That technology is killing the joy of football.' The clip runs everywhere. The fine arrives on Tuesday.", "fx": { "fans": 5, "press": 2, "wealth": "-fine", "followers": 15000 } },
+        { "label": "Stay calm and diplomatic", "desc": "'The referee has a hard job.'", "risk": "low", "hint": "Grown-up. Unexciting.", "text": "He says the right things through gritted teeth. The club's media officer gives him a thumbs up.", "fx": { "board": 2, "press": 2 } }
+      ],
+      "vars": { "fine": ["wageWeeks", 1, 200] }
+    },
+    {
+      "id": "fd_board_takeover", "cat": "politics", "w": 3, "cd": 200, "when": { "freeAgent": false, "rep": [15, 100] },
+      "title": "New Owners",
+      "text": "The club has been sold to a foreign investment group. The new owners arrive in sunglasses and promise 'a global project'. Half the staff are worried about their jobs. The other half are polishing their CVs.",
+      "prompt": "New owners want to meet the senior players.",
+      "choices": [
+        { "label": "Welcome them openly", "desc": "Change can be good.", "risk": "low", "hint": "The new owners will remember a friendly face.", "text": "He shakes their hands and says the right things. Two weeks later he's in their promotional video.", "fx": { "board": 8, "fans": -2, "followers": 10000 } },
+        { "label": "Ask hard questions about the club's future", "desc": "What about the academy, the fans, the history?", "risk": "medium", "hint": "Fans will love it. Owners may not.", "text": "His questions make the owners uncomfortable and the fans adore him. The owners promise to protect the academy. In writing, after he asks.", "fx": { "fans": 6, "board": -3, "image": 3 } }
+      ]
+    },
+    {
+      "id": "fd_relegation_fight_speech", "cat": "dressing", "w": 4, "cd": 60, "when": { "freeAgent": false, "phase": ["in"], "months": [3, 4, 5, 10, 11], "morale": [0, 50], "level": [3, 5] },
+      "title": "The Bottom Three",
+      "text": "Six games left. Bottom three. The dressing room is quiet in the bad way: players on phones, nobody looking at each other. The manager has run out of speeches.",
+      "prompt": "Someone needs to say something.",
+      "choices": [
+        { "label": "Stand up and speak", "desc": "From the heart.", "risk": "medium", "hint": "Could lift everyone. Could fall flat.", "check": { "stat": "mental", "dc": 58 },
+          "ok": { "text": "He talks about the fans, the kit man who's been here thirty years, the families who can't afford to see the club go down. When he sits down, the room is different.", "fx": { "dressing": 10, "trust": 5, "morale": 6, "form": 0.2, "flag": "leader" } },
+          "bad": { "text": "He starts strong and loses the thread. Somebody coughs. The silence afterwards is worse than before.", "fx": { "dressing": -2, "morale": -3 } } },
+        { "label": "Lead by example in training", "desc": "Actions, not words.", "risk": "low", "hint": "Quiet leadership.", "text": "He trains like it's a cup final every day. Slowly, others follow.", "fx": { "dressing": 4, "trust": 3, "pfm": -3 } }
+      ]
+    },
+    {
+      "id": "fd_derby_week", "cat": "dressing", "w": 5, "cd": 40, "when": { "freeAgent": false, "phase": ["in"] },
+      "title": "Derby Week",
+      "text": ["It's derby week against {R}. The city is split in two. Old men stop him in the street to tell him what this match means. A kid draws {R}'s badge on the floor and asks him to stamp on it.", "Derby week: extra security at training, messages from fans of both sides, and {DAD} calling every day to remind him of a derby in 1998."],
+      "prompt": "How do you handle derby week?",
+      "choices": [
+        { "label": "Embrace the madness", "desc": "Talk it up, wind them up.", "risk": "medium", "hint": "Fans love it. The other side won't forget.", "text": "He says {R} 'should be nervous'. Their fans print his face on a banner. The atmosphere on matchday is volcanic.", "fx": { "fans": 6, "press": 2, "stress": 3, "form": 0.2 } },
+        { "label": "Block it all out", "desc": "Just another game.", "risk": "low", "hint": "Calm head.", "text": "Phone off, headphones in. He treats it like any other week. On matchday he's the calmest man in the stadium.", "fx": { "stress": -3, "trust": 2 } }
+      ]
+    },
+    {
+      "id": "fd_benched_for_signing", "cat": "manager", "w": 4, "cd": 100, "when": { "freeAgent": false, "role": ["starter", "rotation"] }, "uses": { "T": "signing" },
+      "title": "The New Signing",
+      "text": ["The club unveils {T}: same position, bigger name, bigger fee. At the press conference {T} says he's here 'to start every game'. {J} watches it on his phone in the canteen.", "{T} arrives from abroad with a big reputation and a bigger smile. In his first training session, he's put in {J}'s bib."],
+      "prompt": "A new signing wants your place.",
+      "choices": [
+        { "label": "Welcome him, then outwork him", "desc": "Respect and rivalry.", "risk": "low", "hint": "The professional's way.", "text": "He shows {T} around the city and then outworks him every day for a month. {Mf} has a nice problem.", "fx": { "trust": 4, "bond": 6, "pfm": -3, "growth": ["rel"] } },
+        { "label": "Freeze him out", "desc": "Make it clear he's not welcome.", "risk": "high", "hint": "Petty. Noticed.", "text": "{T} notices the cold shoulder. So does the dressing room, and so does the manager.", "fx": { "teammate": { "who": "T", "rel": "rival" }, "dressing": -3, "trust": -3 } },
+        { "label": "Ask your agent about other clubs", "desc": "If they've replaced you, fine.", "risk": "medium", "hint": "A move could come. So could regret.", "text": "His agent starts making calls. The club notices.", "fx": { "abroadWish": true, "board": -3 } }
+      ]
+    },
+    {
+      "id": "fd_tactical_argument", "cat": "manager", "w": 5, "cd": 60, "when": { "freeAgent": false, "level": [2, 5] },
+      "title": "Wrong Instructions",
+      "text": "In the video session, {M} blames {J} for a goal. {J} was following the exact instruction {M} gave him at half-time. The whole squad watched him give it.",
+      "prompt": "The manager blames you for his own instruction.",
+      "choices": [
+        { "label": "Point it out, respectfully", "desc": "'Boss, you told me to step up.'", "risk": "high", "hint": "Right. Embarrassing for him.", "out": [ { "w": 1, "text": "{Mf} pauses, then says, 'Fair. My mistake.' The squad's respect for both of them goes up.", "fx": { "trust": 3, "dressing": 4 } }, { "w": 1, "text": "{Mf} goes red and moves on. For the next three weeks, {J} is on the bench.", "fx": { "trust": -9, "dressing": 3 } } ] },
+        { "label": "Take the blame", "desc": "Let it go.", "risk": "low", "hint": "The squad knows the truth.", "text": "He nods and says he'll do better. Afterwards, three teammates tell him they know what really happened.", "fx": { "dressing": 3, "trust": 1, "stress": 2 } }
+      ]
+    },
+    {
+      "id": "fd_selfish_striker", "cat": "dressing", "w": 5, "cd": 60, "when": { "freeAgent": false, "pos": ["ATT", "MID"] }, "uses": { "T": "any" },
+      "title": "He Never Passes",
+      "text": "{T} hasn't passed to {J} in three matches. Twice {J} was completely free in front of goal. Twice {T} shot from impossible angles. After the last one, {T} shrugged.",
+      "prompt": "A teammate keeps freezing you out on the pitch.",
+      "choices": [
+        { "label": "Talk to him man to man", "desc": "Sort it out privately.", "risk": "low", "hint": "Probably jealousy. Maybe fixable.", "out": [ { "w": 2, "text": "{T} admits his contract is up and he needs goals. They agree: the best-placed man shoots. It works.", "fx": { "bond": 10, "form": 0.1 } }, { "w": 1, "text": "{T} says he doesn't know what {J} is talking about. Nothing changes.", "fx": { "bond": -6 } } ] },
+        { "label": "Tell the manager", "desc": "It's hurting the team.", "risk": "medium", "hint": "The manager will act. {Tl} will know.", "text": "{Mf} shows the clips in the team meeting. {T} goes red. He passes the next weekend, through gritted teeth.", "fx": { "trust": 2, "teammate": { "who": "T", "rel": "rival" } } },
+        { "label": "Do the same to him", "desc": "Two can play.", "risk": "high", "hint": "The team loses.", "text": "Two players not passing to each other. The team loses. The fans notice. The manager definitely notices.", "fx": { "trust": -6, "dressing": -4, "fans": -3, "teammate": { "who": "T", "rel": "enemy" } } }
+      ]
+    },
+    {
+      "id": "fd_veteran_mentor_falls", "cat": "dressing", "w": 3, "cd": 200, "when": { "freeAgent": false, "age": [17, 23] }, "uses": { "T": "ally" },
+      "title": "{T} Is Being Pushed Out",
+      "text": "{T}, the senior player who took {J} under his wing, has been told he's no longer in the manager's plans. Training alone. Changing in the youth dressing room. Everyone pretends not to notice.",
+      "prompt": "Your mentor is being frozen out.",
+      "choices": [
+        { "label": "Stand by him publicly", "desc": "Train with him, eat with him.", "risk": "high", "hint": "Loyalty. The manager won't like it.", "text": "{J} stays after training to work with {T}. {M} notices and says nothing, which is louder than saying something.", "fx": { "bond": 15, "trust": -4, "dressing": 4, "image": 2 } },
+        { "label": "Support him privately", "desc": "Messages, dinners, away from the club.", "risk": "low", "hint": "Kind and careful.", "text": "Dinners at {T}'s house, long talks, help with the move when he's finally sold. {T} says he'll never forget it.", "fx": { "bond": 10 } },
+        { "label": "Keep your distance", "desc": "Your career comes first.", "risk": "medium", "hint": "Self-preservation.", "text": "He keeps his distance. When {T} leaves, he doesn't say goodbye. Later, he wishes he had.", "fx": { "bond": -10, "morale": -2 } }
+      ]
+    },
+    {
+      "id": "fd_language_barrier", "cat": "dressing", "w": 5, "cd": 100, "when": { "freeAgent": false, "abroad": true, "apps": [0, 40] },
+      "title": "Lost in Translation",
+      "text": ["In the team meeting, the coach speaks fast and everyone laughs at a joke. {J} laughs too, late. He has no idea what was said. He has no idea what his job is on Saturday.", "His teammates shout instructions in a language he doesn't speak yet. He's pressing when he should hold, holding when he should press. The coach is losing patience."],
+      "prompt": "You can't understand the language.",
+      "choices": [
+        { "label": "Intensive lessons, every morning", "desc": "Before training. Every day.", "risk": "low", "hint": "Hard, slow, essential.", "text": "Six weeks of 7am lessons. He makes his first joke in the language in the canteen. It's terrible. Everyone cheers.", "fx": { "dressing": 6, "tacticalFit": 6, "stress": 2, "wealth": -500, "flag": "learned_language" } },
+        { "label": "Lean on the translator", "desc": "The club has one.", "risk": "low", "hint": "Works. Slower integration.", "text": "The club's translator becomes his shadow. It works, mostly. The jokes still fly over his head.", "fx": { "tacticalFit": 3 } },
+        { "label": "Learn the football words only", "desc": "Left, right, press, man on.", "risk": "medium", "hint": "Enough for the pitch. Not for the dressing room.", "text": "He learns forty football words. On the pitch he's fine. Off it, he's lonely.", "fx": { "tacticalFit": 4, "morale": -2 } }
+      ]
+    },
+    {
+      "id": "fd_homesick_crisis", "cat": "dressing", "w": 4, "cd": 100, "when": { "abroad": true, "familyNear": false, "morale": [0, 45] },
+      "title": "Homesick",
+      "text": ["He's started counting the days until the off-season. He eats the same dish from home every night. He calls {MUM} three times a day and pretends he's fine every time.", "It hits him in a supermarket: none of the brands are his, the language on the shelves is wrong, and he realises he's had a conversation with nobody but teammates in eleven days."],
+      "prompt": "You're badly homesick.",
+      "choices": [
+        { "label": "Bring a piece of home here", "desc": "Fly {MUM} over, find a community from home.", "risk": "low", "hint": "Comfort, cost.", "text": "He finds a small community from home in the city: a restaurant, a prayer group, a Sunday football game. Suddenly the city has people in it.", "fx": { "morale": 8, "stress": -4, "family": 3, "wealth": -800 } },
+        { "label": "Tell the club you're struggling", "desc": "Ask for help.", "risk": "low", "hint": "Brave. Usually rewarded.", "text": "The club's welfare officer helps him find a flat in a livelier area and a psychologist who speaks his language. Things improve.", "fx": { "morale": 6, "trust": 2, "stress": -3 } },
+        { "label": "Ask your agent about going home", "desc": "Maybe this was a mistake.", "risk": "high", "hint": "A move home is possible. So is regret.", "text": "His agent starts looking at clubs back home. A part of him is relieved. A part of him feels like he's failing.", "fx": { "abroadWish": false, "offerHome": true, "morale": 2 } }
+      ]
+    },
+    {
+      "id": "fd_mixed_zone_trap", "cat": "media", "w": 5, "cd": 40, "when": { "freeAgent": false, "rep": [8, 100], "played": true },
+      "title": "The Trap Question",
+      "text": "In the mixed zone after the match, a journalist asks: 'Your manager said last week that you need to work harder. Do you agree?' The manager said no such thing.",
+      "prompt": "A journalist is putting words in the manager's mouth.",
+      "choices": [
+        { "label": "Correct him calmly", "desc": "'He didn't say that.'", "risk": "low", "hint": "Smart.", "text": "'I don't think he said that, but I always want to work harder.' Perfect. The journalist moves on, disappointed.", "fx": { "press": 2, "trust": 2 } },
+        { "label": "Take the bait", "desc": "'I work as hard as anyone.'", "risk": "high", "hint": "A headline is born.", "text": "'{J} HITS BACK AT BOSS', says the headline. The manager reads it at breakfast.", "fx": { "trust": -7, "press": 2, "followers": 5000 } }
+      ]
+    },
+    {
+      "id": "fd_injury_coverup", "cat": "body", "w": 3, "cd": 100, "when": { "freeAgent": false, "role": ["starter"], "matchWeek": true },
+      "title": "Don't Tell Anyone",
+      "text": "The club doctor says he has a small tear. He could play, carefully. The club wants to keep it quiet; the national team call-up is next week and they don't want him going.",
+      "prompt": "The club wants to hide your injury.",
+      "choices": [
+        { "label": "Go along with it", "desc": "The club comes first.", "risk": "medium", "hint": "The national team won't be pleased if they find out.", "text": "He plays, says nothing, and withdraws from the national squad 'with a knock'. The national coach isn't fooled.", "fx": { "board": 5, "trust": 3, "pfm": -4, "flag": "nt_suspicious" } },
+        { "label": "Tell the truth to everyone", "desc": "Club and country deserve to know.", "risk": "medium", "hint": "Honest. Political.", "text": "He tells both sets of doctors the truth. The club is annoyed. The national team respects it.", "fx": { "board": -4, "pfm": 4, "image": 2 } }
+      ]
+    },
+    {
+      "id": "fd_club_crisis_fire_sale", "cat": "politics", "w": 3, "cd": 200, "when": { "freeAgent": false, "board": [0, 40] },
+      "title": "Fire Sale",
+      "text": "The club is broke. The president tells the senior players privately: some of them will have to be sold, or the club won't survive the year. He looks at {J} for a long time.",
+      "prompt": "The club may have to sell you.",
+      "choices": [
+        { "label": "Offer to take a pay cut to stay", "desc": "Save the club, save a teammate.", "risk": "medium", "hint": "Noble. Expensive.", "text": "He takes a 20% cut. The fans find out and sing his name for the rest of the season.", "fx": { "wageRaise": -20, "fans": 12, "board": 10, "image": 5, "flag": "pay_cut_hero" } },
+        { "label": "Accept a sale if it helps", "desc": "Go, for the club's sake.", "risk": "medium", "hint": "Offers will come quickly.", "text": "He tells the president he understands. Within a week he's on the transfer list, and the club's accounts look a lot healthier.", "fx": { "listed": true, "board": 8, "fans": -2 } },
+        { "label": "Refuse to be part of it", "desc": "You signed a contract.", "risk": "medium", "hint": "Your right. The board will resent it.", "text": "He points to his contract. The president nods. The relationship is never quite the same.", "fx": { "board": -10 } }
+      ]
+    },
+    {
+      "id": "fd_teammate_depression_2", "cat": "dressing", "w": 3, "cd": 200, "when": { "freeAgent": false }, "uses": { "T": "any" },
+      "title": "{T} Didn't Come In",
+      "text": "{T} hasn't been at training for three days. The club says 'illness'. Then {T} sends {J} a message at 3am that's mostly just the word 'sorry', over and over.",
+      "prompt": "A teammate is in a very dark place.",
+      "choices": [
+        { "label": "Go to his house now", "desc": "Middle of the night. Go.", "risk": "low", "hint": "Some things can't wait.", "text": "He drives over at 3:15am. {T} opens the door. They sit on the floor until morning, and then {J} drives him to a doctor. {T} is alive, and getting help, and will never forget who came.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "dressing": 6, "stress": 4, "morale": -2, "image": 2 } },
+        { "label": "Call the club doctor and his family", "desc": "Get professionals involved now.", "risk": "low", "hint": "The right call.", "text": "He calls the doctor and {T}'s brother. Help arrives within the hour. {T} thanks him weeks later, quietly.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "dressing": 3, "stress": 3 } }
+      ]
+    },
+    {
+      "id": "fd_wrong_number_leak", "cat": "media", "w": 3, "cd": 150, "when": { "freeAgent": false, "rep": [10, 100] },
+      "title": "Wrong Group Chat",
+      "text": "He meant to send a message to {BFf} complaining about {M}'s tactics. He sent it to the squad group chat. Including {M}. The double tick has already turned blue.",
+      "prompt": "You sent a rant about the manager to the whole squad.",
+      "choices": [
+        { "label": "Go to {Mf}'s office immediately", "desc": "Apologise in person.", "risk": "medium", "hint": "Owning it is the only way.", "text": "{Mf} lets him squirm for a full minute, then laughs. 'At least you're honest. Now get out.' The squad calls him 'Wrong Chat' for the rest of the season.", "fx": { "trust": -3, "dressing": 3 } },
+        { "label": "Pretend you were hacked", "desc": "Nobody will believe it. Try anyway.", "risk": "high", "hint": "Nobody believes it.", "text": "Nobody believes it. {Mf} especially doesn't believe it.", "fx": { "trust": -10, "dressing": -2 } }
+      ]
+    },
+    {
+      "id": "fd_board_meddling", "cat": "politics", "w": 4, "cd": 100, "when": { "freeAgent": false, "board": [60, 100] },
+      "title": "The President's Favourite",
+      "text": "{PRES} has started telling {M} who to pick. Specifically: {J}. The manager now resents him for something he never asked for.",
+      "prompt": "The president is forcing the manager to play you.",
+      "choices": [
+        { "label": "Ask {PRESl} to stop", "desc": "You want to earn it.", "risk": "medium", "hint": "Integrity. The board may cool.", "text": "He asks {PRESl} to let the manager manage. {PRESl} is surprised, then impressed. {M} hears about it and softens.", "fx": { "trust": 6, "board": -3 } },
+        { "label": "Enjoy the minutes", "desc": "Play is play.", "risk": "medium", "hint": "The manager will resent you.", "text": "He plays every week and the manager barely looks at him. The dressing room calls him 'the president's son'.", "fx": { "trust": -6, "dressing": -4, "board": 3 } }
+      ]
+    },
+    {
+      "id": "fd_streaker", "cat": "dressing", "w": 3, "cd": 200, "when": { "freeAgent": false, "matchWeek": true, "played": true },
+      "title": "The Pitch Invader",
+      "text": "In the 70th minute a teenage fan runs onto the pitch, past four stewards, straight to {J}, and asks for a selfie. The stewards are closing in fast.",
+      "prompt": "A pitch invader wants a selfie.",
+      "choices": [
+        { "label": "Take the selfie", "desc": "Make the kid's life.", "risk": "medium", "hint": "Viral. A possible fine.", "text": "He takes the selfie, then walks the kid to the stewards with an arm round his shoulder. The video has thirty million views. The league sends a warning letter.", "fx": { "followers": 50000, "fans": 5, "image": 3 } },
+        { "label": "Let the stewards handle it", "desc": "Safety first.", "risk": "low", "hint": "Sensible.", "text": "The stewards escort the boy off. {J} gives him a thumbs up. The kid is banned for three years and frames the thumbs up.", "fx": { "fans": 1 } }
+      ]
+    },
+    {
+      "id": "fd_rival_injures_you", "cat": "dressing", "w": 4, "cd": 80, "when": { "freeAgent": false, "played": true }, "uses": { "T": "outsider" },
+      "title": "A Tackle With Intent",
+      "text": "{T} from {opp} went through the back of him in the 60th minute. No attempt at the ball. In the tunnel afterwards, {T} grins: 'Welcome to the league, kid.'",
+      "prompt": "An opponent tried to hurt you.",
+      "choices": [
+        { "label": "Let it go", "desc": "He wants a reaction.", "risk": "low", "hint": "Mature.", "text": "He walks past without a word. Next time they meet, he nutmegs {T} twice. That's the reply.", "fx": { "image": 2, "stress": 1, "flag": "rival_respect", "cast": { "rival": "T" } } },
+        { "label": "Confront him in the tunnel", "desc": "Face to face.", "risk": "high", "hint": "Satisfying. Possibly suspended.", "text": "The tunnel cameras catch everything. Both players are banned for a match. {T} smiles in the hearing.", "fx": { "suspension": 1, "fans": 3, "image": -3, "flag": "rival_enemy", "cast": { "rival": "T" } } },
+        { "label": "Tell the press about it", "desc": "Name and shame.", "risk": "medium", "hint": "Public pressure.", "text": "His interview puts {T}'s tackle on every highlight show. The league reviews it and bans {T} for three games.", "fx": { "press": 2, "fans": 2, "flag": "rival_enemy", "cast": { "rival": "T" } } }
+      ]
+    },
+    {
+      "id": "fd_kit_man", "cat": "dressing", "w": 4, "cd": 200, "once": true, "when": { "freeAgent": false },
+      "title": "The Kit Man's Last Day",
+      "text": "The kit man has been at the club for thirty-one years. He knows every player's boot size and every player's secret. Today is his last day, and nobody seems to have organised anything.",
+      "prompt": "The kit man is retiring and nobody planned anything.",
+      "choices": [
+        { "label": "Organise something, fast", "desc": "Collection, cake, a shirt signed by everyone.", "risk": "low", "hint": "The dressing room will remember who did it.", "text": "By 4pm there's a cake, a signed shirt and a cheque from the whole squad. The old kit man cries for the first time anyone can remember.", "fx": { "dressing": 8, "image": 2, "wealth": -500, "morale": 4 } },
+        { "label": "Write him a personal note", "desc": "Something just from you.", "risk": "low", "hint": "Small, sincere.", "text": "He writes a note thanking the kit man for the boots he fixed at 6am before his debut. The old man keeps it in his wallet.", "fx": { "morale": 3, "dressing": 2 } }
+      ]
+    },
+    {
+      "id": "fd_contract_promise_broken", "cat": "manager", "w": 4, "cd": 100, "when": { "freeAgent": false, "role": ["bench", "outcast"], "seasonApps": [0, 6] },
+      "title": "The Promise",
+      "text": "When he signed, they promised him a key role. Six months later he's watching from the bench every week. The man who made the promise doesn't make eye contact any more.",
+      "prompt": "The club broke its promise about your role.",
+      "choices": [
+        { "label": "Remind the club, in writing", "desc": "Polite. Firm. Documented.", "risk": "medium", "hint": "A paper trail helps if you want to leave.", "text": "His agent sends a polite letter. The club's reply is vague. The transfer list rumours begin.", "fx": { "board": -4, "abroadWish": true, "listed": true } },
+        { "label": "Work harder and wait", "desc": "Prove them wrong.", "risk": "low", "hint": "Patience.", "text": "He trains like a man possessed. The manager starts to notice.", "fx": { "trust": 5, "pfm": -3, "stress": 2 } },
+        { "label": "Go to the press", "desc": "Tell them what was promised.", "risk": "extreme", "hint": "A public war.", "text": "The interview is explosive. The fans are split. The club fines him and lists him within the week.", "fx": { "listed": true, "board": -15, "trust": -12, "press": 4, "fans": -3 } }
+      ]
+    },
+    {
+      "id": "fd_twin_bus_crash", "cat": "dressing", "w": 2, "cd": 300, "once": true, "when": { "freeAgent": false },
+      "title": "The Accident",
+      "text": "The team bus skids on a wet road on the way back from an away match. Nobody is seriously hurt: some bruises, a broken wrist for the physio, a lot of shaking hands. The squad spends the night together in a roadside hotel.",
+      "prompt": "A night after a near-disaster.",
+      "choices": [
+        { "label": "Keep everyone together", "desc": "Nobody sleeps alone tonight.", "risk": "low", "hint": "Something bonds a squad like nothing else.", "text": "They pull every mattress into the hotel's function room. Nobody sleeps. Everyone talks. The squad is different after that night.", "fx": { "dressing": 10, "stress": 2, "morale": 3 } },
+        { "label": "Call home and try to sleep", "desc": "Process it alone.", "risk": "low", "hint": "Quiet.", "text": "He calls {MUM}, who cries, and then lies awake listening to the rain.", "fx": { "family": 4, "stress": 4 } }
+      ]
+    },
+    {
+      "id": "fd_player_strike", "cat": "politics", "w": 2, "cd": 300, "when": { "freeAgent": false, "level": [2, 5] },
+      "title": "The Players' Union",
+      "text": "The players' union is calling for a league-wide strike over unpaid wages and unsafe pitches. Every player has to decide. Some clubs are threatening to sack anyone who strikes.",
+      "prompt": "Join the strike?",
+      "choices": [
+        { "label": "Strike", "desc": "Solidarity.", "risk": "high", "hint": "Players respect it. Clubs won't.", "text": "The league stops for a week. Then a deal is signed: wages guaranteed, pitches inspected. History, made by tired players.", "fx": { "dressing": 8, "board": -8, "image": 4, "flag": "union_rep" } },
+        { "label": "Play", "desc": "Your contract, your club.", "risk": "medium", "hint": "The board will thank you. The union won't.", "text": "He plays. The stadium is half-empty and the other team are all youth players. It feels wrong. It is wrong.", "fx": { "board": 6, "dressing": -8, "image": -3 } }
+      ]
+    },
+    {
+      "id": "fd_dressing_music_war", "cat": "dressing", "w": 4, "cd": 80, "when": { "freeAgent": false, "apps": [20, 9999] },
+      "title": "Who Controls the Speaker",
+      "text": "The dressing-room speaker has become a battlefield. The Brazilians want samba. The veterans want old rock. The kids want whatever's viral. Today someone hid the speaker entirely.",
+      "prompt": "The music war needs ending.",
+      "choices": [
+        { "label": "Create a rota", "desc": "A different DJ every matchday.", "risk": "low", "hint": "Peace through bureaucracy.", "text": "A rota on the dressing-room door. It works. His week, he plays music from home and makes the whole squad dance.", "fx": { "dressing": 5 } },
+        { "label": "Claim it yourself", "desc": "You're the DJ now.", "risk": "medium", "hint": "Power. Responsibility. Complaints.", "text": "He's the DJ now. Everyone complains. Everyone dances anyway.", "fx": { "dressing": 2, "morale": 2 } }
+      ]
+    },
+    {
+      "id": "fd_fine_system", "cat": "dressing", "w": 4, "cd": 100, "when": { "freeAgent": false },
+      "title": "The Fines Book",
+      "text": "The dressing room has a fines book: late for training, phone at dinner, wearing a rival's colours. The money goes to a party at the end of the season. {J} is somehow already top of the list.",
+      "prompt": "You're top of the fines book.",
+      "choices": [
+        { "label": "Pay up with good grace", "desc": "Rules are rules.", "risk": "low", "hint": "Team player.", "text": "He pays every fine with a smile and a speech. The squad loves it. The end-of-season party will be excellent.", "fx": { "dressing": 4, "wealth": -300 } },
+        { "label": "Appeal every fine", "desc": "Some of these are made up.", "risk": "low", "hint": "Funny or annoying.", "text": "His appeals are so elaborate the squad starts fining him for the appeals.", "fx": { "dressing": 3, "wealth": -500 } }
+      ]
+    },
+    {
+      "id": "fd_relegation_clause_talk", "cat": "politics", "w": 3, "cd": 100, "when": { "freeAgent": false, "phase": ["in"], "months": [3, 4, 5], "morale": [0, 50] },
+      "title": "If We Go Down",
+      "text": "With relegation looking likely, the senior players are quietly comparing contracts. Several have release clauses that kick in if the club goes down. Everyone is doing the maths.",
+      "prompt": "Teammates are planning their exits if the club goes down.",
+      "choices": [
+        { "label": "Promise to stay whatever happens", "desc": "Publicly, if you have to.", "risk": "medium", "hint": "The fans will hold you to it.", "text": "He says it in front of the cameras: he'll stay, whatever division. The fans never forget it.", "fx": { "fans": 10, "board": 6, "flag": "promised_to_stay" } },
+        { "label": "Keep your options open", "desc": "Say nothing yet.", "risk": "low", "hint": "Smart. Not heroic.", "text": "He says nothing. Smart, his agent says. The fans want more.", "fx": { "fans": -2 } }
+      ]
+    },
+    {
+      "id": "fd_promised_to_stay_test", "cat": "politics", "w": 6, "cd": 200, "once": true, "when": { "flags": ["promised_to_stay"], "freeAgent": false, "since": { "promised_to_stay": [8, 80] } },
+      "title": "The Promise, Tested",
+      "text": "He promised the fans he'd stay. Now a bigger club has made an offer, and his agent says it's the best he'll ever get.",
+      "prompt": "Keep your word?",
+      "choices": [
+        { "label": "Keep your word", "desc": "You promised.", "risk": "low", "hint": "Legendary status, less money.", "text": "He turns it down publicly. The fans make a banner with the date of his promise on it.", "fx": { "fans": 15, "board": 8, "image": 6, "unflag": "promised_to_stay", "flag": "promise_kept" } },
+        { "label": "Take the move", "desc": "Things change.", "risk": "high", "hint": "The fans will call you a liar.", "text": "He asks to leave. The fans who sang his name burn his shirt. He gets his move and a nickname he'll never shake.", "fx": { "fans": -25, "offerAbroad": true, "image": -6, "unflag": "promised_to_stay", "flag": "promise_broken" } }
+      ]
+    },
+    {
+      "id": "fd_ballboy_time_wasting", "cat": "dressing", "w": 3, "cd": 200, "when": { "freeAgent": false, "played": true },
+      "title": "The Ballboy",
+      "text": "Away match, 1-0 down, ninety seconds left. The ballboy is holding the ball behind his back and smiling. The clock is ticking.",
+      "prompt": "The ballboy is wasting time.",
+      "choices": [
+        { "label": "Grab the ball from him", "desc": "Quickly.", "risk": "high", "hint": "Remember what happens to players who push ballboys.", "text": "He grabs the ball. The boy falls over theatrically. Red card. Three-match ban. The video is used in referee training for years.", "fx": { "suspension": 3, "image": -6, "fans": -2, "press": -4 } },
+        { "label": "Point it out to the referee", "desc": "Calmly.", "risk": "low", "hint": "Right. Probably too late.", "text": "The referee adds a minute. They don't score. He shakes the ballboy's hand afterwards, which confuses the ballboy enormously.", "fx": { "image": 2 } }
+      ]
+    },
+    {
+      "id": "fd_new_manager_youth", "cat": "manager", "w": 4, "cd": 100, "when": { "freeAgent": false, "age": [16, 21], "role": ["bench", "outcast"] },
+      "title": "The New Boss Believes in Youth",
+      "text": "The new manager says, in his first press conference, that he believes in young players. In his first training session, he spends ten minutes watching only {J}.",
+      "prompt": "A new manager might give you a chance.",
+      "choices": [
+        { "label": "Be first in, last out, every day", "desc": "Show him.", "risk": "low", "hint": "The obvious move.", "text": "First car in the car park every morning. The new manager notices. By the end of the month, {J} is in the squad.", "fx": { "trust": 10, "pfm": -2, "morale": 4 } },
+        { "label": "Ask for a meeting straight away", "desc": "Introduce yourself.", "risk": "medium", "hint": "Bold. Could be too much.", "text": "The new manager likes the confidence. 'Show me, don't tell me,' he says. Fair.", "fx": { "trust": 5 } }
+      ]
+    },
+    {
+      "id": "fd_old_manager_returns_rival", "cat": "manager", "w": 3, "cd": 200, "when": { "freeAgent": false, "age": [19, 35], "flags": ["thanked_old_boss"] },
+      "title": "The Old Boss, on the Other Bench",
+      "text": "{OLDBOSS} is managing {opp} now. Before kick-off he walks across to {J}'s bench and hugs him. 'Don't play too well today,' he says.",
+      "prompt": "Your old manager is in the other dugout.",
+      "choices": [
+        { "label": "Play your heart out, then hug him at the end", "desc": "Respect through effort.", "risk": "low", "hint": "Football at its best.", "text": "He plays brilliantly against his old boss, and at full time they hug for a long time. {OLDBOSS} says he's proud.", "fx": { "morale": 5, "image": 2, "form": 0.3 } },
+        { "label": "Ask for his advice after the match", "desc": "He knew you best.", "risk": "low", "hint": "Old wisdom.", "text": "After the match they talk for twenty minutes in the tunnel. {OLDBOSS} spots something in his game nobody else has.", "fx": { "growth": ["mental"], "morale": 3 } }
+      ]
+    },
+    {
+      "id": "fd_shirt_number_war", "cat": "dressing", "w": 3, "cd": 200, "once": true, "when": { "freeAgent": false, "level": [2, 5] }, "uses": { "T": "signing" },
+      "title": "His Number",
+      "text": "{T}, the new signing, has asked for number {num}. {J}'s number. The club says it's 'up to the players to sort out'.",
+      "prompt": "A new signing wants your shirt number.",
+      "choices": [
+        { "label": "Keep it, politely", "desc": "It's yours.", "risk": "low", "hint": "Fair.", "text": "He says no, politely. {T} shrugs and takes another number. No hard feelings, mostly.", "fx": { "bond": -2 } },
+        { "label": "Give it to him, for a price", "desc": "A donation to charity.", "risk": "low", "hint": "Funny. Generous. Good PR.", "text": "He hands over the number in exchange for a big donation to a children's hospital. The story goes viral for all the right reasons.", "fx": { "image": 5, "bond": 8, "followers": 10000 } }
+      ]
+    },
+    {
+      "id": "fd_assistant_bully", "cat": "manager", "w": 3, "cd": 150, "when": { "freeAgent": false, "age": [16, 22] },
+      "title": "The Fitness Coach",
+      "text": "The fitness coach screams at the younger players, mocks their bodies and makes one of them run until he vomits. The manager doesn't seem to know, or doesn't want to.",
+      "prompt": "A coach is bullying the young players.",
+      "choices": [
+        { "label": "Report it to the club's welfare officer", "desc": "In writing. Formally.", "risk": "medium", "hint": "The right thing. Takes courage.", "text": "The investigation is quick. The coach is gone within a month. The youngsters know who spoke up.", "fx": { "dressing": 6, "image": 3, "trust": -2, "stress": 3 } },
+        { "label": "Tell a senior player", "desc": "Let the captain handle it.", "risk": "low", "hint": "Senior players have more power.", "text": "{CAP} has a quiet word. The screaming stops. The coach glares at {J} for weeks.", "fx": { "dressing": 3, "stress": 2 } },
+        { "label": "Keep your head down", "desc": "It'll pass.", "risk": "medium", "hint": "It rarely does.", "text": "He keeps his head down. It doesn't pass.", "fx": { "stress": 4, "morale": -2 } }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,219 @@
+{
+  "scenarios": [
+    { "id": "m3_presser_title_race", "cat": "media", "w": 5, "cd": 50, "when": { "freeAgent": false, "phase": ["in"], "level": [2, 5] }, "ui": "press",
+      "title": "'Can You Win the League?'", "text": "Pre-match press conference. A journalist from {OUT} asks the question everyone wants answered: 'Can {club} win the league this season?' The cameras zoom in.",
+      "prompt": "What do you say?",
+      "choices": [
+        { "label": "'Yes. Why not us?'", "desc": "Belief.", "risk": "medium", "hint": "Fans love it. Rivals print it.", "text": "The quote is everywhere. The fans make it a banner. The rival's dressing room pins it on their wall.", "fx": { "fans": 6, "press": 2, "stress": 2 } },
+        { "label": "'One game at a time.'", "desc": "The classic.", "risk": "low", "hint": "Safe. Boring.", "text": "The journalists sigh. The manager nods approvingly.", "fx": { "trust": 2 } },
+        { "label": "'Ask me in May.'", "desc": "Charm.", "risk": "low", "hint": "Witty.", "text": "The room laughs. The clip is shared as 'the most confident non-answer of the season'.", "fx": { "press": 3, "followers": 3000 } }
+      ] },
+    { "id": "m3_pundit_feud", "cat": "media", "w": 5, "cd": 60, "when": { "rep": [15, 100], "freeAgent": false },
+      "title": "The Pundit", "text": ["A famous TV pundit, a former international, has said on air that {J} 'will never be good enough for the top level'. He's said it three weeks running.", "A pundit spends six minutes of prime-time TV dissecting one bad touch from {J}'s last match, with arrows, circles and a slow-motion replay."],
+      "prompt": "A TV pundit keeps tearing into you.",
+      "choices": [
+        { "label": "Ignore him and keep playing", "desc": "Let the football answer.", "risk": "low", "hint": "Dignified.", "text": "He says nothing. After his next good game, the pundit grudgingly admits he 'might have been a bit harsh'.", "fx": { "image": 2, "mood": "Determined" } },
+        { "label": "Invite him to training", "desc": "Come and see for yourself.", "risk": "medium", "hint": "Bold. Viral.", "out": [ { "w": 1, "text": "The pundit comes. He's surprisingly humble. The resulting TV segment changes how the country sees {J}.", "fx": { "press": 6, "image": 4, "followers": 15000 } }, { "w": 1, "text": "The pundit declines on air: 'I don't need to watch him train. I've watched him play.'", "fx": { "press": -2, "stress": 2 } } ] },
+        { "label": "Fire back on social media", "desc": "Remind him of his own career.", "risk": "high", "hint": "Satisfying. Petty.", "text": "He posts the pundit's own worst miss. Millions laugh. The pundit makes it his mission to criticise {J} forever.", "fx": { "press": -4, "followers": 30000, "image": -2 } }
+      ] },
+    { "id": "m3_presser_trap_politics", "cat": "media", "w": 4, "cd": 100, "when": { "rep": [20, 100] }, "ui": "press",
+      "title": "A Political Question", "text": "At a press conference, a reporter asks about a controversial political issue in the country. It has nothing to do with football. Every answer will anger somebody.",
+      "prompt": "A political question at a football press conference.",
+      "choices": [
+        { "label": "'I'm here to talk about football.'", "desc": "Polite refusal.", "risk": "low", "hint": "Safe.", "text": "He politely declines. Some say he's dodging. Most say he's sensible.", "fx": { "press": 1 } },
+        { "label": "Give a careful, human answer", "desc": "Speak about people, not sides.", "risk": "medium", "hint": "Brave. Divisive.", "text": "His answer is thoughtful and kind. It's praised by many and twisted by some.", "fx": { "image": 2, "press": 2, "fans": -2, "followers": 20000 } }
+      ] },
+    { "id": "m3_rumour_mill_weekly", "cat": "media", "w": 6, "cd": 40, "when": { "rep": [15, 100], "freeAgent": false },
+      "title": "Linked", "text": ["This week's transfer gossip column links {J} with four clubs in three countries. His agent has spoken to none of them.", "A foreign newspaper claims {J} has been 'scouted extensively' by a club he's never heard of. His mother has already started learning the language."],
+      "prompt": "The transfer rumours are everywhere.",
+      "choices": [
+        { "label": "Ignore them", "desc": "Noise.", "risk": "low", "hint": "Calm.", "text": "He ignores them. The rumours fade by Thursday and new ones arrive by Friday.", "fx": {} },
+        { "label": "Kiss the badge after your next goal", "desc": "Message to the fans.", "risk": "medium", "hint": "They'll hold you to it.", "text": "He scores and kisses the badge. The fans go wild. The rumours become 'loyalty' stories.", "fx": { "fans": 6, "board": 2 } },
+        { "label": "Tell your agent to use the interest", "desc": "Leverage.", "risk": "medium", "hint": "A new contract, maybe.", "text": "His agent uses the noise. The club offers talks about a new deal.", "fx": { "renewalPush": true, "board": -2 } }
+      ] },
+    { "id": "m3_social_storm_quote", "cat": "media", "w": 5, "cd": 60, "when": { "followers": [10000, 999999999] },
+      "title": "Out of Context", "text": "A clip of {J} laughing during a minute's silence is going viral. He wasn't laughing: he was coughing. The video doesn't have sound. Nobody cares about the sound.",
+      "prompt": "A misleading clip is spreading.",
+      "choices": [
+        { "label": "Post the full footage with sound", "desc": "The truth, simply.", "risk": "low", "hint": "Facts usually win. Slowly.", "text": "The full clip shows him coughing into his elbow. The storm turns into apologies within a day.", "fx": { "image": 2, "stress": 2 } },
+        { "label": "Apologise anyway", "desc": "End it fast.", "risk": "medium", "hint": "Apologising for nothing confirms it.", "text": "His apology makes people think he really did laugh. The storm doubles.", "fx": { "image": -4, "stress": 4 } },
+        { "label": "Say nothing", "desc": "It'll blow over.", "risk": "medium", "hint": "Eventually.", "text": "It blows over in a week. Some people still believe it.", "fx": { "image": -2 } }
+      ] },
+    { "id": "m3_interview_tears", "cat": "media", "w": 4, "cd": 100, "when": { "rep": [10, 100], "morale": [0, 40] },
+      "title": "On Camera", "text": "In a post-match interview, the reporter asks about his family and his voice cracks. He's on live TV, close to tears, and the reporter is holding the microphone a little closer.",
+      "prompt": "You're about to cry on live TV.",
+      "choices": [
+        { "label": "Let it happen", "desc": "You're human.", "risk": "medium", "hint": "Vulnerability. People connect.", "text": "He lets the tears come and says how much he misses home. The clip moves the whole country. Strangers send letters.", "fx": { "fans": 6, "image": 5, "followers": 25000, "stress": -3 } },
+        { "label": "Pull yourself together and walk off", "desc": "Not here.", "risk": "low", "hint": "Private.", "text": "He says 'excuse me' and walks off. The reporter looks guilty. People respect the dignity.", "fx": { "image": 1 } }
+      ] },
+    { "id": "m3_presser_rival_manager", "cat": "media", "w": 4, "cd": 80, "when": { "freeAgent": false, "rep": [10, 100] }, "ui": "press",
+      "title": "The Other Manager's Words", "text": "{R}'s manager says in his press conference that {J} 'dives more than he dribbles'. Now every reporter wants {J}'s reaction.",
+      "prompt": "A rival manager insulted you.",
+      "choices": [
+        { "label": "'I'll let him enjoy his opinion.'", "desc": "Cool, short.", "risk": "low", "hint": "Class.", "text": "The calm reply makes the rival manager look petty. The fans love it.", "fx": { "fans": 3, "press": 2, "image": 2 } },
+        { "label": "'He should worry about his own team.'", "desc": "A jab back.", "risk": "medium", "hint": "Spicy. Headlines.", "text": "The headline writes itself. The match next month sells out in an hour.", "fx": { "fans": 4, "press": 1, "board": 2, "stress": 2 } }
+      ] },
+    { "id": "m3_magazine_ranking", "cat": "media", "w": 4, "cd": 100, "when": { "rep": [25, 100] },
+      "title": "The Top 100", "text": "A football magazine publishes its list of the world's top 100 players. {J} is on it, at number 94. His teammate is at 71. His rival is at 63.",
+      "prompt": "You made the world's top 100 list, low down.",
+      "choices": [
+        { "label": "Celebrate it", "desc": "Top 100 in the world!", "risk": "low", "hint": "Gratitude.", "text": "He posts it with genuine joy. 'Ninety-four in the world. My mum is ranking me number one.' It's adorable.", "fx": { "followers": 15000, "morale": 4 } },
+        { "label": "Use it as fuel", "desc": "Ninety-four?", "risk": "low", "hint": "Hunger.", "text": "He screenshots the list and puts it on his wall. Next year's list will be different.", "fx": { "mood": "Determined", "morale": 2 } }
+      ] },
+    { "id": "m3_leaked_audio", "cat": "media", "w": 3, "cd": 200, "when": { "rep": [20, 100] },
+      "title": "The Voice Note", "text": "A private voice note of {J} complaining about the club's medical staff has leaked. Someone he trusted forwarded it. It's playing on every sports show in the country.",
+      "prompt": "A private voice note has leaked.",
+      "choices": [
+        { "label": "Apologise to the medical staff in person", "desc": "Make it right.", "risk": "low", "hint": "Humility.", "text": "He goes to the medical department with coffee and an honest apology. They accept. Some of what he said was fair, and they know it.", "fx": { "trust": 2, "dressing": 2, "press": -2 } },
+        { "label": "Stand by what you said", "desc": "It was true.", "risk": "high", "hint": "Honesty. War with the club.", "text": "He stands by it. The board is livid. The medical staff, quietly, start doing things differently.", "fx": { "board": -8, "press": 3, "trust": -4 } }
+      ] },
+    { "id": "m3_award_snub", "cat": "media", "w": 4, "cd": 100, "when": { "level": [3, 5], "form": [7, 10] },
+      "title": "Snubbed", "text": "The league's team of the season is announced. He isn't in it. A player with worse numbers in every category is. The fans are outraged on his behalf.",
+      "prompt": "You were left out of the team of the season.",
+      "choices": [
+        { "label": "Congratulate the winners publicly", "desc": "Gracious.", "risk": "low", "hint": "Class.", "text": "His gracious post makes the snub look even worse. The fans love him for it.", "fx": { "image": 4, "fans": 4 } },
+        { "label": "Let your numbers speak", "desc": "Post your stats without comment.", "risk": "medium", "hint": "Passive-aggressive. Effective.", "text": "He posts his stats with no caption. It's the most-liked post of his career.", "fx": { "followers": 25000, "fans": 5, "press": -1 } }
+      ] },
+    { "id": "m3_fan_tv_channel", "cat": "media", "w": 4, "cd": 80, "when": { "rep": [12, 100], "freeAgent": false },
+      "title": "Fan TV", "text": "A popular fan TV channel films angry supporters outside the stadium after every match. One of them has a catchphrase about {J} that's become a meme. It is not affectionate.",
+      "prompt": "A fan TV channel has made you a meme.",
+      "choices": [
+        { "label": "Turn up on their channel", "desc": "Face your critic.", "risk": "medium", "hint": "Could win him over.", "out": [ { "w": 2, "text": "He turns up unannounced. The angry fan is lost for words, then hugs him. The video is the channel's biggest ever.", "fx": { "fans": 7, "followers": 30000, "image": 3 } }, { "w": 1, "text": "The fan doesn't back down and it turns into an argument on camera. Awkward.", "fx": { "fans": -2, "stress": 3 } } ] },
+        { "label": "Ignore it", "desc": "It's entertainment.", "risk": "low", "hint": "It'll fade.", "text": "He ignores it. The meme fades when he scores twice.", "fx": {} }
+      ] },
+    { "id": "m3_wrong_name", "cat": "media", "w": 4, "cd": 150, "when": { "rep": [10, 40] },
+      "title": "Who?", "text": "An international broadcaster calls him by a teammate's name for the whole of a live match. Social media in his country is furious on his behalf.",
+      "prompt": "A broadcaster got your name wrong for ninety minutes.",
+      "choices": [
+        { "label": "Joke about it", "desc": "Change your profile name for a day.", "risk": "low", "hint": "Charm.", "text": "He changes his name online to the wrong one for twenty-four hours. The broadcaster apologises on air. Everyone laughs.", "fx": { "followers": 20000, "image": 2 } },
+        { "label": "Let it go", "desc": "One day they'll know it.", "risk": "low", "hint": "Motivation.", "text": "He lets it go and promises himself the world will learn his name.", "fx": { "mood": "Determined" } }
+      ] },
+    { "id": "m3_documentary_old_club", "cat": "media", "w": 3, "cd": 200, "when": { "rep": [30, 100], "age": [22, 40] },
+      "title": "The Old Club's Documentary", "text": "His first club, {FIRSTCLUB}, is making a documentary about its history. They want to interview him about where it all began. The old president, who once told him he'd never make it, is in it too.",
+      "prompt": "Take part in your first club's documentary?",
+      "choices": [
+        { "label": "Yes, warmly", "desc": "Gratitude.", "risk": "low", "hint": "Your roots.", "text": "He talks for an hour about the club that made him. The old president, it turns out, cries when he watches it.", "fx": { "image": 3, "family": 2, "fans": 2 } },
+        { "label": "Yes, and tell the truth about the hard times", "desc": "Honest.", "risk": "medium", "hint": "Some old wounds open.", "text": "He talks about the unpaid wages and the cold showers. The documentary is better for it. Some old directors aren't happy.", "fx": { "image": 2, "press": 3 } }
+      ] },
+    { "id": "m3_late_night_tweet", "cat": "media", "w": 4, "cd": 80, "when": { "followers": [5000, 999999999], "stress": [55, 100] },
+      "title": "1:47am", "text": "1:47am. He's typed a long post about how nobody appreciates what players go through. His thumb is hovering over 'post'.",
+      "prompt": "Post the late-night rant?",
+      "choices": [
+        { "label": "Post it", "desc": "Say what you feel.", "risk": "high", "hint": "Honest. Very public.", "out": [ { "w": 1, "text": "Strangely, it resonates. Other players share it. A conversation about mental health starts.", "fx": { "image": 3, "followers": 20000, "stress": -3 } }, { "w": 1, "text": "It reads as self-pity from a millionaire. The replies are brutal.", "fx": { "image": -5, "stress": 4 } } ] },
+        { "label": "Delete it and go to sleep", "desc": "Morning you will thank you.", "risk": "low", "hint": "Wisdom.", "text": "He deletes it and sleeps. In the morning he's very glad.", "fx": { "stress": -2 } },
+        { "label": "Send it to {BFf} instead", "desc": "Just one person.", "risk": "low", "hint": "Heard, privately.", "text": "{BFf} replies in two minutes: 'Bro. Go to sleep. I'm proud of you.'", "fx": { "friends": 3, "stress": -3 } }
+      ] },
+    { "id": "m3_reporter_relationship", "cat": "media", "w": 4, "cd": 100, "when": { "press": [60, 100] },
+      "title": "The Favour", "text": "{JR}, who has always written kindly about him, asks a favour: the inside story on a dressing-room row. Just a hint. 'You know I'll protect you.'",
+      "prompt": "A friendly journalist wants inside information.",
+      "choices": [
+        { "label": "Politely refuse", "desc": "The dressing room comes first.", "risk": "low", "hint": "Loyalty.", "text": "He refuses. {JRl} smiles and says he understands. The next piece is a little less warm.", "fx": { "press": -3, "dressing": 2 } },
+        { "label": "Give him a harmless detail", "desc": "Keep him sweet.", "risk": "medium", "hint": "A slippery slope.", "text": "He gives a harmless detail. It isn't harmless once it's in print.", "fx": { "press": 4, "dressing": -4 } }
+      ] },
+    { "id": "m3_kids_interview", "cat": "media", "w": 4, "cd": 100, "when": { "rep": [10, 100] },
+      "title": "The Toughest Interview", "text": "A children's TV show sends three eight-year-olds to interview him. Their questions: 'Do you cry when you lose?', 'Who's your best friend?', and 'Why is your hair like that?'",
+      "prompt": "How do you handle the kids' interview?",
+      "choices": [
+        { "label": "Answer everything honestly", "desc": "Kids deserve the truth.", "risk": "low", "hint": "Adorable.", "text": "'Yes, I cry when I lose. My best friend is called {BFf}. My hair is a mistake.' The clip is the cutest thing on the internet for a week.", "fx": { "image": 5, "followers": 30000, "fans": 3 } },
+        { "label": "Turn it round and interview them", "desc": "Fun.", "risk": "low", "hint": "Chaos.", "text": "He interviews them instead. One of them wants to be a goalkeeper and an astronaut. Lovely.", "fx": { "image": 4, "followers": 20000 } }
+      ] },
+    { "id": "m3_mixed_zone_silence", "cat": "media", "w": 4, "cd": 60, "when": { "freeAgent": false, "lastResult": ["L"], "rep": [8, 100] },
+      "title": "Walk Past or Stop?", "text": "After a humiliating defeat, the mixed zone is full of microphones. The press officer says he can walk past if he wants. The journalists are watching to see who stops.",
+      "prompt": "Talk to the media after a heavy defeat?",
+      "choices": [
+        { "label": "Stop and take responsibility", "desc": "Front up.", "risk": "medium", "hint": "Respect.", "text": "He stops and says it plainly: 'We were not good enough. I was not good enough.' The journalists write that he was the only one who stopped.", "fx": { "press": 5, "fans": 3, "image": 2 } },
+        { "label": "Walk past", "desc": "Not today.", "risk": "low", "hint": "Noted.", "text": "He walks past with his headphones on. 'Hiding,' says one column.", "fx": { "press": -3 } }
+      ] },
+    { "id": "m3_podcast_teammate_says", "cat": "media", "w": 3, "cd": 120, "when": { "freeAgent": false }, "uses": { "T": "any" },
+      "title": "What {T} Said", "text": "{T} went on a podcast and, asked about {J}, said: 'Talented, but he needs to grow up.' The clip has two million views.",
+      "prompt": "A teammate criticised you on a podcast.",
+      "choices": [
+        { "label": "Talk to {T} face to face", "desc": "What did you mean?", "risk": "low", "hint": "Clear it up.", "out": [ { "w": 1, "text": "{T} says it was clipped out of context; he'd also called {J} the best young player he'd seen. They post a photo together. Done.", "fx": { "bond": 6 } }, { "w": 1, "text": "{T} says he meant every word. At least it's honest.", "fx": { "bond": -6, "growth": ["mental"] } } ] },
+        { "label": "Reply publicly", "desc": "Your turn.", "risk": "high", "hint": "A feud.", "text": "His reply starts a public feud. The manager has to separate them in training.", "fx": { "teammate": { "who": "T", "rel": "rival" }, "dressing": -4, "followers": 15000 } }
+      ] },
+    { "id": "m3_sponsor_says_wrong_thing", "cat": "media", "w": 3, "cd": 150, "when": { "sponsors": [1, 20] },
+      "title": "The Sponsor's Post", "text": "One of his sponsors posted a picture of him with a caption written in his voice: 'Best weekend ever!' He didn't write it. It went out an hour after his team lost 4-0.",
+      "prompt": "A sponsor posted badly-timed content in your name.",
+      "choices": [
+        { "label": "Ask them to delete it, and say so", "desc": "Your voice is yours.", "risk": "low", "hint": "Fans will understand.", "text": "He asks them to delete it and explains that he didn't write it. The fans forgive him. The sponsor's social media manager is having a terrible day.", "fx": { "fans": 2, "press": 1 } },
+        { "label": "Let it go quietly", "desc": "Don't upset the sponsor.", "risk": "medium", "hint": "Fans will blame you.", "text": "The fans blame him. The sponsor never realises the damage.", "fx": { "fans": -4, "image": -2 } }
+      ] },
+    { "id": "m3_halftime_tunnel_mic", "cat": "media", "w": 4, "cd": 60, "when": { "freeAgent": false, "level": [2, 5], "played": true },
+      "title": "Half-Time Interview", "text": "Walking off at half-time, 0-2 down, a pitchside reporter sticks a microphone in his face: 'What's going wrong out there?'",
+      "prompt": "A half-time microphone.",
+      "choices": [
+        { "label": "'We'll fix it.'", "desc": "Short, focused.", "risk": "low", "hint": "Professional.", "text": "Three words, then the tunnel. Nothing to see.", "fx": { "press": 1 } },
+        { "label": "Say exactly what's going wrong", "desc": "Brutal honesty.", "risk": "high", "hint": "A headline at half-time.", "text": "'Nobody is running.' Live on TV. The manager hears it in the dressing room before {J} gets there.", "fx": { "trust": -5, "fans": 3, "dressing": -3, "press": 3 } }
+      ] },
+    { "id": "m3_youngster_hype_column", "cat": "media", "w": 5, "cd": 60, "when": { "level": [1, 2], "form": [7, 10] },
+      "title": "'The Next Big Thing'", "text": "A big columnist writes a whole page about {J}: 'the next big thing', 'a generational talent'. Strangers recognise him in the street for the first time. The squad will never let him forget the word 'generational'.",
+      "prompt": "The media is hyping you up.",
+      "choices": [
+        { "label": "Keep your feet on the ground", "desc": "One good month.", "risk": "low", "hint": "The squad respects humility.", "text": "He shrugs it off in training and works harder. The squad calls him 'Generational' anyway, affectionately.", "fx": { "dressing": 3, "followers": 3000, "rep": 0.5 } },
+        { "label": "Enjoy it", "desc": "You've earned a moment.", "risk": "medium", "hint": "Careful.", "text": "He enjoys the attention. A little too much. A senior player has a quiet word.", "fx": { "followers": 6000, "rep": 0.5, "dressing": -2 } }
+      ] },
+    { "id": "m3_icon_retirement_question", "cat": "media", "w": 4, "cd": 100, "when": { "age": [31, 40], "rep": [30, 100] }, "ui": "press",
+      "title": "'When Will You Retire?'", "text": "Every press conference now ends with the same question: when will he retire? He's playing well. They keep asking anyway.",
+      "prompt": "The retirement question, again.",
+      "choices": [
+        { "label": "'When my legs tell me.'", "desc": "Calm, final.", "risk": "low", "hint": "Grace.", "text": "His calm answer stops the question for a month. A record.", "fx": { "press": 2, "image": 1 } },
+        { "label": "'Ask my last opponent.'", "desc": "A swagger.", "risk": "low", "hint": "Fans love it.", "text": "The quote goes on a T-shirt. The fans buy thousands.", "fx": { "fans": 4, "followers": 10000 } }
+      ] },
+    { "id": "m3_photographer_kindness", "cat": "media", "w": 3, "cd": 150, "when": { "rep": [20, 100] },
+      "title": "The Photographer", "text": "An old pitchside photographer, who has taken pictures of {J} since his first match, is retiring. He's sent {J} a box of prints: every important moment of his career, from the stands.",
+      "prompt": "An old photographer sends you your whole career in pictures.",
+      "choices": [
+        { "label": "Visit him to say thank you", "desc": "In person.", "risk": "low", "hint": "Gratitude.", "text": "He visits with a signed shirt. The old man tells him stories about every photo. They're the best stories {J} has ever heard about himself.", "fx": { "image": 2, "morale": 4, "press": 3 } },
+        { "label": "Fund an exhibition of his work", "desc": "His career deserves it.", "risk": "low", "hint": "A gift back.", "text": "The exhibition opens in the city centre. The photographer stands in front of his own work and cries.", "fx": { "image": 4, "press": 5, "wealth": -3000 } }
+      ] },
+    { "id": "m3_influencer_accusation", "cat": "media", "w": 3, "cd": 150, "when": { "rep": [25, 100] },
+      "title": "The Accusation", "text": "An influencer claims {J} was rude to her at a restaurant. He has never met her. The restaurant's cameras show he was across the city that night.",
+      "prompt": "A false accusation from an influencer.",
+      "choices": [
+        { "label": "Release the evidence calmly", "desc": "Facts.", "risk": "low", "hint": "Clean.", "text": "He shares the evidence calmly. The influencer deletes her post and apologises. His calm wins.", "fx": { "image": 3, "press": 2 } },
+        { "label": "Sue for defamation", "desc": "Set an example.", "risk": "medium", "hint": "Expensive, effective.", "text": "The lawsuit settles quickly. The money goes to charity. Nobody accuses him of anything for a while.", "fx": { "image": 2, "wealth": -2000 } }
+      ] },
+    { "id": "m3_kit_launch_leak", "cat": "media", "w": 3, "cd": 150, "when": { "freeAgent": false, "rep": [10, 100] },
+      "title": "The Kit Leak", "text": "He accidentally posts a photo with next season's kit visible in the background. The kit manufacturer had planned a big launch. The internet has already decided the kit is ugly.",
+      "prompt": "You leaked the new kit.",
+      "choices": [
+        { "label": "Apologise to the club and the brand", "desc": "Own it.", "risk": "low", "hint": "Contrition.", "text": "He apologises. The brand turns it into a 'leaked by {J}' campaign. It's their best-selling kit in years.", "fx": { "board": -1, "followers": 5000 } },
+        { "label": "Pretend it's an old photo", "desc": "Deny.", "risk": "medium", "hint": "Nobody believes it.", "text": "Nobody believes it. The club fines him a symbolic amount.", "fx": { "board": -3, "wealth": -500 } }
+      ] },
+    { "id": "m3_quiet_star", "cat": "media", "w": 4, "cd": 100, "when": { "level": [3, 5], "press": [0, 40] },
+      "title": "'Why Won't He Talk?'", "text": "He hasn't given an interview in months. The press have started writing about his silence: 'arrogant', 'hiding', 'too big for us now'.",
+      "prompt": "The press resent your silence.",
+      "choices": [
+        { "label": "Give one long, honest interview", "desc": "End the silence on your terms.", "risk": "medium", "hint": "Resets the relationship.", "text": "One long interview, with the journalist he trusts most. It's warm and honest. The 'arrogant' stories stop.", "fx": { "press": 10, "image": 2 } },
+        { "label": "Keep your silence", "desc": "Your football speaks.", "risk": "medium", "hint": "Mystery, or resentment.", "text": "He stays silent. The press stays hostile. The fans don't mind.", "fx": { "press": -3 } }
+      ] },
+    { "id": "m3_fan_letter_stack", "cat": "media", "w": 4, "cd": 80, "when": { "rep": [15, 100] },
+      "title": "Mail", "text": "The club's mailroom has a whole shelf for him: drawings, letters, requests for shirts, a marriage proposal from a seventy-year-old woman, a letter from a prisoner.",
+      "prompt": "A mountain of fan mail.",
+      "choices": [
+        { "label": "Reply to ten letters a week, by hand", "desc": "Every week.", "risk": "low", "hint": "Some people will keep your letter forever.", "text": "Ten letters a week, by hand. One reply goes to a boy in hospital. His mother posts it online. It's shared a million times.", "fx": { "image": 5, "fans": 4, "stress": 1 } },
+        { "label": "Let the club handle it", "desc": "Signed photos for everyone.", "risk": "low", "hint": "Efficient.", "text": "Signed photos go out to everyone. Efficient, kind enough.", "fx": { "fans": 1 } }
+      ] },
+    { "id": "m3_presser_language", "cat": "media", "w": 4, "cd": 150, "when": { "abroad": true, "rep": [10, 100] }, "ui": "press",
+      "title": "In Their Language", "text": "His first press conference in the local language. He's practised for weeks. The translator is sitting next to him, just in case.",
+      "prompt": "Speak the local language at the press conference?",
+      "choices": [
+        { "label": "Do it all in their language", "desc": "Mistakes and all.", "risk": "medium", "hint": "Respect.", "out": [ { "w": 2, "text": "He makes eight mistakes and gets a round of applause. The local fans adore him from that day on.", "fx": { "fans": 8, "press": 6, "image": 3 } }, { "w": 1, "text": "He accidentally says something very rude instead of 'thank you'. The room explodes with laughter. It becomes a beloved story.", "fx": { "fans": 6, "press": 3, "followers": 10000 } } ] },
+        { "label": "Use the translator", "desc": "Precision matters.", "risk": "low", "hint": "Safe.", "text": "Precise, careful answers through the translator. Fine.", "fx": { "press": 1 } }
+      ] },
+    { "id": "m3_photo_with_child_fan_viral", "cat": "media", "w": 4, "cd": 80, "when": { "rep": [10, 100], "freeAgent": false },
+      "title": "The Mascot", "text": "The match mascot, a seven-year-old girl, is so nervous she freezes in the tunnel. Thirty thousand people are waiting. {J} is standing next to her.",
+      "prompt": "The mascot is frozen with fear.",
+      "choices": [
+        { "label": "Carry her out on your shoulders", "desc": "Make it fun.", "risk": "low", "hint": "Heart-warming.", "text": "He lifts her on his shoulders and walks out like it's a parade. She waves at the crowd. The photo is the image of the season.", "fx": { "fans": 6, "image": 5, "followers": 25000 } },
+        { "label": "Kneel down and talk to her", "desc": "Calm her down.", "risk": "low", "hint": "Gentle.", "text": "He kneels and tells her he's scared too. She giggles and walks out holding his hand.", "fx": { "fans": 4, "image": 4, "followers": 15000 } }
+      ] },
+    { "id": "m3_stat_nerd_thread", "cat": "media", "w": 4, "cd": 80, "when": { "rep": [12, 100] },
+      "title": "The Thread", "text": "A data analyst posts a forty-tweet thread proving, with charts, that {J} is either massively underrated or massively overrated, depending on which half you read.",
+      "prompt": "A viral data thread about you.",
+      "choices": [
+        { "label": "Reply: 'Can you send this to my agent?'", "desc": "Humour.", "risk": "low", "hint": "Charm.", "text": "His reply gets more likes than the thread. The analyst becomes a fan for life.", "fx": { "followers": 10000, "image": 1 } },
+        { "label": "Actually read it", "desc": "Learn something.", "risk": "low", "hint": "Self-improvement.", "text": "He reads all forty tweets. Tweet twenty-seven teaches him something real about his positioning.", "fx": { "tacticalFit": 4 } }
+      ] }
+  ]
+}

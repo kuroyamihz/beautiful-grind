@@ -1,0 +1,407 @@
+{
+  "scenarios": [
+    {
+      "id": "me_viral_wrong_reasons", "cat": "media", "w": 5, "when": { "followers": [3000, 999999999] },
+      "title": "{J} Video Goes Viral for the Wrong Reasons",
+      "text": [
+        "It's a twelve-second clip: {J} dancing in the car park an hour after a defeat. Context doesn't matter online. By lunchtime it has two million views and the club's media officer has called three times.",
+        "Someone filmed {J} laughing on the bench while the team was losing. He was laughing at something a teammate said about his boots. The internet decides he doesn't care."
+      ],
+      "prompt": "The internet is angry. Your response?",
+      "choices": [
+        { "label": "Apologise publicly", "desc": "Short, sincere statement.", "risk": "low", "hint": "The story dies faster. Some call it weak.", "text": "The apology is four lines long and does its job. The club's media officer sends a thumbs-up emoji, which is the most warmth she's ever shown.", "fx": { "rep": -0.3, "followers": 3000, "trust": 1 } },
+        { "label": "Say nothing", "desc": "Delete, lock comments, wait.", "risk": "medium", "hint": "Could fade — or fester.", "out": [
+          { "w": 1, "text": "Silence works. A bigger scandal elsewhere buries the clip within days.", "fx": {} },
+          { "w": 1, "text": "Silence is read as arrogance. A columnist writes a whole piece about “this generation”.", "fx": { "rep": -1, "trust": -2 } }
+        ] },
+        { "label": "Double down", "desc": "“I'll dance when I want.”", "risk": "high", "hint": "Followers spike. Club and manager furious.", "text": "The defiant post gets more likes than anything {J} has ever done on a pitch. The club fines him a week's wages. {M} doesn't make eye contact on Monday.", "fx": { "followers": 40000, "trust": -8, "rep": -1, "wealth": -200, "mood": "Angry" } }
+      ]
+    },
+    {
+      "id": "me_press_conference", "cat": "media", "w": 6, "when": { "rep": [10, 100] },
+      "title": "{J} Faces the Press",
+      "text": "The club puts {J} in front of the microphones for the first time in weeks. The third question is the one everyone came for: “There are reports you're unhappy with your playing time under {M}. Is that true?”",
+      "prompt": "How do you answer?",
+      "choices": [
+        { "label": "Diplomatic", "desc": "“I trust the coach. I work every day.”", "risk": "low", "hint": "Manager appreciates it. Boring headlines.", "text": "The quotes are bland, which is the point. {M} gives him a nod in the corridor.", "fx": { "trust": 2 } },
+        { "label": "Honest", "desc": "“Every player wants to play more.”", "risk": "medium", "hint": "Fans like honesty. The manager may not.", "text": "“Honest {J}” trends locally for an afternoon. {M} says he respects ambition — through slightly gritted teeth.", "fx": { "trust": -3, "rep": 0.5, "followers": 4000 } },
+        { "label": "Pointed", "desc": "“Ask the coach. I'm ready.”", "risk": "high", "hint": "Big headlines. Public criticism of the manager is costly.", "text": "The back pages lead with it. {M} answers the next day: “Players who want to play should train better.” War is declared.", "fx": { "trust": -15, "rep": 1, "followers": 12000, "mood": "Angry" } }
+      ]
+    },
+    {
+      "id": "me_rival_fans_online", "cat": "media", "w": 4, "when": { "followers": [2000, 999999999] },
+      "title": "Rival Fans Target {J} Online",
+      "text": "Derby week, and {J}'s mentions are a sewer. His mother's photo, edited. His mistakes, slowed down and set to music. One account has posted forty times in a day.",
+      "prompt": "The abuse is relentless.",
+      "choices": [
+        { "label": "Fire back", "desc": "One cutting reply.", "risk": "high", "hint": "Huge engagement. Club won't like it.", "text": "His reply gets screenshotted into every football group in the country. The club's communications team issue “guidance”.", "fx": { "followers": 15000, "trust": -3, "rep": 0.2 } },
+        { "label": "Report and ignore", "desc": "Hand it to the club's safeguarding team.", "risk": "low", "hint": "Professional. Doesn't feel satisfying.", "text": "The club's team takes it over. Three accounts are suspended. The rest just find new ones.", "fx": { "trust": 1 } },
+        { "label": "Take a social media break", "desc": "Delete the apps for a month.", "risk": "low", "hint": "Peace of mind, fewer followers.", "text": "{J} deletes every app. The first three days are strange. Then the silence feels like rest.", "fx": { "followers": -1000, "mood": "Relieved", "pfm": 3 } }
+      ]
+    },
+    {
+      "id": "me_journalist_exclusive", "cat": "media", "w": 4, "when": { "rep": [8, 100] },
+      "title": "Journalist Offers {J} an Exclusive Interview",
+      "text": "A respected journalist from the country's biggest sports outlet wants a long sit-down interview: childhood, family, ambitions. Two hours, photos at his old school.",
+      "prompt": "Do the interview?",
+      "choices": [
+        { "label": "Do it, open up", "desc": "Tell your real story.", "risk": "medium", "hint": "People connect with stories. Some details get twisted.", "out": [
+          { "w": 3, "text": "The piece is beautiful: honest, warm, a little sad. Fans who never cared about {J} now do.", "fx": { "followers": 15000, "rep": 1.2 } },
+          { "w": 1, "text": "The headline twists one line about money into a story about greed. The rest of the piece is lovely. Nobody reads the rest.", "fx": { "followers": 5000, "rep": -0.3, "mood": "Frustrated" } }
+        ] },
+        { "label": "Do it, stay guarded", "desc": "Polite, safe answers.", "risk": "low", "hint": "Nothing gained, nothing lost.", "text": "The interview is pleasant and forgettable.", "fx": { "followers": 2000 } },
+        { "label": "Decline", "desc": "Not yet.", "risk": "low", "hint": "Mystery has value.", "text": "{J} declines. The journalist writes about someone else.", "fx": {} }
+      ]
+    },
+    {
+      "id": "me_podcast", "cat": "media", "w": 3, "when": { "followers": [20000, 999999999] },
+      "title": "Popular Football Podcast Invites {J}",
+      "text": "A football podcast with millions of listeners wants {J} as a guest. The hosts are funny and ruthless. Previous guests have gone viral in good ways and bad ways.",
+      "prompt": "Go on the podcast?",
+      "choices": [
+        { "label": "Go on and be yourself", "desc": "Banter, stories, honesty.", "risk": "medium", "hint": "Personality sells.", "check": { "stat": "mental", "dc": 50 },
+          "ok": { "text": "{J} is hilarious. One story about the academy becomes a meme. Followers double.", "fx": { "followers": 50000, "rep": 0.8 } },
+          "bad": { "text": "{J} says something about a former coach that sounds worse out of context. The clip spreads.", "fx": { "followers": 20000, "rep": -0.5, "trust": -2 } } },
+        { "label": "Decline", "desc": "Not your thing.", "risk": "low", "hint": "Nothing happens.", "text": "{J} declines. The podcast gets someone else.", "fx": {} }
+      ]
+    },
+    {
+      "id": "me_fake_transfer_rumour", "cat": "media", "w": 4, "when": { "rep": [12, 100] },
+      "title": "Fake Rumour: {J} Linked With a Big Move",
+      "text": "A transfer account with a big following reports that {J} is close to a move abroad. It's completely made up. But {club}'s fans have seen it, and they're asking questions.",
+      "prompt": "Respond to the rumour?",
+      "choices": [
+        { "label": "Deny it publicly", "desc": "“I'm happy here.”", "risk": "low", "hint": "Fans calm down.", "text": "A clear denial. Fans calm down. The account deletes its post.", "fx": { "trust": 2, "followers": 1500 } },
+        { "label": "Post a cryptic emoji", "desc": "Let them wonder.", "risk": "high", "hint": "Flattering and dangerous.", "text": "One eyes emoji. The internet loses its mind. {M} asks what {J} is playing at.", "fx": { "followers": 20000, "trust": -6, "rep": 0.4 } },
+        { "label": "Ignore it", "desc": "Rumours die.", "risk": "low", "hint": "Usually true.", "text": "The rumour dies in four days.", "fx": {} }
+      ]
+    },
+    {
+      "id": "me_tiktok_trend", "cat": "media", "w": 4, "when": { "age": [16, 27] },
+      "title": "Teammates Want {J} in a Dance Trend",
+      "text": "The younger players have a viral dance to film in the dressing room. They need one more person. The club's social team is very excited about it.",
+      "prompt": "Dance?",
+      "choices": [
+        { "label": "Dance, badly", "desc": "Commit to the bit.", "risk": "low", "hint": "Fans love humans.", "text": "{J} is visibly the worst dancer. The video is the club's most-watched of the year.", "fx": { "followers": 25000, "teammate": { "who": "T", "rel": "ally" } } },
+        { "label": "Dance, well", "desc": "You've practised secretly.", "risk": "low", "hint": "Surprise talent.", "check": { "stat": "dribbling", "dc": 50 },
+          "ok": { "text": "{J} steals the video. Comments ask whether he should quit football for dance.", "fx": { "followers": 30000 } },
+          "bad": { "text": "{J} overdoes it and slips on a towel. That becomes the video.", "fx": { "followers": 20000 } } },
+        { "label": "Refuse", "desc": "Not after a loss.", "risk": "low", "hint": "Some fans would agree.", "text": "{J} sits it out. A day later the team loses and the video gets deleted anyway.", "fx": {} }
+      ]
+    },
+    {
+      "id": "me_old_post_resurfaces", "cat": "media", "w": 3, "when": { "followers": [5000, 999999999], "age": [18, 30] },
+      "title": "An Old Post From {J}'s Teenage Years Resurfaces",
+      "text": "Someone has found something {J} posted at fourteen: a mean joke about a rival club's supporters. It's childish, not hateful, but it's spreading.",
+      "prompt": "Address it?",
+      "choices": [
+        { "label": "Apologise sincerely", "desc": "“I was a kid. I was wrong.”", "risk": "low", "hint": "Most people accept growth.", "text": "The apology is accepted by most. A few use it as proof of something.", "fx": { "rep": 0.2 } },
+        { "label": "Delete and ignore", "desc": "Pretend it never existed.", "risk": "medium", "hint": "The internet never forgets.", "text": "Deleted, but screenshotted. It resurfaces every time he plays that club.", "fx": { "rep": -0.3 } }
+      ]
+    },
+    {
+      "id": "me_pundit_criticism", "cat": "media", "w": 5, "when": { "apps": [10, 9999] },
+      "title": "TV Pundit Destroys {J} on Live Television",
+      "text": "A former player turned pundit spends four minutes of a highlights show dissecting {J}'s mistakes. “He's not good enough for this level. Simple.” The clip is everywhere.",
+      "prompt": "Respond?",
+      "choices": [
+        { "label": "Respond on the pitch", "desc": "Say nothing. Play.", "risk": "low", "hint": "The classic answer.", "text": "{J} says nothing. He screenshots the clip and uses it as his phone background.", "fx": { "mood": "Determined", "form": 0.1 } },
+        { "label": "Clap back online", "desc": "“How many caps did you win again?”", "risk": "high", "hint": "Popular with fans, dangerous with media.", "text": "The reply is savage and perfect. Fans love it. Every pundit on that channel now has an opinion about {J}.", "fx": { "followers": 18000, "rep": -0.3, "trust": -2 } },
+        { "label": "Invite him to training", "desc": "“Come and see.”", "risk": "medium", "hint": "Classy if he comes.", "out": [
+          { "w": 1, "text": "The pundit comes, watches, and changes his tune on air the next week. A friendship starts.", "fx": { "rep": 1, "followers": 8000 } },
+          { "w": 1, "text": "The pundit doesn't reply. The invitation looks a bit desperate.", "fx": {} }
+        ] }
+      ]
+    },
+    {
+      "id": "me_charity_campaign", "cat": "media", "w": 3, "when": { "rep": [15, 100] },
+      "title": "Charity Wants {J} as an Ambassador",
+      "text": "A children's education charity asks {J} to be their ambassador: school visits, a campaign video, a few events a year. No fee.",
+      "prompt": "Accept?",
+      "choices": [
+        { "label": "Accept", "desc": "Give back.", "risk": "low", "hint": "Good for the soul and reputation.", "text": "The campaign video makes his mother cry. Three schools get new libraries.", "fx": { "rep": 1.5, "followers": 10000, "pfm": -2, "parental": 5 } },
+        { "label": "Decline politely", "desc": "Too busy.", "risk": "low", "hint": "Nobody blames you.", "text": "{J} declines politely and donates instead.", "fx": { "wealth": -200 } }
+      ]
+    },
+    {
+      "id": "me_selfie_refused", "cat": "media", "w": 3, "when": { "followers": [10000, 999999999] },
+      "title": "Fan Films {J} Refusing a Selfie",
+      "text": "After a bad loss, {J} walked past a fan asking for a selfie at the airport. The fan filmed it. The clip has a caption: “Fame has changed him.” {J} doesn't even remember the moment.",
+      "prompt": "How do you respond?",
+      "choices": [
+        { "label": "Find the fan and make it right", "desc": "A meet-up, a signed shirt.", "risk": "low", "hint": "Turns the story around.", "text": "{J} tracks the fan down and invites him to training. The follow-up video is lovely.", "fx": { "followers": 12000, "rep": 0.6 } },
+        { "label": "Explain", "desc": "“I'd just lost. I'm human.”", "risk": "medium", "hint": "Some will understand. Some won't.", "text": "Half the comments understand. The other half say excuses.", "fx": { "followers": 2000 } },
+        { "label": "Ignore", "desc": "It'll pass.", "risk": "medium", "hint": "Might not.", "text": "It passes, mostly. It comes up again in every “arrogant footballers” list for a year.", "fx": { "rep": -0.4 } }
+      ]
+    },
+    {
+      "id": "me_gaming_stream", "cat": "media", "w": 3, "when": { "age": [16, 28] },
+      "title": "Gaming Stream: {J} Plays Himself in a Football Game",
+      "text": "An esports organisation asks {J} to stream a session of a football video game playing as his own club. Their audience is enormous.",
+      "prompt": "Stream it?",
+      "choices": [
+        { "label": "Stream it", "desc": "Fun with fans.", "risk": "low", "hint": "Followers up.", "out": [
+          { "w": 2, "text": "{J} loses 5-0 to a fourteen-year-old, laughs about it for an hour, and gains a whole new audience.", "fx": { "followers": 30000 } },
+          { "w": 1, "text": "{J} complains about his own video-game rating live on stream. The clip of him saying “my pace is NOT 72” goes everywhere.", "fx": { "followers": 40000, "rep": 0.2 } }
+        ] },
+        { "label": "Decline", "desc": "Rest your eyes.", "risk": "low", "hint": "Nothing.", "text": "{J} declines.", "fx": {} }
+      ]
+    },
+    {
+      "id": "me_misquote", "cat": "media", "w": 4, "when": { "rep": [8, 100] },
+      "title": "Misquoted: “{J} Wants to Leave”",
+      "text": "{J} told a reporter he dreams of playing abroad “one day”. The headline says “{J} WANTS OUT”. The club's fans are furious, and {M} has read it.",
+      "prompt": "Fix it?",
+      "choices": [
+        { "label": "Release the full audio", "desc": "Prove what you actually said.", "risk": "low", "hint": "Truth wins, slowly.", "text": "The full audio clears it up. The outlet issues a quiet correction nobody reads. Most fans get the message.", "fx": { "trust": 1 } },
+        { "label": "Talk to {M} first", "desc": "Manager before media.", "risk": "low", "hint": "Smart priorities.", "text": "{J} explains to {M} before training. {M} nods: “I've been misquoted too. Forget it.”", "fx": { "trust": 3 } }
+      ]
+    },
+    {
+      "id": "me_documentary", "cat": "media", "w": 2, "when": { "rep": [30, 100] }, "once": true,
+      "title": "Streaming Service Wants a Documentary About {J}",
+      "text": "A streaming company wants to follow {J} for a season: cameras at home, in the car, at training. The fee is huge. Privacy would be gone.",
+      "prompt": "Let the cameras in?",
+      "vars": { "fee": ["endorse", 15000] },
+      "choices": [
+        { "label": "Yes", "desc": "Fee: {fee}.", "risk": "high", "hint": "Fame and money. Privacy gone.", "out": [
+          { "w": 2, "text": "The documentary is a hit. Kids around the world now know {J}'s mother's name and his favourite food.", "fx": { "wealth": "fee", "followers": 200000, "rep": 2, "pfm": -4 } },
+          { "w": 1, "text": "The edit makes {J} look moody and selfish. He didn't recognise himself.", "fx": { "wealth": "fee", "followers": 100000, "rep": -1, "mood": "Frustrated" } }
+        ] },
+        { "label": "No", "desc": "Some things stay private.", "risk": "low", "hint": "Peace.", "text": "{J} declines. They make a documentary about someone else.", "fx": {} }
+      ]
+    },
+    {
+      "id": "me_interview_family_question", "cat": "media", "w": 3,
+      "title": "Reporter Asks About {J}'s Family Money",
+      "text": "In a post-match interview, a reporter asks if it's true {J} bought his parents a house. He hasn't, yet. He's been sending money home every month.",
+      "prompt": "Answer?",
+      "choices": [
+        { "label": "Tell the truth", "desc": "Not yet. One day.", "risk": "low", "hint": "Honest and humble.", "text": "“Not yet. One day.” His mother watches it four times.", "fx": { "parental": 5, "followers": 2000 } },
+        { "label": "Refuse to discuss family", "desc": "Private life is private.", "risk": "low", "hint": "Respected.", "text": "“My family is private.” The reporter moves on.", "fx": {} }
+      ]
+    },
+    {
+      "id": "me_fake_account", "cat": "media", "w": 3, "when": { "followers": [15000, 999999999] },
+      "title": "Fake {J} Account Scams Fans",
+      "text": "Someone has created a fake account in {J}'s name and is asking fans to send money for a “charity”. Several fans have already paid.",
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Warn fans and refund the victims", "desc": "Out of your own pocket.", "risk": "low", "hint": "Expensive, decent.", "vars": { "cost": ["wealthPct", 5, 100] }, "text": "{J} warns everyone and quietly refunds the victims {cost}. The story of the refund goes viral.", "fx": { "wealth": "-cost", "rep": 1, "followers": 8000 } },
+        { "label": "Warn fans", "desc": "Report the account.", "risk": "low", "hint": "Standard.", "text": "The fake account is removed after three days.", "fx": {} }
+      ]
+    },
+    {
+      "id": "me_sponsored_post_backlash", "cat": "media", "w": 3, "when": { "followers": [20000, 999999999] },
+      "title": "A Sponsored Post Turns Into a Scandal",
+      "text": "An online gambling company offers {J} money for one sponsored post. It's legal where the company is based. It's controversial everywhere else.",
+      "prompt": "Accept the paid post?",
+      "vars": { "fee": ["wageWeeks", 3, 200] },
+      "choices": [
+        { "label": "Accept", "desc": "Easy money: {fee}.", "risk": "high", "hint": "Backlash likely.", "text": "The post goes up and the backlash follows. The federation sends a letter. The club makes him delete it.", "fx": { "wealth": "fee", "rep": -1.5, "trust": -5 } },
+        { "label": "Decline", "desc": "Not worth it.", "risk": "low", "hint": "Clean.", "text": "{J} declines. Months later, three players who accepted are investigated.", "fx": { "rep": 0.2 } }
+      ]
+    },
+    {
+      "id": "me_photoshoot_magazine", "cat": "media", "w": 3, "when": { "rep": [20, 100] },
+      "title": "Fashion Magazine Wants {J} on the Cover",
+      "text": "A fashion magazine wants {J} for a cover shoot: designer suits, dramatic lighting, an interview about style. Football magazines never asked him that.",
+      "prompt": "Do it?",
+      "choices": [
+        { "label": "Do it", "desc": "Expand your brand.", "risk": "medium", "hint": "New audience. Some old-school fans will mock it.", "text": "The cover sells out. His teammates print it and stick it all over the dressing room with moustaches drawn on.", "fx": { "followers": 30000, "rep": 0.5 } },
+        { "label": "Decline", "desc": "You're a footballer.", "risk": "low", "hint": "Focus.", "text": "{J} declines.", "fx": {} }
+      ]
+    },
+    {
+      "id": "me_heroic_act_filmed", "cat": "media", "w": 2,
+      "title": "{J} Filmed Helping After a Road Accident",
+      "text": "On the way to training, {J} sees a motorbike accident and stops to help, holding a stranger's hand until the ambulance arrives. Someone filmed it. He's late to training.",
+      "prompt": "The club wants to share the video.",
+      "choices": [
+        { "label": "Let them share it", "desc": "Good news is good news.", "risk": "low", "hint": "Massive goodwill.", "text": "The video spreads across the country. {M} cancels the lateness fine before anyone mentions it.", "fx": { "followers": 40000, "rep": 2 } },
+        { "label": "Ask them not to", "desc": "It wasn't for attention.", "risk": "low", "hint": "Humility.", "text": "{J} asks the club to keep it quiet. It leaks anyway. The humility makes it a bigger story.", "fx": { "followers": 30000, "rep": 2.5 } }
+      ]
+    },
+    {
+      "id": "me_match_report_unfair", "cat": "media", "w": 4, "when": { "played": true },
+      "title": "Newspaper Rates {J} a 4 Out of 10",
+      "text": "The country's biggest newspaper gives {J} a 4 out of 10 in their match ratings. Everyone else, including the club's own data, thought he was fine. The rating is shared everywhere with crying emojis.",
+      "prompt": "React?",
+      "choices": [
+        { "label": "Laugh about it", "desc": "Post the rating with a joke.", "risk": "low", "hint": "Humour beats anger.", "text": "“Tough marker.” With a laughing photo. The internet decides {J} is likeable.", "fx": { "followers": 6000, "rep": 0.2 } },
+        { "label": "Use it as fuel", "desc": "Print it. Stick it on your mirror.", "risk": "low", "hint": "Motivation.", "text": "The rating goes on the bathroom mirror. Every morning, a reminder.", "fx": { "mood": "Determined" } }
+      ]
+    },
+    {
+      "id": "me_youtube_channel", "cat": "media", "w": 2, "when": { "followers": [50000, 999999999] }, "once": true,
+      "title": "Should {J} Start a YouTube Channel?",
+      "text": "His agent thinks {J} should launch his own channel: vlogs, training content, behind-the-scenes. Other players earn more from content than from football.",
+      "prompt": "Start a channel?",
+      "choices": [
+        { "label": "Launch it", "desc": "Hire an editor, post weekly.", "risk": "medium", "hint": "Income and fame. Takes time and energy.", "vars": { "cost": ["wageWeeks", 2, 300] }, "text": "{J} spends {cost} on a camera crew and launches. The first vlog does well. The fourth does better. It becomes a small business.", "fx": { "wealth": "-cost", "followers": 60000, "flag": "youtuber", "pfm": -3 } },
+        { "label": "Not now", "desc": "Football first.", "risk": "low", "hint": "Fine.", "text": "{J} says no. Maybe after retirement.", "fx": {} }
+      ]
+    },
+    {
+      "id": "me_youtuber_income", "cat": "media", "w": 4, "when": { "flags": ["youtuber"] }, "vars": { "income": ["endorse", 2000] },
+      "title": "{J}'s Channel Pays Out",
+      "text": "The channel has grown. The quarterly ad revenue arrives: {income}. More than some of his teammates earn from football.",
+      "fx": { "wealth": "income", "followers": 15000 }
+    },
+    {
+      "id": "me_political_question", "cat": "media", "w": 2, "when": { "rep": [25, 100] },
+      "title": "Journalist Asks {J} About Politics",
+      "text": "During an election season, a journalist asks {J} which candidate he supports. Every answer has consequences. Half the country will love him; half won't.",
+      "prompt": "Answer?",
+      "choices": [
+        { "label": "Decline to answer", "desc": "“I'm a footballer.”", "risk": "low", "hint": "Neutral.", "text": "“I'm a footballer. I want everyone to vote.” A perfect non-answer.", "fx": {} },
+        { "label": "Share your view", "desc": "Your opinion matters.", "risk": "high", "hint": "Love and hate in equal measure.", "text": "{J} answers honestly. His followers split down the middle. Some sponsors get nervous.", "fx": { "followers": 20000, "rep": -0.5 } }
+      ]
+    },
+    {
+      "id": "me_social_media_milestone", "cat": "media", "w": 3, "when": { "followers": [100000, 999999999] }, "once": true,
+      "title": "{J} Passes 100,000 Followers",
+      "text": "A small number on a screen, and yet it feels like something. One hundred thousand people chose to follow him. His first coach sends a message: “Remember the kid with the torn boots.”",
+      "fx": { "mood": "Motivated", "rep": 0.5 }
+    },
+    {
+      "id": "me_social_media_million", "cat": "media", "w": 3, "when": { "followers": [1000000, 999999999] }, "once": true,
+      "title": "One Million Followers for {J}",
+      "text": "A million. The platform sends a verified badge and an automated congratulation. Brands start sliding into his messages. His mother asks if a million is a lot.",
+      "fx": { "rep": 1, "mood": "Confident" }
+    },
+    {
+      "id": "me_journalist_enemy", "cat": "media", "w": 3, "when": { "rep": [15, 100] },
+      "title": "A Columnist Has a Problem With {J}",
+      "text": "One columnist has written about {J} four times this season, each piece nastier than the last. Overrated, overpaid, overexposed. His colleagues say it's personal.",
+      "prompt": "Confront him?",
+      "choices": [
+        { "label": "Invite him for coffee", "desc": "Find out why.", "risk": "medium", "hint": "Might change everything.", "out": [
+          { "w": 1, "text": "Coffee turns into two hours. The columnist admits he was harsh. The next column is fair.", "fx": { "rep": 0.6 } },
+          { "w": 1, "text": "The columnist writes about the coffee, too. Unflatteringly.", "fx": { "rep": -0.3 } }
+        ] },
+        { "label": "Ignore him forever", "desc": "Don't feed it.", "risk": "low", "hint": "Columnists hate being ignored.", "text": "{J} never reads him again. The columns continue, unread by their subject.", "fx": {} }
+      ]
+    },
+    {
+      "id": "me_meme", "cat": "media", "w": 3, "when": { "played": true },
+      "title": "{J}'s Face Becomes a Meme",
+      "text": "A broadcast camera caught {J}'s face after a referee's decision: pure disbelief, mouth open, eyes wide. By Monday it's the country's favourite reaction meme, used for everything from exam results to traffic jams.",
+      "prompt": "Embrace the meme?",
+      "choices": [
+        { "label": "Embrace it", "desc": "Use it yourself.", "risk": "low", "hint": "Self-awareness wins.", "text": "{J} posts the meme himself with “me reading my contract”. It's his most-liked post ever.", "fx": { "followers": 35000, "rep": 0.3 } },
+        { "label": "Ignore it", "desc": "It'll pass.", "risk": "low", "hint": "It won't.", "text": "It doesn't pass. Years later, people still send it to him.", "fx": { "followers": 10000 } }
+      ]
+    },
+    {
+      "id": "me_kids_tv_show", "cat": "media", "w": 2, "when": { "rep": [12, 100] },
+      "title": "Children's TV Show Wants {J} as a Guest",
+      "text": "A children's television show wants {J} to visit: a football skills segment, a song, a puppet. His agent laughs. His mother insists.",
+      "prompt": "Go?",
+      "choices": [
+        { "label": "Go, and enjoy it", "desc": "Kids are the best audience.", "risk": "low", "hint": "Wholesome.", "text": "{J} loses a penalty shoot-out to a puppet on national television. Every child in the country now knows his name.", "fx": { "followers": 20000, "rep": 0.6, "parental": 5 } },
+        { "label": "Decline", "desc": "Not your image.", "risk": "low", "hint": "Your mother will be disappointed.", "text": "{J} declines. His mother doesn't speak to him for a day.", "fx": { "parental": -3 } }
+      ]
+    },
+    {
+      "id": "me_mental_health_post", "cat": "media", "w": 2, "when": { "rep": [10, 100], "form": [4, 6.4] },
+      "title": "Should {J} Talk Publicly About Anxiety?",
+      "text": "{J} has been struggling with anxiety for months. A mental health charity asks if he'd share his story to help young fans. It would mean admitting it publicly.",
+      "prompt": "Share your story?",
+      "choices": [
+        { "label": "Share it", "desc": "Help others.", "risk": "medium", "hint": "Brave. Most responses will be kind.", "text": "The post is honest and short. Thousands of messages arrive: kids, parents, other players. The weight lifts a little.", "fx": { "rep": 1.5, "followers": 25000, "mood": "Relieved", "growth": ["mental"] } },
+        { "label": "Not yet", "desc": "Keep it private for now.", "risk": "low", "hint": "Your choice.", "text": "{J} keeps it private but starts seeing a therapist. That's a start.", "fx": { "growth": ["mental"] } }
+      ]
+    },
+    {
+      "id": "me_rival_player_trash_talk", "cat": "media", "w": 3, "when": { "apps": [15, 9999] },
+      "title": "Rival Player Mocks {J} in an Interview",
+      "text": "Ahead of the next match, a rival player tells reporters: “{J}? Never heard of him.” It's clearly a wind-up. The clip is shared with popcorn emojis.",
+      "prompt": "Respond?",
+      "choices": [
+        { "label": "Respond on Saturday", "desc": "Let your feet talk.", "risk": "low", "hint": "Classic.", "text": "{J} says nothing until Saturday, when he shakes the rival's hand after the match and says: “Now you've heard of me.”", "fx": { "rep": 0.4, "mood": "Determined" } },
+        { "label": "Fire back", "desc": "“He'll hear of me soon.”", "risk": "medium", "hint": "Raises the stakes.", "text": "The back-and-forth becomes the story of the week. Ticket sales go up.", "fx": { "followers": 10000, "rep": 0.2 } }
+      ]
+    },
+    {
+      "id": "me_injury_rumour", "cat": "media", "w": 2, "when": { "injured": false },
+      "title": "False Report Says {J} Is Badly Injured",
+      "text": "A gossip account reports that {J} has a serious knee injury. He's fine. But a club interested in him has just called his agent to ask.",
+      "prompt": "Respond?",
+      "choices": [
+        { "label": "Post training video", "desc": "Show you're fine.", "risk": "low", "hint": "Evidence beats rumours.", "text": "A video of {J} sprinting in training ends the rumour in an hour.", "fx": { "followers": 3000 } },
+        { "label": "Let the club handle it", "desc": "Official statement.", "risk": "low", "hint": "Professional.", "text": "The club issues a statement. The gossip account deletes the post.", "fx": {} }
+      ]
+    },
+    {
+      "id": "me_award_nomination", "cat": "media", "w": 3, "when": { "form": [7.2, 10], "seasonApps": [10, 99] },
+      "title": "{J} Nominated for Player of the Month",
+      "text": "The league announces its Player of the Month shortlist: five names, a public vote. {J} is one of them. The club's social team goes into campaign mode.",
+      "prompt": "Campaign for votes?",
+      "choices": [
+        { "label": "Campaign hard", "desc": "Posts, videos, begging.", "risk": "low", "hint": "Fan bases decide these.", "out": [
+          { "w": 1, "text": "{J} wins the public vote. A small trophy, a big moment.", "fx": { "rep": 1, "followers": 15000, "mood": "Confident" } },
+          { "w": 1, "text": "A bigger club's fan base wins it for their player. {J} congratulates him.", "fx": { "followers": 5000 } }
+        ] },
+        { "label": "Stay humble", "desc": "One post. Thank the team.", "risk": "low", "hint": "Classy.", "text": "One modest post thanking the team. He doesn't win, but the post is the most liked of the shortlist.", "fx": { "rep": 0.4, "followers": 4000 } }
+      ]
+    },
+    {
+      "id": "me_supporters_club_visit", "cat": "media", "w": 3,
+      "title": "Invited to a Supporters' Club Meeting",
+      "text": "A supporters' club in a small town three hours away invites {J} to their monthly meeting. Forty fans in a rented hall, homemade food, one banner with his face on it.",
+      "prompt": "Go?",
+      "choices": [
+        { "label": "Go, stay late", "desc": "Signatures, photos, stories.", "risk": "low", "hint": "Fans for life.", "text": "{J} stays four hours. He eats everything offered. Forty people will defend him online for the rest of his life.", "fx": { "rep": 0.8, "followers": 6000, "pfm": -3 } },
+        { "label": "Send a video message", "desc": "Too busy, but grateful.", "risk": "low", "hint": "Nice.", "text": "A warm video message. They play it twice.", "fx": { "followers": 1000 } }
+      ]
+    },
+    {
+      "id": "me_hate_message_dm", "cat": "media", "w": 3, "when": { "followers": [5000, 999999999], "lastResult": ["L"] },
+      "title": "Hate Messages After the Defeat",
+      "text": "After the defeat, {J}'s direct messages fill with abuse: threats, slurs, messages about his family. One account knows where his parents live.",
+      "prompt": "This is serious.",
+      "choices": [
+        { "label": "Report to the club and police", "desc": "Some lines can't be crossed.", "risk": "low", "hint": "Correct.", "text": "The club's security team takes it seriously. The account behind the threat is traced. The police visit.", "fx": { "rep": 0.3, "mood": "Anxious" } },
+        { "label": "Go public with the messages", "desc": "Show the world what players face.", "risk": "medium", "hint": "Raises awareness. Invites more.", "text": "{J} posts screenshots. The response is huge: support from players everywhere, a statement from the league.", "fx": { "rep": 1, "followers": 15000, "mood": "Determined" } }
+      ]
+    },
+    {
+      "id": "me_press_conference_joke", "cat": "media", "w": 3, "when": { "rep": [10, 100] },
+      "title": "{J}'s Press-Conference Joke Lands — Too Well",
+      "text": "Asked about the next opponent, {J} makes a joke about their goalkeeper's hairstyle. The room laughs. The goalkeeper does not.",
+      "fx": { "followers": 8000 },
+      "prompt": "Their keeper responds angrily online.",
+      "choices": [
+        { "label": "Apologise with humour", "desc": "Send him a hair product gift.", "risk": "low", "hint": "Defuses beautifully.", "text": "{J} sends the keeper a gift basket of hair products. The keeper posts it laughing. The internet loves them both.", "fx": { "followers": 10000, "rep": 0.4 } },
+        { "label": "Double down", "desc": "Banter is banter.", "risk": "medium", "hint": "Spicy matchday.", "text": "The keeper saves a penalty from {J} on Saturday and points at his hair. The internet loves that more.", "fx": { "followers": 12000, "mood": "Frustrated" } }
+      ]
+    },
+    {
+      "id": "me_brand_post_mistake", "cat": "media", "w": 2, "when": { "followers": [30000, 999999999] },
+      "title": "{J} Posts the Sponsor's Instructions by Mistake",
+      "text": "{J}'s sponsored post goes live with the brand's instructions still in the caption: “Write something natural here about loving the product.” Screenshots everywhere.",
+      "prompt": "Damage control?",
+      "choices": [
+        { "label": "Laugh at yourself", "desc": "“Natural enough?”", "risk": "low", "hint": "Self-deprecation wins.", "text": "The self-mocking follow-up does better than the ad. The brand renews his deal, delighted.", "fx": { "followers": 15000 } },
+        { "label": "Delete and hide", "desc": "Pretend it didn't happen.", "risk": "medium", "hint": "It happened.", "text": "Deleted. Screenshotted. Immortal.", "fx": { "followers": 5000, "rep": -0.3 } }
+      ]
+    },
+    {
+      "id": "me_legend_praise", "cat": "media", "w": 2, "when": { "form": [7.4, 10], "rep": [20, 100] },
+      "title": "A National Football Legend Praises {J}",
+      "text": "On a national talk show, one of the country's greatest-ever players is asked about the new generation. Without hesitation he names {J}: “He reminds me of myself. Hungrier, maybe.”",
+      "fx": { "rep": 1.5, "followers": 20000, "mood": "On Fire" }
+    },
+    {
+      "id": "me_fan_tattoo", "cat": "media", "w": 2, "when": { "followers": [20000, 999999999] },
+      "title": "Fan Gets {J}'s Face Tattooed on His Leg",
+      "text": "A fan posts his new tattoo: {J}'s face, slightly wrong, on his calf. The internet wants {J}'s reaction.",
+      "prompt": "React?",
+      "choices": [
+        { "label": "Invite him to a match", "desc": "VIP treatment.", "risk": "low", "hint": "Wholesome.", "text": "{J} meets the fan after the match and they compare the tattoo to his real face. Neither stops laughing.", "fx": { "followers": 15000, "rep": 0.3 } },
+        { "label": "Joke about the likeness", "desc": "“I'm better looking than that.”", "risk": "low", "hint": "Funny or mean, depending on tone.", "text": "The joke lands. The fan replies: “Not for long.” The internet loves it.", "fx": { "followers": 10000 } }
+      ]
+    }
+  ]
+}

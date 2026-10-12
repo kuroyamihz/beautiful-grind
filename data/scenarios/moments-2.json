@@ -1,0 +1,277 @@
+{
+  "scenarios": [
+    { "id": "k2_gk_penalty", "cat": "moment", "moment": true, "w": 6, "cd": 40, "when": { "pos": ["GK"] },
+      "title": "Penalty Against", "text": ["Next match, 70th minute: a penalty against you. The taker is their best player. He always goes to the keeper's right. Always. Doesn't he?", "A penalty. The taker is staring at you, trying to read you. You've watched every penalty he has ever taken."],
+      "prompt": "Which way do you dive?",
+      "choices": [
+        { "label": "Dive right: trust the homework", "desc": "He always goes right.", "risk": "medium", "hint": "Analysts' call.", "out": [ { "w": 3, "text": "He goes right. So does {J}. Saved, and held. The stadium explodes.", "fx": { "matchMod": { "rating": 1.0 } } }, { "w": 2, "text": "He goes left for the first time in his career. Goal.", "fx": { "matchMod": { "rating": -0.3, "concede": 1 } } } ] },
+        { "label": "Stand big and wait", "desc": "Make him choose.", "risk": "medium", "hint": "Instinct.", "check": { "stat": "reflexes", "dc": 60 }, "ok": { "text": "He stands until the last moment and gets a strong hand to it. Saved.", "fx": { "matchMod": { "rating": 1.0 } } }, "bad": { "text": "He waits. The taker waits longer. Goal, rolled into the corner.", "fx": { "matchMod": { "rating": -0.3, "concede": 1 } } } }
+      ] },
+    { "id": "k2_gk_one_on_one", "cat": "moment", "moment": true, "w": 6, "cd": 40, "when": { "pos": ["GK"] },
+      "title": "Through on Goal", "text": "Next match: a striker clean through, one-on-one. You have half a second to decide whether to rush out or stay on your line.",
+      "prompt": "Rush or stay?",
+      "choices": [
+        { "label": "Rush out and spread", "desc": "Close the angle.", "risk": "high", "hint": "Brave. A foul risks a red.", "check": { "stat": "command", "dc": 58 }, "ok": { "text": "He's out like a shot, spread wide, and the ball hits his knee and loops away. Clean sheet saved.", "fx": { "matchMod": { "rating": 0.9 } } }, "bad": { "text": "Too late. He clips the striker's ankle. Penalty and a yellow card.", "fx": { "matchMod": { "rating": -0.6, "concede": 1, "card": "yellow" } } } },
+        { "label": "Hold your ground", "desc": "Make him beat you.", "risk": "medium", "hint": "Safe positioning.", "check": { "stat": "gkPositioning", "dc": 56 }, "ok": { "text": "The striker shoots early. {J} is perfectly placed. Easy save, made to look easy.", "fx": { "matchMod": { "rating": 0.6 } } }, "bad": { "text": "The striker takes his time and slots it past him.", "fx": { "matchMod": { "rating": -0.3, "concede": 1 } } } }
+      ] },
+    { "id": "k2_gk_cross_claim", "cat": "moment", "moment": true, "w": 5, "cd": 40, "when": { "pos": ["GK"] },
+      "title": "The Last-Minute Corner", "text": "Next match, last minute, a corner against you. Their giant centre-back is in the box. Everyone is looking at you.",
+      "prompt": "Come for the cross?",
+      "choices": [
+        { "label": "Come and claim it", "desc": "Your box, your ball.", "risk": "high", "hint": "Commanding, or a calamity.", "check": { "stat": "command", "dc": 60 }, "ok": { "text": "He rises above everyone and catches it cleanly. Final whistle. Clean sheet.", "fx": { "matchMod": { "rating": 0.8 } } }, "bad": { "text": "He flaps at it. The ball drops at the giant's feet. Goal.", "fx": { "matchMod": { "rating": -0.8, "concede": 1 } } } },
+        { "label": "Stay on your line", "desc": "Trust your defenders.", "risk": "medium", "hint": "Depends on them.", "out": [ { "w": 2, "text": "The defenders head it clear. Final whistle.", "fx": { "matchMod": { "rating": 0.2 } } }, { "w": 1, "text": "A free header from six yards. Unsaveable. Goal.", "fx": { "matchMod": { "rating": -0.2, "concede": 1 } } } ] }
+      ] },
+    { "id": "k2_gk_distribution", "cat": "moment", "moment": true, "w": 5, "cd": 40, "when": { "pos": ["GK"] },
+      "title": "Play It Out", "text": "Next match: the manager wants you to play out from the back under pressure. Their striker is pressing like a madman. Your centre-back is showing for the ball, marked.",
+      "prompt": "What do you do with the ball?",
+      "choices": [
+        { "label": "Pass short, through the press", "desc": "Brave football.", "risk": "high", "hint": "Assist or disaster.", "check": { "stat": "distribution", "dc": 60 }, "ok": { "text": "A perfect pass through the press starts a counter that ends in a goal. The manager punches the air.", "fx": { "matchMod": { "rating": 0.7, "assists": 1 } } }, "bad": { "text": "Intercepted. Goal. The manager looks at the sky.", "fx": { "matchMod": { "rating": -0.8, "concede": 1 } } } },
+        { "label": "Kick it long", "desc": "Safety first.", "risk": "low", "hint": "Boring. Sensible.", "text": "He launches it long. Nothing happens, which is fine.", "fx": { "matchMod": { "rating": 0.1 } } }
+      ] },
+    { "id": "k2_cb_last_ditch", "cat": "moment", "moment": true, "w": 6, "cd": 40, "when": { "pos": ["CB", "FB"] },
+      "title": "The Last Man", "text": "Next match: you're the last defender. Their fastest player is running at you with the ball. If you go to ground and miss, it's a red card.",
+      "prompt": "Slide or jockey?",
+      "choices": [
+        { "label": "Slide in", "desc": "All or nothing.", "risk": "extreme", "hint": "Heroic or sent off.", "check": { "stat": "tackling", "dc": 62 }, "ok": { "text": "A perfect sliding tackle, all ball. The crowd roars like it's a goal.", "fx": { "matchMod": { "rating": 1.0 } } }, "bad": { "text": "He catches the man, not the ball. Straight red.", "fx": { "matchMod": { "rating": -1.5, "card": "red", "concede": 1 } } } },
+        { "label": "Jockey and show him wide", "desc": "Patience.", "risk": "medium", "hint": "Buys time for help to arrive.", "check": { "stat": "marking", "dc": 55 }, "ok": { "text": "He shows the winger down the line until help arrives. Danger over.", "fx": { "matchMod": { "rating": 0.5 } } }, "bad": { "text": "The winger cuts inside and scores. {J} was too passive.", "fx": { "matchMod": { "rating": -0.4, "concede": 1 } } } }
+      ] },
+    { "id": "k2_cb_aerial", "cat": "moment", "moment": true, "w": 5, "cd": 40, "when": { "pos": ["CB"] },
+      "title": "Set-Piece Target", "text": "Next match: a corner for you, late on. The coach has drawn your name in a circle on the set-piece sheet. You're the target.",
+      "prompt": "How do you attack the corner?",
+      "choices": [
+        { "label": "Attack the near post", "desc": "Flick it on.", "risk": "medium", "hint": "Glancing headers win games.", "check": { "stat": "aerial", "dc": 60 }, "ok": { "text": "He meets it at the near post and glances it into the far corner. A centre-back's goal.", "fx": { "matchMod": { "rating": 0.9, "goals": 1 } } }, "bad": { "text": "Mistimed. The ball skims off his head and out for a goal kick.", "fx": { "matchMod": { "rating": -0.1 } } } },
+        { "label": "Block the keeper, free a teammate", "desc": "The unselfish role.", "risk": "low", "hint": "Assists don't always count.", "text": "He blocks the keeper's path and {CAPl} heads it in. Nobody notices {J}'s role except the coach.", "fx": { "matchMod": { "rating": 0.3 }, "trust": 2 } }
+      ] },
+    { "id": "k2_cb_ball_playing", "cat": "moment", "moment": true, "w": 5, "cd": 40, "when": { "pos": ["CB", "DM"] },
+      "title": "Step Into Midfield", "text": "Next match: their midfield keeps dropping off. There's space in front of you, acres of it. The coach has told you to step in when you see it.",
+      "prompt": "Step in with the ball?",
+      "choices": [
+        { "label": "Carry it forward and split them with a pass", "desc": "Modern centre-back.", "risk": "high", "hint": "Assist, or caught upfield.", "check": { "stat": "ballPlaying", "dc": 58 }, "ok": { "text": "He strides into midfield and threads a pass between two lines. Assist.", "fx": { "matchMod": { "rating": 0.8, "assists": 1 } } }, "bad": { "text": "He loses it and they counter into the space he left behind. Goal.", "fx": { "matchMod": { "rating": -0.7, "concede": 1 } } } },
+        { "label": "Keep it simple", "desc": "Short pass to the full-back.", "risk": "low", "hint": "Calm.", "text": "Simple and safe, all match. The coach wanted more. The clean sheet didn't.", "fx": { "matchMod": { "rating": 0.1 } } }
+      ] },
+    { "id": "k2_fb_overlap", "cat": "moment", "moment": true, "w": 6, "cd": 40, "when": { "pos": ["FB"] },
+      "title": "The Overlap", "text": "Next match: the winger in front of you has the ball and nobody is tracking your run. Bomb on, or stay home and protect?",
+      "prompt": "Overlap?",
+      "choices": [
+        { "label": "Sprint the overlap and cross", "desc": "Get to the byline.", "risk": "medium", "hint": "Assist, or caught out of position.", "check": { "stat": "crossing", "dc": 57 }, "ok": { "text": "He hits the byline and whips in a cross. The striker can't miss. Assist.", "fx": { "matchMod": { "rating": 0.8, "assists": 1 } } }, "bad": { "text": "The cross is cut out and they break down his empty flank. Goal.", "fx": { "matchMod": { "rating": -0.6, "concede": 1 } } } },
+        { "label": "Hold your position", "desc": "Defend first.", "risk": "low", "hint": "Solid.", "text": "He stays home. Their counter-attacks die on his flank all match.", "fx": { "matchMod": { "rating": 0.3 } } }
+      ] },
+    { "id": "k2_fb_winger_duel", "cat": "moment", "moment": true, "w": 5, "cd": 40, "when": { "pos": ["FB"] },
+      "title": "The Fastest Man in the League", "text": "Next match, you're up against the league's fastest winger. He's beaten every full-back he's faced this season. The whole match is this duel.",
+      "prompt": "How do you play him?",
+      "choices": [
+        { "label": "Stand off and use your body", "desc": "Don't let him run.", "risk": "medium", "hint": "Positioning beats pace.", "check": { "stat": "marking", "dc": 58 }, "ok": { "text": "He never gives him a yard. The winger is subbed in the 60th minute, furious.", "fx": { "matchMod": { "rating": 0.9 } } }, "bad": { "text": "One burst of pace and he's gone. Cross, goal.", "fx": { "matchMod": { "rating": -0.5, "concede": 1 } } } },
+        { "label": "Get tight and physical", "desc": "Let him know you're there.", "risk": "high", "hint": "Early yellow risk.", "check": { "stat": "tackling", "dc": 58 }, "ok": { "text": "Two crunching early challenges, both fair. The winger disappears from the game.", "fx": { "matchMod": { "rating": 0.7 } } }, "bad": { "text": "Yellow card after eight minutes. He spends the rest of the match on a tightrope.", "fx": { "matchMod": { "rating": -0.4, "card": "yellow" } } } }
+      ] },
+    { "id": "k2_dm_screen", "cat": "moment", "moment": true, "w": 5, "cd": 40, "when": { "pos": ["DM"] },
+      "title": "Their Number Ten", "text": "Next match: their playmaker floats between the lines and kills teams. Your job is to make sure he never turns.",
+      "prompt": "How do you handle him?",
+      "choices": [
+        { "label": "Man-mark him everywhere", "desc": "His shadow for ninety minutes.", "risk": "medium", "hint": "Exhausting. Effective.", "check": { "stat": "marking", "dc": 58 }, "ok": { "text": "The playmaker touches the ball eleven times all match. The coach calls it the perfect defensive display.", "fx": { "matchMod": { "rating": 0.8 } } }, "bad": { "text": "He drags {J} out of position and a teammate exploits the hole. Goal.", "fx": { "matchMod": { "rating": -0.5, "concede": 1 } } } },
+        { "label": "Break up play with a tactical foul", "desc": "Stop it at source.", "risk": "high", "hint": "Effective. A card is coming.", "text": "Three tactical fouls, one yellow, zero counter-attacks. The cynical art.", "fx": { "matchMod": { "rating": 0.4, "card": "yellow" } } }
+      ] },
+    { "id": "k2_dm_long_range", "cat": "moment", "moment": true, "w": 4, "cd": 40, "when": { "pos": ["DM", "CM"] },
+      "title": "Room to Shoot", "text": "Next match: their defence keeps dropping deep. You'll get space thirty yards out. Nobody ever closes down the holding midfielder.",
+      "prompt": "Take a shot from distance?",
+      "choices": [
+        { "label": "Let fly", "desc": "Thirty yards, top corner.", "risk": "high", "hint": "Goal of the season, or row Z.", "check": { "stat": "longShots", "dc": 64 }, "ok": { "text": "It swerves, dips and kisses the underside of the bar on the way in. Goal of the season.", "fx": { "matchMod": { "rating": 1.0, "goals": 1 }, "followers": 20000 } }, "bad": { "text": "Row Z. The fans behind the goal throw it back.", "fx": { "matchMod": { "rating": -0.2 } } } },
+        { "label": "Recycle it", "desc": "Keep the ball.", "risk": "low", "hint": "Discipline.", "text": "He keeps it simple and moves it on. Ninety-four per cent pass accuracy.", "fx": { "matchMod": { "rating": 0.2 } } }
+      ] },
+    { "id": "k2_cm_through_ball", "cat": "moment", "moment": true, "w": 6, "cd": 40, "when": { "pos": ["CM", "AM"] },
+      "title": "The Pass Nobody Sees", "text": "Next match: there's a gap between their centre-backs that opens for half a second every time their striker presses. Your striker has noticed too.",
+      "prompt": "Look for the killer pass?",
+      "choices": [
+        { "label": "Thread it through", "desc": "The risky, beautiful pass.", "risk": "medium", "hint": "Assist or giveaway.", "check": { "stat": "vision", "dc": 60 }, "ok": { "text": "The gap opens and the ball is already through it. One-on-one, goal. Assist.", "fx": { "matchMod": { "rating": 0.9, "assists": 1 } } }, "bad": { "text": "Intercepted and countered. The coach throws his water bottle.", "fx": { "matchMod": { "rating": -0.5, "concede": 1 } } } },
+        { "label": "Control the tempo", "desc": "Keep the ball moving.", "risk": "low", "hint": "Steady.", "text": "He dictates the rhythm all match. The team wins the possession battle, if not the highlights reel.", "fx": { "matchMod": { "rating": 0.3 } } }
+      ] },
+    { "id": "k2_cm_box_to_box", "cat": "moment", "moment": true, "w": 5, "cd": 40, "when": { "pos": ["CM"] },
+      "title": "Late Run", "text": "Next match: when the winger gets to the byline, nobody is ever arriving at the edge of the box. That could be you, if your legs allow it.",
+      "prompt": "Make the late run into the box?",
+      "choices": [
+        { "label": "Arrive late at the edge", "desc": "The box-to-box run.", "risk": "medium", "hint": "A goal if the cut-back comes.", "check": { "stat": "physical", "dc": 58 }, "ok": { "text": "The cut-back comes, he arrives on time, side-foot finish. Goal.", "fx": { "matchMod": { "rating": 0.9, "goals": 1 } } }, "bad": { "text": "He's a step too late every time, and too tired to track back for their goal.", "fx": { "matchMod": { "rating": -0.4, "concede": 1 } } } },
+        { "label": "Stay in your lane", "desc": "Balance the midfield.", "risk": "low", "hint": "Disciplined.", "text": "He stays in position all match. Disciplined, unspectacular, important.", "fx": { "matchMod": { "rating": 0.2 } } }
+      ] },
+    { "id": "k2_am_free_kick", "cat": "moment", "moment": true, "w": 6, "cd": 40, "when": { "pos": ["AM", "W", "CM"] },
+      "title": "Free Kick, Twenty-Two Yards", "text": "Next match: a free kick just outside the box. The regular taker is injured. Everybody looks at {J}.",
+      "prompt": "Take it?",
+      "choices": [
+        { "label": "Over the wall, top corner", "desc": "Curl it.", "risk": "high", "hint": "Hero or wasted chance.", "check": { "stat": "longShots", "dc": 62 }, "ok": { "text": "Over the wall, under the bar. The keeper doesn't move.", "fx": { "matchMod": { "rating": 1.0, "goals": 1 }, "followers": 15000 } }, "bad": { "text": "Straight into the wall. The rebound is cleared.", "fx": { "matchMod": { "rating": -0.2 } } } },
+        { "label": "Square it for a teammate", "desc": "The training-ground routine.", "risk": "medium", "hint": "Clever or embarrassing.", "out": [ { "w": 1, "text": "The routine works perfectly. Goal, and an assist.", "fx": { "matchMod": { "rating": 0.7, "assists": 1 } } }, { "w": 1, "text": "The routine goes wrong. Nobody knows who was supposed to run where.", "fx": { "matchMod": { "rating": -0.3 } } } ] }
+      ] },
+    { "id": "k2_am_turn", "cat": "moment", "moment": true, "w": 5, "cd": 40, "when": { "pos": ["AM"] },
+      "title": "Between the Lines", "text": "Next match: their holding midfielder is slow to turn. If you can receive on the half-turn, you're facing goal with space.",
+      "prompt": "Take the risk of receiving under pressure?",
+      "choices": [
+        { "label": "Turn and drive at them", "desc": "Spin, go.", "risk": "medium", "hint": "Goal or turnover.", "check": { "stat": "dribbling", "dc": 60 }, "ok": { "text": "He spins his marker, drives forward and slides it home. Goal.", "fx": { "matchMod": { "rating": 1.0, "goals": 1 } } }, "bad": { "text": "He's caught on the turn and they break. {Mf} is not impressed.", "fx": { "matchMod": { "rating": -0.5 } } } },
+        { "label": "Lay it off first time", "desc": "Keep it moving.", "risk": "low", "hint": "Safe.", "text": "One-touch football all afternoon. Good, not great.", "fx": { "matchMod": { "rating": 0.2 } } }
+      ] },
+    { "id": "k2_w_one_v_one", "cat": "moment", "moment": true, "w": 6, "cd": 40, "when": { "pos": ["W"] },
+      "title": "Isolated Against the Full-Back", "text": "Next match: their right-back is on a yellow card and slow on the turn. You'll get him one-on-one at least five times.",
+      "prompt": "How do you attack him?",
+      "choices": [
+        { "label": "Take him on every time", "desc": "Skill, pace, nerve.", "risk": "medium", "hint": "He'll be sent off or you'll be brilliant.", "check": { "stat": "dribbling", "dc": 58 }, "ok": { "text": "He destroys the full-back. A cut inside, a curled finish. Goal.", "fx": { "matchMod": { "rating": 1.0, "goals": 1 } } }, "bad": { "text": "The full-back reads him every time. A frustrating afternoon.", "fx": { "matchMod": { "rating": -0.4 } } } },
+        { "label": "Get to the byline and cross", "desc": "Old-school wing play.", "risk": "medium", "hint": "Assists.", "check": { "stat": "crossing", "dc": 56 }, "ok": { "text": "Byline, cut-back, goal. Assist.", "fx": { "matchMod": { "rating": 0.8, "assists": 1 } } }, "bad": { "text": "Every cross finds the first defender.", "fx": { "matchMod": { "rating": -0.3 } } } }
+      ] },
+    { "id": "k2_w_counter", "cat": "moment", "moment": true, "w": 5, "cd": 40, "when": { "pos": ["W", "ST"] },
+      "title": "The Counter-Attack", "text": "Next match: they will commit everyone to their corners. If you stay up the pitch, you'll be running at a back line of one.",
+      "prompt": "Stay up for the counter?",
+      "choices": [
+        { "label": "Stay up and run", "desc": "Gamble on the break.", "risk": "medium", "hint": "A goal, or you're blamed for their header.", "check": { "stat": "pace", "dc": 58 }, "ok": { "text": "The clearance falls to him at halfway. Sixty yards, one defender, goal.", "fx": { "matchMod": { "rating": 1.0, "goals": 1 } } }, "bad": { "text": "He stays up. They score from the corner because the man he should have marked was free.", "fx": { "matchMod": { "rating": -0.6, "concede": 1 } } } },
+        { "label": "Defend the corner", "desc": "Team first.", "risk": "low", "hint": "The manager will notice.", "text": "He tracks back for every corner. Unglamorous. The manager notices.", "fx": { "matchMod": { "rating": 0.2 }, "trust": 2 } }
+      ] },
+    { "id": "k2_st_header", "cat": "moment", "moment": true, "w": 5, "cd": 40, "when": { "pos": ["ST"] },
+      "title": "Cross Incoming", "text": "Next match: their centre-backs struggle in the air. The winger will cross all day. Near post or far post?",
+      "prompt": "Where do you attack the cross?",
+      "choices": [
+        { "label": "Near post: get in front", "desc": "Front the defender.", "risk": "medium", "hint": "Instinctive striking.", "check": { "stat": "aerial", "dc": 58 }, "ok": { "text": "He gets in front of his marker and flicks it in at the near post. Goal.", "fx": { "matchMod": { "rating": 0.9, "goals": 1 } } }, "bad": { "text": "Beaten to it every time.", "fx": { "matchMod": { "rating": -0.3 } } } },
+        { "label": "Far post: lose your marker", "desc": "Drift off the shoulder.", "risk": "medium", "hint": "Movement over muscle.", "check": { "stat": "offBall", "dc": 58 }, "ok": { "text": "He drifts away unnoticed and the cross finds him alone. Easy header. Goal.", "fx": { "matchMod": { "rating": 0.9, "goals": 1 } } }, "bad": { "text": "The crosses never reach the far post.", "fx": { "matchMod": { "rating": -0.2 } } } }
+      ] },
+    { "id": "k2_st_chip", "cat": "moment", "moment": true, "w": 5, "cd": 40, "when": { "pos": ["ST", "W", "AM"] },
+      "title": "The Keeper Comes Out", "text": "Next match: their keeper rushes off his line at everything. One-on-one, he'll be on you in a flash.",
+      "prompt": "How do you beat a rushing keeper?",
+      "choices": [
+        { "label": "The chip", "desc": "Cheeky, beautiful, risky.", "risk": "high", "hint": "Genius or embarrassing.", "check": { "stat": "finishing", "dc": 63 }, "ok": { "text": "The softest touch, over the diving keeper, into the empty net. Pure art.", "fx": { "matchMod": { "rating": 1.1, "goals": 1 }, "followers": 25000 } }, "bad": { "text": "The chip lands on the roof of the net. The keeper laughs.", "fx": { "matchMod": { "rating": -0.3 } } } },
+        { "label": "Round him", "desc": "Go past and walk it in.", "risk": "medium", "hint": "Pace and composure.", "check": { "stat": "dribbling", "dc": 58 }, "ok": { "text": "He drops a shoulder, rounds the keeper and walks it in.", "fx": { "matchMod": { "rating": 0.9, "goals": 1 } } }, "bad": { "text": "Taken too wide. A defender clears off the line.", "fx": { "matchMod": { "rating": -0.2 } } } }
+      ] },
+    { "id": "k2_st_penalty_taker", "cat": "moment", "moment": true, "w": 5, "cd": 50, "when": { "pos": ["ST", "AM", "W"] },
+      "title": "Penalty Duty", "text": "Next match: the regular penalty taker is out. The coach has asked who wants it if the moment comes. Nobody answered. Then everyone looked at you.",
+      "prompt": "Volunteer for penalties?",
+      "choices": [
+        { "label": "Take responsibility", "desc": "It's yours.", "risk": "medium", "hint": "Pressure, glory.", "check": { "stat": "mental", "dc": 58 }, "ok": { "text": "A penalty in the 80th minute. Stuttered run-up, keeper the wrong way. Goal.", "fx": { "matchMod": { "rating": 0.9, "goals": 1 }, "trust": 2 } }, "bad": { "text": "He hits the post. The silence is deafening.", "fx": { "matchMod": { "rating": -0.7 }, "stress": 4 } } },
+        { "label": "Let the captain take it", "desc": "Experience first.", "risk": "low", "hint": "Humble.", "text": "The captain takes it and scores. {J} is first to celebrate with him.", "fx": { "matchMod": { "rating": 0.1 }, "dressing": 1 } }
+      ] },
+    { "id": "k2_st_hold_up", "cat": "moment", "moment": true, "w": 4, "cd": 40, "when": { "pos": ["ST"] },
+      "title": "Back to Goal", "text": "Next match: the team will play long to you all game. Their centre-back is huge and enjoys hurting strikers.",
+      "prompt": "How do you play against him?",
+      "choices": [
+        { "label": "Battle him for every ball", "desc": "Muscle against muscle.", "risk": "medium", "hint": "Bruises. Respect.", "check": { "stat": "physical", "dc": 58 }, "ok": { "text": "He wins every duel. The centre-back is subbed at half-time with a sore ego. {J} sets up the winner.", "fx": { "matchMod": { "rating": 0.8, "assists": 1 } } }, "bad": { "text": "He's bullied all afternoon and limps off late on.", "fx": { "matchMod": { "rating": -0.5, "injury": "minor" } } } },
+        { "label": "Spin in behind instead", "desc": "Make him turn.", "risk": "medium", "hint": "Pace over power.", "check": { "stat": "pace", "dc": 56 }, "ok": { "text": "He spins in behind every time. The big man can't turn. Goal.", "fx": { "matchMod": { "rating": 0.9, "goals": 1 } } }, "bad": { "text": "Offside, offside, offside.", "fx": { "matchMod": { "rating": -0.3 } } } }
+      ] },
+    { "id": "k2_any_dive", "cat": "moment", "moment": true, "w": 4, "cd": 60, "when": { "pos": ["ATT", "MID"] },
+      "title": "A Touch in the Box", "text": "Next match: in the box, a defender will brush your shoulder. Not a foul. Not quite. But if you go down...",
+      "prompt": "Go down?",
+      "choices": [
+        { "label": "Stay on your feet", "desc": "Honest football.", "risk": "low", "hint": "Respected.", "text": "He stays up and shoots. Saved. A commentator praises his honesty.", "fx": { "matchMod": { "rating": 0.2 }, "image": 1 } },
+        { "label": "Go down", "desc": "Let the referee decide.", "risk": "high", "hint": "Penalty or a yellow for diving.", "out": [ { "w": 1, "text": "Penalty. Converted. The replays are not kind.", "fx": { "matchMod": { "rating": 0.4, "goals": 1 }, "image": -3 } }, { "w": 1, "text": "Yellow card for simulation. The away fans chant about it for the rest of the match.", "fx": { "matchMod": { "rating": -0.6, "card": "yellow" }, "image": -3 } } ] }
+      ] },
+    { "id": "k2_any_injury_scare", "cat": "moment", "moment": true, "w": 3, "cd": 60, "when": { "pfm": [0, 60] },
+      "title": "Something Pulls", "text": "Next match, thirty minutes in, you'll feel something pull in your thigh. Not agony. A warning.",
+      "prompt": "Play on or come off?",
+      "choices": [
+        { "label": "Signal to come off", "desc": "Listen to your body.", "risk": "low", "hint": "Short game, long career.", "text": "He signals to the bench and comes off. The scan shows a tiny strain, caught early.", "fx": { "matchMod": { "rating": -0.2 }, "pfm": 3 } },
+        { "label": "Play on", "desc": "It'll loosen up.", "risk": "high", "hint": "It might. It might not.", "out": [ { "w": 1, "text": "It loosens up. He plays the full ninety.", "fx": { "matchMod": { "rating": 0.2 } } }, { "w": 1, "text": "In the 70th minute, it goes. Properly.", "fx": { "matchMod": { "rating": -0.5, "injury": "moderate" } } } ] }
+      ] },
+    { "id": "k2_any_red_mist", "cat": "moment", "moment": true, "w": 4, "cd": 50,
+      "title": "Provoked", "text": "Next match: their midfielder will spend the whole game insulting your family, stamping on your heels and laughing. He wants you sent off.",
+      "prompt": "How do you keep your head?",
+      "choices": [
+        { "label": "Ignore every word", "desc": "Cold as ice.", "risk": "medium", "hint": "He wins if you react.", "check": { "stat": "mental", "dc": 57 }, "ok": { "text": "He doesn't react once. In the 85th minute the midfielder loses it himself and gets sent off.", "fx": { "matchMod": { "rating": 0.6 } } }, "bad": { "text": "In the 60th minute, he snaps and shoves him. Straight red.", "fx": { "matchMod": { "rating": -1.2, "card": "red" } } } },
+        { "label": "Ask the referee to watch him", "desc": "Use the officials.", "risk": "low", "hint": "Sensible.", "text": "The referee watches closely and books the midfielder. The provocation stops.", "fx": { "matchMod": { "rating": 0.3 } } }
+      ] },
+    { "id": "k2_any_captain_moment", "cat": "moment", "moment": true, "w": 4, "cd": 60, "when": { "isCaptain": true },
+      "title": "The Captain's Armband", "text": "Next match: the referee will make a terrible decision against you early, and your teammates will lose their heads. As captain, it's on you to calm them.",
+      "prompt": "How do you lead?",
+      "choices": [
+        { "label": "Gather them, calm them", "desc": "Huddle, words, focus.", "risk": "low", "hint": "Leadership.", "check": { "stat": "mental", "dc": 52 }, "ok": { "text": "He pulls the team into a huddle. Ten seconds, three sentences. They come back stronger.", "fx": { "matchMod": { "rating": 0.6 }, "dressing": 3 } }, "bad": { "text": "Nobody listens. Two teammates are booked for dissent within five minutes.", "fx": { "matchMod": { "rating": -0.2 } } } },
+        { "label": "Argue with the referee yourself", "desc": "Fight for your team.", "risk": "high", "hint": "Passion. A booking.", "text": "He argues fiercely and gets a yellow card. His team loves him for it. The referee doesn't.", "fx": { "matchMod": { "rating": 0.1, "card": "yellow" }, "dressing": 2 } }
+      ] },
+    { "id": "k2_youngster_nerves", "cat": "moment", "moment": true, "w": 5, "cd": 60, "when": { "level": [1, 2], "age": [16, 20] },
+      "title": "Big Stadium, Small Boy", "text": "Next match: the biggest crowd you've ever played in front of. Forty thousand people. Your legs feel like they belong to someone else.",
+      "prompt": "How do you handle the nerves?",
+      "choices": [
+        { "label": "Keep it simple at the start", "desc": "First touches: short and safe.", "risk": "low", "hint": "Build into it.", "text": "Five simple passes and the nerves fade. By the second half he's enjoying himself.", "fx": { "matchMod": { "rating": 0.4 } } },
+        { "label": "Try something spectacular early", "desc": "Announce yourself.", "risk": "high", "hint": "Legend or meme.", "out": [ { "w": 1, "text": "A rainbow flick in the third minute. The crowd gasps. He's arrived.", "fx": { "matchMod": { "rating": 0.8 }, "followers": 20000, "fans": 3 } }, { "w": 2, "text": "The rainbow flick hits his own heel. Forty thousand people laugh at once.", "fx": { "matchMod": { "rating": -0.6 }, "stress": 4 } } ] }
+      ] },
+    { "id": "k2_veteran_legs", "cat": "moment", "moment": true, "w": 5, "cd": 60, "when": { "age": [31, 40] },
+      "title": "The Young Legs", "text": "Next match: you'll be up against a nineteen-year-old who runs like the wind and doesn't know who you are. Your legs aren't what they were.",
+      "prompt": "How does the old head handle the young legs?",
+      "choices": [
+        { "label": "Out-think him", "desc": "Position, timing, cunning.", "risk": "medium", "hint": "Experience is a skill.", "check": { "stat": "mental", "dc": 55 }, "ok": { "text": "He's always one step ahead without ever running. The kid asks for his shirt at full time.", "fx": { "matchMod": { "rating": 0.8 } } }, "bad": { "text": "The kid is simply too quick. A tough afternoon.", "fx": { "matchMod": { "rating": -0.5 } } } },
+        { "label": "Ask for a role with less running", "desc": "Play smart.", "risk": "low", "hint": "Accepting time.", "text": "The coach shifts him into a quieter role. He's useful, if not spectacular.", "fx": { "matchMod": { "rating": 0.3 }, "tacticalFit": 3 } }
+      ] },
+    { "id": "k2_derby_goal_celebration", "cat": "moment", "moment": true, "w": 4, "cd": 60, "when": { "pos": ["ATT", "MID"] },
+      "title": "If You Score Against Them", "text": "Next match: {R}. If you score, you'll be running towards their fans, who have been abusing you for ninety minutes.",
+      "prompt": "If you score, how do you celebrate?",
+      "choices": [
+        { "label": "Celebrate in front of them", "desc": "Cupped ear, big grin.", "risk": "high", "hint": "Iconic. Possibly a yellow.", "out": [ { "w": 2, "text": "He scores and stands in front of them with a hand to his ear. Yellow card, legendary photo.", "fx": { "matchMod": { "rating": 0.8, "goals": 1, "card": "yellow" }, "fans": 6, "followers": 30000 } }, { "w": 1, "text": "He doesn't score. Their fans sing about it for an hour.", "fx": { "matchMod": { "rating": -0.2 } } } ] },
+        { "label": "Celebrate with your own fans", "desc": "Run to your people.", "risk": "low", "hint": "Classy.", "out": [ { "w": 2, "text": "He scores and sprints to his own fans. A pile-on of joy.", "fx": { "matchMod": { "rating": 0.8, "goals": 1 }, "fans": 4 } }, { "w": 1, "text": "No goal today. He still applauds his fans at the end.", "fx": { "matchMod": { "rating": 0.1 } } } ] }
+      ] },
+    { "id": "k2_rain_pitch", "cat": "moment", "moment": true, "w": 4, "cd": 50,
+      "title": "Waterlogged", "text": "Next match: torrential rain is forecast. The ball will stop dead in puddles. Pretty football will be impossible.",
+      "prompt": "How do you adapt?",
+      "choices": [
+        { "label": "Play direct", "desc": "Long balls, second balls, fight.", "risk": "low", "hint": "Ugly and effective.", "text": "He adapts first. The team plays in the air and wins every second ball. Ugly, effective.", "fx": { "matchMod": { "rating": 0.4 } } },
+        { "label": "Keep trying to play", "desc": "Your style, regardless.", "risk": "medium", "hint": "Brave or stubborn.", "out": [ { "w": 1, "text": "One perfect pass skims across a puddle into the striker's path. Assist.", "fx": { "matchMod": { "rating": 0.7, "assists": 1 } } }, { "w": 2, "text": "The ball dies in a puddle and they counter. Goal.", "fx": { "matchMod": { "rating": -0.5, "concede": 1 } } } ] }
+      ] },
+    { "id": "k2_heat", "cat": "moment", "moment": true, "w": 4, "cd": 50, "when": { "country": ["Indonesia", "Thailand", "Malaysia", "Vietnam", "Saudi Arabia", "Qatar", "United Arab Emirates", "Brazil", "Mexico"] },
+      "title": "Thirty-Six Degrees", "text": "Next match kicks off at 3pm in thirty-six degrees and ninety per cent humidity. Even the referee looks worried.",
+      "prompt": "How do you manage your energy?",
+      "choices": [
+        { "label": "Pace yourself", "desc": "Pick your moments.", "risk": "low", "hint": "Strong at the end.", "text": "He walks when he can and sprints when it matters. In the last ten minutes he's the only one still running.", "fx": { "matchMod": { "rating": 0.5 } } },
+        { "label": "Go flat out from the start", "desc": "Blow them away early.", "risk": "medium", "hint": "Glorious hour, then cramp.", "out": [ { "w": 1, "text": "An early blitz, an early goal. Then cramp.", "fx": { "matchMod": { "rating": 0.6, "goals": 1 }, "pfm": -6 } }, { "w": 1, "text": "He's empty by the 50th minute and subbed.", "fx": { "matchMod": { "rating": -0.4 }, "pfm": -6 } } ] }
+      ] },
+    { "id": "k2_new_position", "cat": "moment", "moment": true, "w": 3, "cd": 80,
+      "title": "Out of Position", "text": "Next match: injuries everywhere. The manager wants you to play a position you've never played. Just for this match.",
+      "prompt": "Agree to play out of position?",
+      "choices": [
+        { "label": "Say yes, and give everything", "desc": "Team first.", "risk": "medium", "hint": "Respect, whatever happens.", "out": [ { "w": 1, "text": "He's surprisingly good there. The manager is quietly impressed.", "fx": { "matchMod": { "rating": 0.5 }, "trust": 6 } }, { "w": 1, "text": "He's lost all match but never stops running. The manager thanks him anyway.", "fx": { "matchMod": { "rating": -0.4 }, "trust": 5 } } ] },
+        { "label": "Ask to stay in your role", "desc": "Play to your strengths.", "risk": "low", "hint": "Fair. A bit selfish.", "text": "The manager shuffles someone else. He notes who said no.", "fx": { "matchMod": { "rating": 0.1 }, "trust": -3 } }
+      ] },
+    { "id": "k2_mother_in_stands", "cat": "moment", "moment": true, "w": 4, "cd": 120, "when": { "familyNear": true },
+      "title": "{MUM} Is Coming", "text": "Next match: {MUM} is coming to watch for the first time in a year. She's made a banner. It's very large and has his baby photo on it.",
+      "prompt": "Will it inspire you, or distract you?",
+      "choices": [
+        { "label": "Play for her", "desc": "Every touch for {MUM}.", "risk": "low", "hint": "Inspiration.", "text": "He plays the match of his life and runs to the banner at full time. {MUM} is in tears.", "fx": { "matchMod": { "rating": 0.6 }, "family": 6 } },
+        { "label": "Ask her to bring a smaller banner", "desc": "Please.", "risk": "low", "hint": "She won't.", "text": "She brings a bigger banner. He plays fine and pretends not to see it.", "fx": { "matchMod": { "rating": 0.2 }, "family": 2 } }
+      ] },
+    { "id": "k2_last_minute_chance", "cat": "moment", "moment": true, "w": 5, "cd": 40, "when": { "pos": ["ATT", "MID"] },
+      "title": "Ninety-Fourth Minute", "text": "Next match: 1-1, ninety-fourth minute, the ball will drop to you twenty yards out. Shoot, or pass to the teammate in a better position?",
+      "prompt": "Shoot or pass?",
+      "choices": [
+        { "label": "Shoot", "desc": "This is your moment.", "risk": "high", "hint": "Hero or villain.", "check": { "stat": "finishing", "dc": 62 }, "ok": { "text": "He hits it sweet. Top corner. The stadium loses its mind.", "fx": { "matchMod": { "rating": 1.1, "goals": 1 }, "fans": 5 } }, "bad": { "text": "Over the bar. His teammate, who was in on goal, throws his arms up.", "fx": { "matchMod": { "rating": -0.6 }, "dressing": -2 } } },
+        { "label": "Pass to the teammate", "desc": "The better chance.", "risk": "medium", "hint": "Unselfish.", "out": [ { "w": 2, "text": "Perfect pass, simple finish. Winner. Assist.", "fx": { "matchMod": { "rating": 0.8, "assists": 1 }, "dressing": 3 } }, { "w": 1, "text": "His teammate misses an open goal. {J} stares at the sky.", "fx": { "matchMod": { "rating": 0.1 } } } ] }
+      ] },
+    { "id": "k2_gk_sweeper", "cat": "moment", "moment": true, "w": 4, "cd": 40, "when": { "pos": ["GK"] },
+      "title": "The Ball Over the Top", "text": "Next match: their striker will chase a ball over the top. You could race out of your box and clear it, or stay home and wait.",
+      "prompt": "Sweep or stay?",
+      "choices": [
+        { "label": "Race out and clear it", "desc": "Sweeper-keeper.", "risk": "high", "hint": "Modern. Risky.", "check": { "stat": "command", "dc": 60 }, "ok": { "text": "He's out like a flash and heads it clear thirty yards from goal. The crowd gasps, then applauds.", "fx": { "matchMod": { "rating": 0.6 } } }, "bad": { "text": "He misjudges it. The striker rounds him into an empty net.", "fx": { "matchMod": { "rating": -0.9, "concede": 1 } } } },
+        { "label": "Stay and set yourself", "desc": "Make him finish.", "risk": "low", "hint": "Traditional.", "check": { "stat": "reflexes", "dc": 55 }, "ok": { "text": "The striker shoots early. Saved.", "fx": { "matchMod": { "rating": 0.5 } } }, "bad": { "text": "He finishes coolly. Goal.", "fx": { "matchMod": { "rating": -0.3, "concede": 1 } } } }
+      ] },
+    { "id": "k2_cb_offside_trap", "cat": "moment", "moment": true, "w": 4, "cd": 40, "when": { "pos": ["CB"] },
+      "title": "Step Up", "text": "Next match: as the organiser of the back line, it's your call when to step up for offside. Their striker loves running on the shoulder.",
+      "prompt": "High line or drop off?",
+      "choices": [
+        { "label": "Hold a high line", "desc": "Squeeze the space.", "risk": "high", "hint": "Brilliant when it works.", "check": { "stat": "marking", "dc": 60 }, "ok": { "text": "Five offsides in the first half. The striker is furious. Clean sheet.", "fx": { "matchMod": { "rating": 0.8 } } }, "bad": { "text": "Mistimed once. Once is enough. Goal.", "fx": { "matchMod": { "rating": -0.6, "concede": 1 } } } },
+        { "label": "Drop deep", "desc": "Deny the space behind.", "risk": "low", "hint": "Safe. Gives them the midfield.", "text": "He drops deep. They dominate possession and do nothing with it.", "fx": { "matchMod": { "rating": 0.3 } } }
+      ] },
+    { "id": "k2_dm_shield_lead", "cat": "moment", "moment": true, "w": 4, "cd": 40, "when": { "pos": ["DM", "CB"] },
+      "title": "Protect the Lead", "text": "Next match: if you're 1-0 up with fifteen minutes left, the manager wants you to drop between the centre-backs and see it out.",
+      "prompt": "How do you see the game out?",
+      "choices": [
+        { "label": "Become a third centre-back", "desc": "Block everything.", "risk": "low", "hint": "Clean sheets win titles.", "check": { "stat": "tackling", "dc": 54 }, "ok": { "text": "He blocks four shots in fifteen minutes. The lead holds.", "fx": { "matchMod": { "rating": 0.6 } } }, "bad": { "text": "A deflection off his own leg loops in. 1-1.", "fx": { "matchMod": { "rating": -0.6, "concede": 1 } } } },
+        { "label": "Keep the ball instead", "desc": "Defend by possessing.", "risk": "medium", "hint": "Clever if you're good enough.", "check": { "stat": "passing", "dc": 58 }, "ok": { "text": "He keeps the ball for most of the last fifteen minutes. The opposition never touch it.", "fx": { "matchMod": { "rating": 0.7 } } }, "bad": { "text": "Caught in possession. Equaliser.", "fx": { "matchMod": { "rating": -0.6, "concede": 1 } } } }
+      ] },
+    { "id": "k2_w_track_back", "cat": "moment", "moment": true, "w": 4, "cd": 40, "when": { "pos": ["W", "AM"] },
+      "title": "Track Back or Stay High", "text": "Next match: their full-back bombs forward constantly. The manager wants you to track him all the way. Your legs want to stay high.",
+      "prompt": "Track back?",
+      "choices": [
+        { "label": "Track him every time", "desc": "Selfless running.", "risk": "low", "hint": "The manager will love it.", "text": "He tracks every run. Exhausted, unglamorous, important. The manager mentions it in the press conference.", "fx": { "matchMod": { "rating": 0.4 }, "trust": 4 } },
+        { "label": "Stay high for the counter", "desc": "Make him worry about you.", "risk": "medium", "hint": "Brave.", "out": [ { "w": 1, "text": "Their full-back stops bombing on because he's scared of {J}. Problem solved by threat.", "fx": { "matchMod": { "rating": 0.6 } } }, { "w": 1, "text": "The full-back keeps coming. Cross, goal. The manager's face says everything.", "fx": { "matchMod": { "rating": -0.5, "concede": 1 }, "trust": -3 } } ] }
+      ] },
+    { "id": "k2_cup_final_nerves", "cat": "moment", "moment": true, "w": 4, "cd": 100, "when": { "rep": [10, 100], "months": [4, 5, 6, 11, 12] },
+      "title": "The Big Stage", "text": "Next match is the biggest of the season. The whole country is watching. Your phone hasn't stopped buzzing all week.",
+      "prompt": "How do you prepare?",
+      "choices": [
+        { "label": "Phone off all week", "desc": "Total focus.", "risk": "low", "hint": "Calm mind.", "text": "Phone in a drawer, early nights, visualisation. On the day he's calm and sharp.", "fx": { "matchMod": { "rating": 0.6 }, "stress": -3 } },
+        { "label": "Soak it all up", "desc": "Enjoy every moment.", "risk": "medium", "hint": "Energy or distraction.", "out": [ { "w": 1, "text": "The buzz carries him. He plays like a man possessed.", "fx": { "matchMod": { "rating": 0.8 } } }, { "w": 1, "text": "The buzz becomes noise. He's flat and distracted.", "fx": { "matchMod": { "rating": -0.5 } } } ] }
+      ] },
+    { "id": "k2_injury_teammate", "cat": "moment", "moment": true, "w": 3, "cd": 80, "uses": { "T": "any" },
+      "title": "{T} Goes Down", "text": "Next match: early on, {T} will go down badly near you. He'll be in real pain. The ball is still in play.",
+      "prompt": "Ball in play, teammate down.",
+      "choices": [
+        { "label": "Kick it out immediately", "desc": "Sportsmanship first.", "risk": "low", "hint": "The right thing.", "text": "He kicks it out without thinking. {T} is stretchered off with a thumbs up. Both sets of fans applaud.", "fx": { "matchMod": { "rating": 0.1 }, "image": 2, "bond": 6 } },
+        { "label": "Play on", "desc": "Let the referee decide.", "risk": "medium", "hint": "Technically fine. Looks bad.", "text": "He plays on, and they score from the move. Some fans aren't happy about it.", "fx": { "matchMod": { "rating": 0.2 }, "image": -2 } }
+      ] }
+  ]
+}

@@ -1,0 +1,313 @@
+{
+  "_about": "Context-aware scenarios: text variants with \"when\" only appear when they fit (after a defeat, abroad, married, in debt...), so the same situation reads differently depending on his life.",
+  "scenarios": [
+    {
+      "id": "dy_followers_100k", "cat": "media", "w": 10, "trigger": "followers100K", "once": true, "ui": "social",
+      "title": "100,000 Followers and a Blue Tick",
+      "text": [
+        "The notification arrives during a team meeting: 100K. A blue tick appears next to his name. {T} notices and announces it to the whole room.",
+        { "when": { "nationality": ["Indonesia"] }, "t": "100 ribu followers. Verified. In the family WhatsApp group, {MUM} posts the screenshot eleven times." },
+        { "when": { "age": [16, 19] }, "t": "A hundred thousand people follow a teenager who still can't cook rice. The blue tick arrives on a Tuesday. {SIB} demands a cut." }
+      ],
+      "prompt": "How do you use the bigger platform?",
+      "choices": [
+        { "label": "Hire someone to manage it", "desc": "Go professional.", "risk": "low", "hint": "Polished, less personal.", "vars": { "cost": ["wageWeeks", 1.5, 200] }, "text": "A social media manager starts on Monday. The posts get prettier. The comments say he 'changed'.", "fx": { "wealth": "-cost", "followers": 20000, "fans": -1, "stress": -2 } },
+        { "label": "Keep it personal", "desc": "Your voice, your posts.", "risk": "medium", "hint": "Authentic. More stress.", "text": "He keeps posting himself: blurry photos, bad jokes, real moments. Fans love that it's really him.", "fx": { "fans": 3, "followers": 10000, "stress": 2 } },
+        { "label": "Use it for a cause", "desc": "Amplify something that matters.", "risk": "low", "hint": "Image up.", "text": "His first post as a verified account is about the youth pitch in his old neighbourhood. Donations follow.", "fx": { "image": 4, "family": 2, "followers": 8000 } }
+      ]
+    },
+    {
+      "id": "dy_followers_1m", "cat": "media", "w": 10, "trigger": "followers1M", "once": true,
+      "title": "One Million",
+      "text": [
+        "One million people follow {J}. His phone has become a different object: brands, fans, strangers, trolls, all at once.",
+        { "when": { "partnerStyle": ["public"] }, "t": "{Pf} throws a surprise 'one million' party with a cake shaped like a phone. She films everything. Her followers jump too." },
+        { "when": { "partnerStyle": ["private"] }, "t": "One million followers. {Pf} asks, quietly, whether they can keep their home a phone-free zone." }
+      ],
+      "prompt": "Fame just changed size.",
+      "choices": [
+        { "label": "Set boundaries: no family, no home", "desc": "Protect the private.", "risk": "low", "hint": "Your partner and family will thank you.", "text": "He decides: no family, no home, no partner on his accounts. The fans grumble. The people he loves exhale.", "fx": { "family": 4, "love": 5, "followers": -20000, "stress": -3 } },
+        { "label": "Monetise it", "desc": "Brands, collaborations, paid posts.", "risk": "medium", "hint": "Money. Image risk.", "text": "His agent's phone rings off the hook. Paid posts, collaborations, a clothing capsule. The money is serious. So are the comments about 'ads'.", "fx": { "wealth": 3000, "image": -2, "fans": -1, "board": 2 } },
+        { "label": "Carry on as before", "desc": "It's just a number.", "risk": "low", "hint": "Stay grounded.", "text": "He posts a photo of his muddy boots with the caption 'thanks'. That's it. It becomes his most-liked post ever.", "fx": { "fans": 3, "image": 2 } }
+      ]
+    },
+    {
+      "id": "dy_sponsor_clash_club", "cat": "politics", "w": 6, "when": { "sponsors": [1, 20], "freeAgent": false }, "ui": "boardroom",
+      "title": "Sponsor Clash at {club}",
+      "text": [
+        "The club's new main sponsor is a direct rival of one of {J}'s personal sponsors. The commercial director wants him in the launch photo, holding their product.",
+        { "when": { "board": [0, 40] }, "t": "The board, already cool on {J}, have chosen this moment to sign a sponsor that competes with his own deal. The commercial director's email is three lines long and ends with 'we expect full cooperation'." }
+      ],
+      "prompt": "Your sponsor or your club?",
+      "choices": [
+        { "label": "Do the club shoot", "desc": "Club first.", "risk": "medium", "hint": "Your own sponsor will be unhappy.", "text": "He does the photo, smiling, holding the wrong brand. His own sponsor's lawyer sends a letter by Friday.", "fx": { "board": 6, "stress": 3, "wealth": -400 } },
+        { "label": "Refuse, citing your contract", "desc": "Contracts are contracts.", "risk": "medium", "hint": "Board annoyed. Sponsor grateful.", "text": "He refuses politely, contract in hand. The board backs down and remembers.", "fx": { "board": -6, "image": 1 } },
+        { "label": "Let your agent find a compromise", "desc": "Hidden logo, different angle.", "risk": "low", "hint": "Agent skill matters.", "check": { "stat": "agent", "dc": 50 },
+          "ok": { "text": "A shoot where he holds nothing at all and wears a club tracksuit. Everyone is satisfied, nobody is happy. Perfect.", "fx": { "board": 2 } },
+          "bad": { "text": "The compromise fails. Both sides are now slightly annoyed.", "fx": { "board": -2, "stress": 2 } } }
+      ]
+    },
+    {
+      "id": "dy_sponsor_shoot_matchday", "cat": "lifestyle", "w": 5, "when": { "sponsors": [1, 20], "matchWeek": true },
+      "title": "{BRAND} Shoot the Day Before a Match",
+      "text": [
+        "{BRAND} have booked a six-hour shoot the day before a match. The location is two hours away. The fitness coach has gone pale.",
+        { "when": { "role": ["bench", "outcast"] }, "t": "{BRAND} want a full-day shoot on Friday. Since {J} isn't starting anyway, the agent says, 'what's the harm?' The harm is that the manager might hear." }
+      ],
+      "prompt": "Go to the shoot?",
+      "choices": [
+        { "label": "Go, but cut it to two hours", "desc": "Negotiate the schedule.", "risk": "low", "hint": "Fair. The brand grumbles.", "text": "Two hours, efficient, done. The photographer complains. The fitness coach doesn't.", "fx": { "pfm": -2, "stress": 1 } },
+        { "label": "Do the full day", "desc": "They pay well.", "risk": "high", "hint": "Tired legs on matchday.", "text": "Six hours under hot lights. On matchday his legs feel like someone else's.", "fx": { "pfm": -7, "wealth": 500, "trust": -2 } },
+        { "label": "Postpone it", "desc": "Football first.", "risk": "medium", "hint": "Brand unhappy.", "text": "{BRAND} reschedule, coldly. Their next email is shorter than usual.", "fx": { "stress": 1 } }
+      ]
+    },
+    {
+      "id": "dy_brand_competitor_dm", "cat": "money", "w": 4, "when": { "sponsors": [1, 20], "rep": [30, 100] },
+      "title": "A Bigger Brand Slides Into the DMs",
+      "text": "{BRAND} contact {J} directly on social media, bypassing his agent: 'We'd love to talk about something bigger.' The offer they hint at is double what he earns from his current deal.",
+      "prompt": "Talk to them?",
+      "choices": [
+        { "label": "Forward it to your agent", "desc": "Do it properly.", "risk": "low", "hint": "Professional.", "text": "His agent takes it from there. Whatever happens, it happens the right way.", "fx": { "stress": -1 } },
+        { "label": "Chat directly, keep it secret", "desc": "Cut out the middleman.", "risk": "high", "hint": "Your agent will find out.", "out": [
+          { "w": 1, "text": "The conversation goes well — until the agent finds out from the brand's own lawyer. He is furious.", "fx": { "stress": 4, "flag": "agent_angry" } },
+          { "w": 1, "text": "It leads nowhere. Just a strange late-night chat with a marketing executive.", "fx": {} }
+        ] }
+      ]
+    },
+    {
+      "id": "dy_tax_return", "cat": "money", "w": 4, "cd": 104, "when": { "wealth": [10000, 999999999] },
+      "title": "Tax Season",
+      "text": [
+        "The tax forms are forty pages long. {J} understands about four of them.",
+        { "when": { "abroad": true }, "t": "Playing abroad means two tax systems, two sets of rules, and a lot of paperwork in a language he can barely read." },
+        { "when": { "sponsors": [2, 20] }, "t": "Sponsorship income, image rights, appearance fees: his tax situation has become a full-time job for somebody. That somebody is currently nobody." }
+      ],
+      "prompt": "Who handles your taxes?",
+      "choices": [
+        { "label": "Hire a proper tax adviser", "desc": "Costs money, saves money.", "risk": "low", "hint": "Sensible.", "vars": { "cost": ["wageWeeks", 1, 300] }, "text": "The adviser finds savings he didn't know existed and two mistakes he didn't know he'd made.", "fx": { "wealth": "-cost", "stress": -3, "flag": "financial_adviser" } },
+        { "label": "A teammate's 'guy'", "desc": "Cheap and creative.", "risk": "extreme", "hint": "Creative accounting is a crime.", "out": [
+          { "w": 1, "text": "The guy saves him a fortune. Nobody asks how. Yet.", "fx": { "wealth": 1500, "flag": "tax_risk" } },
+          { "w": 1, "text": "The tax office opens an investigation into the guy's clients. {J}'s name is on the list.", "fx": { "wealth": -3000, "image": -4, "press": -3, "stress": 6 } }
+        ] },
+        { "label": "Do it yourself", "desc": "How hard can it be?", "risk": "medium", "hint": "Very.", "text": "Three nights, two headaches, one form submitted late. A fine arrives a month later.", "fx": { "wealth": -200, "stress": 3 } }
+      ]
+    },
+    {
+      "id": "dy_tax_risk_audit", "cat": "money", "w": 8, "once": true, "when": { "flags": ["tax_risk"], "since": { "tax_risk": [60, 9999] } },
+      "title": "The Tax Office Calls",
+      "text": "The tax office has opened an audit into the 'creative' accountant {J}'s teammate recommended years ago. Every client is being checked. {J} is a client.",
+      "prompt": "The past has caught up.",
+      "vars": { "cost": ["wealthPct", 20, 2000] },
+      "choices": [
+        { "label": "Pay everything back, plus penalties", "desc": "{cost}. Make it go away.", "risk": "medium", "hint": "Expensive. Over.", "text": "He pays. It hurts. The story never reaches the papers.", "fx": { "wealth": "-cost", "unflag": "tax_risk", "stress": 4 } },
+        { "label": "Fight it in court", "desc": "Claim ignorance.", "risk": "extreme", "hint": "Public, long, risky.", "text": "The case drags on for a year and makes every sports page in the country. He wins on a technicality. Nobody remembers the technicality.", "fx": { "unflag": "tax_risk", "image": -8, "press": -5, "board": -4, "stress": 8, "wealth": -1500 } }
+      ]
+    },
+    {
+      "id": "dy_savings_plan", "cat": "money", "w": 4, "once": true, "when": { "age": [20, 30], "wealth": [20000, 999999999] },
+      "title": "The Retirement Question",
+      "text": [
+        "A former player, now broke at 40, comes to talk to the squad. He made millions. He has nothing. The room is very quiet.",
+        { "when": { "flags": ["financial_adviser"] }, "t": "{J}'s financial adviser lays out two futures on one sheet of paper: the one where he saves now, and the one where he doesn't. The second one ends badly." }
+      ],
+      "prompt": "Plan for life after football?",
+      "choices": [
+        { "label": "Set up a pension and investments", "desc": "Lock away a third of everything.", "risk": "low", "hint": "Less to spend now. Safe later.", "text": "A third of every payslip goes somewhere he can't touch. Some months it stings. Future {J} will be grateful.", "fx": { "lifestyle": -0.2, "stress": -3, "flag": "pension_plan", "growth": ["mental"] } },
+        { "label": "Buy property back home", "desc": "Bricks are safe.", "risk": "medium", "hint": "Solid, slow, family helps manage it.", "vars": { "cost": ["wealthPct", 30, 5000] }, "text": "He buys two small houses near his parents. {DAD} becomes a landlord and loves it far too much.", "fx": { "wealth": "-cost", "family": 4, "flag": "property_home", "monthlySupport": -100 } },
+        { "label": "Later", "desc": "You're young.", "risk": "medium", "hint": "Everyone says later.", "text": "'Later,' he says. Everyone in the room said that once.", "fx": {} }
+      ]
+    },
+    {
+      "id": "dy_press_after_result", "cat": "media", "w": 7, "ui": "press", "when": { "rep": [8, 100], "matchWeek": true, "played": true },
+      "title": "The Post-Match Microphone",
+      "text": [
+        { "when": { "lastResult": ["W"], "lastRating": [7.5, 10] }, "t": "{J} was the best player on the pitch and the TV crew grab him before he reaches the tunnel, still breathing hard. The reporter is beaming." },
+        { "when": { "lastResult": ["L"] }, "t": "After the defeat, the club sends {J} to the mixed zone. Nobody else wanted to go. The reporters are hungry." },
+        { "when": { "lastResult": ["D"] }, "t": "A draw nobody can quite explain. {JR} from {OUT} wants three minutes with {J} in the mixed zone." },
+        "The press officer pushes {J} towards the microphones. 'Two questions, max.' There are going to be more than two questions."
+      ],
+      "prompt": "What tone do you set?",
+      "choices": [
+        { "label": "Credit the team", "desc": "'It's about the group.'", "risk": "low", "hint": "The dressing room approves.", "text": "Humble, generous, a bit boring. The squad reads it on the bus and nods.", "fx": { "dressing": 3, "press": 1 } },
+        { "label": "Speak from the heart", "desc": "Raw honesty.", "risk": "medium", "hint": "Fans love honesty. Coaches less so.", "out": [
+          { "w": 2, "text": "His honesty lands. The clip spreads with the caption 'this is why we love him'.", "fx": { "fans": 4, "followers": 6000, "press": 2 } },
+          { "w": 1, "text": "He says one honest thing too many about the tactics. {Mf} reads it the next morning.", "fx": { "fans": 2, "trust": -4, "press": 2 } }
+        ] },
+        { "label": "Make a joke", "desc": "Lighten it up.", "risk": "low", "hint": "Charm, if the result allows it.", "text": [
+          { "when": { "lastResult": ["L"] }, "t": "The joke lands badly after a defeat. 'He's laughing while we suffer', writes a fan. It trends for a day." },
+          { "when": { "lastResult": ["W", "D"] }, "t": "The reporters laugh. The clip is everywhere by dinner, and it's the good kind of everywhere." }
+        ], "fx": { "followers": 4000, "press": 1 } }
+      ]
+    },
+    {
+      "id": "dy_rumour_partner_transfer", "cat": "love", "w": 5, "when": { "partner": ["serious", "engaged", "married"], "listed": true },
+      "title": "{Pf} Reads the Transfer Rumours",
+      "text": [
+        "{Pf} sends a screenshot of a transfer rumour: a club in another country, a city she's never heard of. Just the screenshot. No words.",
+        { "when": { "partnerStyle": ["public"] }, "t": "{Pf}'s followers are asking her where she's moving. She doesn't know. She's furious that she has to find out from strangers." },
+        { "when": { "kidAge": [4, 17] }, "t": "{KID} comes home from school crying: a classmate said they're moving to another country. {Pf} looks at {J} and waits." }
+      ],
+      "prompt": "Your family is reading about your future in the papers.",
+      "choices": [
+        { "label": "Sit down and decide together", "desc": "Whatever happens, together.", "risk": "low", "hint": "Love strengthens.", "text": "They make a list of places they'd move for and places they wouldn't. It's the most honest conversation they've had in months.", "fx": { "love": 7, "stress": -2, "family": 2 } },
+        { "label": "'It's just noise'", "desc": "Brush it off.", "risk": "medium", "hint": "She wanted more than that.", "text": "'It's nothing.' It isn't nothing to her.", "fx": { "love": -5 } }
+      ]
+    },
+    {
+      "id": "dy_debt_temptation_bonus", "cat": "money", "w": 6, "when": { "debt": true, "freeAgent": false },
+      "title": "A Bonus, and a Hole",
+      "text": [
+        "A win bonus lands in {J}'s account. For one day, the balance is almost not negative.",
+        { "when": { "flags": ["bought_car"] }, "t": "The bonus arrives, and so does a message from the car dealership: the payment on the car he can't afford is due." }
+      ],
+      "prompt": "What do you do with the bonus?",
+      "choices": [
+        { "label": "Every cent goes to the debt", "desc": "Discipline.", "risk": "low", "hint": "Boring, right.", "text": "It all goes to the bank. The interest bill shrinks. It feels like nothing. It's everything.", "fx": { "stress": -3, "morale": 1, "growth": ["mental"] } },
+        { "label": "Treat yourself, you've earned it", "desc": "Just this once.", "risk": "high", "hint": "The hole gets deeper.", "text": "Dinner, new trainers, a weekend away. The debt is still there on Monday, slightly bigger.", "fx": { "wealth": -600, "morale": 3, "stress": 3 } }
+      ]
+    },
+    {
+      "id": "dy_friend_media_jealousy", "cat": "friends", "w": 5, "when": { "followers": [200000, 999999999] },
+      "title": "{BFf} Goes Viral — Because of You",
+      "text": [
+        "A video of {BFf} roasting {J} at a family party goes viral. Now {BFf} has 50,000 followers and brands are messaging him. He's having the time of his life.",
+        { "when": { "friends": [0, 40] }, "t": "{BFf}, who barely talks to {J} anymore, has become a minor celebrity by posting old stories about him. Some of them are private." }
+      ],
+      "prompt": "Your best friend is using your fame.",
+      "choices": [
+        { "label": "Be happy for him", "desc": "He's earned some luck.", "risk": "low", "hint": "Friendship over pride.", "text": "You share his best video yourself. His follower count doubles. He sends you a voice note that's mostly screaming.", "fx": { "friends": 6, "followers": 3000 } },
+        { "label": "Ask him to keep private things private", "desc": "Boundaries.", "risk": "medium", "hint": "Fair. He might be hurt.", "text": "{BFf} apologises, then deletes two videos. Things are a bit stiff for a while.", "fx": { "friends": -2, "family": 2, "image": 1 } }
+      ]
+    },
+    {
+      "id": "dy_league_title_race", "cat": "dressing", "w": 6, "when": { "phase": ["in"], "freeAgent": false, "months": [3, 4, 5, 10, 11] },
+      "title": "The Run-In",
+      "text": [
+        "The season is in its final stretch. Every training session feels heavier, every mistake louder. The dressing room is quieter than usual.",
+        { "when": { "role": ["starter"] }, "t": "{J} is one of the names {Mf} trusts for the run-in. The pressure has a texture now: dry mouth, early mornings, the table on everyone's phone." },
+        { "when": { "role": ["bench", "outcast"] }, "t": "The run-in is here and {J} is watching it from the outside. Every day in training is an audition nobody is watching." }
+      ],
+      "prompt": "How do you handle the final weeks?",
+      "choices": [
+        { "label": "Lead the young players", "desc": "Calm everyone down.", "risk": "low", "hint": "Leadership counts.", "text": "He takes the nervous academy kids for coffee and tells them about his worst game. They laugh. The tension breaks a little.", "fx": { "dressing": 4, "stress": -1 } },
+        { "label": "Lock in completely", "desc": "No phone, no media, just football.", "risk": "low", "hint": "Focus. Others may feel shut out.", "text": "He switches everything off: phone, social media, family chat. Pure football.", "fx": { "form": 0.3, "stress": -2, "family": -2, "love": -2 } },
+        { "label": "Demand a bigger role", "desc": "Knock on the manager's door.", "risk": "medium", "hint": "Bold. Timing matters.", "check": { "stat": "trust", "dc": 55 },
+          "ok": { "text": "{Mf} likes the hunger. 'Saturday. Don't waste it.'", "fx": { "trust": 4, "stress": 2 } },
+          "bad": { "text": "'Not now,' says {Mf}, and means 'not ever, if you ask like this again'.", "fx": { "trust": -4, "morale": -2 } } }
+      ]
+    },
+    {
+      "id": "dy_injury_social", "cat": "media", "w": 5, "when": { "injured": true, "followers": [20000, 999999999] },
+      "title": "Rehab in Public",
+      "text": [
+        "Injured and bored, {J} gets a message from his agent: rehab content does numbers. Fans want to see the comeback.",
+        { "when": { "stress": [60, 100] }, "t": "The injury is eating at him, and the comment section isn't helping: 'injury-prone', 'finished', 'waste of money'." }
+      ],
+      "prompt": "Share the comeback?",
+      "choices": [
+        { "label": "Document every step", "desc": "The road back, in public.", "risk": "medium", "hint": "Fans connect. Pressure grows.", "text": "Daily clips: first steps, first jog, first ball. Fans follow every day. When he finally plays again, the whole internet feels it.", "fx": { "followers": 30000, "fans": 4, "stress": 3 } },
+        { "label": "Go dark until you're back", "desc": "Heal in private.", "risk": "low", "hint": "Peace.", "text": "He disappears from social media for weeks. When he comes back, it's with a photo of his boots and one word: 'Back.'", "fx": { "stress": -4, "followers": -3000 } }
+      ]
+    },
+    {
+      "id": "dy_kid_birthday_match", "cat": "love", "w": 6, "cd": 52, "when": { "kidAge": [3, 15], "freeAgent": false },
+      "title": "{KID}'s Birthday Is on Matchday",
+      "text": [
+        "{KID} turns {KIDage} on Saturday. Saturday is matchday. {KID} has asked, seriously, whether the match can be moved.",
+        { "when": { "abroad": true }, "t": "{KID}'s birthday party is back home, eight hours' flight away. The match is here, on the same day." }
+      ],
+      "prompt": "Football or the birthday?",
+      "choices": [
+        { "label": "Dedicate a goal, video-call the party", "desc": "Both, sort of.", "risk": "low", "hint": "If you score...", "text": "He tells {KID} on video that if he scores, it's for them. Whatever happens, {KID} watches the whole match in a paper crown.", "fx": { "love": 3, "family": 3, "morale": 3 } },
+        { "label": "Ask to miss the match", "desc": "Some things matter more.", "risk": "high", "hint": "The manager might not agree.", "check": { "stat": "trust", "dc": 60 },
+          "ok": { "text": "{Mf}, a father himself, says yes. {J} spends the day in a bouncy castle. Best day of the year.", "fx": { "love": 8, "family": 6, "morale": 6 } },
+          "bad": { "text": "{Mf} says no. {J} plays with his mind somewhere else entirely.", "fx": { "trust": -3, "love": -3, "stress": 3 } } }
+      ]
+    },
+    {
+      "id": "dy_sibling_adult_job", "cat": "family", "w": 5, "once": true, "when": { "sibAge": [21, 30] },
+      "title": "{SIB} Wants to Work for You",
+      "text": [
+        "{SIB} has finished studying and has an idea: become {J}'s manager. Not the football agent — the business manager. Sponsors, money, schedules. 'Who would you trust more than family?'",
+        { "when": { "flags": ["sib_pro"] }, "t": "{SIB}'s own football career has stalled. {SIBhe} wants to stop playing and start managing {J}'s business instead. 'I know the game. I know you.'" }
+      ],
+      "prompt": "Hire your {SIBr}?",
+      "choices": [
+        { "label": "Yes, on a proper contract", "desc": "Family, but professional.", "risk": "medium", "hint": "Could be brilliant. Could ruin Christmas.", "out": [
+          { "w": 2, "text": "{SIB} turns out to be ferociously good at it. Brands are slightly scared of {SIBhim}. Your mother is the proudest woman alive.", "fx": { "family": 8, "flag": "sib_manager", "stress": -3, "wealth": 500 } },
+          { "w": 1, "text": "Six months in, they argue about money at a family dinner. {SIB} quits by text. {MUM} cries.", "fx": { "family": -8, "stress": 4 } }
+        ] },
+        { "label": "Help {SIBhim} find another job", "desc": "Keep family and business separate.", "risk": "low", "hint": "Wise. {SIB} may sulk.", "text": "You call in a favour with a sponsor. {SIB} gets a marketing job there and, eventually, admits it was the right call.", "fx": { "family": 3 } }
+      ]
+    },
+    {
+      "id": "dy_parent_retire", "cat": "family", "w": 5, "once": true, "when": { "dadAge": [55, 70], "wealth": [30000, 999999999] },
+      "title": "{DAD} Could Stop Working",
+      "text": [
+        "{DAD} is {DADage} and still working six days a week. He'll never ask. {MUM} finally does, on his behalf: could {J} help him retire?",
+        { "when": { "family": [0, 40] }, "t": "{MUM} calls after weeks of silence. {DAD} has hurt his back at work again. She isn't asking for money. She's asking for her son." }
+      ],
+      "prompt": "Help your father retire?",
+      "vars": { "cost": ["fixed", 400] },
+      "choices": [
+        { "label": "Pay him a monthly pension", "desc": "{cost} a month, for life.", "risk": "low", "hint": "He'll argue. He'll accept.", "text": "{DAD} argues for an hour, then accepts. On his first Monday off in thirty years he goes fishing and catches nothing and is perfectly happy.", "fx": { "monthlySupport": "cost", "family": 12, "morale": 5 } },
+        { "label": "Buy him the shop he always wanted", "desc": "A small business of his own.", "risk": "medium", "hint": "He'll work harder than ever. Happily.", "vars": { "shop": ["wealthPct", 15, 3000] }, "text": "A little shop near the house. He works there seven days a week now, and he's never been happier.", "fx": { "wealth": "-shop", "family": 10 } },
+        { "label": "'He likes working'", "desc": "Leave it.", "risk": "medium", "hint": "Does he?", "text": "'He likes it,' {J} says. {MUM} goes quiet on the phone.", "fx": { "family": -6 } }
+      ]
+    },
+    {
+      "id": "dy_away_fan_racism", "cat": "media", "w": 4, "cd": 150, "when": { "abroad": true, "freeAgent": false },
+      "title": "Abuse From the Stands",
+      "text": [
+        "In an away game, a section of the home crowd targets {J} with racist chants. The referee hears it. The match continues.",
+        { "when": { "dressing": [65, 100] }, "t": "Racist abuse from the away end. Before {J} can react, {CAPl} walks over to the referee and the whole team follows. Nobody plays until something is done." }
+      ],
+      "prompt": "How do you respond?",
+      "choices": [
+        { "label": "Walk off the pitch", "desc": "Refuse to play on.", "risk": "high", "hint": "A stand. Consequences either way.", "text": "He walks. Some teammates follow. The match is suspended. It's on every channel in the world, and most of them are on his side.", "fx": { "image": 6, "press": 4, "fans": 4, "board": -2, "stress": 6, "dressing": 3 } },
+        { "label": "Report it and keep playing", "desc": "Let the authorities act.", "risk": "medium", "hint": "Dignified. Slow.", "text": "He tells the referee, points at the stand, and plays on. Afterwards he posts a long, calm statement. The league opens an investigation.", "fx": { "image": 3, "press": 2, "stress": 4 } },
+        { "label": "Answer with a goal", "desc": "Silence them.", "risk": "medium", "hint": "Only if you score.", "text": "He doesn't say a word. The next time he gets the ball, he plays like his life depends on it.", "fx": { "form": 0.3, "stress": 5, "morale": 2 } }
+      ]
+    },
+    {
+      "id": "dy_old_teammate_needs_job", "cat": "friends", "w": 4, "when": { "age": [27, 40] },
+      "title": "An Old Teammate Asks for Help",
+      "text": [
+        "A teammate from {FIRSTCLUB}'s youth team never made it. Now he's driving a taxi and asks, embarrassed, if {J} knows anyone who needs a driver.",
+        { "when": { "flags": ["foundation"] }, "t": "An old youth-team friend has seen the foundation's work and asks if there's a job there. He's good with kids. He's had a hard few years." }
+      ],
+      "prompt": "Help him?",
+      "choices": [
+        { "label": "Give him a real job", "desc": "Driver, coach, assistant.", "risk": "low", "hint": "A life changes.", "text": "He starts on Monday. He's punctual, grateful and funny. Within a year he's indispensable.", "fx": { "friends": 6, "image": 2, "wealth": -300, "morale": 3 } },
+        { "label": "Make some calls for him", "desc": "Open doors.", "risk": "low", "hint": "Help without strings.", "text": "Two calls, one recommendation. He gets a job at a club's academy. He sends a photo in his new tracksuit.", "fx": { "friends": 4, "morale": 2 } },
+        { "label": "Give him money and wish him luck", "desc": "Quick help.", "risk": "low", "hint": "Kind, but it won't last.", "text": "He takes the money, thanks him, and doesn't call again. {J} isn't sure if he helped or hurt.", "fx": { "wealth": -200 } }
+      ]
+    },
+    {
+      "id": "dy_ballon_debate", "cat": "media", "w": 5, "when": { "ovr": [82, 99], "rep": [70, 100] },
+      "title": "Among the Best in the World",
+      "text": [
+        "The debate has started: is {J} one of the best players in the world? Pundits argue about him on three continents.",
+        { "when": { "nationality": ["Indonesia"] }, "t": "An Indonesian among the world's best. The country can barely believe it. Every coffee stall has his face on the TV." }
+      ],
+      "prompt": "The world is talking about you.",
+      "choices": [
+        { "label": "Embrace it", "desc": "'I want to be the best. Why hide it?'", "risk": "medium", "hint": "Pressure as fuel.", "text": "His bold quote is everywhere. Now every game is a referendum on it.", "fx": { "followers": 500000, "rep": 2, "stress": 5, "press": 2 } },
+        { "label": "Deflect to the team", "desc": "'Talk to me when we win something.'", "risk": "low", "hint": "Humble. Respected.", "text": "The humility makes the debate louder. His teammates love him for it.", "fx": { "dressing": 4, "image": 3, "rep": 1 } }
+      ]
+    },
+    {
+      "id": "dy_superclub_interest", "cat": "manager", "w": 6, "when": { "ovr": [78, 99], "age": [20, 30], "freeAgent": false },
+      "title": "A Giant Is Watching",
+      "text": [
+        "The sporting director of one of the world's biggest clubs is in the stand. {J}'s agent texts before kick-off: 'Don't look up. Just play.'",
+        { "when": { "role": ["starter"] }, "t": "Reports say the biggest clubs in Europe are compiling dossiers on {J}. His manager is asked about it in every press conference." }
+      ],
+      "prompt": "The elite are circling.",
+      "choices": [
+        { "label": "Tell your agent: push for it", "desc": "This is the dream.", "risk": "medium", "hint": "Your club may not like it.", "text": "Your agent starts talking. Your club starts worrying. Offers will come from abroad — and from the very top.", "fx": { "abroadWish": true, "board": -3, "stress": 3, "offerAbroad": true } },
+        { "label": "Commit to your club publicly", "desc": "Loyalty, for now.", "risk": "low", "hint": "Fans love it.", "text": "'I'm happy here.' The fans sing his name louder than ever. The giants will come back.", "fx": { "fans": 6, "board": 5 } }
+      ]
+    }
+  ]
+}

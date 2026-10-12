@@ -1,0 +1,270 @@
+{
+  "scenarios": [
+    { "id": "as_car_scratch", "cat": "lifestyle", "w": 5, "cd": 60, "when": { "ownsCar": true },
+      "title": "A Key Down the Side", "text": ["Someone has dragged a key down the whole length of {CAR}, parked outside the training ground. The word scratched into the door is not a compliment.", "{CAR} has been egged in the stadium car park after a defeat. Somebody has also written something on the windscreen in lipstick."],
+      "prompt": "Your car has been vandalised.",
+      "choices": [
+        { "label": "Fix it quietly and say nothing", "desc": "Not worth the drama.", "risk": "low", "hint": "Dignity.", "text": "He gets it fixed and says nothing. A fan forum finds out anyway and is mortified on the club's behalf.", "fx": { "wealth": -1500, "fans": 2, "stress": 2 } },
+        { "label": "Post a photo with a joke", "desc": "Turn it into humour.", "risk": "medium", "hint": "Could go either way.", "text": "'At least they spelled it right.' The post goes viral. The vandal is found by other fans within a day and apologises publicly.", "fx": { "wealth": -1500, "followers": 10000, "fans": 3 } },
+        { "label": "Report it and push for charges", "desc": "Zero tolerance.", "risk": "medium", "hint": "Fair. Some fans will think it's too much.", "text": "The police find the culprit on camera: a sixteen-year-old. {J} drops the charges after meeting him. They take a photo together.", "fx": { "wealth": -1500, "image": 3 } }
+      ] },
+    { "id": "as_car_crash", "cat": "lifestyle", "w": 3, "cd": 150, "when": { "ownsCar": true, "age": [17, 35] },
+      "title": "The Crash", "text": ["Wet road, a moment's distraction, a lamppost. He walks away with a bruised shoulder. {CAR} doesn't walk away at all.", "A truck runs a red light and clips the back of {CAR}. Nobody is hurt. The car is a write-off. The photos of the wreck are online before the tow truck arrives."],
+      "prompt": "You've crashed your car.",
+      "choices": [
+        { "label": "Thank the heavens and get checked out", "desc": "Hospital, scans, rest.", "risk": "low", "hint": "Health first.", "text": "The scans are clear. {MUM} makes him promise to drive like a grandmother. The car is gone.", "fx": { "assetLoss": "car", "stress": 4, "family": 2, "pfm": -3 } },
+        { "label": "Play the next match anyway", "desc": "Show everyone you're fine.", "risk": "medium", "hint": "The shoulder may disagree.", "out": [ { "w": 1, "text": "He plays and scores. 'Indestructible,' say the papers. The shoulder hurts for a month.", "fx": { "assetLoss": "car", "fans": 4, "pfm": -6 } }, { "w": 1, "text": "The shoulder seizes up in the warm-up. A minor injury, a major lesson.", "fx": { "assetLoss": "car", "injury": "minor", "stress": 3 } } ] }
+      ] },
+    { "id": "as_speeding", "cat": "lifestyle", "w": 4, "cd": 100, "when": { "ownsCar": true, "age": [17, 30] },
+      "title": "Flashed", "text": "Caught on camera doing 160 in an 80 zone in {CAR}, on the way to training because he was late. The photo, with his face clearly visible, has been leaked to a newspaper.",
+      "prompt": "You've been caught speeding.",
+      "choices": [
+        { "label": "Apologise publicly and pay the fine", "desc": "Own it.", "risk": "low", "hint": "Damage control.", "text": "A short apology, a fine, a road-safety video for a children's charity. The story dies in two days.", "fx": { "wealth": -800, "image": -2, "press": 1 } },
+        { "label": "Hire a lawyer to fight it", "desc": "There might be a technicality.", "risk": "high", "hint": "Looks arrogant if it fails.", "out": [ { "w": 1, "text": "The lawyer finds a technicality. He gets off. The headline: 'RICH FOOTBALLER ESCAPES SPEEDING BAN.'", "fx": { "wealth": -3000, "image": -5 } }, { "w": 1, "text": "The lawyer fails. Now it's a speeding story and an arrogance story.", "fx": { "wealth": -4000, "image": -6, "press": -3 } } ] },
+        { "label": "Get a driver", "desc": "Never drive yourself again.", "risk": "low", "hint": "Problem solved, at a price.", "text": "He hires a driver and works on his phone in the back seat. He's never late again.", "fx": { "wealth": -800, "image": -1, "lifestyle": 0.1, "trust": 1 } }
+      ] },
+    { "id": "as_watch_stolen", "cat": "lifestyle", "w": 4, "cd": 120, "when": { "flags": ["owns_watch"] },
+      "title": "The Watch", "text": "A man on a motorbike rips the watch off his wrist at a red light and is gone before he can react. His wrist is bleeding. His heart is pounding.",
+      "prompt": "Your watch has been stolen.",
+      "choices": [
+        { "label": "Report it and move on", "desc": "It's just a watch.", "risk": "low", "hint": "Perspective.", "text": "He reports it and decides it's a lesson. He was lucky the man didn't have a knife.", "fx": { "assetLoss": "watch", "stress": 5 } },
+        { "label": "Hire security", "desc": "This won't happen again.", "risk": "low", "hint": "Peace of mind.", "text": "He hires a security driver. It feels excessive until the next time someone follows him home.", "fx": { "assetLoss": "watch", "stress": 2, "wealth": -3000 } },
+        { "label": "Stop wearing expensive things in public", "desc": "Low profile.", "risk": "low", "hint": "Sensible.", "text": "He leaves the expensive things in the safe. A cheap digital watch becomes his trademark.", "fx": { "assetLoss": "watch", "image": 2, "stress": 1 } }
+      ] },
+    { "id": "as_crypto_tip", "cat": "money", "w": 4, "cd": 100, "when": { "wealth": [5000, 999999999], "age": [17, 35] }, "uses": { "T": "any" }, "vars": { "bet": ["wealthPct", 20, 1000] },
+      "title": "To the Moon", "text": "{T} swears he's made a fortune on a new coin called SAMBACOIN. 'Get in now, before it goes to the moon.' He shows {J} a chart that only goes up.",
+      "prompt": "Put {bet} into SAMBACOIN?",
+      "choices": [
+        { "label": "Go all in", "desc": "Fortune favours the brave.", "risk": "extreme", "hint": "It's a meme coin.", "out": [ { "w": 1, "text": "It triples in a week. He sells. {T} doesn't. {T} loses everything a week later.", "fx": { "wealth": "bet*2", "stress": 2 } }, { "w": 3, "text": "It goes to zero in nine days. The founders disappear. {T} can't look him in the eye.", "fx": { "wealth": "-bet", "stress": 6, "morale": -3 } } ] },
+        { "label": "Put in a tiny amount, for fun", "desc": "Lottery ticket.", "risk": "medium", "hint": "Lose a little, learn a lot.", "text": "He puts in pocket money. It goes to zero. Cheap lesson.", "fx": { "wealth": -200 } },
+        { "label": "Say no", "desc": "Too good to be true.", "risk": "low", "hint": "Usually right.", "text": "He says no. A month later {T} is asking the squad for a loan.", "fx": {} }
+      ] },
+    { "id": "as_financial_adviser", "cat": "money", "w": 5, "cd": 150, "when": { "wealth": [30000, 999999999], "notFlags": ["has_adviser"] },
+      "title": "Who Looks After Your Money?", "text": "His savings have grown faster than his knowledge of what to do with them. Three different 'advisers' have approached him this month. One drove a car worth more than his house.",
+      "prompt": "Hire a financial adviser?",
+      "choices": [
+        { "label": "A boring, regulated firm", "desc": "Index funds and patience.", "risk": "low", "hint": "Slow, safe, sensible.", "text": "A quiet woman in a cheap suit explains index funds, pensions and taxes. It's the most useful meeting of his life.", "fx": { "flag": "has_adviser", "lifestyle": -0.1, "stress": -3 } },
+        { "label": "The flashy one with the great returns", "desc": "Twenty per cent a year, guaranteed.", "risk": "extreme", "hint": "Nobody guarantees that honestly.", "text": "Twenty per cent a year, guaranteed. It works for a while. Then the emails stop.", "fx": { "flag": ["has_adviser", "bad_adviser"], "chain": { "id": "as_adviser_scam", "in": [10, 30] } } },
+        { "label": "Learn to manage it yourself", "desc": "Books, courses, discipline.", "risk": "medium", "hint": "Empowering. Time-consuming.", "text": "He reads three books on investing on the team bus. {T} calls him 'the Professor'.", "fx": { "flag": "has_adviser", "growth": ["mental"] } }
+      ] },
+    { "id": "as_adviser_scam", "cat": "money", "chainOnly": true, "critical": true, "cd": 1, "vars": { "loss": ["wealthPct", 35, 5000] },
+      "title": "Gone", "text": "The adviser's office is empty. His phone is disconnected. The 'fund' was never real. {J} has lost {loss}. He's not the only footballer: there are eleven others.",
+      "prompt": "Your adviser stole your money.",
+      "choices": [
+        { "label": "Go to the police with the others", "desc": "Together.", "risk": "low", "hint": "Justice is slow.", "text": "Twelve footballers file a joint complaint. The adviser is arrested in another country eighteen months later. They get back a fraction.", "fx": { "wealth": "-loss", "stress": 8, "image": 1, "unflag": "bad_adviser" } },
+        { "label": "Go public as a warning", "desc": "So it doesn't happen to young players.", "risk": "medium", "hint": "Humiliating. Helpful.", "text": "His interview about being scammed is used by the players' union in every academy. Young players stop him to say thank you.", "fx": { "wealth": "-loss", "image": 5, "stress": 6, "unflag": "bad_adviser" } }
+      ] },
+    { "id": "as_tax_audit", "cat": "money", "w": 3, "cd": 200, "when": { "wealth": [50000, 999999999] },
+      "title": "The Tax Office", "text": "A letter from the tax authorities: an audit of his image rights and sponsor income for the last three years. His accountant goes very pale.",
+      "prompt": "You're being audited.",
+      "choices": [
+        { "label": "Cooperate fully", "desc": "Every document.", "risk": "medium", "hint": "If it's all clean, it's fine.", "out": [ { "w": 2, "text": "Six months of paperwork. Everything is in order, apart from a small mistake. A small fine. Over.", "fx": { "wealth": -3000, "stress": 4 } }, { "w": 1, "text": "Mistakes were made, not by him, but in his name. The back taxes are big. Paying them hurts.", "fx": { "wealth": -20000, "stress": 8, "image": -3 } } ] },
+        { "label": "Hire the most expensive tax lawyers", "desc": "Fight everything.", "risk": "medium", "hint": "Expensive. Probably effective.", "text": "The lawyers cost a fortune. The audit ends quietly. The bill for the lawyers does not.", "fx": { "wealth": -10000, "stress": 3 } }
+      ] },
+    { "id": "as_yacht_party", "cat": "lifestyle", "w": 3, "cd": 100, "when": { "flags": ["owns_yacht"], "phase": ["off"] },
+      "title": "The Yacht Party", "text": "His yacht is moored in the marina and everyone he has ever met wants to be invited aboard. A famous DJ has offered to play. A gossip photographer has already rented a boat nearby.",
+      "prompt": "Throw a party on your yacht?",
+      "choices": [
+        { "label": "The party of the summer", "desc": "Everyone, everything.", "risk": "high", "hint": "Legendary. Photographed.", "out": [ { "w": 1, "text": "The party is the talk of the summer. The photos are mostly harmless. Mostly.", "fx": { "followers": 50000, "friends": 5, "image": -2, "wealth": -8000 } }, { "w": 1, "text": "A guest falls overboard. He's fine. The headlines are not.", "fx": { "followers": 30000, "image": -6, "press": -3, "wealth": -8000, "stress": 4 } } ] },
+        { "label": "A quiet day with family", "desc": "Just {MUM}, {DAD} and {SIB}.", "risk": "low", "hint": "The yacht's best use.", "text": "{DAD} catches a fish and talks about it for a year. {MUM} gets seasick and laughs about it. Best day of the summer.", "fx": { "family": 10, "stress": -5 } }
+      ] },
+    { "id": "as_yacht_cost", "cat": "money", "w": 4, "cd": 100, "when": { "flags": ["owns_yacht"] },
+      "title": "The Yacht Bill", "text": "The yacht's annual running costs have arrived: crew, mooring, fuel, insurance, a broken engine part flown in from Italy. The number is bigger than his first club's whole wage bill.",
+      "prompt": "Is the yacht worth it?",
+      "choices": [
+        { "label": "Keep it", "desc": "It's your escape.", "risk": "low", "hint": "Expensive joy.", "text": "He keeps it. Every time he steps on board, he remembers why.", "fx": { "stress": -2 } },
+        { "label": "Charter it out when you're not using it", "desc": "Let it pay for itself.", "risk": "low", "hint": "Smart. Strangers on your boat.", "text": "Chartering covers half the costs. A famous rapper rents it for a week and leaves it spotless, surprisingly.", "fx": { "wealth": 5000 } }
+      ] },
+    { "id": "as_house_burglary", "cat": "lifestyle", "w": 3, "cd": 150, "when": { "worth": [100000, 999999999] },
+      "title": "Break-In", "text": "Burglars broke into his house during an away match, while everyone knew where he was: on TV. They took jewellery, cash and the shirt from his debut. That last one hurts the most.",
+      "prompt": "Your home was burgled during a match.",
+      "choices": [
+        { "label": "Upgrade security and move on", "desc": "Cameras, alarms, a guard.", "risk": "low", "hint": "Peace of mind.", "text": "Cameras, alarms, a guard at the gate. The house feels safe again, and a little like a prison.", "fx": { "wealth": -6000, "stress": 4 } },
+        { "label": "Appeal for the debut shirt", "desc": "Only that matters.", "risk": "low", "hint": "Fans can help.", "text": "His appeal for the shirt is shared a million times. A week later it's left in a bag at the stadium gate with an anonymous note: 'Sorry, we didn't know.'", "fx": { "wealth": -4000, "fans": 4, "morale": 4 } }
+      ] },
+    { "id": "as_property_flip", "cat": "money", "w": 3, "cd": 150, "when": { "flags": ["owns_property"] },
+      "title": "An Offer for Your Property", "text": "A developer has made an unsolicited offer on one of his properties: well above what he paid. They want to build something enormous next door, and his place is in the way.",
+      "prompt": "Sell to the developer?",
+      "choices": [
+        { "label": "Sell", "desc": "Take the profit.", "risk": "low", "hint": "A good deal.", "text": "He sells. The profit is real. The tower they build next door is very ugly.", "fx": { "assetLoss": "property", "wealth": 40000 } },
+        { "label": "Hold out for more", "desc": "They need it more than you do.", "risk": "medium", "hint": "Greedy, or smart.", "out": [ { "w": 1, "text": "The developer doubles the offer. He sells for a fortune.", "fx": { "assetLoss": "property", "wealth": 80000 } }, { "w": 1, "text": "The developer builds around him instead. His view is now a concrete wall.", "fx": { "stress": 3 } } ] },
+        { "label": "Keep it", "desc": "It's home.", "risk": "low", "hint": "Sentimental.", "text": "He keeps it. Money isn't everything. Sometimes.", "fx": {} }
+      ] },
+    { "id": "as_luxury_backlash", "cat": "lifestyle", "w": 4, "cd": 80, "when": { "flags": ["owns_supercar"], "lastResult": ["L"] },
+      "title": "The Supercar and the Defeat", "text": "He drives into training the day after a bad defeat in {CAR}. Someone films it. 'Glad someone's happy,' says the caption. Twenty thousand angry comments follow.",
+      "prompt": "Fans are angry about your car after a loss.",
+      "choices": [
+        { "label": "Drive something modest for a while", "desc": "Read the room.", "risk": "low", "hint": "Humility.", "text": "He turns up in his dad's old car for a month. Fans notice. The anger fades.", "fx": { "fans": 3, "image": 2 } },
+        { "label": "It's my money", "desc": "Say it publicly.", "risk": "high", "hint": "True. Unwise.", "text": "'I earned it.' True. The fans hear something else.", "fx": { "fans": -8, "image": -4, "press": -2 } },
+        { "label": "Ignore it", "desc": "It'll pass.", "risk": "medium", "hint": "Probably.", "text": "It passes, mostly. The supercar becomes a chant at away games.", "fx": { "fans": -3 } }
+      ] },
+    { "id": "as_charity_foundation_start", "cat": "money", "w": 3, "cd": 300, "once": true, "when": { "worth": [500000, 999999999], "notFlags": ["foundation"] },
+      "title": "A Foundation", "text": "His lawyer suggests a charitable foundation: tax-efficient, his name on something good, and a structure for all the requests he gets. {MUM} suggests something simpler: help the kids from his old neighbourhood.",
+      "prompt": "Start a foundation?",
+      "choices": [
+        { "label": "Start it, for kids from your old neighbourhood", "desc": "Football pitches, scholarships, meals.", "risk": "low", "hint": "A legacy.", "text": "The {J} Foundation's first project is a pitch in his old neighbourhood. He's there on opening day, playing with forty kids in his socks.", "fx": { "flag": "foundation", "wealth": -30000, "image": 10, "family": 6, "fans": 5, "monthlySupport": 300 } },
+        { "label": "Not yet", "desc": "You want to do it properly.", "risk": "low", "hint": "Later.", "text": "He puts it off. It's a promise to himself he intends to keep.", "fx": {} }
+      ] },
+    { "id": "as_foundation_scandal", "cat": "money", "w": 3, "cd": 200, "when": { "flags": ["foundation"] },
+      "title": "Where the Money Went", "text": "A journalist reports that a manager at his foundation has been paying himself far too much and spending donations on a car. {J} had no idea. His name is on the door.",
+      "prompt": "Your foundation has a scandal.",
+      "choices": [
+        { "label": "Fire him, audit everything, publish the results", "desc": "Total transparency.", "risk": "low", "hint": "Restores trust.", "text": "Everything is published. He repays the donors from his own pocket. Donations go up the following year.", "fx": { "wealth": -10000, "image": 4, "stress": 4 } },
+        { "label": "Handle it quietly", "desc": "Protect the foundation's name.", "risk": "high", "hint": "Looks like a cover-up.", "text": "Handling it quietly looks like a cover-up. The second story is worse than the first.", "fx": { "image": -6, "press": -4 } }
+      ] },
+    { "id": "as_jet_carbon", "cat": "lifestyle", "w": 3, "cd": 150, "when": { "flags": ["owns_jet"] },
+      "title": "Thirty-Minute Flights", "text": "A climate account has tracked his private jet: thirty-one flights this year, several shorter than an hour. The post is going viral alongside a photo of him wearing a 'save the planet' T-shirt at a charity event.",
+      "prompt": "You're being called a hypocrite over your jet.",
+      "choices": [
+        { "label": "Sell the jet and say why", "desc": "Change, publicly.", "risk": "low", "hint": "Respect.", "text": "He sells it and says, simply, that they had a point. The climate account thanks him. Some fans are surprised to find they like him more.", "fx": { "assetLoss": "jet", "image": 6, "wealth": 50000 } },
+        { "label": "Offset the emissions and keep it", "desc": "Plant a forest.", "risk": "medium", "hint": "Some will call it greenwashing.", "text": "He funds a reforestation project. Half the internet applauds; half calls it greenwashing. The jet stays.", "fx": { "wealth": -15000, "image": 1 } },
+        { "label": "Ignore it", "desc": "It's your business.", "risk": "medium", "hint": "It stays a story.", "text": "He ignores it. The account keeps tracking. Every flight becomes a post.", "fx": { "image": -4 } }
+      ] },
+    { "id": "as_flex_friends", "cat": "friends", "w": 4, "cd": 80, "when": { "worth": [200000, 999999999] },
+      "title": "Rich and Lonely", "text": "Since the money came, his old friends have been strange: they won't let him pay, or they always let him pay, or they bring up his car in every conversation. {BFf} is the only one who still acts normal.",
+      "prompt": "Money is changing your friendships.",
+      "choices": [
+        { "label": "Talk about it openly with the old crew", "desc": "Name the weirdness.", "risk": "medium", "hint": "Awkward. Healing.", "text": "One honest night in the old café. They admit they don't know how to act around him now. He admits he doesn't either. It gets better.", "fx": { "friends": 8, "stress": -2 } },
+        { "label": "Pay for everything, always", "desc": "It's easier.", "risk": "medium", "hint": "Generous. Changes the friendship.", "text": "He pays for everything. They let him. Something gets lost.", "fx": { "friends": -3, "wealth": -2000 } },
+        { "label": "Hang out mostly with other footballers", "desc": "People who get it.", "risk": "medium", "hint": "Easier. Narrower.", "text": "His circle becomes footballers and their partners. Easier, smaller, a little hollow.", "fx": { "friends": -6, "dressing": 3 } }
+      ] },
+    { "id": "as_spending_habit", "cat": "money", "w": 5, "cd": 80, "when": { "wealth": [0, 999999999], "lifestyle": [1.4, 3] },
+      "title": "Where Did It Go?", "text": "His accountant sends a summary of last month's spending. Restaurants, clothes, a watch he doesn't remember buying, flights for friends, a 'gift' for someone whose name he can't place. The number has a lot of zeros.",
+      "prompt": "Your spending is out of control.",
+      "choices": [
+        { "label": "Cut back hard", "desc": "A budget. A real one.", "risk": "low", "hint": "Future you says thanks.", "text": "He sets a budget and sticks to it, mostly. His accountant sends a smiley face for the first time ever.", "fx": { "lifestyle": -0.3, "stress": -2, "friends": -2 } },
+        { "label": "Earn more instead", "desc": "More sponsors, more appearances.", "risk": "medium", "hint": "More work, same habits.", "text": "He signs up for every appearance going. The money comes in. So does the exhaustion.", "fx": { "pfm": -4, "stress": 3, "sponsorPitch": true } },
+        { "label": "You only live once", "desc": "It's fine.", "risk": "high", "hint": "Footballers who think this end up broke.", "text": "It's fine, he tells himself. It's fine.", "fx": { "lifestyle": 0.2 } }
+      ] },
+    { "id": "as_bad_investment_restaurant", "cat": "money", "w": 3, "cd": 150, "when": { "wealth": [20000, 999999999], "rep": [15, 100] }, "vars": { "stake": ["wealthPct", 12, 3000] },
+      "title": "The Restaurant", "text": "A famous chef wants to open a restaurant with his name on it: '{J}'s Kitchen'. He needs {stake} and {J}'s face on the menu. The chef's last two restaurants closed.",
+      "prompt": "Invest in a restaurant with your name on it?",
+      "choices": [
+        { "label": "Invest", "desc": "Your name on a door.", "risk": "high", "hint": "Restaurants are hard.", "out": [ { "w": 1, "text": "It's a hit. Matchday queues round the block. His mother refuses to eat there because her cooking is better.", "fx": { "wealth": "stake*0.5", "followers": 10000, "flag": "owns_restaurant" } }, { "w": 2, "text": "It closes after fourteen months. The sign with his name on it ends up in a skip. Someone photographs it.", "fx": { "wealth": "-stake", "image": -2 } } ] },
+        { "label": "Decline", "desc": "Stick to football.", "risk": "low", "hint": "Sensible.", "text": "He declines. The restaurant opens with a rival player's name on it instead.", "fx": {} }
+      ] },
+    { "id": "as_gold_digger_rumour", "cat": "love", "w": 3, "cd": 150, "when": { "partner": ["dating", "serious"], "worth": [300000, 999999999] },
+      "title": "Prenup", "text": "His lawyer, his agent and, awkwardly, {DAD} all say the same thing: before things get any more serious with {Pf}, he needs to think about a prenup.",
+      "prompt": "Raise the subject of a prenup?",
+      "choices": [
+        { "label": "Talk to {Pf} about it honestly", "desc": "It's about protection, not distrust.", "risk": "high", "hint": "Could go fine. Could go very badly.", "out": [ { "w": 1, "text": "{Pf} laughs: 'I was going to suggest one, I have savings too.' They sign it over dinner. It's oddly romantic.", "fx": { "love": 4, "stress": -2, "flag": "prenup" } }, { "w": 1, "text": "{Pf} hears 'I don't trust you'. It takes a long time to undo.", "fx": { "love": -12, "stress": 4 } } ] },
+        { "label": "Don't mention it", "desc": "Love isn't a contract.", "risk": "medium", "hint": "Romantic. Risky.", "text": "He never mentions it. His lawyer sighs and closes the file.", "fx": {} }
+      ] },
+    { "id": "as_auction_shirt_value", "cat": "money", "w": 3, "cd": 200, "when": { "rep": [40, 100] },
+      "title": "What's It Worth?", "text": "A shirt he wore in a famous match has appeared at an auction house, sold by a former teammate who swapped it with him years ago. The estimate is enormous.",
+      "prompt": "Your old shirt is being auctioned.",
+      "choices": [
+        { "label": "Buy it back", "desc": "It's your history.", "risk": "low", "hint": "Sentimental.", "text": "He bids anonymously and wins. The shirt goes in a frame. He finds out later it was the other bidder's dream shirt.", "fx": { "wealth": -12000, "morale": 4 } },
+        { "label": "Let it go", "desc": "Good for him.", "risk": "low", "hint": "Generous.", "text": "It sells to a museum. He visits it once, incognito.", "fx": { "morale": 1 } }
+      ] },
+    { "id": "as_family_house_build", "cat": "family", "w": 4, "cd": 200, "once": true, "when": { "wealth": [60000, 999999999], "notFlags": ["parents_house"] }, "vars": { "cost": ["fixed", 60000] },
+      "title": "A House for {MUM} and {DAD}", "text": "{MUM} and {DAD} still live in the small rented house where he grew up. The roof leaks every rainy season. {DAD} pretends not to notice. {MUM} has a bucket for every leak.",
+      "prompt": "Build your parents a house ({cost})?",
+      "choices": [
+        { "label": "Build it", "desc": "Their dream home.", "risk": "low", "hint": "A promise kept.", "text": "A year later, he hands {MUM} the keys. She walks through every room twice and then sits on the kitchen floor and cries. {DAD} plants a mango tree in the garden.", "fx": { "wealth": "-cost", "family": 18, "morale": 8, "flag": "parents_house" } },
+        { "label": "Fix the old house instead", "desc": "They love that house.", "risk": "low", "hint": "Cheaper, sentimental.", "text": "A new roof, a new kitchen, the same house. {MUM} says it's perfect. It is.", "fx": { "wealth": "-cost*0.25", "family": 10 } }
+      ] },
+    { "id": "as_lottery_relatives", "cat": "money", "w": 3, "cd": 150, "when": { "worth": [500000, 999999999] },
+      "title": "The Long-Lost Brother", "text": "A man claiming to be his father's son from another relationship has appeared with a lawyer and a story. {DAD} has gone very quiet.",
+      "prompt": "A stranger claims to be your half-brother.",
+      "choices": [
+        { "label": "Ask for a DNA test, kindly", "desc": "Know the truth.", "risk": "medium", "hint": "Facts first.", "out": [ { "w": 1, "text": "It's true. The man is his half-brother. {DAD} has some explaining to do. Slowly, they get to know each other.", "fx": { "family": -6, "stress": 6, "flag": "half_brother" } }, { "w": 1, "text": "It's false. The man disappears, and so does his lawyer.", "fx": { "stress": 2 } } ] },
+        { "label": "Talk to {DAD} first", "desc": "Family before strangers.", "risk": "medium", "hint": "Hard conversation.", "text": "{DAD} tells him the truth, haltingly. It's complicated. The family will survive it, eventually.", "fx": { "family": -4, "stress": 5 } }
+      ] },
+    { "id": "as_brand_gift_car", "cat": "lifestyle", "w": 3, "cd": 200, "when": { "sponsors": [1, 20], "rep": [25, 100] },
+      "title": "The Free Car", "text": "A car brand sponsoring the club has 'gifted' every first-team player a new car, on condition they post about it and drive it to training. It's fine. It's beige.",
+      "prompt": "The club's car sponsor wants you driving their car.",
+      "choices": [
+        { "label": "Drive it, post it, smile", "desc": "Contractual.", "risk": "low", "hint": "Everyone's happy.", "text": "He drives the beige car with good grace. It's actually very comfortable. He'd never admit it.", "fx": { "board": 2, "followers": 2000 } },
+        { "label": "Give it to {DAD}", "desc": "He needs it more.", "risk": "low", "hint": "Sweet. Technically against the rules.", "text": "{DAD} drives it everywhere with the club logo proudly on the side. The sponsor finds the story charming.", "fx": { "family": 6, "board": 1 } }
+      ] },
+    { "id": "as_insurance_body", "cat": "money", "w": 3, "cd": 200, "once": true, "when": { "worth": [200000, 999999999] },
+      "title": "Insure Your Legs?", "text": "An insurance broker wants to insure his body: a big premium, but a huge payout if a career-ending injury happens. His agent says every serious player should have it.",
+      "prompt": "Take out career-ending injury insurance?",
+      "choices": [
+        { "label": "Yes", "desc": "Protect the future.", "risk": "low", "hint": "Peace of mind.", "text": "He signs. The premium hurts every year. He hopes he never needs it.", "fx": { "wealth": -8000, "stress": -4, "flag": "insured" } },
+        { "label": "No", "desc": "You'll take the risk.", "risk": "medium", "hint": "Cheaper. Riskier.", "text": "He decides against it. He touches wood every time someone mentions it.", "fx": {} }
+      ] },
+    { "id": "as_flashy_watch_gift_teammate", "cat": "dressing", "w": 3, "cd": 150, "when": { "worth": [100000, 999999999], "freeAgent": false },
+      "title": "The Thank-You Gift", "text": "Tradition at the club: when a player hits a milestone, he buys the squad a gift. {J} has just reached a big one. The last player bought everyone a pair of trainers.",
+      "prompt": "What do you buy the squad?",
+      "choices": [
+        { "label": "Something extravagant", "desc": "Watches for everyone.", "risk": "medium", "hint": "Legendary. Possibly too much.", "text": "Twenty-five watches. The squad screams. The kit man cries. The next player to hit a milestone is very worried.", "fx": { "dressing": 10, "wealth": -15000 } },
+        { "label": "Something personal", "desc": "A framed photo of each player's best moment.", "risk": "low", "hint": "Thoughtful.", "text": "Each player gets a framed photo of his best moment at the club. Several of them hang it at home.", "fx": { "dressing": 7, "wealth": -2000 } },
+        { "label": "Dinner for everyone, families too", "desc": "A night together.", "risk": "low", "hint": "Community.", "text": "A huge dinner with every player's family. The kids run riot. The best night of the season.", "fx": { "dressing": 8, "wealth": -5000, "family": 2 } }
+      ] },
+    { "id": "as_rent_out_house", "cat": "money", "w": 3, "cd": 200, "when": { "flags": ["owns_property"], "abroad": true },
+      "title": "The Empty House", "text": "His house back home has been empty since he moved abroad. A cousin wants to live there 'to look after it'. An estate agent wants to rent it out properly.",
+      "prompt": "What happens to your empty house?",
+      "choices": [
+        { "label": "Rent it out properly", "desc": "Income and a proper tenant.", "risk": "low", "hint": "Business.", "text": "A nice family rents it. The rent pays for {MUM}'s monthly allowance.", "fx": { "wealth": 4000 } },
+        { "label": "Let the cousin stay", "desc": "Family.", "risk": "medium", "hint": "Cousins are complicated.", "text": "The cousin moves in. Then his girlfriend. Then her brothers. The house is full, the bills are unpaid.", "fx": { "family": 3, "wealth": -1500, "stress": 2 } }
+      ] },
+    { "id": "as_counterfeit_merch", "cat": "money", "w": 4, "cd": 150, "when": { "rep": [30, 100] },
+      "title": "Fake Shirts", "text": "His name is on thousands of fake shirts in every market in the country. They're cheap, they're terrible and kids love them. His agent wants to sue the factories.",
+      "prompt": "Fight the counterfeit shirts?",
+      "choices": [
+        { "label": "Sue the factories", "desc": "Protect your brand.", "risk": "medium", "hint": "Legally right. Kids lose their cheap shirts.", "text": "The factories are shut down. Market stalls empty. Some fans say he's punishing poor kids.", "fx": { "wealth": 5000, "fans": -3 } },
+        { "label": "Launch a cheap official line", "desc": "Beat them on price.", "risk": "low", "hint": "Smart business.", "text": "An official shirt at market prices. It sells millions. The fakes disappear because nobody needs them.", "fx": { "wealth": 15000, "fans": 5, "image": 3 } },
+        { "label": "Leave it", "desc": "The kids are happy.", "risk": "low", "hint": "Generous.", "text": "He shrugs. 'If a kid wants my name on his back, I won't stop him.' The quote is everywhere.", "fx": { "fans": 6, "image": 4 } }
+      ] },
+    { "id": "as_charity_gala_host", "cat": "money", "w": 3, "cd": 150, "when": { "flags": ["foundation"], "rep": [30, 100] },
+      "title": "The Foundation Gala", "text": "His foundation's first gala: famous guests, an auction, a speech he has to give. The event planner wants a celebrity host. {MUM} wants to give the speech instead.",
+      "prompt": "Who speaks at your foundation's gala?",
+      "choices": [
+        { "label": "Let {MUM} speak", "desc": "She's the reason for all of it.", "risk": "medium", "hint": "Unforgettable.", "text": "{MUM} speaks for four minutes in her own language with subtitles behind her. There isn't a dry eye in the room. Donations triple.", "fx": { "family": 10, "image": 6, "wealth": -2000, "followers": 20000 } },
+        { "label": "Give the speech yourself", "desc": "Your foundation, your words.", "risk": "low", "hint": "Heartfelt.", "text": "He talks about the pitch behind his school and the kids still playing there. The room stands.", "fx": { "image": 5, "wealth": -2000 } }
+      ] },
+    { "id": "as_rich_kid_trap", "cat": "lifestyle", "w": 4, "cd": 80, "when": { "worth": [100000, 999999999], "age": [17, 26] },
+      "title": "The Club Owner's Son", "text": "The son of a billionaire wants to be friends. Private jets, private islands, private everything. Every weekend there's a new invitation. Every photo is a temptation.",
+      "prompt": "A billionaire's son wants you in his world.",
+      "choices": [
+        { "label": "Accept the invitations", "desc": "Live a little.", "risk": "high", "hint": "Glamour. Distraction. Photos.", "text": "Monaco one weekend, a yacht the next. The photos are stunning. His form is not.", "fx": { "followers": 30000, "pfm": -6, "trust": -4, "image": -2, "flag": "party_regular" } },
+        { "label": "Accept once, then politely decline", "desc": "Experience it, don't live it.", "risk": "low", "hint": "Balance.", "text": "One weekend of absurd luxury. Then he goes back to his life. The billionaire's son respects it, oddly.", "fx": { "followers": 10000, "morale": 3 } },
+        { "label": "Decline", "desc": "Not your world.", "risk": "low", "hint": "Focus.", "text": "He declines. The son finds another footballer to collect.", "fx": { "trust": 1 } }
+      ] },
+    { "id": "as_wealth_guilt", "cat": "money", "w": 4, "cd": 150, "when": { "worth": [1000000, 999999999] },
+      "title": "Too Much", "text": "He drives past the neighbourhood where he grew up and sees kids playing barefoot on the same dirt pitch he played on. He's wearing a watch that costs more than their parents earn in ten years.",
+      "prompt": "Your wealth feels strange.",
+      "choices": [
+        { "label": "Fund a proper pitch for them", "desc": "Right now.", "risk": "low", "hint": "Direct help.", "text": "Three months later there's a proper pitch with lights. He plays the opening match barefoot, out of respect.", "fx": { "wealth": -25000, "image": 6, "morale": 6, "fans": 3 } },
+        { "label": "Give a percentage of everything, forever", "desc": "A pledge.", "risk": "low", "hint": "Changes your life, and theirs.", "text": "He pledges ten per cent of his income to youth football for the rest of his career. He tells nobody. {MUM} tells everybody.", "fx": { "image": 6, "monthlySupport": 500, "flag": "foundation" } },
+        { "label": "Accept that you earned it", "desc": "Guilt helps nobody.", "risk": "low", "hint": "Fair.", "text": "He reminds himself of the 5am runs and the bus rides. He earned it. The kids on the pitch stay on his mind anyway.", "fx": {} }
+      ] },
+    { "id": "as_gambling_ad_refuse", "cat": "money", "w": 3, "cd": 200, "when": { "rep": [25, 100] },
+      "title": "BetKing", "text": "A betting company called BetKing wants him as its face: an enormous fee for three adverts and a monthly post. His agent says the money is the biggest he'll ever see from a sponsor. {MUM} says gambling ruined her brother.",
+      "prompt": "Take the betting company's money?",
+      "choices": [
+        { "label": "Refuse", "desc": "Not for any money.", "risk": "low", "hint": "Your values.", "text": "He refuses and says why in an interview. A charity for gambling addiction asks him to be its patron.", "fx": { "image": 6, "family": 5 } },
+        { "label": "Take it", "desc": "It's legal, and it's huge.", "risk": "high", "hint": "Your image takes the hit.", "text": "The money is enormous. So is the backlash. {MUM} doesn't mention it, which is worse.", "fx": { "wealth": 60000, "image": -10, "family": -6, "flag": "gambling" } }
+      ] },
+    { "id": "as_old_car_sentimental", "cat": "lifestyle", "w": 3, "cd": 300, "once": true, "when": { "rep": [20, 100], "age": [22, 40] },
+      "title": "The First Car", "text": "He finds his first car, the battered old hatchback he bought with his first wage, for sale online. Rusty, sad, eleven owners later.",
+      "prompt": "Buy back your first car?",
+      "choices": [
+        { "label": "Buy it and restore it", "desc": "A piece of your story.", "risk": "low", "hint": "Sentimental.", "text": "He restores it lovingly. It sits in his garage next to cars worth fifty times more. It's the only one he talks about.", "fx": { "wealth": -4000, "morale": 4, "followers": 5000 } },
+        { "label": "Let it go", "desc": "The past is the past.", "risk": "low", "hint": "Move on.", "text": "He scrolls past. Some things are better as memories.", "fx": {} }
+      ] },
+    { "id": "as_business_partner_betray", "cat": "money", "w": 3, "cd": 200, "when": { "flags": ["owns_business"] },
+      "title": "The Partner", "text": "His business partner has been running the business into the ground while telling him everything is fine. The accounts are a mess. There are debts he never knew about.",
+      "prompt": "Your business partner lied to you.",
+      "choices": [
+        { "label": "Take control and fix it", "desc": "Your name is on it.", "risk": "medium", "hint": "Time and money.", "text": "He fires the partner, hires a proper manager and puts in more money. The business survives, barely.", "fx": { "wealth": -10000, "stress": 5 } },
+        { "label": "Sell your stake and walk away", "desc": "Cut your losses.", "risk": "low", "hint": "Clean exit.", "text": "He sells for a fraction of what he put in. Lesson expensive, lesson learned.", "fx": { "assetLoss": "business", "wealth": 3000, "stress": 2 } }
+      ] },
+    { "id": "as_luxury_watch_gift_from_brand", "cat": "lifestyle", "w": 3, "cd": 200, "when": { "rep": [45, 100] },
+      "title": "A Gift From a Watchmaker", "text": "A famous watchmaker sends him a limited-edition watch as a gift, with a note hoping he'll wear it at his next press conference. There's no contract. Just the watch.",
+      "prompt": "Wear the gifted watch?",
+      "choices": [
+        { "label": "Wear it at the press conference", "desc": "Free publicity for them.", "risk": "low", "hint": "A sponsorship may follow.", "text": "He wears it. Watch forums identify it within an hour. The brand calls his agent the next day.", "fx": { "sponsorPitch": true, "followers": 5000 } },
+        { "label": "Return it politely", "desc": "No strings.", "risk": "low", "hint": "Principled.", "text": "He sends it back with a kind note. The brand is impressed. They'll be back with a proper offer.", "fx": { "image": 2 } }
+      ] },
+    { "id": "as_house_party_neighbours", "cat": "lifestyle", "w": 3, "cd": 100, "when": { "worth": [100000, 999999999], "age": [18, 30] },
+      "title": "Complaints", "text": "His neighbours in the expensive gated community have complained: loud music, too many cars, his friends' motorbikes. The residents' committee wants a meeting.",
+      "prompt": "The neighbours are complaining.",
+      "choices": [
+        { "label": "Apologise and invite them over", "desc": "Win them round.", "risk": "low", "hint": "Diplomacy.", "text": "He invites the whole street for a barbecue. The retired judge next door turns out to be a huge fan. Peace.", "fx": { "image": 2, "stress": -1, "wealth": -500 } },
+        { "label": "Ignore them", "desc": "You paid for this house.", "risk": "medium", "hint": "A tabloid story waiting to happen.", "text": "A neighbour sells the story to a tabloid: 'MY NIGHTMARE LIVING NEXT TO {J}'.", "fx": { "image": -4, "press": -2 } }
+      ] }
+  ]
+}

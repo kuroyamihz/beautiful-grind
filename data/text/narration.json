@@ -1,0 +1,169 @@
+{
+  "_about": "Phrase banks for the offline narrator. Tokens: {J} player, {M} manager, {opp} opponent, {club} club, {min} minute, {comp} competition, {score} scoreline, {venue} home/away. Add lines freely; one is picked at random.",
+  "intro": {
+    "W": [
+      "Victory {venue} in the {comp}: {score}.",
+      "Three points {venue}. {score} in the {comp}.",
+      "A win that matters {venue}: {score}.",
+      "{club} get the job done {venue}. {score}.",
+      "The {comp} table looks better tonight. {score}.",
+      "Smiles in the dressing room after a {score} win {venue}.",
+      "A professional afternoon {venue} ends {score}.",
+      "{score}. The fans sing all the way to the car park."
+    ],
+    "D": [
+      "Honours even {venue} in the {comp}: {score}.",
+      "A draw {venue}. {score}.",
+      "Points shared: {score} in the {comp}.",
+      "Neither side blinks. {score} {venue}.",
+      "{score}. A point that feels like a defeat to some and a win to others.",
+      "Stalemate {venue}: {score}."
+    ],
+    "L": [
+      "Defeat {venue} in the {comp}: {score}.",
+      "A painful loss {venue}. {score}.",
+      "Nothing to show for it {venue}: {score}.",
+      "{score}. The long walk off the pitch.",
+      "A bad afternoon {venue}. {score} in the {comp}.",
+      "{club} are beaten {venue}: {score}. The silence on the bus says everything."
+    ]
+  },
+  "goal": {
+    "ATT": [
+      "On {min} minutes he scores: a low finish across the keeper.",
+      "On {min} minutes he scores with a header nobody else attacks.",
+      "On {min} minutes he gets in behind and slots it through the keeper's legs.",
+      "On {min} minutes he curls one into the far corner from the edge of the box.",
+      "On {min} minutes he reacts first to a rebound and smashes it into the roof of the net.",
+      "On {min} minutes he chests it down and volleys it home before the defender can react.",
+      "On {min} minutes he cuts inside, shifts it onto his stronger foot and buries it.",
+      "On {min} minutes he chips the keeper from twenty metres. Audacious.",
+      "On {min} minutes he arrives at the far post and taps in. Simple, deadly.",
+      "On {min} minutes he holds off two defenders and toe-pokes it in."
+    ],
+    "MID": [
+      "On {min} minutes he arrives late in the box and side-foots it in.",
+      "On {min} minutes he hits a thunderbolt from thirty metres that never stops rising.",
+      "On {min} minutes he finishes off a one-two with a calm side-foot.",
+      "On {min} minutes he picks up a loose ball and drills it low into the corner.",
+      "On {min} minutes he ghosts in at the back post and heads it down and in."
+    ],
+    "DEF": [
+      "On {min} minutes he rises highest from a corner and powers in a header.",
+      "On {min} minutes he bundles it in from a set-piece scramble.",
+      "On {min} minutes he wanders forward and shocks everyone, himself included, with a finish.",
+      "On {min} minutes he meets a free kick with a glancing header."
+    ]
+  },
+  "assist": [
+    "He also sets one up with a disguised pass.",
+    "He also whips a cross onto a teammate's forehead.",
+    "He also beats his man and cuts it back for a tap-in.",
+    "He also threads a through ball that splits the defence.",
+    "He also wins the ball high and squares it for an easy finish.",
+    "He also flicks on a header that falls perfectly for a teammate."
+  ],
+  "rating": {
+    "great": [
+      "It's the kind of performance people will lie about having seen live. {J} is untouchable.",
+      "{J} plays like the pitch is tilted towards him. Some nights football makes sense; this is one.",
+      "Every touch is right. Every decision is right. {J} is the best player on the pitch by a distance.",
+      "The opposition try three different players on {J}. None of them work."
+    ],
+    "excellent": [
+      "{J} is the best player on the pitch and everyone inside the stadium knows it.",
+      "Every good thing seems to pass through {J}. The away end starts booing his touches by the hour mark, the highest compliment.",
+      "{J} runs the game: tackles, passes, a moment of magic. A complete performance.",
+      "The pundits on the radio keep saying {J}'s name."
+    ],
+    "good": [
+      "{J} is tidy, brave, involved. The kind of display coaches love and highlight reels ignore.",
+      "A good shift from {J}: duels won, simple passes chosen, nothing wasted.",
+      "{J} does everything asked of him, and a little more.",
+      "Solid and smart from {J}. The kind of game that earns trust."
+    ],
+    "decent": [
+      "{J} does the job. Nothing more, nothing less.",
+      "A quiet, functional evening for {J}.",
+      "{J} is neat but rarely decisive.",
+      "Not much to say about {J} tonight, which isn't always a bad thing."
+    ],
+    "poor": [
+      "{J} drifts through the game, a step behind its rhythm.",
+      "It never quite happens for {J}: a heavy touch here, a wrong option there.",
+      "{J} looks nervous, and the crowd notices.",
+      "{J} loses the ball too often and the frustration shows."
+    ],
+    "awful": [
+      "It's a night {J} will replay at 3am: a mistake that leads to a goal, a booking, a substitution greeted by ironic applause.",
+      "{J} is the problem tonight, and he knows it before the final whistle.",
+      "Everything {J} tries goes wrong. Everything.",
+      "The worst game of {J}'s career so far. There's no hiding from it."
+    ]
+  },
+  "start": ["{J} starts and plays the full ninety.", "{J} starts and lasts the whole match.", "{J} is in the starting eleven and finishes the game."],
+  "startSubbed": ["{J} starts and is withdrawn after {min} minutes.", "{J} starts and makes way on {min} minutes.", "{J} starts and is replaced after {min} minutes."],
+  "sub": ["{J} comes off the bench for the final {min} minutes.", "{J} is introduced with {min} minutes left.", "{J} gets {min} minutes as a substitute."],
+  "unused": [
+    "{J} warms up for forty minutes and never gets the call.",
+    "{J}'s name is on the team sheet among the substitutes. He doesn't get on.",
+    "{J} isn't in the matchday squad.",
+    "{J} watches the whole match from the bench, jacket zipped to the chin.",
+    "{J} does three warm-up sprints along the touchline and sits back down."
+  ],
+  "monologue": {
+    "great": [
+      "In the dressing room {J} stares at his phone, at forty unread messages, and opens only one: his mother's.",
+      "“Remember this,” he thinks, studs still on, nobody else left in the showers.",
+      "On the bus home {J} watches the clip of his goal eleven times and pretends to be asleep when someone notices.",
+      "{J} lies awake at 2am, too happy to sleep."
+    ],
+    "bad": [
+      "The silence of the dressing room afterwards is a particular kind of silence. {J} sits inside it.",
+      "{J} unlaces his boots slowly, as if the knots might hold the answer.",
+      "{J} switches his phone off before the bus leaves the stadium.",
+      "At home {J} watches the match again with the sound off. It doesn't get better."
+    ],
+    "normal": [
+      "{J} ices both knees, eats, sleeps. Tomorrow it starts again.",
+      "“Fine,” he says when his father calls. It's the truth, which is somehow worse.",
+      "{J} drives home with the radio off, replaying three moments in his head.",
+      "Another week, another match. {J} is learning that most of football is this."
+    ],
+    "none": [
+      "“Next week,” {J} tells himself, and doesn't quite believe it.",
+      "In the car park {J} sits with the engine off for ten minutes before driving home.",
+      "{J} goes for a run alone after the match. Nobody asks him to.",
+      "{J} stays behind to do extra sprints while the stadium lights go off one by one."
+    ]
+  },
+  "quiet": [
+    "A week without a match. {J} trains, sleeps, eats chicken and rice, and watches clips of the next opponent until his eyes ache.",
+    "No fixture this week. The training ground is quiet except for the thud of {J}'s shooting practice long after everyone else has gone home.",
+    "A week of drills, ice baths and team meetings. Nothing to report, which is most of a footballer's life.",
+    "{J} spends the week in the gym and the analysis room. Small improvements, invisible from the outside.",
+    "Training, physio, sleep, repeat. {J} calls home on Thursday and talks about nothing for an hour.",
+    "A rainy week of tactical sessions. {M} stops play forty times to move players two metres. {J} learns something every time.",
+    "{J} spends his day off at the cinema alone and enjoys it more than he expected.",
+    "The week passes in a blur of cones, bibs and protein shakes.",
+    "No match, no drama. {J} is grateful for the quiet."
+  ],
+  "fans": {
+    "good": {
+      "id": ["{J} gila malam ini 🔥🔥 kontrak seumur hidup!!", "Mainkan {J} terus coach, jangan diganti!! 💙", "Anak muda ini masa depan timnas, catat!", "{J} main kayak pemain Eropa 😭🔥", "Siapa yang bilang {J} ga layak starter? Sini maju 😤", "Merinding liat {J} malam ini. Bangga!"],
+      "en": ["{J} was everywhere tonight. Give him a new contract NOW", "Anyone else think {J} is going to be special?", "{J} > everyone on that pitch tonight", "Frame that {J} performance. Unreal.", "We've found a player. {J} 🔥"]
+    },
+    "bad": {
+      "id": ["{J} main kayak lagi puasa 🙄 cadangkan aja", "Kenapa {J} starter terus sih? Gak ada kontribusi", "{J} hari ini... sudahlah 😮‍💨", "Pelatih lihat apa sih dari {J}?", "Bang {J}, tolong bangun dulu sebelum main 😭"],
+      "en": ["{J} has to be dropped. Off the pace all night.", "Not having a go but {J} was miles off it.", "{J} looks lost out there.", "How does {J} keep getting picked?", "Worst {J} game I've seen. Hope it's a one-off."]
+    },
+    "bench": {
+      "id": ["Kapan {J} dikasih menit bermain? Anak muda butuh kesempatan coach 🙏", "Bebaskan {J}! 😤", "Masa {J} cuma jadi penghangat bangku terus"],
+      "en": ["Still no minutes for {J}. Development won't happen on the bench.", "Free {J}.", "Give {J} a chance, what's the worst that could happen?"]
+    }
+  },
+  "quietPosts": {
+    "id": ["Latihan hari ini di {club}. {J} terlihat tajam di game kecil 👀", "Pekan tanpa pertandingan untuk {club}. Skuad latihan keras menyambut laga berikutnya.", "Info: {club} gelar latihan tertutup jelang pertandingan berikutnya."],
+    "en": ["{club} training today. {J} looking sharp in the small-sided games 👀", "Quiet week at {club}. Squad in heavy training ahead of the next block of fixtures.", "{club} have closed training this week ahead of the next match."]
+  }
+}

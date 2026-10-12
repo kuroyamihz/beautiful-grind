@@ -1,0 +1,349 @@
+{
+  "scenarios": [
+    {
+      "id": "fa_money_request", "group": "money_ask", "groupCd": 40, "cat": "family", "w": 5, "when": { "wealth": [800, 999999999] }, "cd": 30,
+      "vars": { "amount": ["wealthPct", 30, 150] },
+      "title": "Family Calls: {J} Asked for Help",
+      "text": [
+        "His mother doesn't ask directly. She never does. She just mentions that an uncle's warung is failing, and then talks about the weather for ten minutes. {J} understands exactly what is being asked.",
+        "His sister calls in tears: the university fees are due on Friday and their father's business had a bad month. She hasn't asked for anything. She doesn't need to."
+      ],
+      "prompt": "Your family needs about {amount}. What do you do?",
+      "choices": [
+        { "label": "Send it all", "desc": "Transfer {amount} tonight.", "risk": "low", "hint": "Family grateful; savings hit hard.", "text": "The money goes that night. His mother sends a voice note that is mostly crying and a little bit laughing.", "fx": { "wealth": "-amount", "parental": 12, "mood": "Relieved" } },
+        { "label": "Monthly support", "desc": "Set up a regular transfer instead.", "risk": "medium", "hint": "Sustainable — but it never stops.", "text": "{J} sets up a monthly transfer. It feels like being an adult in a way that scoring never has.", "fx": { "monthlySupport": "amount*0.12", "parental": 8 } },
+        { "label": "Say no", "desc": "You're building something. Not yet.", "risk": "medium", "hint": "Savings safe. Relationship strained.", "text": "The silence in the family group chat for the next few days is loud.", "fx": { "parental": -12, "mood": "Anxious" } }
+      ]
+    },
+    {
+      "id": "fa_father_illness", "cat": "family", "w": 3, "once": true, "vars": { "cost": ["wealthPct", 40, 300] },
+      "title": "{J}'s Father Is in Hospital",
+      "text": "The call comes at 5am. His father collapsed at work. Heart problems. He's stable, the doctors say, but needs an operation, and the good hospital in the city costs {cost}.",
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Pay for the best care and fly home", "desc": "Miss a week of training.", "risk": "medium", "hint": "The right thing. The club should understand.", "text": "{J} pays for the operation and sits by the bed for five days. His father squeezes his hand and says only, “Go back. Play well.” The club sends flowers.", "fx": { "wealth": "-cost", "parental": 20, "pfm": -5, "trust": -1, "mood": "Numb", "chain": { "id": "fa_father_recovery", "in": [8, 14] } } },
+        { "label": "Pay, stay with the team", "desc": "Your father would want you to play.", "risk": "medium", "hint": "Your family may not see it that way.", "text": "{J} pays for everything and stays. He plays on Saturday and points to the sky after a good tackle. His mother doesn't call for three days.", "fx": { "wealth": "-cost", "parental": -4, "mood": "Anxious", "chain": { "id": "fa_father_recovery", "in": [8, 14] } } }
+      ]
+    },
+    {
+      "id": "fa_father_recovery", "cat": "family", "chainOnly": true,
+      "title": "{J}'s Father Walks Into the Stadium",
+      "text": "Three months after the operation, {J}'s father sits in the stand for the first time since he got sick. Slower, thinner, wearing a club scarf his wife had to wrap twice. When {J} warms up, he waves. {J} has to look away for a second.",
+      "fx": { "parental": 10, "mood": "Relieved", "form": 0.2 }
+    },
+    {
+      "id": "fa_sibling_footballer", "once": true, "group": "sib_sport", "groupCd": 104, "cat": "family", "w": 3, "when": { "sibKind": ["brother"], "sibAge": [10, 17], "age": [19, 35] },
+      "title": "{J}'s Younger Brother Wants to Be a Footballer",
+      "text": "His fifteen-year-old brother calls: an academy has offered him a trial. He's good, but not as good as {J} was. Their mother wants {J} to decide whether he should go.",
+      "prompt": "What do you advise?",
+      "choices": [
+        { "label": "Support him all the way", "desc": "Pay for boots, travel, training.", "risk": "low", "hint": "Your family will love it.", "vars": { "cost": ["wealthPct", 8, 100] }, "text": "{J} pays {cost} for boots and a summer programme. His brother sends him a video of every training session.", "fx": { "wealth": "-cost", "parental": 10, "chain": { "id": "fa_sibling_trial_result", "in": [20, 40] } } },
+        { "label": "Tell him the truth", "desc": "It's brutal. School matters too.", "risk": "medium", "hint": "Honest, maybe hurtful.", "text": "{J} tells his brother how few make it. His brother goes quiet. Their mother says he was too harsh.", "fx": { "parental": -5 } }
+      ]
+    },
+    {
+      "id": "fa_sibling_trial_result", "cat": "family", "chainOnly": true,
+      "title": "News From {J}'s Brother's Trial",
+      "text": "The academy has made a decision about {J}'s younger brother.",
+      "choices": [
+        { "label": "Call him", "risk": "low", "hint": "Whatever happened, he needs you.", "out": [
+          { "w": 1, "text": "He's in! A scholarship at the academy. He screams down the phone. {J} screams back.", "fx": { "parental": 10, "mood": "On Fire" } },
+          { "w": 2, "text": "Released. He's trying not to cry. {J} tells him about all the times he nearly gave up. They talk for two hours.", "fx": { "parental": 6, "mood": "Numb" } }
+        ] }
+      ]
+    },
+    {
+      "id": "fa_build_house", "cat": "family", "w": 3, "when": { "wealth": [30000, 999999999] }, "once": true, "vars": { "cost": ["wealthPct", 35, 5000] },
+      "title": "{J} Can Buy His Parents a House",
+      "text": "For the first time, {J} has enough savings to buy his parents a proper house. They've lived in the same small rented place for twenty years. His mother says they don't need it. She has been looking at house listings on her phone.",
+      "prompt": "Buy the house ({cost})?",
+      "choices": [
+        { "label": "Buy it", "desc": "The moment you've dreamed of since you were nine.", "risk": "low", "hint": "Life-changing for them.", "text": "{J} hands his parents the keys on a Sunday afternoon. His father walks around every room twice without speaking. His mother cries in the kitchen. It's the best day of {J}'s life.", "fx": { "wealth": "-cost", "parental": 25, "mood": "Relieved", "followers": 20000, "flag": "bought_parents_house" } },
+        { "label": "Wait a few years", "desc": "Build security first.", "risk": "low", "hint": "Sensible.", "text": "{J} decides to wait until his finances are safer. His mother says she understands, and means it.", "fx": {} }
+      ]
+    },
+    {
+      "id": "fa_hometown_return", "group": "hometown", "groupCd": 52, "cat": "family", "w": 4, "when": { "phase": ["off"] },
+      "title": "Back in {J}'s Hometown",
+      "text": "Off-season. {J} goes home. The streets feel smaller. Old friends work in shops and drive ojek. Kids follow him everywhere. Everyone wants something: a photo, an autograph, a loan, advice.",
+      "prompt": "How do you spend your time at home?",
+      "choices": [
+        { "label": "Free football clinic for kids", "desc": "Give back to where it started.", "risk": "low", "hint": "Unforgettable for them.", "text": "Two hundred kids on a dusty pitch, {J} in the middle of it all. The local paper runs it on the front page.", "fx": { "rep": 1, "followers": 10000, "parental": 6, "pfm": -2 } },
+        { "label": "Rest with family", "desc": "Mother's cooking, no football.", "risk": "low", "hint": "Recharge.", "text": "Two weeks of his mother's cooking and his father's terrible jokes. He goes back heavier and happier.", "fx": { "pfm": 10, "parental": 8 } },
+        { "label": "Catch up with old friends", "desc": "Remember who you were.", "risk": "medium", "hint": "Not all old friendships survive fame.", "out": [
+          { "w": 1, "text": "The old crew treats him exactly the same as always. It's the most normal he's felt in a year.", "fx": { "mood": "Relieved" } },
+          { "w": 1, "text": "An old friend asks for a large loan and won't take no for an answer. Things get awkward.", "fx": { "mood": "Frustrated" } }
+        ] }
+      ]
+    },
+    {
+      "id": "fa_wedding_cousin", "cd": 104, "cat": "family", "w": 3,
+      "title": "Cousin's Wedding on Match Day",
+      "text": "His favourite cousin is getting married. The wedding is on the same day as a league match. The family expects {J} to be there. The club expects him on the pitch.",
+      "prompt": "Ask for permission to miss the match?",
+      "choices": [
+        { "label": "Ask the club", "desc": "Family is family.", "risk": "medium", "hint": "The manager might say no — or remember.", "out": [
+          { "w": 1, "text": "{M} grudgingly agrees. {J} dances at the wedding, and his cousin gives a speech about him. Worth it.", "fx": { "parental": 10, "trust": -4 } },
+          { "w": 1, "text": "{M} says no. {J} sends a video message. His aunt is still angry about it at the next family gathering.", "fx": { "parental": -6 } }
+        ] },
+        { "label": "Play the match", "desc": "Send a gift and a video.", "risk": "low", "hint": "Family disappointed. Club happy.", "text": "{J} plays, then joins the reception by video call. The bride holds the phone up to show him the dancing.", "fx": { "parental": -3, "trust": 1 } }
+      ]
+    },
+    {
+      "id": "fa_grandmother", "cat": "family", "w": 2, "once": true, "when": { "age": [18, 32] },
+      "title": "{J}'s Grandmother Passes Away",
+      "text": "His grandmother, who walked him to every training session when he was small, who kept every newspaper clipping in a shoebox under her bed, has passed away. The funeral is in two days, a long way from here.",
+      "prompt": "The club will let you go.",
+      "choices": [
+        { "label": "Go to the funeral", "desc": "Of course.", "risk": "low", "hint": "Grief. Family.", "text": "{J} carries her coffin with his father and uncles. Afterwards his aunt gives him the shoebox. It's full of him.", "fx": { "parental": 12, "mood": "Numb", "pfm": -4, "flag": "grandma_passed" } },
+        { "label": "Play in her honour", "desc": "She'd want you to play.", "risk": "medium", "hint": "Some family members won't understand.", "text": "{J} plays with a black armband and points to the sky. His aunt says it's what grandma would have wanted. Not everyone agrees.", "fx": { "parental": -2, "mood": "Numb", "flag": "grandma_passed" } }
+      ]
+    },
+    {
+      "id": "fa_parents_visit", "cd": 104, "group": "parents_abroad", "groupCd": 80, "cat": "family", "w": 4, "when": { "abroad": true },
+      "title": "{J}'s Parents Visit Him Abroad",
+      "text": "His parents arrive for a week: first time on a plane, first time abroad. His mother has packed sambal, krupuk and dried fish in a suitcase that set off two alarms at customs. His father wears a new shirt bought for the trip.",
+      "prompt": "How do you spend the week?",
+      "choices": [
+        { "label": "Show them everything", "desc": "Tourist mode. All of it.", "risk": "low", "hint": "Tired legs, full heart.", "text": "{J} shows them the city, the stadium, the training ground. His father shakes {M}'s hand for a full minute.", "fx": { "parental": 15, "pfm": -4, "mood": "Relieved" } },
+        { "label": "Quiet week at home", "desc": "Just eat together.", "risk": "low", "hint": "Comfort.", "text": "A week of his mother cooking in his tiny kitchen. The apartment smells like home for the first time.", "fx": { "parental": 10, "pfm": 4, "mood": "Relieved" } }
+      ]
+    },
+    {
+      "id": "fa_mother_watches_first_time", "cat": "family", "w": 3, "when": { "role": ["starter", "rotation"] }, "once": true,
+      "title": "{J}'s Mother Watches Him Play Live for the First Time",
+      "text": "His mother has watched every match on a phone screen. She has never been to a stadium. This weekend, {J} has paid for her flight and a seat behind the dugout. She's terrified of the crowd.",
+      "fx": { "parental": 10, "form": 0.2, "mood": "Motivated" }
+    },
+    {
+      "id": "fa_family_pressure_marriage", "cd": 120, "cat": "family", "w": 3, "when": { "age": [24, 32], "partner": ["none", "dating"] },
+      "title": "Family Asks: When Will {J} Get Married?",
+      "text": "At every family gathering, every phone call, the same question. Aunts suggest daughters of friends. His mother sends photos “just to look”.",
+      "prompt": "How do you handle it?",
+      "choices": [
+        { "label": "Laugh it off", "desc": "“When I find the right one.”", "risk": "low", "hint": "The questions continue.", "text": "The aunts laugh too. The photos keep coming.", "fx": {} },
+        { "label": "Agree to meet someone", "desc": "Your mother's recommendation.", "risk": "medium", "hint": "Could be lovely. Could be awkward.", "out": [
+          { "w": 1, "text": "The dinner is surprisingly lovely. {F} is smart, funny, and doesn't care about football.", "fx": { "partner": { "who": "F", "status": "dating" }, "parental": 8 } },
+          { "w": 1, "text": "The dinner is painfully awkward. Both mothers are disappointed.", "fx": { "parental": 2 } }
+        ] }
+      ]
+    },
+    {
+      "id": "fa_business_scam_relative", "once": true, "cat": "family", "w": 3, "when": { "wealth": [5000, 999999999] }, "vars": { "cost": ["wealthPct", 25, 500] },
+      "title": "Uncle's Business Proposal",
+      "text": "An uncle has a business proposal: a fleet of minibuses, a guaranteed route, “everyone in the family is in”. He needs {cost} from {J}.",
+      "prompt": "Invest in your uncle's business?",
+      "choices": [
+        { "label": "Invest", "desc": "Family helps family.", "risk": "high", "hint": "Could be fine. Could ruin Christmas forever.", "out": [
+          { "w": 1, "text": "The minibuses run. Profits are small, but real. Uncle is very proud.", "fx": { "wealth": "-cost", "parental": 8, "chain": { "id": "fa_uncle_returns", "in": [20, 30] } } },
+          { "w": 1, "text": "Six months later, the minibuses are sold and nobody knows where the money went. Family gatherings are tense.", "fx": { "wealth": "-cost", "parental": -10, "mood": "Angry" } }
+        ] },
+        { "label": "Politely decline", "desc": "Offer a smaller gift instead.", "risk": "medium", "hint": "Uncle may sulk.", "text": "{J} gives a small gift instead. The uncle is offended for a year, then forgets.", "fx": { "wealth": -100, "parental": -4 } }
+      ]
+    },
+    {
+      "id": "fa_uncle_returns", "cat": "family", "chainOnly": true, "vars": { "cost": ["wealthPct", 25, 500] },
+      "title": "The Minibus Business Pays Out",
+      "text": "Twenty months after {J} invested, his uncle shows up at the family house with an envelope and a big grin. The minibuses made money.",
+      "fx": { "wealth": "cost*0.7", "parental": 6, "mood": "Relieved" }
+    },
+    {
+      "id": "fa_father_criticism", "cd": 80, "cat": "family", "w": 4, "when": { "played": true, "lastRating": [0, 6.3] },
+      "title": "{J}'s Father Has Notes",
+      "text": "His father calls after every match with a list of mistakes. Tonight the list is long. “Why didn't you pass? Why didn't you run back?” He means well. It doesn't feel like it.",
+      "prompt": "How do you respond?",
+      "choices": [
+        { "label": "Listen patiently", "desc": "He means well.", "risk": "low", "hint": "Peace in the family.", "text": "{J} listens to all fourteen points. Some are even right.", "fx": { "parental": 3 } },
+        { "label": "Ask him to stop", "desc": "“I have coaches, Pak.”", "risk": "medium", "hint": "Could hurt him.", "out": [
+          { "w": 1, "text": "His father goes quiet, then laughs. “Okay. From now on, I only say good things.” He doesn't manage it, but he tries.", "fx": { "parental": 2, "mood": "Relieved" } },
+          { "w": 1, "text": "His father hangs up. Their next three calls are short.", "fx": { "parental": -8 } }
+        ] }
+      ]
+    },
+    {
+      "id": "fa_home_flood", "once": true, "cat": "family", "w": 2, "when": { "nationality": ["Indonesia", "Philippines", "Vietnam", "Thailand", "Malaysia", "Bangladesh", "India"] }, "vars": { "cost": ["wealthPct", 20, 200] },
+      "title": "Floods Hit {J}'s Home Village",
+      "text": "The rainy season brings floods to {J}'s home village. His parents' house has water up to the windows. They're staying at a school hall with two hundred other families.",
+      "prompt": "Help?",
+      "choices": [
+        { "label": "Fund relief for the whole village", "desc": "{cost} for food, water and repairs.", "risk": "low", "hint": "Hero at home.", "text": "{J} pays for food parcels, clean water and repairs for the whole village. His name is painted on the new school wall.", "fx": { "wealth": "-cost", "rep": 1.5, "followers": 15000, "parental": 15 } },
+        { "label": "Help your family", "desc": "Repairs for your parents' house.", "risk": "low", "hint": "Family first.", "vars": { "small": ["wealthPct", 8, 100] }, "text": "{J} pays {small} for his parents' repairs. They move back in within a month.", "fx": { "wealth": "-small", "parental": 8 } }
+      ]
+    },
+    {
+      "id": "fa_mother_birthday", "cat": "family", "w": 3,
+      "title": "{J}'s Mother's Birthday",
+      "text": "It's his mother's birthday. She says she doesn't want anything. She says that every year.",
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Fly home for one day", "desc": "Surprise her.", "risk": "medium", "hint": "Tired legs, joy.", "text": "{J} knocks on the door at 7pm with a cake. His mother screams so loudly the neighbours come running.", "fx": { "parental": 12, "pfm": -4 } },
+        { "label": "Send a big gift", "desc": "Gold earrings, delivered.", "risk": "low", "hint": "She'll wear them to every wedding.", "vars": { "cost": ["wealthPct", 5, 80] }, "text": "Gold earrings worth {cost}. She wears them to every family event for the next ten years.", "fx": { "wealth": "-cost", "parental": 8 } },
+        { "label": "A long video call", "desc": "Simple and sincere.", "risk": "low", "hint": "She just wants to hear from you.", "text": "Two hours on video. She tells him about every neighbour. He listens to all of it.", "fx": { "parental": 5 } }
+      ]
+    },
+    {
+      "id": "fa_family_fame_problem", "once": true, "cat": "family", "w": 3, "when": { "followers": [50000, 999999999] },
+      "title": "{J}'s Family Gets Unwanted Attention",
+      "text": "Fans have started visiting his parents' house. Some bring gifts. Some just stand outside taking photos. Yesterday someone climbed the fence.",
+      "prompt": "What do you do?",
+      "choices": [
+        { "label": "Hire security for the house", "desc": "Protect them.", "risk": "low", "hint": "Expensive, safe.", "vars": { "cost": ["wageWeeks", 2, 200] }, "text": "{J} hires a security guard for {cost}. His mother feeds the guard so much he gains five kilos.", "fx": { "wealth": "-cost", "parental": 6 } },
+        { "label": "Post a polite request", "desc": "Ask fans to respect privacy.", "risk": "low", "hint": "Most fans listen.", "text": "The post works, mostly. The visits drop off.", "fx": { "rep": 0.2 } }
+      ]
+    },
+    {
+      "id": "fa_sister_wedding_cost", "once": true, "cat": "family", "w": 3, "when": { "sibKind": ["sister"], "sibAge": [21, 40], "wealth": [3000, 999999999] }, "vars": { "cost": ["wealthPct", 20, 300] },
+      "title": "Sister's Wedding: Who Pays?",
+      "text": "His sister is getting married. The family expects {J}, the famous one, to help pay for a big wedding: five hundred guests, a band, a full buffet. The total is {cost}.",
+      "prompt": "Pay for it?",
+      "choices": [
+        { "label": "Pay for everything", "desc": "She deserves it.", "risk": "low", "hint": "Pride and family joy.", "text": "{J} pays for everything. His sister's wedding is the talk of the town for a year.", "fx": { "wealth": "-cost", "parental": 15 } },
+        { "label": "Pay half", "desc": "Help, but set limits.", "risk": "medium", "hint": "Fair, maybe not enough.", "text": "{J} pays half. Some relatives grumble that the famous brother could do more.", "fx": { "wealth": "-cost*0.5", "parental": 4 } }
+      ]
+    },
+    {
+      "id": "fa_fasting_parents_advice", "cat": "family", "w": 2, "when": { "ramadan": true, "nationality": ["Indonesia", "Malaysia"] },
+      "title": "Video Call at Sahur",
+      "text": "3:30am. His mother calls during sahur, as she does every day of Ramadan, to make sure he's eating. She can see the empty fridge behind him on the video. She is not impressed.",
+      "fx": { "parental": 4, "mood": "Relieved" }
+    },
+    {
+      "id": "fa_lebaran_home", "cat": "family", "w": 6, "when": { "nationality": ["Indonesia"], "months": [3, 4] },
+      "title": "Lebaran: Will {J} Go Home for Eid?",
+      "text": "Idul Fitri is coming. All of Indonesia is going home: mudik, the great journey back to the kampung. His family is counting on him for the first day of Lebaran. The club has a match two days later.",
+      "prompt": "Go home for Lebaran?",
+      "choices": [
+        { "label": "Go home for the first day", "desc": "Sungkem with your parents.", "risk": "medium", "hint": "Tired legs, full heart.", "text": "{J} kneels before his parents and asks for forgiveness for the year's mistakes, as every Indonesian child does. His father puts a hand on his head. Then ketupat, opor ayam, and fifty relatives asking for photos.", "fx": { "parental": 15, "pfm": -5, "mood": "Relieved" } },
+        { "label": "Stay with the club", "desc": "Video call, send THR money home.", "risk": "low", "hint": "Your mother will cry on the call.", "vars": { "thr": ["wealthPct", 5, 80] }, "text": "{J} sends {thr} as THR for the whole family and joins the gathering by video. His mother cries. His little cousins ask why he's in a box.", "fx": { "wealth": "-thr", "parental": 3 } }
+      ]
+    },
+    {
+      "id": "fa_old_coach_sick", "once": true, "group": "old_coach", "groupCd": 9999, "cat": "family", "w": 2, "when": { "age": [20, 38] }, "vars": { "cost": ["wealthPct", 10, 100] },
+      "title": "{J}'s First Coach Is Sick",
+      "text": "News from home: the coach who found {J} at nine years old, who drove him to tournaments in his own car, who bought his first proper boots, is sick and can't afford treatment.",
+      "prompt": "Help him?",
+      "choices": [
+        { "label": "Pay for his treatment", "desc": "{cost}. You owe him everything.", "risk": "low", "hint": "Gratitude.", "text": "{J} pays and visits. The old man cries and tells the nurses: “I found him. Me.”", "fx": { "wealth": "-cost", "rep": 0.8, "mood": "Relieved" } },
+        { "label": "Send a message", "desc": "Your thoughts are with him.", "risk": "low", "hint": "Something.", "text": "A heartfelt message. The coach shows it to everyone in the ward.", "fx": {} }
+      ]
+    },
+    {
+      "id": "fa_brother_trouble", "once": true, "cat": "family", "w": 2, "when": { "sibKind": ["brother"], "sibAge": [15, 35], "age": [20, 38] }, "vars": { "cost": ["wealthPct", 15, 150] },
+      "title": "{J}'s Brother Is in Trouble",
+      "text": "His younger brother has fallen in with the wrong crowd at home: debts, gambling, a fight at a night market. His mother calls in a panic. Someone is threatening him.",
+      "prompt": "How do you help?",
+      "choices": [
+        { "label": "Pay the debt and bring him to live with you", "desc": "Get him away from it.", "risk": "medium", "hint": "A second chance. Responsibility.", "text": "{J} pays {cost} and moves his brother into his spare room. It's hard. It's also the best thing for both of them.", "fx": { "wealth": "-cost", "parental": 12, "pfm": -3 } },
+        { "label": "Pay the debt only", "desc": "Solve the immediate problem.", "risk": "medium", "hint": "He may do it again.", "out": [
+          { "w": 1, "text": "The debt is paid and his brother is scared straight. For now.", "fx": { "wealth": "-cost", "parental": 6 } },
+          { "w": 1, "text": "Three months later, a new debt. Bigger.", "fx": { "wealth": "-cost", "parental": 2, "mood": "Frustrated" } }
+        ] },
+        { "label": "Refuse to pay", "desc": "He needs to learn.", "risk": "high", "hint": "Tough love — or tragedy.", "text": "{J} refuses. His mother doesn't speak to him for a month. His brother eventually sorts it out himself, barely.", "fx": { "parental": -15 } }
+      ]
+    },
+    {
+      "id": "fa_family_proud_tv", "once": true, "cat": "family", "w": 3, "when": { "role": ["starter"], "rep": [15, 100] },
+      "title": "{J}'s Parents on National TV",
+      "text": "A national TV station visits {J}'s parents for a feature on his career. His father wears a suit for the first time since his wedding. His mother shows the shoebox of newspaper clippings to the camera.",
+      "fx": { "parental": 8, "followers": 12000, "rep": 0.5 }
+    },
+    {
+      "id": "fa_ex_teacher", "once": true, "cat": "family", "w": 2,
+      "title": "A Message From {J}'s Old Teacher",
+      "text": "His primary school teacher, the one who told him he'd never amount to anything because he only cared about football, sends a message: “I was wrong about you. My whole class watches your matches now.”",
+      "fx": { "mood": "Confident" }
+    },
+    {
+      "id": "fa_family_gathering_pressure", "group": "money_ask", "groupCd": 40, "cat": "family", "w": 3, "when": { "phase": ["off"], "wealth": [2000, 999999999] },
+      "title": "Every Relative Has a Request",
+      "text": "At the family gathering, the requests come one after another: a cousin wants a phone, an aunt wants help with rent, a distant relative wants him to invest in a durian farm.",
+      "prompt": "How do you handle it?",
+      "choices": [
+        { "label": "Help everyone a little", "desc": "Small gifts for all.", "risk": "low", "hint": "Peace, at a price.", "vars": { "cost": ["wealthPct", 10, 150] }, "text": "{J} spends {cost} on small gifts and favours. Everyone is happy. The requests will be back next year.", "fx": { "wealth": "-cost", "parental": 6 } },
+        { "label": "Set clear boundaries", "desc": "Help only parents and siblings.", "risk": "medium", "hint": "Some relatives will be hurt.", "text": "{J} explains he can only support his parents and siblings. A few relatives call him arrogant. His father defends him.", "fx": { "parental": 2, "growth": ["mental"] } }
+      ]
+    },
+    {
+      "id": "fa_family_member_in_stands", "once": true, "cat": "family", "w": 2, "when": { "role": ["starter", "rotation"] },
+      "title": "Little Cousin's First Match in the Stadium",
+      "text": "{J} gets tickets for his little cousin, eight years old, to watch his first ever live match. The boy wears {J}'s shirt down to his knees.",
+      "fx": { "parental": 4, "form": 0.1, "mood": "Motivated" }
+    },
+    {
+      "id": "fa_retirement_parents", "cat": "family", "w": 2, "when": { "wealth": [15000, 999999999], "age": [24, 38] }, "once": true, "vars": { "cost": ["wealthPct", 20, 2000] },
+      "title": "{J} Can Let His Father Retire",
+      "text": "His father has worked six days a week for thirty-one years. With {cost}, {J} could set up a fund so he never has to work again.",
+      "prompt": "Let your father retire?",
+      "choices": [
+        { "label": "Do it", "desc": "He's earned it.", "risk": "low", "hint": "A gift beyond money.", "text": "His father argues for twenty minutes, then says yes. The next morning, for the first time in thirty-one years, he sleeps in. He calls {J} at 10am to complain he doesn't know what to do with himself.", "fx": { "wealth": "-cost", "parental": 20, "mood": "Relieved" } },
+        { "label": "Not yet", "desc": "Your career isn't secure yet.", "risk": "low", "hint": "Sensible.", "text": "{J} waits. His father wouldn't have accepted yet anyway.", "fx": {} }
+      ]
+    },
+    {
+      "id": "fa_hometown_club", "cd": 150, "cat": "family", "w": 2, "when": { "age": [24, 40], "rep": [20, 100] },
+      "title": "Hometown Club Asks for Help",
+      "text": "The amateur club in {J}'s hometown, where he played as a boy, is about to fold. They need money for pitch rental and kit. The chairman, an old man who used to referee his games, writes a letter by hand.",
+      "prompt": "Save the club?",
+      "vars": { "cost": ["wealthPct", 15, 300] },
+      "choices": [
+        { "label": "Fund the club for five years", "desc": "{cost}.", "risk": "low", "hint": "Your name on the clubhouse.", "text": "The club is saved. They rename the youth team after him. Forty kids play there every weekend.", "fx": { "wealth": "-cost", "rep": 1.2, "followers": 8000, "flag": "saved_hometown_club" } },
+        { "label": "Donate kit", "desc": "Something, not everything.", "risk": "low", "hint": "Help, not rescue.", "text": "New kits for every age group. The club survives another season.", "fx": { "wealth": -150, "rep": 0.3 } }
+      ]
+    },
+    {
+      "id": "fa_sad_news_teammate_family", "cat": "family", "w": 2,
+      "title": "A Teammate's Child Is Sick",
+      "text": "{T}'s young daughter is seriously ill. He's been coming to training with red eyes and leaving immediately after. The squad wants to do something.",
+      "prompt": "Help organise something?",
+      "choices": [
+        { "label": "Organise a squad fund", "desc": "Everyone contributes.", "risk": "low", "hint": "Brotherhood.", "text": "The squad raises enough to cover the treatment. {T} breaks down in the dressing room. Nobody says anything. Everyone hugs him.", "fx": { "teammate": { "who": "T", "rel": "ally" }, "wealth": -200, "rep": 0.3 } },
+        { "label": "Visit the hospital", "desc": "Bring toys and time.", "risk": "low", "hint": "Presence matters.", "text": "{J} visits with a giant teddy bear. The little girl names it after him.", "fx": { "teammate": { "who": "T", "rel": "ally" } } }
+      ]
+    },
+    {
+      "id": "fa_parental_support_low", "cat": "family", "w": 5, "when": { "parental": [0, 35] },
+      "title": "Distance Grows Between {J} and His Family",
+      "text": "The calls have become shorter. The family group chat is quiet when he posts. His mother's messages are polite. Something has broken, slowly, and nobody has said it out loud.",
+      "prompt": "Try to fix it?",
+      "choices": [
+        { "label": "Go home and talk", "desc": "Face to face, honestly.", "risk": "medium", "hint": "Hard conversation, maybe healing.", "out": [
+          { "w": 2, "text": "Three hours around the kitchen table. Tears, some shouting, then laughter. It's better.", "fx": { "parental": 20, "pfm": -3, "mood": "Relieved" } },
+          { "w": 1, "text": "The talk goes badly. Old resentments come out. It will take time.", "fx": { "parental": 5, "mood": "Numb" } }
+        ] },
+        { "label": "Write a long letter", "desc": "Say what you can't say out loud.", "risk": "low", "hint": "Words last.", "text": "{J} writes four pages by hand. His mother keeps it in her handbag.", "fx": { "parental": 12 } }
+      ]
+    },
+    {
+      "id": "fa_family_supports_fully", "cd": 150, "cat": "family", "w": 3, "when": { "parental": [85, 100] },
+      "title": "Family Banner in the Stands",
+      "text": "His whole family — parents, siblings, cousins, an elderly aunt in a wheelchair — arrive at the stadium with a homemade banner: “{J}, OUR PRIDE”. The TV cameras find it in the first minute.",
+      "fx": { "form": 0.2, "followers": 5000, "mood": "Motivated" }
+    },
+    {
+      "id": "fa_new_nephew", "once": true, "cat": "family", "w": 2, "when": { "sibAge": [22, 45], "age": [20, 40] },
+      "title": "{J} Becomes an Uncle",
+      "text": "His older sister has given birth to a baby boy. The first photo arrives at 4am: tiny, wrinkled, furious. His sister writes: “He's going to be a footballer like his uncle.”",
+      "prompt": "Gift?",
+      "choices": [
+        { "label": "A tiny club kit with your name", "desc": "Start him early.", "risk": "low", "hint": "Adorable.", "text": "The photo of the baby in a tiny shirt with {J} on the back is the most liked thing he's ever posted.", "fx": { "followers": 15000, "parental": 6 } },
+        { "label": "A savings account", "desc": "For his education.", "risk": "low", "hint": "Practical love.", "vars": { "cost": ["wealthPct", 5, 100] }, "text": "{J} opens a savings account for his nephew with {cost}. His sister cries.", "fx": { "wealth": "-cost", "parental": 8 } }
+      ]
+    },
+    {
+      "id": "fa_school_promise", "once": true, "cat": "family", "w": 2, "when": { "age": [18, 30] },
+      "title": "{J}'s Mother Wants Him to Finish His Studies",
+      "text": "{J} left school at sixteen for football. His mother has never stopped mentioning it. She's found an online university programme designed for athletes.",
+      "prompt": "Enrol?",
+      "choices": [
+        { "label": "Enrol", "desc": "Study at night.", "risk": "medium", "hint": "Tired, but your mother will be thrilled.", "text": "{J} enrols in a sports management degree. He's tired. His mother tells everyone at the market.", "fx": { "parental": 12, "pfm": -3, "growth": ["mental"], "flag": "studying" } },
+        { "label": "Not now", "desc": "Football first.", "risk": "low", "hint": "She'll ask again.", "text": "“After my career, Ma.” She sighs. She'll ask again.", "fx": { "parental": -2 } }
+      ]
+    },
+    {
+      "id": "fa_graduation", "cat": "family", "w": 4, "when": { "flags": ["studying"], "age": [22, 40] }, "once": true,
+      "title": "{J} Graduates",
+      "text": "After years of studying at night, {J} completes his degree. His mother attends the ceremony in her best clothes and cries louder than when he signed his first contract.",
+      "fx": { "parental": 15, "rep": 0.8, "growth": ["mental"], "unflag": "studying" }
+    }
+  ]
+}

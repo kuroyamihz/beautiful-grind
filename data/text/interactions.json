@@ -1,0 +1,329 @@
+{
+  "_about": "Things the player can start himself, towards one person. Same choice format as scenarios (text/fx, out[], or check/ok/bad). who = partner | crush | ex | parents | sibling | bestfriend | kid | teammate | captain | manager | president | journalist | agent. cd = weeks before the same action can be used on the same person again. cost = free-time slots. Teammate filters: trait (joker leader quiet hothead mentor partyboy devout gamer professional fashion family gossip), bond [min,max], rel [ally neutral rival enemy], ageRel older|younger, competitor (same position). big = a life-changing move. media = a media topic it can create. Extra effects: wealthWeeks (cost in weeks of wages), supportWeeks (monthly allowance home, in weeks of wages), wageRaise (%), agentCut, renewalPush, sponsorPitch, bond (that teammate), crush/crushHeat/crushClear, partnerFromCrush, partnerNear, partnerVisit.",
+  "actions": [
+    { "id": "pt_date", "who": "partner", "icon": "heart", "label": "Plan a proper date", "desc": "Book somewhere, dress up, phones in the car.", "risk": "low", "hint": "Love grows. Costs a little.", "when": { "partnerNear": true }, "cd": 2,
+      "out": [
+        { "w": 4, "text": ["Dinner at {PLACE}. {Pf} laughs at a story he's told before, and he realises she's laughing at him, not the story. A good evening.", "He books the table himself, which he has never done. {Pf} notices. She notices everything. The food is fine; the evening is perfect.", "A long dinner, then a longer walk. They talk about everything except football. {Pf} says it's the first time in months she's had all of him."], "fx": { "love": 7, "stress": -3, "wealthWeeks": 0.2 } },
+        { "w": 1, "text": ["Halfway through dessert a table of fans starts filming. {Pf} smiles for the photos. In the car she is very quiet.", "The restaurant tips off a photographer. The pictures are online before they've paid. Nice pictures, at least."], "fx": { "love": 2, "followers": 1500, "press": 1, "wealthWeeks": 0.2 } }
+      ] },
+    { "id": "pt_cook", "who": "partner", "icon": "home", "label": "Cook dinner for {Pf} yourself", "desc": "No chef, no delivery. Just you and a recipe video.", "risk": "low", "hint": "Effort counts more than the result.", "when": { "partnerNear": true }, "cd": 3,
+      "out": [
+        { "w": 3, "text": ["The {FOOD} is a disaster. The kitchen is worse. {Pf} eats every bite and says it's the best thing he's ever made, which is technically true.", "He follows the recipe exactly and it actually works. {Pf} takes a photo of the plate like it's a trophy."], "fx": { "love": 6, "stress": -2, "morale": 2 } },
+        { "w": 1, "text": "The smoke alarm goes off twice. They end up eating instant noodles on the floor, laughing until it hurts.", "fx": { "love": 5, "stress": -3 } }
+      ] },
+    { "id": "pt_listen", "who": "partner", "icon": "message", "label": "Ask {Pf} about her week, and really listen", "desc": "She works as {Pjob}. When did you last ask about it?", "risk": "low", "hint": "Quietly powerful.", "cd": 2,
+      "out": [ { "w": 1, "text": ["He asks about her work and doesn't check his phone once. It turns out a lot has been happening that he didn't know about. {Pf} talks for an hour. Something loosens between them.", "{Pf} is surprised by the question. Then she answers it properly, and he hears about the colleague she can't stand, the promotion she wants, the thing she's scared of. He should have asked sooner."], "fx": { "love": 5, "stress": -1 } } ] },
+    { "id": "pt_video", "who": "partner", "icon": "video", "label": "Long video call with {Pf}", "desc": "Time zones permitting. Long distance needs work.", "risk": "low", "hint": "Keeps the distance from winning.", "when": { "longDistance": true }, "cd": 1,
+      "out": [
+        { "w": 3, "text": ["Two hours on video. She falls asleep mid-sentence on her end; he leaves the call running for a while anyway.", "They watch the same film at the same time, pausing for each other. It's stupid and it works."], "fx": { "love": 5, "stress": -1 } },
+        { "w": 1, "text": "The connection keeps freezing. Every frozen frame catches her looking tired and sad. They hang up worse than they started.", "fx": { "love": 1, "stress": 2 } }
+      ] },
+    { "id": "pt_flyover", "who": "partner", "icon": "plane", "label": "Fly {Pf} over for a few days", "desc": "Flights, a hotel she'll like, and real time together.", "risk": "low", "hint": "Expensive, worth it.", "when": { "longDistance": true }, "cd": 6,
+      "out": [ { "w": 1, "text": ["{Pf} lands on a Thursday. For four days the distance doesn't exist. Saying goodbye at the airport is the hardest thing he does all month.", "She sees his new city for the first time: his flat, his bakery, his route to training. 'Now I can picture you,' she says."], "fx": { "love": 10, "morale": 4, "stress": -3, "partnerVisit": true, "wealthWeeks": 1 } } ] },
+    { "id": "pt_ask_move", "who": "partner", "icon": "home", "label": "Ask {Pf} to move here to be with you", "desc": "Her job, her family, her whole life. Or the distance forever.", "risk": "high", "hint": "The answer depends on how strong you are together.", "big": true, "when": { "longDistance": true }, "cd": 16,
+      "check": { "stat": "love", "dc": 66 },
+      "ok": { "text": ["{Pf} is quiet for a long time. Then: 'Okay. Yes. Let's stop doing this on a screen.' Three weeks later she arrives with two suitcases and a plant.", "She's already looked at jobs in his city, it turns out. She was waiting for him to ask."], "fx": { "love": 10, "partnerNear": true, "morale": 6, "stress": -4, "flag": "partner_moved" } },
+      "bad": { "text": ["'You're asking me to give up everything so you can have everything,' {Pf} says. 'Not yet. Maybe not ever.' The call ends politely. That's the worst part.", "She says no. Not angrily: carefully, like she's practised it. Her life is there, and his is here."], "fx": { "love": -8, "stress": 4, "morale": -3 } } },
+    { "id": "pt_meet_parents", "who": "partner", "icon": "users", "label": "Introduce {Pf} to your parents", "desc": "{MUM} and {DAD} have opinions. They always have opinions.", "risk": "medium", "hint": "Could bring everyone closer, or not.", "when": { "partner": ["dating", "serious"], "partnerNear": true }, "cd": 52,
+      "out": [
+        { "w": 3, "text": ["{MUM} cooks enough for twenty. {Pf} eats seconds, then thirds. By the end of the evening {MUM} is showing her baby photos of {J}. A complete success, and a little humiliating.", "{DAD} asks {Pf} three questions about her job and one about her family, then nods slowly. In {DAD}'s language, that's a blessing."], "fx": { "love": 6, "family": 5, "morale": 3, "flag": "partner_met_family" } },
+        { "w": 1, "text": ["{MUM} asks {Pf} when she's going to learn to cook properly. {Pf} smiles through it. In the car, she doesn't smile at all.", "The evening is polite, which is worse than a fight. {DAD} barely speaks. Later {MUM} calls: 'She's very... modern.'"], "fx": { "love": -4, "family": -3, "stress": 3 } }
+      ] },
+    { "id": "pt_move_in", "who": "partner", "icon": "home", "label": "Ask {Pf} to move in with you", "desc": "A drawer, then a wardrobe, then a key.", "risk": "medium", "hint": "A real step. Not everyone is ready.", "big": true, "when": { "partner": ["dating", "serious"], "partnerNear": true, "partnerYears": [0.5, 99] }, "cd": 26,
+      "check": { "stat": "love", "dc": 60 },
+      "ok": { "text": "'I thought you'd never ask,' {Pf} says, already making a list of what has to go. Most of it is his.", "fx": { "love": 8, "partner": { "status": "serious" }, "stress": -2, "flag": "living_together" } },
+      "bad": { "text": "{Pf} says she loves him but she isn't ready to live in a footballer's flat with a footballer's schedule. 'Ask me again in a year.'", "fx": { "love": -3, "morale": -2 } } },
+    { "id": "pt_propose", "who": "partner", "icon": "gem", "label": "Propose to {Pf}", "desc": "A ring, a question, a moment you can't take back.", "risk": "extreme", "hint": "If she says yes, everything changes. If she says no, everything changes too.", "big": true, "when": { "partner": ["serious"], "partnerYears": [1, 99], "age": [19, 45] }, "cd": 26, "media": "engaged",
+      "check": { "stat": "love", "dc": 72 },
+      "ok": { "text": ["He gets down on one knee at {PLACE}. {Pf} says yes before he finishes the question. Then she says it again, louder, for the people at the next table.", "No crowd, no cameras: just the two of them on the balcony, and a ring he's been hiding in a sock for a month. She cries. He cries. Yes."], "fx": { "partner": { "status": "engaged" }, "love": 10, "morale": 8, "family": 4, "followers": 5000, "flag": "engaged", "wealthWeeks": 3 } },
+      "bad": { "text": ["She doesn't say yes. She doesn't say no either. She says 'Can we talk about this?', and they talk for four hours, and the ring goes back in the sock.", "'I love you,' {Pf} says, 'but not like this, not yet.' The silence on the drive home could stop a clock."], "fx": { "love": -12, "morale": -8, "stress": 6, "mood": "Broken" } } },
+    { "id": "pt_wedding", "who": "partner", "icon": "heart", "label": "Set a date and get married", "desc": "A wedding: families, a guest list, a budget that will be ignored.", "risk": "low", "hint": "The biggest day of your life. Not cheap.", "big": true, "when": { "partner": ["engaged"], "partnerNear": true }, "cd": 20, "cost": 2, "media": "married",
+      "out": [ { "w": 1, "text": ["The wedding is enormous, loud and perfect. {MUM} cries from the first song to the last. {BF} gives a speech that is ninety per cent embarrassing stories. {Pf} is his wife now.", "A small wedding, in the end: family, friends, a few teammates. {DAD} dances, which nobody has seen in twenty years. {Pf} and {J} are married."], "fx": { "partner": { "status": "married" }, "love": 12, "family": 8, "morale": 10, "stress": -4, "followers": 20000, "flag": "married", "wealthWeeks": 8 } } ] },
+    { "id": "pt_baby", "who": "partner", "icon": "heart", "label": "Talk to {Pf} about starting a family", "desc": "A child. The biggest conversation two people can have.", "risk": "medium", "hint": "You'll both have to want it.", "big": true, "when": { "partner": ["married"], "partnerNear": true, "age": [21, 45], "notFlags": ["trying_for_baby", "father"] }, "cd": 26,
+      "check": { "stat": "love", "dc": 62 },
+      "ok": { "text": "They talk until the sun comes up. Names, fears, which grandmother will be worse. They decide: yes.", "fx": { "love": 7, "morale": 4, "flag": "trying_for_baby", "chain": { "id": "lv_baby_news_planned", "in": [12, 40] } } },
+      "bad": { "text": "{Pf} isn't ready. Her career is just taking off, she says, and he's never home. She's not wrong.", "fx": { "love": -4, "stress": 2 } } },
+    { "id": "pt_apologise", "who": "partner", "icon": "heart", "label": "Apologise to {Pf}, properly", "desc": "Not 'sorry you feel that way'. A real one.", "risk": "low", "hint": "Repairs damage. Doesn't erase it.", "when": { "love": [0, 55] }, "cd": 3,
+      "out": [
+        { "w": 3, "text": ["He says it without excuses. {Pf} listens, arms crossed, then uncrossed. 'Okay,' she says. 'Okay.' It's a start.", "He writes it down first so he gets it right. She can tell. It helps."], "fx": { "love": 7, "stress": -2 } },
+        { "w": 1, "text": "{Pf} hears him out and says it's not enough this time. Words are cheap; she wants to see it.", "fx": { "love": 2 } }
+      ] },
+    { "id": "pt_space", "who": "partner", "icon": "moon", "label": "Tell {Pf} you need some space", "desc": "Honest. Also dangerous.", "risk": "medium", "hint": "Less pressure for you; she may not take it well.", "cd": 6,
+      "out": [
+        { "w": 2, "text": "{Pf} takes it better than he expected. 'Me too, honestly.' A quiet week apart does them both good.", "fx": { "stress": -4, "love": -1 } },
+        { "w": 2, "text": "'Space from what? From me?' {Pf} packs a bag and goes to her sister's. Space, delivered.", "fx": { "stress": -1, "love": -7 } }
+      ] },
+    { "id": "pt_phone", "who": "partner", "icon": "phone", "label": "Look through {Pf}'s phone while she sleeps", "desc": "Something feels off. Or you're paranoid.", "risk": "extreme", "hint": "Whatever you find, you'll have looked.", "when": { "partner": ["dating", "serious", "engaged", "married"], "partnerNear": true, "love": [0, 60] }, "cd": 20,
+      "out": [
+        { "w": 3, "text": "Nothing. Group chats, work emails, a hundred photos of her sister's dog. He puts it back and lies awake feeling worse than if he'd found something.", "fx": { "stress": 3, "love": -2, "morale": -2 } },
+        { "w": 1, "text": "She wakes up. She sees him holding her phone. Nobody says anything for a very long time.", "fx": { "love": -14, "stress": 6, "mood": "Lost" } },
+        { "w": 1, "text": "Messages from someone saved as a single letter. Late at night, every night, for weeks. His hands won't stop shaking.", "fx": { "love": -10, "stress": 10, "mood": "Broken", "flag": "partner_secret", "chain": { "id": "lv_partner_secret", "in": [1, 2] } } }
+      ] },
+    { "id": "pt_breakup", "who": "partner", "icon": "close", "label": "End the relationship", "desc": "It isn't working, and you both know it.", "risk": "extreme", "hint": "Final. Painful. Sometimes right.", "big": true, "cd": 12, "media": "breakup",
+      "out": [ { "w": 1, "text": ["He says it in the kitchen, standing up, because sitting down would make it a conversation. {Pf} doesn't argue. That's how he knows it was already over.", "It ends with tears on both sides and one last hug at the door. He sits on the floor of the empty flat for an hour."], "fx": { "partner": { "status": "none" }, "morale": -10, "stress": 6, "family": -2, "mood": "Numb", "flag": "broke_up" } } ] },
+    { "id": "pt_confess", "who": "partner", "icon": "alert", "label": "Confess the affair to {Pf}", "desc": "Before she finds out from someone else.", "risk": "extreme", "hint": "The truth will cost you. A lie found out costs more.", "big": true, "when": { "flags": ["affair"], "notFlags": ["affair_exposed"] }, "cd": 52,
+      "check": { "stat": "love", "dc": 76 },
+      "ok": { "text": "{Pf} throws a glass. Then she cries. Then, days later, she says she'll try, if he cuts it off completely and never lies to her again. It is the hardest conversation of his life, and it might have saved it.", "fx": { "love": -20, "stress": 8, "morale": -6, "unflag": "affair", "flag": "affair_confessed", "crushClear": true } },
+      "bad": { "text": "She hears him out, nods, and leaves. Her things are gone by the weekend. Her friends make sure everybody knows why.", "fx": { "partner": { "status": "none" }, "morale": -14, "stress": 10, "image": -6, "family": -5, "mood": "Broken", "unflag": "affair", "flag": "affair_confessed", "crushClear": true } } },
+    { "id": "pt_public", "who": "partner", "icon": "camera", "label": "Go public: post {Pf} on your profile", "desc": "Official. Everyone will know.", "risk": "medium", "hint": "A public partner loves it. A private one may not.", "when": { "notFlags": ["couple_public"] }, "cd": 52,
+      "out": [
+        { "w": 1, "text": ["A photo of the two of them laughing at {PLACE}, no caption, just a heart. The comments arrive by the thousand. {Pf} reads every one of them.", "He posts her. The fan accounts lose their minds. {Pf}'s follower count triples overnight."], "fx": { "followers": 4000, "love": 4, "flag": "couple_public", "press": 1 } }
+      ] },
+    { "id": "pt_trip", "who": "partner", "icon": "plane", "label": "Take {Pf} away for the weekend", "desc": "Off-season or a free weekend: somewhere neither of you has been.", "risk": "low", "hint": "Expensive, restorative.", "when": { "partnerNear": true, "phase": ["off", "pre"] }, "cd": 10, "cost": 2,
+      "out": [ { "w": 1, "text": ["Three days somewhere with no football on the hotel TV. {Pf} sleeps in for the first time in months. He doesn't check the transfer news once. Almost once.", "They get lost, find a tiny restaurant by accident, and decide it's the best one in the world. The holiday photos are mostly of food."], "fx": { "love": 10, "stress": -7, "morale": 5, "pfm": 3, "wealthWeeks": 1.5 } } ] },
+    { "id": "pt_surprise", "who": "partner", "icon": "star", "label": "Surprise {Pf} at work", "desc": "Flowers, lunch, a terrible joke.", "risk": "medium", "hint": "Sweet, if her colleagues don't make it a circus.", "when": { "partnerNear": true }, "cd": 5,
+      "out": [
+        { "w": 3, "text": "He turns up at lunch with {FOOD} and flowers. Her colleagues pretend not to stare. {Pf} pretends not to be pleased. Both fail.", "fx": { "love": 6 } },
+        { "w": 1, "text": "Her whole office wants selfies. Her boss wants tickets. {Pf} spends the afternoon apologising to everyone, including him.", "fx": { "love": 1, "followers": 800 } }
+      ] },
+
+    { "id": "cr_text", "who": "crush", "icon": "message", "label": "Text {CRUSHf} back", "desc": "Something funny. Or something honest.", "risk": "low", "hint": "Keeps it going.", "cd": 1,
+      "out": [ { "w": 1, "text": ["He rewrites the message six times. She replies in thirty seconds with exactly the right emoji.", "They text until 2am about nothing at all. He's tired at training. He doesn't care."], "fx": { "crushHeat": 8, "morale": 2 } } ] },
+    { "id": "cr_date", "who": "crush", "icon": "heart", "label": "Ask {CRUSHf} out", "desc": "A real date. Nervous, single, why not.", "risk": "medium", "hint": "Could be the start of something.", "when": { "partner": ["none"] }, "cd": 2,
+      "out": [
+        { "w": 3, "text": ["Dinner at {PLACE}. {CRUSHf} is funnier than he expected and doesn't care about football at all, which is the best thing about her.", "Coffee turns into dinner turns into a walk turns into him missing his own curfew by an hour."], "fx": { "crushHeat": 15, "morale": 4, "stress": -2, "wealthWeeks": 0.2 } },
+        { "w": 1, "text": "The conversation never quite catches. She spends a lot of it looking at her phone. Maybe not.", "fx": { "crushHeat": -10, "morale": -2 } }
+      ] },
+    { "id": "cr_official", "who": "crush", "icon": "heart", "label": "Ask {CRUSHf} to be your girlfriend", "desc": "Make it official.", "risk": "medium", "hint": "Only if the chemistry is there.", "big": true, "when": { "partner": ["none"], "crushHeat": [45, 100] }, "cd": 4,
+      "check": { "stat": "crushHeat", "dc": 60 },
+      "ok": { "text": "She says she was going to ask him if he took one more week. It's official.", "fx": { "partnerFromCrush": true, "morale": 8, "stress": -3, "mood": "Confident" } },
+      "bad": { "text": "{CRUSHf} likes him. She just doesn't want anything serious right now. 'Can we keep it like this?'", "fx": { "crushHeat": -10, "morale": -4 } } },
+    { "id": "cr_flirt", "who": "crush", "icon": "spark", "label": "Flirt back with {CRUSHf}", "desc": "Harmless. Probably.", "risk": "high", "hint": "You have a partner. This is how it starts.", "when": { "partner": ["dating", "serious", "engaged", "married"] }, "cd": 2,
+      "out": [ { "w": 1, "text": ["One message becomes ten. He deletes them all before he gets home. That should tell him something.", "She says something that makes him laugh out loud in the car park. He hasn't laughed like that in a while. He doesn't like what that means."], "fx": { "crushHeat": 12, "love": -3, "stress": 3 } } ] },
+    { "id": "cr_secret", "who": "crush", "icon": "moon", "label": "Meet {CRUSHf} in secret", "desc": "A hotel bar across town. Nobody will know.", "risk": "extreme", "hint": "Somebody always knows.", "big": true, "when": { "partner": ["dating", "serious", "engaged", "married"], "crushHeat": [35, 100] }, "cd": 3,
+      "out": [
+        { "w": 3, "text": ["It happens. Afterwards he sits in the car for twenty minutes before he can drive home. {Pf} has left the light on for him.", "One drink, then another, then a room key. He tells himself it's a one-time thing. It isn't."], "fx": { "crushHeat": 15, "love": -6, "stress": 8, "flag": "affair", "mood": "Numb" } },
+        { "w": 1, "text": "A man at the bar recognises him and takes a photo without being subtle about it. {J} leaves through the kitchen.", "fx": { "crushHeat": 8, "stress": 12, "flag": "affair", "image": -3 } }
+      ] },
+    { "id": "cr_leave_for", "who": "crush", "icon": "heart", "label": "Leave {Pf} for {CRUSHf}", "desc": "The honest version of what you've been doing.", "risk": "extreme", "hint": "Your family, your fans and the papers will all have an opinion.", "big": true, "when": { "partner": ["dating", "serious", "engaged", "married"], "crushHeat": [60, 100] }, "cd": 26, "media": "breakup",
+      "out": [ { "w": 1, "text": ["He tells {Pf} the truth and walks out with one bag. A week later he's photographed holding hands with {CRUSHf}. The internet does the maths.", "It's ugly and quick. {Pf}'s family will never speak to him again. {CRUSHf} is waiting when he gets to her door."], "fx": { "partnerFromCrush": true, "image": -7, "family": -6, "morale": -2, "stress": 6, "unflag": "affair" } } ] },
+    { "id": "cr_end", "who": "crush", "icon": "close", "label": "Shut it down with {CRUSHf}", "desc": "Before it becomes something.", "risk": "low", "hint": "The right call, if it hurts.", "cd": 2,
+      "out": [ { "w": 1, "text": ["He writes the message, deletes her number, and deletes the message. Then he goes home and hugs {Pf} for a weirdly long time.", "'I can't do this,' he tells her. She says she understands. She doesn't, quite, but she lets it go."], "fx": { "crushClear": true, "stress": -3, "love": 3, "morale": 1, "unflag": "affair" } } ] },
+    { "id": "cr_ghost", "who": "crush", "icon": "close", "label": "Stop replying to {CRUSHf}", "desc": "The coward's exit.", "risk": "low", "hint": "Easy now. Might come back later.", "when": { "partner": ["none"] }, "cd": 2,
+      "out": [ { "w": 1, "text": "He just stops answering. Her last message sits there, unread, for weeks.", "fx": { "crushClear": true, "stress": -1 } } ] },
+
+    { "id": "ex_coffee", "who": "ex", "icon": "coffee", "label": "Meet {EXFLAME} for a coffee", "desc": "To clear the air. Supposedly.", "risk": "medium", "hint": "Closure, or complications.", "cd": 8,
+      "out": [
+        { "w": 2, "text": "They talk like two people who used to know each other. It's sad and kind, and when it's over he feels lighter.", "fx": { "exBond": 10, "morale": 3, "stress": -2 } },
+        { "w": 1, "text": "Someone photographs them laughing over coffee. 'BACK TOGETHER?' says a gossip page. {Pf} sees it before he gets home.", "fx": { "exBond": 6, "love": -6, "press": -1 } }
+      ] },
+    { "id": "ex_sorry", "who": "ex", "icon": "message", "label": "Apologise to {EXFLAME} for how it ended", "desc": "Long overdue.", "risk": "low", "hint": "Maybe she replies. Maybe she doesn't.", "cd": 26,
+      "out": [ { "w": 1, "text": ["He sends a long message. Three days later she replies with one line: 'Thank you. I needed that.'", "She doesn't reply. But he sent it, and that was the point."], "fx": { "exBond": 12, "morale": 3, "stress": -2 } } ] },
+    { "id": "ex_again", "who": "ex", "icon": "heart", "label": "Ask {EXFLAME} to try again", "desc": "Second chances happen. Sometimes.", "risk": "high", "hint": "Only if things ended well enough.", "big": true, "when": { "partner": ["none"] }, "cd": 26,
+      "out": [
+        { "w": 1, "text": "She laughs, then realises he's serious, then goes quiet. 'One dinner,' she says. 'One.' It's three dinners. They're back together.", "fx": { "partner": { "who": "F", "status": "dating" }, "morale": 8, "exBond": 20 } },
+        { "w": 2, "text": "'We were good,' she says, 'and we ended for a reason.' She wishes him well. She means it, which hurts more.", "fx": { "morale": -5, "exBond": -5 } }
+      ] },
+
+    { "id": "pa_lunch", "who": "parents", "icon": "home", "label": "Sunday lunch at home", "desc": "{MUM}'s cooking, {DAD}'s opinions about your last match.", "risk": "low", "hint": "Family and a full stomach.", "when": { "familyNear": true }, "cd": 2,
+      "out": [ { "w": 1, "text": ["{MUM} has made his favourite {FOOD}. {DAD} has a list of what he did wrong on Saturday, delivered with love and a toothpick.", "Lunch takes four hours. Nobody mentions football until dessert, which for {DAD} is a world record."], "fx": { "family": 7, "stress": -3, "morale": 2 } } ] },
+    { "id": "pa_fly_home", "who": "parents", "icon": "plane", "label": "Fly home for a weekend", "desc": "Two days in your own bed. Your old room hasn't changed.", "risk": "low", "hint": "Exhausting travel, full heart.", "when": { "familyNear": false }, "cd": 8, "cost": 2,
+      "out": [ { "w": 1, "text": ["His old room is exactly as he left it, posters and all. {MUM} cries at the airport both ways. {DAD} pretends he doesn't.", "The whole street knows he's home within an hour. He signs forty shirts, eats three dinners and sleeps eleven hours."], "fx": { "family": 12, "morale": 5, "stress": -3, "pfm": -3, "wealthWeeks": 0.6, "friends": 3 } } ] },
+    { "id": "pa_fly_over", "who": "parents", "icon": "plane", "label": "Fly {MUM} and {DAD} over to visit", "desc": "Show them your new life.", "risk": "low", "hint": "They'll rearrange your kitchen.", "when": { "familyNear": false }, "cd": 12,
+      "out": [ { "w": 1, "text": ["{DAD} photographs everything: the stadium, the supermarket, a bus. {MUM} reorganises his kitchen and fills his freezer for a month.", "They come to a match. {DAD} sings louder than the ultras. {MUM} watches only him, never the ball."], "fx": { "family": 12, "morale": 5, "stress": -2, "wealthWeeks": 0.8 } } ] },
+    { "id": "pa_lump", "who": "parents", "icon": "coin", "label": "Send {MUM} and {DAD} a lump sum", "desc": "For the roof, the debts, whatever they've been too proud to mention.", "risk": "low", "hint": "Money can't buy closeness. It helps.", "when": { "wealth": [2000, 999999999] }, "cd": 8,
+      "out": [ { "w": 1, "text": ["{DAD} calls to say it's too much. {MUM} calls an hour later to say thank you, and that {DAD} has already ordered the new roof.", "They try to send half of it back. He refuses. {MUM} uses it to fix the house and tells the whole neighbourhood who paid for it."], "fx": { "family": 8, "morale": 2, "wealthWeeks": 2 } } ] },
+    { "id": "pa_allowance", "who": "parents", "icon": "wallet", "label": "Start a monthly allowance for your parents", "desc": "So {DAD} can finally stop working nights.", "risk": "low", "hint": "A permanent monthly cost.", "big": true, "when": { "notFlags": ["parents_allowance"] }, "cd": 52,
+      "out": [ { "w": 1, "text": "{DAD} argues for twenty minutes. Then he hands in his notice. {MUM} says she hasn't seen him this relaxed since their wedding.", "fx": { "family": 12, "supportWeeks": 0.6, "morale": 4, "flag": "parents_allowance" } } ] },
+    { "id": "pa_movein", "who": "parents", "icon": "home", "label": "Ask your parents to move abroad with you", "desc": "Your country, their grandchildren-to-be, your cooking problem.", "risk": "medium", "hint": "They'll be close, and very involved.", "big": true, "when": { "abroad": true, "notFlags": ["family_moved_in"] }, "cd": 52,
+      "check": { "stat": "family", "dc": 60 },
+      "ok": { "text": "After weeks of debate, {MUM} and {DAD} pack up a lifetime. They arrive with eleven boxes, mostly food. Home is wherever they are.", "fx": { "family": 12, "stress": -4, "morale": 5, "flag": "family_moved_in", "wealthWeeks": 1.5 } },
+      "bad": { "text": "{DAD} won't leave his friends, his mosque, his football club. 'We'll visit,' he says. 'You come home.'", "fx": { "family": -2, "morale": -2 } } },
+    { "id": "pa_advice", "who": "parents", "icon": "message", "label": "Ask {DAD} for advice", "desc": "Not about football. About life.", "risk": "low", "hint": "Old wisdom, new problems.", "cd": 4,
+      "out": [ { "w": 1, "text": ["{DAD} talks for an hour about his own father, which he has never done. At the end he says: 'Be the same person when nobody is clapping.' {J} writes it down.", "{DAD} listens to the whole thing, says 'Hmm,' and then tells him exactly what he needed to hear in eight words."], "fx": { "family": 5, "stress": -3, "growth": ["mental"] } } ] },
+    { "id": "pa_stands", "who": "parents", "icon": "megaphone", "label": "Ask {DAD} to stop shouting at the referee", "desc": "From the stands. Every match. You can hear him on the TV.", "risk": "medium", "hint": "Pride is easily hurt.", "when": { "familyNear": true }, "cd": 26,
+      "out": [
+        { "w": 1, "text": "{DAD} is offended for exactly one day. At the next match he sits on his hands. Then he stands up and shouts at the linesman instead.", "fx": { "family": -1, "stress": -2 } },
+        { "w": 1, "text": "{DAD} goes quiet and then says, 'I'm just proud of you.' {J} feels terrible.", "fx": { "family": -4, "morale": -2 } }
+      ] },
+    { "id": "pa_holiday", "who": "parents", "icon": "plane", "label": "Take your parents on holiday", "desc": "They've never had one. Not a real one.", "risk": "low", "hint": "Off-season only. Costs a lot. Means more.", "when": { "phase": ["off"] }, "cd": 40, "cost": 2,
+      "out": [ { "w": 1, "text": ["{MUM} has never stayed in a hotel with a pool. She swims every morning at six. {DAD} complains about the prices and smiles in every photo.", "A week by the sea. {DAD} falls asleep on the beach and gets sunburnt in the shape of a newspaper. They talk about it for years."], "fx": { "family": 15, "morale": 6, "stress": -6, "wealthWeeks": 2 } } ] },
+    { "id": "pa_checkup", "who": "parents", "icon": "pulse", "label": "Book your parents a full health check-up", "desc": "{DAD} hasn't seen a doctor in a decade.", "risk": "low", "hint": "Peace of mind.", "when": { "dadAge": [50, 99] }, "cd": 52,
+      "out": [
+        { "w": 3, "text": "Blood pressure a bit high, cholesterol a bit higher, nothing scary. {DAD} grumbles about the diet he's been given. {MUM} enforces it with joy.", "fx": { "family": 6, "stress": -3 } },
+        { "w": 1, "text": "The doctor finds something early: early enough to treat. {MUM} holds his hand in the waiting room and says he saved his father's life.", "fx": { "family": 10, "stress": 2, "flag": "dad_checkup" } }
+      ] },
+
+    { "id": "sb_day", "who": "sibling", "icon": "home", "label": "Spend a whole day with {SIB}", "desc": "No phones. Like when you were kids.", "risk": "low", "hint": "{SIBhe} looks up to you more than you know.", "when": { "familyNear": true }, "cd": 3,
+      "out": [ { "w": 1, "text": ["They play FIFA for five hours. {SIB} wins and makes him promise not to tell anyone. He tells everyone.", "{SIB} shows him around {SIBhis} {SIBplace}. Everyone wants a photo with {J}; {SIB} pretends to be annoyed and is absolutely thrilled."], "fx": { "family": 5, "sibBond": 10, "stress": -3, "morale": 2 } } ] },
+    { "id": "sb_call", "who": "sibling", "icon": "phone", "label": "Call {SIB} just to talk", "desc": "Not about money, not about football.", "risk": "low", "hint": "Small thing, big signal.", "cd": 2,
+      "out": [ { "w": 1, "text": ["{SIB} talks about {SIBhis} {SIBplace}, a show {SIBhe} loves, a friend who betrayed {SIBhim}. Forty minutes. It's the longest they've talked in a year.", "{SIB} picks up suspicious: 'What do you want?' Nothing, he says. It takes {SIBhim} ten minutes to believe it."], "fx": { "sibBond": 7, "family": 3 } } ] },
+    { "id": "sb_school", "who": "sibling", "icon": "book", "label": "Pay for {SIB}'s studies", "desc": "Tuition, books, a laptop that isn't held together with tape.", "risk": "low", "hint": "An investment in the family.", "when": { "sibAge": [14, 24] }, "cd": 52,
+      "out": [ { "w": 1, "text": ["{SIB} cries on the phone, which {SIBhe} hasn't done since {SIBhe} was nine. {MUM} cries too. Everyone cries.", "The tuition is paid. {SIB} sends a photo of the enrolment letter with eleven exclamation marks."], "fx": { "family": 10, "sibBond": 15, "morale": 4, "wealthWeeks": 4, "flag": "paid_sibling_school" } } ] },
+    { "id": "sb_tough", "who": "sibling", "icon": "alert", "label": "Have a tough conversation with {SIB}", "desc": "About the friends, the grades, the attitude.", "risk": "medium", "hint": "Big-brother energy. It may land or backfire.", "when": { "sibAge": [13, 25] }, "cd": 12,
+      "out": [
+        { "w": 1, "text": "{SIB} rolls {SIBhis} eyes through the whole thing. A week later {MUM} says {SIBhe} has dropped the bad crowd. Apparently someone got through.", "fx": { "sibBond": 4, "family": 4 } },
+        { "w": 1, "text": "'You're never here and now you want to parent me?' {SIB} hangs up. {SIBhe} has a point.", "fx": { "sibBond": -10, "family": -3, "stress": 2 } }
+      ] },
+    { "id": "sb_matchday", "who": "sibling", "icon": "ball", "label": "Bring {SIB} to a matchday", "desc": "Tunnel, dressing room, the whole experience.", "risk": "low", "hint": "{SIBhe}'ll remember it forever.", "when": { "freeAgent": false }, "cd": 12,
+      "out": [ { "w": 1, "text": ["{SIB} meets the whole squad. {T} gives {SIBhim} a signed shirt. {SIB} doesn't take it off for a week.", "{SIB} walks out of the tunnel with the mascots, far too old for it and loving it anyway."], "fx": { "sibBond": 12, "family": 5, "dressing": 1 } } ] },
+    { "id": "sb_name", "who": "sibling", "icon": "alert", "label": "Confront {SIB} about using your name", "desc": "Free entry to clubs, discounts, 'do you know who my brother is'.", "risk": "medium", "hint": "Needs saying. Will sting.", "when": { "sibAge": [18, 40], "rep": [15, 100] }, "cd": 26,
+      "out": [
+        { "w": 1, "text": "{SIB} is embarrassed and angry at the same time. But the stories stop.", "fx": { "sibBond": -4, "image": 2 } },
+        { "w": 1, "text": "{SIB} storms out: 'Everything is always about you.' {MUM} takes {SIB}'s side, as always.", "fx": { "sibBond": -12, "family": -5, "stress": 3 } }
+      ] },
+
+    { "id": "bf_night", "who": "bestfriend", "icon": "friends", "label": "Lads' night with {BFf}", "desc": "Food, a game on TV, talk about everything.", "risk": "low", "hint": "The friend who knew you before.", "when": { "familyNear": true }, "cd": 2,
+      "out": [
+        { "w": 3, "text": ["{BFf} roasts him for an hour about a miss from three weeks ago. He's never felt more normal.", "They eat {FOOD} out of the box and watch {SHOW}. {BFf} talks about his work as {BFjob}; {J} realises he's jealous of how simple it sounds."], "fx": { "friends": 7, "stress": -4, "morale": 3 } },
+        { "w": 1, "text": "One drink becomes a big night. {J} is sluggish at training. {BFf} sends a photo from 3am that he deletes immediately.", "fx": { "friends": 5, "stress": -2, "pfm": -4, "trust": -1 } }
+      ] },
+    { "id": "bf_flyover", "who": "bestfriend", "icon": "plane", "label": "Fly {BFf} out to visit", "desc": "Show him the city, the stadium, the madness.", "risk": "low", "hint": "Expensive cure for homesickness.", "when": { "familyNear": false }, "cd": 12,
+      "out": [ { "w": 1, "text": ["{BFf} spends the first day just staring at things. By day three he's on first-name terms with the barista and half the squad.", "{BFf} sits in the stands for a match and sends live commentary to their old group chat. It's the funniest thing anyone's read all year."], "fx": { "friends": 12, "stress": -5, "morale": 5, "wealthWeeks": 0.5 } } ] },
+    { "id": "bf_invest", "who": "bestfriend", "icon": "briefcase", "label": "Invest in {BFf}'s business idea", "desc": "He's wanted his own place for years. He's never asked you.", "risk": "high", "hint": "Friends and money: careful.", "when": { "wealth": [8000, 999999999], "notFlags": ["friend_business"] }, "cd": 52, "big": true,
+      "out": [
+        { "w": 2, "text": "{BFf} opens the doors three months later. It's small and busy and has a photo of the two of them at age ten behind the counter.", "fx": { "friends": 12, "morale": 4, "wealthWeeks": 6, "flag": "friend_business" } },
+        { "w": 1, "text": "It doesn't work. The rent is too high, the street too quiet. {BFf} can't look him in the eye. 'I'll pay you back.' He won't; it doesn't matter.", "fx": { "friends": 3, "stress": 3, "wealthWeeks": 6, "flag": "friend_business" } }
+      ] },
+    { "id": "bf_honest", "who": "bestfriend", "icon": "message", "label": "Ask {BFf} for the honest truth about you", "desc": "Has fame changed you?", "risk": "medium", "hint": "He'll tell you. That's the problem.", "when": { "rep": [10, 100] }, "cd": 26,
+      "out": [
+        { "w": 1, "text": "'You're still you,' {BFf} says. 'You just answer your phone less.' Fair.", "fx": { "friends": 5, "stress": -2 } },
+        { "w": 1, "text": "{BFf} takes a breath and tells him: the lateness, the cancelled plans, the way he talks about money now. It stings for days. It's also true.", "fx": { "friends": 6, "morale": -3, "growth": ["mental"] } }
+      ] },
+    { "id": "bf_hire", "who": "bestfriend", "icon": "briefcase", "label": "Hire {BFf} as your assistant", "desc": "Driver, organiser, the only person you trust with your calendar.", "risk": "medium", "hint": "Work can ruin a friendship. Or make it.", "when": { "wealth": [20000, 999999999], "notFlags": ["friend_employed"] }, "cd": 52, "big": true,
+      "out": [
+        { "w": 2, "text": "{BFf} quits his job as {BFjob} on the spot. He's organised, loyal and brutally honest. Best decision of the year.", "fx": { "friends": 8, "stress": -4, "flag": "friend_employed", "supportWeeks": 0.3 } },
+        { "w": 1, "text": "It's weird being his boss. They argue about a missed flight like an old married couple. They'll survive it. Probably.", "fx": { "friends": -2, "stress": 1, "flag": "friend_employed", "supportWeeks": 0.3 } }
+      ] },
+    { "id": "bf_cut", "who": "bestfriend", "icon": "close", "label": "Drift away from {BFf}", "desc": "Different worlds now. Maybe it's time.", "risk": "high", "hint": "Saves time. Costs something you can't buy back.", "cd": 26,
+      "out": [ { "w": 1, "text": "He stops replying, stops visiting. {BFf} sends one last message: 'Proud of you, bro. Always.' He doesn't answer that either.", "fx": { "friends": -15, "stress": -1, "morale": -4 } } ] },
+
+    { "id": "kd_park", "who": "kid", "icon": "ball", "label": "Take {KID} to the park", "desc": "A ball, a swing, a whole afternoon.", "risk": "low", "hint": "Pure joy.", "when": { "hasKid": true, "partnerNear": true }, "cd": 1,
+      "out": [ { "w": 1, "text": ["{KID} kicks the ball the wrong way and celebrates like a cup final. {J} celebrates too.", "Other parents recognise him and pretend they don't. {KID} tells every one of them who {J} is anyway."], "fx": { "family": 6, "stress": -5, "morale": 5, "love": 2 } } ] },
+    { "id": "kd_school", "who": "kid", "icon": "book", "label": "Do the school run with {KID}", "desc": "Normal dad, for one morning.", "risk": "low", "hint": "The other parents will talk. Let them.", "when": { "hasKid": true, "kidAge": [4, 18] }, "cd": 2,
+      "out": [ { "w": 1, "text": "{KID} makes him walk in, not just drop off. Half the class wants a selfie. The teacher wants tickets. {KID} has never been prouder.", "fx": { "family": 5, "stress": -2, "love": 2 } } ] },
+    { "id": "kd_training", "who": "kid", "icon": "shirt", "label": "Bring {KID} to training", "desc": "Let the squad meet the boss.", "risk": "low", "hint": "Everyone loves a kid at training.", "when": { "hasKid": true, "freeAgent": false }, "cd": 8,
+      "out": [ { "w": 1, "text": "{KID} nutmegs the captain and the whole squad goes wild. {M} pretends to sign {KID} on a napkin.", "fx": { "family": 5, "dressing": 2, "morale": 4 } } ] },
+
+    { "id": "tm_extra", "who": "teammate", "icon": "dumbbell", "label": "Extra training with {T}", "desc": "After the session, when everyone else has gone.", "risk": "low", "hint": "Build a bond, sharpen up.", "cd": 2,
+      "out": [ { "w": 1, "text": ["{T} and {J} stay for an extra hour of finishing, one-twos and penalties. The kit man has to turn the lights off on them.", "They work on {J}'s weaker foot until it isn't so weak. {Tl} is a patient teacher and a terrible loser."], "fx": { "bond": 8, "growth": ["rel"], "pfm": -2, "trust": 1 } } ] },
+    { "id": "tm_dinner", "who": "teammate", "icon": "home", "label": "Invite {T} round for dinner", "desc": "Get to know the person, not the player.", "risk": "low", "hint": "Teammates become friends this way.", "cd": 3,
+      "out": [ { "w": 1, "text": ["{T} brings his family and a dessert nobody can pronounce. The conversation goes from football to fathers to the future. A friendship starts.", "{Tl} turns out to be hilarious away from the training ground. They talk until midnight."], "fx": { "bond": 12, "dressing": 1, "friends": 2, "stress": -2 } } ] },
+    { "id": "tm_gaming", "who": "teammate", "icon": "gamepad", "label": "Gaming night online with {T}", "desc": "{Tl} lives on his console. Join him.", "risk": "low", "hint": "Easy bonding.", "trait": "gamer", "cd": 2,
+      "out": [ { "w": 1, "text": ["Six hours of online games. {T} is genuinely terrifying with a controller. They're a duo now.", "They stream it. Ten thousand people watch two professional footballers lose to a twelve-year-old."], "fx": { "bond": 12, "stress": -3, "followers": 600, "pfm": -1 } } ] },
+    { "id": "tm_party", "who": "teammate", "icon": "moon", "label": "Go out with {T}", "desc": "{Tl} knows every VIP table in the city.", "risk": "high", "hint": "Fun, risky, very visible.", "trait": "partyboy", "cd": 3,
+      "out": [
+        { "w": 2, "text": "A big night. {T} knows everyone and introduces {J} as 'the future'. Home at 4am. Training at 9 is very long.", "fx": { "bond": 12, "stress": -3, "pfm": -6, "trust": -1, "flag": "party_regular" } },
+        { "w": 1, "text": "Someone films them on a table at 3am. The video does numbers. The manager's office does not.", "fx": { "bond": 10, "image": -5, "trust": -5, "press": -2, "followers": 3000, "flag": "party_regular" } }
+      ] },
+    { "id": "tm_pray", "who": "teammate", "icon": "moon", "label": "Go to prayers with {T}", "desc": "{Tl}'s faith keeps him steady. Join him this week.", "risk": "low", "hint": "Quiet company.", "trait": "devout", "cd": 2,
+      "out": [ { "w": 1, "text": "They go together and say very little afterwards. They don't need to. {J} feels calmer than he has in weeks.", "fx": { "bond": 10, "stress": -4, "morale": 2 } } ] },
+    { "id": "tm_prank", "who": "teammate", "icon": "spark", "label": "Start a prank war with {T}", "desc": "{Tl} is the dressing-room joker. Strike first.", "risk": "medium", "hint": "Respect, or retaliation.", "trait": "joker", "cd": 4,
+      "out": [
+        { "w": 2, "text": "He fills {T}'s car with balloons. {T} retaliates by replacing his shampoo with blue dye. The squad has never laughed harder.", "fx": { "bond": 10, "dressing": 3, "morale": 3 } },
+        { "w": 1, "text": "The prank goes slightly too far and the manager's car gets involved. Fines for both. Worth it, says {T}.", "fx": { "bond": 12, "trust": -3, "dressing": 2, "wealthWeeks": 0.3 } }
+      ] },
+    { "id": "tm_advice", "who": "teammate", "icon": "message", "label": "Ask {T} for advice", "desc": "He's older and has seen everything.", "risk": "low", "hint": "Wisdom from the senior pros.", "ageRel": "older", "cd": 4,
+      "out": [ { "w": 1, "text": ["{T} talks about his first contract, the agent who robbed him, the injury that nearly ended him. 'Look after your body and your money,' he says. 'In that order.'", "{Tl} watches a clip of {J}'s game with him and points out three things nobody else had. Gold."], "fx": { "bond": 8, "growth": ["mental"], "stress": -2 } } ] },
+    { "id": "tm_mentor", "who": "teammate", "icon": "star", "label": "Take {T} under your wing", "desc": "He's young and lost. You remember that feeling.", "risk": "low", "hint": "The dressing room notices who looks after the kids.", "ageRel": "younger", "when": { "age": [20, 45] }, "cd": 4,
+      "out": [ { "w": 1, "text": ["He shows {T} the shortcuts: which coach to listen to, which journalist to avoid, where to eat. {T} follows him around like a duckling.", "{T} finally scores in training after weeks of nothing and runs straight to {J}. The squad sees it."], "fx": { "bond": 12, "dressing": 3, "morale": 2, "image": 1 } } ] },
+    { "id": "tm_confront", "who": "teammate", "icon": "alert", "label": "Confront {T}", "desc": "Things between you have gone too far.", "risk": "high", "hint": "Clear the air, or start a war.", "rel": ["rival", "enemy"], "cd": 6,
+      "check": { "stat": "mental", "dc": 58 },
+      "ok": { "text": "He says it calmly, in private, to {T}'s face. {T} blusters, then shrugs. They'll never be friends, but they understand each other now.", "fx": { "bond": 15, "stress": -3, "dressing": 2 } },
+      "bad": { "text": "It turns into shouting, then shoving, then three teammates pulling them apart. The manager hears about it within the hour.", "fx": { "bond": -10, "dressing": -3, "trust": -4, "stress": 5 } } },
+    { "id": "tm_peace", "who": "teammate", "icon": "heart", "label": "Make peace with {T}", "desc": "A coffee, an apology, a handshake.", "risk": "medium", "hint": "It takes two.", "rel": ["rival", "enemy"], "cd": 6,
+      "out": [
+        { "w": 2, "text": "{T} accepts the coffee and, after a long pause, the handshake. The dressing room breathes out.", "fx": { "bond": 20, "dressing": 3, "stress": -3 } },
+        { "w": 1, "text": "{T} looks at the outstretched hand and walks past it. Message received.", "fx": { "bond": -3, "morale": -2 } }
+      ] },
+    { "id": "tm_backpress", "who": "teammate", "icon": "mic", "label": "Back {T} publicly", "desc": "He's getting slaughtered online. Stand up for him.", "risk": "low", "hint": "Teammates remember who defended them.", "cd": 8,
+      "out": [ { "w": 1, "text": ["In the mixed zone {J} says {T} is the best teammate he's ever had and anyone who says otherwise can come and say it to him. {T} texts him a single heart.", "He posts a photo with {T} and a caption that ends the pile-on. The fans follow his lead."], "fx": { "bond": 15, "dressing": 4, "press": 1, "fans": 1 } } ] },
+    { "id": "tm_snitch", "who": "teammate", "icon": "whistle", "label": "Report {T} to the manager", "desc": "He's been breaking the rules. Somebody should say something.", "risk": "high", "hint": "The manager will be grateful. The squad will find out.", "cd": 12,
+      "out": [
+        { "w": 1, "text": "{M} thanks him and deals with it quietly. {T} never finds out who talked.", "fx": { "trust": 5, "bond": -2 } },
+        { "w": 2, "text": "{T} is fined and dropped. By Thursday everyone knows who told. The group chat goes quiet whenever {J} types.", "fx": { "trust": 4, "bond": -25, "dressing": -8, "stress": 4 } }
+      ] },
+    { "id": "tm_lend", "who": "teammate", "icon": "coin", "label": "Lend {T} money", "desc": "He's in trouble and too proud to ask twice.", "risk": "medium", "hint": "Loyalty bought. Maybe repaid.", "cd": 26,
+      "out": [
+        { "w": 2, "text": "{T} pays it back two months later with a bottle of something expensive. Friends for life.", "fx": { "bond": 18, "wealthWeeks": 0.5 } },
+        { "w": 1, "text": "The money disappears and so, a little, does {T}. He avoids eye contact in the canteen.", "fx": { "bond": 4, "wealthWeeks": 1.5, "stress": 2 } }
+      ] },
+    { "id": "tm_shirt", "who": "teammate", "icon": "shirt", "label": "Tell {T} the shirt is yours", "desc": "He plays your position. Make it clear.", "risk": "high", "hint": "Healthy rivalry, or a feud.", "competitor": true, "cd": 12,
+      "out": [
+        { "w": 1, "text": "{T} grins: 'Good. Then prove it.' Training is brutal for a month. Both of them get better.", "fx": { "bond": -4, "growth": ["rel"], "stress": 2 } },
+        { "w": 1, "text": "{T} doesn't say a word. Then he goes to the manager. Then to the press. A rivalry is born.", "fx": { "bond": -18, "dressing": -2, "stress": 4 } }
+      ] },
+    { "id": "tm_team_up", "who": "teammate", "icon": "users", "label": "Suggest you and {T} push each other", "desc": "Same position, same goal. Work together instead.", "risk": "low", "hint": "Grown-up rivalry.", "competitor": true, "cd": 8,
+      "out": [ { "w": 1, "text": "They share clips, drills and a weekly target. Whoever starts, the other one helps. The coaches can't stop talking about it.", "fx": { "bond": 15, "trust": 2, "growth": ["rel"] } } ] },
+    { "id": "cp_back", "who": "captain", "icon": "users", "label": "Ask {T} to back you with the manager", "desc": "The captain's word carries weight.", "risk": "medium", "hint": "Only if he rates you.", "cd": 12,
+      "check": { "stat": "bond", "dc": 55 },
+      "ok": { "text": "{T} has a quiet word with {M}. On Monday the manager calls {J} in for a chat about his role. Captains matter.", "fx": { "trust": 7, "bond": 3 } },
+      "bad": { "text": "{T} says he doesn't get involved in selection. He says it kindly. It still stings.", "fx": { "bond": -3, "morale": -2 } } },
+    { "id": "cp_challenge", "who": "captain", "icon": "flag", "label": "Challenge {T} for the armband", "desc": "You think you should lead this team.", "risk": "extreme", "hint": "Only a senior player can pull this off.", "big": true, "when": { "age": [23, 45], "apps": [80, 9999], "role": ["starter"] }, "cd": 52,
+      "check": { "stat": "dressing", "dc": 74 },
+      "ok": { "text": "The squad votes. It's close. {J} is the new captain, and {T} is the first to shake his hand. That says a lot about {T}.", "fx": { "flag": "captain", "dressing": 4, "trust": 4, "fans": 4, "rep": 1, "bond": -8 } },
+      "bad": { "text": "The squad backs {T}. Nobody says anything, but everybody saw {J} reach for something and miss.", "fx": { "dressing": -8, "bond": -20, "trust": -3, "morale": -6 } } },
+
+    { "id": "mg_minutes", "who": "manager", "icon": "whistle", "label": "Ask {M} for more minutes", "desc": "Knock on the door. Make your case.", "risk": "medium", "hint": "Respect if you're ready, irritation if you're not.", "when": { "role": ["bench", "outcast", "rotation"] }, "cd": 6,
+      "check": { "stat": "trust", "dc": 42 },
+      "ok": { "text": ["{Mf} listens, then nods. 'Show me in training this week and you start on Saturday.'", "{Mf} says he likes players who ask. He gives {J} three specific things to improve and a promise."], "fx": { "trust": 6, "morale": 3 } },
+      "bad": { "text": ["{Mf} doesn't look up from his laptop. 'When I think you're ready, you'll know.'", "{Mf} points at the tactics board: 'Learn this first. Then knock again.'"], "fx": { "trust": -3, "morale": -3 } } },
+    { "id": "mg_feedback", "who": "manager", "icon": "chart", "label": "Ask {M} for honest feedback", "desc": "What does he actually think?", "risk": "low", "hint": "Information is power.", "cd": 6,
+      "out": [ { "w": 1, "text": ["{Mf} pulls up six clips: two good, four bad. He's specific, fair and terrifying. {J} learns more in twenty minutes than in a month.", "'Your attitude is perfect,' {Mf} says. 'Your positioning is a crime.' Then he shows him how to fix it."], "fx": { "trust": 3, "tacticalFit": 6, "growth": ["mental"] } } ] },
+    { "id": "mg_video", "who": "manager", "icon": "video", "label": "Study the next opponent with {M}'s staff", "desc": "Voluntary video session.", "risk": "low", "hint": "The staff notice who turns up.", "cd": 2,
+      "out": [ { "w": 1, "text": "Two hours of clips on the next opponent. {J} spots something the analysts missed. {Mf} raises an eyebrow, which is high praise.", "fx": { "trust": 2, "tacticalFit": 5, "form": 0.1 } } ] },
+    { "id": "mg_apologise", "who": "manager", "icon": "heart", "label": "Apologise to {M}", "desc": "You know what for.", "risk": "low", "hint": "Swallow your pride.", "when": { "trust": [0, 45] }, "cd": 6,
+      "out": [
+        { "w": 2, "text": "{Mf} accepts the apology with a grunt and a handshake. The air clears a little.", "fx": { "trust": 7, "stress": -2 } },
+        { "w": 1, "text": "{Mf} says apologies are words. He wants to see it in training.", "fx": { "trust": 2 } }
+      ] },
+    { "id": "mg_position", "who": "manager", "icon": "map", "label": "Ask {M} to play you in a different role", "desc": "You think you'd be better elsewhere on the pitch.", "risk": "medium", "hint": "Managers don't love being told their job.", "cd": 12,
+      "out": [
+        { "w": 1, "text": "{Mf} thinks about it, tries it in training, and agrees it's worth a go. Tactical fit improves.", "fx": { "tacticalFit": 10, "trust": 2 } },
+        { "w": 1, "text": "'You play where I tell you to play.' Conversation over.", "fx": { "trust": -4, "tacticalFit": -3 } }
+      ] },
+    { "id": "mg_request", "who": "manager", "icon": "letter", "label": "Hand in a transfer request", "desc": "In writing. No way back.", "risk": "extreme", "hint": "You'll be listed. Bridges burn.", "big": true, "when": { "listed": false, "freeAgent": false }, "cd": 26,
+      "out": [ { "w": 1, "text": "{Mf} reads the letter, folds it, and says, 'Fine.' By evening the club confirms {J} is available for transfer. The fans' forum melts down.", "fx": { "listed": true, "trust": -12, "board": -8, "fans": -10, "dressing": -3, "stress": 5 } } ] },
+
+    { "id": "pr_commit", "who": "president", "icon": "building", "label": "Tell {PRES} you're committed to the club", "desc": "In his office, looking him in the eye.", "risk": "low", "hint": "The board likes loyalty.", "cd": 12,
+      "out": [ { "w": 1, "text": "{PRESl} shakes his hand for a long time. 'That's what I like to hear.' It will be remembered at contract time.", "fx": { "board": 7, "fans": 1 } } ] },
+    { "id": "pr_raise", "who": "president", "icon": "coin", "label": "Ask {PRES} for a pay rise", "desc": "Mid-contract. Bold.", "risk": "high", "hint": "Only if you're worth more than you're paid.", "when": { "role": ["starter"], "form": [6.8, 10] }, "cd": 26,
+      "check": { "stat": "rep", "dc": 30 },
+      "ok": { "text": "{PRESl} sighs, makes a phone call, and comes back with a number. Not everything {J} wanted, but a real raise.", "fx": { "wageRaise": 15, "board": -2, "morale": 4 } },
+      "bad": { "text": "{PRESl} says the club honours its contracts and expects its players to do the same. The meeting lasts four minutes.", "fx": { "board": -6, "morale": -3 } } },
+    { "id": "pr_extend", "who": "president", "icon": "letter", "label": "Ask {PRES} to talk about a new contract", "desc": "Get ahead of it.", "risk": "medium", "hint": "A renewal offer, if the club rates you.", "when": { "contractYears": [0.6, 3], "trust": [40, 100] }, "cd": 26,
+      "out": [ { "w": 1, "text": "{PRESl} says he'll have the papers drawn up. 'We want you here.'", "fx": { "renewalPush": true, "board": 2 } } ] },
+    { "id": "pr_community", "who": "president", "icon": "megaphone", "label": "Volunteer for the club's community work", "desc": "School visits, hospital visits, the youth tournament.", "risk": "low", "hint": "The board, the fans and your image all like it.", "cd": 6,
+      "out": [ { "w": 1, "text": ["A morning at a primary school. Two hundred kids, one ball, total chaos. {PRESl} posts the photos himself.", "He spends Saturday morning refereeing an under-10s tournament and gets shouted at by a parent. Character-building."], "fx": { "board": 4, "fans": 3, "image": 3, "pfm": -1 } } ] },
+
+    { "id": "jr_exclusive", "who": "journalist", "icon": "mic", "label": "Give {JR} an exclusive interview", "desc": "A long sit-down for {OUT}.", "risk": "medium", "hint": "Good press if it goes well. Headlines either way.", "when": { "rep": [4, 100] }, "cd": 12, "media": "interview",
+      "out": [
+        { "w": 3, "text": ["The piece runs over three pages. It's thoughtful and kind and uses the word 'humble' four times.", "{JRl} lets him talk about his family and his first club. The interview goes viral for all the right reasons."], "fx": { "press": 8, "followers": 2500, "image": 2, "rep": 0.5 } },
+        { "w": 1, "text": "One throwaway line about the manager becomes the headline. The other two thousand words disappear.", "fx": { "press": 3, "followers": 3000, "trust": -5, "stress": 3 } }
+      ] },
+    { "id": "jr_offrecord", "who": "journalist", "icon": "coffee", "label": "Off-the-record dinner with {JR}", "desc": "Build a relationship. Say nothing you'd regret.", "risk": "medium", "hint": "Journalists are friends until they need a story.", "cd": 8,
+      "out": [
+        { "w": 3, "text": "Dinner, gossip, no notebook. {JRl} owes him one now. Journalists remember that.", "fx": { "press": 7 } },
+        { "w": 1, "text": "Something he said 'off the record' turns up as 'a source close to the player'. Lesson learned.", "fx": { "press": 2, "trust": -3, "dressing": -2 } }
+      ] },
+    { "id": "jr_leak", "who": "journalist", "icon": "alert", "label": "Leak a story to {JR} about the club", "desc": "The dressing-room row. The board's money problems.", "risk": "extreme", "hint": "Press love you. If the club finds out, they won't.", "cd": 26,
+      "out": [
+        { "w": 2, "text": "The story breaks with no fingerprints. {JRl} sends a thank-you message from a burner number.", "fx": { "press": 10, "board": -2 } },
+        { "w": 1, "text": "The club launches an investigation and finds the leak in a day. {PRESl} calls him in. The meeting is short and cold.", "fx": { "press": 6, "board": -15, "trust": -8, "dressing": -6, "image": -3 } }
+      ] },
+    { "id": "jr_complain", "who": "journalist", "icon": "newspaper", "label": "Complain to {JR} about an article", "desc": "That piece was unfair, and you're telling him.", "risk": "medium", "hint": "Satisfying. Rarely smart.", "cd": 8,
+      "out": [
+        { "w": 1, "text": "{JRl} listens and agrees, sort of. The next piece is noticeably kinder.", "fx": { "press": 2, "stress": -2 } },
+        { "w": 1, "text": "{JRl} writes a column about players who can't take criticism. Guess who's in it.", "fx": { "press": -6, "image": -2, "stress": 2 } }
+      ] },
+
+    { "id": "ag_abroad", "who": "agent", "icon": "map", "label": "Tell {A} to find you a club abroad", "desc": "Make the calls. You're ready.", "risk": "medium", "hint": "Offers from abroad get much likelier.", "when": { "wantsAbroad": false }, "cd": 12,
+      "out": [ { "w": 1, "text": "{Al} grins. 'Finally.' By the end of the week three foreign scouts have his highlights.", "fx": { "abroadWish": true, "agentBond": 5 } } ] },
+    { "id": "ag_stay", "who": "agent", "icon": "home", "label": "Tell {A} you want to stay put", "desc": "No moves this window.", "risk": "low", "hint": "Calmer, fewer offers.", "when": { "wantsAbroad": true }, "cd": 12,
+      "out": [ { "w": 1, "text": "{Al} sighs and puts the foreign contacts back in the drawer. For now.", "fx": { "abroadWish": false, "stress": -2 } } ] },
+    { "id": "ag_brands", "who": "agent", "icon": "briefcase", "label": "Ask {A} to pitch you to brands", "desc": "Sponsorships. Make some calls.", "risk": "low", "hint": "A brand may approach you right away.", "when": { "rep": [6, 100] }, "cd": 8,
+      "out": [ { "w": 1, "text": "{Al} spends a week on the phone. 'Something's coming,' he says.", "fx": { "sponsorPitch": true, "agentBond": 3 } } ] },
+    { "id": "ag_contract", "who": "agent", "icon": "letter", "label": "Ask {A} to push for a new contract", "desc": "You're outperforming your deal.", "risk": "medium", "hint": "A renewal offer, if the club wants you.", "when": { "freeAgent": false, "trust": [45, 100], "contractYears": [0.6, 4] }, "cd": 26,
+      "out": [
+        { "w": 2, "text": "{Al} makes a call. The club agrees to talk.", "fx": { "renewalPush": true, "agentBond": 3 } },
+        { "w": 1, "text": "The club says they'll talk when the contract is closer to running out. {Al} says that's code for 'not yet'.", "fx": { "board": -1 } }
+      ] },
+    { "id": "ag_cut", "who": "agent", "icon": "coin", "label": "Ask {A} to lower his cut", "desc": "He's taking a lot for not much.", "risk": "medium", "hint": "Saves money. Strains the relationship.", "when": { "agent": true }, "cd": 52,
+      "out": [
+        { "w": 1, "text": "{Al} grumbles and agrees to a lower percentage. He'll remember it.", "fx": { "agentCut": -2, "agentBond": -10 } },
+        { "w": 1, "text": "{Al} refuses. 'You want a cheaper agent, find one.'", "fx": { "agentBond": -8, "stress": 2 } }
+      ] },
+    { "id": "ag_fire", "who": "agent", "icon": "close", "label": "Fire {A}", "desc": "It's over. You'll manage yourself, or find someone better.", "risk": "high", "hint": "No agent means fewer offers and worse deals.", "big": true, "cd": 26,
+      "out": [ { "w": 1, "text": "{Al} takes it badly and sends a long email about loyalty and an invoice for 'outstanding services'.", "fx": { "agent": null, "stress": 2, "wealthWeeks": 0.5 } } ] }
+  ]
+}

@@ -1,0 +1,199 @@
+{
+  "scenarios": [
+    { "id": "b2_second_opinion", "cat": "body", "trigger": "longInjury", "w": 5, "cd": 60,
+      "title": "Second Opinion", "text": "The club doctor says surgery and six months. A famous specialist abroad says no surgery, rest and rehab, four months. The club is paying for one of them.",
+      "prompt": "Two doctors, two opinions.",
+      "choices": [
+        { "label": "Trust the club doctor", "desc": "Surgery. Thorough.", "risk": "low", "hint": "Slower, safer.", "text": "Surgery goes well. The rehab is long and boring and works.", "fx": { "trust": 2, "pfm": 4 } },
+        { "label": "Fly to the specialist", "desc": "Pay for it yourself.", "risk": "medium", "hint": "Faster, if he's right.", "out": [ { "w": 2, "text": "The specialist is right. He's back a month early, stronger than before.", "fx": { "wealth": -6000, "pfm": 6, "board": -2 } }, { "w": 1, "text": "The specialist was wrong. He needs the surgery anyway, a month later. Two months lost.", "fx": { "wealth": -6000, "stress": 6, "board": -4 } } ] }
+      ] },
+    { "id": "b2_rehab_loneliness", "cat": "body", "w": 5, "cd": 60, "when": { "injured": true },
+      "title": "The Loneliest Room", "text": "Week six of rehab. The squad trains on the pitch outside the window while he does leg raises with a resistance band. Nobody texts any more. The physio is the only person he talks to.",
+      "prompt": "Rehab is lonely.",
+      "choices": [
+        { "label": "Go to every match and every team meal", "desc": "Stay part of it.", "risk": "low", "hint": "Belonging.", "text": "He goes to everything: matches, meals, meetings. The squad starts saving him a seat again.", "fx": { "dressing": 4, "morale": 3 } },
+        { "label": "Learn something new", "desc": "Use the time.", "risk": "low", "hint": "Growth off the pitch.", "text": "He starts an online course and studies the game from the stands. He comes back smarter.", "fx": { "growth": ["mental"], "tacticalFit": 4, "morale": 2 } },
+        { "label": "Disappear into your phone", "desc": "Scroll the days away.", "risk": "medium", "hint": "Bad for the head.", "text": "Hours of scrolling. The comments say he's finished. He starts to believe them.", "fx": { "stress": 5, "morale": -5 } }
+      ] },
+    { "id": "b2_painkiller_dependency", "cat": "body", "w": 3, "cd": 200, "when": { "age": [25, 40], "pfm": [0, 65] },
+      "title": "One More Pill", "text": "He's been taking painkillers before every training session for a month now. Then before every match. Then before sleep. The bottle is nearly empty. He's already thinking about the next one.",
+      "prompt": "You're relying on painkillers.",
+      "choices": [
+        { "label": "Tell the club doctor everything", "desc": "Before it gets worse.", "risk": "low", "hint": "Brave. Necessary.", "text": "The doctor takes it seriously and kindly. A plan, a taper, physio for the real problem. It takes two months. He's clean, and the knee is better.", "fx": { "pfm": 4, "stress": -4, "trust": 1, "flag": "beat_painkillers" } },
+        { "label": "Keep going, carefully", "desc": "You're in control.", "risk": "extreme", "hint": "Everyone thinks that.", "text": "He keeps going. It gets harder to stop. Eventually he can't hide it any more.", "fx": { "pfm": -6, "stress": 8, "image": -3, "flag": "painkiller_problem" } }
+      ] },
+    { "id": "b2_mental_health_break", "cat": "body", "w": 3, "cd": 150, "when": { "stress": [75, 100] },
+      "title": "Running on Empty", "text": "He sits in the car outside the training ground for forty minutes and can't make himself go in. His hands are shaking. Nothing is wrong, and everything is wrong.",
+      "prompt": "You're burning out.",
+      "choices": [
+        { "label": "Tell the club and ask for time off", "desc": "A mental health break.", "risk": "medium", "hint": "Some will judge. Many will respect it.", "text": "The club gives him two weeks. A psychologist, rest, home cooking. He comes back lighter. A month later, two teammates ask for the psychologist's number.", "fx": { "stress": -18, "morale": 6, "trust": -2, "image": 3, "flag": "therapy" } },
+        { "label": "Start seeing a psychologist quietly", "desc": "Keep training.", "risk": "low", "hint": "Help without headlines.", "text": "Weekly sessions with someone who doesn't care about football. Slowly the shaking stops.", "fx": { "stress": -10, "morale": 4, "wealth": -800, "flag": "therapy" } },
+        { "label": "Push through", "desc": "Football is mental strength.", "risk": "extreme", "hint": "It isn't, like that.", "text": "He pushes through. It gets worse before it gets anything else.", "fx": { "stress": 4, "morale": -6, "potential": -1 } }
+      ] },
+    { "id": "b2_mental_health_public", "cat": "body", "w": 2, "cd": 300, "once": true, "when": { "flags": ["therapy"], "rep": [20, 100] },
+      "title": "Say It Out Loud", "text": "A journalist he trusts asks whether he'd talk publicly about his mental health, the therapy, the panic in the car park. 'It might help someone,' she says.",
+      "prompt": "Talk publicly about your mental health?",
+      "choices": [
+        { "label": "Yes, all of it", "desc": "If it helps one person.", "risk": "medium", "hint": "Vulnerable. Powerful.", "text": "The interview is honest and gentle. Thousands of messages arrive from young players and fans. One says, 'You saved me.' He keeps that one.", "fx": { "image": 10, "fans": 6, "followers": 50000, "stress": -3 } },
+        { "label": "Not yet", "desc": "It's still yours.", "risk": "low", "hint": "Private.", "text": "Not yet, he says. Maybe one day.", "fx": {} }
+      ] },
+    { "id": "b2_concussion", "cat": "body", "w": 3, "cd": 150, "when": { "pos": ["CB", "ST", "GK", "DM"], "played": true },
+      "title": "Seeing Double", "text": "A clash of heads in the match. He played on. Now, hours later, the lights are too bright, he's nauseous, and he can't remember the drive home.",
+      "prompt": "You might have a concussion.",
+      "choices": [
+        { "label": "Tell the doctor and follow the protocol", "desc": "Brains don't heal like hamstrings.", "risk": "low", "hint": "A week or two out.", "text": "The protocol is strict: dark rooms, no screens, slow return. Two weeks out. His head is clear when he comes back.", "fx": { "pfm": -4, "stress": 2, "trust": 1 } },
+        { "label": "Hide it and play the next match", "desc": "You'll be fine.", "risk": "extreme", "hint": "Brains are not to be gambled with.", "text": "He hides it. In the next match he can't follow the ball. He's subbed at half-time and diagnosed properly. Now it's a month.", "fx": { "injury": "moderate", "trust": -4, "stress": 6 } }
+      ] },
+    { "id": "b2_body_comparison", "cat": "body", "w": 4, "cd": 100, "when": { "age": [16, 21] },
+      "title": "The Mirror", "text": "In the dressing room, everyone seems bigger, stronger, more defined. A teammate jokes about his skinny legs. He starts looking at supplements online late at night, some of them sketchy.",
+      "prompt": "You feel physically behind.",
+      "choices": [
+        { "label": "Ask the club's strength coach for a plan", "desc": "Do it properly.", "risk": "low", "hint": "Slow, safe, real.", "text": "A proper plan: food, sleep, lifting. Six months later the jokes stop.", "fx": { "growth": ["physical"], "pfm": 2 } },
+        { "label": "Order the supplements", "desc": "Faster results.", "risk": "high", "hint": "Some of those products aren't legal.", "out": [ { "w": 2, "text": "He reads the label properly and sends them back. Close call.", "fx": { "stress": 2 } }, { "w": 1, "text": "One of them contains a banned substance. A random test. A ban.", "fx": { "suspension": 8, "image": -8, "board": -6, "flag": "doping_case" } } ] }
+      ] },
+    { "id": "b2_sleep_problems", "cat": "body", "w": 4, "cd": 80, "when": { "stress": [55, 100] },
+      "title": "3am", "text": "He hasn't slept more than four hours a night for two weeks. His reactions in training are slow. The sports scientist's data screams it.",
+      "prompt": "You can't sleep.",
+      "choices": [
+        { "label": "A sleep specialist", "desc": "Fix it properly.", "risk": "low", "hint": "Better sleep, better everything.", "text": "The specialist bans screens after 9pm and coffee after noon. It's miserable for a week, then he sleeps like a child.", "fx": { "stress": -5, "pfm": 5 } },
+        { "label": "Sleeping pills", "desc": "Quick fix.", "risk": "medium", "hint": "Groggy mornings.", "text": "He sleeps. He also wakes up foggy for training. Not quite a solution.", "fx": { "stress": -2, "pfm": 2, "form": -0.1 } }
+      ] },
+    { "id": "b2_returning_fear", "cat": "body", "trigger": "returnLong", "w": 5, "cd": 60,
+      "title": "First Tackle Back", "text": "He's fit. The scans say so. The physio says so. But in his first training match back, a tackle comes in and he pulls out of it, flinching. Everyone saw.",
+      "prompt": "You're scared after a long injury.",
+      "choices": [
+        { "label": "Talk to the club psychologist", "desc": "The fear is normal. Deal with it.", "risk": "low", "hint": "The head heals slower than the body.", "text": "The psychologist helps him trust the knee again. A month later, he goes into a fifty-fifty without thinking. He's back.", "fx": { "stress": -4, "morale": 4, "form": 0.1 } },
+        { "label": "Force yourself", "desc": "Go into every tackle.", "risk": "medium", "hint": "Brave. Tense.", "text": "He forces himself into every challenge. It's tense, then it isn't.", "fx": { "stress": 3, "trust": 2 } }
+      ] },
+    { "id": "b2_altitude_illness", "cat": "body", "w": 3, "cd": 150, "when": { "freeAgent": false },
+      "title": "Food Poisoning", "text": "Something from the team hotel buffet. Half the squad is ill. He's spent the night on the bathroom floor. Kick-off is in eleven hours.",
+      "prompt": "You're ill on matchday.",
+      "choices": [
+        { "label": "Tell the doctor you can't play", "desc": "Honest.", "risk": "low", "hint": "Sensible.", "text": "He sits out. The team, weakened, loses. Nobody blames him.", "fx": { "pfm": -4 } },
+        { "label": "Play anyway", "desc": "The team is short.", "risk": "medium", "hint": "Heroic or a disaster.", "out": [ { "w": 1, "text": "He plays on willpower and nothing else. The manager calls it the bravest performance of the season.", "fx": { "trust": 5, "fans": 3, "pfm": -8 } }, { "w": 1, "text": "He's subbed after thirty minutes, grey and shaking.", "fx": { "pfm": -8, "form": -0.2 } } ] }
+      ] },
+    { "id": "b2_knee_warning", "cat": "body", "w": 3, "cd": 200, "when": { "age": [28, 40] },
+      "title": "The Knee", "text": "A specialist looks at his MRI for a long time. 'The cartilage is wearing thin. You have a few good years left if you manage it. One if you don't.'",
+      "prompt": "Your knee has a time limit.",
+      "choices": [
+        { "label": "Manage it: fewer minutes, more care", "desc": "Play longer by playing less.", "risk": "low", "hint": "Longevity.", "text": "Rest days, injections, a reduced load. He plays fewer matches and has more years.", "fx": { "pfm": 4, "trust": -2, "stress": 2, "flag": "managed_knee" } },
+        { "label": "Ignore it, play every game", "desc": "Burn bright.", "risk": "high", "hint": "The knee keeps the score.", "text": "He plays every minute. The knee aches every morning. He doesn't tell anyone how much.", "fx": { "pfm": -6, "stress": 3 } }
+      ] },
+    { "id": "b2_vegan_diet", "cat": "body", "w": 3, "cd": 200, "once": true, "when": { "age": [24, 36] },
+      "title": "A New Diet", "text": "A famous teammate swears his career was extended by going fully plant-based. He offers to share his chef. The club nutritionist is curious. {MUM} is horrified.",
+      "prompt": "Change your diet completely?",
+      "choices": [
+        { "label": "Try it for three months", "desc": "Experiment.", "risk": "medium", "hint": "Could transform you. Could not.", "out": [ { "w": 2, "text": "Three months later: lighter, faster recovery, fewer aches. He sticks with it. {MUM} sends meat anyway.", "fx": { "pfm": 8, "growth": ["physical"], "family": -2 } }, { "w": 1, "text": "He feels weak and hungry all the time. He goes back to normal and eats {MUM}'s cooking for a week straight.", "fx": { "pfm": -3, "family": 3 } } ] },
+        { "label": "No thanks", "desc": "{MUM}'s cooking stays.", "risk": "low", "hint": "Comfort.", "text": "He declines. {MUM} is very relieved.", "fx": { "family": 2 } }
+      ] },
+    { "id": "b2_heat_stroke", "cat": "body", "w": 3, "cd": 150, "when": { "country": ["Indonesia", "Thailand", "Saudi Arabia", "Qatar", "United Arab Emirates", "Malaysia", "Vietnam"], "played": true },
+      "title": "The Heat", "text": "Forty degrees at kick-off. In the second half, the pitch starts to spin. He finds himself on his knees without knowing how he got there.",
+      "prompt": "Heat exhaustion in a match.",
+      "choices": [
+        { "label": "Signal and come off", "desc": "Now.", "risk": "low", "hint": "Smart.", "text": "He comes off, gets ice and fluids. The doctor says another ten minutes could have been serious.", "fx": { "pfm": -6, "stress": 2 } },
+        { "label": "Stay on", "desc": "Five more minutes.", "risk": "high", "hint": "Your body is warning you.", "text": "He collapses in the 80th minute. Hospital, drips, a week of rest. The club changes its hydration plan.", "fx": { "pfm": -12, "injury": "minor", "stress": 4 } }
+      ] },
+    { "id": "v2_young_legs_mentor", "cat": "veteran", "w": 5, "cd": 80, "when": { "age": [31, 40], "freeAgent": false }, "uses": { "T": "peer" },
+      "title": "The Heir", "text": "The club has signed a talented young player in {J}'s position: {T}. Everyone knows what it means. The kid is nervous around him, like he's taking something that isn't his.",
+      "prompt": "Your replacement has arrived.",
+      "choices": [
+        { "label": "Teach him everything", "desc": "Legacy over ego.", "risk": "low", "hint": "The squad respects it hugely.", "text": "He teaches the kid every trick. When {T} scores his first goal, he runs straight to {J} on the bench. The cameras catch it.", "fx": { "bond": 20, "dressing": 6, "image": 4, "flag": "mentor_kid", "cast": { "mentee": "T" } } },
+        { "label": "Make him earn every minute", "desc": "Not giving up the shirt yet.", "risk": "low", "hint": "Healthy competition.", "text": "He fights for the shirt every day. The kid is better for it. So is he.", "fx": { "trust": 3, "growth": ["mental"], "bond": 2 } },
+        { "label": "Freeze him out", "desc": "He's after your job.", "risk": "high", "hint": "Bitterness.", "text": "He's cold to the kid. The squad sees an old man clinging on. It's not a good look.", "fx": { "dressing": -6, "image": -3, "bond": -15 } }
+      ] },
+    { "id": "v2_last_contract", "cat": "veteran", "w": 4, "cd": 100, "when": { "age": [32, 40], "contractYears": [0, 0.7] },
+      "title": "The Last Contract", "text": "His contract is running out. The club offers one more year on a big pay cut, as a squad player. A club in a smaller league offers two years, decent money and a starting place.",
+      "prompt": "Your last big decision as a player.",
+      "choices": [
+        { "label": "Stay, as a squad player", "desc": "Finish where you're loved.", "risk": "low", "hint": "Dignity, fewer minutes.", "text": "He stays. He plays less and coaches more. The fans give him a standing ovation every time he warms up.", "fx": { "fans": 8, "board": 4, "renewalPush": true } },
+        { "label": "Go where you'll play", "desc": "Your legs have more to give.", "risk": "medium", "hint": "Adventure in the twilight.", "text": "He tells his agent to take the smaller club's offer. A last adventure.", "fx": { "offerAbroad": true, "fans": -2 } },
+        { "label": "Start thinking about retirement", "desc": "Maybe this is the end.", "risk": "medium", "hint": "A gentle wind-down.", "text": "He starts thinking about life after football. It's frightening and a little exciting.", "fx": { "flag": "thinking_retirement", "stress": 2 } }
+      ] },
+    { "id": "v2_farewell_tour", "cat": "veteran", "w": 4, "cd": 300, "once": true, "when": { "age": [33, 40], "rep": [30, 100], "flags": ["thinking_retirement"] },
+      "title": "The Farewell Season", "text": "He's announced that this will be his last season. Every away ground now applauds him. Opponents ask for his shirt. Even the rival ultras made a banner: 'RESPECT'.",
+      "prompt": "Your farewell season.",
+      "choices": [
+        { "label": "Soak in every moment", "desc": "Wave, sign, remember.", "risk": "low", "hint": "Unforgettable.", "text": "He signs every shirt and claps every away end. He keeps a notebook of every moment. It's the happiest season of his career.", "fx": { "fans": 10, "image": 6, "morale": 8 } },
+        { "label": "Focus on winning one last thing", "desc": "Go out on top.", "risk": "medium", "hint": "Pressure, purpose.", "text": "He trains like it's his first season. The squad follows his lead.", "fx": { "dressing": 6, "trust": 4, "pfm": -2 } }
+      ] },
+    { "id": "v2_coaching_offer", "cat": "veteran", "w": 3, "cd": 200, "when": { "age": [32, 40], "flags": ["coaching_badges"] },
+      "title": "The Coaching Job", "text": "The club offers him a job with the under-18s once he retires. A pathway to the first team one day. The money is modest; the meaning is not.",
+      "prompt": "Accept a future coaching role?",
+      "choices": [
+        { "label": "Accept", "desc": "A future in the game.", "risk": "low", "hint": "Security, purpose.", "text": "He accepts. He's already planning his first training session in his head during matches.", "fx": { "board": 6, "flag": "future_coach", "stress": -4 } },
+        { "label": "Keep options open", "desc": "Maybe TV, maybe business.", "risk": "low", "hint": "Freedom.", "text": "He thanks them and says he'll think about it. The offer stays on the table.", "fx": {} }
+      ] },
+    { "id": "v2_pundit_audition", "cat": "veteran", "w": 3, "cd": 200, "when": { "age": [30, 40], "rep": [35, 100], "press": [55, 100] },
+      "title": "A TV Audition", "text": "A TV channel asks him to co-commentate on a match he's not playing in. Just to see. If it goes well, there's a job waiting after retirement.",
+      "prompt": "Try commentary?",
+      "choices": [
+        { "label": "Do it", "desc": "See if you're any good.", "risk": "medium", "hint": "A second career, maybe.", "out": [ { "w": 2, "text": "He's natural, funny and insightful. The channel offers him a contract on the spot.", "fx": { "press": 6, "followers": 20000, "flag": "future_pundit" } }, { "w": 1, "text": "He says 'great ball' eleven times. The channel thanks him for his time.", "fx": { "press": 2 } } ] },
+        { "label": "Not yet", "desc": "Still a player.", "risk": "low", "hint": "Focus.", "text": "He declines. Still a player, for now.", "fx": {} }
+      ] },
+    { "id": "v2_body_slowing", "cat": "veteran", "w": 5, "cd": 60, "when": { "age": [31, 40] },
+      "title": "A Step Slower", "text": "A twenty-year-old winger runs past him in training like he isn't there. It's never happened before. The kid didn't even look back.",
+      "prompt": "You're slowing down.",
+      "choices": [
+        { "label": "Reinvent your game", "desc": "Think faster than you run.", "risk": "low", "hint": "How great veterans survive.", "text": "He adjusts: positioning, anticipation, fewer sprints, smarter ones. The kid never gets past him again.", "fx": { "growth": ["mental"], "tacticalFit": 4 } },
+        { "label": "Extra fitness work", "desc": "Fight the clock.", "risk": "medium", "hint": "Some gains, more aches.", "text": "Extra sessions, ice baths, a personal trainer. He holds the clock back, a little.", "fx": { "pfm": -3, "growth": ["physical"], "stress": 2 } },
+        { "label": "Accept it with humour", "desc": "Time wins.", "risk": "low", "hint": "Peace.", "text": "'Next time, kid,' he shouts after him. The squad laughs. So does he.", "fx": { "dressing": 3, "stress": -2 } }
+      ] },
+    { "id": "v2_testimonial", "cat": "veteran", "w": 3, "cd": 300, "once": true, "when": { "age": [32, 40], "apps": [300, 9999] },
+      "title": "The Testimonial", "text": "The club wants to hold a testimonial match in his honour: former teammates, old rivals, his family on the pitch at half-time. All the money goes wherever he wants.",
+      "prompt": "Accept a testimonial match?",
+      "choices": [
+        { "label": "Yes, and give the money to charity", "desc": "Give back.", "risk": "low", "hint": "A day to remember.", "text": "Thirty thousand people. His old managers. {MUM} in tears on the pitch. Every cent goes to children's football in his hometown.", "fx": { "fans": 10, "image": 8, "family": 10, "morale": 10 } },
+        { "label": "Yes, and keep the money for your family", "desc": "Your future.", "risk": "low", "hint": "Traditional.", "text": "A beautiful day. The money secures his family's future. Nobody begrudges him it.", "fx": { "fans": 6, "wealth": 30000, "family": 6, "morale": 8 } }
+      ] },
+    { "id": "v2_young_wife_new_dad", "cat": "veteran", "w": 3, "cd": 200, "when": { "age": [30, 40], "hasKid": true },
+      "title": "Dad Legs", "text": "His child wakes up three times a night. He's thirty-something with a newborn and a match on Saturday. His body is not designed for this.",
+      "prompt": "Fatherhood and football.",
+      "choices": [
+        { "label": "Share the nights equally", "desc": "Be a real partner.", "risk": "medium", "hint": "Love grows. Legs suffer.", "text": "He takes his share of nights. He's exhausted. {Pf} looks at him differently, in the best way.", "fx": { "love": 8, "family": 6, "pfm": -5 } },
+        { "label": "Sleep in the spare room before matches", "desc": "Protect your body.", "risk": "medium", "hint": "Sensible. Noticed.", "text": "He sleeps in the spare room before matches. {Pf} understands. Mostly.", "fx": { "pfm": 3, "love": -3 } }
+      ] },
+    { "id": "v2_old_rival_retires", "cat": "veteran", "w": 3, "cd": 200, "when": { "age": [30, 40], "flags": ["rival_respect"] },
+      "title": "The Old Rival Hangs Up His Boots", "text": "{RIVAL}, his great rival for a decade, announces his retirement. In the farewell interview he says {J} was the reason he got better.",
+      "prompt": "Your old rival is retiring.",
+      "choices": [
+        { "label": "Send him a message", "desc": "Honest respect.", "risk": "low", "hint": "Closure.", "text": "A long message about every battle. {RIVAL} replies with a photo of their first meeting, aged nineteen.", "fx": { "morale": 4, "flag": "rival_friend" } },
+        { "label": "Turn up at his farewell match", "desc": "Surprise.", "risk": "low", "hint": "Legendary gesture.", "text": "He turns up in the rival's stadium and applauds from the tunnel. The home fans, for once, applaud him back.", "fx": { "image": 5, "fans": 2, "flag": "rival_friend" } }
+      ] },
+    { "id": "v2_kid_watch_last", "cat": "veteran", "w": 3, "cd": 300, "once": true, "when": { "age": [32, 40], "hasKid": true, "kidAge": [4, 18] },
+      "title": "Before It's Over", "text": "{KID} has never seen him play live in a stadium: always on TV, always too young or too far away. There may not be many chances left.",
+      "prompt": "Make sure your child sees you play?",
+      "choices": [
+        { "label": "Bring {KID} to the next home match", "desc": "Best seat in the house.", "risk": "low", "hint": "A memory forever.", "text": "{KID} watches from the front row in a shirt with {J}'s name. When he scores, he runs to the front row first.", "fx": { "family": 12, "morale": 8, "followers": 15000 } },
+        { "label": "Walk out with {KID} as mascot", "desc": "Hand in hand.", "risk": "low", "hint": "Tear-jerker.", "text": "{KID} walks out holding his hand. Thirty thousand people stand. He has to wipe his eyes before kick-off.", "fx": { "family": 15, "fans": 5, "image": 3 } }
+      ] },
+    { "id": "v2_comeback_call", "cat": "veteran", "w": 3, "cd": 300, "once": true, "when": { "age": [33, 40], "role": ["bench", "outcast"] },
+      "title": "The Last Dance", "text": "A former manager, now at a club fighting relegation in a lower league, calls. 'I need someone who's been there. Six months. Help me keep them up.'",
+      "prompt": "One last mission?",
+      "choices": [
+        { "label": "Take it", "desc": "One last fight.", "risk": "medium", "hint": "Meaning at the end.", "text": "He tells his agent to make it happen. A last adventure, for an old friend.", "fx": { "offerAbroad": true, "morale": 4 } },
+        { "label": "Decline", "desc": "Your body has had enough.", "risk": "low", "hint": "Rest.", "text": "He declines kindly. His knees are grateful.", "fx": { "stress": -2 } }
+      ] },
+    { "id": "v2_veteran_voice", "cat": "veteran", "w": 4, "cd": 100, "when": { "age": [30, 40], "freeAgent": false, "dressing": [55, 100] },
+      "title": "The Elder", "text": "The young players have started coming to him with everything: contracts, girlfriends, agents, homesickness. He's become the dressing-room elder without noticing.",
+      "prompt": "You're the dressing room's elder now.",
+      "choices": [
+        { "label": "Embrace it", "desc": "Look after them.", "risk": "low", "hint": "A legacy beyond goals.", "text": "He sets up a WhatsApp group for the young players called 'Ask the Old Man'. It's always busy.", "fx": { "dressing": 8, "image": 3, "flag": "mentor_kid" } },
+        { "label": "Point them to professionals", "desc": "You're a player, not a therapist.", "risk": "low", "hint": "Healthy boundaries.", "text": "He helps where he can and points them to the club's welfare team for the rest. Sensible.", "fx": { "dressing": 3, "stress": -1 } }
+      ] },
+    { "id": "v2_retirement_fear", "cat": "veteran", "w": 4, "cd": 100, "when": { "age": [32, 40] },
+      "title": "And Then What?", "text": "Lying awake: what does a footballer do at thirty-six? Every day for twenty years has been training, matches, travel. In a year or two, the alarm will go off and there'll be nowhere to be.",
+      "prompt": "You're afraid of life after football.",
+      "choices": [
+        { "label": "Start planning now", "desc": "Courses, business, coaching.", "risk": "low", "hint": "Less fear, more future.", "text": "He starts a business course on Tuesday nights. The fear shrinks a little every week.", "fx": { "stress": -4, "flag": "planning_future" } },
+        { "label": "Talk to retired players", "desc": "How did they do it?", "risk": "low", "hint": "Wisdom.", "text": "Three retired players, three dinners, three honest stories. Two of them struggled badly. One found peace. He learns from all three.", "fx": { "stress": -3, "growth": ["mental"] } },
+        { "label": "Don't think about it", "desc": "Not yet.", "risk": "medium", "hint": "It'll come anyway.", "text": "He pushes the thought away. It comes back at 3am, as these thoughts do.", "fx": { "stress": 2 } }
+      ] },
+    { "id": "v2_hometown_finale", "cat": "veteran", "w": 3, "cd": 300, "once": true, "when": { "age": [32, 40], "abroad": true },
+      "title": "Going Home to Finish", "text": "His first club, {FIRSTCLUB}, wants him back for the last chapter. The money is a fraction of what he earns now. His mother has already told the whole neighbourhood.",
+      "prompt": "Go home to finish your career?",
+      "choices": [
+        { "label": "Go home", "desc": "Where it all began.", "risk": "low", "hint": "A circle closed.", "text": "He tells his agent: take it. Home.", "fx": { "offerHome": true, "family": 8, "morale": 5 } },
+        { "label": "Stay abroad", "desc": "Your life is here now.", "risk": "low", "hint": "Your choice.", "text": "He thanks them warmly and stays. His mother is disappointed, then proud.", "fx": { "family": -2 } }
+      ] }
+  ]
+}

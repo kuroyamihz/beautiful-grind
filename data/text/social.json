@@ -1,0 +1,42 @@
+{
+  "_about": "Social media text. captions = what the player writes; comments.{type}.pos/neg = replies under the post. Tokens: {J} {opp} {club} {BRAND} {Pf}.",
+  "handles": ["@ultras_forever", "@matchday_mike", "@bolaku_id", "@terrace_tales", "@xg_nerd", "@footy_mum_23", "@kickoff_kev", "@garuda_hearts", "@the_away_end", "@tactics_tom", "@net_buster", "@sofa_scout", "@sunday_league_legend", "@grumpy_gaffer", "@stats_sasha", "@kampung_fc", "@hopeful_hooligan", "@curva_nord_92", "@just_a_fan", "@rival_troll_99"],
+  "captions": {
+    "goal": ["That feeling 😮‍💨⚽", "For the people who believed. 🙏", "Three points, one goal, a lot of love. ❤️ #{club}", "Dreamt about this. Did it.", "Never stop. ⚽🔥"],
+    "matchday": ["Together. Always. 💪", "Head up, next one.", "On to the next. #{club}", "Proud of this group.", "Grateful for every minute on this pitch."],
+    "training": ["Nobody sees this part. 🏃‍♂️", "Work in silence.", "5am club. ☀️", "Small steps, big dreams.", "The grind doesn't care how you feel."],
+    "fans": ["You carried us today. Thank you. 💙", "Best fans in the world, and I'm not even arguing about it.", "Every song. Every flag. We hear you.", "This one is for you."],
+    "teammate": ["My brother. 🤝", "Proud to share a pitch with this guy.", "Underrated? Not for long.", "Best teammate there is."],
+    "family": ["Everything I do is for them. ❤️", "Home. 🏠", "The real MVPs.", "Sunday with the people who matter."],
+    "partner": ["Mine. 🤍", "Grateful every day.", "My calm in every storm.", "The best assist of my life."],
+    "flex": ["Worked for this. 🔑", "New toy. 😎", "Treat yourself sometimes.", "Living the dream."],
+    "charity": ["Some days matter more than matches. ❤️", "These kids are the real heroes.", "Giving back where it all began.", "Smiles > trophies."],
+    "trend": ["Couldn't resist 😂", "Don't judge the moves.", "The dressing room made me do it.", "10/10 choreography, 2/10 execution."],
+    "cryptic": ["Some people will understand.", "Patience.", "The truth always comes out.", "Noted. 🤐", "Silence is also an answer."],
+    "reply": ["Criticise my game, that's fair. But I will never stop working.", "Some of you wrote me off. Keep watching.", "I hear you. I'll answer on the pitch.", "Read every comment. Saving them for later."],
+    "throwback": ["Where it started. 🥹", "Little me had big dreams.", "Same smile, bigger boots.", "Kid me would not believe this."],
+    "greeting": ["Wishing peace and joy to everyone celebrating. ❤️", "Grateful for this season of togetherness.", "From my family to yours: happy holidays.", "A blessed time to everyone. 🙏"],
+    "nation": ["For the shirt. For the flag.", "Representing millions. No bigger honour.", "The anthem still gives me chills.", "Proud. Humbled. Ready."],
+    "sponsor": ["Ready for the next one with {BRAND}. #ad", "Matchday essentials. @{BRAND} #ad", "Never without my {BRAND}. #partner", "Teamed up with {BRAND}. Link in bio. #ad"],
+    "default": ["⚽", "🙏", "Onwards."]
+  },
+  "comments": {
+    "goal": { "pos": ["WHAT A STRIKE 🔥🔥🔥", "{J} you are HIM", "Watched it 20 times already", "That celebration 😭❤️", "Put him in the national team NOW", "{opp} defenders still looking for the ball 😂"], "neg": ["One goal and he thinks he's a legend 🙄", "Lucky deflection", "Score in a big game first", "Still missed two sitters"] },
+    "matchday": { "pos": ["Proud of you lads 💪", "Next game we go again", "Respect the effort", "Leader. ❤️"], "neg": ["Posting after THAT performance?", "Delete this", "Less selfies, more running", "We pay to watch this?"] },
+    "training": { "pos": ["Work rate is unreal 💯", "This is why he'll make it", "Inspiring bro", "The hunger 🔥"], "neg": ["Train your first touch maybe", "Gym won't fix that left foot", "Show it on Sunday", "Content > football"] },
+    "fans": { "pos": ["We love you {J} 💙", "One of our own", "This is why we support this club", "Never leave us 🙏"], "neg": ["Words are cheap. Perform.", "Nice PR", "Thank us with goals"] },
+    "teammate": { "pos": ["Brothers 🤝", "Love this dressing room energy", "Wholesome", "This duo next season 🔥"], "neg": ["Both of you were awful last week", "Bromance won't win games"] },
+    "family": { "pos": ["Your mum is so proud ❤️", "Family first, always", "Beautiful family 😍", "This made my day"], "neg": ["Nobody asked", "Post your stats instead"] },
+    "partner": { "pos": ["Couple goals 😍", "Protect her at all costs", "She's the real MVP", "Cutest pair in football"], "neg": ["Is this why you can't pass anymore?", "Focus on football bro", "Rich footballer and influencer, shocking"] },
+    "flex": { "pos": ["Earned it 🔥", "Living the dream bro", "Goals 😎", "Dream car 😍"], "neg": ["We lost and he's posting cars??", "Imagine being this tone-deaf", "Buy a first touch instead", "Fans can't afford tickets and he posts this", "Unfollowed."] },
+    "charity": { "pos": ["Heart of gold ❤️", "This is a real role model", "Respect 🙏", "More of this please"], "neg": ["PR team working overtime", "Posting charity for likes...", "Do it without a camera next time"] },
+    "trend": { "pos": ["HAHAHA the moves 😂", "Vibes are immaculate", "Never stop doing these", "Bro has rhythm 🕺"], "neg": ["Train instead of dancing", "After that result?? Read the room", "Cringe", "The coach will see this 💀"] },
+    "cryptic": { "pos": ["Say less 👀", "We're with you whatever happens", "Something's coming..."], "neg": ["Who is this about?? 👀", "Passive aggressive much", "Leaving? Good riddance", "Grow up and say it", "The manager will love this 😬"] },
+    "reply": { "pos": ["Respect for saying it", "That's the attitude 💪", "Prove them wrong", "Finally someone with a backbone"], "neg": ["Arrogant", "Can't take criticism", "Fragile ego alert", "Blocked him, he's done", "Imagine replying to fans after that game"] },
+    "throwback": { "pos": ["Baby {J} 😭😭", "The boots are bigger than you", "From that to this ❤️", "Same face honestly"], "neg": ["Peaked at 8", "Nostalgia won't save your season"] },
+    "greeting": { "pos": ["Same to you and your family 🙏", "Blessings ❤️", "Thank you {J}!", "Love this"], "neg": ["Just focus on football"] },
+    "nation": { "pos": ["PRIDE OF THE NATION 🔥", "Wear it with pride ❤️", "Make us proud", "Our hero"], "neg": ["Didn't deserve the call-up", "Coach's pet", "Show it in a real match"] },
+    "sponsor": { "pos": ["Need these 😍", "Clean 🔥", "Fair play, get that bag", "Link??"], "neg": ["#ad #ad #ad", "Another ad...", "Footballer or billboard?", "Unfollowing if this continues", "Sellout"] },
+    "default": { "pos": ["🔥🔥🔥", "❤️", "Legend", "👏👏", "King", "Love from Indonesia 🇮🇩"], "neg": ["🙄", "Meh", "Ok", "Who?"] }
+  }
+}

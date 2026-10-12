@@ -1,0 +1,265 @@
+{
+  "scenarios": [
+    { "id": "sq_ally_sold", "cat": "dressing", "trigger": "allyLeft", "w": 6, "cd": 30, "uses": { "T": "any" },
+      "title": "The Empty Peg", "text": ["His best mate at the club has been sold. The peg next to his is empty, a strip of tape still showing the name. The group chat is quieter already.", "The transfer happened in a day. One minute they were laughing in the canteen, the next his friend was posting a photo in a new shirt. {J} found out from the internet."],
+      "prompt": "Your closest teammate has left the club.",
+      "choices": [
+        { "label": "Drive him to the airport", "desc": "One last ride.", "risk": "low", "hint": "Friendship outlasts transfers.", "text": "They sit in the car outside departures for twenty minutes, saying very little. 'Same group chat,' says his friend. 'Always.'", "fx": { "friends": 4, "morale": -2, "stress": -1 } },
+        { "label": "Throw himself into training", "desc": "Push the feeling down.", "risk": "low", "hint": "Distraction works, for a while.", "text": "He trains harder than anyone for a week. The coaches love it. He's lonely at lunch.", "fx": { "trust": 2, "morale": -3, "growth": ["rel"] } },
+        { "label": "Make an effort with someone new", "desc": "The squad is bigger than one man.", "risk": "low", "hint": "New bonds.", "text": "He sits with {T} at lunch for the first time. It turns out they have the same terrible taste in music.", "fx": { "bond": 12, "dressing": 2 } }
+      ] },
+    { "id": "sq_new_signing_lost", "cat": "dressing", "w": 5, "cd": 50, "when": { "freeAgent": false, "apps": [15, 9999] }, "uses": { "T": "signing" },
+      "title": "The New Boy", "text": ["{T} arrived this week from abroad. He doesn't speak the language, doesn't know where the canteen is, and ate lunch alone in his car today.", "The new signing, {T}, is clearly struggling: lost in drills, quiet in meetings, homesick in every photo he posts."],
+      "prompt": "A new teammate is struggling to settle.",
+      "choices": [
+        { "label": "Take him under your wing", "desc": "Dinner, the city, the shortcuts.", "risk": "low", "hint": "A grateful friend for years.", "text": "He shows {T} where to eat, where to live and which coach to avoid. By the end of the month {T} is laughing in the canteen.", "fx": { "bond": 18, "dressing": 4, "image": 1 } },
+        { "label": "Leave it to the club", "desc": "They have a welfare officer.", "risk": "low", "hint": "Not your job.", "text": "The welfare officer does their job. {T} settles slowly. He never quite forgets who didn't help.", "fx": {} }
+      ] },
+    { "id": "sq_youth_graduate", "cat": "dressing", "w": 5, "cd": 60, "when": { "freeAgent": false, "age": [22, 40] }, "uses": { "T": "peer" },
+      "title": "The Kid Who Reminds Him of Himself", "text": "A seventeen-year-old has been promoted from the academy: same position, same nerves, same way of staring at the senior players like they're gods. It's like looking in a mirror from years ago.",
+      "prompt": "A young academy graduate plays your position.",
+      "choices": [
+        { "label": "Mentor him properly", "desc": "Everything you wish someone had taught you.", "risk": "low", "hint": "One day he might take your place. That's the point.", "text": "Extra sessions, honest advice, a phone number for the bad days. The kid improves fast. One day he'll take the shirt; {J} hopes he does.", "fx": { "dressing": 5, "image": 3, "flag": "mentor_kid", "growth": ["mental"] } },
+        { "label": "Make him earn it", "desc": "Nobody gave you anything.", "risk": "low", "hint": "Tough love.", "text": "He goes hard in every drill against the kid. The kid gets better, and a little scared.", "fx": { "trust": 2, "dressing": 1 } },
+        { "label": "Keep him at a distance", "desc": "He's after your place.", "risk": "medium", "hint": "Insecure, and it shows.", "text": "He keeps the kid at arm's length. The senior players notice. So does the kid.", "fx": { "dressing": -3 } }
+      ] },
+    { "id": "sq_teammate_wedding", "cat": "dressing", "w": 4, "cd": 60, "when": { "freeAgent": false }, "uses": { "T": "ally" },
+      "title": "{T}'s Wedding", "text": "{T} is getting married and wants {J} to give a speech at the reception. In front of four hundred people. In two languages.",
+      "prompt": "Give the wedding speech?",
+      "choices": [
+        { "label": "Yes, and make them laugh", "desc": "Prepare for a week.", "risk": "medium", "hint": "A great speech is remembered forever.", "out": [ { "w": 3, "text": "The speech is a triumph: two embarrassing stories, one touching line, and a toast in {T}'s mother's language. {T} hugs him for a full minute.", "fx": { "bond": 15, "dressing": 4, "followers": 2000 } }, { "w": 1, "text": "He freezes halfway through. {T}'s grandmother finishes the toast for him. Everyone thinks it's adorable.", "fx": { "bond": 10, "stress": 2 } } ] },
+        { "label": "Politely say you're not a speaker", "desc": "Offer to organise the stag do instead.", "risk": "low", "hint": "Still helpful.", "text": "He organises a legendary stag weekend instead. {T} says it was even better than a speech.", "fx": { "bond": 8, "wealth": -800, "pfm": -2 } }
+      ] },
+    { "id": "sq_teammate_father", "cat": "dressing", "w": 4, "cd": 60, "when": { "freeAgent": false }, "uses": { "T": "any" },
+      "title": "{T} Is a Dad", "text": "{T}'s first child was born at 4am. He's at training at 10, eyes red, grinning like an idiot, showing everyone the same eleven photos.",
+      "prompt": "A teammate has just become a father.",
+      "choices": [
+        { "label": "Organise a squad gift", "desc": "A collection, a card, a tiny shirt.", "risk": "low", "hint": "Brings the room together.", "text": "A tiny shirt with the baby's name and number 1, signed by the whole squad. {T} cries in the dressing room. Nobody teases him.", "fx": { "bond": 12, "dressing": 4, "wealth": -200 } },
+        { "label": "Congratulate him and move on", "desc": "A handshake, a smile.", "risk": "low", "hint": "Nice. Ordinary.", "text": "A warm handshake and a 'congrats, man'. {T} is too tired to remember who said what anyway.", "fx": { "bond": 3 } }
+      ] },
+    { "id": "sq_teammate_grief", "cat": "dressing", "w": 3, "cd": 120, "when": { "freeAgent": false }, "uses": { "T": "any" },
+      "title": "{T}'s Father", "text": "{T}'s father died suddenly yesterday. He's flying home tonight. He came to the training ground to collect his boots and is sitting alone in his car in the car park.",
+      "prompt": "A teammate has lost his father.",
+      "choices": [
+        { "label": "Sit with him in the car", "desc": "No words needed.", "risk": "low", "hint": "Presence is everything.", "text": "He sits in the passenger seat for half an hour. They don't say much. When {T} drives away, he raises a hand from the window.", "fx": { "bond": 20, "dressing": 3, "morale": -2 } },
+        { "label": "Organise the squad to wear black armbands", "desc": "A tribute at the next match.", "risk": "low", "hint": "A gesture the family will see.", "text": "The whole squad wears black armbands at the weekend. {T}'s family watches on TV back home and writes the club a letter.", "fx": { "bond": 14, "dressing": 5, "fans": 2 } }
+      ] },
+    { "id": "sq_captain_retires", "cat": "dressing", "w": 3, "cd": 150, "when": { "freeAgent": false, "age": [23, 40], "apps": [80, 9999] },
+      "title": "The Captain Is Retiring", "text": "{CAP} announces he'll retire at the end of the season. In the dressing room afterwards, he looks around the room and his eyes stop on {J} for a moment.",
+      "prompt": "The captain is leaving. The armband will need a new home.",
+      "choices": [
+        { "label": "Tell {CAPl} you'd like to be considered", "desc": "Honest ambition.", "risk": "medium", "hint": "He'll respect the honesty.", "check": { "stat": "dressing", "dc": 65 }, "ok": { "text": "{CAPl} nods slowly. 'I already told the manager it should be you.' At the start of next season, the armband is his.", "fx": { "flag": "captain", "dressing": 4, "trust": 4, "rep": 1 } }, "bad": { "text": "{CAPl} says he's recommended someone else. 'Your time will come.'", "fx": { "morale": -3 } } },
+        { "label": "Say nothing, keep leading by example", "desc": "Let it come to you.", "risk": "low", "hint": "Patience.", "text": "He keeps his head down and his standards high. The decision will come in its own time.", "fx": { "dressing": 2, "trust": 2 } }
+      ] },
+    { "id": "sq_rival_for_shirt", "cat": "dressing", "w": 5, "cd": 50, "when": { "freeAgent": false }, "uses": { "T": "peer" },
+      "title": "One Shirt, Two Players", "text": ["The manager has been rotating {J} and {T} week to week. Neither of them is happy. In the gym, they don't make eye contact.", "{T} plays your position and has started the last three matches. You've been on the bench for all three."],
+      "prompt": "You're fighting {T} for a place.",
+      "choices": [
+        { "label": "Make it a friendly rivalry", "desc": "Push each other.", "risk": "low", "hint": "Both get better.", "text": "They start a running competition in training: whoever loses buys coffee. Both improve. The manager has a happy headache.", "fx": { "bond": 12, "growth": ["rel"], "trust": 2 } },
+        { "label": "Go to the manager for answers", "desc": "Who's first choice?", "risk": "medium", "hint": "Clarity, maybe bad news.", "out": [ { "w": 1, "text": "'You are,' says {Mf}. 'But keep pushing.' {J} walks out ten feet tall.", "fx": { "trust": 4, "morale": 4 } }, { "w": 1, "text": "'Right now, {Tl} is,' says {Mf}. At least he knows.", "fx": { "trust": 1, "morale": -4 } } ] },
+        { "label": "Freeze {T} out", "desc": "He's the enemy.", "risk": "high", "hint": "Poison in the dressing room.", "text": "They stop speaking. The dressing room tension becomes a story in the papers.", "fx": { "teammate": { "who": "T", "rel": "enemy" }, "dressing": -5, "press": -2 } }
+      ] },
+    { "id": "sq_gamer_tournament", "cat": "dressing", "w": 4, "cd": 60, "when": { "freeAgent": false, "age": [16, 30] }, "uses": { "T": "any" },
+      "title": "The FIFA Tournament", "text": "The squad has a video-game tournament every international break. The trophy is a plastic cup with a toy footballer glued to it. {T} has won it four times running and won't stop talking about it.",
+      "prompt": "Enter the squad tournament?",
+      "choices": [
+        { "label": "Enter and try to win", "desc": "Practise for a week.", "risk": "low", "hint": "Bragging rights.", "out": [ { "w": 1, "text": "He beats {T} in the final on penalties. The squad goes wild. The plastic cup has pride of place on his shelf.", "fx": { "dressing": 4, "bond": 4, "morale": 4 } }, { "w": 2, "text": "Knocked out in the first round by the reserve goalkeeper. The squad will never let him forget it.", "fx": { "dressing": 3, "morale": 1 } } ] },
+        { "label": "Commentate instead", "desc": "Better at talking than playing.", "risk": "low", "hint": "Comedy gold.", "text": "His live commentary of the final becomes legendary. Someone films it. The club posts it.", "fx": { "dressing": 5, "followers": 3000 } }
+      ] },
+    { "id": "sq_devout_ramadan", "cat": "dressing", "w": 4, "cd": 40, "when": { "freeAgent": false, "ramadan": true }, "uses": { "T": "any" },
+      "title": "Breaking the Fast", "text": "It's Ramadan. {T} and several teammates are fasting through training. The club has arranged a late iftar at the training ground and invited the whole squad.",
+      "prompt": "Join the squad iftar?",
+      "choices": [
+        { "label": "Join, whatever your faith", "desc": "Share the table.", "risk": "low", "hint": "Brotherhood.", "text": "Dates, soup, a long table and a lot of laughter. The fasting players are touched that everyone came.", "fx": { "dressing": 5, "bond": 8, "morale": 3 } },
+        { "label": "Help organise it", "desc": "Food, schedule, everything.", "risk": "low", "hint": "Leadership through service.", "text": "He helps organise the iftar every week of Ramadan. The squad has never been closer.", "fx": { "dressing": 7, "bond": 10, "trust": 2 } }
+      ] },
+    { "id": "sq_partyboy_influence", "cat": "dressing", "w": 4, "cd": 60, "when": { "freeAgent": false, "age": [17, 28] }, "uses": { "T": "any" },
+      "title": "Every Night Is a Party", "text": "{T} is out every night: clubs, yachts, rooftop bars. He keeps inviting {J}. His form has dropped off a cliff, and the manager is watching both of them.",
+      "prompt": "A teammate's lifestyle is pulling you in.",
+      "choices": [
+        { "label": "Decline, every time", "desc": "Your career is too important.", "risk": "low", "hint": "Discipline.", "text": "He declines so often that {T} stops asking. His fitness numbers are the best in the squad.", "fx": { "pfm": 3, "trust": 2, "bond": -3 } },
+        { "label": "Go once a month", "desc": "Balance.", "risk": "medium", "hint": "Fun, controlled.", "text": "Once a month, never before a match. He has a good time and a clear head.", "fx": { "bond": 6, "stress": -2 } },
+        { "label": "Talk to {T} about it", "desc": "He's wasting his talent.", "risk": "medium", "hint": "He might listen.", "out": [ { "w": 1, "text": "{T} laughs it off. Then, a month later, he cuts down. He thanks {J} at the end of the season.", "fx": { "bond": 12, "dressing": 3 } }, { "w": 1, "text": "{T} tells him he's boring. They drift apart.", "fx": { "bond": -6 } } ] }
+      ] },
+    { "id": "sq_gossip_teammate", "cat": "dressing", "w": 4, "cd": 60, "when": { "freeAgent": false }, "uses": { "T": "any" },
+      "title": "{T} Knows Everything", "text": "{T} knows every secret in the club: who's being sold, whose marriage is in trouble, what the manager said about whom. Today he leans in: 'You want to know what {Mf} really thinks of you?'",
+      "prompt": "Listen to the gossip?",
+      "choices": [
+        { "label": "Listen", "desc": "Knowledge is power.", "risk": "medium", "hint": "Knowledge, or poison.", "out": [ { "w": 1, "text": "Apparently {Mf} rates him highly but thinks he's lazy without the ball. Useful, painful, true.", "fx": { "tacticalFit": 4, "stress": 2 } }, { "w": 1, "text": "Apparently {Mf} said something cruel. It may not even be true. It sits in his head for weeks.", "fx": { "stress": 5, "morale": -3 } } ] },
+        { "label": "Walk away", "desc": "Gossip is poison.", "risk": "low", "hint": "Clean.", "text": "He walks away. {T} shrugs and tells someone else. He's happier not knowing.", "fx": { "stress": -1 } }
+      ] },
+    { "id": "sq_mentor_vet", "cat": "dressing", "w": 5, "cd": 60, "when": { "freeAgent": false, "age": [16, 22] }, "uses": { "T": "any" },
+      "title": "Lessons From the Old Man", "text": "{T}, the oldest player in the squad, takes {J} for coffee and says, 'Let me tell you what I wish someone had told me at your age.' He has been in football for seventeen years.",
+      "prompt": "What do you ask the veteran?",
+      "choices": [
+        { "label": "About money", "desc": "How not to end up broke.", "risk": "low", "hint": "The most useful conversation of your career.", "text": "{T} talks about the teammates who ended up broke: cars, friends, bad advice. He gives {J} the name of an honest financial adviser.", "fx": { "bond": 10, "lifestyle": -0.1, "flag": "money_advice" } },
+        { "label": "About surviving managers", "desc": "How to last.", "risk": "low", "hint": "Football wisdom.", "text": "'Every manager wants three things: effort, honesty and no surprises.' {J} writes it in his notes app.", "fx": { "bond": 10, "trust": 2, "growth": ["mental"] } },
+        { "label": "About family", "desc": "How to keep them close.", "risk": "low", "hint": "Life wisdom.", "text": "{T} talks about the birthdays he missed and the divorce he didn't see coming. {J} calls home that night.", "fx": { "bond": 10, "family": 4 } }
+      ] },
+    { "id": "sq_squad_birthday", "cat": "dressing", "w": 4, "cd": 40, "when": { "freeAgent": false }, "uses": { "T": "any" },
+      "title": "Cake Ambush", "text": "It's {T}'s birthday. The squad tradition is to ambush the birthday boy with a cake to the face after training. Somebody has to carry the cake.",
+      "prompt": "Carry the cake?",
+      "choices": [
+        { "label": "Carry it, and do it properly", "desc": "Full face.", "risk": "low", "hint": "Legendary.", "text": "Perfect execution. {T} is covered in icing and laughing. The video is the club's most-watched post of the month.", "fx": { "dressing": 4, "bond": 6, "followers": 2000 } },
+        { "label": "Film it", "desc": "Someone has to.", "risk": "low", "hint": "Safe.", "text": "He films it. The footage is shaky because he's laughing too hard.", "fx": { "dressing": 2 } }
+      ] },
+    { "id": "sq_squad_awards", "cat": "dressing", "w": 4, "cd": 100, "when": { "freeAgent": false, "months": [5, 6, 11, 12] },
+      "title": "The Dressing-Room Awards", "text": "End-of-season dressing-room awards: Worst Dressed, Most Likely to Be Late, Best Moaner. The voting is secret and brutal. {J} has been nominated for three.",
+      "prompt": "How do you take it?",
+      "choices": [
+        { "label": "Accept every award with a speech", "desc": "Lean into it.", "risk": "low", "hint": "The squad will love you.", "text": "He accepts 'Worst Dressed' wearing the outfit in question. Standing ovation.", "fx": { "dressing": 6, "morale": 3 } },
+        { "label": "Demand a recount", "desc": "It's a fix.", "risk": "low", "hint": "Funny, if you commit.", "text": "His demand for a recount is so dramatic that the squad invents a new award just for him: Worst Loser.", "fx": { "dressing": 4 } }
+      ] },
+    { "id": "sq_teammate_contract_jealousy", "cat": "dressing", "w": 4, "cd": 80, "when": { "freeAgent": false, "role": ["starter"] }, "uses": { "T": "any" },
+      "title": "Wages", "text": "Someone leaked the squad's wages. {J} earns more than {T}, who has been at the club for six years. {T} hasn't said anything. His face says everything.",
+      "prompt": "A teammate resents your wage.",
+      "choices": [
+        { "label": "Talk to him honestly", "desc": "It wasn't your decision.", "risk": "low", "hint": "Clear the air.", "text": "{T} admits he's hurt, but not at {J}. They end up going to the board together to push for better deals for the long-serving players.", "fx": { "bond": 12, "dressing": 4, "board": -2 } },
+        { "label": "Say nothing", "desc": "Money is private.", "risk": "medium", "hint": "It festers.", "text": "Nothing is said. Something changes.", "fx": { "bond": -6, "dressing": -2 } }
+      ] },
+    { "id": "sq_foreign_teammate_racism", "cat": "dressing", "w": 3, "cd": 120, "when": { "freeAgent": false }, "uses": { "T": "any" },
+      "title": "Not Okay", "text": "In the dressing room, a senior player makes a 'joke' about {T}'s skin colour. A few people laugh. {T} doesn't. He stares at the floor.",
+      "prompt": "A teammate was racially mocked.",
+      "choices": [
+        { "label": "Call it out, right there", "desc": "In front of everyone.", "risk": "medium", "hint": "Right. Awkward. Necessary.", "text": "'That's not funny, and it's not okay.' The room goes silent. The senior player mumbles an apology. {T} catches {J}'s eye and nods.", "fx": { "bond": 15, "dressing": 2, "image": 2 } },
+        { "label": "Talk to {T} privately afterwards", "desc": "Check he's okay. Ask what he wants.", "risk": "low", "hint": "Support, quietly.", "text": "{T} says it happens more than people know. Together they go to the captain. It doesn't happen again.", "fx": { "bond": 10, "dressing": 2 } }
+      ] },
+    { "id": "sq_teammate_car_crash", "cat": "dressing", "w": 3, "cd": 150, "when": { "freeAgent": false }, "uses": { "T": "any" },
+      "title": "{T}'s Car", "text": "{T} crashed his sports car into a lamppost at 2am. He's fine, mostly. The police are involved. The manager is livid. {T} calls {J} from the station.",
+      "prompt": "A teammate is in trouble and called you.",
+      "choices": [
+        { "label": "Go and get him", "desc": "Now.", "risk": "low", "hint": "Loyalty.", "text": "He picks {T} up at 4am and drives him home. On the way {T} admits he'd been drinking. They sit in the car outside his flat until the sun comes up.", "fx": { "bond": 15, "pfm": -2 } },
+        { "label": "Call the club's lawyer for him", "desc": "Professional help.", "risk": "low", "hint": "Practical.", "text": "The club lawyer arrives in twenty minutes. {T} is grateful. The newspapers still get the story.", "fx": { "bond": 8 } }
+      ] },
+    { "id": "sq_two_teammates_feud", "cat": "dressing", "w": 4, "cd": 60, "when": { "freeAgent": false, "level": [2, 5] }, "uses": { "T": "any", "T2": "any" },
+      "title": "Caught in the Middle", "text": "{T} and {T2} haven't spoken in a month. Both of them are friends with {J}. Both have asked him, separately, whose side he's on.",
+      "prompt": "Two teammates want you to pick a side.",
+      "choices": [
+        { "label": "Get them in a room together", "desc": "Force a peace summit.", "risk": "medium", "hint": "Could fix it. Could explode.", "out": [ { "w": 2, "text": "Pizza, a locked door and two hours. They come out laughing. The squad can't believe it.", "fx": { "dressing": 7, "bond": 6, "trust": 2 } }, { "w": 1, "text": "It explodes. Now both of them are angry at {J}.", "fx": { "dressing": -3, "bond": -5 } } ] },
+        { "label": "Refuse to choose", "desc": "Neutral. Switzerland.", "risk": "low", "hint": "Safe.", "text": "He refuses to pick a side. Both respect it, grudgingly.", "fx": { "stress": 1 } },
+        { "label": "Side with {T}", "desc": "He's right.", "risk": "medium", "hint": "A friend kept, a friend lost.", "text": "He backs {T}. {T2} takes it personally.", "fx": { "bond": 8, "teammate": { "who": "T2", "rel": "rival" } } }
+      ] },
+    { "id": "sq_squad_charity_match", "cat": "dressing", "w": 3, "cd": 120, "when": { "freeAgent": false },
+      "title": "The Charity Match", "text": "The squad is playing a charity match against a team of local celebrities and retired legends. Nobody is supposed to try too hard. Somebody always does.",
+      "prompt": "How seriously do you take it?",
+      "choices": [
+        { "label": "Entertain: tricks, jokes, let the celebrities score", "desc": "It's for charity.", "risk": "low", "hint": "Crowd-pleaser.", "text": "He lets a famous comedian nutmeg him and falls over dramatically. The crowd loves it. The charity raises a fortune.", "fx": { "fans": 4, "image": 4, "followers": 5000 } },
+        { "label": "Play properly", "desc": "Respect the game.", "risk": "medium", "hint": "Someone might get hurt.", "text": "He scores a hat-trick against retired men in their fifties. Technically impressive, socially questionable.", "fx": { "image": -1, "followers": 3000 } }
+      ] },
+    { "id": "sq_teammate_asks_money_back", "cat": "dressing", "w": 3, "cd": 120, "when": { "freeAgent": false, "wealth": [5000, 999999999] }, "uses": { "T": "any" },
+      "title": "The Investment", "text": "{T} is pitching every player in the squad on a business: a chain of padel courts. He wants {J} in for a slice. 'Can't lose,' he says, which is always what people say.",
+      "prompt": "Invest in a teammate's business?",
+      "choices": [
+        { "label": "Invest a little", "desc": "Support a mate.", "risk": "medium", "hint": "Money might come back. Might not.", "out": [ { "w": 1, "text": "The padel courts are packed. A year later he gets a cheque bigger than his investment.", "fx": { "bond": 10, "wealth": 3000 } }, { "w": 1, "text": "The business folds in eight months. {T} apologises every time they see each other.", "fx": { "bond": 6, "wealth": -3000 } } ] },
+        { "label": "Politely decline", "desc": "Never mix friends and money.", "risk": "low", "hint": "Sensible.", "text": "He declines kindly. {T} understands. Mostly.", "fx": { "bond": -2 } }
+      ] },
+    { "id": "sq_captain_advice_love", "cat": "dressing", "w": 3, "cd": 120, "when": { "freeAgent": false, "love": [0, 45] },
+      "title": "The Captain Notices", "text": "{CAP} catches {J} staring at his phone in the physio room for twenty minutes. 'Trouble at home?' he asks. It isn't really a question.",
+      "prompt": "The captain offers to listen.",
+      "choices": [
+        { "label": "Open up", "desc": "Tell him everything.", "risk": "low", "hint": "Sometimes it helps.", "text": "{CAPl} listens, then says, 'I nearly lost my wife over football. Go home on time tonight. Every night this week.' {J} does.", "fx": { "love": 5, "dressing": 3, "stress": -3 } },
+        { "label": "Say it's nothing", "desc": "Keep it private.", "risk": "low", "hint": "Private.", "text": "'Nothing, captain.' {CAPl} nods and leaves the door open anyway.", "fx": {} }
+      ] },
+    { "id": "sq_old_friend_opponent", "cat": "dressing", "w": 4, "cd": 80, "when": { "freeAgent": false, "matchWeek": true },
+      "title": "{FORMER} on the Other Side", "text": "{FORMER}, his old friend from {FORMERCLUB}, is playing against him this weekend. They text all week. Trash talk, mostly. Some of it serious.",
+      "prompt": "Your old friend is in the other team.",
+      "choices": [
+        { "label": "Swap shirts after the match", "desc": "Whatever the result.", "risk": "low", "hint": "Some friendships outlast clubs.", "text": "They swap shirts on the halfway line at full time and hug for a long time. The photo goes everywhere.", "fx": { "friends": 4, "image": 2, "followers": 3000 } },
+        { "label": "Promise to nutmeg him", "desc": "Friendly war.", "risk": "low", "hint": "Bragging rights.", "text": "He does nutmeg him, in the 34th minute. {FORMER} laughs so hard he nearly falls over.", "fx": { "friends": 3, "morale": 3 } }
+      ] },
+    { "id": "sq_back_from_injury_teammate", "cat": "dressing", "w": 3, "cd": 100, "when": { "freeAgent": false }, "uses": { "T": "any" },
+      "title": "{T} Comes Back", "text": "{T} has been out for nine months with a knee injury. Today is his first full session back. He's nervous. Everyone is being careful around him.",
+      "prompt": "Help a teammate's comeback?",
+      "choices": [
+        { "label": "Train with him, no special treatment", "desc": "Treat him normally.", "risk": "low", "hint": "Normal is what he wants.", "text": "He tackles {T} in the first drill, fairly and firmly. {T} grins: 'Thank you. I needed that.'", "fx": { "bond": 12, "dressing": 2 } },
+        { "label": "Ask him how the rehab really was", "desc": "Nobody has asked.", "risk": "low", "hint": "Kindness.", "text": "{T} talks for an hour about the loneliness of the gym. {J} remembers it if his own knee ever goes.", "fx": { "bond": 10, "growth": ["mental"] } }
+      ] },
+    { "id": "sq_teammate_poached", "cat": "dressing", "w": 3, "cd": 120, "when": { "freeAgent": false, "level": [3, 5] }, "uses": { "T": "ally" },
+      "title": "Come With Me", "text": "{T} has an offer from a big club, and the club wants a second player in his position. He's recommended {J}. 'Come with me,' he says. 'We'll do it together.'",
+      "prompt": "Your friend wants you to move with him.",
+      "choices": [
+        { "label": "Tell your agent to look into it", "desc": "Why not?", "risk": "medium", "hint": "A real offer might follow.", "text": "His agent makes calls. An offer comes within weeks, from the same club.", "fx": { "offerAbroad": true, "bond": 8 } },
+        { "label": "Stay", "desc": "Your journey is here.", "risk": "low", "hint": "Loyalty.", "text": "{T} goes alone. They stay friends. {J} wonders, sometimes.", "fx": { "board": 3, "bond": 4 } }
+      ] },
+    { "id": "sq_new_captain_me", "cat": "dressing", "w": 4, "cd": 100, "when": { "isCaptain": true },
+      "title": "The Captain's Job", "text": "Being captain is more than the armband. A young player wants to talk about homesickness, two seniors are feuding, and the kit man has asked {J} to sort out the coffee machine.",
+      "prompt": "What do you prioritise as captain?",
+      "choices": [
+        { "label": "The young player first", "desc": "People before politics.", "risk": "low", "hint": "The squad notices who you look after.", "text": "He spends an evening with the homesick kid and his family on video. The kid settles. The squad sees.", "fx": { "dressing": 6, "image": 2 } },
+        { "label": "The feud first", "desc": "Fix the dressing room.", "risk": "medium", "hint": "Leadership is conflict.", "text": "He sits the two seniors down and sorts it. It takes three hours and all his patience.", "fx": { "dressing": 5, "trust": 3, "stress": 3 } },
+        { "label": "The coffee machine, obviously", "desc": "Priorities.", "risk": "low", "hint": "Morale is caffeine.", "text": "He buys a new coffee machine with his own money. Honestly, the most popular thing he does all season.", "fx": { "dressing": 4, "wealth": -400 } }
+      ] },
+    { "id": "sq_bus_seat", "cat": "dressing", "w": 4, "cd": 200, "once": true, "when": { "freeAgent": false, "apps": [0, 10] },
+      "title": "The Back Seat", "text": "First away trip. He sits on the back seat of the team bus. Nobody says anything. Then {CAP} gets on, looks at him, and waits.",
+      "prompt": "You're in the captain's seat.",
+      "choices": [
+        { "label": "Move immediately with an apology", "desc": "Hierarchy matters.", "risk": "low", "hint": "Learn the rules.", "text": "He moves so fast he trips. {CAPl} laughs and pats his head. Lesson learned, gently.", "fx": { "dressing": 3 } },
+        { "label": "Stay put with a cheeky grin", "desc": "Test him.", "risk": "high", "hint": "Bold, or stupid.", "out": [ { "w": 1, "text": "{CAPl} grins back and sits next to him. 'I like this kid.'", "fx": { "dressing": 4, "morale": 3 } }, { "w": 2, "text": "{CAPl} doesn't grin. {J} carries the kit bags for a month.", "fx": { "dressing": -3, "pfm": -2 } } ] }
+      ] },
+    { "id": "sq_teammate_gay", "cat": "dressing", "w": 2, "cd": 300, "once": true, "when": { "freeAgent": false }, "uses": { "T": "ally" },
+      "title": "{T} Trusts Him", "text": "{T} asks {J} to stay behind after training. Haltingly, he tells him he's gay, and that he's thinking about telling the squad. He's terrified. He wanted {J} to know first.",
+      "prompt": "Your friend has trusted you with something important.",
+      "choices": [
+        { "label": "Promise to stand with him, whatever he decides", "desc": "Support, on his terms.", "risk": "low", "hint": "Friendship.", "text": "'Whatever you decide, I'm next to you.' {T} lets out a breath he's been holding for years.", "fx": { "bond": 25, "morale": 2, "flag": "supported_friend" } },
+        { "label": "Help him plan how to tell the squad", "desc": "Practical support.", "risk": "low", "hint": "Careful and kind.", "text": "They plan it together, with the captain. When {T} tells the squad, {J} is the first to hug him. The room follows.", "fx": { "bond": 25, "dressing": 5, "image": 3, "flag": "supported_friend" } }
+      ] },
+    { "id": "sq_jersey_swap_idol", "cat": "dressing", "w": 3, "cd": 200, "once": true, "when": { "played": true, "level": [1, 3] },
+      "title": "His Childhood Hero", "text": "The opposition includes a veteran {J} worshipped as a kid: posters on the wall, his name on a homemade shirt. After the match, {J} is too shy to ask for his shirt.",
+      "prompt": "Ask your childhood hero for his shirt?",
+      "choices": [
+        { "label": "Ask", "desc": "You'll regret it if you don't.", "risk": "low", "hint": "Heroes are usually kind.", "text": "The veteran laughs and says he was going to ask for {J}'s. They swap. The shirt is framed above his bed within the week.", "fx": { "morale": 8, "followers": 3000 } },
+        { "label": "Don't", "desc": "Too embarrassing.", "risk": "low", "hint": "Regret.", "text": "He doesn't ask. He thinks about it on the bus home, and for years afterwards.", "fx": { "morale": -1 } }
+      ] },
+    { "id": "sq_youth_kid_trouble", "cat": "dressing", "w": 3, "cd": 120, "when": { "freeAgent": false, "age": [24, 40], "level": [3, 5] }, "uses": { "T": "any" },
+      "title": "The Kid in Trouble", "text": "One of the youngsters, {T}, has been seen with the wrong crowd: expensive cars, men who don't work, a lot of cash. He's nineteen. He reminds {J} of someone.",
+      "prompt": "A young teammate is heading down a bad road.",
+      "choices": [
+        { "label": "Have the hard conversation", "desc": "Before it's too late.", "risk": "medium", "hint": "He might listen.", "out": [ { "w": 1, "text": "{T} gets defensive, then quiet, then tells him everything. With {J}'s help, he walks away from them.", "fx": { "bond": 18, "dressing": 4, "image": 2, "flag": "mentor_kid" } }, { "w": 1, "text": "{T} tells him to mind his business. Six months later, the headlines arrive.", "fx": { "bond": -4, "morale": -3 } } ] },
+        { "label": "Tell the club's welfare team", "desc": "Professional help.", "risk": "low", "hint": "Safer for everyone.", "text": "The welfare team steps in quietly. {T} doesn't know who raised it. He's okay, in the end.", "fx": { "trust": 2 } }
+      ] },
+    { "id": "sq_pre_match_ritual", "cat": "dressing", "w": 4, "cd": 200, "once": true, "when": { "freeAgent": false, "apps": [10, 9999] },
+      "title": "The Ritual", "text": "Every player has a pre-match ritual: left boot first, the same song, a prayer, touching the badge on the tunnel wall. {J} has been asked what his is for a club video. He doesn't have one. Yet.",
+      "prompt": "What becomes your ritual?",
+      "choices": [
+        { "label": "A message to {MUM} before every match", "desc": "The same three words.", "risk": "low", "hint": "Family.", "text": "Three words to {MUM}, every match. She replies with a heart within seconds, always.", "fx": { "family": 5, "morale": 2 } },
+        { "label": "Touch the badge on the tunnel wall", "desc": "For the club.", "risk": "low", "hint": "The fans will love it.", "text": "He touches the badge every time. The fans start doing it too, at the turnstiles.", "fx": { "fans": 4 } },
+        { "label": "Something nobody knows about", "desc": "Your secret.", "risk": "low", "hint": "Mystery.", "text": "He tells the camera it's a secret. The video goes viral with fans guessing.", "fx": { "followers": 5000 } }
+      ] },
+    { "id": "sq_squad_trip_off_day", "cat": "dressing", "w": 4, "cd": 60, "when": { "freeAgent": false },
+      "title": "Day Off Together", "text": "The squad has two days off and someone suggests going away together: a beach, a rented house, twenty footballers and one barbecue.",
+      "prompt": "Go on the squad trip?",
+      "choices": [
+        { "label": "Go", "desc": "Bonding.", "risk": "low", "hint": "Team spirit.", "text": "Two days of beach football, terrible singing and burnt sausages. The team that comes back is closer.", "fx": { "dressing": 6, "stress": -3, "wealth": -300 } },
+        { "label": "Stay home with family", "desc": "Rare free days.", "risk": "low", "hint": "Family time.", "text": "He goes home instead. {MUM} is thrilled. The squad photos look fun.", "fx": { "family": 5, "dressing": -1 } }
+      ] },
+    { "id": "sq_dressing_room_speech_kid", "cat": "dressing", "w": 3, "cd": 120, "when": { "freeAgent": false, "age": [16, 20] },
+      "title": "Say Something, Kid", "text": "Before a big match, the captain does something unusual: he asks the youngest player to say a few words. That's {J}. Twenty-five grown men turn to look at him.",
+      "prompt": "The captain wants you to speak.",
+      "choices": [
+        { "label": "Speak from the heart", "desc": "Say what this means to you.", "risk": "medium", "hint": "Nervy, powerful.", "check": { "stat": "mental", "dc": 52 }, "ok": { "text": "He talks about watching this club from the cheap seats with his dad. The room goes very quiet. Then they roar.", "fx": { "dressing": 8, "morale": 5 } }, "bad": { "text": "He says 'let's win' and sits down. Somebody claps, kindly.", "fx": { "dressing": 1 } } },
+        { "label": "Make them laugh", "desc": "Break the tension.", "risk": "medium", "hint": "Could be perfect.", "text": "One joke about the captain's haircut. The whole room breaks up. They go out loose and laughing.", "fx": { "dressing": 6, "morale": 3 } }
+      ] },
+    { "id": "sq_teammate_affair_secret", "cat": "dressing", "w": 2, "cd": 200, "when": { "freeAgent": false, "partner": ["dating", "serious", "engaged", "married"] }, "uses": { "T": "any" },
+      "title": "What He Saw", "text": "{J} saw {T}, who is married, leaving a hotel with a woman who is not his wife. {T} saw him see it. Neither of them said anything. Now {T}'s wife has invited {J} and {P} for dinner.",
+      "prompt": "You know a teammate's secret.",
+      "choices": [
+        { "label": "Talk to {T} privately", "desc": "Tell him you won't lie for him.", "risk": "medium", "hint": "Honest, uncomfortable.", "text": "{T} begs him to keep quiet. {J} says he won't tell, and won't lie either. The dinner is the longest of his life.", "fx": { "bond": -4, "stress": 4 } },
+        { "label": "Decline the dinner", "desc": "Avoid it all.", "risk": "low", "hint": "Distance.", "text": "He finds an excuse. {P} asks why. He changes the subject, badly.", "fx": { "love": -2, "stress": 2 } },
+        { "label": "Tell {P}", "desc": "No secrets at home.", "risk": "medium", "hint": "Your partner may not keep it.", "text": "{P} is horrified, and now they both have to pretend at dinner. She's better at it than he is.", "fx": { "love": 3, "stress": 3 } }
+      ] },
+    { "id": "sq_team_photo", "cat": "dressing", "w": 3, "cd": 52, "when": { "freeAgent": false, "phase": ["pre"] },
+      "title": "The Team Photo", "text": "Official team photo day. The photographer is putting players in rows by height and fame. {J} has been put at the end of the back row, half cut out of the frame.",
+      "prompt": "Your place in the team photo.",
+      "choices": [
+        { "label": "Accept your spot", "desc": "Earn the middle next year.", "risk": "low", "hint": "Humble.", "text": "He stands at the end with a grin. Next year, he promises himself, the middle.", "fx": { "mood": "Determined" } },
+        { "label": "Photobomb it", "desc": "Rabbit ears on the captain.", "risk": "medium", "hint": "Legendary or embarrassing.", "text": "The official photo goes to print with {J} giving the captain rabbit ears. The club uses it on the calendar anyway.", "fx": { "dressing": 4, "trust": -1, "followers": 3000 } }
+      ] },
+    { "id": "sq_squad_new_manager_meeting", "cat": "dressing", "w": 3, "cd": 120, "when": { "freeAgent": false, "level": [3, 5] },
+      "title": "The Senior Players' Meeting", "text": "The senior players have been asked to meet the board about the club's direction. Someone has to speak for the squad. All eyes turn to {J}.",
+      "prompt": "Speak for the squad?",
+      "choices": [
+        { "label": "Speak up for everyone", "desc": "Wages, facilities, respect.", "risk": "medium", "hint": "Respect from the squad. Notice from the board.", "text": "He speaks clearly and calmly. The board agrees to fix the training pitches and pay bonuses on time. The squad cheers when he walks back in.", "fx": { "dressing": 8, "board": -2, "flag": "union_rep" } },
+        { "label": "Let someone else speak", "desc": "Not your place.", "risk": "low", "hint": "Safe.", "text": "{CAP} speaks. {J} nods along.", "fx": {} }
+      ] }
+  ]
+}

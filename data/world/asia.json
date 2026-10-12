@@ -1,0 +1,344 @@
+{
+  "_meta": {
+    "region": "Asia (AFC) — includes Australia, which plays in the AFC",
+    "baseline": "2025-26 season (calendar-year leagues: 2025 season unless noted)",
+    "continentalNote": "AFC club tiers since 2024-25: AFC Champions League Elite (24 clubs) > AFC Champions League Two (32 clubs) > AFC Challenge League (replaced the AFC Cup). Slots depend on each country's AFC club ranking. ASEAN clubs also play the ASEAN Club Championship (Shopee Cup)."
+  },
+  "countries": [
+    {
+      "country": "Indonesia",
+      "code": "IDN",
+      "flag": "🇮🇩",
+      "currency": "IDR",
+      "federation": "PSSI (Persatuan Sepakbola Seluruh Indonesia). President: Erick Thohir.",
+      "leagueOperator": "I.League (PT Liga Indonesia Baru, rebranded 2025)",
+      "transferWindows": { "summer": "Jun - Aug (verify exact dates each season)", "midseason": "Jan - Feb" },
+      "leagues": [
+        {
+          "tier": 1, "name": "BRI Super League", "formerName": "Liga 1 (renamed 2025)", "teams": 18, "matchdays": 34, "season": "Aug-May",
+          "clubs": ["Persib Bandung", "Dewa United Banten FC", "Malut United", "Persebaya Surabaya", "Borneo FC Samarinda", "Bali United FC", "Persija Jakarta", "Persita Tangerang", "PSM Makassar", "Persik Kediri", "Arema FC", "PSBS Biak", "Madura United FC", "Persis Solo", "Semen Padang FC", "Bhayangkara Presisi Lampung FC", "Persijap Jepara", "PSIM Yogyakarta"],
+          "relegation": "Bottom 3 to Championship",
+          "europe": "Champion → AFC Champions League Two (play-off/group per AFC slots); others may enter the ASEAN Club Championship",
+          "foreignPlayers": "Up to 11 registered foreign players, limited number on the pitch at once (verify the exact 2025-26 numbers)",
+          "notes": "Persib won back-to-back titles in 2023-24 and 2024-25. Relegated 2024-25: PSIS Semarang, PSS Sleman, Barito Putera. Promoted: Bhayangkara FC (now based in Lampung), Persijap Jepara, PSIM Yogyakarta. The original prompt's '26 clubs, 50 matchdays' is wrong."
+        },
+        {
+          "tier": 2, "name": "Pegadaian Championship", "formerName": "Liga 2 (renamed 2025)", "teams": 20, "season": "Sep-Apr", "format": "Two regional groups, then promotion phase (verify)", "complete": false,
+          "clubs": ["PSIS Semarang", "PSS Sleman", "PS Barito Putera", "Sriwijaya FC", "Persiraja Banda Aceh", "PSMS Medan", "Persela Lamongan", "Deltras FC", "Persipura Jayapura", "Kendal Tornado FC", "Persiba Balikpapan", "FC Bekasi City", "Persekat Tegal", "PSPS Pekanbaru", "Adhyaksa FC", "Garudayaksa FC"],
+          "promotion": "3 clubs promoted (verify format)"
+        },
+        {
+          "tier": 3, "name": "Liga Nusantara", "teams": 16, "season": "Oct-Mar", "format": "Created 2024-25 as a new national 3rd tier", "complete": false,
+          "clubs": ["Persiku Kudus", "Persikabo 1973", "Persibo Bojonegoro", "Persikas Subang", "PSGC Ciamis"],
+          "notes": "verify club list."
+        },
+        {
+          "tier": 4, "name": "Liga 4", "formerName": "Liga 3", "format": "Amateur. Provincial competitions → national phase. Many players have other jobs; facilities basic; this is where most Indonesian careers start.",
+          "complete": false,
+          "clubs": ["Persibas Banyumas", "Persip Pekalongan", "PSIR Rembang", "Persikota Tangerang", "Persebaya-affiliated amateur clubs"]
+        }
+      ],
+      "cups": ["Piala Indonesia (irregular; last full edition 2018-19)", "Piala Presiden (pre-season invitational; 2025 edition included Oxford United and Port FC)"],
+      "youth": "Elite Pro Academy (EPA) U-16/U-18/U-20 league attached to top-flight clubs — the realistic entry point for a 16-year-old.",
+      "supporters": { "Persib Bandung": "Bobotoh / Viking Persib Club", "Persija Jakarta": "The Jakmania", "Persebaya Surabaya": "Bonek", "Arema FC": "Aremania", "PSM Makassar": "The Macz Man", "PSS Sleman": "Brigata Curva Sud / Slemania", "Persis Solo": "Pasoepati" },
+      "rivalries": ["Persib vs Persija (biggest; away fans frequently banned)", "Persebaya vs Arema (East Java derby; Kanjuruhan disaster 2022 still shapes security)", "PSIM vs PSS (Yogyakarta)", "Persis vs PSIS/PSIM (Central Java/Mataram)"],
+      "stadiums": {
+        "Persija Jakarta": "Jakarta International Stadium (JIS, ~82,000) / Gelora Bung Karno (77,193)",
+        "Persib Bandung": "Gelora Bandung Lautan Api (GBLA, ~38,000); Si Jalak Harupat as alternative",
+        "Persebaya Surabaya": "Gelora Bung Tomo (~46,000)",
+        "Arema FC": "Kanjuruhan Stadium (rebuilt after 2022 disaster)",
+        "Bali United FC": "Kapten I Wayan Dipta Stadium",
+        "Persis Solo": "Manahan Stadium (~20,000)",
+        "PSM Makassar": "Gelora B.J. Habibie, Parepare (Makassar stadium being rebuilt, verify)",
+        "National team": "Gelora Bung Karno, Jakarta"
+      },
+      "stars": ["Thom Haye (Persib)", "Eliano Reijnders (Persib)", "Marc Klok (Persib)", "Beckham Putra (Persib)", "Rizky Ridho (Persija)", "Egy Maulana Vikri (Dewa United)", "Ricky Kambuaya (Dewa United)", "Yakob Sayuri (Malut United)", "Witan Sulaeman (verify club)", "Stefano Lilipaly (verify club)"],
+      "notes": "Football is the national obsession. Social media numbers for Indonesian players are huge relative to their market value. Ramadan falls inside the season and affects training/matches. Match-fixing scandals and stadium-safety problems are real parts of the culture to depict carefully. The national team's naturalisation programme (players of Indonesian heritage from the Netherlands) changed the senior team from 2023 onwards."
+    },
+    {
+      "country": "Japan",
+      "code": "JPN",
+      "flag": "🇯🇵",
+      "currency": "JPY",
+      "transferWindows": { "note": "Changing with the new autumn-spring calendar from 2026-27; summer window ~Jul-Aug, winter window ~Jan-Mar (verify)" },
+      "leagues": [
+        {
+          "tier": 1, "name": "Meiji Yasuda J1 League", "teams": 20, "matchdays": 38, "season": "Aug-May from 2026-27 (was Feb-Dec)",
+          "clubs": ["Kashima Antlers", "Kashiwa Reysol", "Kyoto Sanga FC", "Sanfrecce Hiroshima", "Vissel Kobe", "FC Machida Zelvia", "Urawa Red Diamonds", "Kawasaki Frontale", "Gamba Osaka", "Cerezo Osaka", "Tokyo Verdy", "FC Tokyo", "Nagoya Grampus", "Avispa Fukuoka", "Fagiano Okayama", "Shimizu S-Pulse", "Yokohama F. Marinos", "Mito HollyHock", "V-Varen Nagasaki", "JEF United Chiba"],
+          "relegation": "Bottom 3 (from 2026-27)",
+          "europe": "Top clubs → AFC Champions League Elite; next → ACL Two",
+          "notes": "2025 champions: Kashima Antlers. Relegated after 2025: Albirex Niigata, Yokohama FC, Shonan Bellmare. Promoted: Mito HollyHock, V-Varen Nagasaki, JEF United Chiba. Feb-Jun 2026 is a one-off half-season, the 'J.League 100 Year Vision League' (no relegation), before the switch to an August start. verify 2026 clubs."
+        },
+        {
+          "tier": 2, "name": "Meiji Yasuda J2 League", "teams": 20, "season": "Aug-May from 2026-27", "complete": false,
+          "clubs": ["Albirex Niigata", "Yokohama FC", "Shonan Bellmare", "Júbilo Iwata", "Hokkaido Consadole Sapporo", "Sagan Tosu", "Vegalta Sendai", "RB Omiya Ardija", "Montedio Yamagata", "Ventforet Kofu", "Tokushima Vortis", "Oita Trinita", "Blaublitz Akita", "Renofa Yamaguchi", "Iwaki FC", "Fujieda MYFC", "FC Imabari"]
+        },
+        {
+          "tier": 3, "name": "Meiji Yasuda J3 League", "teams": 20, "complete": false,
+          "clubs": ["Matsumoto Yamaga", "Giravanz Kitakyushu", "FC Osaka", "Tegevajaro Miyazaki", "Kagoshima United", "Gainare Tottori", "Azul Claro Numazu", "Vanraure Hachinohe", "Tochigi SC", "FC Gifu"]
+        }
+      ],
+      "cups": ["Emperor's Cup", "J.League YBC Levain Cup"],
+      "supercup": "FUJIFILM Super Cup (February)",
+      "stars": ["Yoshinori Muto (Vissel Kobe)", "Yuya Osako (Vissel Kobe)", "Shinji Okazaki (retired 2024; coaching)"],
+      "notes": "Japan's best players play in Europe (see national-teams.json). J.League is very professional, punctual and tactical. High-school football (All Japan High School Championship) is a huge alternative pathway."
+    },
+    {
+      "country": "South Korea",
+      "code": "KOR",
+      "flag": "🇰🇷",
+      "currency": "KRW",
+      "transferWindows": { "winter": "Jan - Mar", "summer": "Jul" },
+      "leagues": [
+        {
+          "tier": 1, "name": "K League 1", "teams": 12, "matchdays": 38, "season": "Feb/Mar-Nov (calendar year)", "format": "33 rounds then Final A (top 6) and Final B (bottom 6)",
+          "clubs": ["Jeonbuk Hyundai Motors", "Daejeon Hana Citizen", "Gimcheon Sangmu", "Pohang Steelers", "FC Seoul", "Gangwon FC", "Gwangju FC", "FC Anyang", "Ulsan HD", "Suwon FC", "Jeju SK FC", "Daegu FC"],
+          "relegation": "12th relegated; 10th-11th promotion/relegation play-offs",
+          "notes": "2025 season list. 2025 champions: Jeonbuk. Gimcheon Sangmu is the military team: Korean players do national service there. verify 2026 changes (Daegu relegated; Incheon United promoted)."
+        },
+        { "tier": 2, "name": "K League 2", "teams": 14, "complete": false, "clubs": ["Incheon United", "Suwon Samsung Bluewings", "Busan IPark", "Jeonnam Dragons", "Seongnam FC", "Bucheon FC 1995", "Seoul E-Land", "Gyeongnam FC", "Chungnam Asan", "Chungbuk Cheongju", "Ansan Greeners", "Cheonan City", "Gimpo FC", "Hwaseong FC"] },
+        { "tier": 3, "name": "K3 League", "teams": 15, "complete": false, "clubs": [] }
+      ],
+      "cups": ["Korea Cup (formerly KFA Cup)"],
+      "notes": "'Super Match' (in the original prompt) is the FC Seoul vs Suwon Samsung derby, not a super cup. Korea has no regular super cup. Military service (around 18-21 months) is a career-defining issue for Korean players, exempt only via Asian Games gold or an Olympic medal."
+    },
+    {
+      "country": "China PR",
+      "code": "CHN",
+      "flag": "🇨🇳",
+      "currency": "CNY",
+      "transferWindows": { "winter": "Jan - Feb", "summer": "Jul" },
+      "leagues": [
+        {
+          "tier": 1, "name": "Chinese Super League", "teams": 16, "matchdays": 30, "season": "Mar-Nov (calendar year)",
+          "clubs": ["Shanghai Port", "Shanghai Shenhua", "Chengdu Rongcheng", "Beijing Guoan", "Shandong Taishan", "Tianjin Jinmen Tiger", "Zhejiang FC", "Henan FC", "Dalian Yingbo", "Qingdao Hainiu", "Qingdao West Coast", "Yunnan Yukun", "Shenzhen Peng City", "Wuhan Three Towns", "Meizhou Hakka", "Changchun Yatai"],
+          "notes": "2025 season list (verify). Guangzhou FC was dissolved in 2025 (debts). Spending is far below the 2016-2019 boom; salary caps apply."
+        },
+        { "tier": 2, "name": "China League One", "teams": 16, "complete": false, "clubs": [] }
+      ],
+      "cups": ["Chinese FA Cup"],
+      "stars": ["Wu Lei (Shanghai Port)", "Oscar (formerly Shanghai Port)"]
+    },
+    {
+      "country": "Saudi Arabia",
+      "code": "KSA",
+      "flag": "🇸🇦",
+      "currency": "SAR",
+      "transferWindows": { "summer": "Jul - early Sep", "winter": "Jan" },
+      "leagues": [
+        {
+          "tier": 1, "name": "Roshn Saudi League (Saudi Pro League)", "teams": 18, "matchdays": 34, "season": "Aug-May",
+          "clubs": ["Al-Ittihad", "Al-Hilal", "Al-Nassr", "Al-Ahli", "Al-Qadsiah", "Al-Shabab", "Al-Ettifaq", "Al-Taawoun", "Al-Fateh", "Al-Khaleej", "Al-Riyadh", "Al-Fayha", "Al-Okhdood", "Damac", "Al-Kholood", "Al-Hazem", "Al-Najma", "NEOM SC"],
+          "relegation": "Bottom 3",
+          "europe": "Top clubs → AFC Champions League Elite",
+          "foreignPlayers": "Up to 10 foreign players per squad (some must be U21, verify).",
+          "notes": "2024-25 champions: Al-Ittihad. Al-Ahli won the 2024-25 AFC Champions League Elite. Promoted: Al-Hazem, Al-Najma, NEOM SC. Relegated: Al-Raed, Al-Wehda, Al-Orobah. Four clubs are owned by the PIF (Public Investment Fund). Income tax: 0%."
+        },
+        { "tier": 2, "name": "Saudi First Division League", "teams": 18, "complete": false, "clubs": ["Al-Raed", "Al-Wehda", "Al-Orobah", "Al-Faisaly", "Al-Ula", "Abha"] }
+      ],
+      "cups": ["King's Cup (King Cup of Champions)"],
+      "supercup": "Saudi Super Cup (4 teams)",
+      "stars": ["Cristiano Ronaldo (Al-Nassr)", "João Félix (Al-Nassr)", "Sadio Mané (Al-Nassr)", "Kingsley Coman (Al-Nassr)", "Iñigo Martínez (Al-Nassr)", "Karim Benzema (Al-Ittihad)", "Fabinho (Al-Ittihad)", "Houssem Aouar (Al-Ittihad)", "Riyad Mahrez (Al-Ahli)", "Ivan Toney (Al-Ahli)", "Franck Kessié (Al-Ahli)", "Édouard Mendy (Al-Ahli)", "Merih Demiral (Al-Ahli)", "Rúben Neves (Al-Hilal)", "Sergej Milinković-Savić (Al-Hilal)", "Theo Hernández (Al-Hilal)", "Kalidou Koulibaly (Al-Hilal)", "Yassine Bounou (Al-Hilal)", "Darwin Núñez (Al-Hilal)", "João Cancelo (Al-Hilal)", "Malcom (Al-Hilal)", "Salem Al-Dawsari (Al-Hilal)", "Mateo Retegui (Al-Qadsiah)", "Nacho (Al-Qadsiah)"],
+      "notes": "Neymar left Al-Hilal for Santos in January 2025. Jordan Henderson left Al-Ettifaq in January 2024."
+    },
+    {
+      "country": "United Arab Emirates", "code": "UAE", "flag": "🇦🇪", "currency": "AED",
+      "leagues": [{ "tier": 1, "name": "ADNOC Pro League", "teams": 14, "matchdays": 26, "season": "Aug-May", "complete": false, "clubs": ["Shabab Al-Ahli", "Al Ain", "Al Wahda", "Al Jazira", "Sharjah FC", "Al Wasl", "Al Nasr", "Baniyas", "Khorfakkan", "Ajman", "Kalba", "Al Bataeh", "Dibba"], "notes": "Al Ain won the 2023-24 AFC Champions League. Sharjah won the 2024-25 ACL Two. Income tax: 0%." }],
+      "cups": ["UAE President's Cup", "UAE League Cup"]
+    },
+    {
+      "country": "Qatar", "code": "QAT", "flag": "🇶🇦", "currency": "QAR",
+      "leagues": [{ "tier": 1, "name": "Qatar Stars League (Ooredoo Stars League)", "teams": 12, "matchdays": 22, "season": "Aug-May", "complete": false, "clubs": ["Al Sadd", "Al-Duhail", "Al-Rayyan", "Al-Gharafa", "Al-Arabi", "Al-Wakrah", "Qatar SC", "Umm Salal", "Al-Sailiya", "Al-Shamal", "Al-Shahania"], "notes": "Al Sadd dominant. Stars: Roberto Firmino (Al Sadd, verify), Joselu (Al-Gharafa, verify)." }],
+      "cups": ["Emir of Qatar Cup", "QSL Cup"]
+    },
+    {
+      "country": "Iran", "code": "IRN", "flag": "🇮🇷", "currency": "IRR",
+      "leagues": [{ "tier": 1, "name": "Persian Gulf Pro League", "teams": 16, "matchdays": 30, "season": "Aug-May", "complete": false, "clubs": ["Tractor SC", "Persepolis", "Esteghlal", "Sepahan", "Foolad", "Zob Ahan", "Gol Gohar Sirjan", "Malavan", "Chadormalu", "Aluminium Arak", "Kheybar Khorramabad", "Esteghlal Khuzestan"], "notes": "2024-25 champions: Tractor. Tehran derby (Persepolis vs Esteghlal) is one of Asia's biggest. Iranian clubs have played AFC home games at neutral venues during regional conflict." }],
+      "cups": ["Hazfi Cup"]
+    },
+    {
+      "country": "Iraq", "code": "IRQ", "flag": "🇮🇶", "currency": "IQD",
+      "leagues": [{ "tier": 1, "name": "Iraq Stars League", "teams": 20, "season": "Sep-Jun", "complete": false, "clubs": ["Al-Shorta", "Al-Quwa Al-Jawiya", "Al-Zawraa", "Al-Talaba", "Erbil SC", "Duhok SC", "Zakho FC", "Al-Najaf", "Al-Karkh"], "notes": "Al-Shorta dominant recently. Duhok won the 2025 Gulf Club Champions League." }]
+    },
+    {
+      "country": "Uzbekistan", "code": "UZB", "flag": "🇺🇿", "currency": "UZS",
+      "leagues": [{ "tier": 1, "name": "Uzbekistan Super League", "teams": 16, "season": "Mar-Nov (calendar year)", "complete": false, "clubs": ["FC Pakhtakor", "FC Nasaf", "FC Navbahor", "AGMK FC", "FC Neftchi Fergana", "FC Bunyodkor", "FC Surkhon", "FC Sogdiana", "FC Andijon", "Olympic Tashkent", "Dinamo Samarqand"], "notes": "Uzbekistan qualified for their first World Cup (2026)." }]
+    },
+    {
+      "country": "Australia", "code": "AUS", "flag": "🇦🇺", "currency": "AUD",
+      "confederationNote": "AFC member (moved from OFC in 2006).",
+      "transferWindows": { "main": "Jul - Oct (verify)", "midseason": "Jan - Feb" },
+      "leagues": [
+        {
+          "tier": 1, "name": "Isuzu UTE A-League Men", "teams": 12, "matchdays": 26, "season": "Oct-May", "format": "Regular season then Finals Series (top 6); no promotion/relegation; salary cap",
+          "clubs": ["Melbourne City", "Melbourne Victory", "Sydney FC", "Western Sydney Wanderers", "Brisbane Roar", "Perth Glory", "Adelaide United", "Macarthur FC", "Central Coast Mariners", "Newcastle Jets", "Wellington Phoenix (NZ)", "Auckland FC (NZ)"],
+          "notes": "2024-25 champions: Melbourne City. Newcastle Jets was missing from the original prompt. Western United did not compete in 2025-26 (licence issues, verify). Auckland FC joined 2024-25 and won the Premiers Plate in its first season."
+        },
+        { "tier": 2, "name": "Australian Championship / National Premier Leagues (NPL)", "format": "State-based NPLs; the national Australian Championship launched in 2025 as a second-tier bridge (verify format)", "complete": false, "clubs": ["South Melbourne", "Sydney Olympic", "Marconi Stallions", "Wollongong Wolves", "APIA Leichhardt", "Preston Lions", "Avondale FC"] }
+      ],
+      "cups": ["Australia Cup"],
+      "notes": "Grassroots and school competition is strong; many Australians move to Asia, Scotland or Scandinavia."
+    },
+    {
+      "country": "India", "code": "IND", "flag": "🇮🇳", "currency": "INR",
+      "leagues": [
+        { "tier": 1, "name": "Indian Super League", "teams": 13, "season": "Sep-Apr (2025-26 heavily disrupted, verify)", "complete": false, "clubs": ["Mohun Bagan Super Giant", "FC Goa", "Bengaluru FC", "NorthEast United FC", "Jamshedpur FC", "Mumbai City FC", "Odisha FC", "Kerala Blasters FC", "Chennaiyin FC", "Punjab FC", "East Bengal FC", "Mohammedan SC", "Sporting Club Delhi (formerly Hyderabad FC, verify)"], "notes": "The 2025-26 ISL was delayed by a dispute over the league's commercial rights agreement (verify). Mohun Bagan SG won the 2024-25 Shield and Cup. 'ATK Mohun Bagan' (in the original prompt) is the old name of Mohun Bagan SG, not a separate club." },
+        { "tier": 2, "name": "I-League", "teams": 12, "complete": false, "clubs": ["Inter Kashi", "Churchill Brothers", "Real Kashmir", "Gokulam Kerala", "Shillong Lajong", "Sreenidi Deccan"] }
+      ],
+      "cups": ["AIFF Super Cup", "Durand Cup (oldest club competition in Asia)"],
+      "stars": ["Sunil Chhetri (Bengaluru FC; came out of international retirement in 2025)"]
+    },
+    {
+      "country": "Thailand", "code": "THA", "flag": "🇹🇭", "currency": "THB",
+      "leagues": [
+        { "tier": 1, "name": "Thai League 1", "teams": 16, "matchdays": 30, "season": "Aug-May", "complete": false, "clubs": ["Buriram United", "Bangkok United", "BG Pathum United", "Port FC", "Ratchaburi FC", "Muangthong United", "Chiangrai United", "Uthai Thani", "Nakhon Ratchasima", "PT Prachuap", "Sukhothai FC", "Lamphun Warriors", "Chonburi FC", "Ayutthaya United", "Kanchanaburi Power"], "notes": "Buriram United are dominant champions (won the 2024-25 treble and the ASEAN Club Championship). Sandy Walsh (Indonesia) and Asnawi Mangkualam (Indonesia, Port FC, verify) play here — Thai League is a common first step abroad for Indonesian players." },
+        { "tier": 2, "name": "Thai League 2", "teams": 18, "complete": false, "clubs": [] },
+        { "tier": 3, "name": "Thai League 3", "format": "Regional groups", "complete": false, "clubs": [] }
+      ],
+      "cups": ["Thai FA Cup", "Thai League Cup"]
+    },
+    {
+      "country": "Vietnam", "code": "VIE", "flag": "🇻🇳", "currency": "VND",
+      "leagues": [{ "tier": 1, "name": "V.League 1 (LPBank V.League 1)", "teams": 14, "matchdays": 26, "season": "Aug-Jun", "complete": false, "clubs": ["Thép Xanh Nam Định", "Hà Nội FC", "Công An Hà Nội", "Thể Công-Viettel", "Hải Phòng", "Becamex TP. Hồ Chí Minh", "Hoàng Anh Gia Lai", "Sông Lam Nghệ An", "Đông Á Thanh Hóa", "Hồng Lĩnh Hà Tĩnh", "SHB Đà Nẵng", "Ninh Bình FC", "PVF-CAND"], "notes": "Nam Định won 2023-24 and 2024-25. Stars: Nguyễn Xuân Son (naturalised Brazilian, Nam Định), Nguyễn Quang Hải (Công An Hà Nội), Nguyễn Hoàng Đức. Vietnam is Indonesia's fiercest Southeast Asian rival." }],
+      "cups": ["Vietnamese National Cup"]
+    },
+    {
+      "country": "Malaysia", "code": "MAS", "flag": "🇲🇾", "currency": "MYR",
+      "leagues": [{ "tier": 1, "name": "Malaysia Super League", "teams": 13, "season": "Aug-Apr", "complete": false, "clubs": ["Johor Darul Ta'zim", "Selangor FC", "Sabah FC", "Terengganu FC", "Kuala Lumpur City", "Kuching City", "Penang FC", "Negeri Sembilan", "PDRM FC", "Immigration FC", "Melaka FC"], "notes": "JDT have won every title since 2014. In 2025 FIFA sanctioned the Malaysian FA over falsified heritage documents for seven naturalised players — a real scandal and a realistic story hook (for fictional characters)." }],
+      "cups": ["Malaysia FA Cup", "Malaysia Cup", "Piala Sumbangsih (super cup)"]
+    },
+    {
+      "country": "Singapore", "code": "SGP", "flag": "🇸🇬", "currency": "SGD",
+      "leagues": [{ "tier": 1, "name": "Singapore Premier League", "teams": 9, "season": "Aug-May", "clubs": ["Lion City Sailors", "BG Tampines Rovers", "Geylang International", "Hougang United", "Balestier Khalsa", "Albirex Niigata (S)", "Tanjong Pagar United", "Young Lions", "DPMM FC (Brunei)"], "notes": "Lion City Sailors reached the 2024-25 ACL Two final. Brunei's DPMM plays here." }]
+    },
+    {
+      "country": "Philippines", "code": "PHI", "flag": "🇵🇭", "currency": "PHP",
+      "leagues": [{ "tier": 1, "name": "Philippines Football League", "season": "varies", "complete": false, "clubs": ["Kaya FC-Iloilo", "Dynamic Herb Cebu", "Manila Digger", "Stallion Laguna", "One Taguig"], "notes": "Semi-professional; the national team relies heavily on heritage players from Europe." }]
+    },
+    {
+      "country": "Cambodia", "code": "CAM", "flag": "🇰🇭", "currency": "KHR",
+      "leagues": [{ "tier": 1, "name": "Cambodian Premier League", "teams": 11, "season": "Aug-May", "complete": false, "clubs": ["Phnom Penh Crown", "Preah Khan Reach Svay Rieng", "Visakha FC", "Boeung Ket", "Angkor Tiger"] }]
+    },
+    {
+      "country": "Myanmar", "code": "MYA", "flag": "🇲🇲", "currency": "MMK",
+      "leagues": [{ "tier": 1, "name": "Myanmar National League", "season": "calendar year", "complete": false, "clubs": ["Shan United", "Yangon United", "Hantharwady United", "Ayeyawady United"] }]
+    },
+    {
+      "country": "Laos", "code": "LAO", "flag": "🇱🇦", "currency": "LAK",
+      "leagues": [{ "tier": 1, "name": "Lao League 1", "complete": false, "clubs": ["Young Elephants", "Ezra FC", "Master 7 FC"] }]
+    },
+    {
+      "country": "Timor-Leste", "code": "TLS", "flag": "🇹🇱", "currency": "USD",
+      "leagues": [{ "tier": 1, "name": "Liga Futebol Timor-Leste", "complete": false, "clubs": ["Karketu Dili", "Boavista FC Timor", "SLB Laulara"] }]
+    },
+    {
+      "country": "Brunei", "code": "BRU", "flag": "🇧🇳", "currency": "BND",
+      "leagues": [{ "tier": 1, "name": "Brunei Super League", "complete": false, "clubs": ["Kasuka FC", "Indera SC"] }],
+      "notes": "DPMM FC (Brunei's main professional club) plays in the Singapore Premier League."
+    },
+    {
+      "country": "Hong Kong", "code": "HKG", "flag": "🇭🇰", "currency": "HKD",
+      "leagues": [{ "tier": 1, "name": "Hong Kong Premier League", "teams": 9, "season": "Aug-May", "complete": false, "clubs": ["Kitchee SC", "Eastern AA", "Lee Man FC", "Tai Po FC", "Southern District", "Rangers (HKG)", "Hong Kong FC", "North District FC"] }]
+    },
+    {
+      "country": "Chinese Taipei", "code": "TPE", "flag": "🇹🇼", "currency": "TWD",
+      "leagues": [{ "tier": 1, "name": "Taiwan Football Premier League", "complete": false, "clubs": ["Taipower FC", "Tainan City TSG", "Hang Yuen FC", "Taichung Futuro"] }]
+    },
+    {
+      "country": "Macau", "code": "MAC", "flag": "🇲🇴", "currency": "MOP",
+      "leagues": [{ "tier": 1, "name": "Liga de Elite", "complete": false, "clubs": ["Benfica de Macau", "Chao Pak Kei", "Ka I"] }]
+    },
+    {
+      "country": "Mongolia", "code": "MNG", "flag": "🇲🇳", "currency": "MNT",
+      "leagues": [{ "tier": 1, "name": "Mongolian Premier League", "complete": false, "clubs": ["Khangarid", "Deren FC", "SP Falcons", "Ulaanbaatar FC"] }]
+    },
+    {
+      "country": "North Korea", "code": "PRK", "flag": "🇰🇵", "currency": "KPW",
+      "leagues": [{ "tier": 1, "name": "DPR Korea Premier Football League", "complete": false, "clubs": ["April 25", "Hwaebul", "Rimyongsu", "Kigwancha"] }],
+      "notes": "Isolated; foreign transfers essentially impossible."
+    },
+    {
+      "country": "Kuwait", "code": "KUW", "flag": "🇰🇼", "currency": "KWD",
+      "leagues": [{ "tier": 1, "name": "Kuwaiti Premier League (Zain League)", "teams": 10, "complete": false, "clubs": ["Kuwait SC", "Al-Arabi SC", "Al-Qadsia", "Kazma SC", "Al-Salmiya", "Al-Tadamon"] }]
+    },
+    {
+      "country": "Bahrain", "code": "BHR", "flag": "🇧🇭", "currency": "BHD",
+      "leagues": [{ "tier": 1, "name": "Bahraini Premier League (Nasser bin Hamad Premier League)", "teams": 12, "complete": false, "clubs": ["Al-Muharraq", "Al-Riffa", "Al-Khaldiya", "Al-Ahli (Manama)", "East Riffa", "Sitra"] }]
+    },
+    {
+      "country": "Oman", "code": "OMA", "flag": "🇴🇲", "currency": "OMR",
+      "leagues": [{ "tier": 1, "name": "Oman Professional League", "complete": false, "clubs": ["Al-Seeb", "Al-Nahda", "Dhofar", "Al-Shabab (Oman)", "Sohar SC", "Al-Nasr (Salalah)"] }]
+    },
+    {
+      "country": "Jordan", "code": "JOR", "flag": "🇯🇴", "currency": "JOD",
+      "leagues": [{ "tier": 1, "name": "Jordanian Pro League", "teams": 12, "complete": false, "clubs": ["Al-Hussein Irbid", "Al-Faisaly", "Al-Wehdat", "Shabab Al-Ordon", "Al-Ramtha", "Al-Salt"] }],
+      "notes": "Jordan reached the 2023 Asian Cup final and qualified for the 2026 World Cup (their first)."
+    },
+    {
+      "country": "Syria", "code": "SYR", "flag": "🇸🇾", "currency": "SYP",
+      "leagues": [{ "tier": 1, "name": "Syrian Premier League", "complete": false, "clubs": ["Al-Karamah", "Tishreen", "Al-Wahda (Damascus)", "Al-Jaish", "Al-Fotuwa", "Al-Ittihad (Aleppo)"] }]
+    },
+    {
+      "country": "Lebanon", "code": "LBN", "flag": "🇱🇧", "currency": "LBP",
+      "leagues": [{ "tier": 1, "name": "Lebanese Premier League", "teams": 12, "complete": false, "clubs": ["Al-Ansar", "Al-Ahed", "Nejmeh SC", "Safa SC", "Tadamon Sour"] }]
+    },
+    {
+      "country": "Palestine", "code": "PLE", "flag": "🇵🇸", "currency": "ILS",
+      "leagues": [{ "tier": 1, "name": "West Bank Premier League", "complete": false, "clubs": ["Shabab Al-Khalil", "Jabal Al-Mukaber", "Hilal Al-Quds", "Markaz Balata"] }],
+      "notes": "Domestic football has been heavily disrupted by the war; the Gaza league is suspended. The national team plays home games abroad."
+    },
+    {
+      "country": "Yemen", "code": "YEM", "flag": "🇾🇪", "currency": "YER",
+      "leagues": [{ "tier": 1, "name": "Yemeni League", "complete": false, "clubs": ["Al-Ahli Sana'a", "Al-Saqr", "Al-Wahda (Sana'a)"] }],
+      "notes": "Irregular because of the civil war."
+    },
+    {
+      "country": "Kyrgyzstan", "code": "KGZ", "flag": "🇰🇬", "currency": "KGS",
+      "leagues": [{ "tier": 1, "name": "Kyrgyz Premier League", "complete": false, "clubs": ["Abdysh-Ata Kant", "Dordoi Bishkek", "Alay Osh", "Muras United"] }]
+    },
+    {
+      "country": "Tajikistan", "code": "TJK", "flag": "🇹🇯", "currency": "TJS",
+      "leagues": [{ "tier": 1, "name": "Tajikistan Higher League", "complete": false, "clubs": ["FC Istiklol", "FK Khujand", "Ravshan Kulob", "CSKA Pamir Dushanbe"] }]
+    },
+    {
+      "country": "Turkmenistan", "code": "TKM", "flag": "🇹🇲", "currency": "TMT",
+      "leagues": [{ "tier": 1, "name": "Ýokary Liga", "complete": false, "clubs": ["Arkadag FC", "Ahal FK", "Altyn Asyr", "Köpetdag Aşgabat"] }],
+      "notes": "Arkadag (founded 2023) has dominated."
+    },
+    {
+      "country": "Afghanistan", "code": "AFG", "flag": "🇦🇫", "currency": "AFN",
+      "leagues": [{ "tier": 1, "name": "Afghanistan Champions League", "complete": false, "clubs": [] }],
+      "notes": "Most national team players are diaspora based in Europe."
+    },
+    {
+      "country": "Bangladesh", "code": "BAN", "flag": "🇧🇩", "currency": "BDT",
+      "leagues": [{ "tier": 1, "name": "Bangladesh Football League", "teams": 10, "complete": false, "clubs": ["Bashundhara Kings", "Mohammedan SC (Dhaka)", "Abahani Limited Dhaka","Rahmatganj MFS"] }],
+      "notes": "Hamza Choudhury (Leicester City) switched to represent Bangladesh in 2025."
+    },
+    {
+      "country": "Nepal", "code": "NEP", "flag": "🇳🇵", "currency": "NPR",
+      "leagues": [{ "tier": 1, "name": "Martyr's Memorial A-Division League", "complete": false, "clubs": ["Machhindra FC", "Three Star Club", "Manang Marshyangdi Club", "Church Boys United"] }]
+    },
+    {
+      "country": "Maldives", "code": "MDV", "flag": "🇲🇻", "currency": "MVR",
+      "leagues": [{ "tier": 1, "name": "Dhivehi Premier League", "complete": false, "clubs": ["Maziya S&RC", "Club Eagles", "Club Valencia", "TC Sports Club"] }]
+    },
+    {
+      "country": "Sri Lanka", "code": "SRI", "flag": "🇱🇰", "currency": "LKR",
+      "leagues": [{ "tier": 1, "name": "Sri Lanka Champions League", "complete": false, "clubs": ["Police SC", "Army SC", "Ratnam SC", "Renown SC"] }]
+    },
+    {
+      "country": "Pakistan", "code": "PAK", "flag": "🇵🇰", "currency": "PKR",
+      "leagues": [{ "tier": 1, "name": "Pakistan Premier League", "complete": false, "clubs": ["WAPDA FC", "Pakistan Army FC", "SA Gardens"] }],
+      "notes": "Irregular because of federation problems (FIFA suspensions in recent years)."
+    },
+    {
+      "country": "Bhutan", "code": "BHU", "flag": "🇧🇹", "currency": "BTN",
+      "leagues": [{ "tier": 1, "name": "Bhutan Premier League", "complete": false, "clubs": ["Paro FC", "Thimphu City", "Transport United"] }]
+    },
+    {
+      "country": "Guam", "code": "GUM", "flag": "🇬🇺", "currency": "USD",
+      "leagues": [{ "tier": 1, "name": "Guam Soccer League", "complete": false, "clubs": ["Rovers FC", "Bank of Guam Strykers"] }]
+    }
+  ]
+}
