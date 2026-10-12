@@ -58,7 +58,7 @@ const byCat = {}; for (const [id, n] of fired) { const c = world.scenarioById[id
 console.log(`
 Scenarios: ${fired.size}/${world.scenarios.length} different ones fired, ${[...fired.values()].reduce((a, b) => a + b, 0)} total over ${weeksTotal} weeks (${(decisions / weeksTotal).toFixed(2)} decisions/week)`);
 console.log("By category: " + Object.entries(byCat).map(([k, v]) => `${k} ${v}`).join(" · "));
-const never = world.scenarios.filter((x) => !fired.has(x.id) && !x.chainOnly).map((x) => x.id);
+const never = world.scenarios.filter((x) => !fired.has(x.id) && !x.chainOnly && x.trigger !== "start").map((x) => x.id);
 if (process.argv.includes("--never")) console.log(`Never fired (${never.length}): ${never.join(", ")}`);
 console.log(errors ? `\n${errors} career(s) crashed` : '\nAll careers completed without errors');
 process.exit(errors ? 1 : 0);

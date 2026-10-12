@@ -26,7 +26,10 @@ export function scenarioContext(state, world, res = null) {
   const w = state.week;
   const club = p.club;
   const season = club ? state.seasons[club.key] : null;
-  const phase = !season ? 'off' : season.finished || w > season.endWeek ? 'off' : w < season.startWeek ? 'pre' : 'in';
+  // Off-season = from the final whistle until the first day of next pre-season.
+  const phase = !season ? 'off' : season.finished || w > season.endWeek || w < season.preStartWeek ? 'off' : w < season.startWeek ? 'pre' : 'in';
+  // Season stats are reset at the final whistle; end-of-season scenarios still need to see them.
+  const seasonStats = res?.seasonEnd ?? { apps: p.season.apps, goals: p.season.goals };
   const allies = p.keyTeammates.filter((t) => t.relationship === 'ally');
   const rivals = p.keyTeammates.filter((t) => ['rival', 'enemy'].includes(t.relationship));
   const played = res ? res.matches.find((m) => m.minutes > 0) : null;
@@ -36,11 +39,11 @@ export function scenarioContext(state, world, res = null) {
     abroad: !!club && club.country !== p.nationality, pos: p.position, posGroup: POS_GROUP[p.position],
     partner: p.partner.status, leagueQ: club ? leagueQuality(club.key) : 0, tier: club?.tier ?? 0, phase,
     month: monthOf(w) + 1, flags: new Set(Object.keys(state.flags.story ?? {})), ramadan: RAMADAN.some(([a, b]) => inRange(w, a, b)),
-    agent: !!p.agent, nt: p.national.status, caps: p.national.caps, apps: p.career.apps, seasonApps: p.season.apps,
+    agent: !!p.agent, nt: p.national.status, caps: p.national.caps, apps: p.career.apps, seasonApps: seasonStats.apps,
     contractYears: club ? Math.max(0, (club.contractEndWeek - w) / 52) : 0, listed: p.transferListed, parental: p.family.parentalSupport,
     lastResult: (played ?? p.lastMatch)?.result ?? null, lastRating: (played ?? p.lastMatch)?.rating ?? null,
     played: !!played, matchWeek: !!res?.matches.length, freeAgent: !club, hasAlly: allies.length > 0, hasRival: rivals.length > 0,
-    trophies: p.career.trophies.length, ovr: overall(p), tacticalFit: p.manager.tacticalFit, pfm: p.pfm, loan: !!club?.loan, goalsSeason: p.season.goals,
+    trophies: p.career.trophies.length, ovr: overall(p), tacticalFit: p.manager.tacticalFit, pfm: p.pfm, loan: !!club?.loan, goalsSeason: seasonStats.goals,
   };
 }
 

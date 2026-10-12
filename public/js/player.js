@@ -59,7 +59,7 @@ export const minRole = (a, b) => ROLE_ORDER[Math.min(ROLE_ORDER.indexOf(a), ROLE
 
 export function wealthLevel(eur) {
   const idr = eur * EUR_IDR;
-  if (idr < 0) return 'Broke';
+  if (idr < 0) return 'In debt';
   if (idr < 50e6) return 'Struggling';
   if (idr < 500e6) return 'Comfortable';
   if (idr < 5e9) return 'Well-off';

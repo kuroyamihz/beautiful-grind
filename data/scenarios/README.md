@@ -87,7 +87,7 @@ True/false: `injured abroad ramadan agent listed played matchWeek freeAgent hasA
 
 ## Triggers
 
-`start seasonStart seasonEnd champion trophy promoted relegated debut firstGoal goalStreak hatTrick nightmare redCard badRun benchStreak moved loanStart loanReturn freeAgent injured longInjury recovered returnLong callup ntWatch ntDropped ntDebut roleStarter roleOutcast roleChange birthday18 birthday21 birthday25 birthday30 birthday33`
+`start seasonStart seasonEnd champion trophy promoted relegated debut firstGoal goalStreak hatTrick nightmare redCard badRun benchStreak moved loanStart loanReturn freeAgent injured longInjury recovered returnLong callup ntWatch ntDropped ntDebut roleStarter roleOutcast roleChange birthday18 birthday21 birthday25 birthday30 birthday33 debt`
 
 ## Categories
 

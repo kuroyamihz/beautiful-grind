@@ -117,10 +117,19 @@ export const SOCIAL_BOOST = { 'Indonesia': 4, 'Brazil': 3, 'Argentina': 3, 'Indi
 
 export const EUR_IDR = 19000;
 
-// Ramadan (approximate) — used for culturally relevant events for Indonesian players.
+// ── Debt ───────────────────────────────────────────────────────
+// Savings below zero cost interest each month, and a debt story comes back every few months until it's cleared.
+export const DEBT = { monthlyInterest: 0.015, storyEveryMonths: 3 };
+
+// Ramadan (approximate, ±1 day) — used for culturally relevant events. Covers a full career from 2025.
 export const RAMADAN = [
   ['2026-02-18', '2026-03-19'], ['2027-02-08', '2027-03-09'], ['2028-01-28', '2028-02-26'],
   ['2029-01-16', '2029-02-14'], ['2030-01-06', '2030-02-04'], ['2030-12-26', '2031-01-24'],
+  ['2031-12-15', '2032-01-13'], ['2032-12-04', '2033-01-02'], ['2033-11-23', '2033-12-22'],
+  ['2034-11-12', '2034-12-11'], ['2035-11-01', '2035-11-30'], ['2036-10-20', '2036-11-18'],
+  ['2037-10-10', '2037-11-08'], ['2038-09-29', '2038-10-28'], ['2039-09-19', '2039-10-18'],
+  ['2040-09-07', '2040-10-06'], ['2041-08-28', '2041-09-26'], ['2042-08-17', '2042-09-15'],
+  ['2043-08-06', '2043-09-04'], ['2044-07-26', '2044-08-24'], ['2045-07-15', '2045-08-13'],
 ];
 
 // Season strings that need help being read (see data/world).

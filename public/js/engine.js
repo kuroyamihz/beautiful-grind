@@ -1,6 +1,6 @@
 // The game engine: owns every number. One call to advanceWeek() = one game week.
 import {
-  START_DATE_UTC, GROWTH, PFM, INJURY, INJURY_TYPES, GOAL_SHARE, ASSIST_SHARE, TAX, DEFAULT_TAX, SOCIAL_BOOST, RAMADAN,
+  START_DATE_UTC, GROWTH, PFM, INJURY, INJURY_TYPES, GOAL_SHARE, ASSIST_SHARE, TAX, DEFAULT_TAX, SOCIAL_BOOST, RAMADAN, DEBT,
 } from './config.js';
 import { chance, clamp, gauss, pick, randint, round1, uid, weightedPick, shuffle } from './util.js';
 import { weekDate, weekOfDate, monthOf, yearOf, dateLabel, isFifaWeek, nthMondayWeek, ageAt, inRange } from './time.js';
@@ -756,6 +756,15 @@ function moneyMonth(state, res) {
   const net = Math.round(gross - agentFee - tax - living - family);
   p.wealthEUR += net;
   res.money = { gross: Math.round(gross), agentFee: Math.round(agentFee), tax: Math.round(tax), living: Math.round(living), family, net };
+  // Debt is real: it costs interest every month and keeps coming back as a story until it's paid off.
+  if (p.wealthEUR < 0) {
+    const interest = Math.round(-p.wealthEUR * DEBT.monthlyInterest);
+    p.wealthEUR -= interest;
+    res.money.interest = interest;
+    p.debtMonths = (p.debtMonths ?? 0) + 1;
+    if (p.debtMonths === 1 || p.debtMonths % DEBT.storyEveryMonths === 0) res.triggers.push('debt');
+    if (p.debtMonths >= 2 && !res.mood) res.mood = 'Anxious';
+  } else p.debtMonths = 0;
 }
 
 // ═══════════════════════════ SEASON END ═══════════════════════════

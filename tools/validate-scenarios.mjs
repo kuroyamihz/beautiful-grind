@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DIR = path.join(ROOT, 'data', 'scenarios');
 const CATS = ['milestone', 'training', 'dressing', 'manager', 'moment', 'media', 'family', 'love', 'money', 'culture', 'national', 'body', 'veteran'];
-const TRIGGERS = ['start', 'seasonStart', 'seasonEnd', 'champion', 'trophy', 'promoted', 'relegated', 'debut', 'firstGoal', 'goalStreak', 'hatTrick', 'nightmare', 'redCard', 'badRun', 'benchStreak', 'moved', 'loanStart', 'loanReturn', 'freeAgent', 'injured', 'longInjury', 'recovered', 'returnLong', 'callup', 'ntWatch', 'ntDropped', 'ntDebut', 'roleStarter', 'roleOutcast', 'roleChange', 'birthday18', 'birthday21', 'birthday25', 'birthday30', 'birthday33'];
+const TRIGGERS = ['start', 'seasonStart', 'seasonEnd', 'champion', 'trophy', 'promoted', 'relegated', 'debut', 'firstGoal', 'goalStreak', 'hatTrick', 'nightmare', 'redCard', 'badRun', 'benchStreak', 'moved', 'loanStart', 'loanReturn', 'freeAgent', 'injured', 'longInjury', 'recovered', 'returnLong', 'callup', 'ntWatch', 'ntDropped', 'ntDebut', 'roleStarter', 'roleOutcast', 'roleChange', 'birthday18', 'birthday21', 'birthday25', 'birthday30', 'birthday33', 'debt'];
 const RANGE = ['age', 'trust', 'form', 'rep', 'wealth', 'followers', 'leagueQ', 'tier', 'caps', 'apps', 'seasonApps', 'contractYears', 'parental', 'lastRating', 'trophies', 'ovr', 'pfm', 'goalsSeason', 'tacticalFit'];
 const LIST = ['role', 'partner', 'phase', 'nt', 'lastResult', 'country', 'notCountry', 'nationality', 'notNationality', 'pos', 'months', 'flags', 'notFlags'];
 const BOOL = ['injured', 'abroad', 'ramadan', 'agent', 'listed', 'played', 'matchWeek', 'freeAgent', 'hasAlly', 'hasRival', 'loan'];

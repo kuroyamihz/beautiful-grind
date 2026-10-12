@@ -96,14 +96,20 @@ function playWeek() {
   if (busy) return;
   if (pendingUnanswered(state).length) { $('decisions').classList.add('shake'); setTimeout(() => $('decisions').classList.remove('shake'), 400); return; }
   busy = true;
-  const res = advanceWeek(state, world, plan);
-  const next = narrateOffline(state, world, res);
-  if (!state.log.length || state.log.at(-1).week !== res.week) state.log.push({ week: res.week, headline: next.headline, type: next.eventType });
-  story = next;
-  busy = false;
-  save();
-  render();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  try {
+    const res = advanceWeek(state, world, plan);
+    const next = narrateOffline(state, world, res);
+    if (!state.log.length || state.log.at(-1).week !== res.week) state.log.push({ week: res.week, headline: next.headline, type: next.eventType });
+    story = next;
+    save();
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch (err) {
+    console.error(err);
+    $('planner').insertAdjacentHTML('afterbegin', `<p class="box box-bad">Something went wrong playing this week (${escapeHtml(err.message)}). Your last save is safe — refresh the page and try again.</p>`);
+  } finally {
+    busy = false; // never leave the Play button locked
+  }
 }
 
 function showGame() {

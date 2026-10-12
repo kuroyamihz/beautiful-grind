@@ -1,0 +1,71 @@
+{
+  "scenarios": [
+    {
+      "id": "mn_debt_red_letter", "cat": "money", "w": 6, "trigger": "debt", "cd": 12,
+      "title": "The Bank Writes to {J}",
+      "text": [
+        "The envelope is red and the first line is in bold: the account is overdrawn and interest is now being charged every month. {J} reads it twice in the car park, then puts it in the glovebox as if that makes it smaller.",
+        "His card is declined at a petrol station in front of two fans who recognise him. He laughs, pays with the emergency cash in his wallet, and sits in the car for ten minutes afterwards doing maths that doesn't work."
+      ],
+      "prompt": "You owe money and it is growing every month. What do you do?",
+      "choices": [
+        { "label": "Cut everything back", "desc": "Cheaper flat, no extras, cook at home.", "risk": "low", "hint": "Living costs drop. Life gets smaller for a while.", "text": "{J} moves into a smaller place and learns to cook four meals properly. It is humbling. It also works.", "fx": { "lifestyle": -0.4, "mood": "Determined", "rep": -0.2 } },
+        { "label": "Sell the car and the watch", "desc": "Turn possessions into cash today.", "risk": "medium", "hint": "Instant money. Someone will notice.", "vars": { "sale": ["wageWeeks", 6, 600] }, "text": "The dealer pays less than half what {J} paid. A forum post with a photo of his old car appears within a week. But the hole is smaller.", "fx": { "wealth": "sale", "lifestyle": -0.2, "followers": -500 } },
+        { "label": "Ask the club for an advance", "desc": "Wages paid early, repaid over the year.", "risk": "medium", "hint": "Breathing room. The board will remember.", "vars": { "adv": ["wageWeeks", 8, 800] }, "out": [
+          { "w": 2, "text": "The finance director agrees, slowly, as if every word costs him. The money arrives on Friday. So does the feeling of being watched.", "fx": { "wealth": "adv", "trust": -2 } },
+          { "w": 1, "text": "The board says no. Word of the request leaks to a local journalist by Thursday.", "fx": { "trust": -3, "rep": -0.5, "mood": "Anxious" } }
+        ] },
+        { "label": "Ignore it", "desc": "Something will turn up.", "risk": "high", "hint": "The interest keeps growing.", "text": "{J} stops opening the post. The debt does not stop growing.", "fx": { "mood": "Numb" } }
+      ]
+    },
+    {
+      "id": "mn_debt_family_finds_out", "cat": "money", "w": 5, "trigger": "debt", "cd": 20, "when": { "parental": [20, 100] },
+      "title": "{J}'s Family Find Out About the Debt",
+      "text": [
+        "His mother calls on a Sunday. Somebody at the mosque heard something from somebody whose cousin works at the bank. She doesn't say the word 'debt'. She asks, very carefully, whether he is eating properly.",
+        "His father found the letter during a visit. He has put it on the kitchen table, unfolded, and is sitting next to it with his arms crossed when {J} gets home from training."
+      ],
+      "prompt": "Your family know you're in trouble.",
+      "choices": [
+        { "label": "Tell them everything", "desc": "Show them the numbers.", "risk": "low", "hint": "Hard conversation. Trust grows.", "text": "It takes two hours and a lot of tea. At the end his father says, 'We were poorer than this and we survived.' It helps more than {J} expected.", "fx": { "parental": 8, "mood": "Relieved" } },
+        { "label": "Stop the money you send home", "desc": "Pause the monthly transfer.", "risk": "medium", "hint": "Saves money every month. It hurts them.", "text": "{J} explains he must pause the transfers. His mother says it's fine. Her voice says something else.", "fx": { "monthlySupport": -150, "parental": -6, "mood": "Frustrated" } },
+        { "label": "Lie: 'It's handled'", "desc": "Protect them from the worry.", "risk": "high", "hint": "Peace now. Worse if it comes out.", "text": "'It's an admin mistake, it's handled.' His mother believes him. His father doesn't, and says nothing.", "fx": { "parental": -3, "flag": "debt_lie" } }
+      ]
+    },
+    {
+      "id": "mn_debt_loan_shark", "cat": "money", "w": 3, "trigger": "debt", "cd": 40, "when": { "age": [18, 40] },
+      "title": "A 'Friend' Offers {J} a Quick Loan",
+      "text": "A man who says he knows {J}'s cousin turns up after training with an offer: cash today, no paperwork, 'pay me back when you get your next bonus'. His car is too nice and his smile is too wide.",
+      "prompt": "Take the money?",
+      "vars": { "loan": ["wageWeeks", 10, 1000] },
+      "choices": [
+        { "label": "Walk away", "desc": "Nothing free comes from men like this.", "risk": "low", "hint": "Smart. The debt is still there.", "text": "{J} says no thanks and drives home the long way, checking his mirrors.", "fx": { "growth": ["mental"] } },
+        { "label": "Take it", "desc": "{loan} today.", "risk": "extreme", "hint": "Cash now. These men collect.", "text": "The money arrives in a sports bag. It clears the bank letter. Weeks later the man is waiting by {J}'s car again, and this time he isn't smiling.", "fx": { "wealth": "loan", "flag": "loan_shark", "chain": { "id": "mn_debt_loan_shark_collect", "in": [6, 10] } } },
+        { "label": "Report him to the club", "desc": "Let security deal with it.", "risk": "medium", "hint": "The club protects players. Gossip follows.", "text": "Club security takes his number plate. The man never comes back. A teammate asks, grinning, whether {J} 'owes the mafia now'.", "fx": { "trust": 1 } }
+      ]
+    },
+    {
+      "id": "mn_debt_loan_shark_collect", "cat": "money", "w": 5, "chainOnly": true, "vars": { "loan": ["wageWeeks", 10, 1000] },
+      "title": "The Man With the Sports Bag Returns",
+      "text": "He is leaning on {J}'s car. 'Double,' he says. 'That was always the deal.' It was never the deal.",
+      "prompt": "He wants twice what he lent.",
+      "choices": [
+        { "label": "Pay him", "desc": "Make it go away.", "risk": "medium", "hint": "Very expensive. Over.", "text": "{J} pays. It wipes out more than he borrowed. The man pats his cheek like a nephew and leaves.", "fx": { "wealth": "-loan*2", "unflag": "loan_shark", "mood": "Numb" } },
+        { "label": "Go to the police", "desc": "Report it.", "risk": "high", "hint": "Right thing. Headlines guaranteed.", "text": "The police take it seriously. So do the newspapers: 'Footballer in Loan Shark Scandal'. The club stands by him, publicly.", "fx": { "unflag": "loan_shark", "rep": -1.5, "trust": -3, "followers": 8000, "mood": "Relieved" } },
+        { "label": "Tell the club captain", "desc": "Ask the dressing room for help.", "risk": "medium", "hint": "Senior players know people.", "check": { "stat": "trust", "dc": 50 },
+          "ok": { "text": "The captain makes one phone call. Nobody explains what was said. The man is never seen again and the debt is 'forgotten'.", "fx": { "unflag": "loan_shark", "teammate": { "who": "T", "rel": "ally" }, "mood": "Relieved" } },
+          "bad": { "text": "The captain shakes his head: 'You got yourself into this.' In the end {J} pays, and the dressing room knows.", "fx": { "wealth": "-loan*2", "unflag": "loan_shark", "trust": -2 } } }
+      ]
+    },
+    {
+      "id": "mn_debt_cleared", "cat": "money", "w": 4, "when": { "flags": ["debt_lie"], "wealth": [500, 999999999] }, "once": true,
+      "title": "{J} Finally Clears His Debts",
+      "text": "The final statement comes back at zero. {J} photographs it and nearly sends it to his father, then remembers he told him it was 'an admin mistake'.",
+      "prompt": "Tell him the truth now?",
+      "choices": [
+        { "label": "Confess", "desc": "'I lied. I'm sorry. It's over now.'", "risk": "low", "hint": "Clean slate.", "text": "His father reads the message for a long time. Then he sends back a single thumbs up, which from him is a hug.", "fx": { "unflag": "debt_lie", "parental": 6, "mood": "Relieved" } },
+        { "label": "Let it lie", "desc": "No point now.", "risk": "low", "hint": "Some secrets stay buried.", "text": "{J} deletes the photo. Some things get easier the less you say.", "fx": { "unflag": "debt_lie" } }
+      ]
+    }
+  ]
+}
