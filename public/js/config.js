@@ -117,6 +117,18 @@ export const SOCIAL_BOOST = { 'Indonesia': 4, 'Brazil': 3, 'Argentina': 3, 'Indi
 
 export const EUR_IDR = 19000;
 
+// ── Life web (relationships, stress, interludes) ───────────────
+export const LIFE = {
+  maxRipples: 3,                              // side-effect lines shown per decision
+  neglect: { family: 5, love: 3, friends: 4 }, // weeks without contact before that relationship starts sliding
+  freeTimePerWeek: 2,                         // free-time actions per week (+1 while injured)
+  stressInjury: 0.02,                         // extra weekly injury chance when stress is above 75
+  interludeChance: 0.3,                       // share of "Play week" clicks that open a mid-week scene instead (time stands still)
+  weeklyDecisions: { 1: 14, 2: 34, 3: 34, 4: 18 }, // how many story decisions a week brings (weights)
+  maxPending: 5,                              // never more open decisions than this
+  repeatPenalty: 0.5,                         // each time a scenario has fired, its weight is divided by (1 + this × times)
+};
+
 // ── Debt ───────────────────────────────────────────────────────
 // Savings below zero cost interest each month, and a debt story comes back every few months until it's cleared.
 export const DEBT = { monthlyInterest: 0.015, storyEveryMonths: 3 };

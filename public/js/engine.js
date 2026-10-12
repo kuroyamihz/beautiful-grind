@@ -15,6 +15,11 @@ import {
 import {
   scenarioContext, pickScenario, markUsed, instantiate, resolveFx, resolveChoice, decisionFor, textOf, fill, conditionsMet,
 } from './scenarios.js';
+import {
+  METER_KEYS, meter, addMeter, createCircle, clubCast, ripple, lifeWeek, lifeRatingMod, lifeInjuryMod, lifeAfterMatch, lifeMove,
+  freeTimeLeft, freeTimeOptions, doFreeTime, migrateLife,
+} from './life.js';
+import { LIFE } from './config.js';
 
 const DAY = 86400000;
 const CUP_ROUND_NAMES = ['First round', 'Second round', 'Round of 16', 'Quarter-final', 'Semi-final', 'Final'];
@@ -45,16 +50,17 @@ export function newCareer(world, o) {
     lifestyle: 1,
   };
   const state = {
-    version: 2, week: 0, player: p,
+    version: SAVE_VERSION, week: 0, player: p,
     seasons: {}, leagueClubs: {}, cup: null, pending: [], threads: [], log: [], history: [], flags: {},
-    lastEventType: null, last: null, ended: null,
+    lastEventType: null, lastCats: [], last: null, ended: null, interlude: null,
   };
   joinClub(state, world, { club: o.club, key, wageWeekly: weeklyWage(overall(p), key), years: randint(2, 3), type: 'youth' });
+  createCircle(state, world);
   p.squadRole = minRole(trustRole(p.manager.trust), abilityRole(overall(p), cs));
   p.career.peakOverall = overall(p);
   updateMarketValue(state);
   // Day one: an opening scene and first decision.
-  const res = { matches: [], statChanges: {}, milestones: [], trophies: [], awards: [], notes: [], outcomes: [], intl: [], triggers: ['start'] };
+  const res = { matches: [], statChanges: {}, milestones: [], trophies: [], awards: [], notes: [], outcomes: [], intl: [], triggers: ['start'], events: [], ripples: [], life: {} };
   const s = pickScenario(state, world, scenarioContext(state, world, res), { triggers: ['start'] });
   if (s) { fireScenario(state, world, s, res); state.intro = { headline: res.event.headline, text: res.event.text }; }
   else state.intro = { headline: `${p.jerseyName}, 16, Joins ${p.club.name}'s First Team`, text: `Pre-season starts today at ${p.club.name}.` };
@@ -62,8 +68,42 @@ export function newCareer(world, o) {
   return state;
 }
 
+// ═══════════════════════════ SAVES ═══════════════════════════
+// Bump SAVE_VERSION whenever the state shape changes, and teach migrate() how to upgrade older saves.
+export const SAVE_VERSION = 3;
+export function migrate(state, world) {
+  if (!state?.player) return state;
+  if ((state.version ?? 1) < 3) {
+    migrateLife(state, world);
+    delete state.player.stats.rel; // left behind by an old bug in growth: ['rel']
+    state.lastCats = state.lastCats ?? [];
+    state.interlude = null;
+  }
+  state.version = SAVE_VERSION;
+  return state;
+}
+
 // ═══════════════════════════ HELPERS ═══════════════════════════
 export const ageNow = (s) => ageAt(s.player.dob, s.week);
+
+// A snapshot of every number a decision can move, to show the player exactly what changed.
+const SNAP_EXTRA = ['followers', 'reputation', 'wealthEUR', 'pfm', 'form'];
+function snap(state) {
+  const p = state.player, o = {};
+  for (const k of METER_KEYS) o[k] = meter(p, k);
+  for (const k of SNAP_EXTRA) o[k] = p[k];
+  return o;
+}
+function diff(a, b) {
+  const o = {};
+  for (const k of Object.keys(b)) {
+    if (a[k] === null || b[k] === null || a[k] === undefined) continue;
+    const d = b[k] - a[k];
+    if (Math.abs(d) >= (k === 'form' || k === 'reputation' ? 0.1 : 1)) o[k] = k === 'form' || k === 'reputation' ? round1(d) : Math.round(d);
+  }
+  return o;
+}
+const emptyRes = (state) => ({ week: state.week, statChanges: {}, notes: [], triggers: [], milestones: [], outcomes: [], matches: [], intl: [], trophies: [], awards: [] });
 export const currentSeason = (s) => (s.player.club ? s.seasons[s.player.club.key] : null);
 
 function contractEndWeekFor(world, key, startWeek, years) {
@@ -88,6 +128,7 @@ function joinClub(state, world, { club, key, wageWeekly, years, type, loan = nul
   p.transferListed = false;
   p.renewalOffered = false;
   state.cup = null;
+  clubCast(state, world);
   ensureSeason(state, world);
   updateRole(state);
 }
@@ -135,6 +176,7 @@ function addFollowers(state, n) { state.player.followers = Math.max(0, Math.roun
 function grow(state, stat, res) {
   const p = state.player;
   const age = ageNow(state);
+  if (stat === 'rel') stat = pick(relevantStats(p.position).slice(0, 3)); // 'rel' = one of his position's key stats
   if (!stat || p.stats[stat] >= 99) return false;
   if (age >= 29 && stat !== 'mental') return false;
   if (p.season.growthUsed >= GROWTH.seasonCapByAge(age)) { res.growthCapped = true; return false; }
@@ -173,9 +215,27 @@ function log(state, headline, type) {
 function addMilestone(res, text) { res.milestones.push(text); }
 
 // ═══════════════════════════ EFFECTS ═══════════════════════════
-export function applyEffects(state, world, eff, res) {
+// Every decision's effects go through here. After the direct effects, ripple() works out what
+// they do to the rest of the player's life (partner, family, dressing room, press, board…).
+export function applyEffects(state, world, eff, res, opts = {}) {
   if (!eff) return;
   const p = state.player;
+  const before = snap(state);
+  const lifestyleBefore = p.lifestyle;
+  directEffects(state, world, eff, res);
+  if (opts.ripple === false) return;
+  const d = diff(before, snap(state));
+  d.wealth = d.wealthEUR ?? 0; d.rep = d.reputation ?? 0;
+  d.lifestyle = round1(p.lifestyle - lifestyleBefore);
+  d.mood = eff.mood ?? null;
+  ripple(state, world, d, res, opts.source ?? 'decision');
+}
+
+const PARTNER_RANK = { none: 0, dating: 1, serious: 2, engaged: 3, married: 4 };
+
+function directEffects(state, world, eff, res) {
+  const p = state.player;
+  for (const k of ['board', 'dressing', 'fans', 'press', 'image', 'love', 'friends', 'morale', 'stress', 'family']) if (eff[k]) addMeter(state, k, eff[k], res);
   if (eff.newManager && p.club) { p.manager = { name: managerName(p.club.country), trust: 50, tacticalFit: 50 }; res.newManager = p.manager.name; }
   if (eff.trust) addTrust(state, eff.trust, res);
   if (eff.rep) addRep(state, eff.rep, res);
@@ -183,7 +243,7 @@ export function applyEffects(state, world, eff, res) {
   if (eff.wealth) { p.wealthEUR = Math.round(p.wealthEUR + eff.wealth); res.wealthDelta = (res.wealthDelta ?? 0) + eff.wealth; }
   if (eff.pfm) p.pfm = clamp(p.pfm + eff.pfm, 0, p.pfmCeiling);
   if (eff.tacticalFit) p.manager.tacticalFit = clamp(p.manager.tacticalFit + eff.tacticalFit, 0, 100);
-  if (eff.parental) p.family.parentalSupport = clamp(p.family.parentalSupport + eff.parental, 0, 100);
+  if (eff.parental) addMeter(state, 'family', eff.parental, res);
   if (eff.monthlySupport) p.family.monthlySupport += eff.monthlySupport;
   for (const s of eff.growth ?? []) grow(state, s, res);
   for (const [k, v] of Object.entries(eff.stat ?? {})) changeStat(state, k, v, res);
@@ -191,8 +251,17 @@ export function applyEffects(state, world, eff, res) {
     const t = p.keyTeammates.find((x) => x.name === eff.teammate.name);
     if (t) t.relationship = eff.teammate.rel; else p.keyTeammates.push({ name: eff.teammate.name, relationship: eff.teammate.rel });
     if (p.keyTeammates.length > 5) p.keyTeammates.shift();
+    addMeter(state, 'dressing', { ally: 2, neutral: 0, rival: -1, enemy: -3 }[eff.teammate.rel] ?? 0, res);
   }
-  if (eff.partner) p.partner = { ...p.partner, ...eff.partner };
+  if (eff.newPartner && p.partner.status === 'none') eff = { ...eff, partner: { name: personName(p.club?.country ?? p.nationality, true), status: 'dating' } };
+  if (eff.partner) {
+    const old = { ...p.partner };
+    p.partner = { ...p.partner, ...eff.partner };
+    if (p.partner.status === 'none') p.partner.aff = 0;
+    else if (old.status === 'none' || (eff.partner.name && eff.partner.name !== old.name)) {
+      p.partner.aff = 62; p.partner.style = pick(['private', 'public']); p.contact.love = state.week;
+    } else if ((PARTNER_RANK[p.partner.status] ?? 0) > (PARTNER_RANK[old.status] ?? 0)) addMeter(state, 'love', 8, res);
+  }
   if (eff.agent) p.agent = eff.agent;
   if (eff.endorsement) p.endorsements.push({ brand: eff.endorsement.brand, type: eff.endorsement.type, annualValue: eff.endorsement.annualValue, expiryWeek: state.week + 52 * eff.endorsement.years });
   if (eff.transferListed || eff.listed === true) p.transferListed = true;
@@ -231,20 +300,23 @@ function resolveDecisions(state, world, res) {
     const choice = d.choices.find((c) => c.id === d.chosen) ?? d.choices[0];
     state.history.push(`Wk ${state.week}: "${d.prompt}" → ${choice.label}`);
     if (state.history.length > 15) state.history.shift();
-    const out = { prompt: d.prompt, label: choice.label, kind: d.kind, text: '' };
+    const out = { prompt: d.prompt, label: choice.label, kind: d.kind, cat: d.cat ?? d.type, text: '' };
+    const before = snap(state), r0 = res.ripples?.length ?? 0;
     if (d.kind === 'scenario') {
       const s = world.scenarioById[d.sid];
-      if (s) { const r = resolveChoice(state, s, d.data, choice.id); out.text = r.text; out.moment = !!s.moment; applyEffects(state, world, r.fx, res); }
+      if (s) { const r = resolveChoice(state, s, d.data, choice.id); out.text = r.text; out.moment = !!s.moment; applyEffects(state, world, r.fx, res, { source: s.cat }); }
     } else if (d.kind === 'offer') {
       out.text = resolveOffer(state, world, d.data, choice.id, res);
     } else if (d.kind === 'renewal') {
       out.text = resolveRenewal(state, world, d.data, choice.id, res);
     } else if (d.kind === 'rehab') {
-      out.text = resolveRehab(state, d.data, choice.id, res);
+      out.text = resolveRehab(state, world, d.data, choice.id, res);
     } else if (d.kind === 'retire') {
       if (choice.id === 'a') { state.ended = { reason: 'retirement', week: state.week }; out.text = `${state.player.jerseyName} calls time on his career.`; }
       else out.text = 'One more season. The body protests; the heart insists.';
     }
+    out.changes = diff(before, snap(state));
+    out.ripples = (res.ripples ?? []).slice(r0);
     res.outcomes.push(out);
   }
 }
@@ -271,7 +343,7 @@ function playerMatchCore(state, { myStr, oppStr, home, part, competition, opp, c
   let rating = null, goals = 0, assists = 0, motm = false, yellow = false, red = false, adj = 0;
   if (part.minutes > 0) {
     rating = 6.6 + (overall(p) - myStr) * 0.03 + (p.form - 6.5) * 0.25 + gauss() * 0.65
-      + (p.pfm < 50 ? -0.4 : p.pfm < 70 ? -0.15 : 0) + (MOOD_MOD[p.mood] ?? 0);
+      + (p.pfm < 50 ? -0.4 : p.pfm < 70 ? -0.15 : 0) + (MOOD_MOD[p.mood] ?? 0) + lifeRatingMod(p, home);
     adj = (rating - 6.4) * 2.2 * (part.minutes / 90);
   }
   const mod = part.minutes > 0 && state.matchMod && !state.matchMod.used ? state.matchMod : null;
@@ -333,6 +405,7 @@ function afterClubMatch(state, world, m, res) {
   p.form = round1(p.form * 0.7 + m.rating * 0.3);
   p.pfm = clamp(p.pfm + PFM.matchFull * (m.minutes / 90), 0, p.pfmCeiling);
   p.pendingBonus += Math.round(p.club.wageWeekly * (0.1 + 0.25 * m.goals));
+  lifeAfterMatch(state, m, res);
   // Manager trust (original rules)
   if (m.rating >= 7.5) addTrust(state, 3, res);
   else if (m.rating > 7.0) addTrust(state, 1, res);
@@ -547,8 +620,9 @@ function createInjury(state, world, res, forceSeverity = null) {
   }
 }
 
-function resolveRehab(state, data, choiceId, res) {
+function resolveRehab(state, world, data, choiceId, res) {
   const inj = state.player.injury;
+  if (inj) applyEffects(state, world, { a: { stress: 4, family: -2 }, b: { stress: 1 }, c: { stress: -3, board: -2 } }[choiceId] ?? {}, res, { source: "rehab" });
   if (!inj) return 'He was back before the plan mattered.';
   if (choiceId === 'a') { inj.weeksLeft = Math.max(1, Math.round(inj.weeksLeft * 0.7)); inj.approach = 'rush'; return `The medical team sigh and write a faster plan. ${inj.weeksLeft} weeks — if the body agrees.`; }
   if (choiceId === 'c') { inj.weeksLeft = Math.round(inj.weeksLeft * 1.25); inj.approach = 'cautious'; return `Slow and thorough. ${inj.weeksLeft} weeks of rebuilding, every muscle accounted for.`; }
@@ -577,6 +651,7 @@ function injuryWeek(state, world, res, matchesPlayed, plan) {
   if (p.pfm < 50) risk += INJURY.lowPfm;
   if (plan.intensity === 'hard') risk += INJURY.hardPlan;
   if (p.fragileWeeks > 0) { risk += 0.15; p.fragileWeeks--; }
+  risk += lifeInjuryMod(p);
   if (chance(risk)) createInjury(state, world, res);
 }
 
@@ -643,6 +718,7 @@ function executeMove(state, world, offer, res) {
   const from = p.club?.name ?? 'free agency';
   let loan = null;
   if (offer.type === 'loan') loan = { parent: { ...p.club }, untilWeek: offer.untilWeek };
+  lifeMove(state, world, offer, res);
   joinClub(state, world, { club: offer.club, key: offer.key, wageWeekly: offer.wageWeekly, years: offer.years, type: offer.type, loan });
   if (offer.fee > 0) p.career.transferFees = (p.career.transferFees ?? 0) + offer.fee;
   addFollowers(state, (offer.fee > 1e6 ? 50000 : 5000) * socialBoost(state));
@@ -655,10 +731,12 @@ function executeMove(state, world, offer, res) {
 function resolveOffer(state, world, offer, choiceId, res) {
   const p = state.player;
   const J = p.jerseyName;
-  if (choiceId === 'reject') { if (p.club) addTrust(state, 2, res); return `${J} turns down ${offer.club}.`; }
-  if (choiceId === 'stay') { addTrust(state, 3, res); return `${J} tells his agent to close the door on ${offer.club}. The club notices the loyalty.`; }
+  const fx = (e) => applyEffects(state, world, e, res, { source: 'transfer' });
+  if (choiceId === 'reject') { if (p.club) { addTrust(state, 2, res); fx({ board: 2, fans: 2 }); } return `${J} turns down ${offer.club}.`; }
+  if (choiceId === 'stay') { addTrust(state, 3, res); fx({ fans: 4, board: 3, dressing: 1 }); return `${J} tells his agent to close the door on ${offer.club}. The club notices the loyalty.`; }
   if (choiceId === 'push') {
     addTrust(state, -10, res);
+    fx({ board: -6, fans: -5, press: 2, stress: 4 });
     if (!chance(0.55)) { p.transferListed = false; return `${J} pushes. The club refuses to sell, and now everybody knows he wanted out.`; }
     executeMove(state, world, offer, res);
     return `After a tense week the clubs agree. ${J} is on his way to ${offer.club}.`;
@@ -717,14 +795,16 @@ function findClubKey(state, world, club) {
 function resolveRenewal(state, world, data, choiceId, res) {
   const p = state.player;
   const J = p.jerseyName;
-  if (choiceId === 'a') { signRenewal(state, world, data.wage, data.years); addTrust(state, 3, res); return `${J} signs. €${data.wage.toLocaleString()} a week until ${yearOf(p.club.contractEndWeek)}.`; }
+  const fx = (e) => applyEffects(state, world, e, res, { source: 'contract' });
+  if (choiceId === 'a') { signRenewal(state, world, data.wage, data.years); addTrust(state, 3, res); fx({ board: 5, fans: 3, stress: -3 }); return `${J} signs. €${data.wage.toLocaleString()} a week until ${yearOf(p.club.contractEndWeek)}.`; }
   if (choiceId === 'b') {
     const q = p.agent?.quality ?? 30;
     if (chance(0.35 + q / 200)) { const w = Math.round(data.wage * (1.1 + q / 500) / 10) * 10; signRenewal(state, world, w, data.years); return `The negotiation works: €${w.toLocaleString()} a week, signed and sealed.`; }
     if (chance(0.5)) { signRenewal(state, world, data.wage, data.years); addTrust(state, -2, res); return `The club will not move. ${J} signs the original offer, slightly embarrassed.`; }
-    addTrust(state, -6, res); return `Talks collapse. The board withdraws the offer. ${J}'s contract is now running down.`;
+    addTrust(state, -6, res); fx({ board: -5, stress: 3 }); return `Talks collapse. The board withdraws the offer. ${J}'s contract is now running down.`;
   }
   addTrust(state, -8, res);
+  fx({ board: -8, fans: -5, press: 2, stress: 3 });
   return `${J} refuses to sign. The club's statement is polite. The manager's face is not.`;
 }
 
@@ -843,42 +923,121 @@ function seasonEnd(state, world, season, res) {
 }
 
 // ═══════════════════════════ EVENTS ═══════════════════════════
+// Arenas = the parts of his life a week's decisions come from. Each week draws decisions from
+// several different arenas, so one week is football + love + media, the next is family + politics.
+export const ARENAS = {
+  football: { cats: ['training', 'manager', 'dressing', 'body', 'national', 'milestone', 'veteran'], w: 3 },
+  media: { cats: ['media'], w: 2 },
+  love: { cats: ['love'], w: 1.3 },
+  friends: { cats: ['friends'], w: 1.4 },
+  family: { cats: ['family', 'culture'], w: 1.3 },
+  lifestyle: { cats: ['money', 'lifestyle'], w: 1.2 },
+  politics: { cats: ['politics'], w: 1 },
+};
+export const CAT_ARENA = Object.fromEntries(Object.entries(ARENAS).flatMap(([a, v]) => v.cats.map((c) => [c, a])));
+
 function fireScenario(state, world, s, res, carried = null) {
   markUsed(state, s);
   const inst = instantiate(s, state, world, carried);
-  const ev = { sid: s.id, type: s.cat, headline: fill(s.title, inst, state), text: textOf(s, inst, state), moment: !!s.moment };
-  if (s.moment) res.moment = ev; else { res.event = ev; state.lastEventType = s.cat; }
-  if (s.fx) applyEffects(state, world, resolveFx(s.fx, inst, state), res);
-  if (s.choices?.length) pushDecision(state, { ...decisionFor(s, inst, state), scene: s.moment ? ev.text : null });
+  const ev = { sid: s.id, type: s.cat, arena: CAT_ARENA[s.cat] ?? 'football', ui: s.ui ?? null, headline: fill(s.title, inst, state), text: textOf(s, inst, state), moment: !!s.moment, hasChoices: !!s.choices?.length };
+  if (s.moment) res.moment = ev;
+  else { if (!res.event) res.event = ev; res.events.push(ev); state.lastEventType = s.cat; }
+  if (s.fx) applyEffects(state, world, resolveFx(s.fx, inst, state), res, { source: s.cat });
+  if (s.choices?.length) pushDecision(state, { ...decisionFor(s, inst, state), scene: ev.text, headline: ev.headline, arena: ev.arena });
 }
 
 function eventWeek(state, world, res) {
   const p = state.player;
   if (state.ended) return;
   const ctx = scenarioContext(state, world, res);
-  // Storylines that come back weeks later go first.
-  const due = state.threads.find((t) => t.dueWeek <= state.week);
-  if (due) {
+  const room = () => LIFE.maxPending - state.pending.length;
+  const used = new Set(state.pending.map((d) => d.cat).filter(Boolean));
+  // 1. Storylines that come back weeks later go first.
+  for (const due of state.threads.filter((t) => t.dueWeek <= state.week)) {
+    if (room() <= 0) break;
     state.threads = state.threads.filter((t) => t !== due);
     const s = world.scenarioById[due.id];
-    if (s && (p.club || s.when?.freeAgent) && conditionsMet(s.when, ctx)) return fireScenario(state, world, s, res, due.data);
-    if (s && (due.tries ?? 0) < 4) state.threads.push({ ...due, dueWeek: state.week + 2, tries: (due.tries ?? 0) + 1 });
+    if (s && (p.club || s.when?.freeAgent) && conditionsMet(s.when, ctx)) { fireScenario(state, world, s, res, due.data); used.add(s.cat); }
+    else if (s && (due.tries ?? 0) < 4) state.threads.push({ ...due, dueWeek: state.week + 2, tries: (due.tries ?? 0) + 1 });
   }
-  if (state.pending.length >= 2) return;
+  // 2. Things that just happened (a debut, a red card, a relationship hitting the red line…)
   const triggers = [...new Set(res.triggers)];
-  if (triggers.length && chance(0.85)) {
-    const s = pickScenario(state, world, ctx, { triggers });
-    if (s) return fireScenario(state, world, s, res);
+  for (let i = 0; i < 2 && triggers.length && room() > 0; i++) {
+    const s = pickScenario(state, world, ctx, { triggers, excludeCats: used });
+    if (!s) break;
+    fireScenario(state, world, s, res);
+    used.add(s.cat);
+    const ti = triggers.indexOf(s.trigger); if (ti >= 0) triggers.splice(ti, 1);
   }
-  if (!chance(res.matches.length ? 0.5 : 0.9)) return;
-  const s = pickScenario(state, world, ctx);
-  if (s) fireScenario(state, world, s, res);
+  // 3. The rest of life: 1-4 decisions from different arenas.
+  const target = Number(weightedPick(Object.entries(LIFE.weeklyDecisions), ([, w]) => w)[0]);
+  let arenas = Object.keys(ARENAS);
+  while (res.events.length < target && room() > 0 && arenas.length) {
+    const arena = weightedPick(arenas, (a) => ARENAS[a].w);
+    arenas = arenas.filter((a) => a !== arena);
+    const cats = ARENAS[arena].cats.filter((c) => !used.has(c));
+    const s = cats.length ? pickScenario(state, world, ctx, { cats }) : null;
+    if (s) { fireScenario(state, world, s, res); used.add(s.cat); }
+  }
+}
+
+// ═══════════════════════════ INTERLUDES ═══════════════════════════
+// A mid-week scene that does NOT advance time. main.js asks for one when "Play week" is pressed;
+// if one comes back, the player answers it and sees the result immediately, then plays on.
+export function maybeInterlude(state, world, force = false) {
+  if (state.ended || state.interlude) return state.interlude ?? null;
+  const n = state.interludeWeek === state.week ? state.interludeCount ?? 0 : 0;
+  if (!force && (n >= 2 || !chance(n === 0 ? LIFE.interludeChance : LIFE.interludeChance * 0.35))) return null;
+  const s = pickScenario(state, world, scenarioContext(state, world, null), { interlude: true });
+  if (!s) return null;
+  markUsed(state, s);
+  const inst = instantiate(s, state, world);
+  state.interludeWeek = state.week;
+  state.interludeCount = n + 1;
+  const d = s.choices?.length ? decisionFor(s, inst, state) : null;
+  state.interlude = {
+    sid: s.id, data: inst, time: fill(s.time ?? pick(world.life?.words?.TIME ?? ['Midweek']), inst, state),
+    headline: fill(s.title, inst, state), text: textOf(s, inst, state), ui: s.ui ?? null,
+    choices: d ? d.choices : [{ id: 'ok', label: 'Carry on', description: '', risk: 'low', consequence: '' }],
+  };
+  return state.interlude;
+}
+
+export function answerInterlude(state, world, choiceId) {
+  const it = state.interlude;
+  if (!it) return null;
+  const s = world.scenarioById[it.sid];
+  const res = emptyRes(state);
+  const before = snap(state);
+  let text = '', label = it.choices.find((c) => c.id === choiceId)?.label ?? '';
+  if (s?.fx) applyEffects(state, world, resolveFx(s.fx, it.data, state), res, { source: 'interlude' });
+  if (s?.choices?.length) {
+    const r = resolveChoice(state, s, it.data, choiceId);
+    text = r.text;
+    applyEffects(state, world, r.fx, res, { source: 'interlude' });
+  }
+  if (res.mood) state.player.mood = res.mood;
+  state.interlude = null;
+  state.lastAside = { kind: 'interlude', time: it.time, headline: it.headline, label, text, changes: diff(before, snap(state)), ripples: res.ripples ?? [], stats: res.statChanges };
+  return state.lastAside;
+}
+
+// ═══════════════════════════ FREE TIME ═══════════════════════════
+export const freeTimeSlots = (state) => freeTimeLeft(state);
+export const freeTimeList = (state, world) => freeTimeOptions(state, world, scenarioContext(state, world, null), conditionsMet);
+export function freeTime(state, world, id) {
+  const before = snap(state);
+  const r = doFreeTime(state, world, id, applyEffects);
+  if (!r) return null;
+  if (r.res.mood) state.player.mood = r.res.mood;
+  state.lastAside = { kind: 'free', icon: r.action.icon, headline: r.action.label, text: r.text, changes: diff(before, snap(state)), ripples: r.res.ripples ?? [], stats: r.res.statChanges };
+  return state.lastAside;
 }
 
 // Key moments: a split-second decision before next week's match, which changes that match.
 function momentWeek(state, world, res) {
   const p = state.player;
-  if (!p.club || p.injury || p.suspension > 0 || state.pending.length >= 2 || state.ended) return;
+  if (!p.club || p.injury || p.suspension > 0 || state.pending.length >= LIFE.maxPending || state.ended) return;
   if (!['starter', 'rotation'].includes(p.squadRole) && !chance(0.3)) return;
   const season = currentSeason(state);
   const next = state.week + 1;
@@ -894,7 +1053,7 @@ export function advanceWeek(state, world, plan = { intensity: 'balanced', focus:
   const p = state.player;
   const res = {
     week: state.week, dateLabel: dateLabel(state.week), age: ageNow(state), clubBefore: p.club?.name ?? null,
-    matches: [], intl: [], outcomes: [], milestones: [], trophies: [], awards: [], notes: [], statChanges: {}, event: null, plan, triggers: [],
+    matches: [], intl: [], outcomes: [], milestones: [], trophies: [], awards: [], notes: [], statChanges: {}, event: null, events: [], plan, triggers: [], ripples: [], life: {},
   };
   const roleBefore = p.squadRole, ntBefore = p.national.status, preseason = (() => { const s = currentSeason(state); return s && state.week === s.preStartWeek; })();
   if (preseason) res.triggers.push('seasonStart');
@@ -918,6 +1077,8 @@ export function advanceWeek(state, world, plan = { intensity: 'balanced', focus:
   injuryWeek(state, world, res, res.matches.filter((m) => m.minutes > 0).length, plan);
   p.pfm = clamp(p.pfm + PFM.naturalRecovery, 0, p.pfmCeiling);
   p.pfmCeiling = round1(Math.max(0, p.pfmCeiling - PFM.ageDecay(ageNow(state))));
+  // 4b. Life: relationships drift, stress and morale move, red lines trigger stories
+  lifeWeek(state, world, res, plan);
   // 5. Club life
   updateRole(state, res);
   if (state.week % 4 === 0) updateMarketValue(state);
@@ -931,6 +1092,9 @@ export function advanceWeek(state, world, plan = { intensity: 'balanced', focus:
   collectTriggers(state, res, roleBefore, ntBefore);
   eventWeek(state, world, res);
   momentWeek(state, world, res);
+  state.lastCats = res.events.map((e) => e.type);
+  state.interlude = null;
+  state.lastAside = null;
   state.matchMod = null; // a key moment only ever applies to the week it was chosen for
   return finish(state, world, res);
 }

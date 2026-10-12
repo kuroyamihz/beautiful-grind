@@ -6,9 +6,12 @@ import { STAT_KEYS, EUR_IDR, RAMADAN, POSITIONS } from './config.js';
 import { personName, overall } from './player.js';
 import { leagueQuality, leagueClubs } from './world.js';
 import { monthOf, ageAt, inRange } from './time.js';
+import { meter, lifeTokens, LIFE_FX } from './life.js';
+import { LIFE } from './config.js';
 
 const POS_GROUP = { GK: 'GK', CB: 'DEF', FB: 'DEF', DM: 'MID', CM: 'MID', AM: 'MID', W: 'ATT', ST: 'ATT' };
-export const DEFAULT_COOLDOWN = 40;
+export const DEFAULT_COOLDOWN = 60;
+export const LIFE_RANGES = ['board', 'dressing', 'fans', 'press', 'image', 'love', 'friends', 'morale', 'stress', 'family'];
 
 export async function loadScenarios(fetchJson) {
   const index = await fetchJson('data/scenarios/index.json');
@@ -44,6 +47,8 @@ export function scenarioContext(state, world, res = null) {
     lastResult: (played ?? p.lastMatch)?.result ?? null, lastRating: (played ?? p.lastMatch)?.rating ?? null,
     played: !!played, matchWeek: !!res?.matches.length, freeAgent: !club, hasAlly: allies.length > 0, hasRival: rivals.length > 0,
     trophies: p.career.trophies.length, ovr: overall(p), tacticalFit: p.manager.tacticalFit, pfm: p.pfm, loan: !!club?.loan, goalsSeason: seasonStats.goals,
+    partnerStyle: p.partner.status === 'none' ? null : p.partner.style, debt: p.wealthEUR < 0,
+    ...Object.fromEntries(LIFE_RANGES.map((k) => [k, p.life ? meter(p, k) : 50])),
   };
 }
 
@@ -55,8 +60,9 @@ export function conditionsMet(when = {}, c) {
       case 'age': case 'trust': case 'form': case 'rep': case 'wealth': case 'followers': case 'leagueQ': case 'tier':
       case 'caps': case 'apps': case 'seasonApps': case 'contractYears': case 'parental': case 'lastRating': case 'trophies':
       case 'ovr': case 'pfm': case 'goalsSeason': case 'tacticalFit':
+      case 'board': case 'dressing': case 'fans': case 'press': case 'image': case 'love': case 'friends': case 'morale': case 'stress': case 'family':
         if (!inRangeOf(c[k], v)) return false; break;
-      case 'role': case 'partner': case 'phase': case 'nt': case 'lastResult':
+      case 'role': case 'partner': case 'phase': case 'nt': case 'lastResult': case 'partnerStyle':
         if (!v.includes(c[k])) return false; break;
       case 'country': if (!v.includes(c.country)) return false; break;
       case 'notCountry': if (v.includes(c.country)) return false; break;
@@ -67,7 +73,7 @@ export function conditionsMet(when = {}, c) {
       case 'flags': if (!v.every((f) => c.flags.has(f))) return false; break;
       case 'notFlags': if (v.some((f) => c.flags.has(f))) return false; break;
       case 'injured': case 'abroad': case 'ramadan': case 'agent': case 'listed': case 'played': case 'matchWeek':
-      case 'freeAgent': case 'hasAlly': case 'hasRival': case 'loan':
+      case 'freeAgent': case 'hasAlly': case 'hasRival': case 'loan': case 'debt':
         if (!!c[k] !== v) return false; break;
       default: break; // unknown keys are caught by tools/validate-scenarios.mjs
     }
@@ -76,25 +82,31 @@ export function conditionsMet(when = {}, c) {
 }
 
 // ── Picking a scenario for this week ──
-export function pickScenario(state, world, ctx, { triggers = [], moment = false } = {}) {
+export function pickScenario(state, world, ctx, { triggers = [], moment = false, interlude = false, cats = null, excludeCats = null } = {}) {
   const seen = state.flags.scenWeek ?? {};
   const once = state.flags.scenOnce ?? {};
+  const count = state.flags.scenCount ?? {};
+  const lastCats = state.lastCats ?? [];
   const pool = world.scenarios.filter((s) => {
     if (s.chainOnly) return false;
     if (!!s.moment !== moment) return false;
+    if ((s.cat === 'interlude') !== interlude) return false;
+    if (cats && !cats.includes(s.cat)) return false;
+    if (excludeCats?.has(s.cat)) return false;
     if (s.once && once[s.id]) return false;
     if (state.week - (seen[s.id] ?? -999) < (s.cd ?? DEFAULT_COOLDOWN)) return false;
     if (s.trigger ? !triggers.includes(s.trigger) : triggers.length > 0) return false;
-    if (!moment && !s.trigger && s.cat === state.lastEventType) return false;
     if (!s.when?.freeAgent && ctx.freeAgent) return false;
     if (!s.when || !('injured' in s.when)) { if (ctx.injured && ['training', 'moment'].includes(s.cat)) return false; }
     return conditionsMet(s.when, ctx);
   });
-  return weightedPick(pool, (s) => s.w ?? 5);
+  // Fresh stories first: anything that has fired before, or shares a category with last week, is less likely.
+  return weightedPick(pool, (s) => (s.w ?? 5) / (1 + LIFE.repeatPenalty * (count[s.id] ?? 0)) * (!s.trigger && lastCats.includes(s.cat) ? 0.35 : 1));
 }
 
 export function markUsed(state, s) {
   state.flags.scenWeek = { ...(state.flags.scenWeek ?? {}), [s.id]: state.week };
+  state.flags.scenCount = { ...(state.flags.scenCount ?? {}), [s.id]: (state.flags.scenCount?.[s.id] ?? 0) + 1 };
   if (s.once) state.flags.scenOnce = { ...(state.flags.scenOnce ?? {}), [s.id]: true };
 }
 
@@ -125,6 +137,8 @@ function computeVar([kind, a = 0, b = 0], state) {
 export function instantiate(s, state, world, carried = null) {
   const p = state.player;
   const inst = carried ? { ...carried, sid: s.id } : { sid: s.id, names: {}, vars: {} };
+  // Random words ({PLACE}, {FOOD}, {DAY}…) are picked once, so the scene and its outcome agree.
+  inst.words = { ...Object.fromEntries(Object.entries(world.life?.words ?? {}).map(([k, list]) => [k, pick(list)])), ...(carried?.words ?? {}) };
   for (const k of ['T', 'T2', 'F', 'A', 'K']) {
     if (inst.names[k]) continue;
     const mode = s.uses?.[k] ?? 'new';
@@ -154,6 +168,7 @@ export function fill(str, inst, state) {
     T: inst.names.T, T2: inst.names.T2, F: inst.names.F, P: p.partner.name || inst.names.F, A: inst.names.A, K: inst.names.K, R: inst.names.R,
     Tl: inst.names.T?.split(' ').slice(-1)[0], T2l: inst.names.T2?.split(' ').slice(-1)[0], Ff: inst.names.F?.split(' ')[0], Al: inst.names.A?.split(' ').slice(-1)[0],
     Kl: inst.names.K?.split(' ').slice(-1)[0], Mf: p.manager.name.split(' ').slice(-1)[0], opp: p.lastMatch?.opp ?? inst.names.R, num: String(p.number),
+    ...(p.circle ? lifeTokens(state) : {}), ...(inst.words ?? {}),
   };
   return String(str).replace(/\{(\w+)\}/g, (m, k) => (k in map ? map[k] : k in inst.vars ? fmtMoney(state, inst.vars[k]) : m));
 }
@@ -172,7 +187,7 @@ export function resolveFx(fx, inst, state) {
   if (!fx) return null;
   const out = {};
   for (const [k, v] of Object.entries(fx)) {
-    if (['trust', 'rep', 'followers', 'wealth', 'pfm', 'form', 'tacticalFit', 'parental', 'monthlySupport', 'suspension', 'lifestyle'].includes(k)) out[k] = num(v, inst);
+    if (['trust', 'rep', 'followers', 'wealth', 'pfm', 'form', 'tacticalFit', 'parental', 'monthlySupport', 'suspension', 'lifestyle', ...LIFE_FX].includes(k)) out[k] = num(v, inst);
     else if (k === 'newManager') out.newManager = !!v;
     else if (k === 'teammate') out.teammate = { name: inst.names[v.who ?? 'T'], rel: v.rel };
     else if (k === 'partner') out.partner = v.status === 'none' ? { name: '', status: 'none' } : { name: v.who ? inst.names[v.who] : state.player.partner.name, status: v.status };
@@ -202,11 +217,25 @@ export function resolveChoice(state, s, inst, choiceId) {
   return { text: fill(out.text ?? '', inst, state), fx: resolveFx(out.fx, inst, state), label: fill(c.label, inst, state) };
 }
 
+// Which parts of life a choice can touch (shown as icons on the choice button).
+const FX_ASPECT = {
+  trust: 'trust', tacticalFit: 'trust', newManager: 'trust', board: 'board', listed: 'board', dressing: 'dressing', teammate: 'dressing', fans: 'fans',
+  press: 'press', image: 'image', rep: 'image', followers: 'social', wealth: 'money', lifestyle: 'money', monthlySupport: 'money', endorsement: 'money', agent: 'money',
+  parental: 'family', family: 'family', love: 'love', partner: 'love', friends: 'friends', morale: 'morale', mood: 'morale', stress: 'stress',
+  pfm: 'body', injury: 'body', suspension: 'body', growth: 'skills', stat: 'skills', form: 'form', matchMod: 'match',
+};
+export function aspectsOf(c) {
+  const outs = c.check ? [c.ok, c.bad] : c.out ? c.out : [c];
+  const set = new Set();
+  for (const o of outs) for (const k of Object.keys(o?.fx ?? {})) if (FX_ASPECT[k]) set.add(FX_ASPECT[k]);
+  return [...set];
+}
+
 export function decisionFor(s, inst, state) {
   return {
-    kind: 'scenario', sid: s.id, data: inst, type: s.dtype ?? (s.moment ? 'in-match' : s.cat),
+    kind: 'scenario', sid: s.id, data: inst, cat: s.cat, ui: s.ui ?? null, type: s.dtype ?? (s.moment ? 'in-match' : s.cat),
     prompt: fill(s.prompt ?? s.title, inst, state),
-    choices: s.choices.map((c, i) => ({ id: String(i), label: fill(c.label, inst, state), description: fill(c.desc ?? '', inst, state), risk: c.risk ?? 'medium', consequence: fill(c.hint ?? '', inst, state) })),
+    choices: s.choices.map((c, i) => ({ id: String(i), label: fill(c.label, inst, state), description: fill(c.desc ?? '', inst, state), risk: c.risk ?? 'medium', consequence: fill(c.hint ?? '', inst, state), aspects: aspectsOf(c) })),
   };
 }
 

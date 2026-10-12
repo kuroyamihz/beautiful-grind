@@ -96,6 +96,10 @@ export function moodFrom(p, extra = null) {
   if (extra) return extra;
   if (p.injury && p.injury.weeksLeft > 8) return 'Broken';
   if (p.injury) return 'Frustrated';
+  // The life web: stress and morale colour everything.
+  if (p.life?.stress >= 82) return pick(['Anxious', 'Numb']);
+  if (p.life?.morale <= 20) return 'Lost';
+  if (p.life?.morale >= 82 && p.form >= 7) return 'On Fire';
   if (p.form >= 7.6) return 'On Fire';
   if (p.form >= 7.1) return 'Confident';
   if (p.squadRole === 'outcast') return 'Lost';
